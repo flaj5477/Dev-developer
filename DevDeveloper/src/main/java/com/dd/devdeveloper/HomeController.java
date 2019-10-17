@@ -45,5 +45,10 @@ public class HomeController {
 	public String getUser() {
 		return "user/getUser";
 	}
+	@RequestMapping("index")
+	public String getCbt() {
+		return "cbt/jsp/index";
+	}
+
 	
 }

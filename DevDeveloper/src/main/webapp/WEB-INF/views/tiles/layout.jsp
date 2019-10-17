@@ -249,8 +249,7 @@
       </div>
     </nav>
     <!-- End Navbar -->
-    <div class="header bg-gradient-primary pb-7">
-	</div>
+    <div class="header bg-gradient-primary pb-7"></div>
     <div class="container-fluid mt-5">
     	<!-- 내용 -->
     	<tiles:insertAttribute name="content"></tiles:insertAttribute>
@@ -274,5 +273,4 @@
       });
   </script>
 </body>
-
 </html>

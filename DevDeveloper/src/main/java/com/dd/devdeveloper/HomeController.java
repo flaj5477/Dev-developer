@@ -36,14 +36,17 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping("getBoard")
-	public String getBoard() {
-		return "board/getBoard";
-	}
+	//화정
 	
-	@RequestMapping("getUser")
-	public String getUser() {
-		return "user/getUser";
-	}
+	//지민
 	
+	//동우
+	
+	//경민
+	
+	//동규
+	@RequestMapping("index")
+	public String getCbt() {
+		return "cbt/jsp/index";
+	}
 }

@@ -4,8 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>CBT HOME</title>
 </head>
 <body>
+
 </body>
 </html>

@@ -37,14 +37,18 @@ public class HomeController {
 	}
 	
 	//화정
+	@RequestMapping("getProjectsList")
+	public String getProjectsList() {
+		return "projects/projectsList";
+	}
 	
-	//지민
+	//吏�誘�
 	
-	//동우
+	//�룞�슦
 	
-	//경민
+	//寃쎈��
 	
-	//동규
+	//�룞洹�
 	@RequestMapping("index")
 	public String getCbt() {
 		return "cbt/jsp/index";

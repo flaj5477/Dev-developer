@@ -129,32 +129,32 @@
         <!-- Navigation -->
         <ul class="navbar-nav">
           <li class="nav-item  class=" active" ">
-          <a class=" nav-link active " href=" ./index.html"> <i class="ni ni-tv-2 text-primary"></i> Dashboard
+          <a class=" nav-link active " href=" #"> <i class="ni ni-tv-2 text-primary"></i> Dashboard
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="./examples/icons.html">
-              <i class="ni ni-planet text-blue"></i> Icons
+            <a class="nav-link " href="#">
+              <i class="ni ni-planet text-blue"></i> Q&A
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="./examples/maps.html">
-              <i class="ni ni-pin-3 text-orange"></i> Maps
+            <a class="nav-link " href="./getProjectsList">
+              <i class="ni ni-pin-3 text-orange"></i> 프로젝트 공고
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="./examples/profile.html">
-              <i class="ni ni-single-02 text-yellow"></i> User profile
+            <a class="nav-link " href="#">
+              <i class="ni ni-single-02 text-yellow"></i> 위키가이드
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="./examples/tables.html">
-              <i class="ni ni-bullet-list-67 text-red"></i> Tables
+            <a class="nav-link " href="./index">
+              <i class="ni ni-bullet-list-67 text-red"></i> CBT
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./examples/login.html">
-              <i class="ni ni-key-25 text-info"></i> Login
+            <a class="nav-link" href="#">
+              <i class="ni ni-key-25 text-info"></i> Tags
             </a>
           </li>
           <li class="nav-item">
@@ -250,7 +250,7 @@
     </nav>
     <!-- End Navbar -->
     <div class="header bg-gradient-primary pb-7"></div>
-    <div class="container-fluid mt-5">
+    <div class="container-fluid mt-7">
     	<!-- 내용 -->
     	<tiles:insertAttribute name="content"></tiles:insertAttribute>
     

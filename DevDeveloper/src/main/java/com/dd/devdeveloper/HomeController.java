@@ -37,10 +37,10 @@ public class HomeController {
 	}
 	
 	//화정
-	@RequestMapping("getProjectsList")
-	public String getProjectsList() {
-		return "projects/projectsList";
-	}
+	/*
+	 * @RequestMapping("getProjectsList") public String getProjectsList() { return
+	 * "projects/projectsList"; }
+	 */
 	
 	//지민
 	

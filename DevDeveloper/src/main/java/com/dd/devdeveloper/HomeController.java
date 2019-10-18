@@ -42,13 +42,13 @@ public class HomeController {
 		return "projects/projectsList";
 	}
 	
-	//吏�誘�
+	//지민
 	
-	//�룞�슦
+	//동우
 	
-	//寃쎈��
+	//경민
 	
-	//�룞洹�
+	//동규
 	@RequestMapping("index")
 	public String getCbt() {
 		return "cbt/jsp/index";

@@ -19,7 +19,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>
 		<typeAlias alias="board"
 			type="com.dd.devdeveloper.board.BoardVO" />
-
+	
+		<!-- 위키 -->
+		<typeAlias alias="wiki"
+			type="com.dd.devdeveloper.wiki.WikiVO"/>
 	</typeAliases>
 
 </configuration>

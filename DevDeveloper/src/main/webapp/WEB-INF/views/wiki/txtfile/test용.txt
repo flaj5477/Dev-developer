@@ -1,0 +1,60 @@
+<h3>HTML and CSS</h3>
+<h3>XML</h3>
+<h3>JavaScript</h3>
+<h3>Programming</h3>
+<h3>Server Side</h3>
+<h3>Web Building</h3>
+<h3>XML</h3>
+<h3>HTML</h3>
+<h3>CSS</h3>
+<h3>JavaScript</h3>
+<h3>Programming</h3>
+<h3>Server Side</h3>
+<h3>XML</h3>
+<h3>Character Sets</h3>
+<h3>Exercises</h3>
+<h3>Quizzes</h3>
+<h3>Certificates</h3>
+<h2 class="left"><span class="left_h2">jQuery Tutorial</span></h2>
+<h2 class="left"><span class="left_h2">jQuery Effects</span></h2>
+<h2 class="left"><span class="left_h2">jQuery HTML</span></h2>
+<h2 class="left"><span class="left_h2">jQuery Traversing</span></h2>
+<h2 class="left"><span class="left_h2">jQuery AJAX</span></h2>
+<h2 class="left"><span class="left_h2">jQuery Misc</span></h2>
+<h2 class="left"><span class="left_h2">jQuery Examples</span></h2>
+<h2 class="left"><span class="left_h2">jQuery References</span></h2>
+<p class="intro">With jQuery, it is easy to add new elements/content.</p>
+<h2>Add New HTML Content</h2>
+<p>We will look at four jQuery methods that are used to add new content:</p>
+<li><code class="w3-codespan">append()</code> - Inserts content at the end of the selected elements</li>
+<li><code class="w3-codespan">prepend()</code> - Inserts content at the beginning of the selected elements</li>
+<li><code class="w3-codespan">after()</code> - Inserts content after the selected elements</li>
+<li><code class="w3-codespan">before()</code> - Inserts content before the selected elements</li>
+<h2>jQuery append() Method</h2>
+<p>The jQuery <code class="w3-codespan">append()</code> method inserts content AT THE END of the selected HTML elements.</p>
+<h3>Example</h3>
+<h2>jQuery prepend() Method</h2>
+<p>The jQuery <code class="w3-codespan">prepend()</code> method inserts content AT THE BEGINNING of the selected HTML elements.</p>
+<h3>Example</h3>
+<h2>Add Several New Elements With append() and prepend()</h2>
+<p>In both examples above, we have only inserted some text/HTML at the beginning/end of the selected HTML elements.</p>
+<p>However, both the <code class="w3-codespan">append()</code> and <code class="w3-codespan">prepend()</code> methods can take an infinite number of new elements as parameters. The new elements can be generated with text/HTML (like we have done in the examples above), with jQuery, or with JavaScript code and DOM elements.</p>
+<p>In the following example, we create several new elements. The elements are created with text/HTML, jQuery, and JavaScript/DOM. Then we append the new elements to the text with the <code class="w3-codespan">append()</code> method (this would have worked for <code class="w3-codespan">prepend()</code> too) :</p>
+<h3>Example</h3>
+<h2>jQuery after() and before() Methods</h2>
+<p>The jQuery <code class="w3-codespan">after()</code> method inserts content AFTER the selected HTML elements.</p>
+<p>The jQuery <code class="w3-codespan">before()</code> method inserts content BEFORE the selected HTML elements.</p>
+<h3>Example</h3>
+<h2>Add Several New Elements With after() and before()</h2>
+<p>Also, both the <code class="w3-codespan">after()</code> and <code class="w3-codespan">before()</code> methods can take an infinite number of new elements as parameters. The new elements can be generated with text/HTML (like we have done in the example above), with jQuery, or with JavaScript code and DOM elements.</p>
+<p>In the following example, we create several new elements. The elements are created with text/HTML, jQuery, and JavaScript/DOM. Then we insert the new elements to the text with the <code class="w3-codespan">after()</code> method (this would have worked for <code class="w3-codespan">before()</code> too) :</p>
+<h3>Example</h3>
+<h2>jQuery Exercises</h2>
+<h2>Test Yourself With Exercises</h2>
+<h2>Exercise:</h2>
+<p>Use a jQuery method to <strong>insert</strong> the text "YES!" at the end of a &lt;p&gt; element.</p>
+<p><a target="_blank" href="exercise_jq.asp?filename=exercise_jq_dom_add1">Start the Exercise</a></p>
+<h2>jQuery HTML Reference</h2>
+<p>For a complete overview of all jQuery HTML methods, please go to our <a href="jquery_ref_html.asp">jQuery HTML/CSS Reference</a>.</p>
+<h2>Your Suggestion:</h2>
+<h2>Thank You For Helping Us!</h2>

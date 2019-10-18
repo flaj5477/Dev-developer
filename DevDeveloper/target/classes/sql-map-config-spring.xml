@@ -22,10 +22,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		<typeAlias alias="projects"
 			type="com.dd.devdeveloper.projects.ProjectsVO" />
-	
-		<!-- 위키 -->
-		<typeAlias alias="wiki"
-			type="com.dd.devdeveloper.wiki.WikiVO"/>
+
 	</typeAliases>
 
 </configuration>

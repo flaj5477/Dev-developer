@@ -26,5 +26,6 @@ public class BoardDAOMybatis {    //(p.513)
 	//�쟾泥댁“�쉶
 	public List<BoardVO> getBoardList() {
 		return mybatis.selectList("BoardDAO.getBoardList");
+		
 	}
 }

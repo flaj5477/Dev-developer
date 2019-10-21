@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- 오라클 컬럼이 first_name 를 VO firstName 처럼 카멜케이스로 변환 -->
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
-
+	                       
 	<!-- Alias 설정 -->
 	<typeAliases>
 		<!-- 화정 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->

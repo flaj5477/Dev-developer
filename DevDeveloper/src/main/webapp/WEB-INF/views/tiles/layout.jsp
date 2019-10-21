@@ -140,7 +140,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="#">
+            <a class="nav-link " href="./wikihome">
               <i class="ni ni-single-02 text-yellow"></i> 위키가이드
             </a>
           </li>

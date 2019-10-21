@@ -52,16 +52,16 @@
                 <tr>
                 		<td>
                      		${projects.projTitle }
-                     	<td>
+                     	</td>
                      	<td>
                      		${projects.projRegDate }
-                     	<td>
+                     	</td>
                      	<td>
                      		${projects.projDueDate }
-                     	<td>
+                     	</td>
                      	<td>
                      		${projects.membersNo }
-                     	<td>
+                     	</td>
                  </tr>
                  </c:forEach>
                   <tr>

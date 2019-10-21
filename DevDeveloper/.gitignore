@@ -1,4 +1,5 @@
 /target/
+/target/classes/sql-map-config-spring.xml
 /target/classes/
 *.class
 # Package Files #

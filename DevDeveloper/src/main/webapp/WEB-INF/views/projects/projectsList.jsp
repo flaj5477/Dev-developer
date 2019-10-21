@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,8 +113,12 @@
                       </div>
                     </th>
                     <td>
-                      $1,800 USD
+                    	<c:forEach var="projects" items="${list}">
+                     		${projects.projTitle }<br>
+                      	</c:forEach>
                     </td>
+                    
+                  	
                     <td>
                       <span class="badge badge-dot">
                         <i class="bg-success"></i> completed

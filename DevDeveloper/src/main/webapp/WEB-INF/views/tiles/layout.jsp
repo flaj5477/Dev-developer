@@ -1,21 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<!--
 
-=========================================================
-* Argon Dashboard - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,6 +20,17 @@
   <link href="./resources/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link href="./resources/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script>
+  	//페이지 이름 표시
+  	$(document).ready(function(){	
+	        $("#pageName").html(pageName);
+	      //메뉴 볼드 설정
+	    	$( 'a.nav-link:contains('+pageName+')' ).addClass('active');
+	});
+  	
+  	
+  </script>
 </head>
 
 <body class="">
@@ -128,8 +125,8 @@
         </form>
         <!-- Navigation -->
         <ul class="navbar-nav">
-          <li class="nav-item  class=" active" ">
-          <a class=" nav-link active " href=" #"> <i class="ni ni-tv-2 text-primary"></i> Dashboard
+          <li class="nav-item">
+          <a class=" nav-link" href=" #"> <i class="ni ni-tv-2 text-primary"></i> Dashboard
             </a>
           </li>
           <li class="nav-item">
@@ -139,7 +136,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link " href="./getProjectsList">
-              <i class="ni ni-pin-3 text-orange"></i> 프로젝트 공고
+              <i class="ni ni-pin-3 text-orange"></i> 프로젝트공고
             </a>
           </li>
           <li class="nav-item">
@@ -193,7 +190,7 @@
     <nav class="navbar navbar-top navbar-expand-md navbar-dark bg-gradient-primary" id="navbar-main">
       <div class="container-fluid">
         <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="./index.html">Dashboard</a>
+        <a id="pageName" class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="./index.html">Dashboard</a>
         <!-- Form -->
         <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
           <div class="form-group mb-0">

@@ -18,4 +18,5 @@ public class ProjectsVO {
 	private int projPrice;
 	private String projStoreUrl;
 	private String projTags;
+	
 }

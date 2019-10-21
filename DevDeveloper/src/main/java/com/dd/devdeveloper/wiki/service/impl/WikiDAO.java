@@ -1,5 +1,8 @@
 package com.dd.devdeveloper.wiki.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,5 +16,9 @@ public class WikiDAO {
 	
 	public WikiVO getWiki(WikiVO vo) {
 		return mybatis.selectOne("WikiDAO.getWiki", vo);
+	}
+
+	public List<Map<String, Object>> getWikiMap() {
+		return mybatis.selectList("WikiDAO.getWikiMap");
 	}
 }

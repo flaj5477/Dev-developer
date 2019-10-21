@@ -1,5 +1,8 @@
 package com.dd.devdeveloper.wiki.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,13 @@ public class WikiServiceImpl implements WikiService{
 	public WikiVO getWiki(WikiVO vo) {
 		
 		return wikiDAO.getWiki(vo);
+	}
+
+	//20191021 곽동우	//위키리스트조회
+	@Override
+	public List<Map<String, Object>> getWikiMap() {
+		
+		return wikiDAO.getWikiMap();
 	}
 
 }

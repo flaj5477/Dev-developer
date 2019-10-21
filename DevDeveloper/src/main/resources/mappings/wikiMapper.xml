@@ -7,5 +7,33 @@
 	<select id="getWiki" parameterType = "wiki" resultType="wiki">
 		select * from wiki_guide where manual_no = #{manualNo}
 	</select>
-
+	
+	
+	<!-- 20191021 곽동우 -->
+	<!-- 위키조회맵 -->
+	<select id="getWikiMap" resultType="Map">
+		SELECT 	MANUAL_NO				as		"manualNo",
+				MANUAL_CONTENTS			as		"manualContents",
+				MANUAL_ORI_URL			as		"manualOriUrl",
+				MANUAL_TAGS				as		"manualTags"
+				
+		FROM wiki_guide
+		
+		<![CDATA[ 
+		WHERE 	1=1 		
+		]]>
+		 
+		<if test="manualOriUrl != null and manualOriUrl != '' ">
+			AND manualTags LIKE '%' || #{manualTags} || '%'
+		</if>
+		
+		<choose>	
+			<when test="orderby != null and orderby != '' ">	<!--  '' 체크해줘야됨 -->
+				ORDER BY ${orderby} DESC
+			</when>
+			<otherwise>
+				ORDER BY MANUAL_NO DESC
+			</otherwise>
+		</choose>
+	</select>
 </mapper>

@@ -1,2 +1,3 @@
 /target/
+/target/classes/sql-map-config-spring.xml
 *.class

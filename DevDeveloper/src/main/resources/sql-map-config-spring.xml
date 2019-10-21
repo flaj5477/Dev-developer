@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>
 		<typeAlias alias="board"
 			type="com.dd.devdeveloper.board.BoardVO" />
-		
+		  
 		<typeAlias alias="projects"
 			type="com.dd.devdeveloper.projects.ProjectsVO" />
 	

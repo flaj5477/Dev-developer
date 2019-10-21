@@ -17,15 +17,30 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 	<!-- Alias 설정 -->
 	<typeAliases>
+		<!-- 화정 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
 		<typeAlias alias="board"
 			type="com.dd.devdeveloper.board.BoardVO" />
 		  
 		<typeAlias alias="projects"
 			type="com.dd.devdeveloper.projects.ProjectsVO" />
+
 	
-		<!-- 위키 -->
+		<!-- 동우 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
 		<typeAlias alias="wiki"
 			type="com.dd.devdeveloper.wiki.WikiVO"/>
+			
+		<!-- 동규 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
+		
+		
+		
+		<!-- 지민 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
+		
+		
+		<!-- 경민 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
+		
+		
+		
+		
 	</typeAliases>
 
 </configuration>

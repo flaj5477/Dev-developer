@@ -27,10 +27,6 @@
 
 <body class="">
     <div class="container-fluid mt--7">
-    
-    
-    
-    
       <!-- Table -->
       <div class="row">
         <div class="col">
@@ -43,14 +39,31 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">Project</th>
-                    <th scope="col">Budget</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">공고일</th>
+                    <th scope="col">마감일</th>
+                    <th scope="col">공고자</th>
                     <th scope="col">Users</th>
                     <th scope="col">Completion</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="projects" items="${list}">
+                <tr>
+                		<td>
+                     		${projects.projTitle }
+                     	<td>
+                     	<td>
+                     		${projects.projRegDate }
+                     	<td>
+                     	<td>
+                     		${projects.projDueDate }
+                     	<td>
+                     	<td>
+                     		${projects.membersNo }
+                     	<td>
+                 </tr>
+                 </c:forEach>
                   <tr>
                     <th scope="row">
                       <div class="media align-items-center">
@@ -121,9 +134,7 @@
                       </div>
                     </th>
                     <td>
-                    	<c:forEach var="projects" items="${list}">
-                     		${projects.projTitle }<br>
-                      	</c:forEach>
+                    	
                     </td>
                     
                   	

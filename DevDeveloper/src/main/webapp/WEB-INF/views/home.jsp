@@ -4,11 +4,10 @@
 <head>
 	<title>Home</title>
 </head>
+<script>
+	document.location.href = "getProjectsList";
+</script>
 <body>
-<h1>
-	Hello world!  
-</h1>
-<img src="./images/Lighthouse.jpg"/>
-<P>  The time on the server is ${serverTime}. </P>
+
 </body>
 </html>

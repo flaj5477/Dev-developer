@@ -20,15 +20,15 @@
   <link href="./resources/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link href="./resources/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
-  
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script>
-  	//페이지 이름 표시
+  	
   	$(document).ready(function(){	
+  			//페이지 이름 표시
 	        $("#pageName").html(pageName);
 	      //메뉴 볼드 설정
 	    	$( 'a.nav-link:contains('+pageName+')' ).addClass('active');
 	});
-  	
   	
   </script>
 </head>
@@ -262,7 +262,7 @@
   <!--   Argon JS   -->
   <script src="./resources/assets/js/argon-dashboard.min.js?v=1.1.0"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+ 
   <script>
     window.TrackJS &&
       TrackJS.install({

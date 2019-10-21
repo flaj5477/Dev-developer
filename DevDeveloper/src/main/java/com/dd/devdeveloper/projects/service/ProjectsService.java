@@ -9,5 +9,8 @@ public interface ProjectsService {
 	
 	
 	//전체 조회
-	List<ProjectsVO> getBoardList(ProjectsVO vo);
+	List<ProjectsVO> getProjectsList(ProjectsVO vo);
+
+	//상세 프로젝트 조회
+	ProjectsVO getProjects(ProjectsVO vo);
 }

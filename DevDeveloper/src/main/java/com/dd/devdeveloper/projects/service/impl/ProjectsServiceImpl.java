@@ -15,9 +15,15 @@ public class ProjectsServiceImpl implements ProjectsService {
 	@Autowired ProjectsDAO projectsDAO;
 	
 	@Override
-	public List<ProjectsVO> getBoardList(ProjectsVO vo) {
+	public List<ProjectsVO> getProjectsList(ProjectsVO vo) {	//프로젝트 리스트 출력
 		// TODO Auto-generated method stub
 		return projectsDAO.getProjectsList();
+	}
+
+	@Override
+	public ProjectsVO getProjects(ProjectsVO vo) {	//프로젝트 상세 출력
+		// TODO Auto-generated method stub
+		return projectsDAO.getProjects(vo);
 	}
 
 }

@@ -6,6 +6,25 @@
 	
 	<!-- 전체조회 -->
 	<select id="getProjectsList" resultType="projects">
-		select * from projects order by proj_no
+		select 	proj_no, 
+				members_no, 
+				proj_title, 
+				proj_reg_date, 
+				proj_due_date 
+		from projects 
+		order by proj_no
+	</select>
+	
+	<!-- 상세조회 -->
+	<select id="getProjects" resultType="projects">
+		select 	proj_no,
+				members_no,
+				proj_title,
+				proj_contents,
+				proj_reg_date,
+				proj_due_date,
+				proj_tags
+		from projects 
+		where proj_no = #{projNo}
 	</select>
 </mapper>

@@ -15,7 +15,13 @@ public class ProjectsController {
 	
 	@RequestMapping("/getProjectsList")
 	public String getProjectsList(ProjectsVO vo, Model model) {
-		model.addAttribute("list", projectsService.getBoardList(null));
+		model.addAttribute("list", projectsService.getProjectsList(null));
 		return "projects/projectsList";
+	}
+	
+	@RequestMapping("/getProjects")
+	public String detailProjects(ProjectsVO vo, Model model) {
+		model.addAttribute("project", projectsService.getProjects(vo));
+		return "projects/projects";
 	}
 }

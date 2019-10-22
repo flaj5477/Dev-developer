@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		<!-- 경민 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
 		<typeAlias alias="files"
-			type="com.dd.devdeveloper.files.FileVO"/>
+			type="com.dd.devdeveloper.files.FilesVO"/>
 		
 		
 		

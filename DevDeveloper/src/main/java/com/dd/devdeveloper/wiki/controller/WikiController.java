@@ -17,8 +17,6 @@ public class WikiController {
 	
 	@RequestMapping("/getWiki")
 	public String getWiki(WikiVO vo, Model model) {
-		vo.setManualNo(1);
-		
 		model.addAttribute("wiki", wikiService.getWiki(vo));
 		
 		
@@ -31,5 +29,10 @@ public class WikiController {
 	public String wikiHome(Model model) {
 		model.addAttribute("wikiMap", wikiService.getWikiMap());
 		return "wiki/wikihome";
+	}
+	
+	@RequestMapping("/insertWikiForm")
+	public String insertWiki() {
+		return "wiki/insertWikiForm";
 	}
 }

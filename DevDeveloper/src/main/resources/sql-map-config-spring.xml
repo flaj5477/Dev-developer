@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<setting name="defaultExecutorType" value="SIMPLE" />
 		<setting name="defaultStatementTimeout" value="25000" />
 		<!-- 오라클 컬럼이 first_name 를 VO firstName 처럼 카멜케이스로 변환 -->
-		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<setting name="mapUnderscoreToCamelCase" value="true" />	
 	</settings>
 	                       
 	<!-- Alias 설정 -->
@@ -30,9 +30,16 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 			type="com.dd.devdeveloper.wiki.WikiVO"/>
 			
 		<!-- 동규 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
-		
-		
-		
+		<typeAlias alias="testsRecord"
+				   type="com.dd.devdeveloper.cbt.TestsRecordVO"/>
+		<typeAlias alias="tests"
+				   type="com.dd.devdeveloper.cbt.TestsVO"/>		   
+		<typeAlias alias="testsQ"
+				   type="com.dd.devdeveloper.cbt.TestsQVO"/>
+		<typeAlias alias="testsSet"
+				   type="com.dd.devdeveloper.cbt.TestsSetVO"/>
+		<typeAlias alias="member"
+				   type="com.dd.devdeveloper.cbt.MemberVO"/>		   
 		<!-- 지민 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
 		
 		

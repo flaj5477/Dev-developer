@@ -35,6 +35,7 @@
               <h3 class="mb-0">Card tables</h3>
             </div>
             <div class="table-responsive">
+            
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
@@ -51,7 +52,7 @@
                 <c:forEach var="projects" items="${list}">
                 <tr>
                 		<td>
-                     		${projects.projTitle }
+                		<a href="./getProjects?projNo=${projects.projNo}">${projects.projTitle }</a>
                      	</td>
                      	<td>
                      		${projects.projRegDate }

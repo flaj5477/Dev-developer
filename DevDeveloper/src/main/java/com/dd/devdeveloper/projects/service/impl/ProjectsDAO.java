@@ -16,4 +16,8 @@ public class ProjectsDAO {
 	public List<ProjectsVO> getProjectsList() {
 		return mybatis.selectList("ProjectsDAO.getProjectsList");
 	}
+	
+	public ProjectsVO getProjects(ProjectsVO vo) {
+		return mybatis.selectOne("ProjectsDAO.getProjects", vo);
+	}
 }

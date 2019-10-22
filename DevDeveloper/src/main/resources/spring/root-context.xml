@@ -13,7 +13,7 @@
 	<context:component-scan base-package="com"/>
 	
 	<!-- DataSource(DBCP)설정 -->
-	<bean id="dataSource"
+	<bean id="dataSourceSpied"
 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName"
 			value="oracle.jdbc.OracleDriver" />
@@ -22,7 +22,16 @@
 		<property name="username" value="dd" />
 		<property name="password" value="dd" />
 	</bean>
-	
+	<bean id="dataSource"
+		class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="dataSourceSpied" />
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE" />
+				<property name="sqlPrefix" value="SQL:::" />
+			</bean>
+		</property>
+	</bean>
 	
 	
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">

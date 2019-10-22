@@ -6,16 +6,16 @@
 	<!-- 시험응시여부 판단, 시험기록조회 -->
 	<select id="getTestJudg" parameterType = "testsRecord" resultType="testsRecord">
 	<![CDATA[
-		SELECT m.members_grade , ADD_MONTHS(tr.tests_date,1) AS tests_Date
+		SELECT m.members_grade , ADD_MONTHS(tr.tests_date,1) AS tests_date
 		FROM (SELECT *
 		      FROM tests_apply
 		      ORDER BY tests_apply_no DESC, tests_date DESC) tr JOIN members m
 		ON m.members_no = tr.members_no 
 		WHERE
 	]]>
-		<if test="memberNo != null">
+		<if test="membersNo != null">
 	<![CDATA[
-			tr.members_no = #{memberNo} AND rownum <= 1
+			tr.members_no = #{membersNo} AND rownum <= 1
 	]]>		
 		</if>
 	</select>

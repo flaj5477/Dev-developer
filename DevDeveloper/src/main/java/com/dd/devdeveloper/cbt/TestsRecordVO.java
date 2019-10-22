@@ -6,13 +6,13 @@ import lombok.Data;
 
 @Data
 public class TestsRecordVO {
-	private int testRecNo; // TESTS_APPLY_NO
-	private int memberNo; // MEMBERS_NO
-	private int memberGrade;
-	private int testNo; // TESTS_NO  
-	private Date testDay; // TESTS_DATE 
-	private int testScore; // TESTS_SCORE 
-	private String testRes; // TESTS_RESULTS
-	private int testResTime; // TESTS_TIME     
+	private int testsApplyNo; // TESTS_APPLY_NO
+	private int membersNo; // MEMBERS_NO
+	private int membersGrade; // Members_grade
+	private int testsNo; // TESTS_NO  
+	private Date testsDate; // TESTS_DATE 
+	private int testsScore; // TESTS_SCORE 
+	private String testsResult; // TESTS_RESULTS
+	private int testsTime; // TESTS_TIME     
 	
 }

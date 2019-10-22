@@ -1,5 +1,7 @@
 package com.dd.devdeveloper.wiki.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dd.devdeveloper.wiki.WikiVO;
 import com.dd.devdeveloper.wiki.service.WikiService;
+import com.dd.devdeveloper.wiki.textFile.textToFile;
 
 
 //위키컨트롤러 1018 곽동우
@@ -18,8 +21,6 @@ public class WikiController {
 	@RequestMapping("/getWiki")
 	public String getWiki(WikiVO vo, Model model) {
 		model.addAttribute("wiki", wikiService.getWiki(vo));
-		
-		
 		
 		return "wiki/getWiki";
 	}
@@ -45,9 +46,18 @@ public class WikiController {
 	 * 설명:위키 등록하기
 	 */
 	@RequestMapping("/insertWiki")
-	public String insertWiki() {
+	public String insertWiki(WikiVO vo) {
+		textToFile ttf = new textToFile();
 		
+		try {
+			ttf.textSave(vo.getManualContents(), vo.getManualTags(), vo.getManualTitle());	//txt파일로떨군다
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		wikiService.insertWiki(vo);
 		return "redirect:/wikihome";
 	}
+	
 }

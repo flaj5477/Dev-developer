@@ -3,6 +3,33 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="WikiDAO">
+	
+	<!-- 
+		곽동우
+		191022
+		위키등록	
+	 -->
+	 <insert id="insertWiki" parameterType="wiki">	<!-- id sql구문 구분용 -->
+		<selectKey keyProperty="manualNo" resultType="int" order="BEFORE">  <!-- seq에담는다 타입은 int -->
+			select max(MANUAL_NO)+1 from wiki_guide
+		</selectKey>
+		insert into wiki_guide(MANUAL_NO, MANUAL_CONTENTS_PATH, MANUAL_ORI_URL, MANUAL_TAGS, MANUAL_TITLE) 
+		values( #{manualNo}, '테스트중' ,'naver.com' ,'하하하' ,#{manualTitle} )
+		<!-- values( #{manualNo}, #{manualContentsPath} ,#{manualOriUrl} ,#{manualTags} ,#{manualTitle} ) -->
+	</insert>
+	
+<!-- 	
+	<insert id="insertBoardProc" statementType="CALLABLE" parameterType="board">
+		{call board_ins_proc( #{title},
+							  #{writer},
+							  #{content},
+							  #{seq, mode=OUT, jdbcType=NUMERIC, javaType=java.lang.Integer},
+							  #{msg, mode=OUT, jdbcType=VARCHAR, javaType=string}  )  }	call 프로시저명(?,?,?) ???순서대로 | 프로시저명 대소문자구분 x
+		
+	</insert>
+	 -->
+	
+	
 	<!-- 단건조회 -->
 	<select id="getWiki" parameterType = "wiki" resultType="wiki">
 		select * from wiki_guide where manual_no = #{manualNo}
@@ -13,9 +40,10 @@
 	<!-- 위키조회맵 -->
 	<select id="getWikiMap" resultType="Map">
 		SELECT 	MANUAL_NO				as		"manualNo",
-				MANUAL_CONTENTS			as		"manualContents",
+				MANUAL_CONTENTS_PATH	as		"manualContentsPath",
 				MANUAL_ORI_URL			as		"manualOriUrl",
-				MANUAL_TAGS				as		"manualTags"
+				MANUAL_TAGS				as		"manualTags",
+				MANUAL_TITLE			as 		"manualTitle"
 				
 		FROM wiki_guide
 		
@@ -23,7 +51,7 @@
 		WHERE 	1=1 		
 		]]>
 		 
-		<if test="manualOriUrl != null and manualOriUrl != '' ">
+		<if test="manualTags != null and manualTags != '' ">
 			AND manualTags LIKE '%' || #{manualTags} || '%'
 		</if>
 		

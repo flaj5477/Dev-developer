@@ -4,9 +4,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	${wiki.manualNo}
 	${wiki.manualNo}<br>
-	${wiki.manualContents}<br>
+	${wiki.manualTitle}<br>
+	${wiki.manualContentsPath}<br>
 	${wiki.manualOriUrl}<br>
 	${wiki.manualTags}<br>
 	

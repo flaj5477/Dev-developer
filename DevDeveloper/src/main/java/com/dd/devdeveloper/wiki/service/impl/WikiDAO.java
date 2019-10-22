@@ -21,4 +21,8 @@ public class WikiDAO {
 	public List<Map<String, Object>> getWikiMap() {
 		return mybatis.selectList("WikiDAO.getWikiMap");
 	}
+
+	public int insertWiki(WikiVO vo) {
+		return mybatis.insert("WikiDAO.insertWiki", vo);
+	}
 }

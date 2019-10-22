@@ -17,14 +17,16 @@
 	
 	<!-- 상세조회 -->
 	<select id="getProjects" resultType="projects">
-		select 	proj_no,
-				members_no,
-				proj_title,
-				proj_contents,
-				proj_reg_date,
-				proj_due_date,
-				proj_tags
-		from projects 
+		select 	p.proj_no,
+				p.members_no,
+				p.proj_title,
+				p.proj_contents,
+				p.proj_reg_date,
+				p.proj_due_date,
+				p.proj_tags,
+        		m.members_name
+		from projects p join members m
+    	on p.members_no = m.members_no
 		where proj_no = #{projNo}
 	</select>
 </mapper>

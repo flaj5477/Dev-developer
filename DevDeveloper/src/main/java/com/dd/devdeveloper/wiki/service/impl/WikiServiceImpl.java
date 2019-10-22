@@ -27,4 +27,10 @@ public class WikiServiceImpl implements WikiService{
 		return wikiDAO.getWikiMap();
 	}
 
+	//위키등록
+	@Override
+	public int insertWiki(WikiVO vo) {
+		return wikiDAO.insertWiki(vo);
+	}
+
 }

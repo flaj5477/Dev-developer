@@ -69,7 +69,7 @@
                      
                     </th>
                     <td>
-                      ${wiki.manualOriUrl}
+                      ${wiki.manualTitle}
                     </td>
                     <td>
                       <span class="badge badge-dot mr-4">

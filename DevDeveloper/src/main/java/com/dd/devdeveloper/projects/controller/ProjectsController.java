@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.dd.devdeveloper.projects.ProjParticipantsVO;
 import com.dd.devdeveloper.projects.ProjectsVO;
 import com.dd.devdeveloper.projects.service.ProjectsService;
 
@@ -20,8 +21,14 @@ public class ProjectsController {
 	}
 	
 	@RequestMapping("/getProjects")
-	public String detailProjects(ProjectsVO vo, Model model) {
+	public String getProjects(ProjectsVO vo, Model model) {
 		model.addAttribute("project", projectsService.getProjects(vo));
 		return "projects/projects";
+	}
+	
+	@RequestMapping("/applyProjectsForm")
+	public String applyProjects(ProjParticipantsVO vo, Model model) {
+		model.addAttribute("projParticipants", vo);
+		return "projects/applyProjectsForm";
 	}
 }

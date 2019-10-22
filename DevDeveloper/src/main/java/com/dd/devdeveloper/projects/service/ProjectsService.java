@@ -13,4 +13,7 @@ public interface ProjectsService {
 
 	//상세 프로젝트 조회
 	ProjectsVO getProjects(ProjectsVO vo);
+	
+	//프로젝트 지원폼
+	
 }

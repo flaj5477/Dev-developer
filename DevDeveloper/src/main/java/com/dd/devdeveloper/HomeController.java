@@ -49,8 +49,4 @@ public class HomeController {
 	//경민
 	
 	//동규
-	@RequestMapping("index")
-	public String getCbt() {
-		return "cbt/jsp/index";
-	}
 }

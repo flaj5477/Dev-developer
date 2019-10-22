@@ -7,7 +7,8 @@ import lombok.Data;
 @Data
 public class TestsRecordVO {
 	private int testRecNo; // TESTS_APPLY_NO
-	private int memberNo; // MEMBERS_NO   
+	private int memberNo; // MEMBERS_NO
+	private int memberGrade;
 	private int testNo; // TESTS_NO  
 	private Date testDay; // TESTS_DATE 
 	private int testScore; // TESTS_SCORE 

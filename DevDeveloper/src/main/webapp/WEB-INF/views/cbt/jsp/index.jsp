@@ -15,9 +15,9 @@
 	<br><br><br><br>
 </div>
 <div align="center">
-	현재 등급 ???<br>
+	현재 등급 ${tr.membersGrade} <br>
 	다음 등급 ???<br>
-	응시하기까지 남은시간 ???<br>
+	응시하기까지 남은시간 ${tr.testsDate}<br>
 	<H2>IF</H2>
 	1.회원님은 현재 응시가 가능합니다.<br>
 	2.회원님은 ???(지정시간)후 응시가 가능합니다. <br>

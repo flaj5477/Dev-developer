@@ -17,6 +17,7 @@ public class BoardController {
 	//�떒嫄댁“�쉶
 	@RequestMapping("/getBoard")
 	public String getBoard(BoardVO vo, Model model) {
+		System.out.println(vo);
 		model.addAttribute("board",boardService.getBoard(vo));
 
 		return "board/getBoard";  //board�뤃�뜑 諛륁뿉 getBoard.jsp濡� 媛��씪!

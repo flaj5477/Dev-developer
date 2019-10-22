@@ -3,9 +3,9 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="CBTDAO">
-	<!-- 단건조회 -->
-	<select id="getBoard" parameterType = "board" resultType="board">
-		select * from board where seq = #{seq}
+	<!-- 시험응시여부 판단, 시험기록조회 -->
+	<select id="getBoard" parameterType = "testsRecord" resultType="testsRecord">
+		
 	</select>
 
 </mapper>

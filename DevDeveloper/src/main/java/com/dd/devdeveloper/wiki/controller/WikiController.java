@@ -31,8 +31,23 @@ public class WikiController {
 		return "wiki/wikihome";
 	}
 	
+	/*
+	 * 관리자-위키작성페이지 이동
+	 */
 	@RequestMapping("/insertWikiForm")
-	public String insertWiki() {
+	public String insertWikiForm() {
 		return "wiki/insertWikiForm";
+	}
+	
+	/*
+	 * 작성자:곽동우
+	 * 작성일자:2019-10-22
+	 * 설명:위키 등록하기
+	 */
+	@RequestMapping("/insertWiki")
+	public String insertWiki() {
+		
+		
+		return "redirect:/wikihome";
 	}
 }

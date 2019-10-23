@@ -1,6 +1,6 @@
 package com.dd.devdeveloper.cbt;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ public class TestsRecordVO {
 	private int membersNo; // MEMBERS_NO
 	private int membersGrade; // Members_grade
 	private int testsNo; // TESTS_NO  
-	private Date testsDate; // TESTS_DATE 
+	private Timestamp testsDate; // TESTS_DATE 
 	private int testsScore; // TESTS_SCORE 
 	private String testsResult; // TESTS_RESULTS
 	private int testsTime; // TESTS_TIME     

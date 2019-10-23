@@ -76,7 +76,6 @@
                 <c:forEach items="${wikiMap }" var="wiki">
                   <tr id="wikitd" onclick="location.href='getWiki?manualNo=${wiki.manualNo}'">
                     <th scope="row">
-                      
                         <div class="media-body">
                           <span class="mb-0 text-sm">${wiki.manualNo}</span>
                         </div>

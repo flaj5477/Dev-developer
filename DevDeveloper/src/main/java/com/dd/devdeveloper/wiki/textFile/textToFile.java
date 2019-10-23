@@ -19,7 +19,7 @@ public class textToFile {
 	 * 곽동우
 	 * 메뉴얼 등록시 contents와 tag받아서 text파일로 저장
 	 */
-	public void textSave(String contents, String tag, String title) throws IOException {
+	public String textSave(String contents, String tag, String title) throws IOException {
 		BufferedOutputStream bs = null;
 		String fixTitle = today+StringReplace(title);	//제목에서 특수문자 제거
 		String path = checkFolder(tag) +"\\"+fixTitle+".txt";	//	태그폴더 안에 제목.txt 로 파일경로지정
@@ -47,6 +47,8 @@ public class textToFile {
 		}finally {
 			bs.close(); //반드시 닫는다.
 		} 
+		
+		return path;
 	}
 	
 	
@@ -56,12 +58,20 @@ public class textToFile {
 	 * 폴더있는지 확인?
 	 */
 	public String checkFolder(String tag) {
+		String sliceTag = null;
+		if(tag == "" ) tag = "기타";
+		
+		//tag 잘라서 하나만 sliceTag에넣는다
+		/*
+			자르는코드추가
+		*/
+		sliceTag = tag;
 		
 		SimpleDateFormat format2 = new SimpleDateFormat ( "yyyy");
 		Date time = new Date();		
 		String year = format2.format(time);
 		
-		String path = "C:\\Users\\User\\Desktop\\textTest"+"\\"+year+"\\"+tag; //폴더 경로
+		String path = "C:\\Users\\User\\Desktop\\textTest"+"\\"+year+"\\"+sliceTag; //폴더 경로
 		
 		File Folder = new File(path);
 
@@ -69,13 +79,13 @@ public class textToFile {
 		if (!Folder.exists()) {
 			try{
 			    Folder.mkdirs(); //폴더 생성합니다.	mkdir경로없으면 안만듬  mkdirs경로끝까지생성
-			    System.out.println(tag+" 폴더가 생성되었습니다.");
+			    System.out.println(sliceTag+" 폴더가 생성되었습니다.");
 		        } 
 		        catch(Exception e){
 			    e.getStackTrace();
 			}        
 	         }else {
-			System.out.println(tag+" 이미 폴더가 생성되어 있습니다.");
+			System.out.println(sliceTag+" 이미 폴더가 생성되어 있습니다.");
 		}
 		return path;
 	}

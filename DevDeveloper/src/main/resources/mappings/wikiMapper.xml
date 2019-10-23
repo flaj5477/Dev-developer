@@ -11,10 +11,10 @@
 	 -->
 	 <insert id="insertWiki" parameterType="wiki">	<!-- id sql구문 구분용 -->
 		<selectKey keyProperty="manualNo" resultType="int" order="BEFORE">  <!-- seq에담는다 타입은 int -->
-			select max(MANUAL_NO)+1 from wiki_guide
+			select NVL(max(MANUAL_NO),0)+1 from wiki_guide
 		</selectKey>
 		insert into wiki_guide(MANUAL_NO, MANUAL_CONTENTS_PATH, MANUAL_ORI_URL, MANUAL_TAGS, MANUAL_TITLE) 
-		values( #{manualNo}, '테스트중' ,'naver.com' ,'하하하' ,#{manualTitle} )
+		values( #{manualNo}, #{manualContentsPath} ,#{manualOriUrl} ,#{manualTags} ,#{manualTitle} )
 		<!-- values( #{manualNo}, #{manualContentsPath} ,#{manualOriUrl} ,#{manualTags} ,#{manualTitle} ) -->
 	</insert>
 	

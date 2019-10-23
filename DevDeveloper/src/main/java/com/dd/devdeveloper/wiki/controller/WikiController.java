@@ -47,8 +47,10 @@ public class WikiController {
 	 */
 	@RequestMapping("/insertWiki")
 	public String insertWiki(WikiVO vo) {
-		textToFile ttf = new textToFile();
 		
+		System.out.println(vo.getManualTags());
+		
+		textToFile ttf = new textToFile();
 		try {
 			ttf.textSave(vo.getManualContents(), vo.getManualTags(), vo.getManualTitle());	//txt파일로떨군다
 		} catch (IOException e) {

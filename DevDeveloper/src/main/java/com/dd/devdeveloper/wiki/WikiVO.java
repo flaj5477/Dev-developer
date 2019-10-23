@@ -9,6 +9,7 @@ public class WikiVO {
 	private String manualOriUrl;		//메뉴얼 원문 url
 	private String manualTags;			//메뉴얼 적용태그
 	private String manualTitle;			//메뉴얼 제목
+	
 	private String manualContents;		//메뉴얼 원문 내용
 	
 }

@@ -11,10 +11,21 @@
 <script>
 	pageName="위키가이드";
 	
+	
+	$(function(){
+		transTitle();
+	});
+	
 	function formSubmit(n){
 		var form = document.frm;
 		form.manualNo.value = n;
 		form.submit();
+	}
+	
+	function transTitle(){
+		
+		var res = title.replace("<", "&lt;");
+		res = title.replace(">", "&gt;")
 	}
 </script>
 </head>
@@ -68,7 +79,7 @@
                         </div>
                      
                     </th>
-                    <td>
+                    <td id="${wiki.manualNo}" class="title">
                       ${wiki.manualTitle}
                     </td>
                     <td>

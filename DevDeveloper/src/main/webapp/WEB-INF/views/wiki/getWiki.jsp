@@ -10,5 +10,9 @@
 	${wiki.manualOriUrl}<br>
 	${wiki.manualTags}<br>
 	
+	<br>
+	<br>
+	${wiki.manualContents }<br>
+	
 </body>
 </html>

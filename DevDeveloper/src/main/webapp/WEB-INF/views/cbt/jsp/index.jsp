@@ -12,7 +12,7 @@
 		Permission() ;
 	});
 	
-	var permisString = "2019-10-23 09:29:00"; //"${tr.testsDate}"; // String 문자열 자르기(SubString) permisString.substring(0,4);
+	var permisString = "${tr.testsDate}"; // String 문자열 자르기(SubString) permisString.substring(0,4);
 	setInterval("getRestTime()",1000);
 	function getRestTime(){		
 		var permisDate = Date.parse(permisString); // format

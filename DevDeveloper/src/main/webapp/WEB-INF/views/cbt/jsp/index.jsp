@@ -8,28 +8,47 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 
-	var today = new Date();
-	var permission = "${tr.testsDate}";
+	$(document).ready(function() {
+		Permission() ;
+	});
 	
+	var permisString = "2019-10-23 09:29:00"; //"${tr.testsDate}"; // String 문자열 자르기(SubString) permisString.substring(0,4);
 	setInterval("getRestTime()",1000);
-	function getRestTime(){
-	   var year = permission.substring(0,4) - today.getFullYear() ;
-	   var month = permission.substring(5,7) - (today.getMonth()+1) ; // January is 0 !
-	   var day = permission.substring(8,10) - today.getDate();
-	   var hour = permission.substring(11,13) - today.getHours();
-	   var min = permission.substring(14,16) - today.getMinutes();
-	   var sec = permission.substring(17,19) - today.getSeconds();
-	   var aaa = permission - today;
-	   document.getElementById("restTime").innerHTML = '<br>' + year +'년 <br>'+ month +'월 <br>'+ day +'일 <br>'+ hour + '시간 <br>' + min + '분 <br>' + sec + '초 <br>'+aaa	;
-	   document.getElementById("permisTime").innerHTML = permission.substring(0,4)+'년 '+permission.substring(5,7)+'월 '+permission.substring(8,10)+'일 '+
-	   													 permission.substring(11,13)+'시 '+permission.substring(14,16)+'분 '+permission.substring(17,19)+'초';
+	function getRestTime(){		
+		var permisDate = Date.parse(permisString); // format
+	    var restMils = permisDate - new Date();
+	    var restTime = new Date(restMils);    
+	   	var year = restTime.getFullYear() - 1970; 
+	   	var month = restTime.getMonth();
+	   	var day = restTime.getDate() -1;
+	    var hour = restTime.getHours();
+	    var min = restTime.getMinutes(); 
+	    var sec = restTime.getSeconds();
+	    var condition = false;
+	    
+	    if((year||month||day||hour||min||sec) < 0) {
+	    	$('#restTime').html('응시가능');
+	    	$('#cbtEnterBtn').html('응시가능')
+	    					 .css('background-color','blue');
+	    	condition = true;
+	    	
+	    	return condition;
+	    }
+	    else {
+	   		$('#restTime').html( year + '년 ' + month + '월 ' + day + '일 ' +hour + '시 ' + min + '분 ' + sec + '초');
+	   		$('#cbtEnterBtn').html('응시불가')
+	   						 .css('background-color','red');
+	   		
+	   		return condition;
+	    }
 	}
-	/*
 	function Permission() {
 		var grade = "${tr.membersGrade}";
 		if(grade >= 5 )
+			document.getElementById("permisTime").innerHTML =defTime.getFullYear()+'년 '+(defTime.getMonth()+1)+'월 '+defTime.getDate()+'일 '+
+	   defTime.getHours()+'시 '+defTime.getMinutes()+'분 '+defTime.getSeconds()+'초';
 	}
-	*/
+	
 </script>
 </head>
 <body>
@@ -50,8 +69,7 @@
 	<br><br><br>
 </div>
 <div align="center">
-<button>응시하기</button>
-<button>응시불가</button>
+<button type="button" id ="cbtEnterBtn"></button>
 </div>
 </body>
 </html>

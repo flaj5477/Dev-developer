@@ -76,7 +76,7 @@
 							<c:choose>
 								<c:when test="${empty sessionScope.members.membersId}">
 									<!-- 로그인이 안되어 있으면 -->
-									<form name="loginfrm" id="loginfrm" action="loginCheck">
+									<form name="loginfrm" id="loginfrm" action="loginCheck" method="POST">
 										<div class="form-group mb-3">
 											<div class="input-group input-group-alternative">
 												<div class="input-group-prepend">
@@ -126,9 +126,9 @@
 								</c:when>
 								<c:otherwise>
 									<h3>${sessionScope.members.membersId}님 안녕하세요.</h3>
-									<br>
-									 
-
+									<br>${sessionScope.members.membersGrade} 등급	<br>							 
+									이름: ${sessionScope.members.membersName} <br>
+									
 									<a href="logout">로그아웃</a>
 								</c:otherwise>
 							</c:choose>

@@ -42,6 +42,7 @@
 				</div>
 			</div>
 			<div class="card-body">
+			
 				<form action="applyProjects" >
 					<h6 class="heading-small text-muted mb-4">User information</h6>
 					<div class="pl-lg-4">
@@ -69,7 +70,7 @@
 									<label class="form-control-label" for="input-first-name">Phone Number</label> <input type="text" id="input-first-name"
 										name="phoneNo"
 										class="form-control form-control-alternative"
-										placeholder="***-***-****">
+										placeholder="***-****-****">
 								</div>
 							</div>
 							<div class="col-lg-6">
@@ -98,8 +99,8 @@
 						<span class="btn-inner--icon"><i class="fas fa-paper-plane"></i></span>
 
 						<span class="btn-inner--text">지원하기</span>
-
 					</button>
+					<input type="submit" class="btn" ></input>
 					</div>
 				</form>
 			</div>

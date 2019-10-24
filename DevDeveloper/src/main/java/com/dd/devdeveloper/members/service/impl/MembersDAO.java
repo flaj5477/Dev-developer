@@ -29,15 +29,10 @@ public class MembersDAO {
 		return (Integer.parseInt(name) == 0) ? false : true;
 	}
 
-	public void logout(HttpSession session) {
-		session.invalidate();
-
-	}
-
-	/*
-	 * * @SuppressWarnings("unchecked") public Map<String, Object>
-	 * selectUserInfo(Map<String, Object> map) throws Exception { return
-	 * (Map<String, Object>)selectOne("MembersDAO.selectUserInfo", map); }
-	 */
+ 
+    public MembersVO getmembers(MembersVO vo) {
+    	return mybatis.selectOne("MembersDAO.getMembers", vo);
+    	
+    }
 
 }

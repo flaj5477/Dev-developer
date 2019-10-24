@@ -27,8 +27,8 @@ public class MembersServiceImpl implements MembersService{
 		 boolean result = membersDAO.loginCheck(vo);
 			if (result == true) {	//true 일경우 세션 등록
 				//세션 변수 등록
-				session.setAttribute("membersId",vo.getMembersId());
-				session.setAttribute("membersGrade", vo.getMembersGrade());
+				session.setAttribute("members",membersDAO.getmembers(vo));
+				
 			}
 			
 			return result;
@@ -38,7 +38,7 @@ public class MembersServiceImpl implements MembersService{
 
 		@Override
 		public void logout(HttpSession session) {
-			membersDAO.logout(session);
+			session.invalidate();
 			
 		}
 	 

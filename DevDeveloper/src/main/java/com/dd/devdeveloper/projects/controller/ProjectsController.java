@@ -27,8 +27,14 @@ public class ProjectsController {
 	}
 	
 	@RequestMapping("/applyProjectsForm")
-	public String applyProjects(ProjParticipantsVO vo, Model model) {
+	public String applyProjectsForm(ProjParticipantsVO vo, Model model) {
 		model.addAttribute("projParticipants", vo);
 		return "projects/applyProjectsForm";
+	}
+	
+	@RequestMapping("/applyProjects")
+	public String applyProjects(ProjParticipantsVO vo) {
+		projectsService.insertProjects(vo);
+		return "redirect:/getProjects";	//프로젝트 목록 페이지로 돌아감
 	}
 }

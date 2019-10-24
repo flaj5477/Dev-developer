@@ -8,4 +8,9 @@ public class ProjParticipantsVO {
 	private int membersNo;
 	private int projNo;
 	private String status;
+	private String participantName;
+	private String email;
+	private String phoneNo;
+	private String address;
+	private String coverLetter;
 }

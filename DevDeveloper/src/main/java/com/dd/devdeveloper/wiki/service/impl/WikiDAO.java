@@ -30,7 +30,7 @@ public class WikiDAO {
 		return mybatis.update("WikiDAO.updateWiki", vo);
 	}
 
-	public String getWikiContentsPath(WikiVO vo) {
+	public WikiVO getWikiContentsPath(WikiVO vo) {
 		return mybatis.selectOne("WikiDAO.getWikiContentsPath", vo);
 	}
 }

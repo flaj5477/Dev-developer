@@ -25,7 +25,7 @@ public class WikiServiceImpl implements WikiService{
 	public String getWikiContentsPath(WikiVO vo) {
 		String path = null;
 		
-		path = wikiDAO.getWikiContentsPath(vo);
+		path = wikiDAO.getWikiContentsPath(vo).getManualContentsPath();
 		
 		return path;
 	}
@@ -104,6 +104,8 @@ public class WikiServiceImpl implements WikiService{
 		BufferedOutputStream bs = null;
 		//String fixTitle = today+StringReplace(title);	//제목에서 특수문자 제거
 		//String path = checkFolder(tag) +"\\"+fixTitle+".txt";	//	태그폴더 안에 제목.txt 로 파일경로지정
+		
+		System.out.println(path+"파일패스============================");
 		
 		File file = new File(path);
 		

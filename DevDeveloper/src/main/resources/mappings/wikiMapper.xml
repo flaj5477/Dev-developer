@@ -73,9 +73,10 @@
 	 -->
 	 <update id="updateWiki" parameterType="wiki">
 		update wiki_guide set
-		MANUAL_TITLE = #{manualTitle},
-		MANUAL_ORI_URL = #{manualOriUrl},
-		MANUAL_TAGS	= #{manualTags}
+					MANUAL_TITLE = #{manualTitle},
+					MANUAL_ORI_URL = #{manualOriUrl},
+					MANUAL_TAGS	= #{manualTags}
+		where manual_no = #{manualNo}
 	 </update>
 	 
 	 
@@ -86,7 +87,7 @@
 	 	191024 
 	 -->
 	<select id="getWikiContentsPath" parameterType = "wiki" resultType="wiki">
-		select MANUAL_CONTENTS_PATH from wiki_guide where manual_no = #{manualNo}
+		select MANUAL_CONTENTS_PATH as "manualContentsPath" from wiki_guide where manual_no = #{manualNo}
 	</select>
 	 
 </mapper>

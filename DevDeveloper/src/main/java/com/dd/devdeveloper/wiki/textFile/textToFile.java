@@ -47,6 +47,7 @@ public class textToFile {
 	
 		} catch (Exception e) {
 	                e.getStackTrace();
+	                System.out.println("파일등록아뇜");
 			// TODO: handle exception
 		}finally {
 			bs.close(); //반드시 닫는다.
@@ -75,7 +76,7 @@ public class textToFile {
 		Date time = new Date();		
 		String year = format2.format(time);
 		
-		String path = "C:\\Users\\User\\Desktop\\textTest"+"\\"+year+"\\"+sliceTag; //폴더 경로
+		String path = "C:\\Users\\Udon\\Desktop\\textTest"+"\\"+year+"\\"+sliceTag; //폴더 경로
 		
 		File Folder = new File(path);
 

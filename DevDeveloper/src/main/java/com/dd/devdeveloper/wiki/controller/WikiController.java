@@ -72,8 +72,9 @@ public class WikiController {
 	 */
 	@RequestMapping("/updateWiki")
 	public String updateWiki(WikiVO vo, Model model) {
+		System.out.println(vo.getManualTitle()+"============================");
 		wikiService.updateWiki(vo);
-		return "wiki/updateWiki";
+		return "redirect:/wikihome";
 	}
 	
 }

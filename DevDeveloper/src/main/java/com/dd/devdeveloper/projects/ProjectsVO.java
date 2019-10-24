@@ -1,7 +1,6 @@
 package com.dd.devdeveloper.projects;
 
 import java.sql.Date;
-
 import lombok.Data;
 
 @Data

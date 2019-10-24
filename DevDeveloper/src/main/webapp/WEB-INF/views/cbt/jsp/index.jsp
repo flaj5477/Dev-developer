@@ -11,6 +11,7 @@
 	$(document).ready(function() {
 		commentBox();
 		indexCheck();
+		levelChoice();
 	});
 	
 	function commentBox() {
@@ -38,43 +39,42 @@
 	    $('#level').html('현재 등급 ${tr.membersGrade} <br><br>'); 
 	    if(grade >= 5) {
 	    	$('#checkMsg').html('이미 최고레벨에 도달 하셨습니다.<br><br>');
-			$('#entryCBTBtn').html('응시불가')
+			$('#entryBtn').html('응시불가')
 				 			 .css('background-color','red')
 							 .attr('value','refuse');
 	    }
 	    else if(restCond >= 0 && grade < 5) {
 	    	setInterval("indexCheck()",1000);
-	    	$('#getRestTime').html(year + '년 ' + month + '월 ' + day + '일 ' +hour + '시간 ' + min + '분 ' + sec + '초 후에 응시가능 <br><br>');
+	    	$('#restTime').html(year + '년 ' + month + '월 ' + day + '일 ' +hour + '시간 ' + min + '분 ' + sec + '초 후에 응시가능 <br><br>');
 	    	$('#checkMsg').html(permisString.substring(0,4)+'년 '+ // String 문자열 자르기(SubString) permisString.substring(0,4);
 								permisString.substring(5,7)+'월 '+
 								permisString.substring(8,10)+'일 '+
 								permisString.substring(11,13)+'시'+
 								permisString.substring(14,16)+'분 '+
 								permisString.substring(17,19)+'초 이후 응시가 가능합니다. <br><br>');
-	   		$('#entryCBTBtn').html('응시불가')
+	   		$('#entryBtn').html('응시불가')
 	   						 .css('background-color','red')
 	   						 .attr('value','refuse');
 	    }
 	    else if(restCond < 0 && grade < 5) {
 	    	$('#checkMsg').html('현재 응시가 가능합니다.<br><br>');
-	    	$('#entryCBTBtn').html('시험시작')
+	    	$('#entryBtn').html('시험시작')
 	    					 .css('background-color','blue')
 	    					 .attr('value','accept');
 	    }
 	}
 	
-	function entryCBT() {
-		$('#entryCBTBtn').on('click',function() {
+	function levelChoice() {
+		$('#entryBtn').on('click',function() {
 			var state = 1;
-			if(($(this).attr('value')) = 'accept') {
-				location.href = "levelChoice.jsp";
-				/*
+			console.log($(this).attr('value'));
+			if($(this).attr('value') == 'accept') {
+				location.href = "";
 				history.pushState('state : '+state, 'State : '+state);
 				state++;
 				console.log(state);
-				*/
 				//location.replace('levelChoice.jsp');
-			}
+			}	
 		});
 	}
 </script>
@@ -85,9 +85,9 @@
 	<div id="content"></div>
 	<div id="condition">
 		<div id="level"></div>
-		<span id="getRestTime"></span>
+		<span id="restTime"></span>
 		<span id="checkMsg"></span>
-		<button type="button" id ="entryCBTBtn"></button>
+		<button type="button" id ="entryBtn"></button>
 	</div>
 </div>
 </body>

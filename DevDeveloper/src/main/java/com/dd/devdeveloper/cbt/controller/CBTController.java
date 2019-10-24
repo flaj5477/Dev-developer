@@ -15,9 +15,15 @@ public class CBTController {
 	CBTService cbtService;
 	
 	//record
-	@RequestMapping("cbt")
+	@RequestMapping("cbt/index")
 	public String getTestJudg(TestsRecordVO recvo, Model model) {
 		model.addAttribute("tr", cbtService.getTestJudg(recvo));
 		return "cbt/jsp/index";
+	}
+	
+	//tests
+	@RequestMapping("cbt/levelChoice")
+	public String setlevelChoice() {
+		return "cbt/jsp/levelChoice";
 	}
 }

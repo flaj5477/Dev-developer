@@ -15,5 +15,5 @@ public class TestsRecordVO {
 	private String testsResult; // TESTS_RESULTS
 	private int testsTime; // TESTS_TIME
 	
-	private Timestamp utcTestsDate;
+	private Timestamp utcTestsDate; // UTC + 00:00
 }

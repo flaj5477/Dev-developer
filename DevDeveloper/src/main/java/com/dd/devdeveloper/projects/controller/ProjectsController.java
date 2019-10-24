@@ -34,7 +34,7 @@ public class ProjectsController {
 	
 	@RequestMapping("/applyProjects")
 	public String applyProjects(ProjParticipantsVO vo) {
-		projectsService.insertProjects(vo);
+		projectsService.applyProjects(vo);
 		return "redirect:/getProjects";	//프로젝트 목록 페이지로 돌아감
 	}
 }

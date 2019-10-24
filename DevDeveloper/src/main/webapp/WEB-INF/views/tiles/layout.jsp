@@ -153,7 +153,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./signUp">
+            <a class="nav-link" href="./loginTest">
               <i class="ni ni-circle-08 text-pink"></i> Register
             </a>
           </li>

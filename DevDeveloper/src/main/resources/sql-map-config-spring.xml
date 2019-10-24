@@ -39,7 +39,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="testsSet"
 				   type="com.dd.devdeveloper.cbt.TestsSetVO"/>	   
 		<!-- 지민 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
-		
+		<typeAlias alias="members"
+				   type="com.dd.devdeveloper.members.MembersVO"/>
 		
 		<!-- 경민 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
 		<typeAlias alias="files"

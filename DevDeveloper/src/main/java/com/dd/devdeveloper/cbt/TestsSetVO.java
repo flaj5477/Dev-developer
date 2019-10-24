@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class TestsSetVO {
-	private int testSetNo;
-	private int testNo;
-	private int testQNo;
+	private int testsSetNo;
+	private int testsNo;
+	private int testsQNo;
 }

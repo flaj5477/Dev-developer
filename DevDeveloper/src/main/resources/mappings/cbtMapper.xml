@@ -4,8 +4,19 @@
 
 <mapper namespace="CBTDAO">
 	<!-- 시험응시여부 판단, 시험기록조회 -->
-	<select id="getBoard" parameterType = "testsRecord" resultType="testsRecord">
-		
+	<select id="getTestJudg" parameterType = "testsRecord" resultType="testsRecord">
+	<![CDATA[
+		SELECT m.members_grade , ADD_MONTHS(tr.tests_date,1)-9/24 AS tests_date
+		FROM (SELECT *
+		      FROM tests_apply
+		      ORDER BY tests_apply_no DESC, tests_date DESC) tr JOIN members m
+		ON m.members_no = tr.members_no 
+		WHERE
+	]]>
+		<if test="membersNo != null">
+	<![CDATA[
+			tr.members_no = #{membersNo} AND rownum <= 1
+	]]>		
+		</if>
 	</select>
-
 </mapper>

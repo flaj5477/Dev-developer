@@ -2,19 +2,33 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-
 <html>
-
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	pageName="위키가이드";
+	
+	
+	$(function(){
+		transTitle();
+	});
 	
 	function formSubmit(n){
 		var form = document.frm;
 		form.manualNo.value = n;
 		form.submit();
+	}
+	
+	function transTitle(){
+		var title = $('.title');
+		$.each(title,function(idx,item){
+			res = item.html().replace("<", "&lt;");
+			res = res.replace(">", "&gt;")	
+			item.html(res);
+		});
+		
 	}
 </script>
 </head>
@@ -62,14 +76,13 @@
                 <c:forEach items="${wikiMap }" var="wiki">
                   <tr id="wikitd" onclick="location.href='getWiki?manualNo=${wiki.manualNo}'">
                     <th scope="row">
-                      
                         <div class="media-body">
                           <span class="mb-0 text-sm">${wiki.manualNo}</span>
                         </div>
                      
                     </th>
-                    <td>
-                      ${wiki.manualOriUrl}
+                    <td id="${wiki.manualNo}" class="title">
+                      ${wiki.manualTitle}
                     </td>
                     <td>
                       <span class="badge badge-dot mr-4">

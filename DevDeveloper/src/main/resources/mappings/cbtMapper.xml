@@ -6,7 +6,7 @@
 	<!-- 시험응시여부 판단, 시험기록조회 -->
 	<select id="getTestJudg" parameterType = "testsRecord" resultType="testsRecord">
 	<![CDATA[
-		SELECT m.members_grade , ADD_MONTHS(tr.tests_date,1)-9/24 AS tests_date
+		SELECT m.members_grade , ADD_MONTHS(tr.tests_date,1)-9/24 AS UTCTestsDate, ADD_MONTHS(tr.tests_date,1) AS testsDate
 		FROM (SELECT *
 		      FROM tests_apply
 		      ORDER BY tests_apply_no DESC, tests_date DESC) tr JOIN members m

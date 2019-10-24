@@ -13,11 +13,11 @@
   </title>
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-  <!-- Icons -->
-  <link href="./resources/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
-  <link href="./resources/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+  <!-- Icons, 현재 상대경로로 되있어서, 절대경로로 지정(${pageContext.request.contextPath}) -->
+  <link href="${pageContext.request.contextPath}/resources/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+  <link href="${pageContext.request.contextPath}/resources/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link href="./resources/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
+  <link href="${pageContext.request.contextPath}/resources/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script>
   	
@@ -40,7 +40,7 @@
       </button>
       <!-- Brand -->
       <a class="navbar-brand pt-0" href="./index.html">
-        <img src="./resources/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+        <img src="${pageContext.request.contextPath}/resources/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
       </a>
       <!-- User -->
       <ul class="nav align-items-center d-md-none">
@@ -59,7 +59,7 @@
           <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="./resources/assets/img/theme/team-1-800x800.jpg
+                <img alt="Image placeholder" src="${pageContext.request.contextPath}/resources/assets/img/theme/team-1-800x800.jpg
 ">
               </span>
             </div>
@@ -68,19 +68,19 @@
             <div class=" dropdown-header noti-title">
               <h6 class="text-overflow m-0">Welcome!</h6>
             </div>
-            <a href="./examples/profile.html" class="dropdown-item">
+            <a href="${pageContext.request.contextPath}/examples/profile.html" class="dropdown-item">
               <i class="ni ni-single-02"></i>
               <span>My profile</span>
             </a>
-            <a href="./examples/profile.html" class="dropdown-item">
+            <a href="${pageContext.request.contextPath}/examples/profile.html" class="dropdown-item">
               <i class="ni ni-settings-gear-65"></i>
               <span>Settings</span>
             </a>
-            <a href="./examples/profile.html" class="dropdown-item">
+            <a href="${pageContext.request.contextPath}/examples/profile.html" class="dropdown-item">
               <i class="ni ni-calendar-grid-58"></i>
               <span>Activity</span>
             </a>
-            <a href="./examples/profile.html" class="dropdown-item">
+            <a href="${pageContext.request.contextPath}/examples/profile.html" class="dropdown-item">
               <i class="ni ni-support-16"></i>
               <span>Support</span>
             </a>
@@ -99,7 +99,7 @@
           <div class="row">
             <div class="col-6 collapse-brand">
               <a href="./index.html">
-                <img src="./resources/assets/img/brand/blue.png">
+                <img src="${pageContext.request.contextPath}/resources/assets/img/brand/blue.png">
               </a>
             </div>
             <div class="col-6 collapse-close">
@@ -148,12 +148,12 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./login">
+            <a class="nav-link" href="./loginForm">
               <i class="ni ni-key-25 text-info"></i> Tags
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./signUp">
+            <a class="nav-link" href="./loginTest">
               <i class="ni ni-circle-08 text-pink"></i> Register
             </a>
           </li>
@@ -206,7 +206,7 @@
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="./resources/assets/img/theme/team-4-800x800.jpg">
+                  <img alt="Image placeholder" src="${pageContext.request.contextPath}/resources/assets/img/theme/team-4-800x800.jpg">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
                   <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
@@ -217,19 +217,19 @@
               <div class=" dropdown-header noti-title">
                 <h6 class="text-overflow m-0">Welcome!</h6>
               </div>
-              <a href="./examples/profile.html" class="dropdown-item">
+              <a href="${pageContext.request.contextPath}/examples/profile.html" class="dropdown-item">
                 <i class="ni ni-single-02"></i>
                 <span>My profile</span>
               </a>
-              <a href="./examples/profile.html" class="dropdown-item">
+              <a href="${pageContext.request.contextPath}/examples/profile.html" class="dropdown-item">
                 <i class="ni ni-settings-gear-65"></i>
                 <span>Settings</span>
               </a>
-              <a href="./examples/profile.html" class="dropdown-item">
+              <a href="${pageContext.request.contextPath}/examples/profile.html" class="dropdown-item">
                 <i class="ni ni-calendar-grid-58"></i>
                 <span>Activity</span>
               </a>
-              <a href="./examples/profile.html" class="dropdown-item">
+              <a href="${pageContext.request.contextPath}/examples/profile.html" class="dropdown-item">
                 <i class="ni ni-support-16"></i>
                 <span>Support</span>
               </a>
@@ -252,13 +252,13 @@
     </div>
   </div>
   <!--   Core   -->
-  <script src="./resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
-  <script src="./resources/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!--   Optional JS   -->
-  <script src="./resources/assets/js/plugins/chart.js/dist/Chart.min.js"></script>
-  <script src="./resources/assets/js/plugins/chart.js/dist/Chart.extension.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/assets/js/plugins/chart.js/dist/Chart.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/assets/js/plugins/chart.js/dist/Chart.extension.js"></script>
   <!--   Argon JS   -->
-  <script src="./resources/assets/js/argon-dashboard.min.js?v=1.1.0"></script>
+  <script src="${pageContext.request.contextPath}/resources/assets/js/argon-dashboard.min.js?v=1.1.0"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
  
   <script>

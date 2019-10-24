@@ -29,4 +29,30 @@
     	on p.members_no = m.members_no
 		where proj_no = #{projNo}
 	</select>
+	
+	<!-- 지원하기 -->
+	<insert id="applyProjects" parameterType="projParticipants" >
+		<selectKey keyProperty="applyNo" resultType="int" order="BEFORE">
+			select max(apply_no) +1 from proj_participants
+		</selectKey>
+		
+		insert into proj_participants( 	apply_no, 
+										members_no, 
+										proj_no, 
+										status, 
+										participant_name, 
+										email, 
+										phone_no, 
+										address, 
+										cover_letter) 
+		values (#{applyNo}, 
+				#{membersNo}, 
+				#{projNo}, 
+				'지원', 
+				#{participantName}, 
+				#{email}, 
+				#{phoneNo}, 
+				#{address}, 
+				#{coverLetter})
+	</insert>
 </mapper>

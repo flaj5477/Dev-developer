@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dd.devdeveloper.cbt.TestsRecordVO;
+import com.dd.devdeveloper.cbt.TestsVO;
 import com.dd.devdeveloper.cbt.service.CBTService;
 
 @Controller
@@ -15,9 +16,16 @@ public class CBTController {
 	CBTService cbtService;
 	
 	//record
-	@RequestMapping("index")
+	@RequestMapping("cbt/index")
 	public String getTestJudg(TestsRecordVO recvo, Model model) {
 		model.addAttribute("tr", cbtService.getTestJudg(recvo));
 		return "cbt/jsp/index";
+	}
+	
+	//tests
+	@RequestMapping("cbt/levelChoice")
+	public String setlevelChoice(TestsVO recvo, Model model) {
+		model.addAttribute("tslist",cbtService.getTestList());
+		return "cbt/jsp/levelChoice";
 	}
 }

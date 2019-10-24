@@ -33,4 +33,10 @@
 			WHERE members_id = #{membersId} AND members_pw = #{membersPw}
 		]]>
 	</select>
+	
+	<select id="getMembers" parameterType="members" resultType="members">
+	select * 
+	from members 
+	where members_id =  #{membersId}
+	</select>
 </mapper>

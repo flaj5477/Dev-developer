@@ -18,6 +18,6 @@ public class CBTController {
 	@RequestMapping("index")
 	public String getTestJudg(TestsRecordVO recvo, Model model) {
 		model.addAttribute("tr", cbtService.getTestJudg(recvo));
-		return "cbt/jsp/index";
+		return "cbt/jsp/indexCBT";
 	}
 }

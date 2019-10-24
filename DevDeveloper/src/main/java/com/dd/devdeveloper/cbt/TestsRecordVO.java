@@ -13,6 +13,7 @@ public class TestsRecordVO {
 	private Timestamp testsDate; // TESTS_DATE 
 	private int testsScore; // TESTS_SCORE 
 	private String testsResult; // TESTS_RESULTS
-	private int testsTime; // TESTS_TIME     
+	private int testsTime; // TESTS_TIME
 	
+	private Timestamp utcTestsDate;
 }

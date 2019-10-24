@@ -3,6 +3,7 @@ package com.dd.devdeveloper.projects.service;
 import java.util.List;
 
 import com.dd.devdeveloper.board.BoardVO;
+import com.dd.devdeveloper.projects.ProjParticipantsVO;
 import com.dd.devdeveloper.projects.ProjectsVO;
 
 public interface ProjectsService {
@@ -13,7 +14,7 @@ public interface ProjectsService {
 
 	//상세 프로젝트 조회
 	ProjectsVO getProjects(ProjectsVO vo);
-	
-	//프로젝트 지원폼
-	
+
+	//프로젝트 지원
+	void applyProjects(ProjParticipantsVO vo);
 }

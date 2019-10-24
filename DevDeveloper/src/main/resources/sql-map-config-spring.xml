@@ -23,6 +23,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		  
 		<typeAlias alias="projects"
 			type="com.dd.devdeveloper.projects.ProjectsVO" />
+		<typeAlias alias="projParticipants"
+			type="com.dd.devdeveloper.projects.ProjParticipantsVO"/>
 
 	
 		<!-- 동우 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->

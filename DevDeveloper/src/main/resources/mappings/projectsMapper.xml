@@ -29,4 +29,9 @@
     	on p.members_no = m.members_no
 		where proj_no = #{projNo}
 	</select>
+	
+	<!-- 지원하기 -->
+	<insert id="applyProjects" parameterType="projects" >
+	
+	</insert>
 </mapper>

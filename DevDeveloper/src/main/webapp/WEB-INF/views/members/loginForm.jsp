@@ -74,7 +74,7 @@
 						<div class="card-body px-lg-5 py-lg-5">
 							<div class="text-center text-muted mb-4"></div>
 							<c:choose>
-								<c:when test="${empty sessionScope.membersId}">
+								<c:when test="${empty sessionScope.members.membersId}">
 									<!-- 로그인이 안되어 있으면 -->
 									<form name="loginfrm" id="loginfrm" action="loginCheck">
 										<div class="form-group mb-3">
@@ -125,8 +125,9 @@
 									</form>
 								</c:when>
 								<c:otherwise>
-									<h3>${sessionScope.membersId}님안녕하세요.</h3>
+									<h3>${sessionScope.members.membersId}님 안녕하세요.</h3>
 									<br>
+									 
 
 									<a href="logout">로그아웃</a>
 								</c:otherwise>

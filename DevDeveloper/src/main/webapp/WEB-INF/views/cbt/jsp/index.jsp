@@ -66,14 +66,9 @@
 	
 	function levelChoice() {
 		$('#entryBtn').on('click',function() {
-			var state = 1;
-			console.log($(this).attr('value'));
 			if($(this).attr('value') == 'accept') {
-				location.href = "";
-				history.pushState('state : '+state, 'State : '+state);
-				state++;
-				console.log(state);
-				//location.replace('levelChoice.jsp');
+				//location.href = "levelChoice";
+				location.replace('levelChoice');
 			}	
 		});
 	}

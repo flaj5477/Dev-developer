@@ -11,7 +11,7 @@
 <div align="center">
 	<div id="subject"></div>
 	<div id="choose">
-		<c:forEach items="${testList}" var="tests">
+		<c:forEach items="${tslist}" var="tests">
 			${tests.testsNo} | 
 			${tests.testsTitle} |  
 			${tests.testsLevel} | 

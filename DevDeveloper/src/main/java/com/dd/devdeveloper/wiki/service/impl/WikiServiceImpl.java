@@ -1,6 +1,9 @@
 package com.dd.devdeveloper.wiki.service.impl;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -17,10 +20,23 @@ public class WikiServiceImpl implements WikiService{
 
 	@Autowired WikiDAO wikiDAO;
 	
+	//단건조회
+	@Override
+	public String getWikiContentsPath(WikiVO vo) {
+		String path = null;
+		
+		path = wikiDAO.getWikiContentsPath(vo);
+		
+		return path;
+	}
+		
+		
+	//단건조회
 	@Override
 	public WikiVO getWiki(WikiVO vo) {
-		String contents;
+		String contents = null;
 		WikiVO wiki = wikiDAO.getWiki(vo);
+		
 		contents = readText(wiki.getManualContentsPath());
 		
 		wiki.setManualContents(contents);
@@ -62,6 +78,49 @@ public class WikiServiceImpl implements WikiService{
 		return wikiDAO.insertWiki(vo);
 	}
 	
+	//위키수정
+	@Override
+	public void updateWiki(WikiVO vo) {
+		
+		String path = getWikiContentsPath(vo);
+
+		String contents = vo.getManualContents();
+	
+		try {
+			textSave(contents,path);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		wikiDAO.updateWiki(vo);
+	}
+
+	
+	
+	
+	//파일수정
+	public void textSave(String contents, String path) throws IOException {
+		BufferedOutputStream bs = null;
+		//String fixTitle = today+StringReplace(title);	//제목에서 특수문자 제거
+		//String path = checkFolder(tag) +"\\"+fixTitle+".txt";	//	태그폴더 안에 제목.txt 로 파일경로지정
+		
+		File file = new File(path);
+		
+		try {
+			bs = new BufferedOutputStream(new FileOutputStream(file));
+			
+			String str = contents;
+			bs.write(str.getBytes()); //Byte형으로만 넣을 수 있음
+	
+		} catch (Exception e) {
+	                e.getStackTrace();
+			// TODO: handle exception
+		}finally {
+			bs.close(); //반드시 닫는다.
+		} 
+	}
+	
 	
 	
 	
@@ -90,8 +149,9 @@ public class WikiServiceImpl implements WikiService{
 		e.getStackTrace();
 		System.out.println("파일읽기오류!!!!!!!!!!!!!");
 	    }
-		System.out.println(manualContents + "=============");
 		return manualContents;
 	}
+
+	
 
 }

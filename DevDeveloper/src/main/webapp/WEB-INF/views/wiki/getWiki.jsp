@@ -9,10 +9,18 @@
 	${wiki.manualContentsPath}<br>
 	${wiki.manualOriUrl}<br>
 	${wiki.manualTags}<br>
+	<form action="updateWikiForm">
+		<input type="hidden" name="manualNo" value="${wiki.manualNo}">
+		<button class="btn btn-primary">수정</button>
+	</form>
+	<br>
+	<br>
+	<div class="col">
+		<h2>${wiki.manualTitle}</h2>
+		<hr>
+		${wiki.manualContents }</div>
+		
 	
-	<br>
-	<br>
-	${wiki.manualContents }<br>
 	
 </body>
 </html>

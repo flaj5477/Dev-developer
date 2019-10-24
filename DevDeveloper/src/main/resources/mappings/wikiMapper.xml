@@ -64,4 +64,29 @@
 			</otherwise>
 		</choose>
 	</select>
+	
+	
+	<!-- 
+		곽동우
+		수정용
+		20191024
+	 -->
+	 <update id="updateWiki" parameterType="wiki">
+		update wiki_guide set
+		MANUAL_TITLE = #{manualTitle},
+		MANUAL_ORI_URL = #{manualOriUrl},
+		MANUAL_TAGS	= #{manualTags}
+	 </update>
+	 
+	 
+	 
+	 <!-- 
+	 	파일위치조회
+	 	곽동우
+	 	191024 
+	 -->
+	<select id="getWikiContentsPath" parameterType = "wiki" resultType="wiki">
+		select MANUAL_CONTENTS_PATH from wiki_guide where manual_no = #{manualNo}
+	</select>
+	 
 </mapper>

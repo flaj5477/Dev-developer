@@ -25,4 +25,12 @@ public class WikiDAO {
 	public int insertWiki(WikiVO vo) {
 		return mybatis.insert("WikiDAO.insertWiki", vo);
 	}
+	
+	public int updateWiki(WikiVO vo) {
+		return mybatis.update("WikiDAO.updateWiki", vo);
+	}
+
+	public String getWikiContentsPath(WikiVO vo) {
+		return mybatis.selectOne("WikiDAO.getWikiContentsPath", vo);
+	}
 }

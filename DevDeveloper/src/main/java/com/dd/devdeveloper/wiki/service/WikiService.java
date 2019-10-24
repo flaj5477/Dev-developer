@@ -16,4 +16,12 @@ public interface WikiService {
 	
 	//위키등록
 	public int insertWiki(WikiVO vo);
+
+	//위키수정
+	public void updateWiki(WikiVO vo);
+
+	//위키경로 가져오기
+	public String getWikiContentsPath(WikiVO vo);
+	
+	
 }

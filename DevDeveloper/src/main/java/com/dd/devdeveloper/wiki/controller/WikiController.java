@@ -2,6 +2,8 @@ package com.dd.devdeveloper.wiki.controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,6 +52,28 @@ public class WikiController {
 		wikiService.insertWiki(vo);
 		
 		return "redirect:/wikihome";
+	}
+	
+	/*
+	 * 곽동우
+	 * 2019-10-24
+	 * 위키수정폼 이동
+	 */
+	@RequestMapping("/updateWikiForm")
+	public String updateWikiForm(WikiVO vo, Model model) {
+		model.addAttribute("wiki", wikiService.getWiki(vo));
+		return "wiki/updateWikiForm";
+	}
+	
+	/*
+	 * 곽동우
+	 * 2019-10-24
+	 * 위키수정하기
+	 */
+	@RequestMapping("/updateWiki")
+	public String updateWiki(WikiVO vo, Model model) {
+		wikiService.updateWiki(vo);
+		return "wiki/updateWiki";
 	}
 	
 }

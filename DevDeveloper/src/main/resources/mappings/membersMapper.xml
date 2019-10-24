@@ -25,4 +25,12 @@
 		 #{membersName} , #{membersType} , #{membersMail}
 		 )
 	</insert>
+	
+	
+	<select id="loginCheck" resultType="String">
+		<![CDATA[
+			SELECT count(*) FROM members
+			WHERE members_id = #{membersId} AND members_pw = #{membersPw}
+		]]>
+	</select>
 </mapper>

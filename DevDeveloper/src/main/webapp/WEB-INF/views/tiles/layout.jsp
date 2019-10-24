@@ -148,7 +148,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./login">
+            <a class="nav-link" href="./loginForm">
               <i class="ni ni-key-25 text-info"></i> Tags
             </a>
           </li>

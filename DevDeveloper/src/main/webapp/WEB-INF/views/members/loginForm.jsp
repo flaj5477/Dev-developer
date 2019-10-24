@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
- <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 
@@ -96,8 +96,18 @@
 												<input class="form-control" placeholder="비밀번호"
 													type="password" id="membersPw" name="membersPw">
 												<c:if test="${msg == '실패'}">
-													<tr>
-														<td colspan=2>아이디 또는 패스워드가 틀렸습니다.</td>
+													<div
+														class="alert alert-default alert-dismissible fade show"
+														role="alert">
+														<span class="alert-inner--icon"></span> <span class="alert-inner--text">
+															<strong>아이디 또는 패스워드가 틀렸습니다</strong>
+															</span>
+														<button type="button" class="close" data-dismiss="alert"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+
 												</c:if>
 											</div>
 										</div>
@@ -110,13 +120,14 @@
 											</label>
 										</div>
 										<div class="text-center">
-											<button type="submit" id="login" class="btn btn-primary my-4">로그인</button>
+											<button type="button" id="login" class="btn btn-primary my-4">로그인</button>
 										</div>
 									</form>
 								</c:when>
 								<c:otherwise>
-									<h3>${sessionScope.membersId}님 안녕하세요.</h3><br>
-									 
+									<h3>${sessionScope.membersId}님안녕하세요.</h3>
+									<br>
+
 									<a href="logout">로그아웃</a>
 								</c:otherwise>
 							</c:choose>
@@ -136,7 +147,7 @@
 		</div>
 	</div>
 
-	<!-- <script type="text/javascript">
+	<script type="text/javascript">
 		$(document).ready(function(e) {
 			$('#login').click(function() {
 
@@ -152,11 +163,11 @@
 				}
 
 				//전송
-				$('#loginFrm').submit();
+				$('#loginfrm').submit();
 			});
 
 		});
-	</script> -->
+	</script>
 	<!--   Core   -->
 	<script src="../assets/js/plugins/jquery/dist/jquery.min.js"></script>
 	<script

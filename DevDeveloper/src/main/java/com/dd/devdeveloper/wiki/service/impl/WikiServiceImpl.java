@@ -54,13 +54,17 @@ public class WikiServiceImpl implements WikiService{
 		if (paging.getPage() == null) {
 			paging.setPage(1);
 		}
-
+		paging.setPageUnit(10);
+		paging.setPageSize(5);
+		
+		// 전체 건수
+		paging.setTotalRecord(wikiDAO.getCountWiki()); //전체건수
+		
 		// 시작/마지막 레코드 번호	
 		vo.setFirst(paging.getFirst());
 		vo.setLast(paging.getLast());
 
-		// 전체 건수
-		paging.setTotalRecord(wikiDAO.getCountWiki()); //전체건수
+	
 		////////////////////페이징설정 끝
 		
 		List<Map<String, Object>> wikiList= wikiDAO.getWikiMap(vo);

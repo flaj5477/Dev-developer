@@ -39,30 +39,32 @@
 	<!-- 20191021 곽동우 -->
 	<!-- 위키조회맵 -->
 	<select id="getWikiMap" parameterType="wiki" resultType="Map">
-		SELECT 	MANUAL_NO				as		"manualNo",
-				MANUAL_CONTENTS_PATH	as		"manualContentsPath",
-				MANUAL_ORI_URL			as		"manualOriUrl",
-				MANUAL_TAGS				as		"manualTags",
-				MANUAL_TITLE			as 		"manualTitle"
+		SELECT b.* FROM ( SELECT rownum no, a.* FROM (
+				SELECT 	MANUAL_NO				as		"manualNo",
+						MANUAL_CONTENTS_PATH	as		"manualContentsPath",
+						MANUAL_ORI_URL			as		"manualOriUrl",
+						MANUAL_TAGS				as		"manualTags",
+						MANUAL_TITLE			as 		"manualTitle"
+						
+				FROM wiki_guide
 				
-		FROM wiki_guide
-		
-		<![CDATA[ 
-		WHERE 	1=1 		
-		]]>
-		 
-		<if test="manualTags != null and manualTags != '' ">
-			AND manualTags LIKE '%' || #{manualTags} || '%'
-		</if>
-		
-		<choose>	
-			<when test="orderby != null and orderby != '' ">	<!--  '' 체크해줘야됨 -->
-				ORDER BY ${orderby} DESC
-			</when>
-			<otherwise>
-				ORDER BY MANUAL_NO DESC
-			</otherwise>
-		</choose>
+				<![CDATA[ 
+				WHERE 	1=1 		
+				]]>
+				
+				<if test="manualTags != null and manualTags != '' ">
+					AND manualTags LIKE '%' || #{manualTags} || '%'
+				</if>
+				
+				<choose>	
+					<when test="orderby != null and orderby != '' ">	<!--  '' 체크해줘야됨 -->
+						ORDER BY ${orderby} DESC
+					</when>
+					<otherwise>
+						ORDER BY MANUAL_NO DESC
+					</otherwise>
+				</choose>
+		) a ) b WHERE no BETWEEN #{first} AND #{last}
 	</select>
 	
 	
@@ -95,7 +97,7 @@
 		위키 전체수 가져오기(페이징)
 	 -->
 	 <select id="getCountWiki" resultType="int">
-		select count(*)  as  "getCountWiki" from wiki_guide;
+		select count(*)  as  "getCountWiki" from wiki_guide
 	 </select>
 	 
 </mapper>

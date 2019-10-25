@@ -70,4 +70,12 @@ public class Paging {
 		this.endPage = endPage;
 	}
 	
+	@Override
+	public String toString() {
+		return "Paging [pageUnit=" + pageUnit + ", pageSize=" + pageSize + ", lastPage=" + lastPage + ", totalRecord="
+				+ totalRecord + ", page=" + page + ", startPage=" + getStartPage() + ", endPage=" + getEndPage() + ", first="
+				+ first + ", last=" + last + "]";
+	}
+	
+	
 }

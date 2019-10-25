@@ -13,4 +13,5 @@ public class WikiVO {
 	private String manualContents;		//메뉴얼 원문 내용
 	private int first;					//페이징시 첫데이터번호
 	private int last;					//페이징시 마지막데이터번호
+	private String orderby;
 }

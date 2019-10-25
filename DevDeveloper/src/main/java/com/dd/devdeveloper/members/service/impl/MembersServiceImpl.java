@@ -41,6 +41,12 @@ public class MembersServiceImpl implements MembersService{
 			session.invalidate();
 			
 		}
+
+		@Override
+		public MembersVO getmembers(MembersVO vo) {
+			return membersDAO.getmembers(vo);
+			 
+		}
 	 
 }
 	 

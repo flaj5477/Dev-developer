@@ -9,10 +9,30 @@
 	${wiki.manualContentsPath}<br>
 	${wiki.manualOriUrl}<br>
 	${wiki.manualTags}<br>
-	
+	<form action="updateWikiForm">
+		<input type="hidden" name="manualNo" value="${wiki.manualNo}">
+		
+	</form>
 	<br>
 	<br>
-	${wiki.manualContents }<br>
-	
+	<div class="col">
+		<div class="row align-items-center">
+			<div class="col">
+				<div class="ct-page-title">
+		          <h1 class="ct-title" id="content">${wiki.manualTitle}</h1>
+		        </div>
+	        </div>
+	        <div class="col">
+		        <div class="nav nav-pills justify-content-end">
+		        	<button class="btn btn-primary">수정</button>
+		        </div>
+	        </div>
+	    </div>
+		<hr>
+		${wiki.manualContents }
+	</div>
+		
+		
+		
 </body>
 </html>

@@ -18,11 +18,24 @@ public class WikiDAO {
 		return mybatis.selectOne("WikiDAO.getWiki", vo);
 	}
 
-	public List<Map<String, Object>> getWikiMap() {
-		return mybatis.selectList("WikiDAO.getWikiMap");
+	public List<Map<String, Object>> getWikiMap(WikiVO vo) {
+		return mybatis.selectList("WikiDAO.getWikiMap", vo);
 	}
 
 	public int insertWiki(WikiVO vo) {
 		return mybatis.insert("WikiDAO.insertWiki", vo);
+	}
+	
+	public int updateWiki(WikiVO vo) {
+		return mybatis.update("WikiDAO.updateWiki", vo);
+	}
+
+	public WikiVO getWikiContentsPath(WikiVO vo) {
+		return mybatis.selectOne("WikiDAO.getWikiContentsPath", vo);
+	}
+	
+	//전체건수가져오기
+	public int getCountWiki() {
+		return mybatis.selectOne("WikiDAO.getCountWiki");
 	}
 }

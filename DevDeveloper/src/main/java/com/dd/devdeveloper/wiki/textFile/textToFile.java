@@ -26,14 +26,18 @@ public class textToFile {
 		
 		File file = new File(path);	
 		
-		int i=1;
-		while(file.exists()) {	//해당경로 같은파일명 있으면 뒤에 숫자달아준다
-			if(i==1) path = path.substring(0, path.length()-4);
-			else path = path.substring(0, path.length()-5);
-			path = path+i+".txt";
-			file = new File(path);
-			i++;
-		}
+		//파일이름 중복체크
+//		int i=1;
+//		while(file.exists()) {	//해당경로 같은파일명 있으면 뒤에 숫자달아준다
+//			if(i==1) path = path.substring(0, path.length()-4);
+//			else path = path.substring(0, path.length()-5);
+//			path = path+i+".txt";
+//			file = new File(path);
+//			i++;
+//		}
+				
+		file = rename(file);	//파일이름 중복체크
+		path = file.getPath();
 		
 		try {
 			bs = new BufferedOutputStream(new FileOutputStream(file));
@@ -43,6 +47,7 @@ public class textToFile {
 	
 		} catch (Exception e) {
 	                e.getStackTrace();
+	                System.out.println("파일등록아뇜");
 			// TODO: handle exception
 		}finally {
 			bs.close(); //반드시 닫는다.
@@ -102,4 +107,47 @@ public class textToFile {
 	        str =str.replaceAll(match, "");
 	        return str;
 	}
+	
+	
+	/*
+	 * 20191024
+	 * 곽동우
+	 * 파일이름 중복확인
+	 */
+	public File rename(File f) { // File f는 원본 파일
+		if (createNewFile(f))
+			return f; // 생성된 f가
+
+		// 확장자가 없는 파일 일때 처리
+		String name = f.getName();
+		String body = null;
+		String ext = null;
+
+		int dot = name.lastIndexOf(".");
+		if (dot != -1) { // 확장자가 있을때
+			body = name.substring(0, dot);
+			ext = name.substring(dot);
+		} else { // 확장자가 없을때
+			body = name;
+			ext = "";
+		}
+
+		int count = 0;
+		// 중복된 파일이 있을때
+		while (!createNewFile(f) && count < 9999) {
+			count++;
+			String newName = body + count + ext;
+			f = new File(f.getParent(), newName);
+		}
+		return f;
+	}
+
+	private boolean createNewFile(File f) {
+		try {
+			return f.createNewFile(); // 존재하는 파일이 아니면
+		} catch (IOException ignored) {
+			return false;
+		}
+	}
+	
 }

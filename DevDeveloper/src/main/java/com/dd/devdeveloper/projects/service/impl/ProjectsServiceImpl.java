@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dd.devdeveloper.board.BoardVO;
+import com.dd.devdeveloper.projects.ProjParticipantsVO;
 import com.dd.devdeveloper.projects.ProjectsVO;
 import com.dd.devdeveloper.projects.service.ProjectsService;
 
@@ -24,6 +25,12 @@ public class ProjectsServiceImpl implements ProjectsService {
 	public ProjectsVO getProjects(ProjectsVO vo) {	//프로젝트 상세 출력
 		// TODO Auto-generated method stub
 		return projectsDAO.getProjects(vo);
+	}
+
+	@Override
+	public void applyProjects(ProjParticipantsVO vo) {		//프로젝트 지원
+		// TODO Auto-generated method stub
+		projectsDAO.applyProjects(vo);
 	}
 
 }

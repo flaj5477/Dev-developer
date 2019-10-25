@@ -18,6 +18,8 @@
   <link href="../assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link href="../assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
+  
+  
 </head>
 
 <body class="bg-default">
@@ -63,13 +65,13 @@
               <div class="text-center text-muted mb-4">
                
               </div>
-              <form role="form">
+              <form role="form" method="POST" action="logindd">
                 <div class="form-group mb-3">
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
                     </div>
-                    <input class="form-control" placeholder="아이디" type="id">
+                    <input class="form-control" placeholder="아이디" type="text" name="membersId">
                   </div>
                 </div>
                 <div class="form-group">
@@ -77,7 +79,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="비밀번호" type="password">
+                    <input class="form-control" placeholder="비밀번호" type="password" name="membersPw">
                   </div>
                 </div>
                 <div class="custom-control custom-control-alternative custom-checkbox">
@@ -87,7 +89,7 @@
                   </label>
                 </div>
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary my-4">로그인</button>
+                  <button type="submit" class="btn btn-primary my-4">로그인</button>
                 </div>
               </form>
             </div>
@@ -105,6 +107,9 @@
     </div>
      
   </div>
+  
+
+  
   <!--   Core   -->
   <script src="../assets/js/plugins/jquery/dist/jquery.min.js"></script>
   <script src="../assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

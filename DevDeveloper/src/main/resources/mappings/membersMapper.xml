@@ -3,15 +3,40 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="MembersDAO">
-	<insert id="insertMembers" parameterType="members">
+	<!-- <insert id="insertMembers" parameterType="members">
 		insert into members(members_id, members_pw, members_name, members_image
-		members_addr, members_tel, members_mail)
+		members_addr, members_tel, members_mail, members_type)
 		values ( #{membersId}, #{membersPw}, #{membersName}, #{membersImage},
-		 #{membersAddr}, #{membersTel}, #{membersMail})
+		 #{membersAddr}, #{membersTel}, #{membersMail},#{membersType})
+	</insert> -->
+	
+	<!-- <insert id="insertMembers" parameterType="members">
+		insert into members(members_no, members_id, members_pw, members_name, 
+		members_addr, members_tel, members_mail, members_type)
+		values ((select max(members_no)+1 from members), #{membersId}, #{membersPw}, #{membersName}, 
+		 #{membersAddr}, #{membersTel}, #{membersMail},#{membersType})
+	</insert> -->
+	
+		<insert id="insertMembers" parameterType="members">
+		insert into members(members_no, members_id, members_pw, members_name 
+		, members_type, members_mail 
+		)
+		values ((select max(members_no)+1 from members), #{membersId}, #{membersPw},
+		 #{membersName} , #{membersType} , #{membersMail}
+		 )
 	</insert>
 	
-	<!-- 단건조회 -->
+	
+	<select id="loginCheck" resultType="String">
+		<![CDATA[
+			SELECT count(*) FROM members
+			WHERE members_id = #{membersId} AND members_pw = #{membersPw}
+		]]>
+	</select>
+	
 	<select id="getMembers" parameterType="members" resultType="members">
-		select * from members where members_id = #{membersId}
+	select * 
+	from members 
+	where members_id =  #{membersId}
 	</select>
 </mapper>

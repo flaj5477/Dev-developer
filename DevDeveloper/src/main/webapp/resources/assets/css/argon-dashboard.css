@@ -20239,11 +20239,19 @@ pre>code.highlight {
   margin-bottom: 1.5rem;
 }
 
+.ct-page-title2 {
+  display: inline-block;
+  padding-left: 1.25rem;
+  border-left: 2px solid #5e72e4;
+  margin-bottom: 1.5rem;
+}
+
 .ct-title {
   margin-top: 1rem;
   margin-bottom: .5rem;
   font-weight: 300;
 }
+
 
 @media (min-width: 576px) {
   .ct-title {

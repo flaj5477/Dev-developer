@@ -38,7 +38,7 @@
 	
 	<!-- 20191021 곽동우 -->
 	<!-- 위키조회맵 -->
-	<select id="getWikiMap" parameterType="paging" resultType="Map">
+	<select id="getWikiMap" parameterType="wiki" resultType="Map">
 		SELECT 	MANUAL_NO				as		"manualNo",
 				MANUAL_CONTENTS_PATH	as		"manualContentsPath",
 				MANUAL_ORI_URL			as		"manualOriUrl",

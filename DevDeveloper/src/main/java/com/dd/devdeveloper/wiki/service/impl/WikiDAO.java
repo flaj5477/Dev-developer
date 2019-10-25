@@ -18,8 +18,8 @@ public class WikiDAO {
 		return mybatis.selectOne("WikiDAO.getWiki", vo);
 	}
 
-	public List<Map<String, Object>> getWikiMap() {
-		return mybatis.selectList("WikiDAO.getWikiMap");
+	public List<Map<String, Object>> getWikiMap(WikiVO vo) {
+		return mybatis.selectList("WikiDAO.getWikiMap", vo);
 	}
 
 	public int insertWiki(WikiVO vo) {

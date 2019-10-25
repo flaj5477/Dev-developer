@@ -63,7 +63,7 @@ public class WikiServiceImpl implements WikiService{
 		paging.setTotalRecord(wikiDAO.getCountWiki()); //전체건수
 		////////////////////페이징설정 끝
 		
-		List<Map<String, Object>> wikiList= wikiDAO.getWikiMap();
+		List<Map<String, Object>> wikiList= wikiDAO.getWikiMap(vo);
 		
 		
 		//제목에 태그제거하기

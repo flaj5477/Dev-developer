@@ -30,6 +30,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- 동우 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
 		<typeAlias alias="wiki"
 			type="com.dd.devdeveloper.wiki.WikiVO"/>
+		<typeAlias alias="paging"
+			type="com.dd.devdeveloper.common.paging"/>
 			
 		<!-- 동규 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
 		<typeAlias alias="testsRecord"

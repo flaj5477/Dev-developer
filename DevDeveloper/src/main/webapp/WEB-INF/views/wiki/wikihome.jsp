@@ -47,8 +47,6 @@
 		</c:forEach>
 	</form> --%>
 	
-	<button onclick="location.href='insertWikiForm?'">등록</button>
-	
 	<div class="card shadow">
             <div class="card-header border-0">
               <div class="row align-items-center">

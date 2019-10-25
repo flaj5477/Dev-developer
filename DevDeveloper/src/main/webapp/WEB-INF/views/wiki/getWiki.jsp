@@ -11,16 +11,28 @@
 	${wiki.manualTags}<br>
 	<form action="updateWikiForm">
 		<input type="hidden" name="manualNo" value="${wiki.manualNo}">
-		<button class="btn btn-primary">수정</button>
+		
 	</form>
 	<br>
 	<br>
 	<div class="col">
-		<h2>${wiki.manualTitle}</h2>
+		<div class="row align-items-center">
+			<div class="col">
+				<div class="ct-page-title">
+		          <h1 class="ct-title" id="content">${wiki.manualTitle}</h1>
+		        </div>
+	        </div>
+	        <div class="col">
+		        <div class="nav nav-pills justify-content-end">
+		        	<button class="btn btn-primary">수정</button>
+		        </div>
+	        </div>
+	    </div>
 		<hr>
-		${wiki.manualContents }</div>
+		${wiki.manualContents }
+	</div>
 		
-	
-	
+		
+		
 </body>
 </html>

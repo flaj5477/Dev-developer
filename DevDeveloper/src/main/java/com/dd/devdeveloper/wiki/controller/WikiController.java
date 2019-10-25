@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.wiki.WikiVO;
 import com.dd.devdeveloper.wiki.service.WikiService;
 import com.dd.devdeveloper.wiki.textFile.textToFile;
@@ -27,10 +28,13 @@ public class WikiController {
 		return "wiki/getWiki";
 	}
 	
-	
+	/*
+	 * 위키목록
+	 */
 	@RequestMapping("/wikihome")
-	public String wikiHome(Model model) {
-		model.addAttribute("wikiMap", wikiService.getWikiMap());
+	public String wikiHome(Model model, Paging paging, WikiVO vo) {
+		model.addAttribute("wikiMap", wikiService.getWikiMap(paging, vo));
+		model.addAttribute("paging", paging);
 		return "wiki/wikihome";
 	}
 	
@@ -72,7 +76,6 @@ public class WikiController {
 	 */
 	@RequestMapping("/updateWiki")
 	public String updateWiki(WikiVO vo, Model model) {
-		System.out.println(vo.getManualTitle()+"============================");
 		wikiService.updateWiki(vo);
 		return "redirect:/wikihome";
 	}

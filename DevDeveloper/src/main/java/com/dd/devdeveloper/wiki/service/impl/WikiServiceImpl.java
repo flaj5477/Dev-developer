@@ -11,6 +11,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.wiki.WikiVO;
 import com.dd.devdeveloper.wiki.service.WikiService;
 import com.dd.devdeveloper.wiki.textFile.textToFile;
@@ -46,10 +47,26 @@ public class WikiServiceImpl implements WikiService{
 
 	//20191021 곽동우	//위키리스트조회
 	@Override
-	public List<Map<String, Object>> getWikiMap() {
+	public List<Map<String, Object>> getWikiMap(Paging paging, WikiVO vo) {
+		
+		//////////////////페이징 설정
+		// 페이지번호 파라미터
+		if (paging.getPage() == null) {
+			paging.setPage(1);
+		}
+
+		// 시작/마지막 레코드 번호	
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+
+		// 전체 건수
+		paging.setTotalRecord(wikiDAO.getCountWiki()); //전체건수
+		////////////////////페이징설정 끝
+		
 		List<Map<String, Object>> wikiList= wikiDAO.getWikiMap();
 		
 		
+		//제목에 태그제거하기
 		for(int i=0; i<wikiList.size(); i++) {
 			String res = (String)wikiList.get(i).get("manualTitle");
 			
@@ -83,16 +100,25 @@ public class WikiServiceImpl implements WikiService{
 	public void updateWiki(WikiVO vo) {
 		
 		String path = getWikiContentsPath(vo);
-
-		String contents = vo.getManualContents();
-	
+		
+		//기존파일삭제
+		delFile(path);
+		
+		//새로받은 태그폴더에 저장
+		textToFile ttf = new textToFile();
 		try {
-			textSave(contents,path);
+			path = ttf.textSave(vo.getManualContents(), vo.getManualTags(), vo.getManualTitle());	//txt파일로떨군다
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		vo.setManualContentsPath(path);
+//		try {
+//			textSave(contents,path);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		wikiDAO.updateWiki(vo);
 	}
 
@@ -134,26 +160,51 @@ public class WikiServiceImpl implements WikiService{
 	//저장된 txt파일읽기
 	public String readText(String path) {
 		String manualContents = null;
+		// 바이트 단위로 파일읽기
+        String filePath = path; // 대상 파일
+        FileInputStream fileStream = null; // 파일 스트림
+		
 		try {
-		   // 바이트 단위로 파일읽기
-	        String filePath = path; // 대상 파일
-	        FileInputStream fileStream = null; // 파일 스트림
-	        
 	        fileStream = new FileInputStream( filePath );// 파일 스트림 생성
-	        //버퍼 선언
-	        byte[ ] readBuffer = new byte[fileStream.available()];
-	        while (fileStream.read( readBuffer ) != -1){}
 	        
-	        manualContents = new String(readBuffer); //출력
-	
-	        fileStream.close(); //스트림 닫기
+	        //if (fileStream.available() < 0) {	//파일이 비었으면?	jsp에서처리
+		        //버퍼 선언
+		        byte[ ] readBuffer = new byte[fileStream.available()];
+		        while (fileStream.read( readBuffer ) != -1){}
+		        
+		        manualContents = new String(readBuffer); //출력
+		        
+		        fileStream.close();//스트림 닫기
+	        //}
 	    } catch (Exception e) {
-		e.getStackTrace();
-		System.out.println("파일읽기오류!!!!!!!!!!!!!");
-	    }
+			e.getStackTrace();
+			System.out.println("파일읽기오류!!!!!!!!!!!!!");
+	    }finally {
+	    	
+		}
 		return manualContents;
-	}
+	} //end - readText() 
 
-	
+	/*
+	 * 곽동우
+	 * 20191025
+	 * 해당경로 파일삭제
+	 */
+	public void delFile(String path) {
+		boolean delYn = true;
+		File file = new File(path);
+		if (file.exists()) {
+			
+			delYn = file.delete();
+			if (delYn) {
+				System.out.println("File Delete Success"); // 성공
+			} else {
+				System.out.println("File Delete Fail"); // 실패
+			}
+
+		} else {
+			System.out.println("File Not Found"); // 미존재
+		}
+	}// delFile()- end
 
 }

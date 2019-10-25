@@ -33,4 +33,9 @@ public class WikiDAO {
 	public WikiVO getWikiContentsPath(WikiVO vo) {
 		return mybatis.selectOne("WikiDAO.getWikiContentsPath", vo);
 	}
+	
+	//전체건수가져오기
+	public int getCountWiki() {
+		return mybatis.selectOne("WikiDAO.getCountWiki");
+	}
 }

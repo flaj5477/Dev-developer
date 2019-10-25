@@ -3,6 +3,7 @@ package com.dd.devdeveloper.wiki.service;
 import java.util.List;
 import java.util.Map;
 
+import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.wiki.WikiVO;
 
 public interface WikiService {
@@ -11,7 +12,7 @@ public interface WikiService {
 	public WikiVO getWiki(WikiVO vo);
 	
 	//위키리스트
-	List<Map<String, Object>> getWikiMap();
+	List<Map<String, Object>> getWikiMap(Paging paging, WikiVO vo);
 	
 	
 	//위키등록

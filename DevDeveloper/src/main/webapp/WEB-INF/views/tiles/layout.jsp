@@ -122,9 +122,9 @@
           </div>
         </form>
         <!-- Navigation -->
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" >
           <li class="nav-item">
-          <a class=" nav-link" href=" #"> <i class="ni ni-tv-2 text-primary"></i> Dashboard
+          <a class=" nav-link" href="./getDashboard" > <i class="ni ni-tv-2 text-primary"></i> Dashboard
             </a>
           </li>
           <li class="nav-item">
@@ -245,7 +245,7 @@
     </nav>
     <!-- End Navbar -->
     <div class="header bg-gradient-primary pb-7"></div>
-    <div class="container-fluid mt-7">
+    <div class="container-fluid mt-5">
     	<!-- 내용 -->
     	<tiles:insertAttribute name="content"></tiles:insertAttribute>
     

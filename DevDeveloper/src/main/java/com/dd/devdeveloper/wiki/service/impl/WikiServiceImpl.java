@@ -54,11 +54,11 @@ public class WikiServiceImpl implements WikiService{
 		if (paging.getPage() == null) {
 			paging.setPage(1);
 		}
-		paging.setPageUnit(10);
-		paging.setPageSize(5);
+		paging.setPageUnit(10);		//게시글 몇개뿌릴지?
+		paging.setPageSize(5);		//하단 페이지목록 개수
 		
 		// 전체 건수
-		paging.setTotalRecord(wikiDAO.getCountWiki()); //전체건수
+		paging.setTotalRecord(wikiDAO.getCountWiki(vo)); //전체건수 가져와서 set
 		
 		// 시작/마지막 레코드 번호	
 		vo.setFirst(paging.getFirst());
@@ -126,8 +126,19 @@ public class WikiServiceImpl implements WikiService{
 		wikiDAO.updateWiki(vo);
 	}
 
+	/*
+	 * 곽동우
+	 * 20191028
+	 * 위키삭제
+	 */
+	@Override
+	public void deleteWiki(WikiVO vo) {
+		wikiDAO.deleteWiki(vo);
+	}
 	
 	
+	
+	//////////파일
 	
 	//파일수정
 	public void textSave(String contents, String path) throws IOException {
@@ -210,5 +221,7 @@ public class WikiServiceImpl implements WikiService{
 			System.out.println("File Not Found"); // 미존재
 		}
 	}// delFile()- end
+
+
 
 }

@@ -1,5 +1,6 @@
 package com.dd.devdeveloper.members.controller;
 
+import java.util.Collections;
 import java.util.Map;
 
 import javax.activation.CommandMap;
@@ -30,9 +31,9 @@ public class MembersController {
 			return "members/loginForm";
 		}
 		
-		@RequestMapping("/loginTest")
+		@RequestMapping("/signForm")
 		public String loginformtest() {
-			return "members/loginTest";
+			return "members/signForm";
 		}
 		
 		@RequestMapping("/signUp")
@@ -47,7 +48,11 @@ public class MembersController {
 		@RequestMapping("/idsearch")
 		@ResponseBody
 		public MembersVO idSearch(MembersVO vo) {
-			  return membersService.getmembers(vo);
+			MembersVO member = membersService.getmembers(vo);
+			if(member != null)
+				return member;
+			else
+				return new MembersVO();
 		}
 	
 	 //SignUp GET

@@ -3,4 +3,4 @@ encoding//src/main/java/com/dd/devdeveloper/HomeController.java=UTF-8
 encoding//src/main/java/com/dd/devdeveloper/board/service/BoardService.java=UTF-8
 encoding//src/main/java/com/dd/devdeveloper/board/service/impl/BoardDAOMybatis.java=UTF-8
 encoding//src/main/java/com/dd/devdeveloper/board/service/impl/BoardServiceImpl.java=UTF-8
-encoding/<project>=UTF-8
+encoding//src/main/webapp/WEB-INF/views/files/filesList.jsp=UTF-8

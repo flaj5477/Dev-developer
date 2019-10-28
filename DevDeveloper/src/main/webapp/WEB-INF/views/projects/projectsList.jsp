@@ -26,7 +26,7 @@
 </head>
 
 <body class="">
-    <div class="container-fluid mt--7">
+    <div class="container-fluid mt--3">
       <!-- Table -->
       <div class="row">
         <div class="col">

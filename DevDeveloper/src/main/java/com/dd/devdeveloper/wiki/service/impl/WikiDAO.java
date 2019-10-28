@@ -34,8 +34,13 @@ public class WikiDAO {
 		return mybatis.selectOne("WikiDAO.getWikiContentsPath", vo);
 	}
 	
-	//전체건수가져오기
-	public int getCountWiki() {
-		return mybatis.selectOne("WikiDAO.getCountWiki");
+	//전체건수가져오기	//검색하면 검색한거 개수가져오기
+	public int getCountWiki(WikiVO vo) {
+		return mybatis.selectOne("WikiDAO.getCountWiki", vo);
+	}
+
+	//위키삭제
+	public void deleteWiki(WikiVO vo) {
+		mybatis.delete("WikiDAO.deleteWiki", vo);	
 	}
 }

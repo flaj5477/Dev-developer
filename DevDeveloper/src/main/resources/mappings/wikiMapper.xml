@@ -18,7 +18,7 @@
 		<!-- values( #{manualNo}, #{manualContentsPath} ,#{manualOriUrl} ,#{manualTags} ,#{manualTitle} ) -->
 	</insert>
 	
-<!-- 	
+	<!-- 	
 	<insert id="insertBoardProc" statementType="CALLABLE" parameterType="board">
 		{call board_ins_proc( #{title},
 							  #{writer},
@@ -47,14 +47,34 @@
 						MANUAL_TITLE			as 		"manualTitle"
 						
 				FROM wiki_guide
-				
+				<!-- 
 				<![CDATA[ 
 				WHERE 	1=1 		
 				]]>
+				 -->
+				<where>
+						<!-- <if test="manualTitle != null and manualTitle != '' ">
+							AND MANUAL_TITLE LIKE '%' || #{manualTitle} || '%'
+						</if>
 				
-				<if test="manualTags != null and manualTags != '' ">
-					AND manualTags LIKE '%' || #{manualTags} || '%'
-				</if>
+				
+						<if test="manualTags != null and manualTags != '' ">
+							AND MANUAL_TAGS LIKE '%' || #{manualTags} || '%'
+						</if> -->
+						
+						
+						<if test="searchVal != null and searchVal != '' "> 
+							<!-- <if test="manualTitle != null and manualTitle != '' ">
+								AND MANUAL_TITLE LIKE '%' || #{manualTitle} || '%'
+							</if> -->
+							<if test="select == 'title'">
+								AND MANUAL_TITLE LIKE '%' || #{searchVal} || '%'
+							</if>
+							<if test="select == 'tags'">
+								AND MANUAL_TAGS LIKE '%' || #{searchVal} || '%'
+							</if>
+						</if>
+				</where>
 				
 				<choose>	
 					<when test="orderby != null and orderby != '' ">	<!--  '' 체크해줘야됨 -->
@@ -96,8 +116,30 @@
 	<!-- 
 		위키 전체수 가져오기(페이징)
 	 -->
-	 <select id="getCountWiki" resultType="int">
-		select count(*)  as  "getCountWiki" from wiki_guide
+	 <select id="getCountWiki" parameterType="wiki" resultType="int">
+		select count(*)  as  "getCountWiki" 
+		from wiki_guide
+		<where>
+			<if test="searchVal != null and searchVal != '' "> 
+				<!-- <if test="manualTitle != null and manualTitle != '' ">
+					AND MANUAL_TITLE LIKE '%' || #{manualTitle} || '%'
+				</if> -->
+				<if test="select == 'title'">
+					AND MANUAL_TITLE LIKE '%' || #{searchVal} || '%'
+				</if>
+				<if test="select == 'tags'">
+					AND MANUAL_TAGS LIKE '%' || #{searchVal} || '%'
+				</if>
+			</if>
+		</where>
 	 </select>
+	 
+	 <!-- 
+	 	위키삭제
+	  -->
+	  <delete id="deleteWiki" parameterType="wiki">
+	  	delete WIKI_GUIDE
+	  	where MANUAL_NO = ${manualNo}
+	  </delete>
 	 
 </mapper>

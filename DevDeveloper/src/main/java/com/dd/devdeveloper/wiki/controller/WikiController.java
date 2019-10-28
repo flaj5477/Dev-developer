@@ -80,4 +80,15 @@ public class WikiController {
 		return "redirect:/wikihome";
 	}
 	
+	/*
+	 * 곽동우
+	 * 2019-10-28
+	 * 위키삭제
+	 */
+	@RequestMapping("/deleteWiki")
+	public String deleteWiki(WikiVO vo) {
+		wikiService.deleteWiki(vo);
+		return "redirect:/wikihome";
+	}
+	
 }

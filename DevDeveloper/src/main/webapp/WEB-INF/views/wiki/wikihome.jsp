@@ -13,7 +13,7 @@
 	pageName = "위키가이드";
 
 	$(function() {
-		transTitle();
+		//transTitle();
 	});
 
 	function formSubmit(n) {
@@ -22,15 +22,14 @@
 		form.submit();
 	}
 
-	function transTitle() {
+/* 	function transTitle() {
 		var title = $('.title');
 		$.each(title, function(idx, item) {
 			res = item.html().replace("<", "&lt;");
 			res = res.replace(">", "&gt;")
 			item.html(res);
 		});
-
-	}
+	} */
 </script>
 </head>
 
@@ -51,9 +50,32 @@
 		<div class="card-header border-0">
 			<div class="row align-items-center">
 				<div class="col">
-					<h3 class="mb-0">Card tables</h3>
+					<h3 class="mb-0">목록</h3>
 				</div>
-				<div class="col text-right">
+				<div class="col-3">
+					<form name="searchfrm">
+						<div class="input-group">
+							<select name="select">
+								<option value="title">제목
+								<option value="tags">태그
+							</select>
+						
+						
+						
+	                        <div class="input-group-prepend">
+	                          <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+	                        </div>
+                        	<input class="form-control" name="searchVal" value=${param.searchVal }><!-- getparameter? el에서 value안에값처럼표시 -->
+                      	
+							<input type="hidden" name="page" value="1">
+							<button>검색</button>
+						</div>
+					</form>
+				</div>
+				
+				<div class="col-3 text-right">
+					
+				
 					<a href="insertWikiForm" class="btn btn-sm btn-primary">문서등록</a>
 				</div>
 			</div>
@@ -64,7 +86,7 @@
 					<tr>
 						<th scope="col">No</th>
 						<th scope="col">Title</th>
-						<th scope="col">Status</th>
+						<th scope="col">Tags</th>
 						<th scope="col">Completion</th>
 						<th scope="col"></th>
 					</tr>
@@ -83,7 +105,7 @@
 							<td id="${wiki.manualNo}" class="title">${wiki.manualTitle}
 							</td>
 							<td><span class="badge badge-dot mr-4">
-									${wiki.manualOriUrl} </span></td>
+									${wiki.manualTags} </span></td>
 							<td>
 								<div class="d-flex align-items-center">
 									<span class="mr-2">60%</span>
@@ -120,7 +142,9 @@
 	<!-- 페이징 페이지이동 -->
 	<script>
 		function go_page(p) {
-			location.href = "wikihome?page=" + p
+//			location.href = "wikihome?page=" + p
+			document.searchfrm.page.value = p
+			document.searchfrm.submit()
 		}
 	</script>
 

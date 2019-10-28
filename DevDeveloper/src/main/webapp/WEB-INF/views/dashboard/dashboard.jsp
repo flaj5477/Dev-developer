@@ -18,7 +18,7 @@
 								<div class="card-body">
 									<div class="row">
 										<div class="col">
-											<h5 class="card-title text-uppercase text-muted mb-0">Traffic</h5>
+											<h5 class="card-title text-uppercase text-muted mb-0">프로필&레벨 표시 자리</h5>
 											<span class="h2 font-weight-bold mb-0">350,897</span>
 										</div>
 										<div class="col-auto">
@@ -30,8 +30,7 @@
 									</div>
 									<p class="mt-3 mb-0 text-muted text-sm">
 										<span class="text-success mr-2"><i
-											class="fa fa-arrow-up"></i> 3.48%</span> <span class="text-nowrap">Since
-											last month</span>
+											class="fa fa-arrow-up"></i> 3.48%</span> <span class="text-nowrap">프로젝트 지원</span>
 									</p>
 								</div>
 							</div>
@@ -41,8 +40,7 @@
 								<div class="card-body">
 									<div class="row">
 										<div class="col">
-											<h5 class="card-title text-uppercase text-muted mb-0">New
-												users</h5>
+											<h5 class="card-title text-uppercase text-muted mb-0">프로젝트 지원</h5>
 											<span class="h2 font-weight-bold mb-0">2,356</span>
 										</div>
 										<div class="col-auto">
@@ -65,8 +63,8 @@
 								<div class="card-body">
 									<div class="row">
 										<div class="col">
-											<h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
-											<span class="h2 font-weight-bold mb-0">924</span>
+											<h5 class="card-title text-uppercase text-muted mb-0">프로젝트 승인</h5>
+											<span class="h2 font-weight-bold mb-0">1</span>
 										</div>
 										<div class="col-auto">
 											<div
@@ -88,7 +86,7 @@
 								<div class="card-body">
 									<div class="row">
 										<div class="col">
-											<h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
+											<h5 class="card-title text-uppercase text-muted mb-0">프로젝트 참여</h5>
 											<span class="h2 font-weight-bold mb-0">49,65%</span>
 										</div>
 										<div class="col-auto">
@@ -110,6 +108,12 @@
 				</div>
 			</div>
 		</div>
+		
+<script>
+//표 데이터
+{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}
+</script>
+
 		<div class="container-fluid mt--7">
 			<div class="row">
 				<div class="col-xl-8 mb-5 mb-xl-0">
@@ -118,7 +122,7 @@
 							<div class="row align-items-center">
 								<div class="col">
 									<h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
-									<h2 class="text-white mb-0">Sales value</h2>
+									<h2 class="text-white mb-0">출석률</h2>
 								</div>
 								<div class="col">
 									<ul class="nav nav-pills justify-content-end">
@@ -168,7 +172,7 @@
 							<div class="row align-items-center">
 								<div class="col">
 									<h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6>
-									<h2 class="mb-0">Total orders</h2>
+									<h2 class="mb-0">지원자 리스트</h2>
 								</div>
 							</div>
 						</div>
@@ -198,7 +202,7 @@
 						<div class="card-header border-0">
 							<div class="row align-items-center">
 								<div class="col">
-									<h3 class="mb-0">Page visits</h3>
+									<h3 class="mb-0">Question리스트</h3>
 								</div>
 								<div class="col text-right">
 									<a href="#!" class="btn btn-sm btn-primary">See all</a>

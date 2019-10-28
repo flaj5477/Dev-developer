@@ -18,8 +18,10 @@
   <link href="${pageContext.request.contextPath}/resources/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link href="${pageContext.request.contextPath}/resources/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script>
+  
   	
   	$(document).ready(function(){	
   			//페이지 이름 표시
@@ -121,43 +123,13 @@
             </div>
           </div>
         </form>
+        
         <!-- Navigation -->
-        <ul class="navbar-nav" >
-          <li class="nav-item">
-          <a class=" nav-link" href="./getDashboard" > <i class="ni ni-tv-2 text-primary"></i> Dashboard
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="#">
-              <i class="ni ni-planet text-blue"></i> Q&A
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="./getProjectsList">
-              <i class="ni ni-pin-3 text-orange"></i> 프로젝트공고
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="./wikihome">
-              <i class="ni ni-single-02 text-yellow"></i> 위키가이드
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="./index">
-              <i class="ni ni-bullet-list-67 text-red"></i> CBT
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./loginForm">
-              <i class="ni ni-key-25 text-info"></i> Tags
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./loginTest">
-              <i class="ni ni-circle-08 text-pink"></i> Register
-            </a>
-          </li>
-        </ul>
+
+        <tiles:insertAttribute name="left"></tiles:insertAttribute>
+
+
+
         <!-- Divider -->
         <hr class="my-3">
         <!-- Heading -->
@@ -183,6 +155,8 @@
       </div>
     </div>
   </nav>
+  
+  
   <div class="main-content">
     <!-- Navbar -->
     <nav class="navbar navbar-top navbar-expand-md navbar-dark bg-gradient-primary" id="navbar-main">

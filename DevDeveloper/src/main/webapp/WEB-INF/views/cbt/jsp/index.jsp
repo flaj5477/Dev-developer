@@ -67,8 +67,7 @@
 	function levelChoice() {
 		$('#entryBtn').on('click',function() {
 			if($(this).attr('value') == 'accept') {
-				//location.href = "levelChoice";
-				location.replace('levelChoice');
+				location.replace('levelChoice?grade='+${tr.membersGrade}); // location.replace -> 뒤로가기 시, Home으로 이동
 			}	
 		});
 	}

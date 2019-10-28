@@ -6,15 +6,14 @@
 <mapper namespace="FilesDAO">
 	
 	<!-- 전체조회 -->
-	<select id="getfudList" resultType="files">
+	<select id="getfilesList" resultType="files">
 		select  files_no,
 				files_title,
-				members_no,
-				files_title, <!-- 찾기? -->
-				files_group_no,
 				files_comment,
+				members_no,
+				files_group_no,
 				files_upload_date,
-				
+				files_Size
 		from files 
 		order by files_no
 	</select>

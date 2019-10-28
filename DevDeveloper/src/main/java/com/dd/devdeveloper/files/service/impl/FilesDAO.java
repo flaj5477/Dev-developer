@@ -15,11 +15,14 @@ public class FilesDAO {
 	@Autowired
 	SqlSessionTemplate mybatis;
 	
-	public List<FilesVO> getfudList() {
-		return mybatis.selectList("FilesDAO.getfudList");
+	public List<FilesVO> getfilesList() {
+		// TODO Auto-generated method stub
+		return mybatis.selectList("FilesDAO.getfilesList");
 	}
+	
 	
 	public FilesVO getfuds(FilesVO vo) {
 		return mybatis.selectOne("FilesDAO.getfuds", vo);
 	}
+
 }

@@ -15,9 +15,9 @@ public class FilesController {
 	FilesService filesService;
 	
 	@RequestMapping("/getFilesList")
-	public String getgetFilesList(FilesVO vo, Model model) {
-		model.addAttribute("list", filesService.getfudList(null));
-		return "files/fudList";
+	public String getFilesList(FilesVO vo, Model model) {
+		model.addAttribute("list", filesService.getfilesList(null));
+		return "files/filesList";
 	}
 
 }

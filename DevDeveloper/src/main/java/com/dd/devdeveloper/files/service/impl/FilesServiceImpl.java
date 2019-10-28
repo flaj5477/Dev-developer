@@ -15,8 +15,8 @@ public class FilesServiceImpl implements FilesService {
 	@Autowired FilesDAO filesDAO;
 
 	@Override
-	public List<FilesVO> getfudList(FilesVO vo) {		// 파일 리스트 출력
-		return filesDAO.getfudList();
+	public List<FilesVO> getfilesList(FilesVO vo) {		// 파일 리스트 출력
+		return filesDAO.getfilesList();
 	}
 	
 	@Override

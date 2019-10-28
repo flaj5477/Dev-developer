@@ -27,7 +27,7 @@
 </head>
 <body>
 위키등록페이지
-	<form id="frm" name="frm" action="insertWiki">
+	<form id="frm" name="frm" action="insertWiki" method="post">
 		<input type="text" class="form-control" id="manualTitle" name="manualTitle" placeholder="등록할 제목" >
 		<input type="text" class="form-control" id="manualOriUrl" name="manualOriUrl" placeholder="참고페이지url" >
   		<textarea class="form-control form-control-alternative" id="manualContents" name="manualContents" rows="20" placeholder="문서입력"></textarea>

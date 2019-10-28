@@ -25,7 +25,7 @@ public class CBTController {
 	//tests
 	@RequestMapping("cbt/levelChoice")
 	public String setlevelChoice(TestsVO recvo, Model model) {
-		model.addAttribute("tslist",cbtService.getTestList());
+		model.addAttribute("list",cbtService.getTestList());
 		return "cbt/jsp/levelChoice";
 	}
 }

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dd.devdeveloper.members.MembersVO;
@@ -42,6 +43,12 @@ public class MembersController {
 		public String test() {
 			return "members/test";
 	}
+		
+		@RequestMapping("/idsearch")
+		@ResponseBody
+		public MembersVO idSearch(MembersVO vo) {
+			  return membersService.getmembers(vo);
+		}
 	
 	 //SignUp GET
 	/*

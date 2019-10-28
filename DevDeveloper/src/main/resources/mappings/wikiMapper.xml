@@ -38,30 +38,66 @@
 	
 	<!-- 20191021 곽동우 -->
 	<!-- 위키조회맵 -->
-	<select id="getWikiMap" resultType="Map">
-		SELECT 	MANUAL_NO				as		"manualNo",
-				MANUAL_CONTENTS_PATH	as		"manualContentsPath",
-				MANUAL_ORI_URL			as		"manualOriUrl",
-				MANUAL_TAGS				as		"manualTags",
-				MANUAL_TITLE			as 		"manualTitle"
+	<select id="getWikiMap" parameterType="wiki" resultType="Map">
+		SELECT b.* FROM ( SELECT rownum no, a.* FROM (
+				SELECT 	MANUAL_NO				as		"manualNo",
+						MANUAL_CONTENTS_PATH	as		"manualContentsPath",
+						MANUAL_ORI_URL			as		"manualOriUrl",
+						MANUAL_TAGS				as		"manualTags",
+						MANUAL_TITLE			as 		"manualTitle"
+						
+				FROM wiki_guide
 				
-		FROM wiki_guide
-		
-		<![CDATA[ 
-		WHERE 	1=1 		
-		]]>
-		 
-		<if test="manualTags != null and manualTags != '' ">
-			AND manualTags LIKE '%' || #{manualTags} || '%'
-		</if>
-		
-		<choose>	
-			<when test="orderby != null and orderby != '' ">	<!--  '' 체크해줘야됨 -->
-				ORDER BY ${orderby} DESC
-			</when>
-			<otherwise>
-				ORDER BY MANUAL_NO DESC
-			</otherwise>
-		</choose>
+				<![CDATA[ 
+				WHERE 	1=1 		
+				]]>
+				
+				<if test="manualTags != null and manualTags != '' ">
+					AND manualTags LIKE '%' || #{manualTags} || '%'
+				</if>
+				
+				<choose>	
+					<when test="orderby != null and orderby != '' ">	<!--  '' 체크해줘야됨 -->
+						ORDER BY ${orderby} DESC
+					</when>
+					<otherwise>
+						ORDER BY MANUAL_NO DESC
+					</otherwise>
+				</choose>
+		) a ) b WHERE no BETWEEN #{first} AND #{last}
 	</select>
+	
+	
+	<!-- 
+		곽동우
+		위키수정
+		20191024
+	 -->
+	 <update id="updateWiki" parameterType="wiki">
+		update wiki_guide set
+					MANUAL_TITLE = #{manualTitle},
+					MANUAL_ORI_URL = #{manualOriUrl},
+					MANUAL_TAGS	= #{manualTags},
+					MANUAL_CONTENTS_PATH = #{manualContentsPath}
+		where manual_no = #{manualNo}
+	 </update>
+	 
+	 
+	 
+	 <!-- 
+	 	파일위치조회
+	 	곽동우
+	 	191024 
+	 -->
+	<select id="getWikiContentsPath" parameterType = "wiki" resultType="wiki">
+		select MANUAL_CONTENTS_PATH as "manualContentsPath" from wiki_guide where manual_no = #{manualNo}
+	</select>
+	
+	<!-- 
+		위키 전체수 가져오기(페이징)
+	 -->
+	 <select id="getCountWiki" resultType="int">
+		select count(*)  as  "getCountWiki" from wiki_guide
+	 </select>
+	 
 </mapper>

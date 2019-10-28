@@ -19,10 +19,10 @@
 	
 		<insert id="insertMembers" parameterType="members">
 		insert into members(members_no, members_id, members_pw, members_name 
-		, members_type, members_mail 
+		, members_type, members_mail , members_tel,members_addr
 		)
 		values ((select max(members_no)+1 from members), #{membersId}, #{membersPw},
-		 #{membersName} , #{membersType} , #{membersMail}
+		 #{membersName} , #{membersType} , #{membersMail}, #{membersTel},#{membersAddr}
 		 )
 	</insert>
 	

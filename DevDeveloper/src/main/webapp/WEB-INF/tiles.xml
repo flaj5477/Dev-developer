@@ -10,6 +10,16 @@
 			value="/WEB-INF/views/tiles/header.jsp" />
 		<put-attribute name="content"
 			value="/WEB-INF/views/tiles/content.jsp" />
+		
+		<put-attribute name="left"
+			value="/WEB-INF/views/tiles/left.jsp" />
+	</definition>
+	
+	<definition name="files/*" extends="mainTemplate">  <!--파일파일 mainTemplate를 상속받아서, content attribute를 오버라이딩 하는것 -->
+		<put-attribute name="content"
+			value="/WEB-INF/views/files/{1}.jsp" />
+		<put-attribute name="left"
+			value="/WEB-INF/views/tiles/leftfiles.jsp" />
 	</definition>
 	
 	<definition name="*/*" extends="mainTemplate">  <!-- mainTemplate를 상속받아서, content attribute를 오버라이딩 하는것 -->

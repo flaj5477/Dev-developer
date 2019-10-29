@@ -23,6 +23,9 @@ public interface WikiService {
 
 	//위키경로 가져오기
 	public String getWikiContentsPath(WikiVO vo);
+
+	//위키삭제(단건)
+	public void deleteWiki(WikiVO vo);
 	
 	
 }

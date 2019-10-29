@@ -13,5 +13,7 @@ public class WikiVO {
 	private String manualContents;		//메뉴얼 원문 내용
 	private int first;					//페이징시 첫데이터번호
 	private int last;					//페이징시 마지막데이터번호
+	private String select;			//검색 분류 선택 (태그,제목)
+	private String searchVal;		//검색값
 	private String orderby;
 }

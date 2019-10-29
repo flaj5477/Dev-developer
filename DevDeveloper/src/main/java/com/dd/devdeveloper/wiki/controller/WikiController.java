@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.wiki.WikiVO;
@@ -51,7 +52,8 @@ public class WikiController {
 	 * 작성일자:2019-10-22
 	 * 설명:위키 등록하기
 	 */
-	@RequestMapping("/insertWiki")
+	@RequestMapping(value = "/insertWiki",
+					method = RequestMethod.POST)
 	public String insertWiki(WikiVO vo) {
 		wikiService.insertWiki(vo);
 		
@@ -74,9 +76,21 @@ public class WikiController {
 	 * 2019-10-24
 	 * 위키수정하기
 	 */
-	@RequestMapping("/updateWiki")
+	@RequestMapping(value = "/updateWiki",
+					method = RequestMethod.POST)
 	public String updateWiki(WikiVO vo, Model model) {
 		wikiService.updateWiki(vo);
+		return "redirect:/wikihome";
+	}
+	
+	/*
+	 * 곽동우
+	 * 2019-10-28
+	 * 위키삭제
+	 */
+	@RequestMapping("/deleteWiki")
+	public String deleteWiki(WikiVO vo) {
+		wikiService.deleteWiki(vo);
 		return "redirect:/wikihome";
 	}
 	

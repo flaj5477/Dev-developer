@@ -21,47 +21,67 @@
   <link href="./resources/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
   
 <script>
-	pageName="프로젝트공고";
+	pageName="프로젝트 파일";
 </script>
 </head>
 
 <body class="">
-    <div class="container-fluid mt--3">
+    <div class="container-fluid mt--7">
       <!-- Table -->
       <div class="row">
         <div class="col">
           <div class="card shadow">
             <div class="card-header border-0">
-              <h3 class="mb-0">Card tables</h3>
+              			<h2 class="mb-0" >프로젝트명</h3>
+              	<div class="btn-card-header-group text-right">
+              			<div class="ni ni-zoom-split-in">
+          				<input class="form-control" placeholder="Find file" type="text"></input></div>
+          				<button type="button" class="btn btn-primary btn">새폴더</button>
+          				<button type="button" class="btn btn-primary btn">업로드</button>
+                        <button type="button" class="btn btn-primary btn">다운로드</button>
+                        <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
+                          <img alt="Image placeholder" src="./resources/assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
+                        </a>
+                        <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Romina Hadid">
+                          <img alt="Image placeholder" src="./resources/assets/img/theme/team-2-800x800.jpg" class="rounded-circle">
+                        </a>
+                        <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Alexander Smith">
+                          <img alt="Image placeholder" src="./resources/assets/img/theme/team-3-800x800.jpg" class="rounded-circle">
+                        </a>
+                        <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
+                          <img alt="Image placeholder" src="./resources/assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
+                        </a>
+                      </div> <!--  href="./getFiles?filesNo=${files.filesNo}">${files.filesTitle }  -->
             </div>
             <div class="table-responsive">
             
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <th scope="col">Project</th>
-                    <th scope="col">공고일</th>
-                    <th scope="col">마감일</th>
-                    <th scope="col">공고자</th>
+                    <th scope="col">파일명</th>
+                    <th scope="col">코멘트</th>
                     <th scope="col">Users</th>
-                    <th scope="col">Completion</th>
-                    <th scope="col"></th>
+                    <th scope="col">업데이트 날짜</th>
+                    <th scope="col">파일 크기</th>
                   </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="projects" items="${list}">
+                <c:forEach var="files" items="${list}">
                 <tr>
                 		<td>
-                		<a href="./getProjects?projNo=${projects.projNo}">${projects.projTitle }</a>
+                		<a href="./getFiles?filesNo=${files.filesNo}">${files.filesTitle}</a>
                      	</td>
                      	<td>
-                     		${projects.projRegDate }
+                     		${files.filesComment }
                      	</td>
                      	<td>
-                     		${projects.projDueDate }
+                     		${files.membersNo }
                      	</td>
                      	<td>
-                     		${projects.membersNo }
+                     		${files.filesUploadDate }
+                     	</td>
+                     	<td>
+                     		${files.filesSize }
                      	</td>
                  </tr>
                  </c:forEach>
@@ -85,7 +105,7 @@
                       </span>
                     </td>
                     <td>
-                      <div class="avatar-group">
+                    <!--   <div class="avatar-group">
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
                         </a>
@@ -98,7 +118,7 @@
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
                         </a>
-                      </div>
+                      </div> -->
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
@@ -145,7 +165,7 @@
                       </span>
                     </td>
                     <td>
-                      <div class="avatar-group">
+                  <!--     <div class="avatar-group">
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
                         </a>
@@ -158,7 +178,7 @@
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
                         </a>
-                      </div>
+                      </div> -->
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
@@ -203,7 +223,7 @@
                       </span>
                     </td>
                     <td>
-                      <div class="avatar-group">
+                   <!--    <div class="avatar-group">
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
                         </a>
@@ -216,7 +236,7 @@
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
                         </a>
-                      </div>
+                      </div> -->
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
@@ -261,7 +281,7 @@
                       </span>
                     </td>
                     <td>
-                      <div class="avatar-group">
+                 <!--      <div class="avatar-group">
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
                         </a>
@@ -274,7 +294,7 @@
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
                         </a>
-                      </div>
+                      </div> -->
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
@@ -319,7 +339,7 @@
                       </span>
                     </td>
                     <td>
-                      <div class="avatar-group">
+                     <!--  <div class="avatar-group">
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
                         </a>
@@ -332,7 +352,7 @@
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
                         </a>
-                      </div>
+                      </div> -->
                     </td>
                     <td>
                       <div class="d-flex align-items-center">

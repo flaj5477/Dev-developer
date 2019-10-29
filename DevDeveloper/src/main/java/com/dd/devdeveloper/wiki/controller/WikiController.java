@@ -22,6 +22,9 @@ public class WikiController {
 	
 	@Autowired WikiService wikiService;
 	
+	/*
+	 * 위키단건
+	 */
 	@RequestMapping("/getWiki")
 	public String getWiki(WikiVO vo, Model model) {
 		model.addAttribute("wiki", wikiService.getWiki(vo));
@@ -92,6 +95,18 @@ public class WikiController {
 	public String deleteWiki(WikiVO vo) {
 		wikiService.deleteWiki(vo);
 		return "redirect:/wikihome";
+	}
+	
+	/*
+	 * 곽동우
+	 * 2019-10-29
+	 * 위키번역
+	 */
+	@RequestMapping("/transWikiForm")
+	public String transWikiForm(WikiVO vo, Model model) {
+   		//테스트
+			model.addAttribute("wiki", wikiService.getTransWiki(vo));
+		return "wiki/transWikiForm";
 	}
 	
 }

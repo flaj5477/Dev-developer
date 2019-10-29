@@ -8,5 +8,5 @@ import lombok.Data;
 public class ActivityLogVO {
 	private int membersNo;
 	private Date activityDate;
-	private int activityScore;
+	private String activityScore;
 }

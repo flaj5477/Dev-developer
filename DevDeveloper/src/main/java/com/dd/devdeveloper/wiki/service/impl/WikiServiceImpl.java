@@ -23,7 +23,7 @@ public class WikiServiceImpl implements WikiService {
 	@Autowired
 	WikiDAO wikiDAO;
 	
-	// 단건조회
+	// 경로조회
 	@Override
 	public String getWikiContentsPath(WikiVO vo) {
 		String path = null;
@@ -137,6 +137,34 @@ public class WikiServiceImpl implements WikiService {
 		wikiDAO.deleteWiki(vo);
 	}
 
+	/*
+	 * 곽동우
+	 * 20191029
+	 * 위키번역
+	 */
+	@Override
+	public List<Map<Integer, Object>> getTransWiki(WikiVO vo) {
+		//일단 테스트용
+		String path = "C:\\Users\\User\\Desktop\\textTest\\2019\\기타\\20191029.txt";
+		String sTag = "<p>";
+		String eTag = "</p>";
+		
+		String contents = readText(path);
+		
+		System.out.println(contents.indexOf(sTag));	// p태그
+		System.out.println(contents.indexOf(eTag));
+		
+		contents.indexOf(eTag);	//
+		
+		
+		
+		return null;
+	}
+	
+	
+	
+	
+	
 	////////// 파일
 
 	// 파일수정
@@ -256,4 +284,6 @@ public class WikiServiceImpl implements WikiService {
 			e.printStackTrace();
 		} // end - fileCopy
 	}
+
+
 }

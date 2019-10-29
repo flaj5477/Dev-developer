@@ -5,10 +5,10 @@
 <script>
 
 	$(function(){
-		deleteWiki();
+		btnControl();
 	});
 
-	function deleteWiki(){
+	function btnControl(){
 		$('#btnDelWiki').on('click', function(){
 			/* document.frm.action.value = "deleteWiki";
 			document.frm.submit(); */
@@ -19,6 +19,10 @@
 			} else { //no 
 				return;
 			}
+		});
+		
+		$('#btnTransWiki').on('click', function(){
+			$("#frm").attr("action", "transWikiForm").submit();
 		});
 	}
 
@@ -42,6 +46,7 @@
 		        </div>
 		        <div class="col">
 			        <div class="nav nav-pills justify-content-end">
+			        	<button type="button" id="btnTransWiki" class="btn btn-danger">번역</button>
 			        	<button type="button" id="btnDelWiki" class="btn btn-danger">삭제</button>
 			        	<button class="btn btn-primary">수정</button>
 			        </div>

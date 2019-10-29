@@ -4,35 +4,68 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
 <title>위키등록</title>
+<style>
+.ck-editor__editable {
+    min-height: 400px;
+}
+</style>
 <script>
+	var myEditor;
+
 	$(function(){
 		checkForm();
+		
+		 ClassicEditor
+	     .create( document.querySelector( '#manualContents' ) , {
+	    	// 제거 하고싶은 플러그인 (배열)
+			 removePlugins: [ 'ImageUpload' ]
+		 })
+	     .then( editor => {
+	            console.log( 'Editor was initialized', editor );
+	            myEditor = editor;
+	        } )
+	     .catch( error => {
+	         console.error( error );
+	     } );
+		
 	});
 	
+	
+	
 	function checkForm(){
+		
+		//var editor_val = CKEDITOR.instances.manualContents.document.getBody().getChild(0).getText() ;
+		
 		$("#btnfrm").on("click",function(){
-			if($("#manualTitle").val() == ''){
+			if($("#manualTitle").val() == '') {
 				alert("제목을 입력해야합니다")
 				return;
-			} else if($("#manualContents").val() == ''){
-				alert("내용을 입력해야합니다")
+			} 
+			if (myEditor.getData()=="") {
+				alert('내용을 입력 하세요');
+				myEditor.editing.view.focus()
 				return;
 			}
+			
 			$("#frm").submit();
 		});
 	}
-
 </script>
 </head>
 <body>
 위키등록페이지
 	<form id="frm" name="frm" action="insertWiki" method="post">
-		<input type="text" class="form-control" id="manualTitle" name="manualTitle" placeholder="등록할 제목" >
-		<input type="text" class="form-control" id="manualOriUrl" name="manualOriUrl" placeholder="참고페이지url" >
-  		<textarea class="form-control form-control-alternative" id="manualContents" name="manualContents" rows="20" placeholder="문서입력"></textarea>
+		<input type="text" class="form-control" id="manualTitle" name="manualTitle" placeholder="제목을 입력해주세요" >
+		<input type="text" class="form-control" id="manualOriUrl" name="manualOriUrl" placeholder="url" >
+  		<textarea class="form-control form-control-alternative" id="manualContents" name="manualContents" rows="20" placeholder="내용을 입력해주세요"></textarea>
   		<input type="text" class="form-control" id="manualTags" name="manualTags" placeholder="테그" >
   		<button type="button" id="btnfrm" class="btn btn-primary">등록</button>
 	</form>
+	
+	
+	
+	
 </body>
 </html>

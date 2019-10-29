@@ -12,77 +12,81 @@
 	var curLevel = Number('${param.grade}'); // String -> Number 변환
 	
 	$(document).ready(function() {
-		getTestList();
-		chooseEvent();
+		levelBox();
+		testList();
 	});
 	
-	function getTestList() {
-		var levelStr;
+	function levelBox() {
 		$('#subject').html('<h2> 난이도 선택 </h2>');
+		$('#comment').html('<br>');
+		$('#accBtn').html('선택완료')
+					.css('background-color','gray');
+	}
+	
+	function testList() {
 		$.ajax('getTestList', { type:'GET', dataType:'json'})
 		.done(function(data) {
-			$('tbody').empty();
 			$.each(data,function(idx,test) {
 				var level = data[idx].testsLevel;
 				var title = data[idx].testsTitle;
 				var contents = data[idx].testsContents;
 				if(curLevel < level) {
-					switch(level) {
-					case '1' : levelStr='Easy'; break;
-					case '2' : levelStr='Normal'; break;
-					case '3' : levelStr='Hard'; break;
-					case '4' : levelStr='Professional'; break;
-					case '5' : levelStr='Management'; break;
-					}
+					var force = formatString(level);
 					$('<tr>').append($('<th>').html('<input type="radio" name="test" onclick="chooseEvent('+level+')">'))
 							 .append($('<th>').html(title))
 							 .append($('<th>').html(contents))
-							 .append($('<th>').html(levelStr))
+							 .append($('<th>').html(force))
 							 .appendTo('tbody');
 				}
 			});
 		});
 	}
+	
 	function chooseEvent(level) {
-		var state = 0;
-		var chooseGrade;
-		var memberGrade;
-		$('#accBtn').html('선택완료');
-		if(level != null) {
-			chooseGrade = gradeFormat(level);
-			memberGrade = gradeFormat(curLevel);
-			$('#comment').html('<p/> <p> 현재등급 : '+memberGrade+'</p> <p> 합격 시 등급 : '+chooseGrade+'</p> <p> 진행 하시려면 선택완료 버튼을 눌러주세요. </p>');
-			$('#accBtn').css('background-color','blue')
-						.on('click',function() {
-							state ++;
-							if((state%2)==0) {
-								console.log('failed');
-							}
-							else {
-								accessEvent();
-							}
-						});
-		}
-		else {
-			$('#accBtn').css('background-color','gray');
-		}
-	}
-	function gradeFormat(grade) {
-		var gradeStr;
-		switch(grade) {
-		case 1 : gradeStr='Bronze'; break;
-		case 2 : gradeStr='Silver'; break;
-		case 3 : gradeStr='Gold'; break;
-		case 4 : gradeStr='Diamond'; break;
-		case 5 : gradeStr='Challenger'; break;
-		}
-		return gradeStr;
+		var i = 3;
+		var interLock = false;
+		var chooseGrade = formatString(level);
+		var memberGrade = formatString(curLevel);
+		$('#accBtn').css('background-color','blue');
+		$('#comment').html('<p> 진행 하시려면 선택완료 버튼을 눌러주세요. </p>')
+					 .prepend('<br> <p> 현재등급 : '+memberGrade+'</p> <p> 합격 시 등급 : '+chooseGrade+'</p>');
+		$('#accBtn').on('click',function() {
+			interLock = !interLock;
+			console.log(interLock);
+			console.log(level);
+			if(level !== null && interLock == true) {
+				var readyTime = setInterval(function() {
+					$('#comment').html('<br> <p>'+i+'초 후 시험이 시작됩니다. </p>');
+					if(i == 0 || interLock == false) {
+						clearInterval(readyTime);
+						console.log('success');
+					}
+					i--;
+				},1000);
+			}
+		});
 	}
 	
-	function accessEvent() {
-		console.log('success');
+	function formatString(value) {
+		var str;
+		//난이도
+		switch(value) {
+		case '1' : str='Easy'; break;
+		case '2' : str='Normal'; break;
+		case '3' : str='Hard'; break;
+		case '4' : str='Professional'; break;
+		case '5' : str='Management'; break;
+		}
+		//등급
+		switch(value) {
+		case 1 : str='Bronze'; break;
+		case 2 : str='Silver'; break;
+		case 3 : str='Gold'; break;
+		case 4 : str='Diamond'; break;
+		case 5 : str='Challenger'; break;
+		}
+		return str;
 	}
-	
 </script>
 </head>
 <body>

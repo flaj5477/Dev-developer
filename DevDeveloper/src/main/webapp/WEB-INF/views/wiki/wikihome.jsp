@@ -15,7 +15,10 @@
 	$(function() {
 		//transTitle();
 	});
-
+	
+	/* 
+		게시글 클릭(n) 하면 n번 게시글 이동
+	 */
 	function formSubmit(n) {
 		var form = document.frm;
 		form.manualNo.value = n;

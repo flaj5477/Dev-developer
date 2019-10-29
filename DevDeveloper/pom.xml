@@ -131,6 +131,10 @@
 		</dependency>
 
 		<!-- lombok -->
+		<!-- 혹시 집에서 하실 때, Data Annotation 작동이 제대로 안되시는분은
+			 cmd에서 lombok설치된 폴더에서, 경로> java -jar lombok-1.18.10.jar 실행
+			 eclipse.exe파일 넣어서 install하시면 됩니다.
+		 -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

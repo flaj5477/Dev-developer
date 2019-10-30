@@ -41,7 +41,15 @@
 
 	<context:component-scan
 		base-package="com.dd.devdeveloper" />
-
-
-
+	
+	<beans:bean id="LoginInterceptor" class="com.dd.devdeveloper.common.LoginInterceptor"/>
+	<interceptors>
+		<interceptor>
+			<!-- CBT -->
+			<mapping path="/cbt/*"/>
+			<mapping path="/getDashboard"/>
+			<exclude-mapping path=""/>
+			<beans:ref bean="LoginInterceptor"/>
+		</interceptor>
+	</interceptors>
 </beans:beans>

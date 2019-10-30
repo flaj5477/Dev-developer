@@ -47,9 +47,11 @@
 		<interceptor>
 			<!-- CBT -->
 			<mapping path="/cbt/*"/>
-			<mapping path="/getDashboard"/>
+			<mapping path="/getDashboard"/>   
+			<mapping path="/applyProjects"/>
 			<exclude-mapping path=""/>
 			<beans:ref bean="LoginInterceptor"/>
 		</interceptor>
+		
 	</interceptors>
 </beans:beans>

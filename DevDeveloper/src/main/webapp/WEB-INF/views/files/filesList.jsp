@@ -26,19 +26,21 @@
 </head>
 
 <body class="">
-    <div class="container-fluid mt--7">
+	<div class="container-fluid mt--7">
       <!-- Table -->
       <div class="row">
         <div class="col">
+        </br>
+        </br>
+        </br>
+        </br>
           <div class="card shadow">
             <div class="card-header border-0">
-              			<h2 class="mb-0" >프로젝트명</h3>
+              			<h2 class="mb-0" >프로젝트명</h2>
               	<div class="btn-card-header-group text-right">
               			<div class="ni ni-zoom-split-in">
           				<input class="form-control" placeholder="Find file" type="text"></input></div>
-          				<button type="button" class="btn btn-primary btn">새폴더</button>
-          				<button type="button" class="btn btn-primary btn">업로드</button>
-                        <button type="button" class="btn btn-primary btn">다운로드</button>
+          				<!--  -->
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
                         </a>
@@ -54,7 +56,7 @@
                       </div> <!--  href="./getFiles?filesNo=${files.filesNo}">${files.filesTitle }  -->
             </div>
             <div class="table-responsive">
-            
+            ${list }
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
@@ -75,7 +77,6 @@
                      		${files.filesComment }
                      	</td>
                      	<td>
-                     		${files.membersNo }
                      	</td>
                      	<td>
                      		${files.filesUploadDate }

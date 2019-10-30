@@ -5,8 +5,8 @@
 
 <mapper namespace="FilesDAO">
 	
-	<!-- 전체조회 -->
-	<select id="getfilesList" resultType="files">
+	<!-- 파일 전체 조회 -->
+	<select id="getFilesList" resultType="files">
 		select  files_no,
 				files_title,
 				files_comment,

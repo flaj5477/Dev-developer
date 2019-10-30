@@ -5,7 +5,9 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
+/* @JsonIgnoreProperties(value = {"uploadFilename", "seqList", "msg"} ) */
 public class FilesVO {
+	/* @JsonProperty("파일번호") */
 	private int fileNo;
 	private int projNo;
 	private int members_No;
@@ -20,5 +22,7 @@ public class FilesVO {
 	private String files_Import;
 	private String files_Trash;
 	private Date files_Delday;
-
-}
+	
+	/*
+	 * private List<MultipartFile> uploadFile; // 파일업로드용 list로 여러개 받음
+	 */}

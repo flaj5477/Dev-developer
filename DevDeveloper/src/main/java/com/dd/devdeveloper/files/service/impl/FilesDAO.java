@@ -15,14 +15,14 @@ public class FilesDAO {
 	@Autowired
 	SqlSessionTemplate mybatis;
 	
-	public List<FilesVO> getfilesList() {
-		// TODO Auto-generated method stub
-		return mybatis.selectList("FilesDAO.getfilesList");
+	// 파일 전체
+	public List<FilesVO> getFilesList() {
+		return mybatis.selectList("FilesDAO.getFilesList");
 	}
 	
-	
-	public FilesVO getfuds(FilesVO vo) {
-		return mybatis.selectOne("FilesDAO.getfuds", vo);
+	// 파일 상세
+	public FilesVO getFiles(FilesVO vo) {
+		return mybatis.selectOne("FilesDAO.getFiles", vo);
 	}
 
 }

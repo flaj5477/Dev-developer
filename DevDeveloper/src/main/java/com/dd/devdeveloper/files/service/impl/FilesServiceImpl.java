@@ -15,14 +15,17 @@ public class FilesServiceImpl implements FilesService {
 	@Autowired FilesDAO filesDAO;
 
 	@Override
-	public List<FilesVO> getfilesList(FilesVO vo) {		// 파일 리스트 출력
-		return filesDAO.getfilesList();
+	public List<FilesVO> getFilesList(FilesVO vo) { // 파일 전체 출력
+		return filesDAO.getFilesList();
 	}
 	
 	@Override
-	public FilesVO getfuds(FilesVO vo) { // 단건 조회
-		return filesDAO.getfuds(vo);
+	public FilesVO getFiles(FilesVO vo) { //파일 상세 출력
+		return filesDAO.getFiles(vo);
 	}
+	
+	
+	
 
 	
 

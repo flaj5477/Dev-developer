@@ -1,37 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>CBT Choice</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/assets/js/format.js"></script>
 <script>
-
-	var curLevel = Number('${param.grade}'); // String -> Number 변환
+	var readyTime;
+	var curLevel = Number('${members.membersGrade}'); // String -> Number 변환
 	
 	$(document).ready(function() {
 		levelBox();
 		testList();
+		accessEvent();
 	});
 	
 	function levelBox() {
 		$('#subject').html('<h2> 난이도 선택 </h2>');
 		$('#comment').html('<br>');
-		$('#accBtn').html('선택완료')
-					.css('background-color','gray');
+		$('#accessBtn').html('선택완료')
+					   .css('background-color','gray');
 	}
 	
 	function testList() {
-		$.ajax('getTestList', { type:'GET', dataType:'json'})
+		$.ajax('getTestList', { type:'GET', dataType:'JSON'})
 		.done(function(data) {
 			$.each(data,function(idx,test) {
-				var level = data[idx].testsLevel;
+				var level = Number(data[idx].testsLevel);
 				var title = data[idx].testsTitle;
 				var contents = data[idx].testsContents;
 				if(curLevel < level) {
-					var force = formatString(level);
+					var force = formatDifficulty(level);
 					$('<tr>').append($('<th>').html('<input type="radio" name="test" onclick="chooseEvent('+level+')">'))
 							 .append($('<th>').html(title))
 							 .append($('<th>').html(contents))
@@ -43,50 +44,43 @@
 	}
 	
 	function chooseEvent(level) {
-		var i = 3;
-		var interLock = false;
-		var chooseGrade = formatString(level);
-		var memberGrade = formatString(curLevel);
-		$('#accBtn').css('background-color','blue');
+		var chooseGrade = formatGrade(level);
+		var memberGrade = formatGrade(curLevel);
+		$('#accessBtn').html('선택완료')
+					   .css('background-color','#81A8D6');
 		$('#comment').html('<p> 진행 하시려면 선택완료 버튼을 눌러주세요. </p>')
 					 .prepend('<br> <p> 현재등급 : '+memberGrade+'</p> <p> 합격 시 등급 : '+chooseGrade+'</p>');
-		$('#accBtn').on('click',function() {
+		clearInterval(readyTime); // radio 버튼누르면 반복실행 Clear
+	}
+	
+	function accessEvent() {
+		var sec;
+		var interLock = false;
+		$('#accessBtn').on('click',function() {
+			sec = 3;
+			var level = $('[name ="test"]:checked').val(); // 현재 클릭된 상태의 값을 Checked..
 			interLock = !interLock;
-			console.log(interLock);
-			console.log(level);
-			if(level !== null && interLock == true) {
-				var readyTime = setInterval(function() {
-					$('#comment').html('<br> <p>'+i+'초 후 시험이 시작됩니다. </p>');
-					if(i == 0 || interLock == false) {
+			if(level != null && interLock == true) {
+				$('#accessBtn').html('선택취소')
+							   .css('background-color','orange');
+				readyTime = setInterval(function() {
+					$('#comment').html('<br> <p>'+sec+'초 후 시험이 시작됩니다. </p>');
+					console.log(sec);
+					if(sec<=0) {
 						clearInterval(readyTime);
 						console.log('success');
+						location.replace('step1');
 					}
-					i--;
+					sec--;
 				},1000);
+			}
+			else if(level != null && interLock == false){
+				clearInterval(readyTime);
+				chooseEvent(level); // 버튼 한번 더 누르면 반복 Clear하고 chooseEvent로 return
 			}
 		});
 	}
 	
-	function formatString(value) {
-		var str;
-		//난이도
-		switch(value) {
-		case '1' : str='Easy'; break;
-		case '2' : str='Normal'; break;
-		case '3' : str='Hard'; break;
-		case '4' : str='Professional'; break;
-		case '5' : str='Management'; break;
-		}
-		//등급
-		switch(value) {
-		case 1 : str='Bronze'; break;
-		case 2 : str='Silver'; break;
-		case 3 : str='Gold'; break;
-		case 4 : str='Diamond'; break;
-		case 5 : str='Challenger'; break;
-		}
-		return str;
-	}
 </script>
 </head>
 <body>
@@ -106,7 +100,7 @@
 		</table>
 	</div>
 	<div id="comment"></div>
-	<button id='accBtn' type="button"></button>
+	<button id='accessBtn' type="button"></button>
 </div>
 </body>
 </html>

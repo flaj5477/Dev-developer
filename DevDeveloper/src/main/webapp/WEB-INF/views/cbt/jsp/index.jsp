@@ -4,11 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CBT HOME</title>
+<title>CBT Home</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src=""></script>
+<script src="${pageContext.request.contextPath}/resources/assets/js/format.js"></script>
 <script>
-
 	$(document).ready(function() {
 		indexBox();
 		indexCheck();
@@ -23,10 +22,10 @@
 	}
 	
 	function indexCheck() {	// 현재시간, 시험응시가능시간의 차이를 1초마다 갱신하는 Function
-		var permisUTCStr = "${tr.utcTestsDate}" // GMT + 00:00, 이건 남은시간 계산 용도
+		var grade = Number("${members.membersGrade}");
+		var restStr = "${tr.utcTestsDate}" // GMT + 00:00, 이건 남은시간 계산 용도
 		var permisStr = "${tr.testsDate}"; // GMT + 09:00, 이건 응시가능 날짜 용도
-		var grade = "${tr.membersGrade}"; 
-		var permisDate = Date.parse(permisUTCStr); // String -> Date format 
+		var permisDate = Date.parse(restStr); // String -> Date format 
 	    var restMils = permisDate - new Date();
 	    var restTime = new Date(restMils);    
 	   	var year = restTime.getFullYear() - 1970; // 세계협정시 시작 1970년 1월 1일
@@ -36,8 +35,9 @@
 	    var min = restTime.getMinutes(); 
 	    var sec = restTime.getSeconds();
 	    var restCond = (year||month||day||hour||min||sec);
+	    var memberGrade = formatGrade(grade);
+	    $('#level').html('현재 등급 '+memberGrade+' <br><br>'); 
 	    
-	    $('#level').html('현재 등급 ${tr.membersGrade} <br><br>'); 
 	    if(grade >= 5) {
 	    	$('#checkMsg').html('이미 최고레벨에 도달 하셨습니다.<br><br>');
 			$('#entryBtn').html('응시불가')
@@ -46,7 +46,26 @@
 	    }
 	    else if(restCond >= 0 && grade < 5) {
 	    	setInterval("indexCheck()",1000);
-	    	$('#restTime').html(year + '년 ' + month + '월 ' + day + '일 ' +hour + '시간 ' + min + '분 ' + sec + '초 후에 응시가능 <br><br>');
+	    	$('#restTime').empty();
+	    	if(year != 0) {
+	    		$('#restTime').append(year+'년 ');
+	    	}
+	    	if(month != 0) {
+	    		$('#restTime').append(month+'월 ');
+	    	}
+	    	if(day != 0) {
+	    		$('#restTime').append(day+'일 ');
+	    	}
+	    	if(hour != 0) {
+	    		$('#restTime').append(hour+'시간 ');
+	    	}
+	    	if(min != 0) {
+	    		$('#restTime').append(min+'분 ');
+	    	}
+	    	if(sec != 0) {
+	    		$('#restTime').append(sec+'초 ');
+	    	}
+	    	$('#restTime').append('후에 잠금해제 <br><br>');
 	    	$('#checkMsg').html(permisStr.substring(0,4)+'년 '+ // String 문자열 자르기(SubString) permisString.substring(0,4);
 								permisStr.substring(5,7)+'월 '+
 								permisStr.substring(8,10)+'일 '+
@@ -58,9 +77,9 @@
 	   						 .attr('value','refuse');
 	    }
 	    else if(restCond < 0 && grade < 5) {
-	    	$('#checkMsg').html('현재 응시가 가능합니다.<br><br>');
+	    	$('#checkMsg').html('응시가 가능합니다.<br><br>');
 	    	$('#entryBtn').html('시험시작')
-	    					 .css('background-color','blue')
+	    					 .css('background-color','#81A8D6')
 	    					 .attr('value','accept');
 	    }
 	}
@@ -68,8 +87,8 @@
 	function levelChoice() {
 		$('#entryBtn').on('click',function() {
 			if($(this).attr('value') == 'accept') {
-				location.replace('levelChoice?grade='+${tr.membersGrade}); // location.replace -> 뒤로가기 시, Home으로 이동
-			}	
+				location.replace('choice');
+			}
 		});
 	}
 </script>

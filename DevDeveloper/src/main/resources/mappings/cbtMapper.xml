@@ -22,7 +22,7 @@
 		<where>
 			<if test="testsLevel != null and testsLevel != ''">
 	<![CDATA[	
-			testsLevel = #{testsLevel}
+			tests_level = #{testsLevel}
 	]]>
 			</if>
 		</where>

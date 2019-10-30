@@ -27,12 +27,12 @@ public class CBTController {
 		MembersVO member = (MembersVO) session.getAttribute("members");
 		recvo.setMembersNo(member.getMembersNo());
 		model.addAttribute("tr", cbtService.getTestJudg(recvo));
-		return "cbt/jsp/index";
+		return "cbt/index";
 	}
 	
 	@RequestMapping("cbt/choice")
 	public String setChoice() {
-		return "cbt/jsp/choice";
+		return "cbt/choice";
 	}
 	
 	@RequestMapping(value="cbt/getTestList", method=RequestMethod.GET)
@@ -43,9 +43,7 @@ public class CBTController {
 	
 	@RequestMapping("cbt/step1")
 	public String getTest(TestsVO tvo, Model model, HttpSession session) {
-		TestsVO test = (TestsVO) session.getAttribute("test");
-		tvo.setTestsLevel(test.getTestsLevel());
 		model.addAttribute("ts",cbtService.getTest(tvo));
-		return "cbt/jsp/step1";
+		return "cbt/step1";
 	}
 }

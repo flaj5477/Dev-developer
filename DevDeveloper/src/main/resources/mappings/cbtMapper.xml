@@ -9,20 +9,22 @@
 		SELECT m.members_grade , ADD_MONTHS(tr.tests_date,1)-9/24 AS UTCTestsDate, ADD_MONTHS(tr.tests_date,1) AS testsDate
 		FROM (SELECT *
 		      FROM tests_apply
-		      ORDER BY tests_apply_no DESC, tests_date DESC) tr JOIN members m
+		      ORDER BY tests_apply_no DESC, tests_date DESC) tr RIGHT OUTER JOIN members m
 		ON m.members_no = tr.members_no 
-		WHERE
-	]]>
-		<if test="membersNo != null">
-	<![CDATA[
-			tr.members_no = #{membersNo} AND rownum <= 1
+		WHERE m.members_no = #{membersNo} AND rownum <= 1
 	]]>		
-		</if>
 	</select>
 	<!-- 난이도 선택 시, 난이도 별 전체시험 목록조회 -->
-	<select id="getTestList" resultType="tests">
+	<select id="getTestList" resultType="tests" parameterType="tests">
 	<![CDATA[
 		SELECT * FROM TESTS
 	]]>
+		<where>
+			<if test="testsLevel != null and testsLevel != ''">
+	<![CDATA[	
+			tests_level = #{testsLevel}
+	]]>
+			</if>
+		</where>
 	</select>
 </mapper>

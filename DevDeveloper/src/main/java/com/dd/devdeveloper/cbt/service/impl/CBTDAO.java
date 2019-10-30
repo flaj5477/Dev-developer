@@ -22,4 +22,8 @@ public class CBTDAO {
 	public List<TestsVO> getTestList() {
 		return mybatis.selectList("CBTDAO.getTestList");
 	}
+	//선택한 시험 조회
+	public TestsVO getTest(TestsVO tvo) {
+		return mybatis.selectOne("CBTDAO.getTestList",tvo);
+	}
 }

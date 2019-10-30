@@ -11,5 +11,7 @@ public interface CBTService {
 	public TestsRecordVO getTestJudg(TestsRecordVO recvo);
 	
 	public List<TestsVO> getTestList();
+	
+	public TestsVO getTest(TestsVO tvo);
 }
 

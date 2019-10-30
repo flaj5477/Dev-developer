@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<title>${wiki.manualTitle}-DD</title>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 <script>
 
 	$(function(){
-		btnControl();
+		deleteWiki();
 	});
 
-	function btnControl(){
+	function deleteWiki(){
 		$('#btnDelWiki').on('click', function(){
 			/* document.frm.action.value = "deleteWiki";
 			document.frm.submit(); */
@@ -19,10 +22,6 @@
 			} else { //no 
 				return;
 			}
-		});
-		
-		$('#btnTransWiki').on('click', function(){
-			$("#frm").attr("action", "transWikiForm").submit();
 		});
 	}
 
@@ -46,7 +45,6 @@
 		        </div>
 		        <div class="col">
 			        <div class="nav nav-pills justify-content-end">
-			        	<button type="button" id="btnTransWiki" class="btn btn-danger">번역</button>
 			        	<button type="button" id="btnDelWiki" class="btn btn-danger">삭제</button>
 			        	<button class="btn btn-primary">수정</button>
 			        </div>

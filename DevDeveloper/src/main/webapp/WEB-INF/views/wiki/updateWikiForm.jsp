@@ -27,7 +27,7 @@
 </head>
 	<body>
 	위키수정페이지
-		<form id="frm" name="frm" action="updateWiki">
+		<form id="frm" name="frm" action="updateWiki" method="post">
 			<input type="hidden" name="manualNo" value="${wiki.manualNo}"/>
 			<input type="text" class="form-control" id="manualTitle" name="manualTitle" placeholder="등록할 제목" value="${wiki.manualTitle}">
 			<input type="text" class="form-control" id="manualOriUrl" name="manualOriUrl" placeholder="참고페이지url" value="${wiki.manualOriUrl}">

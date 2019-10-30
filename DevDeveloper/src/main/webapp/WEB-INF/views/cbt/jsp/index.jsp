@@ -6,26 +6,27 @@
 <meta charset="UTF-8">
 <title>CBT HOME</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src=""></script>
 <script>
 
 	$(document).ready(function() {
-		commentBox();
+		indexBox();
 		indexCheck();
 		levelChoice();
 	});
 	
-	function commentBox() {
-		$('#subject').html('레벨테스트 <br>'); // html = 내용을 view
+	function indexBox() {
+		$('#subject').html('<p> 레벨테스트 </p>'); // html = 내용을 view
 		$('#content').append('레벨테스트는 CBT방식으로 최대한 객관성을 얻고자 <br>') // append 내용을 추가
 					 .append('한국산업인력공단과 이 사이트를 만든 개발자들이 협력하여 <br>')
 					 .append('출제한 문제이므로 참고바랍니다. <br><br>');	
 	}
 	
 	function indexCheck() {	// 현재시간, 시험응시가능시간의 차이를 1초마다 갱신하는 Function
-		var permisUTCString = "${tr.utcTestsDate}" // GMT + 00:00, 이건 남은시간 계산 용도
-		var permisString = "${tr.testsDate}"; // GMT + 09:00, 이건 응시가능 날짜 용도
+		var permisUTCStr = "${tr.utcTestsDate}" // GMT + 00:00, 이건 남은시간 계산 용도
+		var permisStr = "${tr.testsDate}"; // GMT + 09:00, 이건 응시가능 날짜 용도
 		var grade = "${tr.membersGrade}"; 
-		var permisDate = Date.parse(permisUTCString); // String -> Date format 
+		var permisDate = Date.parse(permisUTCStr); // String -> Date format 
 	    var restMils = permisDate - new Date();
 	    var restTime = new Date(restMils);    
 	   	var year = restTime.getFullYear() - 1970; // 세계협정시 시작 1970년 1월 1일
@@ -46,12 +47,12 @@
 	    else if(restCond >= 0 && grade < 5) {
 	    	setInterval("indexCheck()",1000);
 	    	$('#restTime').html(year + '년 ' + month + '월 ' + day + '일 ' +hour + '시간 ' + min + '분 ' + sec + '초 후에 응시가능 <br><br>');
-	    	$('#checkMsg').html(permisString.substring(0,4)+'년 '+ // String 문자열 자르기(SubString) permisString.substring(0,4);
-								permisString.substring(5,7)+'월 '+
-								permisString.substring(8,10)+'일 '+
-								permisString.substring(11,13)+'시'+
-								permisString.substring(14,16)+'분 '+
-								permisString.substring(17,19)+'초 이후 응시가 가능합니다. <br><br>');
+	    	$('#checkMsg').html(permisStr.substring(0,4)+'년 '+ // String 문자열 자르기(SubString) permisString.substring(0,4);
+								permisStr.substring(5,7)+'월 '+
+								permisStr.substring(8,10)+'일 '+
+								permisStr.substring(11,13)+'시'+
+								permisStr.substring(14,16)+'분 '+
+								permisStr.substring(17,19)+'초 이후 응시가 가능합니다. <br><br>');
 	   		$('#entryBtn').html('응시불가')
 	   						 .css('background-color','red')
 	   						 .attr('value','refuse');
@@ -74,7 +75,7 @@
 </script>
 </head>
 <body>
-<div align="center">
+<div class="cbtIndex" align="center">
 	<div id="subject"></div>
 	<div id="content"></div>
 	<div id="condition">

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.dd.devdeveloper.members.MembersVO;
 import com.dd.devdeveloper.members.service.MembersService;
+import com.dd.devdeveloper.members.service.MembersSha256;
 
 @Service
 public class MembersServiceImpl implements MembersService{
@@ -22,15 +23,35 @@ public class MembersServiceImpl implements MembersService{
 		}
 
 	 @Override
-		public boolean loginCheck(MembersVO vo, HttpSession session) {
+		public int loginCheck(MembersVO vo, HttpSession session) {
+		 	 
+		 System.out.println("impl로 오는거 // 로그인 객체 확인 VO : " + vo);
+			 String mid = vo.getMembersId();
+			 String mpw = vo.getMembersPw();
+			 System.out.println("=======22222222222========" + mpw); 
 			 
-		 boolean result = membersDAO.loginCheck(vo);
-			if (result == true) {	//true 일경우 세션 등록
-				//세션 변수 등록
-				session.setAttribute("members",membersDAO.getmembers(vo));
-				
-			}
-			
+
+			 MembersVO voo = membersDAO.getmembers(vo);
+			 System.out.println("UserLoginService //  voo : " + voo);
+			 
+			 
+			 int result = 0;
+			 
+			 if(voo == null) {
+				 result = 0;
+				 return result;
+			 }
+			 
+			 if(voo.getMembersId().equals(mid)
+					 && voo.getMembersPw().equals(mpw)) {
+				 
+				 
+			 	session.setAttribute("members", voo);
+			 		
+			 	result = 1;
+
+			 }
+		
 			return result;
 		}
 

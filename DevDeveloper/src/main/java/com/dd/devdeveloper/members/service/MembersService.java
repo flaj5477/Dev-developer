@@ -12,7 +12,7 @@ public interface MembersService {
 
 
 	//로그인체크
-	public boolean loginCheck(MembersVO vo, HttpSession session);
+	public int loginCheck(MembersVO vo, HttpSession session);
 	
 	//로그아웃
 	public void logout(HttpSession session);

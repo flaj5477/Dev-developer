@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +39,7 @@
           <div class="card shadow">
             <div class="card-header border-0">
               			<h2 class="mb-0" >프로젝트명</h2>
-              	<div class="btn-card-header-group text-right">
+              			 <div class="btn-card-header-group text-right">
               			<div class="ni ni-zoom-split-in">
           				<input class="form-control" placeholder="Find file" type="text"></input></div>
           				<!--  -->
@@ -56,9 +58,9 @@
                       </div> <!--  href="./getFiles?filesNo=${files.filesNo}">${files.filesTitle }  -->
             </div>
             <div class="table-responsive">
-            ${list }
+            	
               <table class="table align-items-center table-flush">
-                <thead class="thead-light">
+              <thead class="thead-light">
                   <tr>
                     <th scope="col">파일명</th>
                     <th scope="col">코멘트</th>
@@ -70,13 +72,18 @@
                 <tbody>
                 <c:forEach var="files" items="${list}">
                 <tr>
-                		<td>
-                		<a href="./getFiles?filesNo=${files.filesNo}">${files.filesTitle}</a>
+                		<td>${files.filesType}<c:if test="${files.filesType=='F'}">
+                		${files.filesTitle}
+                		</c:if>
+                		<c:if test="${files.filesType=='D'}">
+                		<a href="./getFilesList?filesGroupNo=${files.filesNo}">${files.filesTitle}</a>
+                		</c:if>
                      	</td>
                      	<td>
                      		${files.filesComment }
                      	</td>
                      	<td>
+                     		${files.membersNo }
                      	</td>
                      	<td>
                      		${files.filesUploadDate }
@@ -86,7 +93,7 @@
                      	</td>
                  </tr>
                  </c:forEach>
-                  <tr>
+                  <!-- <tr>
                     <th scope="row">
                       <div class="media align-items-center">
                         <a href="#" class="avatar rounded-circle mr-3">
@@ -106,7 +113,7 @@
                       </span>
                     </td>
                     <td>
-                    <!--   <div class="avatar-group">
+                      <div class="avatar-group">
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
                         </a>
@@ -119,7 +126,7 @@
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
                         </a>
-                      </div> -->
+                      </div>
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
@@ -166,7 +173,7 @@
                       </span>
                     </td>
                     <td>
-                  <!--     <div class="avatar-group">
+                      <div class="avatar-group">
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
                         </a>
@@ -179,7 +186,7 @@
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
                         </a>
-                      </div> -->
+                      </div>
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
@@ -224,7 +231,7 @@
                       </span>
                     </td>
                     <td>
-                   <!--    <div class="avatar-group">
+                      <div class="avatar-group">
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
                         </a>
@@ -237,7 +244,7 @@
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
                         </a>
-                      </div> -->
+                      </div>
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
@@ -282,7 +289,7 @@
                       </span>
                     </td>
                     <td>
-                 <!--      <div class="avatar-group">
+                      <div class="avatar-group">
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
                         </a>
@@ -295,7 +302,7 @@
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
                         </a>
-                      </div> -->
+                      </div>
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
@@ -340,7 +347,7 @@
                       </span>
                     </td>
                     <td>
-                     <!--  <div class="avatar-group">
+                      <div class="avatar-group">
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
                         </a>
@@ -353,7 +360,7 @@
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
                         </a>
-                      </div> -->
+                      </div>
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
@@ -377,34 +384,14 @@
                         </div>
                       </div>
                     </td>
-                  </tr>
+                  </tr> -->
+                
                 </tbody>
               </table>
             </div>
             <div class="card-footer py-4">
-              <nav aria-label="...">
-                <ul class="pagination justify-content-end mb-0">
-                  <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">
-                      <i class="fas fa-angle-left"></i>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                  </li>
-                  <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">
-                      <i class="fas fa-angle-right"></i>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+  <my:paging paging="${paging}" jsFunc="go_page" />
+              
             </div>
           </div>
         </div>
@@ -431,13 +418,14 @@
               </li>
               <li class="nav-item">
                 <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
+
               </li>
             </ul>
           </div>
         </div>
       </footer>
     </div>
-  </div>
+  
   <!--   Core   -->
   <script src="./resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
   <script src="./resources/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -446,11 +434,14 @@
   <script src="./resources/assets/js/argon-dashboard.min.js?v=1.1.0"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script>
-    window.TrackJS &&
+	function go_page(p) {
+		location.href="getFilesList?page="+p
+	} 
+  /*  window.TrackJS &&
       TrackJS.install({
         token: "ee6fab19c5a04ac1a32a645abde4613a",
         application: "argon-dashboard-free"
-      });
+      }); */
   </script>
 </body>
 

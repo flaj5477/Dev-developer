@@ -4,17 +4,61 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="FilesDAO">
-	
-	<!-- 파일 전체 조회 -->
+
+
+
+
 	<select id="getFilesList" resultType="files">
-		select  files_no,
-				files_title,
-				files_comment,
-				members_no,
-				files_group_no,
-				files_upload_date,
-				files_Size
-		from files 
+		SELECT B.* FROM ( SELECT A.*,ROWNUM RN FROM(
+		select files_no,
+		files_title,
+		files_comment,
+		members_no,
+		files_group_no,
+		files_upload_date,
+		files_type,
+		files_size
+		from files
+		where 1=1
+		<choose>
+			<when test="filesGroupNo == null or filesGroupNo==''">
+				and files_group_no is null
+				and proj_no = #{projNo}
+			</when>
+			<otherwise>
+				and files_group_no = #{filesGroupNo}
+			</otherwise>
+		</choose>
 		order by files_no
+		)A)B WHERE RN between #{first} and #{last}
 	</select>
+
+	<select id="getCountFiles" parameterType="files"
+		resultType="int">
+		select count(*) as "getCountFiles"
+		from files
+		<where>
+			<if test="searchVal != null and searchVal != '' ">
+				<!-- <if test="manualTitle != null and manualTitle != '' "> AND MANUAL_TITLE 
+					LIKE '%' || #{manualTitle} || '%' </if> -->
+				<if test="select == 'title'">
+					AND FILES_NO LIKE '%' || #{searchVal} || '%'
+				</if>
+			</if>
+		</where>
+	</select>
+
+
+	<select id="getFiles" resultType="files">
+		select f.files_no,
+		f.files_title,
+		f.files_comment,
+		m.members_no,
+		f.files_upload_date,
+		f.files_size
+		from files f join members m
+		on f.members_no = m.members_no
+		where files_no = #{filesNo}
+	</select>
+
 </mapper>

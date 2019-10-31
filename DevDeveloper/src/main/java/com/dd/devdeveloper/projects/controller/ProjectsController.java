@@ -18,8 +18,8 @@ public class ProjectsController {
 	ProjectsService projectsService;
 	
 	@RequestMapping("/getProjectsList")
-	public String getProjectsList(P
-			rojectsVO vo, Model model) {
+	public String getProjectsList(
+			ProjectsVO vo, Model model) {
 		model.addAttribute("list", projectsService.getProjectsList(null));
 		return "projects/projectsList";
 	}

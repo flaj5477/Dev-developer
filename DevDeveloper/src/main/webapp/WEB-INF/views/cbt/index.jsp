@@ -89,7 +89,7 @@
 	function levelChoice() {
 		$('#entryBtn').on('click',function() {
 			if($(this).attr('value') == 'accept') {
-				location.replace('choice');
+				location.href='choice'; // 페이지 이동, 뒤로가기 허용
 			}
 		});
 	}

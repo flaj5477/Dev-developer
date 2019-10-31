@@ -16,15 +16,10 @@
 		testList();
 		accessEvent();		
 	});
-	
-	history.pushState(null, null, "#noback");
-	$(window).bind("hashchange", function(){
-		history.pushState(null, null, "#noback");
-	});
 
 	function levelBox() {
 		$('#subject').html('<h2> 난이도 선택 </h2>');
-		$('#comment').html('<br>');
+		$('#comment').html('<p/>')
 		$('#accessBtn').html('선택완료')
 					   .css('background-color','gray');
 	}
@@ -73,7 +68,8 @@
 					if(sec<=0) {
 						console.log('success');
 						clearInterval(readyTime);
-						document.frm.submit(); // web에 name = frm인 form태그를 submit
+						location.replace('ready?testsLevel='+level); // 페이지 이동, 뒤로가기 하면 현재 페이지 건너 뛴다, GET
+						//document.frm.submit(); // web에 name = frm인 form태그를 submit, POST
 					}
 					sec--;
 				},200); // n초마다
@@ -105,7 +101,9 @@
 		</form>
 	</div>
 	<div id="comment"></div>
-	<button id='accessBtn' type="button"></button>
+	<div id="Toast" align="center">
+		<button type="button" id="accessBtn"></button>
+	</div>
 </div>
 </body>
 </html>

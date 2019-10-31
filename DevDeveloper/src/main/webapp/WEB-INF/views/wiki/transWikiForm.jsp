@@ -11,8 +11,43 @@
   display: none;
 }
 .transEdit{
-  padding: 50px;
+  padding: 10px 10px;
+  margin: 0px;
+  background-color: white;
+  border: 1px solid;
+  border-radius: 0.25rem;
+  margin-right: -10px;
+  margin-left: -10px;
 }
+
+.transEdit .col{
+  padding: 10px;
+}
+
+.row{
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.transEdit .row > *:not(:first-child) {
+  border-left: solid gray 0.5px;
+}
+
+.ni-fat-remove{
+  font-size: 20px;
+}
+.form-control-alternative2 {
+  box-shadow: 0 1px 3px rgba(50, 50, 93, 0.6), 0 1px 3px rgba(0, 0, 0, 0.4);
+  border: 1px;
+  transition: box-shadow .15s ease;
+}
+
+.translate {
+  border-top: 1px solid #172b4d;
+  padding: 30px 30px;
+}
+
+
 </style>
 
 <script>
@@ -21,6 +56,7 @@
 		deleteWiki();
 		startTrans();
 		hover();
+		btnClose();
 	});
 
 	/*
@@ -49,18 +85,38 @@
 		$('.translate').on('click', function(){
 			var id = $(this).attr("id");
 			
-			
-			//편집창 숨기고 기존문장 보이게
-			$('.translate.hide').attr("class", "translate");	
-			$('.transEdit.open').attr("class", "transEdit hide");	//다른곳에 편집창 열려있으면 숨김
+			transClose();
+
 			
 			$(this).attr("class", "translate hide");	//클릭한 기존 문장 숨김
 			
 			
 			//translate 다음 클래스 transEdit hide 를 transEdit 로만듬
-			$(this).nextAll().filter(".transEdit.hide").first().attr("class", "transEdit open");	//편집창 열어줌
+			$(this).nextAll().filter(".transEdit.hide").first().attr("class", "transEdit open");	//편집창 열어줌gfdgf
 			//$(this+'transEdit hide').first().attr("class", "transEdit");
 			
+		});
+	}
+	
+	/*
+		곽동우
+		20191031
+		번역종료(편집창닫는다)
+	*/
+	function transClose(){
+		//편집창 숨기고 기존문장 보이게
+		$('.translate.hide').attr("class", "translate");	
+		$('.transEdit.open').attr("class", "transEdit hide");	//다른곳에 편집창 열려있으면 숨김
+	}
+	
+	/*
+		곽동우
+		20191031
+		x아이콘 클릭
+	*/
+	function btnClose(){
+		$('[name="btn-trans-close"]').on("click", function(){
+			transClose();
 		});
 	}
 	
@@ -101,27 +157,44 @@
 		    </div>
 
 			<hr>
+			<%-- 위키 번역 문장 뿌려줌 --%>
 			<c:forEach var="entry" items="${transWiki}">
 				<div class="translate open" id="translate${entry.key}">
 					${entry.value }
 				</div>
 				
-				<i class="ni ni-air-baloon"></i>
+				<%-- 변역등록 편집기 --%>
 				<div class="transEdit hide">
+				
 					<div class="row">
 						<div class="col">
-							${entry.value }
-							<textarea class="form-control" rows="3" placeholder="번역이필요합니다"></textarea>
-							
+							<div class="row">
+								<span class="badge badge-primary" id="transLine${entry.key}">
+									${wiki.manualTitle}_번역_${entry.key} </span>
+							</div>
+							<div class="row">
+								${entry.value }
+								<textarea class="form-control form-control-alternative2"
+									rows="3" placeholder="번역이필요합니다"></textarea>
+							</div>
 						</div>
 						<div class="col">
-							다른사람이 번역한거 표시
-						</div>
+							<div class="row nav nav-pills justify-content-end">
+								<span>
+									<i name="btn-trans-close" class="ni ni-fat-remove"></i>
+								</span>
+							</div>
+							<div class="row">
+								
+								<div class="col">
+									다른사람 번역한거 표시
+								</div>
+							</div>
+						
 					</div>
 				</div>
+				</div>
 			</c:forEach>
-			
-			
 			
 		</div>
 	</form>

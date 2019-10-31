@@ -25,11 +25,17 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 			type="com.dd.devdeveloper.projects.ProjectsVO" />
 		<typeAlias alias="projParticipants"
 			type="com.dd.devdeveloper.projects.ProjParticipantsVO"/>
+		<typeAlias alias="activityLog"
+			type="com.dd.devdeveloper.dashboard.ActivityLogVO"/>
+		<typeAlias alias="dashboard"
+			type="com.dd.devdeveloper.dashboard.DashboardVO"/>
 
 	
 		<!-- 동우 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
 		<typeAlias alias="wiki"
 			type="com.dd.devdeveloper.wiki.WikiVO"/>
+		<typeAlias alias="wikiTrans"
+			type="com.dd.devdeveloper.wiki.WikiTransVO"/>			
 			
 		<!-- 동규 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
 		<typeAlias alias="testsRecord"

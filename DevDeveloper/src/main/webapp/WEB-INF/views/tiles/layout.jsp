@@ -177,15 +177,15 @@
         <!-- User -->
         <c:choose>
         	<c:when test="${empty sessionScope.members.membersId}">
-        	 	<a data-toggle="modal" href="signForm" data-target="#modal-testNew"
+				<a data-toggle="modal" href="signForm" data-target="#modal-testNew"
 				role="button"> <span
-				class="btn btn-xs btn-success" id="btn-testNew">회원가입</span>
+				class="btn btn-secondary" id="btn-testNew">회원가입</span>
 				</a>
-				&nbsp;
+				&nbsp;&nbsp;
 				<a data-toggle="modal" href="login" data-target="#modal-testNew2"
 				role="button"> <span
-				class="btn btn-xs btn-success" id="btn-testNew">로그인</span>
-			</a>
+				class="btn btn-secondary" id="btn-testNew">로그인</span>
+				/a>
         	</c:when>
         	<c:otherwise>
         <ul class="navbar-nav align-items-center d-none d-md-flex">
@@ -244,17 +244,17 @@
   
   	<div id="modal-testNew" class="modal fade" tabindex="-1" role="dialog"
 		aria-labelledby="테스트정보 등록" aria-describedby="테스트 모달">
-		<div class="modal-dialog" style="width: 3000px; height: 1700px">
-			<div class="modal-content"></div>
+		<div class="modal-dialog" >
+			<div class="modal-content" style="background: #3d516b; width:550px;"></div>
 		</div>
 	</div>
 	
   	<div id="modal-testNew2" class="modal fade" tabindex="-1" role="dialog"
 		aria-labelledby="테스트정보 등록" aria-describedby="테스트 모달">
 		<div class="modal-dialog" style="width: 3000px; height: 1700px">
-			<div class="modal-content" style="background: black; width:70%;"></div>
+			<div class="modal-content" style="background: #3d516b; width:70%;"></div>
 		</div>
-	</div>	
+	</div>
   <!--   Core   -->
   <script src="${pageContext.request.contextPath}/resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -99,7 +99,7 @@ public class MembersController {
    			String fileName2 = FilenameUtils.getExtension(multipartFile.getOriginalFilename());
    			// 업로드 폴더로 파일 이동
    			String path = request.getSession().getServletContext().
-   					getRealPath("/image/profile/");
+   					getRealPath("/images/profile/");
    					System.out.println("============="+path);
    					
    				if(new File(path + fileName1+dot+fileName2).exists()) {

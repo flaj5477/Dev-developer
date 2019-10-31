@@ -3,26 +3,28 @@ package com.dd.devdeveloper.dashboard.service.impl;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.dd.devdeveloper.dashboard.ActivityLogVO;
 import com.dd.devdeveloper.dashboard.DashboardVO;
 import com.dd.devdeveloper.members.MembersVO;
 
 @Repository
-public class ActivityLogDAO {
+public class DashboardDAO {
 	
 	@Autowired SqlSessionTemplate mybatis; 
+	Logger logger = LoggerFactory.getLogger(DashboardDAO.class);
 
 	//활동로그 select
 	public void getActivityLogList(DashboardVO vo) { 
-		// TODO Auto-generated method stub
-		mybatis.selectList("ActivityLogDAO.getActivityLogList", vo); //리턴을 안해도 vo에 자동으로 들어간다
+		mybatis.selectList("DashboardDAO.getActivityLogList", vo); //리턴을 안해도 vo에 자동으로 들어간다
 	}
 	
-	public void getProjApplyStatus(DashboardVO vo) {
-		//mybatis.select( , handler );
+	//프로젝트 지원상태 
+	public DashboardVO getProjApplyStatus(DashboardVO vo) {
+		return mybatis.selectOne( "DashboardDAO.getProjApplyStatus" , vo);
 	}
 
 }

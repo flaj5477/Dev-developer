@@ -14,7 +14,7 @@ public interface DashboardService {
 	public void getActivityLogList(DashboardVO vo);
 	
 	//프로젝트 지원 상태 가져오기
-	public void getProjApplyStatus(DashboardVO vo);
+	public DashboardVO getProjApplyStatus(DashboardVO vo);
 	
 	//프로젝트공고에 지원한 지원자 리스트
 	public void getProjApplicantsList(DashboardVO vo);

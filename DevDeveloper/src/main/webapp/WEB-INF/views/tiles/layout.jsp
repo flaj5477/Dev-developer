@@ -256,7 +256,6 @@
 		</div>
 	</div>	
   <!--   Core   -->
-  <script src="${pageContext.request.contextPath}/resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!--   Optional JS   -->
   <script src="${pageContext.request.contextPath}/resources/assets/js/plugins/chart.js/dist/Chart.min.js"></script>

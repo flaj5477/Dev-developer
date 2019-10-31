@@ -4,10 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CBT Home</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<title> CBT Home </title>
 <script src="${pageContext.request.contextPath}/resources/assets/js/format.js"></script>
 <script>
+	
+	var page = 1;
+	
 	$(document).ready(function() {
 		indexBox();
 		indexCheck();

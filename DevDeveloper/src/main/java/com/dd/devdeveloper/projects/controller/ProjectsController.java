@@ -25,9 +25,9 @@ public class ProjectsController {
 	}
 	
 	@RequestMapping("/getProjects")	//프로젝트 공고 상세
-	public String getProjects(ProjectsVO vo, Model model, HttpSession session, HttpServletRequest request) {
+	public String getProjects(ProjectsVO vo, Model model, HttpSession session) {
 		model.addAttribute("project", projectsService.getProjects(vo));
-		session.setAttribute("projNo", request.getAttribute("projNo"));	//세션에 projNo 추가
+		session.setAttribute("projNo", vo.getProjNo());	//세션에 projNo 추가
 		return "projects/projects";
 	}
 	

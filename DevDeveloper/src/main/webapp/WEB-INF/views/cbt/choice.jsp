@@ -14,6 +14,7 @@
 	$(document).ready(function() {
 		levelBox();
 		testList();
+		chooseEvent();
 		accessEvent();
 	});
 	
@@ -33,7 +34,7 @@
 				var contents = data[idx].testsContents;
 				if(curLevel < level) { // 자기보다 높은 레벨의 시험만 선택
 					var force = formatDifficulty(level);
-					$('<tr>').append($('<th>').html('<input type="radio" name="testsLevel" value="'+level+'" onclick="chooseEvent('+level+')">')) // testsLevel = VO 변수명
+					$('<tr>').append($('<th>').html('<input type="radio" name="testsLevel" value="'+level+'">')) // testsLevel = VO 변수명
 							 .append($('<th>').html(title))
 							 .append($('<th>').html(contents))
 							 .append($('<th>').html(force))
@@ -43,14 +44,17 @@
 		});
 	}
 	
-	function chooseEvent(level) {
-		var chooseGrade = formatGrade(level);
-		var memberGrade = formatGrade(curLevel);
-		$('#accessBtn').html('선택완료')
-					   .css('background-color','#81A8D6');
-		$('#comment').html('<p> 진행 하시려면 선택완료 버튼을 눌러주세요. </p>')
-					 .prepend('<br> <p> 현재등급 : '+memberGrade+'</p> <p> 합격 시 등급 : '+chooseGrade+'</p>');
-		clearInterval(readyTime); // radio 버튼누르면 반복실행 Clear
+	function chooseEvent() {
+		var level = $('[name ="testsLevel"]:checked').val(); // 현재 클릭된 상태의 값을 Checked..
+		$('[name="test"]').on('click', function() {		
+			var chooseGrade = formatGrade(level);
+			var memberGrade = formatGrade(curLevel);
+			$('#accessBtn').html('선택완료')
+						   .css('background-color','#81A8D6');
+			$('#comment').html('<p> 진행 하시려면 선택완료 버튼을 눌러주세요. </p>')
+						 .prepend('<br> <p> 현재등급 : '+memberGrade+'</p> <p> 합격 시 등급 : '+chooseGrade+'</p>');
+			clearInterval(readyTime); // radio 버튼누르면 반복실행 Clear
+		})
 	}
 	
 	function accessEvent() {

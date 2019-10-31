@@ -48,12 +48,17 @@
 	function startTrans(){
 		$('.translate').on('click', function(){
 			var id = $(this).attr("id");
-			$(this).attr("class", "translate hide");
 			
-			$('.transEdit').attr("class", "transEdit hide");
+			
+			//편집창 숨기고 기존문장 보이게
+			$('.translate.hide').attr("class", "translate");	
+			$('.transEdit.open').attr("class", "transEdit hide");	//다른곳에 편집창 열려있으면 숨김
+			
+			$(this).attr("class", "translate hide");	//클릭한 기존 문장 숨김
+			
 			
 			//translate 다음 클래스 transEdit hide 를 transEdit 로만듬
-			$(this).nextAll().first().attr("class", "transEdit");
+			$(this).nextAll().filter(".transEdit.hide").first().attr("class", "transEdit open");	//편집창 열어줌
 			//$(this+'transEdit hide').first().attr("class", "transEdit");
 			
 		});
@@ -97,7 +102,7 @@
 
 			<hr>
 			<c:forEach var="entry" items="${transWiki}">
-				<div class="translate" id="translate${entry.key}">
+				<div class="translate open" id="translate${entry.key}">
 					${entry.value }
 				</div>
 				

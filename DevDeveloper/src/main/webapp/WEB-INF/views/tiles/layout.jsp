@@ -185,7 +185,7 @@
 				<a data-toggle="modal" href="login" data-target="#modal-testNew2"
 				role="button"> <span
 				class="btn btn-secondary" id="btn-testNew">로그인</span>
-				/a>
+				</a>
         	</c:when>
         	<c:otherwise>
         <ul class="navbar-nav align-items-center d-none d-md-flex">

@@ -148,7 +148,7 @@ public class MembersController {
   		
   		membersService.logout(session);
   		ModelAndView mav = new ModelAndView();
-  		mav.setViewName("members/loginForm");
+  		mav.setViewName("projects/projectsList");
   		mav.addObject("msg", "logout");
   		
   		return mav;

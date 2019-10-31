@@ -139,15 +139,21 @@ public class MembersController {
        
      //로그인처리
    	@RequestMapping(value ="/login" , method = RequestMethod.POST)
+   	@ResponseBody
    	public int loginCheck(@ModelAttribute MembersVO vo,HttpSession session) {
    		
-   		
+   		String Pw = vo.getMembersPw();
+  		vo.setMembersPw(MembersSha256.encrypt(Pw));
+  		System.out.println("=========111111111=======" +Pw);
+  		
    		int result = membersService.loginCheck(vo, session);
+   		
+   		
    		
    		return result;
    	}
    	
-  //로그아웃 처리
+  //로그아웃 처리	
   	@RequestMapping("logout")
   	public ModelAndView logout(HttpSession session) {
   		

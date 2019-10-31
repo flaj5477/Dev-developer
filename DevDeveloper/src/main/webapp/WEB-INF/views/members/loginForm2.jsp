@@ -75,10 +75,17 @@
         </svg>
 		<input type="text" placeholder="아이디" name="membersId" id = "loginid"class="loginform"> <input
 			type="password" placeholder="비밀번호" name="membersPw" id="loginpw" class="loginform">
-		  <div class="eheck_font" id="logincheck"></div> 
+		  
+		  <div class="form-group">
+					<span class="font-weight-bold text-white bg-dark"
+						id="spanLoginCheck"></span>
+				</div>
+	
+
+		   
 
 		<div class="text-center" class="loginform">
-			<button type="submit" id="loginBtn" class="btn btn-primary my-4">로그인</button>
+			<button type="button" id="loginBtn" class="btn btn-primary my-4">로그인</button>
 		</div>
 		<%-- <c:if test="${msg == '실패'}">
 			<div class="alert alert-dark alert-dismissible fade show"
@@ -93,32 +100,31 @@
 		</c:if> --%>
 	</form>
 
-<!-- <script>
+ <script>
 
  $('#loginBtn').click(function() {
 		var id = $('#loginid').val();
 		var pw = $('#loginpw').val();
 			$.ajax({
-			type : 'post',
+			type : 'POST',
 			url : 'login',
 			data : {
 				membersId : id,
 				membersPw : pw,
-				
 				},
 				success : function(data) {
 					if (data == 0) { //로그인 실패시
 						console.log(data);
-						$('logincheck').text('로그인 정보를 정확히 입력해주세요.');
+						$('spanLoginCheck').text('로그인 정보를 정확히 입력해주세요.');
 					}  else { //로그인 성공시
 						console.log(data);
-						location.href = '${pageContext.request.contextPath}/wiki/wikihome';
+						location.href = 'wikihome';
 					}
 				}
 			});
 		});
 
-</script>  -->
+</script>   
 
 
 <script

@@ -24,13 +24,16 @@ public class MembersServiceImpl implements MembersService{
 
 	 @Override
 		public int loginCheck(MembersVO vo, HttpSession session) {
-		 	 String Pw = vo.getMembersPw();
-	   		 vo.setMembersPw(MembersSha256.encrypt(Pw));
-	   		
+		 	 
+		 System.out.println("impl로 오는거 // 로그인 객체 확인 VO : " + vo);
 			 String mid = vo.getMembersId();
 			 String mpw = vo.getMembersPw();
+			 System.out.println("=======22222222222========" + mpw); 
 			 
-			 MembersVO voo = membersDAO.loginCheck(vo);
+
+			 MembersVO voo = membersDAO.getmembers(vo);
+			 System.out.println("UserLoginService //  voo : " + voo);
+			 
 			 
 			 int result = 0;
 			 
@@ -43,7 +46,7 @@ public class MembersServiceImpl implements MembersService{
 					 && voo.getMembersPw().equals(mpw)) {
 				 
 				 
-			 	session.setAttribute("members", membersDAO.loginCheck(voo));
+			 	session.setAttribute("members", voo);
 			 		
 			 	result = 1;
 

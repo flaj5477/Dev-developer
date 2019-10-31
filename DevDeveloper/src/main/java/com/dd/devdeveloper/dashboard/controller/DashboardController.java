@@ -27,9 +27,13 @@ public class DashboardController {
 		
 		//회원의 활동로그 가져옴
 		dashboardService.getActivityLogList(dashboardVO);
+		model.addAttribute("activityLogList", dashboardVO.getActivityLogList() );
 		
 		//회원의 프로젝트 지원 상태 가져옴
-		dashboardService.getProjApplyStatus(dashboardVO);
+		dashboardVO = dashboardService.getProjApplyStatus(dashboardVO);
+		model.addAttribute("projApply", dashboardVO.getProjApply());
+		model.addAttribute("projApprove", dashboardVO.getProjApprove());
+		model.addAttribute("projParticipant", dashboardVO.getProjParticipant());
 		
 		//회원이 올린 프로젝트공고에 지원한 지원자 리스트 가져옴
 		
@@ -38,11 +42,6 @@ public class DashboardController {
 		//위키리스트 가져옴
 		
 		//CBT기록 가져
-		
-		
-		
-		//모델에 담기
-		model.addAttribute("activityLogList", dashboardVO.getActivityLogList() );
 		
 		//return "dashboard/svgtest";
 		return "dashboard/dashboard";

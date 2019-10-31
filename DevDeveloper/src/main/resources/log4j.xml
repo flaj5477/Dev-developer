@@ -40,6 +40,10 @@
 		<level value="DEBUG" />
 		<appender-ref ref="console" />
 	</logger>
+	<logger name="jdbc.resultsettable" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+	</logger>
 
 	<!-- Root Logger -->
 	<root>

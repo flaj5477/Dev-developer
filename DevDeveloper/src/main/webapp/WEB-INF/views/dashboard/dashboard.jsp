@@ -163,7 +163,7 @@
 												<div class="col">
 													<h5 class="card-title text-uppercase text-muted mb-0">프로젝트
 														지원</h5>
-													<span class="h2 font-weight-bold mb-0">2,356</span>
+													<span class="h2 font-weight-bold mb-0">${projApply } </span>
 												</div>
 												<div class="col-auto">
 													<div
@@ -182,7 +182,7 @@
 												<div class="col">
 													<h5 class="card-title text-uppercase text-muted mb-0">프로젝트
 														승인</h5>
-													<span class="h2 font-weight-bold mb-0">1</span>
+													<span class="h2 font-weight-bold mb-0">${projApprove}</span>
 												</div>
 												<div class="col-auto">
 													<div
@@ -201,7 +201,7 @@
 												<div class="col">
 													<h5 class="card-title text-uppercase text-muted mb-0">프로젝트
 														참여</h5>
-													<span class="h2 font-weight-bold mb-0">49,65%</span>
+													<span class="h2 font-weight-bold mb-0">${projParticipant}</span>
 												</div>
 												<div class="col-auto">
 													<div
@@ -220,7 +220,7 @@
 												<div class="col">
 													<h5 class="card-title text-uppercase text-muted mb-0">프로젝트
 														완료</h5>
-													<span class="h2 font-weight-bold mb-0">2,356</span>
+													<span class="h2 font-weight-bold mb-0">0</span>
 												</div>
 												<div class="col-auto">
 													<div

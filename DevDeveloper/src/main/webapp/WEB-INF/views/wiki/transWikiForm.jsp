@@ -44,7 +44,7 @@
 }
 
 .translate {
-  border-top: 1px solid #848484;
+  border-bottom: 1px solid #848484;
   padding: 30px 30px;
 }
 
@@ -130,6 +130,21 @@
 	}
 	
 
+	/*
+		곽동우
+		20191031
+		위키번역 등록
+	*/
+	function insertWikiTrans(){
+		$('#btnDelWiki').on('click', function(){
+			var result = confirm('정말삭제?'); 
+			if(result) { //yes 
+				$("#frm").attr("action", "insertWikiTrans").submit();
+			} else { //no 
+				return;
+			}
+		});
+	}
 
 </script>
 </head>
@@ -164,9 +179,9 @@
 					${entry.value }
 				</div>
 				
+				
 				<%-- 변역등록 편집기 --%>
 				<div class="transEdit hide">
-				
 					<div class="row">
 						<div class="col">
 							<div class="row">
@@ -201,8 +216,8 @@
 					</div>
 				</div>
 				</div>
+				
 			</c:forEach>
-			
 		</div>
 	</form>
 		

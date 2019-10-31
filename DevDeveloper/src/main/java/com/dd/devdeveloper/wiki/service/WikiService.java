@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.dd.devdeveloper.common.paging.Paging;
+import com.dd.devdeveloper.wiki.WikiTransVO;
 import com.dd.devdeveloper.wiki.WikiVO;
 
 public interface WikiService {
@@ -27,6 +28,9 @@ public interface WikiService {
 	//위키삭제(단건)
 	public void deleteWiki(WikiVO vo);
 	
-	//위키번역
-	public Map<Integer, Object> getTransWikiForm(WikiVO vo); 
+	//위키번역폼
+	public Map<Integer, Object> getTransWikiForm(WikiVO vo);
+	
+	//위키
+	public Map<Integer, Object> insertWikiTrans(WikiTransVO vo); 
 }

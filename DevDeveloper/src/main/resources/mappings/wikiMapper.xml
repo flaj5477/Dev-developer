@@ -141,5 +141,21 @@
 	  	delete WIKI_GUIDE
 	  	where MANUAL_NO = ${manualNo}
 	  </delete>
+	  
+	  
+	  
+	  <!-- 
+		곽동우
+		191031
+		위키번역 등록	
+	 -->
+	 <insert id="insertWikiTrans" parameterType="wikiTrans">
+		<selectKey keyProperty="transNo" resultType="int" order="BEFORE">  <!-- seq에담는다 타입은 int -->
+			select NVL(max(TRANS_NO),0)+1 from WIKI_GUIDE_TRANS
+		</selectKey>
+		insert into WIKI_GUIDE_TRANS (TRANS_NO, MANUAL_LINE, MANUAL_BEFORE, MANUAL_AFTER, MANUAL_DATE, MANUAL_NO, MEMBERS_NO)
+		VALUES (2,1,'1','1',SYSDATE,3,1);
+		<!-- values( #{manualNo}, #{manualContentsPath} ,#{manualOriUrl} ,#{manualTags} ,#{manualTitle} ) -->
+	</insert>
 	 
 </mapper>

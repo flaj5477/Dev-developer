@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dd.devdeveloper.common.paging.Paging;
+import com.dd.devdeveloper.wiki.WikiTransVO;
 import com.dd.devdeveloper.wiki.WikiVO;
 import com.dd.devdeveloper.wiki.service.WikiService;
 import com.dd.devdeveloper.wiki.textFile.textToFile;
@@ -170,6 +171,19 @@ public class WikiServiceImpl implements WikiService {
 		return lineMap;
 	}
 	
+	
+	
+	/*
+	 * 20191031
+	 * 곽동우
+	 * 위키번역등록
+	 */
+	public Map<Integer, Object> insertWikiTrans(WikiTransVO vo){
+		wikiDAO.insertWikiTrans(vo);
+		
+		
+		return null;
+	}
 	
 	
 	

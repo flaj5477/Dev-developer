@@ -1,6 +1,8 @@
 package com.dd.devdeveloper.wiki.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.dd.devdeveloper.common.paging.Paging;
+import com.dd.devdeveloper.wiki.WikiTransVO;
 import com.dd.devdeveloper.wiki.WikiVO;
 import com.dd.devdeveloper.wiki.service.WikiService;
 import com.dd.devdeveloper.wiki.textFile.textToFile;
@@ -103,7 +107,7 @@ public class WikiController {
 	/*
 	 * 곽동우
 	 * 2019-10-29
-	 * 위키번역
+	 * 위키번역폼 이동
 	 */
 	@RequestMapping("/transWikiForm")
 	public String transWikiForm(@ModelAttribute("wiki") WikiVO vo, Model model) {
@@ -112,4 +116,17 @@ public class WikiController {
 		return "wiki/transWikiForm";
 	}
 	
+	
+	/*
+	 * 곽동우
+	 * 2019-10-31
+	 * 위키번역 등록
+	 */
+	@RequestMapping("/transWiki")
+	public Map transWiki(@RequestBody WikiTransVO vo, Model model) {
+		wikiService.insertWikiTrans(vo);
+		Map<Integer, Object> map = new HashMap<Integer, Object>();
+		
+		return map;
+	}
 }

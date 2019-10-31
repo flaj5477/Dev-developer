@@ -29,7 +29,7 @@ public class DashboardController {
 		
 		model.addAttribute("activityLogList", dashboardVO.getActivityLogList() );
 		
-		return "dashboard/svgtest";
-		//return "dashboard/dashboard";
+		//return "dashboard/svgtest";
+		return "dashboard/dashboard";
 	}
 }

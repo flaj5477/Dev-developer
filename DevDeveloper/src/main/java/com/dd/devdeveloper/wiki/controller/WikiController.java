@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.wiki.WikiVO;
@@ -18,6 +20,7 @@ import com.dd.devdeveloper.wiki.textFile.textToFile;
 
 //위키컨트롤러 1018 곽동우
 @Controller
+@SessionAttributes("wiki")
 public class WikiController {
 	
 	@Autowired WikiService wikiService;
@@ -103,9 +106,9 @@ public class WikiController {
 	 * 위키번역
 	 */
 	@RequestMapping("/transWikiForm")
-	public String transWikiForm(WikiVO vo, Model model) {
+	public String transWikiForm(@ModelAttribute("wiki") WikiVO vo, Model model) {
    		//테스트
-			model.addAttribute("wiki", wikiService.getTransWiki(vo));
+		model.addAttribute("transWiki", wikiService.getTransWikiForm(vo));
 		return "wiki/transWikiForm";
 	}
 	

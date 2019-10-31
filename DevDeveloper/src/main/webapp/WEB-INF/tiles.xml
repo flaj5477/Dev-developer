@@ -15,6 +15,12 @@
 			value="/WEB-INF/views/tiles/left.jsp" />
 	</definition>
 	
+		<!--타일 적용 안받는거-->
+	<definition name="/notiles/*/*" template="/WEB-INF/views/tiles/notiles.jsp">  
+		<put-attribute name="content"
+			value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	
 	<definition name="files/*" extends="mainTemplate">  <!--파일파일 mainTemplate를 상속받아서, content attribute를 오버라이딩 하는것 -->
 		<put-attribute name="content"
 			value="/WEB-INF/views/files/{1}.jsp" />

@@ -95,12 +95,11 @@
 						</div>
 					</div>
 					<div class="text-center">
-					<button class="btn btn-icon btn-3 btn-primary" type="button">
+					<button class="btn btn-icon btn-3 btn-primary">
 						<span class="btn-inner--icon"><i class="fas fa-paper-plane"></i></span>
-
 						<span class="btn-inner--text">지원하기</span>
 					</button>
-					<input type="submit" class="btn" ></input>
+					
 					</div>
 				</form>
 			</div>

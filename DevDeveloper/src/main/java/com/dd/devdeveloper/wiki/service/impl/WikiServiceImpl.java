@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -143,22 +144,30 @@ public class WikiServiceImpl implements WikiService {
 	 * 위키번역
 	 */
 	@Override
-	public List<Map<Integer, Object>> getTransWiki(WikiVO vo) {
+	public Map<Integer, Object> getTransWikiForm(WikiVO vo) {
 		//일단 테스트용
-		String path = "C:\\Users\\User\\Desktop\\textTest\\2019\\기타\\20191029.txt";
+		
+		String path = vo.getManualContentsPath();
 		String sTag = "<p>";
 		String eTag = "</p>";
 		
 		String contents = readText(path);
 		
-		System.out.println(contents.indexOf(sTag));	// p태그
-		System.out.println(contents.indexOf(eTag));
+		/////////////////태그잘라서 map에담기
+		String date[] = contents.split(sTag);
 		
-		contents.indexOf(eTag);	//
+		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();
+		int lineNum = 0;	//
 		
+		for (int i = 0; i < date.length; i++) {
+			date[i] = date[i].split(eTag)[0];
+			if (!date[i].isEmpty()) {
+				lineMap.put(lineNum++, date[i]);
+			}
+		}
 		
-		
-		return null;
+		////////////////////////////////
+		return lineMap;
 	}
 	
 	

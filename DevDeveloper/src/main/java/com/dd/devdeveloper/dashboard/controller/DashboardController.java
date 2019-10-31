@@ -25,8 +25,23 @@ public class DashboardController {
 		DashboardVO dashboardVO = new DashboardVO();
 		dashboardVO.setMemberNo( ((MembersVO)session.getAttribute("members")).getMembersNo() );//세션의 회원번호를 가져와서 vo에 담는다 
 		
-		dashboardService.getActivityLogList(dashboardVO);	
+		//회원의 활동로그 가져옴
+		dashboardService.getActivityLogList(dashboardVO);
 		
+		//회원의 프로젝트 지원 상태 가져옴
+		dashboardService.getProjApplyStatus(dashboardVO);
+		
+		//회원이 올린 프로젝트공고에 지원한 지원자 리스트 가져옴
+		
+		//Q&A리스트 가져옴
+		
+		//위키리스트 가져옴
+		
+		//CBT기록 가져
+		
+		
+		
+		//모델에 담기
 		model.addAttribute("activityLogList", dashboardVO.getActivityLogList() );
 		
 		//return "dashboard/svgtest";

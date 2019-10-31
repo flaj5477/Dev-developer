@@ -9,239 +9,236 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>회원가입테스트</title>
 <!-- Favicon -->
-<link href="${pageContext.request.contextPath}/resources/assets/img/brand/favicon.png" rel="icon" type="image/png">
+<link
+	href="${pageContext.request.contextPath}/resources/assets/img/brand/favicon.png"
+	rel="icon" type="image/png">
 <!-- Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
 	rel="stylesheet">
 <!-- Icons -->
-<link href="${pageContext.request.contextPath}/resources/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+<link
+	href="${pageContext.request.contextPath}/resources/assets/js/plugins/nucleo/css/nucleo.css"
+	rel="stylesheet" />
 <link
 	href="${pageContext.request.contextPath}/resources/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css"
-rel="stylesheet" />
+	rel="stylesheet" />
 <!-- CSS Files -->
-<link href="../assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
-
+<link
+	href="${pageContext.request.contextPath}/resources/assets/css/argon-dashboard.css?v=1.1.0"
+	rel="stylesheet" />
  
 
 
 
 <style>
+.filebox input[type="file"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+.filebox label {
+	display: inline-block;
+	padding: .5em .75em;
+	color: #999;
+	font-size: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #fdfdfd;
+	cursor: pointer;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+}
+
+.filebox .upload-name {
+	display: inline-block;
+	padding: .5em .75em;
+	/* label의 패딩값과 일치 */
+	font-size: inherit;
+	font-family: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #f5f5f5;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+	-webkit-appearance: none;
+	/* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
+}
+
 .eheck_font {
 	font-size: 13px;
 	color: crimson;
 }
+
+form#signForm {
+	width: 320px;
+	padding: 60px 25px 80px;
+	margin: 50px auto;
+	background: #f8d348;
+	display: flex;
+	flex-direction: column;
+}
 </style>
 </head>
- <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true">×</button>
-   
-</div>
-
-  
+<body>
 	<!-- Table -->
 	<div class="header bg-gradient-primary py-7 py-lg-8">
-       <div class="container">
-         <div class="header-body text-center mb-7">
-           <div>
-             <div>
-               <h1 class="text-white">ddddddddddd!</h1>
-               <p class="text-lead text-light"> ㅎddddddddddd.</p>
-             </div>
-           </div>
-         </div>
-       </div>    
-     </div>
-     
-<div class="row justify-content-center">
-	<div>
-		<div class="card bg-secondary shadow border-0">
-			<div >
-			 
-				   <div class="text-muted text-center mt-2 mb-4"><small>Sign up with</small></div>
-               <div class="text-center">
-
-					<a href="#" class="btn btn-neutral btn-icon"> <span
-						class="btn-inner--icon"><img
-							src="../assets/img/icons/common/google.svg"></span> <span
-						class="btn-inner--text">Google</span>
-					</a>
+		<div class="container">
+			<div class="header-body text-center mb-5">
+				<div>
+					<div>
+						<h1 class="text-white">ddddddddddd!</h1>
+						<p class="text-lead text-light">ㅎddddddddddd.</p>
+					</div>
 				</div>
 			</div>
 		</div>
-
-<form action="signup" method="post" role="form" id="signForm" enctype="multipart/form-data">			
-	<div style="padding: 5px 130px;">
-		<div class="custom-control custom-radio mb-3">
-			<input name="membersType" class="custom-control-input"
-				id="customRadio5" checked="checked" type="radio" value="일반">
-			<label class="custom-control-label" for="customRadio5">일반</label>
-		</div>
-	
-		<div class="custom-control custom-radio mb-3">
-			<input name="membersType" class="custom-control-input"
-				id="customRadio6" value="기업" type="radio"> <label
-				class="custom-control-label" for="customRadio6">기업</label>
-		</div>
 	</div>
 
-	<div class="form-group">
-		<div class="input-group input-group-alternative mb-3">
-			<div class="input-group-prepend">
-				<span class="input-group-text"></span>
+
+	<form action="signup" method="post" id="signForm"
+		enctype="multipart/form-data" style="width: 450px">
+		<div style="text-align : center; padding:0px 0px 7px 0px;">
+			<div class="custom-control custom-radio mb-3" style ="display : inline-block">
+				<input name="membersType" class="custom-control-input"
+					id="customRadio5" checked="checked" type="radio" value="일반">
+				<label class="custom-control-label" for="customRadio5">일반</label>
 			</div>
-			<input name="membersId" id="membersId" class="form-control"
-				placeholder="아이디" type="text"><br>
-		</div>
-		<div class="eheck_font" id="id_check"></div>
-	</div>
-
-	<div class="form-group">
-		<div class="input-group input-group-alternative mb-3">
-			<div class="input-group-prepend">
-				<span class="input-group-text"></span>
+			&nbsp;
+			<div class="custom-control custom-radio mb-3" style ="display : inline-block">
+				<input name="membersType" class="custom-control-input"
+					id="customRadio6" value="기업" type="radio"> <label
+					class="custom-control-label" for="customRadio6">기업</label>
 			</div>
-			<input name="membersPw" id="membersPw" class="form-control"
-				placeholder="비밀번호" type="password">
 		</div>
-		<div class="eheck_font" id="pw_check"></div>
-	</div>
 
-	<div class="form-group">
-		<div class="input-group input-group-alternative mb-3">
-			<div class="input-group-prepend">
-				<span class="input-group-text"></span>
+
+		<div class="form-group">
+			<div id="idv" class ="input-group input-group-alternative mb-3">
+				<input name="membersId" id="membersId" class="form-control"
+					placeholder="아이디" type="text">
 			</div>
-			<input name="membersPw2" id="membersPw2" class="form-control"
-				placeholder="비밀번호 확인" type="password">
+			<div class="eheck_font" id="id_check"></div>
 		</div>
-		<div class="eheck_font" id="pw2_check"></div>
-	</div>
 
-	<div class="form-group">
-		<div class="input-group input-group-alternative mb-3">
-			<div class="input-group-prepend">
-				<span class="input-group-text"></span>
+		<div class="form-group">
+			<div id="pw1v" class ="input-group input-group-alternative mb-3">
+				<input name="membersPw" id="membersPw" class="form-control"
+					placeholder="비밀번호" type="password">
 			</div>
-			<input name="membersName" id="membersName"
-				class="form-control" placeholder="이름" type="text">
+			<div class="eheck_font" id="pw_check"></div>
 		</div>
-		<div class="eheck_font" id="name_check"></div>
-	</div>
-	
-	<div id="wrap"
-		style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
-		<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
-			id="btnFoldWrap"
-			style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
-			onclick="foldDaumPostcode()" alt="접기 버튼">
-	</div>
 
-	<div class="form-group">
-		<div class="input-group input-group-alternative mb-3">
-			<div class="input-group-prepend">
-				<span class="input-group-text"></span>
+		<div class="form-group">
+			<div id="pw2v" class ="input-group input-group-alternative mb-3">
+				<input name="membersPw2" id="membersPw2" class="form-control"
+					placeholder="비밀번호 확인" type="password">
 			</div>
-			<input name="membersTel" id="membersTel" class="form-control"
-				placeholder="연락처('-'없이 번호만 입력해주세요)" type="text">
-
+			<div class="eheck_font" id="pw2_check"></div>
 		</div>
-		<div class="eheck_font" id="phone_check"></div>
-	</div>
 
-	<div class="form-group">
-		<div class="input-group input-group-alternative mb-3">
-			<div class="input-group-prepend">
-				<span class="input-group-text"></span>
+		<div class="form-group">
+			<div id="namev" class ="input-group input-group-alternative mb-3">
+				<input name="membersName" id="membersName" class="form-control"
+					placeholder="이름" type="text">
 			</div>
-			<input name="membersMail" id="membersMail"
-				class="form-control" placeholder="이메일" type="email">
-
+			<div class="eheck_font" id="name_check"></div>
 		</div>
-		<div class="eheck_font" id="email_check"></div>
-	</div>
 
-	<div class="form-group">
-		<div style="display: inline;"
-			class="input-group input-group-alternative mb-3">
-			<input class="form-control"
-				style="width: 40%; display: inline-block" placeholder="　우편번호"
-				name="sample3_postcode" id="sample3_postcode" type="text"
-				readonly="readonly"> &nbsp;&nbsp;
-			<button style="padding: 9px" type="button"
-				class="btn btn-secondary"
-				onclick="sample3_execDaumPostcode()">
-				<i class="fa fa-search"></i> 우편번호 찾기
-			</button>
+		<div id="wrap"
+			style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
+			<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
+				id="btnFoldWrap"
+				style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
+				onclick="foldDaumPostcode()" alt="접기 버튼">
 		</div>
-	</div>
-	
-	<div class="form-group">
-		<input class="form-control" placeholder="　주소" id="sample3_Addr"
-			name="sample3_Addr" type="text"  />
-	</div>
 
+		<div class="form-group">
+			<div id="telv" class ="input-group input-group-alternative mb-3">
+				<input name="membersTel" id="membersTel" class="form-control"
+					placeholder="연락처('-'없이 번호만 입력해주세요)" type="text">
 
-	<div class="form-group">
-		<div class="input-group input-group-alternative mb-3">
-			<input style="width: 30%;" class="form-control"
-										placeholder="　상세주소" name="sample3_detailAddress"
-										id="sample3_detailAddress" type="text" /> <input
-										class="form-control" type="text" id="sample3_extraAddress"
-										placeholder="　참고항목" readonly="readonly" />
-
+			</div>
+			<div class="eheck_font" id="phone_check"></div>
 		</div>
-	</div>
-	
-	<div class="eheck_font" id="addr_check"></div>
-			
-												
-	<div class="form-group">
-	
+
+		<div class="form-group">
+			<div id="mailv" class ="input-group input-group-alternative mb-3">
+				<input name="membersMail" id="membersMail" class="form-control"
+					placeholder="이메일" type="email">
+
+			</div>
+			<div class="eheck_font" id="email_check"></div>
+		</div>
+
+		<div class="form-group">
+			<div style="display: inline;" class ="input-group input-group-alternative mb-3">
+				<input class="form-control"
+					style="width: 40%; display: inline-block" placeholder="　우편번호"
+					name="sample3_postcode" id="sample3_postcode" type="text"
+					readonly="readonly" > &nbsp;&nbsp;
+				<button style="padding: 9px" type="button" class="btn btn-secondary"
+					onclick="sample3_execDaumPostcode()">
+					<i class="fa fa-search"></i> 우편번호 찾기
+				</button>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<input class="form-control" placeholder="　주소" id="sample3_Addr"
+				name="sample3_Addr" type="text" readonly="readonly" />
+		</div>
+
+
+		<div class="form-group">
+			<div id="addrv" class ="input-group input-group-alternative mb-3">
+				<input class="form-control" placeholder="　상세주소"
+					name="sample3_detailAddress" id="sample3_detailAddress" type="text" />
+			</div>
+			<div class="eheck_font" id="addr_check"></div>
+		</div>
+		
+
+
+ 		<div class="filebox">
+			<input class="upload-name" value="프로필사진" disabled="disabled">
+			<label for="ex_filename">업로드</label> <input type="file"
+				id="ex_filename" name="membersImage4" class="upload-hidden"
+				onchange="fileCheck(this)" accept="image/jpeg, image/png"><br>jpg,jpeg,png 파일만 가능합니다.
+		</div> 
+
+
+		 
+<!-- 	<div class="form-group">
 			<input type="file" name="membersImage4"  onchange="fileCheck(this)" accept="image/jpeg, image/png">
 			 jpg,jpeg,png 파일만 가능
-	</div>
-		
-		
-			<div class="text-center">
-				<button type="submit" class="btn btn-primary mt-4"
-					id="usercheck">회원가입</button>
-			</div>
-				<br><br>
-			<input type="hidden" id="membersAddr" name="membersAddr" />
-	</form>	
-	</div>
-				</div>
-	
-		
-	  
+	</div>  -->
 
-
- 
+		<div class="text-center">
+			<button type="submit" class="btn btn-primary mt-4" id="usercheck">회원가입</button>
+		</div>
+		<br>
+		<br> <input type="hidden" id="membersAddr" name="membersAddr" />
+	</form>
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-<script
-	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
+	<script
+		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
 // 우편번호 찾기 찾기 화면을 넣을 element
 var element_wrap = document.getElementById('wrap');
 
@@ -287,15 +284,15 @@ function sample3_execDaumPostcode() {
 									: data.buildingName);
 						}
 						// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-						if (extraAddr !== '') {
-							extraAddr = ' (' + extraAddr + ')';
+				//		if (extraAddr !== '') {
+				//			extraAddr = ' (' + extraAddr + ')';
 						}
 						// 조합된 참고항목을 해당 필드에 넣는다.
-						document.getElementById("sample3_extraAddress").value = extraAddr;
+				//		document.getElementById("sample3_extraAddress").value = extraAddr;
 
-					} else {
-						document.getElementById("sample3_extraAddress").value = '';
-					}
+			//		} else {
+				//		document.getElementById("sample3_extraAddress").value = '';
+				//	}
 
 					// 우편번호와 주소 정보를 해당 필드에 넣는다.
 					document.getElementById('sample3_postcode').value = data.zonecode;
@@ -339,75 +336,50 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a
 var phoneJ = /[0-9]/;
 
 
-			//var address = $('#sample3_detailAddress');
+//var address = $('#sample3_detailAddress');
 
-			//아이디 중복확인
-			$("#membersId")
-					.blur(
-							function() {
-								if ($('#membersId').val() == '') {
-									$('#id_check').text(
-											'아이디를 입력하세요.');
+//아이디 중복확인
+$("#membersId").blur(function() {
+			if ($('#membersId').val() == '') {
+				$('#id_check').text(
+						'아이디를 입력하세요.');
 
-								} else if (idJ.test($('#membersId')
-										.val()) != true) {
-									$('#id_check')
-											.text(
-													'4~12자의 영문, 숫자만 사용 가능합니다.');
-
-								} else {
-
-									var membersId = $('#membersId')
-											.val();
-									$
-											.ajax({
-												// async : true,
-												type : 'POST',
-												data : {
-													membersId : membersId
-												},
-												url : 'idsearch',
-												dataType : 'json',
-												// contentType: "application/json; charset=UTF-8",
-												success : function(
-														data) {
-													if (data.membersId != null) {
-														$(
-																'#id_check')
-																.text(
-																				'중복된 아이디 입니다.');
-																$(
-																		"#usercheck")
-																		.attr(
-																				"disabled",
-																				true);
-															} else {
-
-																$(
-																		'#id_check')
-																		.text(
-																				'사용가능한 아이디 입니다.');
-																$(
-																		"#usercheck")
-																		.attr(
-																				"disabled",
-																				false);
-																$(
-																		'#id_check')
-																		.css(
-																				'color',
-																				'blue');
-
-															}
-														}
-													});//ajax/// 
-										}//else if          
-									});//blur 
+			} else if (idJ.test($('#membersId')
+					.val()) != true) {
+				$('#id_check')
+						.text('4~12자의 영문, 숫자만 사용 가능합니다.');
+			} else {
+				var membersId = $('#membersId')
+						.val();
+				$.ajax({
+				// async : true,
+				type : 'POST',
+				data : {
+					membersId : membersId
+				},
+				url : 'idsearch',
+				dataType : 'json',
+				// contentType: "application/json; charset=UTF-8",
+				success : function(data) {
+					if (data.membersId != null) {
+						$('#id_check').text('중복된 아이디 입니다.');
+								$("#id_check").css('color','crimson');
+								$("#usercheck").attr("disabled",true);
+								$('#idv').attr('class','form-group has-danger');
+							} else {
+								$('#id_check').text('');
+								$("#usercheck").attr("disabled",false);
+								$('#idv').attr('class','form-group has-success');
+								
+								
+									}
+								}
+								});//ajax/// 
+					}//else if          
+				});//blur 
 
 					$('form')
-							.on(
-									'submit',
-						function() {
+							.on('submit',function() {
 							var inval_Arr = new Array(6)
 									.fill(false);
 							if (idJ.test($('#membersId').val())) {
@@ -417,8 +389,6 @@ var phoneJ = /[0-9]/;
 								alert('아이디를 확인하세요.');
 								return false;
 							}
-							
-
 							
 							 document.getElementById('membersAddr').value += ' '
 							+ document.getElementById('sample3_detailAddress').value; 
@@ -492,29 +462,29 @@ var phoneJ = /[0-9]/;
 						});
 
 		$('#membersId')
-				.blur(
-						function() {
+				.blur(function() {
 							if (idJ.test($('#membersId').val())) {
 								console.log('true');
 								$('#id_check').text('');
 							} else {
 								console.log('false');
 								$('#id_check')
-										.text(
-												'5~12자의 영문 소문자, 숫자, 특수문자만 사용 가능합니다.');
+										.text('5~12자의 영문 소문자, 숫자, 특수문자만 사용 가능합니다.');
 								$('#id_check').css('color',
 										'crimson');
-
+								$('#idv').attr('class','form-group has-danger');
+									
 							}
 						});
 					$('#membersPw').blur(function() {
 						if (pwJ.test($('#membersPw').val())) {
 							console.log('true');
 							$('#pw_check').text('');
+							$('#pw1v').attr('class','form-group has-success');
 						} else {
 							console.log('false');
 							$('#pw_check').text('5~14자로 입력해주세요.');
-
+							$('#pw1v').attr('class','form-group has-danger');
 						}
 					});
 
@@ -522,9 +492,11 @@ var phoneJ = /[0-9]/;
 					$('#membersPw2').blur(function() {
 						if ($('#membersPw').val() != $(this).val()) {
 							$('#pw2_check').text('비밀번호가 일치하지 않습니다.');
+							$('#pw2v').attr('class','form-group has-danger');
 
 						} else {
 							$('#pw2_check').text('');
+							$('#pw2v').attr('class','form-group has-success');
 						}
 					});
 
@@ -533,16 +505,19 @@ var phoneJ = /[0-9]/;
 						if (nameJ.test($(this).val())) {
 							console.log(nameJ.test($(this).val()));
 							$("#name_check").text('');
+							$('#namev').attr('class','form-group has-success');
 						} else {
 							$('#name_check').text('이름을 확인해주세요');
-
+							$('#namev').attr('class','form-group has-danger');
 						}
 					});
 					$("#membersMail").blur(function() {
 						if (mailJ.test($(this).val())) {
 							$("#email_check").text('');
+							$('#mailv').attr('class','form-group has-success');
 						} else {
 							$('#email_check').text('이메일 양식을 확인해주세요.');
+							$('#mailv').attr('class','form-group has-danger');
 						}
 					});
 
@@ -551,16 +526,21 @@ var phoneJ = /[0-9]/;
 						if (phoneJ.test($(this).val())) {
 							console.log(nameJ.test($(this).val()));
 							$("#phone_check").text('');
+							$('#telv').attr('class','form-group has-success');
 						} else {
 							$('#phone_check').text('숫자로 입력해주세요.');
+							$('#telv').attr('class','form-group has-danger');
 						}
 					});
 					// 상세주소
 					$('#sample3_detailAddress').blur(function() {
-						if ($('#sample3_detailAddress').val() == '') 
+						if ($('#sample3_detailAddress').val() == '') {
 							$('#addr_check').text('상세주소를 입력해주세요.');
+							$('#addrv').attr('class','form-group has-danger');
+						}
 						else{
 							$("#addr_check").text('');
+							$('#addrv').attr('class','form-group has-success');
 						}
 					});
 					
@@ -579,7 +559,25 @@ var phoneJ = /[0-9]/;
 					        node = parentObj.replaceChild(obj.cloneNode(true),obj);
 					        return false;
 					    }
-					}
+					} 
+					
+					
+ 					$(document).ready(function(){
+						var fileTarget = $('.filebox .upload-hidden');
+						fileTarget.on('change', function(){// 값이 변경되면 
+							if(window.FileReader){ // modern browser 
+								var filename = $(this)[0].files[0].name; 
+							}
+							else { // old IE 
+								var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
+								} 
+						// 추출한 파일명 삽입 
+						$(this).siblings('.upload-name').val(filename);
+						});
+						}); 
+
+					
+						 
 				
 </script>
 </body>

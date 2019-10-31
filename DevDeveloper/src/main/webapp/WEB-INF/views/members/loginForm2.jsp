@@ -34,7 +34,7 @@
 <body id="loginform">
 
 	<form action="login" method="POST" class="loginform">
-		<svg id="ryan" viewBox="0 0 120 120"
+		<svg class="loginform" id="ryan" viewBox="0 0 120 120"
 			xmlns="http://www.w3.org/2000/svg">
             <path d="M0,150 C0,65 120,65 120,150" fill="#e0a243"
 				stroke="#000" stroke-width="2.5" />
@@ -98,6 +98,9 @@
 		src="${pageContext.request.contextPath}/resources/assets/js/loginscript.js"></script>
 <script
 		src="${pageContext.request.contextPath}/resources/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>	
+
+
+
 
 </body>
 

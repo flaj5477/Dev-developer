@@ -11,7 +11,7 @@ form.loginform {
     flex-direction: column;
 }
 
-svg {
+svg.loginform {
     width: 70%;
     border-radius: 50%;
     background: #fff;

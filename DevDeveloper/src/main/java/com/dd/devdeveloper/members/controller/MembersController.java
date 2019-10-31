@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dd.devdeveloper.members.MembersVO;
 import com.dd.devdeveloper.members.service.MembersService;
+import com.dd.devdeveloper.members.service.MembersSha256;
 import com.dd.devdeveloper.wiki.WikiVO;
 
 @Controller
@@ -86,6 +87,17 @@ public class MembersController {
        public String signupPOST(MembersVO vo, HttpSession session,
 				MultipartHttpServletRequest multipart,
 				HttpServletRequest request) {
+    	   
+    	   
+    	   System.out.println("등록 비밀번호 : " + vo.getMembersPw());
+    //암호화
+    	   String encryPassword = MembersSha256.encrypt(vo.getMembersPw());
+    	   vo.setMembersPw(encryPassword);
+    	   System.out.println("암호화작업후 : " + vo.getMembersPw());
+    	   
+   	   
+    	   
+    	   
     		// 첨부파일 업로드하고 파일명 조회
    		MultipartFile multipartFile = multipart.getFile("membersImage4"); //multipartlist getfiles
    		 
@@ -127,19 +139,12 @@ public class MembersController {
        
      //로그인처리
    	@RequestMapping(value ="/login" , method = RequestMethod.POST)
-   	public ModelAndView loginCheck(@ModelAttribute MembersVO vo,HttpSession session) {
+   	public int loginCheck(@ModelAttribute MembersVO vo,HttpSession session) {
    		
-   		boolean result =  membersService.loginCheck(vo, session);
-   		ModelAndView mav = new ModelAndView();
    		
-   		mav.setViewName("projects/projectsList");
+   		int result = membersService.loginCheck(vo, session);
    		
-   		if(result) {
-   			mav.addObject("msg","성공");
-   		}else {
-   			mav.addObject("msg","실패");
-   		}	
-   		return mav;
+   		return result;
    	}
    	
   //로그아웃 처리
@@ -148,7 +153,7 @@ public class MembersController {
   		
   		membersService.logout(session);
   		ModelAndView mav = new ModelAndView();
-  		mav.setViewName("projects/projectsList");
+  		mav.setViewName("members/loginForm");
   		mav.addObject("msg", "logout");
   		
   		return mav;

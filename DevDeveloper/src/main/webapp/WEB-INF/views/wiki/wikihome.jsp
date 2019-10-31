@@ -55,7 +55,7 @@
 				<div class="col">
 					<h3 class="mb-0">목록</h3>
 				</div>
-				<div class="col-3">
+				<div class="col">
 					<form name="searchfrm">
 						<div class="input-group">
 							<select name="select">
@@ -76,11 +76,10 @@
 					</form>
 				</div>
 				
-				<div class="col-3 text-right">
-					
-				
+				<span class="col-3 text-right">
 					<a href="insertWikiForm" class="btn btn-sm btn-primary">문서등록</a>
-				</div>
+				</span>
+				
 			</div>
 		</div>
 		<div class="table-responsive">

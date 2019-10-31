@@ -11,7 +11,7 @@
   display: none;
 }
 .transEdit{
-  padding: 10px 10px;
+  padding: 5px 5px;
   margin: 0px;
   background-color: white;
   border: 1px solid;
@@ -27,6 +27,7 @@
 .row{
   margin-right: 0px;
   margin-left: 0px;
+  padding: 5px;
 }
 
 .transEdit .row > *:not(:first-child) {
@@ -43,7 +44,7 @@
 }
 
 .translate {
-  border-top: 1px solid #172b4d;
+  border-top: 1px solid #848484;
   padding: 30px 30px;
 }
 
@@ -122,7 +123,7 @@
 	
 	function hover(){
 		$('.translate').hover(function() {
-			$(this).css("background-color", "red");
+			$(this).css("background-color", "#f4f5f7");
 		}, function(){
 			$(this).css("background-color", "transparent ");
 		});
@@ -174,8 +175,14 @@
 							</div>
 							<div class="row">
 								${entry.value }
+							</div>
+							<div class="row">	
 								<textarea class="form-control form-control-alternative2"
-									rows="3" placeholder="번역이필요합니다"></textarea>
+								id="transContents" rows="3" placeholder="번역이필요합니다"></textarea>
+							</div>
+							<div class="row">
+								<a href='javascript:void(0);' onclick="함수();" class="btn btn-sm btn-primary">번역등록</a>
+								<a href='javascript:void(0);' onclick="함수();" class="btn btn-sm btn-primary">구글번역</a>
 							</div>
 						</div>
 						<div class="col">

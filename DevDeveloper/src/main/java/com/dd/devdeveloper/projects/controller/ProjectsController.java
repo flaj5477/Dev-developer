@@ -1,5 +1,6 @@
 package com.dd.devdeveloper.projects.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,10 @@ public class ProjectsController {
 		return "projects/projectsList";
 	}
 	
-	@RequestMapping("/getProjects")
-	public String getProjects(ProjectsVO vo, Model model) {
+	@RequestMapping("/getProjects")	//프로젝트 공고 상세
+	public String getProjects(ProjectsVO vo, Model model, HttpSession session, HttpServletRequest request) {
 		model.addAttribute("project", projectsService.getProjects(vo));
+		session.setAttribute("projNo", request.getAttribute("projNo"));	//세션에 projNo 추가
 		return "projects/projects";
 	}
 	

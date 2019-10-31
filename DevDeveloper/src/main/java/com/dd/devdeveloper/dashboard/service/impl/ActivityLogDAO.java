@@ -15,10 +15,14 @@ public class ActivityLogDAO {
 	
 	@Autowired SqlSessionTemplate mybatis; 
 
-	public void getActivityLogList(DashboardVO vo) { //활동로그 select
+	//활동로그 select
+	public void getActivityLogList(DashboardVO vo) { 
 		// TODO Auto-generated method stub
-		
 		mybatis.selectList("ActivityLogDAO.getActivityLogList", vo); //리턴을 안해도 vo에 자동으로 들어간다
+	}
+	
+	public void getProjApplyStatus(DashboardVO vo) {
+		//mybatis.select( , handler );
 	}
 
 }

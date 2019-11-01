@@ -83,21 +83,28 @@
 	/*
 		곽동우
 		20191030
-		번역 하기(문장클릭이벤트 번역append)
+		번역 하기(문장클릭이벤트 번역 open)
 	*/
 	function startTrans(){
 		$('.translate').on('click', function(){
 			var id = $(this).attr("id");
+			var manualNo = ${wiki.manualNo};
+			
 			
 			transClose();
 
 			
 			$(this).attr("class", "translate hide");	//클릭한 기존 문장 숨김
 			
-			
 			//translate 다음 클래스 transEdit hide 를 transEdit 로만듬
 			$(this).nextAll().filter(".transEdit.hide").first().attr("class", "transEdit open");	//편집창 열어줌gfdgf
 			//$(this+'transEdit hide').first().attr("class", "transEdit");
+			
+			
+			var manualLine = $(".transEdit.open .badge").attr('id');
+			console.log(manualNo);
+			console.log(manualLine);
+			getWikiTransLine(manualLine, manualNo);
 			
 		});
 	}
@@ -172,7 +179,7 @@
 						//userList();
 						alert("등록됨");
 						transArea.val('');
-						getWikiTransLine(manualLine);
+						getWikiTransLine(manualLine, manualNo);	//메뉴얼번호 메뉴얼라인수 넘겨줌
 					}
 				},
 				error:function(xht, status, message){
@@ -188,16 +195,21 @@
 		20191101
 		위키번역 목록 조회 요청
 	*/
-	function getWikiTransLine(manualLine){
+	function getWikiTransLine(manualLine, manualNo){
 		
 		$.ajax({
 			url:'getWikiTransLine',
-			type:'GET', 	//요청방식
+			type:'POST', 	//요청방식
 			dataType:'json',	//결과데이터타입
+			data: JSON.stringify({manualLine: manualLine,
+								  manualNo: manualNo}),
+			contentType: 'application/json',
 			error:function(xhr, status, msg){
 				alert("상태값 : "+status + " Http에러메세지 :"+msg);
 			},
-			success:wikiTransListResult
+			success:function(data){
+				wikiTransLineResult(data, manualLine);
+			}
 		});
 	}
 	
@@ -207,17 +219,18 @@
 		20191101
 		위키번역 목록 조회 응답
 	*/
-	function wikiTransLineResult(data){	 //data서버에서넘겨받은 json
-		//$('tbody').empty();
+	function wikiTransLineResult(data, manualLine){	 //data서버에서넘겨받은 json
+		$('#othertrans_'+manualLine).empty();
 		$.each(data,function(idx,item){		//데이터안의 건수만큼 each돌아감
-			$('#othertrans_${entry.key}').append($('<td>').html(item.id))
+			/* $('<tr>').append($('<td>').html(item.id))
 					 .append($('<td>').html(item.name))
 					 .append($('<td>').html(item.password))
 					 .append($('<td>').html(item.role))
 					 .append($('<td>').html('<button id=\'btnSelect\'>조회</button>'))
 					 .append($('<td>').html('<button id=\'btnDelete\'>삭제</button>'))
 					 .append($('<input type=\'hidden\' id=\'hidden_userId\'>').val(item.id))
-					 .appendTo('tbody');
+					 .appendTo('tbody'); */
+			   $('<div>').attr('class','row').html(item.manualAfter).appendTo('#othertrans_'+manualLine);
 		});//each
 	}//wikiTransLineResult
 
@@ -286,7 +299,7 @@
 								</span>
 							</div>
 							<div class="row" id="othertrans_${entry.key}">
-								<div class="col">
+								<div class="row">
 									다른사람 번역한거 표시
 								</div>
 							</div>

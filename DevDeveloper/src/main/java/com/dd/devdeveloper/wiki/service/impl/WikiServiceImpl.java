@@ -190,9 +190,9 @@ public class WikiServiceImpl implements WikiService {
 		위키번역 목록(라인) 조회 요청
 	*/
 	@Override
-	public List<WikiTransVO> getWikiTransLine(WikiTransVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Map<String, Object>> getWikiTransLine(WikiTransVO vo) {
+		
+		return wikiDAO.getWikiTransLine(vo);
 	}
 
 	

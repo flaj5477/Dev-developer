@@ -35,5 +35,5 @@ public interface WikiService {
 	public Map<Integer, Object> insertWikiTrans(WikiTransVO vo);
 
 	//위키번역(라인) 가져오기
-	public List<WikiTransVO> getWikiTransLine(WikiTransVO vo); 
+	public List<Map<String, Object>> getWikiTransLine(WikiTransVO vo); 
 }

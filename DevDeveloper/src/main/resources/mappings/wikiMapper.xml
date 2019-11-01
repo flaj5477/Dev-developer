@@ -158,5 +158,41 @@
 								VALUES (#{transNo}, #{manualLine}, #{manualBefore}, #{manualAfter}, SYSDATE, #{manualNo}, #{membersNo})
 		<!-- values( #{manualNo}, #{manualContentsPath} ,#{manualOriUrl} ,#{manualTags} ,#{manualTitle} ) -->
 	</insert>
+	
+	
+	<!-- 
+		곽동우
+		20191101
+		위키번역(라인별) 들고오기
+	 -->
+	 <select id="getWikiTransLine" parameterType="wikiTrans" resultType="Map">
+		<!-- SELECT b.* FROM ( SELECT rownum no, a.* FROM ( -->
+				SELECT 	TRANS_NO			as		"transNo",
+						MANUAL_LINE			as		"manualLine",
+						MANUAL_BEFORE		as		"manualBefore",
+						MANUAL_AFTER		as		"manualAfter",
+						TO_CHAR(TRANS_DATE,'YYYY-MM-DD')	as 		"translDate",
+						MANUAL_NO			as 		"manualNo",
+						MEMBERS_NO			as 		"membersNo"
+						
+				FROM wiki_guide_trans
+				<where>
+						<if test="manualLine != null and manualLine != '' ">
+								AND MANUAL_LINE = #{manualLine}
+								AND MANUAL_NO = #{manualNo}
+						</if>
+				</where>
+				
+				<choose>	
+					<when test="orderby != null and orderby != '' ">	<!--  '' 체크해줘야됨 -->
+						ORDER BY ${orderby} DESC
+					</when>
+					<otherwise>
+						ORDER BY MANUAL_LINE DESC
+					</otherwise>
+				</choose>
+				<!-- 
+		) a ) b WHERE no BETWEEN #{first} AND #{last} -->
+	</select>
 	 
 </mapper>

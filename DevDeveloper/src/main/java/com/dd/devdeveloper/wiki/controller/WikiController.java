@@ -129,6 +129,8 @@ public class WikiController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("result", true);
 		
+		System.out.println("dkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk번역등록");
+		
 		return map;
 	}
 	
@@ -137,10 +139,11 @@ public class WikiController {
 	 * 2019-11-01
 	 * 위키번역폼에서- 위키라인 번역리스트가져오기
 	 */
-	@RequestMapping(value="/getWikiTransLine", method=RequestMethod.GET)
+	@RequestMapping(value="/getWikiTransLine", method = RequestMethod.POST, consumes="application/json")
 	@ResponseBody
-	public List<WikiTransVO> getWikiTransLine(WikiTransVO tVo, Model model) {
+	public List<Map<String, Object>> getWikiTransLine(@RequestBody WikiTransVO tVo, Model model) {
 		//model.addAttribute("user", userService.getUser(vo));
+		System.out.println(tVo.getManualLine()+"와ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ번역리스트");
 		return wikiService.getWikiTransLine(tVo);
 	}
 }

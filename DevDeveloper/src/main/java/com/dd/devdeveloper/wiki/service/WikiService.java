@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.dd.devdeveloper.common.paging.Paging;
+import com.dd.devdeveloper.wiki.WikiTransVO;
 import com.dd.devdeveloper.wiki.WikiVO;
 
 public interface WikiService {

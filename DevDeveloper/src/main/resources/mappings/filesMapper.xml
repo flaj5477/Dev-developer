@@ -15,7 +15,9 @@
 		files_group_no,
 		files_upload_date,
 		files_type,
-		files_size
+		files_size,
+		files_Import,
+		files_Trash
 		from files
 		where 1=1
 		<choose>

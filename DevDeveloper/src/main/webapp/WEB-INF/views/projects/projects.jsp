@@ -34,6 +34,12 @@
 					<div class="col-4 text-right">
 						<a href="./applyProjectsForm?projNo=${project.projNo }" class="btn btn-lg btn-primary">지원하기</a>
 					</div>
+					
+					<!--  임시 파일링크  -->
+					<div class="col-4 text-right">
+						<a href="./getFilesList" class="btn btn-lg btn-primary">파일이동</a>
+					</div>
+				
 				</div>
 			</div>
 			<div class="card-body">

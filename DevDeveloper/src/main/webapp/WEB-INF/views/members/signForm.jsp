@@ -84,7 +84,7 @@ form#signForm {
 	width: 320px;
 	padding: 60px 25px 80px;
 	margin: 50px auto;
-	background: #f8d348;
+	background: #A18EF4;
 	display: flex;
 	flex-direction: column;
 }

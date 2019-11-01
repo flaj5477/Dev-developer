@@ -9,7 +9,6 @@
 <meta charset="UTF-8">
 <title>SVG.js페이지</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.7.1/svg.js"></script>
 <script>
 	pageName="Dashboard";
@@ -17,7 +16,7 @@
 
 <script> <!--도트 색 표시-->
 	$(document).ready(function() {
-		var draw = SVG('drawing')
+		//var draw = SVG('drawing')
 
 		var rect1 = $('.A').attr({
 			//fill : '#196127'
@@ -47,7 +46,7 @@
 <body>
 	<!-- 출석률 도트 -->
 	<div id="drawing">
-	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="620" height="500">
+	<svg svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="620" height="500">
 		<c:forEach var="activityLog" items="${activityLogList}" varStatus="status">
 			<c:if test="${status.index % 7 == 0 }">		<!-- 일요일이면 g태그 열기 -->
 				<g transform="translate(<fmt:formatNumber value="${status.index/7*12}" pattern="#" />, 0)">

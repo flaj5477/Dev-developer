@@ -25,6 +25,7 @@ public class FilesVO {
 	
 	private int first;	//페이징
 	private int last;	//페이징
+	private String select; // 검색 분류 선택 (제목, 작성자)
 	private String searchVal; //검색
 	
 	

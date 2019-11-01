@@ -15,12 +15,25 @@ import com.dd.devdeveloper.members.MembersVO;
 @Service
 public class DashboardServiceImpl implements DashboardService{
 	
-	@Autowired ActivityLogDAO activityLogDAO;
+	@Autowired DashboardDAO dashboardDAO;
 
-	@Override
-	public void getActivityLogList(DashboardVO vo) { //활동로그 가져오기
+	@Override	//활동로그 가져오기
+	public void getActivityLogList(DashboardVO vo) { 
 		// TODO Auto-generated method stub
-		activityLogDAO.getActivityLogList(vo);
+		dashboardDAO.getActivityLogList(vo);
 	}
+
+	@Override	//프로젝트 지원 상태 가져오기
+	public DashboardVO getProjApplyStatus(DashboardVO vo) {
+		return dashboardDAO.getProjApplyStatus(vo);
+	}
+
+	@Override	//프로젝트 지원자 리스트 가져오기
+	public void getProjApplicantsList(DashboardVO vo) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 
 }

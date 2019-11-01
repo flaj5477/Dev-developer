@@ -28,5 +28,6 @@ public interface WikiService {
 	public void deleteWiki(WikiVO vo);
 	
 	//위키번역
-	public List<Map<Integer, Object>> getTransWiki(WikiVO vo); 
+	public Map<Integer, Object> getTransWikiForm(WikiVO vo);
+	
 }

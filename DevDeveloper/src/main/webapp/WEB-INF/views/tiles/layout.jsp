@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -175,15 +175,28 @@
           </div>
         </form>
         <!-- User -->
+        <c:choose>
+        	<c:when test="${empty sessionScope.members.membersId}">
+				<a data-toggle="modal" href="signForm" data-target="#modal-testNew"
+				role="button"> <span
+				class="btn btn-secondary" id="btn-testNew">회원가입</span>
+				</a>
+				&nbsp;&nbsp;
+				<a data-toggle="modal" href="login" data-target="#modal-testNew2"
+				role="button"> <span
+				class="btn btn-secondary" id="btn-testNew">로그인</span>
+				</a>
+        	</c:when>
+        	<c:otherwise>
         <ul class="navbar-nav align-items-center d-none d-md-flex">
           <li class="nav-item dropdown">
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="${pageContext.request.contextPath}/resources/assets/img/theme/team-4-800x800.jpg">
+                  <img alt="Image placeholder" src="${pageContext.request.contextPath}/images/profile/${sessionScope.members.membersImage}">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
+                  <span class="mb-0 text-sm  font-weight-bold">${sessionScope.members.membersId}</span>
                 </div>
               </div>
             </a>
@@ -191,19 +204,19 @@
               <div class=" dropdown-header noti-title">
                 <h6 class="text-overflow m-0">Welcome!</h6>
               </div>
-              <a href="${pageContext.request.contextPath}/examples/profile.html" class="dropdown-item">
+              <a href="#" class="dropdown-item">
                 <i class="ni ni-single-02"></i>
                 <span>My profile</span>
               </a>
-              <a href="${pageContext.request.contextPath}/examples/profile.html" class="dropdown-item">
+              <a href="#" class="dropdown-item">
                 <i class="ni ni-settings-gear-65"></i>
                 <span>Settings</span>
               </a>
-              <a href="${pageContext.request.contextPath}/examples/profile.html" class="dropdown-item">
+              <a href="#" class="dropdown-item">
                 <i class="ni ni-calendar-grid-58"></i>
                 <span>Activity</span>
               </a>
-              <a href="${pageContext.request.contextPath}/examples/profile.html" class="dropdown-item">
+              <a href="#" class="dropdown-item">
                 <i class="ni ni-support-16"></i>
                 <span>Support</span>
               </a>
@@ -215,6 +228,8 @@
             </div>
           </li>
         </ul>
+        </c:otherwise>
+        </c:choose>
       </div>
     </nav>
     <!-- End Navbar -->
@@ -225,6 +240,21 @@
     
     </div>
   </div>
+  
+  
+  	<div id="modal-testNew" class="modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="테스트정보 등록" aria-describedby="테스트 모달">
+		<div class="modal-dialog" >
+			<div class="modal-content" style="background: #3d516b; width:550px;"></div>
+		</div>
+	</div>
+	
+  	<div id="modal-testNew2" class="modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="테스트정보 등록" aria-describedby="테스트 모달">
+		<div class="modal-dialog" style="width: 3000px; height: 1700px">
+			<div class="modal-content" style="background: #3d516b; width:70%;"></div>
+		</div>
+	</div>
   <!--   Core   -->
   <script src="${pageContext.request.contextPath}/resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -234,13 +264,25 @@
   <!--   Argon JS   -->
   <script src="${pageContext.request.contextPath}/resources/assets/js/argon-dashboard.min.js?v=1.1.0"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
- 
+  	
   <script>
     window.TrackJS &&
       TrackJS.install({
         token: "ee6fab19c5a04ac1a32a645abde4613a",
         application: "argon-dashboard-free"
       });
+  </script>
+  <script>
+  	
+  	$('#modal-testNew').on('show.bs.modal', function (e) {
+	    $(this).find('.modal-content').load("signForm");
+	});
+	
+	
+	
+	$('#modal-testNew2').on('show.bs.modal', function (e) {
+	    $(this).find('.modal-content').load("login");
+	});
   </script>
 </body>
 </html>

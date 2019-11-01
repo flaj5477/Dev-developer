@@ -1,5 +1,7 @@
 package com.dd.devdeveloper.members.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
@@ -8,13 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dd.devdeveloper.members.MembersVO;
@@ -25,21 +31,20 @@ import com.dd.devdeveloper.wiki.WikiVO;
 public class MembersController {
 
 	 @Autowired MembersService membersService;
+	 
+	 
+	 @RequestMapping(value ="/loginForm" , method = RequestMethod.GET)
+			public String loginform1() {
+				return "/notiles/members/loginForm";
+			}   
 	
-	 @RequestMapping("/loginForm")
-		public String loginform() {
-			return "members/loginForm";
-		}
 		
 		@RequestMapping("/signForm")
 		public String loginformtest() {
-			return "members/signForm";
+			return "/notiles/members/signForm";
 		}
 		
-		@RequestMapping("/signUp")
-		public String signUp() {
-			return "members/signUp";
-	}
+
 		@RequestMapping("/loginSuccess")
 		public String test() {
 			return "members/test";
@@ -54,30 +59,80 @@ public class MembersController {
 			else
 				return new MembersVO();
 		}
+		
+		
+		@RequestMapping(value="/testForm", method=RequestMethod.GET)
+		public String testForm(HttpServletRequest request, @RequestParam Map<String, Object> param, Model model) throws Exception {
+
+		    return "/notiles/members/testForm";
+		} 
+
+
+ 
 	
-	 //SignUp GET
-	/*
-	 * @RequestMapping(value="/signup", method=RequestMethod.GET) 
-	 * public void signupGET() {
-	 * 	 }
-	 */
-   //SignUp PSOT
+	 //회원가입 폼
+	
+	  @RequestMapping(value="/signup", method=RequestMethod.GET) 
+	  public String signupGET() {
+		  return "/notiles/members/signForm";
+	 	 }
+	 
+  
+		
+		
+		
+	//회원가입
        @RequestMapping(value="/signup", method=RequestMethod.POST)
-       public String signupPOST(MembersVO vo) {
-       
-           membersService.insertMembers(vo);
-           
-           return "members/loginTest";
-       }
+       public String signupPOST(MembersVO vo, HttpSession session,
+				MultipartHttpServletRequest multipart,
+				HttpServletRequest request) {
+    		// 첨부파일 업로드하고 파일명 조회
+   		MultipartFile multipartFile = multipart.getFile("membersImage4"); //multipartlist getfiles
+   		 
+   		if (multipartFile != null && multipartFile.getSize() > 0) {
+   			// 파일명
+   			//String fileName = multipartFile.getOriginalFilename();
+   			//int dot = fileName.lastIndexOf(".");
+   			//String fileName1 = fileName.substring(0, dot); 
+   			String dot = ".";
+   			String fileName1 = FilenameUtils.getBaseName(multipartFile.getOriginalFilename());
+   			String fileName2 = FilenameUtils.getExtension(multipartFile.getOriginalFilename());
+   			// 업로드 폴더로 파일 이동
+   			String path = request.getSession().getServletContext().
+   					getRealPath("/images/profile/");
+   					System.out.println("============="+path);
+   					
+   				if(new File(path + fileName1+dot+fileName2).exists()) {
+   					fileName1 = fileName1 + "_" + System.currentTimeMillis();
+   				}
+   			
+   			try {
+   				//파일 중복되면 rename
+   				
+   				multipartFile.transferTo(new File(path + fileName1+dot+fileName2));
+   				vo.setMembersImage(fileName1+dot+fileName2);
+   			} catch (IOException e) {
+   				e.printStackTrace();
+   			}
+   		}
+   		membersService.insertMembers(vo);
+   		return "redirect:wikihome";
+   	}
+          
+     //로그인폼 
+       @RequestMapping(value ="/login" , method = RequestMethod.GET)
+		public String loginform() {
+			return "/notiles/members/loginForm2";
+		}      
        
      //로그인처리
-   	@RequestMapping(value="/loginCheck")
+   	@RequestMapping(value ="/login" , method = RequestMethod.POST)
    	public ModelAndView loginCheck(@ModelAttribute MembersVO vo,HttpSession session) {
    		
    		boolean result =  membersService.loginCheck(vo, session);
    		ModelAndView mav = new ModelAndView();
    		
-   		mav.setViewName("members/loginForm");
+   		mav.setViewName("projects/projectsList");
    		
    		if(result) {
    			mav.addObject("msg","성공");
@@ -93,7 +148,7 @@ public class MembersController {
   		
   		membersService.logout(session);
   		ModelAndView mav = new ModelAndView();
-  		mav.setViewName("members/loginForm");
+  		mav.setViewName("projects/projectsList");
   		mav.addObject("msg", "logout");
   		
   		return mav;

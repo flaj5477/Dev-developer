@@ -6,8 +6,6 @@
 <mapper namespace="FilesDAO">
 
 
-
-
 	<select id="getFilesList" resultType="files">
 		SELECT B.* FROM ( SELECT A.*,ROWNUM RN FROM(
 		select files_no,
@@ -33,8 +31,7 @@
 		)A)B WHERE RN between #{first} and #{last}
 	</select>
 
-	<select id="getCountFiles" parameterType="files"
-		resultType="int">
+	<select id="getCountFiles" parameterType="files" resultType="int">
 		select count(*) as "getCountFiles"
 		from files
 		<where>
@@ -44,9 +41,32 @@
 				<if test="select == 'title'">
 					AND FILES_NO LIKE '%' || #{searchVal} || '%'
 				</if>
+				<if test="select == 'usersNo'">
+					AND MANUAL_TAGS LIKE '%' || #{searchVal} || '%'
 			</if>
+		 </if>
 		</where>
 	</select>
+	
+<!-- 	<select id="getBoardListCnt" resultType="int">
+		SELECT
+		count(*) as listCnt
+		FROM
+		TBL_BOARD
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="keyword != null and keyword != '' ">
+				<if test="searchType=='title'">
+					AND TITLE like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='content'">
+					AND CONTENT like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='reg_id'">
+					AND reg_id like CONCAT('%', #{keyword}, '%')
+				</if>
+			</if>
+		</trim>
+	</select> -->
 
 
 	<select id="getFiles" resultType="files">

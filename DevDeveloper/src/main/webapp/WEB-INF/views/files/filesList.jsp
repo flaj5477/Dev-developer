@@ -39,9 +39,26 @@
           <div class="card shadow">
             <div class="card-header border-0">
               			<h2 class="mb-0" >프로젝트명</h2>
-              			 <div class="btn-card-header-group text-right">
-              			<div class="ni ni-zoom-split-in">
-          				<input class="form-control" placeholder="Find file" type="text"></input></div>
+              			 <div class="btn-card-header-group text-right">   <!-- ni ni-zoom-split-in , row align-items-center -->
+              					<div class="col-3">
+					<form name="searchfrm">
+						<div class="input-group">     
+							<select name="select">
+								<option value="title">제목
+								<option value="userNo">작성자
+							</select>
+												
+	                        <div class="input-group-prepend">
+	                          <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+	                        </div>
+                        	<input class="form-control" name="searchVal"><!--  value=${param.searchVal } getparameter? el에서 value안에값처럼표시 -->
+                      	
+							<input type="hidden" name="page" value="1">
+							<button>검색</button>
+						</div>
+					</form>
+				</div> <!--  여기 검색창 -->
+          				
           				<!--  -->
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-1-800x800.jpg" class="rounded-circle">

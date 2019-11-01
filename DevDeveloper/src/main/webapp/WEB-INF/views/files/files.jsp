@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,12 +21,15 @@
   <link href="./resources/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
   
 <script>
-	pageName="프로젝트 파일";
+	pageName="프로젝트 파일"
+	";
 </script>
 </head>
 
 <body class="">
-	<div class="container-fluid mt--7">
+	<action = "fileupload./" method="post" enctype="multipart/form-data">
+	<action = "filedownload./" method="post" enctype="multipart/form-data">
+    <div class="container-fluid mt--7">
       <!-- Table -->
       <div class="row">
         <div class="col">
@@ -39,27 +40,14 @@
           <div class="card shadow">
             <div class="card-header border-0">
               			<h2 class="mb-0" >프로젝트명</h2>
-              			 <div class="btn-card-header-group text-right">   <!-- ni ni-zoom-split-in , row align-items-center -->
-              					<div class="col-3">
-					<form name="searchfrm">
-						<div class="input-group">     
-							<select name="select">
-								<option value="title">제목
-								<option value="userNo">작성자
-							</select>
-												
-	                        <div class="input-group-prepend">
-	                          <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-	                        </div>
-                        	<input class="form-control" name="searchVal"><!--  value=${param.searchVal } getparameter? el에서 value안에값처럼표시 -->
-                      	
-							<input type="hidden" name="page" value="1">
-							<button>검색</button>
-						</div>
-					</form>
-				</div> <!--  여기 검색창 -->
-          				
-          				<!--  -->
+              	<div class="btn-card-header-group text-right">
+              			<div class="ni ni-zoom-split-in">
+          				<input class="form-control" placeholder="Find file" type="text"></input></div>
+          				<button type="button" class="btn btn-primary btn">새폴더</button>
+          				<button type="button" class="btn btn-primary btn">업로드
+                        <input type="file" name="uploadFile" /></button>
+                        <button type="button" class="btn btn-primary btn">다운로드
+                        <input type="file" name="downloadFile" /></button>
                         <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
                           <img alt="Image placeholder" src="./resources/assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
                         </a>
@@ -75,13 +63,12 @@
                       </div> <!--  href="./getFiles?filesNo=${files.filesNo}">${files.filesTitle }  -->
             </div>
             <div class="table-responsive">
-            	
+            
               <table class="table align-items-center table-flush">
-              <thead class="thead-light">
+                <thead class="thead-light">
                   <tr>
-                    <th scope="col">파일명</th>
+                    <th scope="col">파일</th>
                     <th scope="col">코멘트</th>
-                    <th scope="col">Users</th>
                     <th scope="col">업데이트 날짜</th>
                     <th scope="col">파일 크기</th>
                   </tr>
@@ -89,12 +76,8 @@
                 <tbody>
                 <c:forEach var="files" items="${list}">
                 <tr>
-                		<td>${files.filesType}<c:if test="${files.filesType=='F'}">
-                		${files.filesTitle}
-                		</c:if>
-                		<c:if test="${files.filesType=='D'}">
-                		<a href="./getFilesList?filesGroupNo=${files.filesNo}">${files.filesTitle}</a>
-                		</c:if>
+                		<td>
+                		<a href="./getFiles?filesNo=${files.filesNo}">${files.filesTitle}</a>
                      	</td>
                      	<td>
                      		${files.filesComment }
@@ -407,8 +390,29 @@
               </table>
             </div>
             <div class="card-footer py-4">
-  <my:paging paging="${paging}" jsFunc="go_page" />
-              
+              <nav aria-label="...">
+                <ul class="pagination justify-content-end mb-0">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">
+                      <i class="fas fa-angle-left"></i>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">
+                      <i class="fas fa-angle-right"></i>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
         </div>
@@ -435,14 +439,13 @@
               </li>
               <li class="nav-item">
                 <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
-
               </li>
             </ul>
           </div>
         </div>
       </footer>
     </div>
-  
+  </div>
   <!--   Core   -->
   <script src="./resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
   <script src="./resources/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -451,14 +454,11 @@
   <script src="./resources/assets/js/argon-dashboard.min.js?v=1.1.0"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script>
-	function go_page(p) {
-		location.href="getFilesList?page="+p
-	} 
-  /*  window.TrackJS &&
+    window.TrackJS &&
       TrackJS.install({
         token: "ee6fab19c5a04ac1a32a645abde4613a",
         application: "argon-dashboard-free"
-      }); */
+      });
   </script>
 </body>
 

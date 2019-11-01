@@ -49,4 +49,8 @@ public class WikiDAO {
 	public void insertWikiTrans(WikiTransVO vo) {
 		mybatis.insert("WikiDAO.insertWikiTrans", vo);
 	}
+
+	public List<Map<String, Object>> getWikiTransLine(WikiTransVO vo) {
+		return mybatis.selectList("WikiDAO.getWikiTransLine", vo);
+	}
 }

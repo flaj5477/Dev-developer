@@ -31,6 +31,9 @@ public interface WikiService {
 	//위키번역폼
 	public Map<Integer, Object> getTransWikiForm(WikiVO vo);
 	
-	//위키
-	public Map<Integer, Object> insertWikiTrans(WikiTransVO vo); 
+	//위키번역 등록
+	public Map<Integer, Object> insertWikiTrans(WikiTransVO vo);
+
+	//위키번역(라인) 가져오기
+	public List<Map<String, Object>> getWikiTransLine(WikiTransVO vo); 
 }

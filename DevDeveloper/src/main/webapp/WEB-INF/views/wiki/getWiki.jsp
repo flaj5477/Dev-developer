@@ -34,9 +34,9 @@
 	${wiki.manualContentsPath}<br>
 	${wiki.manualOriUrl}<br>
 	${wiki.manualTags}<br>
-	<form name="frm" id="frm" action="updateWikiForm">
+	<form name="frm" id="frm" action="updateWikiForm" method="post">
 		<input type="hidden" name="manualNo" value="${wiki.manualNo}">
-	
+		<input type="hidden" name="manualContentsPath" value="${wiki.manualContentsPath}">
 		<div class="col">
 			<div class="row align-items-center">
 				<div class="col">

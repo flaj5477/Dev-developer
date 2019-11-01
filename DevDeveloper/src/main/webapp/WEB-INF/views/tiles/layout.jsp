@@ -42,7 +42,7 @@
       </button>
       <!-- Brand -->
       <a class="navbar-brand pt-0" href="./index.html">
-        <img src="${pageContext.request.contextPath}/resources/assets/img/DevDeveloper.png" class="navbar-brand-img" alt="...">
+        <img src="${pageContext.request.contextPath}/images/profile/DevDeveloper.png" class="navbar-brand-img" alt="...">
       </a>
       <!-- User -->
       <ul class="nav align-items-center d-md-none">
@@ -177,12 +177,12 @@
         <!-- User -->
         <c:choose>
         	<c:when test="${empty sessionScope.members.membersId}">
-				<a data-toggle="modal" href="signForm" data-target="#modal-testNew"
+				<a data-toggle="modal" href="signup" data-target="#modal-testNew"
 				role="button"> <span
 				class="btn btn-secondary" id="btn-testNew">회원가입</span>
 				</a>
 				&nbsp;&nbsp;
-				<a data-toggle="modal" href="login" data-target="#modal-testNew2"
+				<a data-toggle="modal" href="login2" data-target="#modal-testNew2"
 				role="button"> <span
 				class="btn btn-secondary" id="btn-testNew">로그인</span>
 				</a>
@@ -221,7 +221,7 @@
                 <span>Support</span>
               </a>
               <div class="dropdown-divider"></div>
-              <a href="#!" class="dropdown-item">
+              <a href="${pageContext.request.contextPath}/logout" class="dropdown-item">
                 <i class="ni ni-user-run"></i>
                 <span>Logout</span>
               </a>
@@ -251,8 +251,8 @@
 	
   	<div id="modal-testNew2" class="modal fade" tabindex="-1" role="dialog"
 		aria-labelledby="테스트정보 등록" aria-describedby="테스트 모달">
-		<div class="modal-dialog" style="width: 3000px; height: 1700px">
-			<div class="modal-content" style="background: #3d516b; width:70%;"></div>
+		<div class="modal-dialog">
+			<div class="modal-content" style="background: #5561A5; width:70%;"></div>
 		</div>
 	</div>
   <!--   Core   -->
@@ -272,15 +272,17 @@
       });
   </script>
   <script>
-  	
+     var loginmode = 'page';	
+  
   	$('#modal-testNew').on('show.bs.modal', function (e) {
-	    $(this).find('.modal-content').load("signForm");
+	    $(this).find('.modal-content').load("signup");
 	});
 	
 	
 	
 	$('#modal-testNew2').on('show.bs.modal', function (e) {
-	    $(this).find('.modal-content').load("login");
+		loginmode = 'popup';
+	    $(this).find('.modal-content').load("login2");
 	});
   </script>
 </body>

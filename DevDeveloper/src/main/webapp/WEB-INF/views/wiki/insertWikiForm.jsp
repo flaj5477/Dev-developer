@@ -20,7 +20,7 @@
 		 ClassicEditor
 	     .create( document.querySelector( '#manualContents' ) , {
 	    	// 제거 하고싶은 플러그인 (배열)
-			 removePlugins: [ 'ImageUpload' ]
+			 removePlugins: [ 'ImageUpload' , 'mediaEmbed']
 		 })
 	     .then( editor => {
 	            console.log( 'Editor was initialized', editor );

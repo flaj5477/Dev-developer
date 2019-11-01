@@ -23,7 +23,8 @@ public class DashboardController {
 	public String getDashboard(ActivityLogVO vo, Model model, HttpSession session) {
 		
 		DashboardVO dashboardVO = new DashboardVO();
-		dashboardVO.setMemberNo( ((MembersVO)session.getAttribute("members")).getMembersNo() );//세션의 회원번호를 가져와서 vo에 담는다 
+		int membersNo = ((MembersVO)session.getAttribute("members")).getMembersNo();
+		dashboardVO.setMemberNo( membersNo );//세션의 회원번호를 가져와서 vo에 담는다 
 		
 		//회원의 활동로그 가져옴
 		dashboardService.getActivityLogList(dashboardVO);
@@ -44,6 +45,7 @@ public class DashboardController {
 		//CBT기록 가져
 		
 		//return "dashboard/svgtest";
-		return "dashboard/dashboard";
+
+			return "dashboard/dashboard";
 	}
 }

@@ -22,11 +22,10 @@ public class MembersDAO {
 	}
 
 	/**/
-	public boolean loginCheck(MembersVO vo) {
-		String name = mybatis.selectOne("MembersDAO.loginCheck", vo);
-
-		// 검색이 안되면 0을 반환해주기 때문에 0과 비교해서 참이면 false, 틀리면 true를 반환
-		return (Integer.parseInt(name) == 0) ? false : true;
+	public MembersVO loginCheck(MembersVO vo) {
+		return mybatis.selectOne("MembersDAO.loginCheck", vo);
+		
+		 
 	}
 
  

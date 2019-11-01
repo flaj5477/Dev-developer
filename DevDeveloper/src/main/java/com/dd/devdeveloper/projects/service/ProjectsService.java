@@ -3,6 +3,7 @@ package com.dd.devdeveloper.projects.service;
 import java.util.List;
 
 import com.dd.devdeveloper.board.BoardVO;
+import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.projects.ProjParticipantsVO;
 import com.dd.devdeveloper.projects.ProjectsVO;
 
@@ -10,7 +11,7 @@ public interface ProjectsService {
 	
 	
 	//전체 조회
-	List<ProjectsVO> getProjectsList(ProjectsVO vo);
+	List<ProjectsVO> getProjectsList(Paging paging, ProjectsVO vo);
 
 	//상세 프로젝트 조회
 	ProjectsVO getProjects(ProjectsVO vo);

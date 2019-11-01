@@ -18,10 +18,10 @@ public class ProjectsController {
 	@Autowired
 	ProjectsService projectsService;
 	
-	@RequestMapping("/getProjectsList")
-	public String getProjectsList(
-			ProjectsVO vo, Model model) {
-		model.addAttribute("list", projectsService.getProjectsList(null));
+	@RequestMapping("/getProjectsList") //프로젝트 목록
+	public String getProjectsList(ProjectsVO vo, Model model, Paging paging) {
+		model.addAttribute("list", projectsService.getProjectsList(paging, vo));
+		model.addAttribute("paging", paging);
 		return "projects/projectsList";
 	}
 	

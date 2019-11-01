@@ -56,6 +56,5 @@
 			<exclude-mapping path=""/>
 			<beans:ref bean="LoginInterceptor"/>
 		</interceptor>
-		
 	</interceptors>
 </beans:beans>

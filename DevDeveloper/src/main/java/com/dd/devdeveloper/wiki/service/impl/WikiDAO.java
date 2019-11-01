@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.dd.devdeveloper.wiki.WikiTransVO;
 import com.dd.devdeveloper.wiki.WikiVO;
 
 @Repository
@@ -42,5 +43,10 @@ public class WikiDAO {
 	//위키삭제
 	public void deleteWiki(WikiVO vo) {
 		mybatis.delete("WikiDAO.deleteWiki", vo);	
+	}
+
+	//위키번역등록
+	public void insertWikiTrans(WikiTransVO vo) {
+		mybatis.insert("WikiDAO.insertWikiTrans", vo);
 	}
 }

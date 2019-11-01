@@ -23,8 +23,8 @@
 	
 	<select id="loginCheck" resultType="String">
 		<![CDATA[
-			SELECT count(*) FROM members
-			WHERE members_id = #{membersId} AND members_pw = #{membersPw}
+			SELECT * FROM members
+			WHERE members_id = #{membersId} 
 		]]>
 	</select>
 	

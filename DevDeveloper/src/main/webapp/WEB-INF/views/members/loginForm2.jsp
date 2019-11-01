@@ -76,8 +76,9 @@
 		<input type="text" placeholder="아이디" name="membersId" id = "loginid"class="loginform"> <input
 			type="password" placeholder="비밀번호" name="membersPw" id="loginpw" class="loginform">
 		  
+		  <br>
 		  <div class="form-group">
-					<span class="font-weight-bold text-white bg-dark"
+					<span class="font-weight-bold text-black"
 						id="spanLoginCheck"></span>
 				</div>
 	
@@ -115,7 +116,7 @@
 				success : function(data) {
 					if (data == 0) { //로그인 실패시
 						console.log(data);
-						$('spanLoginCheck').text('로그인 정보를 정확히 입력해주세요.');
+						$('#spanLoginCheck').text('로그인 정보를 정확히 입력해주세요.');
 					}  else { //로그인 성공시
 						console.log(data);
 						location.href = 'wikihome';

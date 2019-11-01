@@ -65,7 +65,7 @@
 	                        <div class="input-group-prepend">
 	                          <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
 	                        </div>
-                        	<input class="form-control" name="searchVal"><!--  value=${param.searchVal } getparameter? el에서 value안에값처럼표시 -->
+                        	<input class="form-control" name="searchVal"  value="${param.searchVal }"><!--  getparameter? el에서 value안에값처럼표시 -->
                       	
 							<input type="hidden" name="page" value="1">
 							<button>검색</button>

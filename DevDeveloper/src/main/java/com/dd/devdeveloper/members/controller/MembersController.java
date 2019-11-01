@@ -34,9 +34,9 @@ public class MembersController {
 	 @Autowired MembersService membersService;
 	 
 	 
-	 @RequestMapping(value ="/loginForm" , method = RequestMethod.GET)
+	 @RequestMapping(value ="/login2" , method = RequestMethod.GET)
 			public String loginform1() {
-				return "/notiles/members/loginForm";
+				return "/notiles/members/loginForm2";
 			}   
 	
 		
@@ -134,7 +134,7 @@ public class MembersController {
      //로그인폼 
        @RequestMapping(value ="/login" , method = RequestMethod.GET)
 		public String loginform() {
-			return "/notiles/members/loginForm2";
+			return "/members/loginForm";
 		}      
        
      //로그인처리

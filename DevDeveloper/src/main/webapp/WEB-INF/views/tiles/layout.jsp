@@ -280,7 +280,7 @@
 	
 	
 	$('#modal-testNew2').on('show.bs.modal', function (e) {
-	    $(this).find('.modal-content').load("login");
+	    $(this).find('.modal-content').load("login2");
 	});
   </script>
 </body>

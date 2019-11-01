@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.members.MembersVO;
 import com.dd.devdeveloper.projects.ProjParticipantsVO;
 import com.dd.devdeveloper.projects.ProjectsVO;
@@ -18,9 +19,10 @@ public class ProjectsController {
 	@Autowired
 	ProjectsService projectsService;
 	
-	@RequestMapping("/getProjectsList")
-	public String getProjectsList(ProjectsVO vo, Model model) {
-		model.addAttribute("list", projectsService.getProjectsList(null));
+	@RequestMapping("/getProjectsList") //프로젝트 목록
+	public String getProjectsList(ProjectsVO vo, Model model, Paging paging) {
+		model.addAttribute("list", projectsService.getProjectsList(paging, vo));
+		model.addAttribute("paging", paging);
 		return "projects/projectsList";
 	}
 	

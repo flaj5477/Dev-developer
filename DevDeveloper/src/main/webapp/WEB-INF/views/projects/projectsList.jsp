@@ -42,7 +42,7 @@
 				<form name="searchfrm">
 					<div class="row mb-3">
 						<div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-xs-7">
-							<input class="form-control" placeholder="Search" type="text">
+							<input class="form-control" name="searchVal" placeholder="Search" type="text">
 							<input type="hidden" name="page" value="1">
 							
 						</div>

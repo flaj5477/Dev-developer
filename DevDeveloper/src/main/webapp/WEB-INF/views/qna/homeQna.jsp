@@ -5,8 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	pageName = "Q & A";
+</script>
 </head>
 <body>
-
+안녕
 </body>
 </html>

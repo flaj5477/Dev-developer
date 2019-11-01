@@ -57,7 +57,7 @@ public class WikiServiceImpl implements WikiService {
 		if (paging.getPage() == null) {
 			paging.setPage(1);
 		}
-		paging.setPageUnit(10); // 게시글 몇개뿌릴지?
+		paging.setPageUnit(5); // 게시글 몇개뿌릴지?
 		paging.setPageSize(5); // 하단 페이지목록 개수
 
 		// 전체 건수
@@ -180,10 +180,21 @@ public class WikiServiceImpl implements WikiService {
 	 */
 	public Map<Integer, Object> insertWikiTrans(WikiTransVO vo){
 		wikiDAO.insertWikiTrans(vo);
-		
-		
 		return null;
 	}
+	
+	
+	/*
+		곽동우
+		20191101
+		위키번역 목록(라인) 조회 요청
+	*/
+	@Override
+	public List<Map<String, Object>> getWikiTransLine(WikiTransVO vo) {
+		
+		return wikiDAO.getWikiTransLine(vo);
+	}
+
 	
 	
 	

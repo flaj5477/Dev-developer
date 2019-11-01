@@ -20,8 +20,5 @@ public interface MembersService {
 	//아이디 검색
 	public MembersVO getmembers(MembersVO vo);
 	
-	/*
-	 * //로그인 Map<String, Object> selectUserInfo(Map<String, Object> map) throws
-	 * Exception;
-	 */
+ 
 }

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title> CBT Home </title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/cbt.css">
 <script src="${pageContext.request.contextPath}/resources/assets/js/format.js"></script>
 <script>
 	
@@ -88,7 +89,8 @@
 	
 	function levelChoice() {
 		$('#entryBtn').on('click',function() {
-			if($(this).attr('value') == 'accept') {
+			var interLock = $(this).val();
+			if(interLock == 'accept') {
 				location.href='choice'; // 페이지 이동, 뒤로가기 허용
 			}
 		});

@@ -27,7 +27,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<!-- <link rel="stylesheet" href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css"> -->
 
 </head>
 
@@ -81,24 +80,11 @@
 					<span class="font-weight-bold text-black"
 						id="spanLoginCheck"></span>
 				</div>
-	
-
-		   
 
 		<div class="text-center" class="loginform">
 			<button type="button" id="loginBtn" class="btn btn-primary my-4">로그인</button>
 		</div>
-		<%-- <c:if test="${msg == '실패'}">
-			<div class="alert alert-dark alert-dismissible fade show"
-				role="alert">
-				<strong>아이디 또는 패스워드가 &nbsp; 틀렸습니다.</strong>
-				<button type="button" class="close" data-dismiss="alert"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
 
-		</c:if> --%>
 	</form>
 
  <script>
@@ -118,8 +104,13 @@
 						console.log(data);
 						$('#spanLoginCheck').text('로그인 정보를 정확히 입력해주세요.');
 					}  else { //로그인 성공시
-						console.log(data);
-						location.href = 'wikihome';
+						if(loginmode == 'page'){
+							console.log(data);
+							location.href = '${sessionScope.prepage}';	
+						}else{
+							location.href = 'getDashboard'
+						}
+						
 					}
 				}
 			});

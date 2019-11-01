@@ -177,12 +177,12 @@
         <!-- User -->
         <c:choose>
         	<c:when test="${empty sessionScope.members.membersId}">
-				<a data-toggle="modal" href="signForm" data-target="#modal-testNew"
+				<a data-toggle="modal" href="signup" data-target="#modal-testNew"
 				role="button"> <span
 				class="btn btn-secondary" id="btn-testNew">회원가입</span>
 				</a>
 				&nbsp;&nbsp;
-				<a data-toggle="modal" href="login" data-target="#modal-testNew2"
+				<a data-toggle="modal" href="login2" data-target="#modal-testNew2"
 				role="button"> <span
 				class="btn btn-secondary" id="btn-testNew">로그인</span>
 				</a>
@@ -221,7 +221,7 @@
                 <span>Support</span>
               </a>
               <div class="dropdown-divider"></div>
-              <a href="logout" class="dropdown-item">
+              <a href="${pageContext.request.contextPath}/logout" class="dropdown-item">
                 <i class="ni ni-user-run"></i>
                 <span>Logout</span>
               </a>
@@ -272,14 +272,16 @@
       });
   </script>
   <script>
-  	
+     var loginmode = 'page';	
+  
   	$('#modal-testNew').on('show.bs.modal', function (e) {
-	    $(this).find('.modal-content').load("signForm");
+	    $(this).find('.modal-content').load("signup");
 	});
 	
 	
 	
 	$('#modal-testNew2').on('show.bs.modal', function (e) {
+		loginmode = 'popup';
 	    $(this).find('.modal-content').load("login2");
 	});
   </script>

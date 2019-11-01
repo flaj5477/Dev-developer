@@ -38,14 +38,22 @@
 		<!-- Table -->
 		<div class="row">
 			<div class="col">
-				<div class="card shadow">
+
 				<form name="searchfrm">
-					<div class="card-header border-0">
-						<h3 class="mb-0">Card tables</h3>
-						<input type="hidden" name="page" value="1">
+					<div class="row mb-3">
+						<div class="col-xl-3">
+							<input class="form-control" placeholder="Search" type="text">
+							<input type="hidden" name="page" value="1">
+							
+						</div>
+						<div >
+							<button class="btn btn-icon btn-2 btn-primary">
+								<span class="btn-inner--icon"><i class="fas fa-search"></i></span>
+							</button>
+						</div>
 					</div>
 				</form>
-				
+				<div class="card shadow">
 					<div class="table-responsive">
 						<table class="table align-items-center table-flush">
 							<thead class="thead-light">
@@ -86,7 +94,7 @@
 			</div>
 		</div>
 
-		
+
 	</div>
 	</div>
 	<!--   Core   -->

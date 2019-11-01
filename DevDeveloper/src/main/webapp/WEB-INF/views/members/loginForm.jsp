@@ -27,7 +27,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<!-- <link rel="stylesheet" href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css"> -->
 
 </head>
 
@@ -82,7 +81,6 @@
 						id="spanLoginCheck"></span>
 				</div>
 
-
 		<div class="text-center" class="loginform">
 			<button type="button" id="loginBtn" class="btn btn-primary my-4">로그인</button>
 		</div>
@@ -106,8 +104,13 @@
 						console.log(data);
 						$('#spanLoginCheck').text('로그인 정보를 정확히 입력해주세요.');
 					}  else { //로그인 성공시
-						console.log(data);
-						location.href = '${sessionScope.prepage}';
+						if(loginmode == 'page'){
+							console.log(data);
+							location.href = '${sessionScope.prepage}';	
+						}else{
+							location.href = 'getDashboard'
+						}
+						
 					}
 				}
 			});

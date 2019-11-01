@@ -8,8 +8,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="${pageContext.request.contextPath}/#">
-              <i class="ni ni-planet text-blue"></i> Q&A
+            <a class="nav-link " href="${pageContext.request.contextPath}/homeQna">
+              <i class="ni ni-planet text-blue"></i> Q & A
             </a>
           </li>
           <li class="nav-item">

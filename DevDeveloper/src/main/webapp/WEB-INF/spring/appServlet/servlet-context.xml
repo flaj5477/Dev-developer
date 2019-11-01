@@ -27,8 +27,8 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-
- 	<beans:bean
+	
+	<beans:bean
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver"
 		p:order="1"
 		p:viewClass="org.springframework.web.servlet.view.tiles3.TilesView" />

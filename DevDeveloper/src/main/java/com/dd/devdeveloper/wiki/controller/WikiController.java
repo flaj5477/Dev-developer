@@ -1,11 +1,8 @@
 package com.dd.devdeveloper.wiki.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +18,6 @@ import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.wiki.WikiTransVO;
 import com.dd.devdeveloper.wiki.WikiVO;
 import com.dd.devdeveloper.wiki.service.WikiService;
-import com.dd.devdeveloper.wiki.textFile.textToFile;
 
 
 //위키컨트롤러 1018 곽동우

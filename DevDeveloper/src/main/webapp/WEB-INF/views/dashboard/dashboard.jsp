@@ -201,7 +201,7 @@
 												<div class="col">
 													<h5 class="card-title text-uppercase text-muted mb-0">프로젝트
 														참여</h5>
-													<span class="h2 font-weight-bold mb-0">${projParticipant}</span>
+													<span class="h2 font-weight-bold mb-0"><a href="./getFilesList?projNo=1">${projParticipant}</a></span>
 												</div>
 												<div class="col-auto">
 													<div

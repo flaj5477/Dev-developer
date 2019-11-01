@@ -7,12 +7,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title> CBT Ready </title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/cbt.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+
 	$(document).ready(function() {
 		$("#tabs").tabs();
 		readyBox();
 		testInfo();
+		start();
 	});
 	
 	history.pushState(null, null, "#noback");
@@ -40,7 +46,7 @@
 		$('#comment2').append('<br> <b>[시험 메뉴안내]</b>는 응시화면에서 사용되는 <b>주요기능</b>을 소개합니다. <br><br>');
 		$('#tab3').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시험 준비완료&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
 		$('#comment3').append('<br> <b>[시험준비완료]</b>버튼을 누르시면 <b>잠시 후 시험이 시작됩니다.</b><br><br>');
-		$('#readyBtn').html('<h3>시험준비완료</h3>');
+		$('#readyBtn').html('<h5>시험준비완료</h5>');
 	}
 	
 	function testInfo() {
@@ -62,8 +68,12 @@
 	}
 	
 	function start() {
-		console.log('success');
-	}
+		$('#readyBtn').on('click',function() {
+			
+			console.log('success');
+			$('#toast').fadeIn(400).delay(3000).fadeOut(400);
+		})
+	}	
 	
 </script>
 </head>
@@ -90,15 +100,17 @@
 		<div id="comment1"></div>
 	</div>
 	<div id="tabs-2">
-		<p> Nice to meet you! </p>
 		<div id="comment2"></div>
 	</div>
 	<div id="tabs-3">
-		<p> Nice to meet you too! </p>
 		<div id="comment3"></div>
-		<div id="Toast" align="center">
-			<button type="button" id="readyBtn" onclick="start()"></button>
+		<div id="toast">
+			<p> 잠시 후 시험이 시작 됩니다.</p>
+			<div class="spinner-border text-info" style="width: 3rem; height: 3rem;" role="status">
+  				<span class="sr-only"></span>
+			</div>
 		</div>
+		<button type="button" id="readyBtn" value="accept"></button>
 	</div>
 </div>
 </body>

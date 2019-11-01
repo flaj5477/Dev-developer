@@ -40,11 +40,20 @@
 		<level value="DEBUG" />
 		<appender-ref ref="console" />
 	</logger>
+<<<<<<< HEAD
+	<!--  읽어 오는거 -->
+	<logger name="jdbc.resultsettable" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+	</logger>
+	
+=======
 	<logger name="jdbc.resultsettable" additivity="false">
 		<level value="DEBUG" />
 		<appender-ref ref="console" />
 	</logger>
 
+>>>>>>> branch 'master' of https://github.com/flaj5477/Dev-developer.git
 	<!-- Root Logger -->
 	<root>
 		<priority value="warn" />

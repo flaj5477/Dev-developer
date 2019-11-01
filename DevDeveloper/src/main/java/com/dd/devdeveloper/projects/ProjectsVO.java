@@ -19,4 +19,9 @@ public class ProjectsVO {
 	private String projTags;
 	private String membersName;
 	
+	
+	private int first;	//페이징 시작 게시글 번호
+	private int last;	//페이징 종료 게시글 번호
+	private String searchVal; //검색 값
+	private String orderby; // 정렬
 }

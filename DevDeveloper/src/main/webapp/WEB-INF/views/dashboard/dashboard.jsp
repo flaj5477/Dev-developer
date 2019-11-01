@@ -85,6 +85,12 @@
 		width: calc(100% - 300px);
 	}
 }
+
+.proj-modal:hover {
+	box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px
+		rgba(0, 0, 0, .08);
+	transform: translateY(-1px);
+}
 </style>
 </head>
 <body>
@@ -92,9 +98,10 @@
 		<div class="header pb-8">
 			<div class="container-fluid">
 				<div class="header-body">
-					
+
 					<div class="row">
-						<div class="col-xl-4 mb-5 mb-xl-0"> <!-- 프로필 -->
+						<div class="col-xl-4 mb-5 mb-xl-0">
+							<!-- 프로필 -->
 							<div class="card card-profile shadow">
 								<div class="row justify-content-center">
 									<div class="col-lg-3 order-lg-2">
@@ -154,26 +161,30 @@
 								</div>
 							</div>
 						</div>
-						<div class="col col-xl-8">  <!-- 프로젝트 상태 카드 -->
+						<div class="col col-xl-8">
+							<!-- 프로젝트 상태 카드 -->
 							<div class="row">
 								<div class="col-xl-3 col-lg-6">
-									<div class="card card-stats mb-4 mb-xl-0">
-										<div class="card-body">
-											<div class="row">
-												<div class="col">
-													<h5 class="card-title text-uppercase text-muted mb-0">프로젝트
-														지원</h5>
-													<span class="h2 font-weight-bold mb-0">${projApply } </span>
-												</div>
-												<div class="col-auto">
-													<div
-														class="icon icon-shape bg-warning text-white rounded-circle shadow">
-														<i class="fas fa-chart-pie"></i>
+									<a data-toggle="modal" data-target="#exampleModal"> <!-- 모달 창 걸기 -->
+										<div class="card card-stats mb-4 mb-xl-0" >
+											<div class="card-body proj-modal">
+												<div class="row">
+													<div class="col">
+														<h5 class="card-title text-uppercase text-muted mb-0">프로젝트
+															<span class="proj_status">지원</span></h5>
+														<span class="h2 font-weight-bold mb-0">${projApply }
+														</span>
+													</div>
+													<div class="col-auto">
+														<div
+															class="icon icon-shape bg-warning text-white rounded-circle shadow">
+															<i class="fas fa-chart-pie"></i>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</div>
+									</a>
 								</div>
 								<div class="col-xl-3 col-lg-6">
 									<div class="card card-stats mb-4 mb-xl-0">
@@ -201,7 +212,8 @@
 												<div class="col">
 													<h5 class="card-title text-uppercase text-muted mb-0">프로젝트
 														참여</h5>
-													<span class="h2 font-weight-bold mb-0"><a href="./getFilesList?projNo=1">${projParticipant}</a></span>
+													<span class="h2 font-weight-bold mb-0"><a
+														href="./getFilesList?projNo=1">${projParticipant}</a></span>
 												</div>
 												<div class="col-auto">
 													<div
@@ -233,38 +245,43 @@
 									</div>
 								</div>
 							</div>
-						
+
 							<!-- 출석률 도트 -->
-					<div class="row  mb-4">
-						<div class="col-xl-7">
-							<div class="card-body">
-								<div id="drawing" class="align-self-center">
-									<svg class=" col-fixed" xmlns="http://www.w3.org/2000/svg"
-										xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-										width="100%" height="84">
+							<div class="row  mb-4">
+								<div class="col-xl-7">
+									<div class="card-body">
+										<div id="drawing" class="align-self-center">
+											<svg class=" col-fixed" xmlns="http://www.w3.org/2000/svg"
+												xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+												width="100%" height="84">
 							<c:forEach var="activityLog" items="${activityLogList}"
-											varStatus="status">
+													varStatus="status">
 								<c:if test="${status.index % 7 == 0 }">		<!-- 일요일이면 g태그 열기 -->
-									<g transform="translate(<fmt:formatNumber value="${status.index/7*10}" pattern="#" />, 0)">
+									<g
+															transform="translate(<fmt:formatNumber value="${status.index/7*10}" pattern="#" />, 0)">
 								
 											
-											</c:if>
+											
+													
+													
+													
+													</c:if>
 									<!-- col-fixed 의 width인 620에 대한 % -->
 								<rect width="1%" height="10%"
-												class="${activityLog.activityScore }" x="0"
-												y="${status.index%7*14 }"></rect>
+														class="${activityLog.activityScore }" x="0"
+														y="${status.index%7*14 }"></rect>
 								<c:if test="${status.index % 7 == 6 }">		<!-- 토요일이면 g태그 닫기 -->
 									</g>
 								</c:if>
 							</c:forEach>
 						</svg>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-						</div>
-					</div>
-					
+
 				</div>
 				<!-- Card stats 여기 프로젝트 카드 있던 곳-->
 				<div class="row"></div>
@@ -272,10 +289,62 @@
 		</div>
 	</div>
 
-<script>
-//표 데이터
-{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}
+
+
+	<!-- 프로젝트 모달 -->
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">...</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- 모달 제어 스크립트 (데이터 담기) -->
+<script> 
+$('#exampleModal').on('show.bs.modal', function (event) {
+	//프로젝트 지원, 프로젝트 승인, 프로젝트 참여 상태의 테이블을 만들어서 보여줘야함
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var status = button.find(".proj_status").html();
+	  $.ajax({
+			url : "getProjStatusDetail",
+			type : 'GET',	//등록이랑 다른부분 
+			dataType : 'json',
+			data : JSON.stringify({
+				status : status
+			}),
+			contentType : 'application/json',
+			success : function(data) {	//데이터 받아오기 성공하면 
+				//테이블 생성
+			},
+			error : function(xhr, status, message) {
+				alert(" status: " + status + " er:" + message);
+			}
+		});
+	  
+	});
 </script>
+
+
+
+
+
+
+
 
 	<div class="container-fluid mt--7">
 		<div class="row">

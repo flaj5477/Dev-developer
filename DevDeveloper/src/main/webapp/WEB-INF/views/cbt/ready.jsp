@@ -69,7 +69,6 @@
 	
 	function start() {
 		$('#readyBtn').on('click',function() {
-			
 			console.log('success');
 			$('#toast').fadeIn(400).delay(3000).fadeOut(400);
 		})

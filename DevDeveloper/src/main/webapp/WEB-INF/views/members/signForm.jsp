@@ -112,13 +112,13 @@ form#signForm {
 			<div class="custom-control custom-radio mb-3" style ="display : inline-block">
 				<input name="membersType" class="custom-control-input"
 					id="customRadio5" checked="checked" type="radio" value="일반">
-				<label class="custom-control-label" for="customRadio5">일반</label>
+				<label class="custom-control-label" for="customRadio5" style="color : white">일반</label>
 			</div>
 			&nbsp;
 			<div class="custom-control custom-radio mb-3" style ="display : inline-block">
 				<input name="membersType" class="custom-control-input"
 					id="customRadio6" value="기업" type="radio"> <label
-					class="custom-control-label" for="customRadio6">기업</label>
+					class="custom-control-label" for="customRadio6" style="color : white">기업</label>
 			</div>
 		</div>
 
@@ -126,7 +126,7 @@ form#signForm {
 		<div class="form-group">
 			<div id="idv" class ="input-group input-group-alternative mb-3">
 				<input name="membersId" id="membersId" class="form-control"
-					placeholder="아이디" type="text">
+					placeholder="　아이디" type="text">
 			</div>
 			<div class="eheck_font" id="id_check"></div>
 		</div>
@@ -134,7 +134,7 @@ form#signForm {
 		<div class="form-group">
 			<div id="pw1v" class ="input-group input-group-alternative mb-3">
 				<input name="membersPw" id="membersPw" class="form-control"
-					placeholder="비밀번호" type="password">
+					placeholder="　비밀번호" type="password">
 			</div>
 			<div class="eheck_font" id="pw_check"></div>
 		</div>
@@ -142,7 +142,7 @@ form#signForm {
 		<div class="form-group">
 			<div id="pw2v" class ="input-group input-group-alternative mb-3">
 				<input name="membersPw2" id="membersPw2" class="form-control"
-					placeholder="비밀번호 확인" type="password">
+					placeholder="　비밀번호 확인" type="password">
 			</div>
 			<div class="eheck_font" id="pw2_check"></div>
 		</div>
@@ -150,7 +150,7 @@ form#signForm {
 		<div class="form-group">
 			<div id="namev" class ="input-group input-group-alternative mb-3">
 				<input name="membersName" id="membersName" class="form-control"
-					placeholder="이름" type="text">
+					placeholder="　이름" type="text">
 			</div>
 			<div class="eheck_font" id="name_check"></div>
 		</div>
@@ -166,7 +166,7 @@ form#signForm {
 		<div class="form-group">
 			<div id="telv" class ="input-group input-group-alternative mb-3">
 				<input name="membersTel" id="membersTel" class="form-control"
-					placeholder="연락처('-'없이 번호만 입력해주세요)" type="text">
+					placeholder="　연락처('-'없이 번호만 입력해주세요)" type="text">
 
 			</div>
 			<div class="eheck_font" id="phone_check"></div>
@@ -175,7 +175,7 @@ form#signForm {
 		<div class="form-group">
 			<div id="mailv" class ="input-group input-group-alternative mb-3">
 				<input name="membersMail" id="membersMail" class="form-control"
-					placeholder="이메일" type="email">
+					placeholder="　이메일" type="email">
 
 			</div>
 			<div class="eheck_font" id="email_check"></div>

@@ -60,7 +60,7 @@
 		startTrans();
 		hover();
 		btnClose();
-
+		otherTransClick();
 	});
 
 	/*
@@ -132,10 +132,24 @@
 	}
 	
 	function hover(){
-		$('.translate').hover(function() {
+		$('.translate, .otherTrans').hover(function() {	// on이벤트? 해줘야됨
 			$(this).css("background-color", "#f4f5f7");
 		}, function(){
 			$(this).css("background-color", "transparent ");
+		});
+	}
+	
+	/*
+		곽동우
+		20191103
+		다른번역 클릭
+	*/
+	function otherTransClick(){
+		$('body').on('click','.otherTrans',function(){
+			var transArea = $(".transEdit.open #transContents");
+			var otherTransVal = $(this).attr('id','otcontents').text();	//왜 날짜 회원번호도 같이?
+			transArea.text(otherTransVal);
+					
 		});
 	}
 	
@@ -148,8 +162,8 @@
 	*/
 	function insertWikiTrans(){
 		
-		var transArea = $(".transEdit.open #transContents")
-		var transVal = transArea.val()
+		var transArea = $(".transEdit.open #transContents");
+		var transVal = transArea.val();
 		
 		if(transVal == '') {
 			alert("번역을 입력해야합니다")
@@ -230,7 +244,10 @@
 					 .append($('<td>').html('<button id=\'btnDelete\'>삭제</button>'))
 					 .append($('<input type=\'hidden\' id=\'hidden_userId\'>').val(item.id))
 					 .appendTo('tbody'); */
-			   $('<div>').attr('class','row').html(item.manualAfter).appendTo('#othertrans_'+manualLine);
+			   $('<div>').attr('class','row transEdit otherTrans')
+			   	.append($('<div id="otcontents" >').html(item.manualAfter))
+			   	.append($('<div>').html("<br>"+item.translDate+" / "+item.membersNo))
+				.appendTo('#othertrans_'+manualLine);
 		});//each
 	}//wikiTransLineResult
 
@@ -298,7 +315,7 @@
 									<i name="btn-trans-close" class="ni ni-fat-remove"></i>
 								</span>
 							</div>
-							<div class="row" id="othertrans_${entry.key}">
+							<div class="scrollspy-example" id="othertrans_${entry.key}">
 								<div class="row">
 									다른사람 번역한거 표시
 								</div>

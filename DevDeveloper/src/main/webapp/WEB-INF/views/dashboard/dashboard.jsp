@@ -332,10 +332,17 @@
 							$(this).find("#tbody").append(ajaxRow); //여기서 모달을 다시 띄우면 그 전에 열었던 모달창에 더 추가된다. 정보가 계속 누적됨;;;
 						});
 		
+		
+
 		//모달 닫기
-		$('.modal-close').on("click", function(){
+		$('#exampleModal').on('hide.bs.modal', function(e){
+
 			$("#tbody").html("");
+
+			e.stopImmediatePropagation();
+
 		});
+		
 	</script>
 	<div class="container-fluid mt--7">
 		<div class="row">

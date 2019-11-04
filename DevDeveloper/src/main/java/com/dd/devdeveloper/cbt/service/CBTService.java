@@ -13,5 +13,7 @@ public interface CBTService {
 	public List<TestsVO> getTestList();
 	
 	public TestsVO getTest(TestsVO tvo);
+	
+	public void cbtInsert(TestsRecordVO recvo);
 }
 

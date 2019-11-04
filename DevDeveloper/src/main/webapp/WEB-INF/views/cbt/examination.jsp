@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>CBT Examination</title>
 </head>
 <body>
-
+	${param.testsLevel}
+	${members.membersNo}
 </body>
 </html>

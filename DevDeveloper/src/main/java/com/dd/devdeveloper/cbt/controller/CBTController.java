@@ -2,6 +2,7 @@ package com.dd.devdeveloper.cbt.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class CBTController {
 	
 	@RequestMapping("cbt/index")
 	public String getTestJudg(TestsRecordVO recvo, Model model, HttpSession session) {
-		MembersVO member = (MembersVO) session.getAttribute("members");
-		recvo.setMembersNo(member.getMembersNo());
+		MembersVO membersNo = (MembersVO) session.getAttribute("members");
+		recvo.setMembersNo(membersNo.getMembersNo());
 		model.addAttribute("tr", cbtService.getTestJudg(recvo));
 		return "cbt/index";
 	}
@@ -43,7 +44,7 @@ public class CBTController {
 	}
 	
 	@RequestMapping("cbt/ready") 
-	public String step1() {
+	public String ready() {
 		return "cbt/ready";
 	}
 	
@@ -52,5 +53,12 @@ public class CBTController {
 	public TestsVO getTest(@PathVariable int level, TestsVO tvo) {
 		tvo.setTestsLevel(level);
 		return cbtService.getTest(tvo);
+	}
+	
+	@RequestMapping("cbt/examination") 
+	public String setExamination(TestsRecordVO recvo) { 
+		//recvo.setMembersNo(membersNo);
+		//recvo.setTestsNo(testsNo);
+		return "cbt/examination";
 	}
 }

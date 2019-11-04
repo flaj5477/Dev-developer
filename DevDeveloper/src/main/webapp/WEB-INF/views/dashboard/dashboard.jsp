@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <!DOCTYPE html>
@@ -10,10 +9,10 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.7.1/svg.js"></script>
 <script>
-	pageName="Dashboard";
+	pageName = "Dashboard";
 </script>
-
-<script> <!--도트 색 표시-->
+<script>
+<!--도트 색 표시-->
 	$(document).ready(function() {
 		var rect1 = $('.A').attr({
 			//fill : '#196127'
@@ -98,45 +97,24 @@
 		<div class="header pb-8">
 			<div class="container-fluid">
 				<div class="header-body">
-
 					<div class="row">
-						<div class="col-xl-4 mb-5 mb-xl-0">
+						<div class="col-xl-4 col-lg-5 col-md-6 mb-5 mb-xl-0">
 							<!-- 프로필 -->
 							<div class="card card-profile shadow">
 								<div class="row justify-content-center">
 									<div class="col-lg-3 order-lg-2">
 										<div class="card-profile-image">
-											<a href="#"> <img
-												src="./resources/assets/img/theme/team-4-800x800.jpg"
-												class="rounded-circle">
+											<a href="#"> <img src="./resources/assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
 											</a>
 										</div>
 									</div>
 								</div>
-								<div
-									class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+								<div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
 									<div class="d-flex justify-content-between">
-										<a href="#" class="btn btn-sm btn-info mr-4">Connect</a> <a
-											href="#" class="btn btn-sm btn-default float-right">Message</a>
+										<a href="#" class="btn btn-sm btn-info mr-4">Connect</a> <a href="#" class="btn btn-sm btn-default float-right">Message</a>
 									</div>
 								</div>
 								<div class="card-body pt-0 pt-md-4">
-									<div class="row">
-										<div class="col">
-											<div
-												class="card-profile-stats d-flex justify-content-center mt-md-5">
-												<div>
-													<span class="heading">22</span> <span class="description">Friends</span>
-												</div>
-												<div>
-													<span class="heading">10</span> <span class="description">Photos</span>
-												</div>
-												<div>
-													<span class="heading">89</span> <span class="description">Comments</span>
-												</div>
-											</div>
-										</div>
-									</div>
 									<div class="text-center">
 										<h3>
 											Jessica Jones<span class="font-weight-light">, 27</span>
@@ -145,39 +123,34 @@
 											<i class="ni location_pin mr-2"></i>Bucharest, Romania
 										</div>
 										<div class="h5 mt-4">
-											<i class="ni business_briefcase-24 mr-2"></i>Solution Manager
-											- Creative Tim Officer
+											<i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
 										</div>
 										<div>
-											<i class="ni education_hat mr-2"></i>University of Computer
-											Science
+											<i class="ni education_hat mr-2"></i>University of Computer Science
 										</div>
 										<hr class="my-4">
-										<p>Ryan — the name taken by Melbourne-raised,
-											Brooklyn-based Nick Murphy — writes, performs and records all
-											of his own music.</p>
+										<p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
 										<a href="#">Show more</a>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col col-xl-8">
+						<div class="col col-xl-8 col-lg-7 col-md-6">
 							<!-- 프로젝트 상태 카드 -->
 							<div class="row">
 								<div class="col-xl-3 col-lg-6">
 									<a data-toggle="modal" data-target="#exampleModal"> <!-- 모달 창 걸기 -->
-										<div class="card card-stats mb-4 mb-xl-0" >
+										<div class="card card-stats mb-4 mb-xl-0">
 											<div class="card-body proj-modal">
 												<div class="row">
 													<div class="col">
-														<h5 class="card-title text-uppercase text-muted mb-0">프로젝트
-															<span class="proj_status">지원</span></h5>
-														<span class="h2 font-weight-bold mb-0">${projApply }
-														</span>
+														<h5 class="card-title text-uppercase text-muted mb-0">
+															프로젝트 <span class="proj_status">지원</span>
+														</h5>
+														<span class="h2 font-weight-bold mb-0">${projApply } </span>
 													</div>
 													<div class="col-auto">
-														<div
-															class="icon icon-shape bg-warning text-white rounded-circle shadow">
+														<div class="icon icon-shape bg-warning text-white rounded-circle shadow">
 															<i class="fas fa-chart-pie"></i>
 														</div>
 													</div>
@@ -187,89 +160,83 @@
 									</a>
 								</div>
 								<div class="col-xl-3 col-lg-6">
-									<div class="card card-stats mb-4 mb-xl-0">
-										<div class="card-body">
-											<div class="row">
-												<div class="col">
-													<h5 class="card-title text-uppercase text-muted mb-0">프로젝트
-														승인</h5>
-													<span class="h2 font-weight-bold mb-0">${projApprove}</span>
-												</div>
-												<div class="col-auto">
-													<div
-														class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-														<i class="fas fa-users"></i>
+									<a data-toggle="modal" data-target="#exampleModal">
+										<div class="card card-stats mb-4 mb-xl-0">
+											<div class="card-body proj-modal">
+												<div class="row">
+													<div class="col">
+														<h5 class="card-title text-uppercase text-muted mb-0">
+															프로젝트 <span class="proj_status">승인</span>
+														</h5>
+														<span class="h2 font-weight-bold mb-0">${projApprove}</span>
+													</div>
+													<div class="col-auto">
+														<div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+															<i class="fas fa-users"></i>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</div>
+									</a>
 								</div>
 								<div class="col-xl-3 col-lg-6">
-									<div class="card card-stats mb-4 mb-xl-0">
-										<div class="card-body">
-											<div class="row">
-												<div class="col">
-													<h5 class="card-title text-uppercase text-muted mb-0">프로젝트
-														참여</h5>
-													<span class="h2 font-weight-bold mb-0"><a
-														href="./getFilesList?projNo=1">${projParticipant}</a></span>
-												</div>
-												<div class="col-auto">
-													<div
-														class="icon icon-shape bg-info text-white rounded-circle shadow">
-														<i class="fas fa-percent"></i>
+									<a data-toggle="modal" data-target="#exampleModal">
+										<div class="card card-stats mb-4 mb-xl-0">
+											<div class="card-body proj-modal">
+												<div class="row">
+													<div class="col">
+														<h5 class="card-title text-uppercase text-muted mb-0">
+															프로젝트 <span class="proj_status">참여</span>
+														</h5>
+														<span class="h2 font-weight-bold mb-0"><a href="./getFilesList?projNo=1">${projParticipant}</a></span>
+													</div>
+													<div class="col-auto">
+														<div class="icon icon-shape bg-info text-white rounded-circle shadow">
+															<i class="fas fa-percent"></i>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</div>
+									</a>
 								</div>
 								<div class="col-xl-3 col-lg-6">
-									<div class="card card-stats mb-4 mb-xl-0">
-										<div class="card-body">
-											<div class="row">
-												<div class="col">
-													<h5 class="card-title text-uppercase text-muted mb-0">프로젝트
-														완료</h5>
-													<span class="h2 font-weight-bold mb-0">0</span>
-												</div>
-												<div class="col-auto">
-													<div
-														class="icon icon-shape bg-warning text-white rounded-circle shadow">
-														<i class="fas fa-chart-pie"></i>
+									<a data-toggle="modal" data-target="#exampleModal">
+										<div class="card card-stats mb-4 mb-xl-0">
+											<div class="card-body proj-modal">
+												<div class="row">
+													<div class="col">
+														<h5 class="card-title text-uppercase text-muted mb-0">
+															프로젝트 <span class="proj_status">완료</span>
+														</h5>
+														<span class="h2 font-weight-bold mb-0">0</span>
+													</div>
+													<div class="col-auto">
+														<div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+															<i class="fas fa-chart-pie"></i>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</div>
+									</a>
 								</div>
 							</div>
-
 							<!-- 출석률 도트 -->
 							<div class="row  mb-4">
 								<div class="col-xl-7">
 									<div class="card-body">
 										<div id="drawing" class="align-self-center">
-											<svg class=" col-fixed" xmlns="http://www.w3.org/2000/svg"
-												xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-												width="100%" height="84">
-							<c:forEach var="activityLog" items="${activityLogList}"
-													varStatus="status">
+											<svg class=" col-fixed" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100%" height="84">
+							<c:forEach var="activityLog" items="${activityLogList}" varStatus="status">
 								<c:if test="${status.index % 7 == 0 }">		<!-- 일요일이면 g태그 열기 -->
-									<g
-															transform="translate(<fmt:formatNumber value="${status.index/7*10}" pattern="#" />, 0)">
+									<g transform="translate(<fmt:formatNumber value="${status.index/7*10}" pattern="#" />, 0)">
 								
-											
-											
-													
-													
-													
+																										
 													</c:if>
 									<!-- col-fixed 의 width인 620에 대한 % -->
-								<rect width="1%" height="10%"
-														class="${activityLog.activityScore }" x="0"
-														y="${status.index%7*14 }"></rect>
+								<rect width="1%" height="10%" class="${activityLog.activityScore }" x="0" y="${status.index%7*14 }"></rect>
 								<c:if test="${status.index % 7 == 6 }">		<!-- 토요일이면 g태그 닫기 -->
 									</g>
 								</c:if>
@@ -281,71 +248,95 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
 				<!-- Card stats 여기 프로젝트 카드 있던 곳-->
 				<div class="row"></div>
 			</div>
 		</div>
 	</div>
-
-
-
 	<!-- 프로젝트 모달 -->
 	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
+					<h5 class="modal-title">프로젝트</h5>
+					<h5 class="modal-title" id="exampleModalLabel"></h5>
+					<button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body">...</div>
+				<div class="modal-body mt--4">
+					<table class="table align-items-center table-flush">
+						<thead class="thead-light">
+							<tr>
+								<th>프로젝트 이름</th>
+								<th>버튼</th>
+							</tr>
+						</thead>
+						<tbody id="tbody">
+						</tbody>
+					</table>
+				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-primary">Save changes</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	<!-- 모달 제어 스크립트 (데이터 담기) -->
+	<script>
+		$('#exampleModal').on(
+						'show.bs.modal',
+						function(event) {
+							//프로젝트 지원, 프로젝트 승인, 프로젝트 참여 상태의 테이블을 만들어서 보여줘야함
+							var button = $(event.relatedTarget) // Button that triggered the modal
+							var status = button.find(".proj_status").html();
+							var ajaxRow = "";
 
-<!-- 모달 제어 스크립트 (데이터 담기) -->
-<script> 
-$('#exampleModal').on('show.bs.modal', function (event) {
-	//프로젝트 지원, 프로젝트 승인, 프로젝트 참여 상태의 테이블을 만들어서 보여줘야함
-	  var button = $(event.relatedTarget) // Button that triggered the modal
-	  var status = button.find(".proj_status").html();
-	  $.ajax({
-			url : "getProjStatusDetail",
-			type : 'GET',	//등록이랑 다른부분 
-			dataType : 'json',
-			data : JSON.stringify({
-				status : status
-			}),
-			contentType : 'application/json',
-			success : function(data) {	//데이터 받아오기 성공하면 
-				//테이블 생성
-			},
-			error : function(xhr, status, message) {
-				alert(" status: " + status + " er:" + message);
-			}
+							console.log(status);
+							$.ajax({
+										url : "getProjStatusDetail/" + status,
+										type : 'GET',
+										dataType : 'json',
+										async : false, //동기화 방식으로 해야 데이터를 다 받아 온 후에 실행한다.
+										/* data : JSON.stringify({
+											status : encodeURI(status)
+										}), */
+										contentType : 'application/json;charset=utf-8',
+										success : function(data) { //데이터 받아오기 성공하면 
+											//테이블 생성
+											console.log(data.length);
+											console.log(data[0].projTitle);
+
+											for (i = 0; i < data.length; i++) {
+												ajaxRow += "<tr>"
+														+ "<td>"
+														+ data[i].projTitle
+														+ "</td>"
+														+ "<td>"
+														+ "<button type=\"button\" class=\"btn btn-default\">지원 취소</button>"
+														+ "</td>" + "</tr>";
+											}
+										},
+										error : function(xhr, status, message) {
+											alert(" status: " + status + " er:"
+													+ message);
+										}
+									});
+
+							//모달 띄우기
+							var modal = $(this);
+							$(this).find("#exampleModalLabel").html(status);
+							$(this).find("#tbody").append(ajaxRow); //여기서 모달을 다시 띄우면 그 전에 열었던 모달창에 더 추가된다. 정보가 계속 누적됨;;;
+						});
+		
+		//모달 닫기
+		$('.modal-close').on("click", function(){
+			$("#tbody").html("");
 		});
-	  
-	});
-</script>
-
-
-
-
-
-
-
-
+	</script>
 	<div class="container-fluid mt--7">
 		<div class="row">
 			<div class="col-xl-8 mb-5 mb-xl-0">
@@ -358,20 +349,9 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 							</div>
 							<div class="col">
 								<ul class="nav nav-pills justify-content-end">
-									<li class="nav-item mr-2 mr-md-0" data-toggle="chart"
-										data-target="#chart-sales"
-										data-update="{&quot;data&quot;:{&quot;datasets&quot;:[{&quot;data&quot;:[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}"
-										data-prefix="$" data-suffix="k"><a href="#"
-										class="nav-link py-2 px-3 active" data-toggle="tab"> <span
-											class="d-none d-md-block">Month</span> <span
-											class="d-md-none">M</span>
+									<li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales" data-update="{&quot;data&quot;:{&quot;datasets&quot;:[{&quot;data&quot;:[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}" data-prefix="$" data-suffix="k"><a href="#" class="nav-link py-2 px-3 active" data-toggle="tab"> <span class="d-none d-md-block">Month</span> <span class="d-md-none">M</span>
 									</a></li>
-									<li class="nav-item" data-toggle="chart"
-										data-target="#chart-sales"
-										data-update="{&quot;data&quot;:{&quot;datasets&quot;:[{&quot;data&quot;:[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}"
-										data-prefix="$" data-suffix="k"><a href="#"
-										class="nav-link py-2 px-3" data-toggle="tab"> <span
-											class="d-none d-md-block">Week</span> <span class="d-md-none">W</span>
+									<li class="nav-item" data-toggle="chart" data-target="#chart-sales" data-update="{&quot;data&quot;:{&quot;datasets&quot;:[{&quot;data&quot;:[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}" data-prefix="$" data-suffix="k"><a href="#" class="nav-link py-2 px-3" data-toggle="tab"> <span class="d-none d-md-block">Week</span> <span class="d-md-none">W</span>
 									</a></li>
 								</ul>
 							</div>
@@ -389,10 +369,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 								</div>
 							</div>
 							<!-- Chart wrapper -->
-							<canvas id="chart-sales"
-								class="chart-canvas chartjs-render-monitor" width="590"
-								height="350"
-								style="display: block; width: 590px; height: 350px;"></canvas>
+							<canvas id="chart-sales" class="chart-canvas chartjs-render-monitor" width="590" height="350" style="display: block; width: 590px; height: 350px;"></canvas>
 						</div>
 					</div>
 				</div>
@@ -418,10 +395,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 									<div class=""></div>
 								</div>
 							</div>
-							<canvas id="chart-orders"
-								class="chart-canvas chartjs-render-monitor"
-								style="display: block; width: 255px; height: 350px;" width="255"
-								height="350"></canvas>
+							<canvas id="chart-orders" class="chart-canvas chartjs-render-monitor" style="display: block; width: 255px; height: 350px;" width="255" height="350"></canvas>
 						</div>
 					</div>
 				</div>
@@ -456,36 +430,31 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 									<th scope="row">/argon/</th>
 									<td>4,569</td>
 									<td>340</td>
-									<td><i class="fas fa-arrow-up text-success mr-3"></i>
-										46,53%</td>
+									<td><i class="fas fa-arrow-up text-success mr-3"></i> 46,53%</td>
 								</tr>
 								<tr>
 									<th scope="row">/argon/index.html</th>
 									<td>3,985</td>
 									<td>319</td>
-									<td><i class="fas fa-arrow-down text-warning mr-3"></i>
-										46,53%</td>
+									<td><i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%</td>
 								</tr>
 								<tr>
 									<th scope="row">/argon/charts.html</th>
 									<td>3,513</td>
 									<td>294</td>
-									<td><i class="fas fa-arrow-down text-warning mr-3"></i>
-										36,49%</td>
+									<td><i class="fas fa-arrow-down text-warning mr-3"></i> 36,49%</td>
 								</tr>
 								<tr>
 									<th scope="row">/argon/tables.html</th>
 									<td>2,050</td>
 									<td>147</td>
-									<td><i class="fas fa-arrow-up text-success mr-3"></i>
-										50,87%</td>
+									<td><i class="fas fa-arrow-up text-success mr-3"></i> 50,87%</td>
 								</tr>
 								<tr>
 									<th scope="row">/argon/profile.html</th>
 									<td>1,795</td>
 									<td>190</td>
-									<td><i class="fas fa-arrow-down text-danger mr-3"></i>
-										46,53%</td>
+									<td><i class="fas fa-arrow-down text-danger mr-3"></i> 46,53%</td>
 								</tr>
 							</tbody>
 						</table>
@@ -523,9 +492,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 											<span class="mr-2">60%</span>
 											<div>
 												<div class="progress">
-													<div class="progress-bar bg-gradient-danger"
-														role="progressbar" aria-valuenow="60" aria-valuemin="0"
-														aria-valuemax="100" style="width: 60%;"></div>
+													<div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
 												</div>
 											</div>
 										</div>
@@ -539,9 +506,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 											<span class="mr-2">70%</span>
 											<div>
 												<div class="progress">
-													<div class="progress-bar bg-gradient-success"
-														role="progressbar" aria-valuenow="70" aria-valuemin="0"
-														aria-valuemax="100" style="width: 70%;"></div>
+													<div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div>
 												</div>
 											</div>
 										</div>
@@ -555,9 +520,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 											<span class="mr-2">80%</span>
 											<div>
 												<div class="progress">
-													<div class="progress-bar bg-gradient-primary"
-														role="progressbar" aria-valuenow="80" aria-valuemin="0"
-														aria-valuemax="100" style="width: 80%;"></div>
+													<div class="progress-bar bg-gradient-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
 												</div>
 											</div>
 										</div>
@@ -571,9 +534,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 											<span class="mr-2">75%</span>
 											<div>
 												<div class="progress">
-													<div class="progress-bar bg-gradient-info"
-														role="progressbar" aria-valuenow="75" aria-valuemin="0"
-														aria-valuemax="100" style="width: 75%;"></div>
+													<div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
 												</div>
 											</div>
 										</div>
@@ -587,9 +548,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 											<span class="mr-2">30%</span>
 											<div>
 												<div class="progress">
-													<div class="progress-bar bg-gradient-warning"
-														role="progressbar" aria-valuenow="30" aria-valuemin="0"
-														aria-valuemax="100" style="width: 30%;"></div>
+													<div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"></div>
 												</div>
 											</div>
 										</div>
@@ -606,23 +565,15 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 			<div class="row align-items-center justify-content-xl-between">
 				<div class="col-xl-6">
 					<div class="copyright text-center text-xl-left text-muted">
-						© 2018 <a href="https://www.creative-tim.com"
-							class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+						© 2018 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
 					</div>
 				</div>
 				<div class="col-xl-6">
-					<ul
-						class="nav nav-footer justify-content-center justify-content-xl-end">
-						<li class="nav-item"><a href="https://www.creative-tim.com"
-							class="nav-link" target="_blank">Creative Tim</a></li>
-						<li class="nav-item"><a
-							href="https://www.creative-tim.com/presentation" class="nav-link"
-							target="_blank">About Us</a></li>
-						<li class="nav-item"><a href="http://blog.creative-tim.com"
-							class="nav-link" target="_blank">Blog</a></li>
-						<li class="nav-item"><a
-							href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"
-							class="nav-link" target="_blank">MIT License</a></li>
+					<ul class="nav nav-footer justify-content-center justify-content-xl-end">
+						<li class="nav-item"><a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a></li>
+						<li class="nav-item"><a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a></li>
+						<li class="nav-item"><a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a></li>
+						<li class="nav-item"><a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a></li>
 					</ul>
 				</div>
 			</div>

@@ -24,5 +24,15 @@
           		(select count(*) from proj_applicants where members_no=#{memberNo} AND status='참여') proj_participant
 		from dual
 	</select>
+	
+	<!-- 회원의 프로젝트 지원상태 상세 -->
+	<select id="getProjStatusDetail" parameterType="projParticipants" resultType="projParticipants">
+		select  a.proj_no   "projNo",
+          		b.proj_title  "projTitle" 
+		from PROJ_APPLICANTS a join PROJECTS b 
+                               on a.proj_no = b.proj_no 
+		where a.members_no=#{membersNo} 
+		and a.status=#{status}
+	</select>
 </mapper>
 

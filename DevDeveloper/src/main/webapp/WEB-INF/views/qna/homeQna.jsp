@@ -42,10 +42,10 @@
                           <a href="/">최신순</a>
                       </li>
                       <li class="filter-item ">
-                          <a href="?type=nonselect">d</a>
+                          <a href="">d</a>
                       </li>
                       <li class="filter-item ">
-                          <a href="?type=nonanswer">d</a>
+                          <a href="">d</a>
                       </li>
                   </ul>
               </div>
@@ -72,15 +72,18 @@
                           </td>
                           <td class="question-content">
                               <div class="question-title">
-                                  <a href="/tag/etc/question/316">ㅋㅁㄴㅇㅁㅇㅁㄴㅇㅋㅇㅋㅋ</a>
+                                  <a href="">ㅋㅁㄴㅇㅁㅇㅁㄴㅇㅋㅇㅋㅋ</a>
                               </div>
                               <div class="row question-meta">
                                   <div class="pull-left">
                                       <div class="tags">
                                       
                                            
-                                              <a href="/tag/etc/question" class="tags-item category">
-                                                  <img src="">etc
+                                              <a href="" class="tags-item category">
+                                                  <img src="">java
+                                              </a>
+                                              <a href="" class="tags-item category">
+                                                  <img src="">asdsads
                                               </a>
                                           
                                       
@@ -89,7 +92,7 @@
                                   <div class="pull-right">
                                       <span class="question-date">2019.11.01 14:37:01</span>
                                       <span class="question-author">
-                                          <a href="/user/601">
+                                          <a href="">
                                               김지민
                                               <span class="author-reputation">
                                                   0

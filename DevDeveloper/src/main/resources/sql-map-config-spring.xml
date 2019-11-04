@@ -49,7 +49,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- 지민 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
 		<typeAlias alias="members"
 				   type="com.dd.devdeveloper.members.MembersVO"/>
-		
+		<typeAlias alias="answer"
+				   type="com.dd.devdeveloper.qna.AnswerVO"/>
+		<typeAlias alias="question"
+				   type="com.dd.devdeveloper.qna.QuestionVO"/>				   
 		<!-- 경민 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
 		<typeAlias alias="files"
 			type="com.dd.devdeveloper.files.FilesVO"/>

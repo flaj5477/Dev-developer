@@ -57,7 +57,7 @@
 				</div>
 				<div class="col">
 					<form name="searchfrm">
-						<div class="input-group">
+						<%-- <div class="input-group">
 							<select name="select">
 								<option value="title">제목
 								<option value="tags">태그
@@ -65,10 +65,26 @@
 	                        <div class="input-group-prepend">
 	                          <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
 	                        </div>
-                        	<input class="form-control" name="searchVal"><!--  value=${param.searchVal } getparameter? el에서 value안에값처럼표시 -->
+                        	<input class="form-control" name="searchVal"  value="${param.searchVal }"><!--  getparameter? el에서 value안에값처럼표시 -->
                       	
 							<input type="hidden" name="page" value="1">
 							<button>검색</button>
+						</div> --%>
+						<select name="select">
+								<option value="title">제목
+								<option value="tags">태그
+						</select>
+						<div class="row mb-3">
+							<div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-xs-7">
+								<input class="form-control" name="searchVal" placeholder="Search" type="text">
+								<input type="hidden" name="page" value="1">
+								
+							</div>
+							<div >
+								<button class="btn btn-icon btn-2 btn-primary">
+									<span class="btn-inner--icon"><i class="fas fa-search"></i></span>
+								</button>
+							</div>
 						</div>
 					</form>
 				</div>

@@ -34,22 +34,9 @@ public class MembersController {
 	 @Autowired MembersService membersService;
 	 
 	 
-	 @RequestMapping(value ="/loginForm" , method = RequestMethod.GET)
-			public String loginform1() {
-				return "/notiles/members/loginForm";
-			}   
-	
-		
-		@RequestMapping("/signForm")
-		public String loginformtest() {
-			return "/notiles/members/signForm";
-		}
-		
 
-		@RequestMapping("/loginSuccess")
-		public String test() {
-			return "members/test";
-	}
+		
+		//아이디 중복확인
 		
 		@RequestMapping("/idsearch")
 		@ResponseBody
@@ -60,17 +47,7 @@ public class MembersController {
 			else
 				return new MembersVO();
 		}
-		
-		
-		@RequestMapping(value="/testForm", method=RequestMethod.GET)
-		public String testForm(HttpServletRequest request, @RequestParam Map<String, Object> param, Model model) throws Exception {
-
-		    return "/notiles/members/testForm";
-		} 
-
-
- 
-	
+  	
 	 //회원가입 폼
 	
 	  @RequestMapping(value="/signup", method=RequestMethod.GET) 
@@ -78,26 +55,19 @@ public class MembersController {
 		  return "/notiles/members/signForm";
 	 	 }
 	 
-  
-		
-		
-		
+	
 	//회원가입
        @RequestMapping(value="/signup", method=RequestMethod.POST)
        public String signupPOST(MembersVO vo, HttpSession session,
 				MultipartHttpServletRequest multipart,
 				HttpServletRequest request) {
-    	   
-    	   
+
     	   System.out.println("등록 비밀번호 : " + vo.getMembersPw());
     //암호화
     	   String encryPassword = MembersSha256.encrypt(vo.getMembersPw());
     	   vo.setMembersPw(encryPassword);
     	   System.out.println("암호화작업후 : " + vo.getMembersPw());
-    	   
-   	   
-    	   
-    	   
+
     		// 첨부파일 업로드하고 파일명 조회
    		MultipartFile multipartFile = multipart.getFile("membersImage4"); //multipartlist getfiles
    		 
@@ -134,8 +104,14 @@ public class MembersController {
      //로그인폼 
        @RequestMapping(value ="/login" , method = RequestMethod.GET)
 		public String loginform() {
-			return "/notiles/members/loginForm2";
+			return "/members/loginForm";
 		}      
+     //로그인모달  
+  	 @RequestMapping(value ="/login2" , method = RequestMethod.GET)
+		public String loginform1() {
+			return "/notiles/members/loginForm";
+		}   
+
        
      //로그인처리
    	@RequestMapping(value ="/login" , method = RequestMethod.POST)
@@ -144,7 +120,7 @@ public class MembersController {
    		
    		String Pw = vo.getMembersPw();
   		vo.setMembersPw(MembersSha256.encrypt(Pw));
-  		System.out.println("=========111111111=======" +Pw);
+  		//System.out.println("=========111111111=======" +Pw);
   		
    		int result = membersService.loginCheck(vo, session);
    		
@@ -155,14 +131,15 @@ public class MembersController {
    	
   //로그아웃 처리	
   	@RequestMapping("logout")
-  	public ModelAndView logout(HttpSession session) {
+  	public String logout(HttpSession session) {
   		
   		membersService.logout(session);
-  		ModelAndView mav = new ModelAndView();
-  		mav.setViewName("members/loginForm");
-  		mav.addObject("msg", "logout");
+		/*
+		 * ModelAndView mav = new ModelAndView(); mav.setViewName("wiki");
+		 * mav.addObject("msg", "logout");
+		 */
   		
-  		return mav;
+  		return "redirect:wikihome";
   	}
   	
        

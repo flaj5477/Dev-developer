@@ -1,25 +1,25 @@
 package com.dd.devdeveloper.dashboard.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dd.devdeveloper.dashboard.ActivityLogVO;
 import com.dd.devdeveloper.dashboard.DashboardVO;
 import com.dd.devdeveloper.dashboard.service.DashboardService;
 import com.dd.devdeveloper.members.MembersVO;
+import com.dd.devdeveloper.projects.ProjParticipantsVO;
 
 @Controller
 public class DashboardController {
 	
 	@Autowired DashboardService dashboardService;
 	
-	@RequestMapping("/getDashboard")
+	@RequestMapping("/getDashboard") //대시보드 페이지 가져오기
 	public String getDashboard(ActivityLogVO vo, Model model, HttpSession session) {
 		
 		DashboardVO dashboardVO = new DashboardVO();
@@ -47,5 +47,18 @@ public class DashboardController {
 		//return "dashboard/svgtest";
 
 			return "dashboard/dashboard";
+	}
+	
+	
+	//회원의 프로젝트 지원상태 상세 모달 가져옴
+	@ResponseBody
+	@RequestMapping("/getProjStatusDetail")
+	public ProjParticipantsVO getProjStatusDetail(ProjParticipantsVO vo, HttpSession session) {
+		//세션에서 회원정보 가져와서 vo에 달고
+		//vo.setMembersNo(session.getAttribute("members"));
+		
+		//서비스 연결
+		
+		return vo;
 	}
 }

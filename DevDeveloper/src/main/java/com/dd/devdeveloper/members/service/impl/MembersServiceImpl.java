@@ -25,14 +25,14 @@ public class MembersServiceImpl implements MembersService{
 	 @Override
 		public int loginCheck(MembersVO vo, HttpSession session) {
 		 	 
-		 System.out.println("impl로 오는거 // 로그인 객체 확인 VO : " + vo);
+		// System.out.println("impl로 오는거 // 로그인 객체 확인 VO : " + vo);
 			 String mid = vo.getMembersId();
 			 String mpw = vo.getMembersPw();
-			 System.out.println("=======22222222222========" + mpw); 
+			// System.out.println("=======22222222222========" + mpw); 
 			 
 
 			 MembersVO voo = membersDAO.getmembers(vo);
-			 System.out.println("UserLoginService //  voo : " + voo);
+			// System.out.println("UserLoginService //  voo : " + voo);
 			 
 			 
 			 int result = 0;

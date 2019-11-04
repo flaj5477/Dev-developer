@@ -1,6 +1,7 @@
 package com.dd.devdeveloper.wiki.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.dd.devdeveloper.common.paging.Paging;
@@ -105,8 +107,8 @@ public class WikiController {
 	 * 2019-10-29
 	 * 위키번역폼 이동
 	 */
-	@RequestMapping("/transWikiForm")
-	public String transWikiForm(@ModelAttribute("wiki") WikiVO vo, Model model) {
+	@RequestMapping(value = "/transWikiForm", method = RequestMethod.POST)
+	public String transWikiForm(@ModelAttribute("wiki") WikiVO vo, Model model) {	//
    		//테스트
 		model.addAttribute("transWiki", wikiService.getTransWikiForm(vo));
 		return "wiki/transWikiForm";
@@ -118,11 +120,28 @@ public class WikiController {
 	 * 2019-10-31
 	 * 위키번역 등록
 	 */
-	@RequestMapping("/transWiki")
-	public Map transWiki(@RequestBody WikiTransVO vo, Model model) {
-		wikiService.insertWikiTrans(vo);
-		Map<Integer, Object> map = new HashMap<Integer, Object>();
+	@RequestMapping(value = "/transWiki", method = RequestMethod.POST, consumes="application/json")
+	@ResponseBody
+	public Map transWiki(@RequestBody WikiTransVO tVo, Model model) {
+		tVo.setTranslDate("오류");	//널이면 오류남
+		tVo.setMembersNo(88); 	//테스트용
+		wikiService.insertWikiTrans(tVo);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", true);
 		
 		return map;
+	}
+	
+	/*
+	 * 곽동우
+	 * 2019-11-01
+	 * 위키번역폼에서- 위키라인 번역리스트가져오기
+	 */
+	@RequestMapping(value="/getWikiTransLine", method = RequestMethod.POST, consumes="application/json")
+	@ResponseBody
+	public List<Map<String, Object>> getWikiTransLine(@RequestBody WikiTransVO tVo, Model model) {
+		//model.addAttribute("user", userService.getUser(vo));
+		System.out.println(tVo);
+		return wikiService.getWikiTransLine(tVo);
 	}
 }

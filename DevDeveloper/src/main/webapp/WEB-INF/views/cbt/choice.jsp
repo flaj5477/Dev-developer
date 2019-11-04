@@ -22,7 +22,8 @@
 	});
 
 	function levelBox() {
-		$('#accessBtn').css('background-color','gray');	   
+		$('#subject').html('<h2>난이도 선택</h2> <br>');
+		$('#accessBtn').hide();
 		$('#cancleBtn').css('background-color','white');   	
 	}
 	
@@ -50,25 +51,24 @@
 		var chooseGrade = formatGrade(parseInt(level)); // parseInt(String 값으로 들어오기때문에)
 		var memberGrade = formatGrade(curLevel);
 		$('#toast').children('p').html('Loading..');
-		$('#comment').html('<p> 진행 하시려면 선택완료 버튼을 눌러주세요. </p> <br>')
+		$('#comment').html('<p> 진행 하시려면 선택완료 버튼을 눌러주세요. </p>')
 					 .prepend('<br> <p> 현재등급 : '+memberGrade+'</p> <p> 합격 시 등급 : '+chooseGrade+'</p>');
-		$('#accessBtn').html('선택완료')
+		$('#accessBtn').show()
+					   .html('선택완료')
 					   .css('background-color','#81A8D6');
 		clearInterval(readyTime); // radio 버튼누르면 반복실행 Clear
 	}
 	
 	function accessEvent() {
-		var interLock = false;
+		//선택완료..
 		$('#accessBtn').on('click',function() {
 			var sec = 3; // 클릭 시, 초기화
 			var level = $('[name ="testsLevel"]:checked').val();
-			interLock = !interLock; // 선택 Toggle
-			if(level != null && interLock == true) {
+			if(level != null) {
 				$('#toast').fadeIn(500).delay(10,function() {
 					readyTime = setInterval(function() {
 						$('#toast').children('p').html(sec+'초 후 이동합니다.');
 						if(sec<=0) {
-							console.log('success');
 							clearInterval(readyTime);
 							location.replace('ready?testsLevel='+level); // 페이지 이동, 뒤로가기 하면 현재 페이지 건너 뛴다, GET
 							//document.frm.submit(); // web에 name = frm인 form태그를 submit, POST
@@ -78,6 +78,7 @@
 				});
 			}
 		});
+		//선택취소..
 		$('#cancleBtn').on('click',function() {
 			clearInterval(readyTime); // 조건 만족 시, 반복 실행 종료
 			$('#toast').stop().fadeOut(500); // setInterval 작업을 STOP()한 후에 fadeOut처리 해야 제대로 된다.
@@ -88,9 +89,7 @@
 </head>
 <body>
 <div class ="levelChoice" align="center">
-	<div id="subject">
-		<h2>난이도 선택</h2>
-	</div>	
+	<div id="subject"></div>	
 	<div id="content">
 		<form action="ready" name="frm" method="post">
 			<table id="chooseTab" border="1" style="width:500px">

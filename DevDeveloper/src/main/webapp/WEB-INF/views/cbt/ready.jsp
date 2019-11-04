@@ -47,7 +47,7 @@
 		$('#tab3').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시험 준비완료&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
 		$('#comment3').append('<br> <b>[시험준비완료]</b>버튼을 누르시면 <b>잠시 후 시험이 시작됩니다.</b><br><br>');
 		$('#readyBtn').html('<h5>시험준비완료</h5>');
-		$('#toast').children('p').html('잠시 후 시험이 시작 됩니다.');
+		$('#toast').children('p').html('<br>잠시 후 시험이 시작 됩니다.');
 	}
 	
 	function testInfo() {
@@ -111,8 +111,8 @@
 		<div id="tabs-3">
 			<div id="comment3"></div>
 			<div id="toast">
-				<br><p></p><br>
-				<div class="spinner-border text-info" style="width: 3rem; height: 3rem;" role="status">
+				<p></p>
+				<div class="spinner-border text-info" style="width: 4rem; height: 4rem;" role="status">
 	  				<span class="sr-only"></span>
 				</div>
 			</div>

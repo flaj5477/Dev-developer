@@ -31,25 +31,25 @@ public class FilesController {
 		model.addAttribute("paging", paging);
 		return "files/filesList";
 	}
-
-	// 파일 상세 맵핑
-	@RequestMapping("/getFiles")
-	public String getFiles(FilesVO vo, Model model) {
-		model.addAttribute("file", filesService.getFiles(vo));
-		return "files/files";
+	
+	@RequestMapping("/getFilesImport") // 중요 파일 뿌려주는?
+	public String getfilesImport(Model model, Paging paging, FilesVO vo, HttpServletRequest request) {
+		model.addAttribute("list", filesService.getImportList(paging, vo));
+		model.addAttribute("paging", paging);
+		return "files/filesImport";
+		
 	}
-
-	/*
-	 * // Find file
-	 * 
-	 * @RequestMapping("list.do") public ModelAndView
-	 * list(@RequestParam(defaultValue="title") String searchOption,
-	 * 
-	 * @RequestParam(defaultValue="") String keyword) throws Exception { int count =
-	 * FilesService.countArticle(searchOption, keyword); // 레코드 갯수
-	 * 
-	 * 
-	 * }
-	 */
+	
+	@RequestMapping("/filesImport")
+	public String filesImport(FilesVO vo) {
+		filesService.filesImport(vo);
+		return "redirect:getFilesList"; //파일 리스트 페이지로 돌아감
+	}
+	
+	@RequestMapping("/filesTrash")
+	public String filesTrash(FilesVO vo) {
+		filesService.filesTrash(vo);
+		return "redirect:getFilesList";
+	}
 	
 }

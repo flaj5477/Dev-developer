@@ -27,4 +27,8 @@
 			</if>
 		</where>
 	</select>
+	<insert id="cbtInsert" statementType="CALLABLE" parameterType="testsRecord">
+		{call CBT_START(#{membersNo},
+						#{testsNo})}
+	</insert>
 </mapper>

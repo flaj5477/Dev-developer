@@ -7,10 +7,7 @@
 <title> CBT Home </title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/cbt.css">
 <script src="${pageContext.request.contextPath}/resources/assets/js/format.js"></script>
-<script>
-	
-	var page = 1;
-	
+<script>	
 	$(document).ready(function() {
 		indexBox();
 		indexCheck();
@@ -18,7 +15,6 @@
 	});
 	
 	function indexBox() {
-		$('#subject').html('<p> 레벨테스트 </p>'); // html = 내용을 view
 		$('#content').append('레벨테스트는 CBT방식으로 최대한 객관성을 얻고자 <br>') // append 내용을 추가
 					 .append('한국산업인력공단과 이 사이트를 만든 개발자들이 협력하여 <br>')
 					 .append('출제한 문제이므로 참고바랍니다. <br><br>');	
@@ -99,10 +95,12 @@
 </head>
 <body>
 <div class="cbtIndex" align="center">
-	<div id="subject"></div>
+	<div id="subject">
+		<h2>레벨테스트</h2>
+	</div>
 	<div id="content"></div>
 	<div id="condition">
-		<div id="level"></div>
+		<span id="level"></span>
 		<span id="restTime"></span>
 		<span id="checkMsg"></span>
 		<button type="button" id ="entryBtn"></button>

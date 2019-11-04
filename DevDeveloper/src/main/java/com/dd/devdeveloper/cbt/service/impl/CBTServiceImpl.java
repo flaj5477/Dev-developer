@@ -45,5 +45,10 @@ public class CBTServiceImpl implements CBTService{
 	public TestsVO getTest(TestsVO tvo) {
 		return dao.getTest(tvo);
 	}
+
+	@Override
+	public void cbtInsert(TestsRecordVO recvo) {
+		dao.cbtInsert(recvo);
+	}
 	
 }

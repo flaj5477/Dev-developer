@@ -181,9 +181,6 @@
 						<if test="manualLine != null and manualLine gte 0"> <!-- 문자열 숫자 비교 다름 -->
 								AND MANUAL_LINE = #{manualLine}
 						</if>
-						<if test="manualLine" == null>
-								
-						</if>
 				</where>
 				
 				<choose>	

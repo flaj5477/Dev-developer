@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title> CBT Ready </title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/cbt.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 
@@ -47,10 +47,12 @@
 		$('#tab3').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시험 준비완료&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
 		$('#comment3').append('<br> <b>[시험준비완료]</b>버튼을 누르시면 <b>잠시 후 시험이 시작됩니다.</b><br><br>');
 		$('#readyBtn').html('<h5>시험준비완료</h5>');
+		$('#toast').children('p').html('잠시 후 시험이 시작 됩니다.');
 	}
 	
 	function testInfo() {
 		var level = parseInt("${param.testsLevel}"); //  command의 vo객체를 통해 form 태그의 값을 가져왔음!
+		frm.testsLevel.value = level; // frm 태그에 레벨 값 저장
 		$.ajax('getTestInfo/'+level, { type:'GET', dataType:'JSON'}) // 호출 Mapping URI
 		.done(function(data) {
 				var title = data.testsTitle;
@@ -70,7 +72,10 @@
 	function start() {
 		$('#readyBtn').on('click',function() {
 			console.log('success');
-			$('#toast').fadeIn(400).delay(3000).fadeOut(400);
+			$(this).attr('disabled',true);
+			$('#toast').fadeIn(400).delay(3000).fadeOut(400,function() {
+				document.frm.submit();
+			}); // delay 3000...
 		})
 	}	
 	
@@ -78,39 +83,42 @@
 </head>
 <body>
 <div class="ready" id="tabs" style="width:600px; left:445px">
-	<ul id="subjects">
-		<li id="content1"><a id="tab1" href="#tabs-1"></a></li>
-		<li id="content2"><a id="tab2" href="#tabs-2"></a></li>
-		<li id="content3"><a id="tab3" href="#tabs-3"></a></li>
-	</ul>
-	<div id="tabs-1">	
-		<table id="chooseTab" border="1" style="width:550px; text-align:center">
-			<thead>
-				<tr align="center">
-					<th>시험명</th>
-					<th>상세</th>
-					<th>문항수</th>
-					<th>통과점수</th>
-					<th>응시시간(분)</th>
-				</tr>
-			</thead>
-			<tbody></tbody>
-		</table>
-		<div id="comment1"></div>
-	</div>
-	<div id="tabs-2">
-		<div id="comment2"></div>
-	</div>
-	<div id="tabs-3">
-		<div id="comment3"></div>
-		<div id="toast">
-			<p> 잠시 후 시험이 시작 됩니다.</p>
-			<div class="spinner-border text-info" style="width: 3rem; height: 3rem;" role="status">
-  				<span class="sr-only"></span>
-			</div>
+	<form action="examination" name="frm" method="post">
+		<input type="hidden" name="testsLevel"/>
+		<ul id="subjects">
+			<li id="content1"><a id="tab1" href="#tabs-1"></a></li>
+			<li id="content2"><a id="tab2" href="#tabs-2"></a></li>
+			<li id="content3"><a id="tab3" href="#tabs-3"></a></li>
+		</ul>
+		<div id="tabs-1">
+			<table id="chooseTab" border="1" style="width:550px; text-align:center">
+				<thead>
+					<tr align="center">
+						<th>시험명</th>
+						<th>상세</th>
+						<th>문항수</th>
+						<th>통과점수</th>
+						<th>응시시간(분)</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+			<div id="comment1"></div>
 		</div>
-		<button type="button" id="readyBtn" value="accept"></button>
-	</div>
+		<div id="tabs-2">
+			<div id="comment2"></div>
+		</div>
+		<div id="tabs-3">
+			<div id="comment3"></div>
+			<div id="toast">
+				<br><p></p><br>
+				<div class="spinner-border text-info" style="width: 3rem; height: 3rem;" role="status">
+	  				<span class="sr-only"></span>
+				</div>
+			</div>
+			<button type="button" id="readyBtn"></button>
+		</div>
+	</form>
 </div>
 </body>
 </html>

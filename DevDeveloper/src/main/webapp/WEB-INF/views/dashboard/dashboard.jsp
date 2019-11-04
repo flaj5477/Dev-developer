@@ -311,7 +311,8 @@
 											console.log(data[0].projTitle);
 
 											for (i = 0; i < data.length; i++) {
-												ajaxRow += "<tr>"
+												//이부분 함수로 만들어서 status가 지원일때, 승인일때, 참여일때, 버튼과 클릭이벤트 따로 주기
+												ajaxRow += "<tr id=" + data[i].projNo + ">"
 														+ "<td>"
 														+ data[i].projTitle
 														+ "</td>"

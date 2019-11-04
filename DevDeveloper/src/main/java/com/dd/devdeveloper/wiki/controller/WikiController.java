@@ -129,8 +129,6 @@ public class WikiController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("result", true);
 		
-		System.out.println("dkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk번역등록");
-		
 		return map;
 	}
 	
@@ -143,7 +141,7 @@ public class WikiController {
 	@ResponseBody
 	public List<Map<String, Object>> getWikiTransLine(@RequestBody WikiTransVO tVo, Model model) {
 		//model.addAttribute("user", userService.getUser(vo));
-		System.out.println(tVo.getManualLine()+"와ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ번역리스트");
+		System.out.println(tVo);
 		return wikiService.getWikiTransLine(tVo);
 	}
 }

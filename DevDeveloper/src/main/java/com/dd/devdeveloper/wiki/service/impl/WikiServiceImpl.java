@@ -191,7 +191,7 @@ public class WikiServiceImpl implements WikiService {
 	*/
 	@Override
 	public List<Map<String, Object>> getWikiTransLine(WikiTransVO vo) {
-		
+		System.out.println(vo.getManualLine()+"=================테스트중...................");
 		return wikiDAO.getWikiTransLine(vo);
 	}
 

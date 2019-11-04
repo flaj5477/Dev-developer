@@ -10,8 +10,12 @@ public interface FilesService {
 		
 	// 파일 전체 조회
 	List<LinkedHashMap<String, Object>> getFilesList(Paging paging, FilesVO vo);
+	
+	List<LinkedHashMap<String, Object>> getImportList(Paging paging, FilesVO vo);
 				
-	//파일 상세 조회
-	FilesVO getFiles(FilesVO vo);
+	//파일 임포트
+	int filesImport(FilesVO vo);
+	
+	int filesTrash(FilesVO vo);
 	
 }

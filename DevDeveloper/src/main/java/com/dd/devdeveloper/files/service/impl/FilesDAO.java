@@ -21,6 +21,10 @@ public class FilesDAO {
 		return mybatis.selectList("FilesDAO.getFilesList", vo);
 	}
 	
+	public List<LinkedHashMap<String, Object>> getImportList(FilesVO vo) {
+		return mybatis.selectList("FilesDAO.getImportList", vo);
+	}
+	
 	// 파일 상세
 	public FilesVO getFiles(FilesVO vo) {
 		return mybatis.selectOne("FilesDAO.getFiles", vo);
@@ -30,5 +34,15 @@ public class FilesDAO {
 	public int getConuntFiles(FilesVO vo) {
 		return mybatis.selectOne("FilesDAO.getCountFiles", vo);
 	}
+	
+	//임포트
+	public int filesImport(FilesVO vo) {
+		return mybatis.update("filesDAO.filesImport", vo);
+	}
+	
+	
 
+	public int filesTrash(FilesVO vo) {
+		 return mybatis.update("filesDAO.filesTrash", vo);
+	}
 }

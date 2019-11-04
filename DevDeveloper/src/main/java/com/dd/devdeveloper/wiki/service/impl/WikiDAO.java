@@ -50,6 +50,7 @@ public class WikiDAO {
 		mybatis.insert("WikiDAO.insertWikiTrans", vo);
 	}
 
+	//위키번역받기
 	public List<Map<String, Object>> getWikiTransLine(WikiTransVO vo) {
 		return mybatis.selectList("WikiDAO.getWikiTransLine", vo);
 	}

@@ -8,17 +8,18 @@
 
 	<select id="getFilesList" resultType="files">
 		SELECT B.* FROM ( SELECT A.*,ROWNUM RN FROM(
-		select files_no,
-		files_title,
-		files_comment,
-		members_no,
-		files_group_no,
-		files_upload_date,
-		files_type,
-		files_size,
-		files_Import,
-		files_Trash
-		from files
+			select files_no,
+					files_title,
+					files_comment,
+					members_no,
+					files_group_no,
+					files_upload_date,
+					files_type,
+					files_size,
+					files_Import,
+					files_Trash
+			from
+					files
 		where 1=1
 		<choose>
 			<when test="filesGroupNo == null or filesGroupNo==''">
@@ -33,42 +34,57 @@
 		)A)B WHERE RN between #{first} and #{last}
 	</select>
 
-	<select id="getCountFiles" parameterType="files" resultType="int">
+	<select id="getImportList" parameterType="files" resultType="files">
+		select files_no,
+			files_title,
+			files_comment,
+			members_no,
+			files_group_no,
+			files_upload_date,
+			files_type,
+			files_Import,
+			files_Trash
+		from
+			files
+		where files_Import='Y'
+			
+	</select>
+
+	<select id="getCountFiles" parameterType="files"
+		resultType="int">
 		select count(*) as "getCountFiles"
 		from files
 		<where>
 			<if test="searchVal != null and searchVal != '' ">
-				<!-- <if test="manualTitle != null and manualTitle != '' "> AND MANUAL_TITLE 
-					LIKE '%' || #{manualTitle} || '%' </if> -->
 				<if test="select == 'title'">
 					AND FILES_NO LIKE '%' || #{searchVal} || '%'
 				</if>
 				<if test="select == 'usersNo'">
 					AND MANUAL_TAGS LIKE '%' || #{searchVal} || '%'
+				</if>
 			</if>
-		 </if>
 		</where>
 	</select>
+
+
+	<update id="getFilesImport" parameterType="files">
+		update files
+		set files_import = 'Y'
+		where files_no=${filesNo}
+	</update>
 	
-<!-- 	<select id="getBoardListCnt" resultType="int">
-		SELECT
-		count(*) as listCnt
-		FROM
-		TBL_BOARD
-		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			<if test="keyword != null and keyword != '' ">
-				<if test="searchType=='title'">
-					AND TITLE like CONCAT('%', #{keyword}, '%')
-				</if>
-				<if test="searchType=='content'">
-					AND CONTENT like CONCAT('%', #{keyword}, '%')
-				</if>
-				<if test="searchType=='reg_id'">
-					AND reg_id like CONCAT('%', #{keyword}, '%')
-				</if>
-			</if>
-		</trim>
-	</select> -->
+	<update id="getFilesTrash" parameterType="files">
+		update files
+		set files_Trash = 'Y'
+		where files_no=${filesNo}
+	</update>
+
+	<!-- <select id="getBoardListCnt" resultType="int"> SELECT count(*) as listCnt 
+		FROM TBL_BOARD <trim prefix="WHERE" prefixOverrides="AND|OR"> <if test="keyword 
+		!= null and keyword != '' "> <if test="searchType=='title'"> AND TITLE like 
+		CONCAT('%', #{keyword}, '%') </if> <if test="searchType=='content'"> AND 
+		CONTENT like CONCAT('%', #{keyword}, '%') </if> <if test="searchType=='reg_id'"> 
+		AND reg_id like CONCAT('%', #{keyword}, '%') </if> </if> </trim> </select> -->
 
 
 	<select id="getFiles" resultType="files">

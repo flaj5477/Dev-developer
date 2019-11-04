@@ -4,12 +4,12 @@
     <!-- Navigation -->
         <ul class="navbar-nav">
           <li class="nav-item">
-          <a class=" nav-link" href=" #"> <i class="ni ni-folder-17 text-blue"></i> 파일
+          <a class=" nav-link" href="getFilesList"> <i class="ni ni-folder-17 text-blue"></i> 파일
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="#">
-              <i class="ni ni-favourite-28 text-red"></i> 중요
+            <a class="nav-link " href="getFilesImport">
+              <i class="ni ni-favourite-28 text-red" ></i> 중요
             </a>
           </li>
           <li class="nav-item">

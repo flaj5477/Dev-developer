@@ -31,6 +31,12 @@
 
 <script>
 	pageName = "프로젝트 파일";
+	
+	function fImport() {
+		$.ajax({
+		})
+	}
+			/* uri:"./filesImport.jsp", */
 </script>
 </head>
 
@@ -66,10 +72,11 @@
 										</div>
 									</form>
 								</div>
+								
 								<div class="col-9 pull-right">
 									<button type="button" class="btn btn-primary btn">새폴더</button>
 
-									<button type="button" class="btn btn-primary btn">중요</button>
+									<button type="button" class="btn btn-primary btn" onclick="location.href='filesImport' ">중요</button> <!-- ./import -->
 
 									<button type="button" class="btn btn-primary btn">휴지통</button>
 

@@ -16,6 +16,7 @@ public interface FilesService {
 	//파일 임포트
 	int filesImport(FilesVO vo);
 	
+	//파일 삭제
 	int filesTrash(FilesVO vo);
 	
 }

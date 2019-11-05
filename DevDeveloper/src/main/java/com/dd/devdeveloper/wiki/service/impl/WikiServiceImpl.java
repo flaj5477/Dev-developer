@@ -179,6 +179,7 @@ public class WikiServiceImpl implements WikiService {
 	 * 곽동우
 	 * 위키번역등록
 	 */
+	@Override
 	public Map<Integer, Object> insertWikiTrans(WikiTransVO vo){
 		wikiDAO.insertWikiTrans(vo);
 		return null;

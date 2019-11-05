@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
 <html>
@@ -8,30 +9,46 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
+<style>
+div h5 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 200px;
+  height: 40px;
+}
+</style>
 <body>
 <div class="row">
-			${tagList }
-            <div class="col-xl-3 col-lg-6">
-              <div class="card card-stats mb-4 mb-xl-0">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Traffic</h5>
-                      <span class="h2 font-weight-bold mb-0">350,897</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                        <i class="fas fa-chart-bar"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
+			
+			<c:forEach items="${tagList}" var="tag">
+	            <div class="col-xl-3 col-lg-6">
+	              <div class="card card-stats mb-4 mb-xl-0">
+	                <div class="card-body">
+	                  <div class="row">
+	                    <div class="col">
+	                      <span class="h2 font-weight-bold text-uppercase mb-0">${tag.manualTags }</span>
+	                      <h5 class="card-title text-muted mb-0">${tag.tagsContents }</h5>
+	                    </div>
+	                    <div class="col-auto">
+	                      <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+	                        <i class="fas fa-chart-bar"></i>
+	                      </div>
+	                    </div>
+	                  </div>
+	                  <p class="mt-3 mb-0 text-muted text-sm">
+	                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+	                    <span class="text-nowrap">${tag.countTags }개</span>
+	                  </p>
+	                </div>
+	              </div>
+	            </div>
+            </c:forEach>
+            
+            
+            
+            
+            
             <div class="col-xl-3 col-lg-6">
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">

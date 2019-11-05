@@ -225,11 +225,21 @@
 	 	20191105
 	 	태그별 위키 갯수
 	  -->
-	  <select id="getWikiTagList" resultType="Map">
-	  		SELECT 	NVL(MANUAL_TAGS, '기타') 		as manualTags , 
+	  <select id="getWikiTagList" parameterType="wikiTag" resultType="Map">
+	  		<!-- SELECT 	NVL(MANUAL_TAGS, '기타') 		as manualTags , 
 	  				COUNT(nvl(MANUAL_TAGS, '기타'))  as countTag
 			FROM WIKI_GUIDE
 			GROUP BY MANUAL_TAGS
-			ORDER BY countTag DESC
+			ORDER BY countTag DESC -->
+			select a.TAGS_NO 		as "tagsNo", 
+				   a.TAGS_TITLE		as "tagsTitle", 
+				   a.TAGS_CONTENTS	as "tagsContents", 
+				   b.manualTags		as "manualTags", 
+				   b.countTags		as "countTags"
+			from tags a right join (SELECT NVL(MANUAL_TAGS, '기타') as manualTags , COUNT(nvl(MANUAL_TAGS, '기타')) as countTags
+					                  FROM WIKI_GUIDE
+					                  GROUP BY MANUAL_TAGS
+					                  ORDER BY countTags DESC) b
+			on a.TAGS_TITLE = b.manualTags
 	  </select>
 </mapper>

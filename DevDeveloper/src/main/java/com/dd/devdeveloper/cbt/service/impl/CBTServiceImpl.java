@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dd.devdeveloper.cbt.TestsQVO;
 import com.dd.devdeveloper.cbt.TestsRecordVO;
 import com.dd.devdeveloper.cbt.TestsVO;
 import com.dd.devdeveloper.cbt.service.CBTService;
@@ -50,5 +51,9 @@ public class CBTServiceImpl implements CBTService{
 	public void cbtInsert(TestsRecordVO recvo) {
 		dao.cbtInsert(recvo);
 	}
-	
+
+	@Override
+	public List<TestsQVO> getQuestList(TestsQVO tqvo) {
+		return dao.getQuestList(tqvo);
+	}
 }

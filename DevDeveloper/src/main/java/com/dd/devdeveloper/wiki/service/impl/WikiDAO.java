@@ -50,8 +50,18 @@ public class WikiDAO {
 		mybatis.insert("WikiDAO.insertWikiTrans", vo);
 	}
 
-	//위키번역받기
+	//위키번역받기(라인별)
 	public List<Map<String, Object>> getWikiTransLine(WikiTransVO vo) {
 		return mybatis.selectList("WikiDAO.getWikiTransLine", vo);
+	}
+	
+	//위키번역받기(게시글)
+	public List<Map<String, Object>> getWikiTrans(WikiVO vo){
+		return mybatis.selectList("WikiDAO.getWikiTrans", vo);
+	}
+
+	//위키원문 등록된 태그 리스트 뿌려주기
+	public List<Map<String, Object>> getWikiTagList() {
+		return mybatis.selectList("WikiDAO.getWikiTagList");
 	}
 }

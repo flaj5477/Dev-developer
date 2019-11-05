@@ -117,6 +117,28 @@ public class WikiController {
 		return "wiki/transWikiForm";
 	}
 	
+	/*
+	 * 곽동우
+	 * 2019-11-05
+	 * 위키원문에 등록된 태그 리스트 뿌려주기
+	 */
+	@RequestMapping(value= "/getWikiTagList")
+	public String getWikiTagList(Model model) {
+		model.addAttribute("tagList",wikiService.getWikiTagList());
+		return "wiki/getWikiTagList";
+	}
+	
+	/*
+	 * 곽동우
+	 * 2019-11-05
+	 * 번역보기 
+	 */
+	@RequestMapping(value= "/getWikiTrans")
+	public String getWikiTrans(WikiVO vo, Model model) {
+		model.addAttribute( "transWiki", wikiService.getWikiTrans(vo) );
+		return "wiki/getWikiTrans";
+	}
+	
 	
 	/*
 	 * 곽동우
@@ -157,10 +179,9 @@ public class WikiController {
 	@RequestMapping(value="/papagoTrans", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String papagoTrans(HttpServletRequest request) {
-		System.out.println("하ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ하하하하ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
 		String papagoTrans = PapagoTranslateNMT.papago(request.getParameter("oriContents"));
-		System.out.println(papagoTrans);
-		String test = "{\"srcLangType\":\"en\",\"tarLangType\":\"ko\",\"translatedText\":\"가나다라마바사아자차카타파하\"}";
 		return papagoTrans;
 	}
+	
+
 }

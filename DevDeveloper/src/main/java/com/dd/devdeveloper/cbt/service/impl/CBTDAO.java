@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.dd.devdeveloper.cbt.TestsQVO;
 import com.dd.devdeveloper.cbt.TestsRecordVO;
 import com.dd.devdeveloper.cbt.TestsVO;
 
@@ -26,8 +27,12 @@ public class CBTDAO {
 	public TestsVO getTest(TestsVO tvo) {
 		return mybatis.selectOne("CBTDAO.getTestList",tvo);
 	}
-	
+	//응시기록 추가
 	public void cbtInsert(TestsRecordVO recvo) {
 		mybatis.insert("CBTDAO.cbtInsert",recvo);
+	}
+	//시험문제 조회
+	public List<TestsQVO> getQuestList(TestsQVO tqvo) {
+		return mybatis.selectList("CBTDAO.getQuestList",tqvo);
 	}
 }

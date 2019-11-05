@@ -35,7 +35,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="wiki"
 			type="com.dd.devdeveloper.wiki.WikiVO"/>
 		<typeAlias alias="wikiTrans"
-			type="com.dd.devdeveloper.wiki.WikiTransVO"/>			
+			type="com.dd.devdeveloper.wiki.WikiTransVO"/>
+		<typeAlias alias="wikiTag"
+			type="com.dd.devdeveloper.wiki.WikiTagVO"/>
+					
 			
 		<!-- 동규 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
 		<typeAlias alias="testsRecord"
@@ -43,9 +46,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="tests"
 				   type="com.dd.devdeveloper.cbt.TestsVO"/>		   
 		<typeAlias alias="testsQ"
-				   type="com.dd.devdeveloper.cbt.TestsQVO"/>
-		<typeAlias alias="testsSet"
-				   type="com.dd.devdeveloper.cbt.TestsSetVO"/>	   
+				   type="com.dd.devdeveloper.cbt.TestsQVO"/>  
 		<!-- 지민 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
 		<typeAlias alias="members"
 				   type="com.dd.devdeveloper.members.MembersVO"/>

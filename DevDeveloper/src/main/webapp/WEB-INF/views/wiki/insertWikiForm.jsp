@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
+<script src="vendor/select2/dist/js/select2.min.js"></script>
 <title>위키등록</title>
 <style>
 .ck-editor__editable {
@@ -15,7 +18,8 @@
 	var myEditor;
 
 	$(function(){
-		checkForm();
+		 checkForm();
+		
 		
 		 ClassicEditor
 	     .create( document.querySelector( '#manualContents' ) , {
@@ -30,9 +34,9 @@
 	         console.error( error );
 	     } );
 		
+		
+		 
 	});
-	
-	
 	
 	function checkForm(){
 		
@@ -63,6 +67,8 @@
   		<input type="text" class="form-control" id="manualTags" name="manualTags" placeholder="테그" >
   		<button type="button" id="btnfrm" class="btn btn-primary">등록</button>
 	</form>
+	
+
 	
 	
 	

@@ -37,6 +37,7 @@
 		})
 	}
 			/* uri:"./filesImport.jsp", */
+	 
 </script>
 </head>
 
@@ -134,7 +135,10 @@
 						<tbody>
 							<c:forEach var="files" items="${list}">
 								<tr>
-									<td><input type="checkbox" name="chk_files" value="${files.filesNo}">
+									<%-- <td><input type="checkbox" name="chk_files" value="${files.filesNo}"> --%>
+									<td>
+									<c:if test="${files.filesImport=='Y'}"><input type="checkbox" value="${files.filesNo}" name="chk_files" checked></c:if>
+									<c:if test="${files.filesImport==null}"><input type="checkbox" value="${files.filesNo}" name="chk_files" ></c:if>
 										<%-- ${files.filesType} --%><c:if test="${files.filesType=='F'}" ><i class="far fa-file"></i>
                 						${files.filesTitle}
                 						 </c:if> <c:if test="${files.filesType=='D'}"><i class="far fa-folder"></i>
@@ -204,6 +208,22 @@
 		      token: "ee6fab19c5a04ac1a32a645abde4613a",
 		      application: "argon-dashboard-free"
 		    }); */
+	</script>
+	<script>
+		$("input[name='chk_files']").on("click", function() {
+			console.log(this);
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/filesImport",
+				type: "POST",
+				data : {
+					"filesNo" : $(this).val()
+				},
+				success : function(data) {
+					console.log(data);
+				}
+			})
+		});
 	</script>
 </body>
 

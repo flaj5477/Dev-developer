@@ -6,11 +6,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.dd.devdeveloper.board.service.BoardService;
 import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.files.FilesVO;
 import com.dd.devdeveloper.files.service.FilesService;
@@ -40,8 +41,10 @@ public class FilesController {
 		
 	}
 	
-	@RequestMapping("/filesImport")
-	public String filesImport(FilesVO vo) {
+	@ResponseBody
+	@RequestMapping(value="/filesImport", method=RequestMethod.POST)
+	public String filesImport(@ModelAttribute FilesVO vo) {
+		System.out.println(vo);
 		filesService.filesImport(vo);
 		return "redirect:getFilesList"; //파일 리스트 페이지로 돌아감
 	}

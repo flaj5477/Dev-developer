@@ -30,19 +30,20 @@ public class FilesDAO {
 		return mybatis.selectOne("FilesDAO.getFiles", vo);
 	}
 	
-	//검색하면 개수 가져오는
+	//검색하면 검색한거 개수 가져오는
 	public int getConuntFiles(FilesVO vo) {
 		return mybatis.selectOne("FilesDAO.getCountFiles", vo);
 	}
 	
 	//임포트
-	public int filesImport(FilesVO vo) {
-		return mybatis.update("FilesDAO.filesImport", vo);
+	public void filesImport(FilesVO vo) {
+		System.out.println("sss"+ vo);
+		  mybatis.update("FilesDAO.filesImport", vo);
 	}
 	
 	
 
-	public int filesTrash(FilesVO vo) {
-		 return mybatis.update("filesDAO.filesTrash", vo);
+	public void filesTrash(FilesVO vo) {
+		   mybatis.update("FilesDAO.filesTrash", vo);
 	}
 }

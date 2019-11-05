@@ -30,14 +30,14 @@ public class FilesDAO {
 		return mybatis.selectOne("FilesDAO.getFiles", vo);
 	}
 	
-	//검색하면 검색한거 개수 가져오는
+	//검색하면 개수 가져오는
 	public int getConuntFiles(FilesVO vo) {
 		return mybatis.selectOne("FilesDAO.getCountFiles", vo);
 	}
 	
 	//임포트
 	public int filesImport(FilesVO vo) {
-		return mybatis.update("filesDAO.filesImport", vo);
+		return mybatis.update("FilesDAO.filesImport", vo);
 	}
 	
 	

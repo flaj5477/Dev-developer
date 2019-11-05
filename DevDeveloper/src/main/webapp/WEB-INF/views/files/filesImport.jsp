@@ -72,7 +72,7 @@
 										</div>
 									</form>
 								</div>
-								
+							<form name="importfrm">
 								<div class="col-9 pull-right">
 									<button type="button" class="btn btn-primary btn">새폴더</button>
 
@@ -112,9 +112,7 @@
 								</div>
 							</div>
 						</div>
-						<!--  여기 검색창 -->
-						<!--  아래 한라인에 넣을것 -->
-						<!-- <div class="ni ni-zoom-split-in"> -->
+						
 
 					</div>
 					<!--  href="./getFiles?filesNo=${files.filesNo}">${files.filesTitle }  -->
@@ -134,7 +132,7 @@
 						<tbody>
 							<c:forEach var="files" items="${list}">
 								<tr>
-									<td><input type="checkbox" name="chk_files" value="${files.filesNo}">
+									<td><input type="checkbox" name="filesNo" value="${files.filesNo}">
 										<%-- ${files.filesType} --%><c:if test="${files.filesType=='F'}" ><i class="far fa-file"></i>
                 						${files.filesTitle}
                 						 </c:if> <c:if test="${files.filesType=='D'}"><i class="far fa-folder"></i>
@@ -150,6 +148,7 @@
 
 						</tbody>
 					</table>
+					</form>
 				</div>
 				<div class="card-footer py-4">
 					<my:paging paging="${paging}" jsFunc="go_page" />

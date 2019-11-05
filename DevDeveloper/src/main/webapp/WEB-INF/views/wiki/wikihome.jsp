@@ -14,6 +14,7 @@
 
 	$(function() {
 		//transTitle();
+		hover();
 	});
 	
 	/* 
@@ -23,6 +24,15 @@
 		var form = document.frm;
 		form.manualNo.value = n;
 		form.submit();
+	}
+	
+	
+	function hover(){
+		$('[name=wikitd]').hover(function() {	// on이벤트? 해줘야됨
+			$(this).css("background-color", "#f4f5f7");
+		}, function(){
+			$(this).css("background-color", "transparent ");
+		});
 	}
 
 /* 	function transTitle() {
@@ -109,7 +119,7 @@
 				<tbody>
 
 					<c:forEach items="${wikiMap }" var="wiki">
-						<tr id="wikitd"
+						<tr name="wikitd"
 							onclick="location.href='getWiki?manualNo=${wiki.manualNo}'">
 							<th scope="row">
 								<div class="media-body">

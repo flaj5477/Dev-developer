@@ -33,10 +33,11 @@
   padding: 5px;
 }
 
+/*
 .transEdit .row > *:not(:first-child) {
   border-left: solid gray 0.5px;
 }
-
+ */
 .ni-fat-remove{
   font-size: 20px;
 }
@@ -262,11 +263,28 @@
 				alert("상태값 : "+status + " Http에러메세지 :"+msg);
 			},
 			success:function(data){
+				if(data.length == 0) {
+					wikiTransEmpty(manualLine);
+					return;
+				}
 				wikiTransLineResult(data, manualLine);
 			}
 		});
 	}
 	
+	/*
+		곽동우
+		20191105
+		번역없는라인
+	*/
+	function wikiTransEmpty(manualLine){
+		$('#othertrans_'+manualLine).empty();
+		
+		$('<div>').attr('class','row otherTrans')
+	   	 .append($('<div id="otcontents" >').attr("align", "center").html("번역이 없어요 "))
+		 .append($('<i class="ni ni-fat-remove">'))
+		 .appendTo('#othertrans_'+manualLine);
+	}
 	
 	/*
 		곽동우

@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -191,12 +192,80 @@ public class WikiServiceImpl implements WikiService {
 	*/
 	@Override
 	public List<Map<String, Object>> getWikiTransLine(WikiTransVO vo) {
-		System.out.println(vo.getManualLine()+"=================테스트중...................");
 		return wikiDAO.getWikiTransLine(vo);
 	}
 
+	/*
+	 * 곽동우
+	 * 20191105
+	 * 위키번역된문서 뿌려주기
+	 */
+	@Override
+	public Map<Integer, Object> getWikiTrans(WikiVO vo) {
+		
+		String path = vo.getManualContentsPath();
+		String sTag = "<p>";
+		String eTag = "</p>";
+		
+		String contents = readText(path);
+		
+//		////////////////////////getTransWikiForm(WikiVO vo) 랑 비슷한 처리 나중에 합쳐?
+//		Map<Integer, String> oriLineMap = new HashMap<Integer, String>();		//원본 라인별분리
+//		
+//		int idx;
+//		int line = 0;
+//		
+//		do {
+//			idx = contents.indexOf(eTag);	//p 닫는태그 위치
+//			
+//			if(idx != -1) {	//</p>가 있으면
+//				oriLineMap.put(line, contents.substring(0, idx+4));	// 0 ~ </P> 까지 맵에담는다
+//				contents = contents.substring(idx+4);				// 담은거 잘라낸다
+//				line++;												//라인수 +1
+//			}
+//		}while(idx != -1);	// </p>가 있으면 반복
+//		//////////////////////////////
+		
+		/////////////////태그잘라서 map에담기
+		String date[] = contents.split(sTag);
+		
+		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();
+		int lineNum = 0;	//
+		
+		for (int i = 0; i < date.length; i++) {
+			date[i] = date[i].split(eTag)[0];
+			if (!date[i].isEmpty()) {
+				lineMap.put(lineNum++, date[i]);
+			}
+		}
+		
+		////////////////////////////////
+		
+		List<Map<String, Object>> transList = wikiDAO.getWikiTrans(vo);
+		
+		for(int i = 0; i < transList.size(); i++) {
+			int transline = Integer.parseInt( String.valueOf( transList.get(i).get("manualLine") ) );	// java.math.BigDecimal cannot be cast to java.lang.Integer 에러 자바
+			String transContents = (String) transList.get(i).get("manualAfter");						//		오라클 NUMBER 형 컬럼의 데이터를 HashMap 타입으로 받아 java에서 사용하려고 하니 발생
+			
+			lineMap.put(transline, transContents);
+		}
+		
+		return lineMap;
+	}//getWikiTrans - end
 	
-	
+
+	/*
+	 * 곽동우
+	 * 20191105
+	 * 위키원문 등록된 태그 리스트 뿌려주기
+	 */
+	@Override
+	public List<Map<String,Object>> getWikiTagList() {
+		List<Map<String,Object>> tagList = wikiDAO.getWikiTagList();
+		
+		return tagList;
+	}
+
 	
 	
 	////////// 파일
@@ -318,6 +387,5 @@ public class WikiServiceImpl implements WikiService {
 			e.printStackTrace();
 		} // end - fileCopy
 	}
-
 
 }

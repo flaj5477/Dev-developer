@@ -24,6 +24,10 @@
 		$('#btnTransWiki').on('click', function(){
 			$("#frm").attr("action", "transWikiForm").submit();
 		});
+		
+		$('#btnGetTransWiki').on('click', function(){
+			$("#frm").attr("action", "getWikiTrans").submit();
+		});
 	}
 
 </script>
@@ -46,6 +50,7 @@
 		        </div>
 		        <div class="col">
 			        <div class="nav nav-pills justify-content-end">
+			        	<button type="button" id="btnGetTransWiki" class="btn btn-danger">번역보기</button>
 			        	<button type="button" id="btnTransWiki" class="btn btn-danger">번역</button>
 			        	<button type="button" id="btnDelWiki" class="btn btn-danger">삭제</button>
 			        	<button class="btn btn-primary">수정</button>

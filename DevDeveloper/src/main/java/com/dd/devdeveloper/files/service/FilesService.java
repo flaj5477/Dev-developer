@@ -14,8 +14,8 @@ public interface FilesService {
 	List<LinkedHashMap<String, Object>> getImportList(Paging paging, FilesVO vo);
 				
 	//파일 임포트
-	int filesImport(FilesVO vo);
+	void filesImport(FilesVO vo);
 	
-	int filesTrash(FilesVO vo);
+	void filesTrash(FilesVO vo);
 	
 }

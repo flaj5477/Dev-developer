@@ -47,21 +47,21 @@ public class FilesServiceImpl implements FilesService {
 		vo.setFirst(paging.getFirst()); // 시작 레코드 번호
 		vo.setLast(paging.getLast());	// 마지막 레코드 번호
 		
-		List<LinkedHashMap<String, Object>> filesList = filesDAO.getFilesList(vo);
+		List<LinkedHashMap<String, Object>> filesList = filesDAO.getImportList(vo);
 		
 		return  filesList;
 	}
 
 	@Override
-	public int filesImport(FilesVO vo) {
-		return filesDAO.filesImport(vo);
+	public void filesImport(FilesVO vo) {
+		  filesDAO.filesImport(vo);
 		
 	}
 	
 	
 	@Override
-	public int filesTrash(FilesVO vo) {
-		return filesDAO.filesTrash(vo);
+	public void filesTrash(FilesVO vo) {
+		  filesDAO.filesTrash(vo);
 	}
 	
 		

@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class TestsQVO {
 	private int testsQNo; // TESTS_Q_NO
+	private int testsNo; // TESTS_NO  
 	private String testsQContents; // TESTS_Q_CONTENTS
 	private String testsQEx1; // TESTS_Q_EX1    
 	private String testsQEx2; // TESTS_Q_EX2

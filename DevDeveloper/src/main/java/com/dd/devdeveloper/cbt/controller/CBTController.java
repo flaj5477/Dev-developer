@@ -51,14 +51,15 @@ public class CBTController {
 	@RequestMapping(value="cbt/getTestInfo/{level}", method=RequestMethod.GET)
 	@ResponseBody
 	public TestsVO getTest(@PathVariable int level, TestsVO tvo) {
-		tvo.setTestsLevel(level);
+		tvo.setTestsNo(level);
 		return cbtService.getTest(tvo);
 	}
 	
 	@RequestMapping("cbt/examination") 
-	public String setExamination(TestsRecordVO recvo) { 
-		//recvo.setMembersNo(membersNo);
-		//recvo.setTestsNo(testsNo);
-		return "cbt/examination";
+	public String setExamination(TestsRecordVO recvo, HttpSession session) { 
+		MembersVO membersNo = (MembersVO) session.getAttribute("members");
+		recvo.setMembersNo(membersNo.getMembersNo());
+		//cbtService.cbtInsert(recvo);
+		return "/notiles/cbt/examination";
 	}
 }

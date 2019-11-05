@@ -36,13 +36,14 @@ public class FilesDAO {
 	}
 	
 	//임포트
-	public int filesImport(FilesVO vo) {
-		return mybatis.update("filesDAO.filesImport", vo);
+	public void filesImport(FilesVO vo) {
+		System.out.println("sss"+ vo);
+		  mybatis.update("FilesDAO.filesImport", vo);
 	}
 	
 	
 
-	public int filesTrash(FilesVO vo) {
-		 return mybatis.update("filesDAO.filesTrash", vo);
+	public void filesTrash(FilesVO vo) {
+		   mybatis.update("FilesDAO.filesTrash", vo);
 	}
 }

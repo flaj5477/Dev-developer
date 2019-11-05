@@ -24,5 +24,26 @@
           		(select count(*) from proj_applicants where members_no=#{memberNo} AND status='참여') proj_participant
 		from dual
 	</select>
+	
+	<!-- 회원의 프로젝트 지원상태 상세 -->
+	<select id="getProjStatusDetail" parameterType="projParticipants" resultType="projParticipants">
+		select  a.proj_no   "projNo",
+          		b.proj_title  "projTitle", 
+          		a.apply_no "applyNo"
+		from PROJ_APPLICANTS a join PROJECTS b 
+                               on a.proj_no = b.proj_no 
+		where a.members_no=#{membersNo} 
+		and a.status=#{status}
+	</select>
+	
+	<!-- 회원의 프로젝트 지원 취소 -->
+	<delete id="deleteApply" parameterType="projParticipants">
+		delete PROJ_APPLICANTS where apply_no=#{applyNo}
+	</delete>
+	
+	<!-- 프로젝트 승인 확인 -->
+	<update id="updateApplyParticipantIn" parameterType="projParticipants">
+		update PROJ_APPLICANTS set status='참여' where apply_no=#{applyNo}
+	</update>
 </mapper>
 

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.dd.devdeveloper.dashboard.ActivityLogVO;
 import com.dd.devdeveloper.dashboard.DashboardVO;
 import com.dd.devdeveloper.members.MembersVO;
+import com.dd.devdeveloper.projects.ProjParticipantsVO;
+
 
 @Repository
 public class DashboardDAO {
@@ -25,6 +27,21 @@ public class DashboardDAO {
 	//프로젝트 지원상태 
 	public DashboardVO getProjApplyStatus(DashboardVO vo) {
 		return mybatis.selectOne( "DashboardDAO.getProjApplyStatus" , vo);
+	}
+	
+	//회원의 프로젝트 지원상태 상세 모달 가져옴
+	public List<ProjParticipantsVO> getProjStatusDetail(ProjParticipantsVO vo) {
+		return mybatis.selectList("DashboardDAO.getProjStatusDetail", vo);
+	}
+	
+	//프로젝트 지원 취소
+	public void deleteApply(ProjParticipantsVO vo) {
+	  mybatis.delete("DashboardDAO.deleteApply", vo);
+	}
+	
+	//프로젝트 승인 확인
+	public void updateApplyParticipantIn(ProjParticipantsVO vo) {
+	   mybatis.update("DashboardDAO.updateApplyParticipantIn", vo);
 	}
 
 }

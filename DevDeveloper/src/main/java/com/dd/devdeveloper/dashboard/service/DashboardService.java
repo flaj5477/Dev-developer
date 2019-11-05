@@ -26,6 +26,10 @@ public interface DashboardService {
 	//프로젝트 지원 취소
 	public void deleteApply(ProjParticipantsVO vo);
 	
+	//프로젝트 승인 확인
+	public void updateApplyParticipantIn(ProjParticipantsVO vo);
+	
+	
 	//Q&A리스트
 	
 	//위키리스트

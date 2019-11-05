@@ -80,11 +80,24 @@ public class DashboardController {
 	
 	//지원취소
 	@RequestMapping("/deleteApply") 
-	public void deleteApply(ProjParticipantsVO vo, HttpSession session) {
-	  vo.setMembersNo( ((MembersVO)session.getAttribute("members")).getMembersNo() );
-	  
+	public String deleteApply(ProjParticipantsVO vo) {
 	  dashboardService.deleteApply(vo);
-	  
+	  return "redirect:/getDashboard";
+	}
+	
+	//승인확인
+	@RequestMapping("/updateApplyParticipantIn")
+	public String updateApplyParticipantIn(ProjParticipantsVO vo) {
+	  dashboardService.updateApplyParticipantIn(vo);
+    return "redirect:/getDashboard";
+	}
+	
+	//파일관리 페이지로 이동
+	@RequestMapping("/moveToFileList")
+	public String moveToFileList(ProjParticipantsVO vo, HttpSession session) {
+	  session.setAttribute("projNo", vo.getProjNo());
+	  System.out.println("세션확인!!!!!!!!!!!!!!!!!!!!!!!!!!!-> " + session.getAttribute("projNo"));
+	  return "redirect:/getFilesList";
 	}
 	
 }

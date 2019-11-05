@@ -313,13 +313,16 @@
 
 											for (i = 0; i < data.length; i++) {
 												//이부분 함수로 만들어서 status가 지원일때, 승인일때, 참여일때, 버튼과 클릭이벤트 따로 주기
-												ajaxRow += "<tr id=" + data[i].projNo + ">"
+												ajaxRow += CreateTableRow(status, data);
+													
+													/* 
+													"<tr id=" + data[i].projNo + ">"
 														+ "<td>"
 														+ data[i].projTitle
 														+ "</td>"
 														+ "<td>"
 														+ "<button type=\"button\" class=\"btn btn-default\">지원 취소</button>"
-														+ "</td>" + "</tr>";
+														+ "</td>" + "</tr>"; */
 											}
 										},
 										error : function(xhr, status, message) {
@@ -343,7 +346,7 @@
 				+ data[i].projTitle
 				+ "</td>"
 				+ "<td>"
-				+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './deleteApply?applyNo=' \">지원 취소</button>" 
+				+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './deleteApply?applyNo=" + data[i].applyNo + "' \">지원 취소</button>" 
 				+ "</td>" + "</tr>"; 
 			}
 			else if(status=="승인"){
@@ -352,7 +355,7 @@
 				+ data[i].projTitle
 				+ "</td>"
 				+ "<td>"
-				+ "<button type=\"button\" class=\"btn btn-default\">승인 확인</button>" 
+				+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './updateApplyParticipantIn?applyNo=" + data[i].applyNo + "' \">승인 확인</button>" 
 				+ "</td>" + "</tr>"; 
 			}
 			else if(status=="참여"){
@@ -361,10 +364,10 @@
 				+ data[i].projTitle
 				+ "</td>"
 				+ "<td>"
-				+ "<button type=\"button\" class=\"btn btn-default\">파일 관리</button>" 
+				+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './moveToFileList?projNo=" + data[i].projNo + "' \">파일 관리</button>" 
 				+ "</td>" + "</tr>"; 
 			}
-			
+			return row;
 		}
 		
 

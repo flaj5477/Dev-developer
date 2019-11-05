@@ -38,7 +38,12 @@
 	
 	<!-- 회원의 프로젝트 지원 취소 -->
 	<delete id="deleteApply" parameterType="projParticipants">
-		delete PROJ_APPLICANTS where apply_no=#{membersNo}
+		delete PROJ_APPLICANTS where apply_no=#{applyNo}
 	</delete>
+	
+	<!-- 프로젝트 승인 확인 -->
+	<update id="updateApplyParticipantIn" parameterType="projParticipants">
+		update PROJ_APPLICANTS set status='참여' where apply_no=#{applyNo}
+	</update>
 </mapper>
 

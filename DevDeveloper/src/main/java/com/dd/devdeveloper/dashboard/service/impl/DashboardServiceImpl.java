@@ -42,6 +42,12 @@ public class DashboardServiceImpl implements DashboardService{
   public void deleteApply(ProjParticipantsVO vo) {
     dashboardDAO.deleteApply(vo);
   }
+
+  @Override //프로젝트 승인 확인
+  public void updateApplyParticipantIn(ProjParticipantsVO vo) {
+    dashboardDAO.updateApplyParticipantIn(vo);
+    
+  }
 	
 	
 	

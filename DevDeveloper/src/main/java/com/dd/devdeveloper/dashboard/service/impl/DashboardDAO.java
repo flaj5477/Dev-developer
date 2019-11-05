@@ -38,5 +38,10 @@ public class DashboardDAO {
 	public void deleteApply(ProjParticipantsVO vo) {
 	  mybatis.delete("DashboardDAO.deleteApply", vo);
 	}
+	
+	//프로젝트 승인 확인
+	public void updateApplyParticipantIn(ProjParticipantsVO vo) {
+	   mybatis.update("DashboardDAO.updateApplyParticipantIn", vo);
+	}
 
 }

@@ -28,6 +28,19 @@
 </head>
  <body id ="qq">
          <div class="main-qqqcontent">
+         	<form name="searchfrm">
+					<div class="row mb-3">
+						<div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-xs-7">
+							<input class="form-control" name="searchVal" placeholder="Search" type="text" style="border:#686ce4 1px solid">
+							<input type="hidden" name="page" value="1">			
+						</div>
+						<div>
+							<button class="btn btn-icon btn-2 btn-primary">
+							<span class="btn-inner-icon"><i class="fas fa-search"></i></span>
+							</button>
+						</div>
+						</div>
+						</form>
     		<div class="col-xs-12">
       		  <div class="main-qqqcontainer qqqhomepage">
           		  <div class="qqqcard qqqcard-tab">
@@ -52,7 +65,7 @@
                     
                         
                             <tr>
-                            <td style="width: 21%">
+                            <td style="width: 21%; padding-left:5px;">
                                 <ul class="question-qqqstatistic">
                                     <li >
                                         <div>0</div>

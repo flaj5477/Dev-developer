@@ -1,12 +1,19 @@
 package com.dd.devdeveloper.dashboard.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.dd.devdeveloper.dashboard.ActivityLogVO;
 import com.dd.devdeveloper.dashboard.DashboardVO;
@@ -18,6 +25,7 @@ import com.dd.devdeveloper.projects.ProjParticipantsVO;
 public class DashboardController {
 	
 	@Autowired DashboardService dashboardService;
+
 	
 	@RequestMapping("/getDashboard") //대시보드 페이지 가져오기
 	public String getDashboard(ActivityLogVO vo, Model model, HttpSession session) {
@@ -52,13 +60,20 @@ public class DashboardController {
 	
 	//회원의 프로젝트 지원상태 상세 모달 가져옴
 	@ResponseBody
-	@RequestMapping("/getProjStatusDetail")
-	public ProjParticipantsVO getProjStatusDetail(ProjParticipantsVO vo, HttpSession session) {
+	@RequestMapping(value="/getProjStatusDetail/{status}", method=RequestMethod.GET)
+	public List<ProjParticipantsVO> getProjStatusDetail(	@PathVariable String status,
+														ProjParticipantsVO vo, 
+														HttpSession session, 
+														//Model model,
+														ModelMap map) {
+		
+		
 		//세션에서 회원정보 가져와서 vo에 달고
-		//vo.setMembersNo(session.getAttribute("members"));
+		vo.setMembersNo( ((MembersVO)session.getAttribute("members")).getMembersNo() );
+		vo.setStatus(status);
 		
 		//서비스 연결
-		
-		return vo;
+		//model.addAttribute("statusDetail", dashboardService.getProjStatusDetail(vo));
+		return dashboardService.getProjStatusDetail(vo);
 	}
 }

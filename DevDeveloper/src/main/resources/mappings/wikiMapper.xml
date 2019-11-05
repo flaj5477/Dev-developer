@@ -180,7 +180,6 @@
 						AND MANUAL_NO = #{manualNo}
 						<if test="manualLine != null and manualLine gte 0"> <!-- 문자열 숫자 비교 다름 -->
 								AND MANUAL_LINE = #{manualLine}
-								
 						</if>
 				</where>
 				

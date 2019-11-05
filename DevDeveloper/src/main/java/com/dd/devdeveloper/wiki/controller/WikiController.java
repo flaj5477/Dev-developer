@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.wiki.WikiTransVO;
 import com.dd.devdeveloper.wiki.WikiVO;
+import com.dd.devdeveloper.wiki.api.PapagoTranslateNMT;
 import com.dd.devdeveloper.wiki.service.WikiService;
 
 
@@ -143,5 +146,21 @@ public class WikiController {
 		//model.addAttribute("user", userService.getUser(vo));
 		System.out.println(tVo);
 		return wikiService.getWikiTransLine(tVo);
+	}
+	
+	
+	/*
+	 * 곽동우
+	 * 2019-11-04
+	 * 파파고 api
+	 */
+	@RequestMapping(value="/papagoTrans", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String papagoTrans(HttpServletRequest request) {
+		System.out.println("하ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ하하하하ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
+		String papagoTrans = PapagoTranslateNMT.papago(request.getParameter("oriContents"));
+		System.out.println(papagoTrans);
+		String test = "{\"srcLangType\":\"en\",\"tarLangType\":\"ko\",\"translatedText\":\"가나다라마바사아자차카타파하\"}";
+		return papagoTrans;
 	}
 }

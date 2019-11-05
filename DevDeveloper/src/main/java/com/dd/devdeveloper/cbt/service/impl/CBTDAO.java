@@ -26,4 +26,8 @@ public class CBTDAO {
 	public TestsVO getTest(TestsVO tvo) {
 		return mybatis.selectOne("CBTDAO.getTestList",tvo);
 	}
+	
+	public void cbtInsert(TestsRecordVO recvo) {
+		mybatis.insert("CBTDAO.cbtInsert",recvo);
+	}
 }

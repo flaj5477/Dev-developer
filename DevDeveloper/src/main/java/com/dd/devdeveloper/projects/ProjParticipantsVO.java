@@ -13,4 +13,6 @@ public class ProjParticipantsVO {
 	private String phoneNo;
 	private String address;
 	private String coverLetter;
+	
+	private String projTitle;
 }

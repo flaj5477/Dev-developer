@@ -1,4 +1,8 @@
 버그
-	D:/dev/ws/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/DevDeveloper/WEB-INF/classes/
-	
+		해결
+		D:/dev/ws/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/DevDeveloper/WEB-INF/classes/
 		log4j 충돌오류
+		
+		
+		미해결
+		번역등록후 다른번역 클릭하면 못가져온다

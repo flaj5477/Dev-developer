@@ -67,7 +67,7 @@
 	</select>
 
 
-	<update id="getFilesImport" parameterType="files">
+	<update id="filesImport" parameterType="files">
 		update files
 		set files_import = 'Y'
 		where files_no=${filesNo}

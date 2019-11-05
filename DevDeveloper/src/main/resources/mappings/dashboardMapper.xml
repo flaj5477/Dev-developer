@@ -17,6 +17,18 @@
 		) }
 	</select>
 	
+	<!-- 대시보드 프로필 정보 조회 -->
+	<select id="getMembers" parameterType="members" resultType="members">
+		select 	members_no, 
+				members_id, 
+				members_name, 
+				members_image, 
+				members_addr, 
+				members_mail 
+		from members 
+		where MEMBERS_NO = #{membersNo}
+	</select>
+	
 	<!-- 프로젝트 지원 상태 조회 -->
 	<select id="getProjApplyStatus" parameterType = "dashboard" resultType="dashboard">
 		select 	(select count(*) from proj_applicants where members_no=#{memberNo} AND status='지원') proj_apply,

@@ -104,7 +104,7 @@
 								<div class="row justify-content-center">
 									<div class="col-lg-3 order-lg-2">
 										<div class="card-profile-image">
-											<a href="#"> <img src="./resources/assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
+											<a href="#"> <img src="./images/profile/${members.membersImage}" class="rounded-circle">
 											</a>
 										</div>
 									</div>
@@ -114,21 +114,44 @@
 										<a href="#" class="btn btn-sm btn-info mr-4">Connect</a> <a href="#" class="btn btn-sm btn-default float-right">Message</a>
 									</div>
 								</div>
-								<div class="card-body pt-0 pt-md-4">
+								<div class="card-body pt-0 pt-md-4 mt-5">
 									<div class="text-center">
-										<h3>
-											Jessica Jones<span class="font-weight-light">, 27</span>
-										</h3>
-										<div class="h5 font-weight-300">
-											<i class="ni location_pin mr-2"></i>Bucharest, Romania
+									<div class="row justify-content-center">
+										<div class="col-2 align-self-center">
+											<img src="./images/grade/2.png" width="70px">
 										</div>
+										<div class="col-3 justify-content-center">
+											<h2>
+											${members.membersName}
+											</h2>
+											<div class="h4 font-weight-300">
+											${members.membersId}
+											</div>
+										</div>
+									</div>
+									
 										<div class="h5 mt-4">
-											<i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+											<i class="fas fa-map-marker-alt"></i> ${members.membersAddr}
 										</div>
 										<div>
-											<i class="ni education_hat mr-2"></i>University of Computer Science
+											<i class="fas fa-envelope"></i> ${members.membersMail}
 										</div>
 										<hr class="my-4">
+										<!-- 출석률 도트 -->
+										<div id="drawing" class="align-self-center">
+											<svg class=" col-fixed" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100%" height="84">
+												<c:forEach var="activityLog" items="${activityLogList}" varStatus="status">
+													<c:if test="${status.index % 7 == 0 }">		<!-- 일요일이면 g태그 열기 -->
+														<g transform="translate(<fmt:formatNumber value="${status.index/7*10}" pattern="#" />, 0)">
+													</c:if>
+													<!-- col-fixed 의 width인 620에 대한 % -->
+													<rect width="1%" height="10%" class="${activityLog.activityScore }" x="0" y="${status.index%7*14 }"></rect>
+													<c:if test="${status.index % 7 == 6 }">		<!-- 토요일이면 g태그 닫기 -->
+														</g>
+													</c:if>
+												</c:forEach>
+											</svg>
+										</div>
 										<p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
 										<a href="#">Show more</a>
 									</div>
@@ -223,28 +246,50 @@
 									</a>
 								</div>
 							</div>
-							<!-- 출석률 도트 -->
-							<div class="row  mb-4">
-								<div class="col-xl-7">
-									<div class="card-body">
-										<div id="drawing" class="align-self-center">
-											<svg class=" col-fixed" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100%" height="84">
-							<c:forEach var="activityLog" items="${activityLogList}" varStatus="status">
-								<c:if test="${status.index % 7 == 0 }">		<!-- 일요일이면 g태그 열기 -->
-									<g transform="translate(<fmt:formatNumber value="${status.index/7*10}" pattern="#" />, 0)">
-								
-																										
-													</c:if>
-									<!-- col-fixed 의 width인 620에 대한 % -->
-								<rect width="1%" height="10%" class="${activityLog.activityScore }" x="0" y="${status.index%7*14 }"></rect>
-								<c:if test="${status.index % 7 == 6 }">		<!-- 토요일이면 g태그 닫기 -->
-									</g>
-								</c:if>
-							</c:forEach>
-						</svg>
+							
+							<div class="row  mb-4 mt-3">
+							<div class="col-xl-6">
+				<div class="card shadow">
+					<div class="card-header border-0">
+						<div class="row align-items-center">
+							<div class="col">
+								<h3 class="mb-0">프로젝트 관리</h3>
+							</div>
+							<div class="col text-right">
+								<a href="#!" class="btn btn-sm btn-primary">See all</a>
+							</div>
+						</div>
+					</div>
+					<div class="table-responsive">
+						<!-- Projects table -->
+						<table class="table align-items-center table-flush">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col">프로젝트</th>
+									<th scope="col">참여자</th>
+									<th scope="col">진척률</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">Facebook</th>
+									<td>1,480</td>
+									<td>
+										<div class="d-flex align-items-center">
+											<span class="mr-2">60%</span>
+											<div>
+												<div class="progress">
+													<div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+												</div>
+											</div>
 										</div>
-									</div>
-								</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
 							</div>
 						</div>
 					</div>
@@ -367,6 +412,12 @@
 				+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './moveToFileList?projNo=" + data[i].projNo + "' \">파일 관리</button>" 
 				+ "</td>" + "</tr>"; 
 			}
+			else if(status=="완료"){
+				
+			}
+			else if(status=="관리"){
+				
+			}
 			return row;
 		}
 		
@@ -379,6 +430,8 @@
 			e.stopImmediatePropagation();
 
 		});
+		
+		
 		
 	</script>
 	<div class="container-fluid mt--7">

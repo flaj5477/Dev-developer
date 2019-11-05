@@ -37,6 +37,11 @@ public class DashboardServiceImpl implements DashboardService{
 	public List<ProjParticipantsVO> getProjStatusDetail(ProjParticipantsVO vo) {
 		return dashboardDAO.getProjStatusDetail(vo);
 	}
+
+  @Override //프로젝트 지원 취소
+  public void deleteApply(ProjParticipantsVO vo) {
+    dashboardDAO.deleteApply(vo);
+  }
 	
 	
 	

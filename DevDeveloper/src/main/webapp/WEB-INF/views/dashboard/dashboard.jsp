@@ -254,6 +254,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<!-- 프로젝트 모달 -->
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -267,7 +268,7 @@
 					</button>
 				</div>
 				<div class="modal-body mt--4">
-					<table class="table align-items-center table-flush">
+					<table class="table align-items-center table-flush text-center">
 						<thead class="thead-light">
 							<tr>
 								<th>프로젝트 이름</th>
@@ -333,6 +334,38 @@
 							$(this).find("#tbody").append(ajaxRow); //여기서 모달을 다시 띄우면 그 전에 열었던 모달창에 더 추가된다. 정보가 계속 누적됨;;;
 						});
 		
+		//status 별로 다른 테이블 값 생성
+		function CreateTableRow(status, data){
+			var row="";
+			if(status=="지원"){
+				row = "<tr id=" + data[i].applyNo + ">"
+				+ "<td>"
+				+ data[i].projTitle
+				+ "</td>"
+				+ "<td>"
+				+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './deleteApply?applyNo=' \">지원 취소</button>" 
+				+ "</td>" + "</tr>"; 
+			}
+			else if(status=="승인"){
+				row = "<tr id=" + data[i].applyNo + ">"
+				+ "<td>"
+				+ data[i].projTitle
+				+ "</td>"
+				+ "<td>"
+				+ "<button type=\"button\" class=\"btn btn-default\">승인 확인</button>" 
+				+ "</td>" + "</tr>"; 
+			}
+			else if(status=="참여"){
+				row = "<tr id=" + data[i].applyNo + ">"
+				+ "<td>"
+				+ data[i].projTitle
+				+ "</td>"
+				+ "<td>"
+				+ "<button type=\"button\" class=\"btn btn-default\">파일 관리</button>" 
+				+ "</td>" + "</tr>"; 
+			}
+			
+		}
 		
 
 		//모달 닫기

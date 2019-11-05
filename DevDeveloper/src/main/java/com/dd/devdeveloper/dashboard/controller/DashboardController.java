@@ -76,4 +76,15 @@ public class DashboardController {
 		//model.addAttribute("statusDetail", dashboardService.getProjStatusDetail(vo));
 		return dashboardService.getProjStatusDetail(vo);
 	}
+	
+	
+	//지원취소
+	@RequestMapping("/deleteApply") 
+	public void deleteApply(ProjParticipantsVO vo, HttpSession session) {
+	  vo.setMembersNo( ((MembersVO)session.getAttribute("members")).getMembersNo() );
+	  
+	  dashboardService.deleteApply(vo);
+	  
+	}
+	
 }

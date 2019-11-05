@@ -23,6 +23,9 @@ public interface DashboardService {
 	//회원의 프로젝트 지원상태 상세 모달 가져옴
 	public List<ProjParticipantsVO> getProjStatusDetail(ProjParticipantsVO vo);
 	
+	//프로젝트 지원 취소
+	public void deleteApply(ProjParticipantsVO vo);
+	
 	//Q&A리스트
 	
 	//위키리스트

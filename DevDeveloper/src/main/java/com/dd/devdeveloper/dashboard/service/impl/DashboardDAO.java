@@ -32,5 +32,10 @@ public class DashboardDAO {
 	public List<ProjParticipantsVO> getProjStatusDetail(ProjParticipantsVO vo) {
 		return mybatis.selectList("DashboardDAO.getProjStatusDetail", vo);
 	}
+	
+	//프로젝트 지원 취소
+	public void deleteApply(ProjParticipantsVO vo) {
+	  mybatis.delete("DashboardDAO.deleteApply", vo);
+	}
 
 }

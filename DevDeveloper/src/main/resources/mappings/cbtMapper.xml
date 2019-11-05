@@ -4,7 +4,7 @@
 
 <mapper namespace="CBTDAO">
 	<!-- 시험응시여부 판단, 시험기록조회 -->
-	<select id="getTestJudg" parameterType = "testsRecord" resultType="testsRecord">
+	<select id="getTestJudg" resultType="testsRecord" parameterType = "testsRecord">
 	<![CDATA[
 		SELECT m.members_grade , ADD_MONTHS(tr.tests_date,1)-9/24 AS UTCTestsDate, ADD_MONTHS(tr.tests_date,1) AS testsDate
 		FROM (SELECT *
@@ -20,15 +20,24 @@
 		SELECT * FROM TESTS
 	]]>
 		<where>
-			<if test="testsLevel != null and testsLevel != ''">
+			<if test="testsNo != null and testsNo != ''">
 	<![CDATA[	
-			tests_level = #{testsLevel}
+			tests_no = #{testsNo}
 	]]>
 			</if>
 		</where>
 	</select>
+	<!-- 시험 시작 후, 응시기록 추가 -->
 	<insert id="cbtInsert" statementType="CALLABLE" parameterType="testsRecord">
-		{call CBT_START(#{membersNo},
-						#{testsNo})}
+		call CBT_PROCESS_PKG.CBT_START(#{membersNo},
+					  				   #{testsNo})
 	</insert>
+	<select id="getQuestList" resultType="testsQ" parameterType="testsQ">
+	<![CDATA[
+		SELECT tests_q_no, tests_no, tests_q_contents, tests_q_ex1, tests_q_ex2, tests_q_ex3, tests_q_ex4,
+      		   tests_q_answer, tests_q_unit
+		FROM tests_q
+		WHERE tests_no = #{testsNo}
+	]]>
+	</select>
 </mapper>

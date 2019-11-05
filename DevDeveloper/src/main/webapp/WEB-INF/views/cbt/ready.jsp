@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/cbt.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
@@ -18,7 +17,7 @@
 		$("#tabs").tabs();
 		readyBox();
 		testInfo();
-		start();
+		connection();
 	});
 	
 	history.pushState(null, null, "#noback");
@@ -45,14 +44,14 @@
 		$('#tab2').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시험 메뉴안내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
 		$('#comment2').append('<br> <b>[시험 메뉴안내]</b>는 응시화면에서 사용되는 <b>주요기능</b>을 소개합니다. <br><br>');
 		$('#tab3').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시험 준비완료&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
-		$('#comment3').append('<br> <b>[시험준비완료]</b>버튼을 누르시면 <b>잠시 후 시험이 시작됩니다.</b><br><br>');
-		$('#readyBtn').html('<h5>시험준비완료</h5>');
-		$('#toast').children('p').html('<br>잠시 후 시험이 시작 됩니다.');
+		$('#comment3').append('<br> <b>[시험 시작하기]</b>버튼을 누르시면 <b>잠시 후 시험이 시작됩니다.</b><br><br>');
+		$('#readyBtn').html('<h5>시험 시작하기</h5>');
+		$('#toast').children('p').html('<br>잠시 후 시험이 시작됩니다.');
 	}
 	
 	function testInfo() {
-		var level = parseInt("${param.testsLevel}"); //  command의 vo객체를 통해 form 태그의 값을 가져왔음!
-		frm.testsLevel.value = level; // frm 태그에 레벨 값 저장
+		var level = parseInt("${param.testsNo}"); //  command의 vo객체를 통해 form 태그의 값을 가져왔음!
+		frm.testsNo.value = level; // frm 태그에 레벨 값 저장
 		$.ajax('getTestInfo/'+level, { type:'GET', dataType:'JSON'}) // 호출 Mapping URI
 		.done(function(data) {
 				var title = data.testsTitle;
@@ -69,14 +68,13 @@
 		});
 	}
 	
-	function start() {
+	function connection() {
 		$('#readyBtn').on('click',function() {
-			console.log('success');
 			$(this).attr('disabled',true);
-			$('#toast').fadeIn(400).delay(3000).fadeOut(400,function() {
+			$('#toast').fadeIn(500).delay(500).fadeOut(500,function() {
 				document.frm.submit();
-			}); // delay 3000...
-		})
+			});
+		});
 	}	
 	
 </script>
@@ -84,7 +82,7 @@
 <body>
 <div class="ready" id="tabs" style="width:600px; left:445px">
 	<form action="examination" name="frm" method="post">
-		<input type="hidden" name="testsLevel"/>
+		<input type="hidden" name="testsNo"/>
 		<ul id="subjects">
 			<li id="content1"><a id="tab1" href="#tabs-1"></a></li>
 			<li id="content2"><a id="tab2" href="#tabs-2"></a></li>

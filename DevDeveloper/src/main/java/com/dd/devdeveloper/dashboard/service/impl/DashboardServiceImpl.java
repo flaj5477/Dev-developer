@@ -27,6 +27,13 @@ public class DashboardServiceImpl implements DashboardService{
 	public DashboardVO getProjApplyStatus(DashboardVO vo) {
 		return dashboardDAO.getProjApplyStatus(vo);
 	}
+	
+  @Override //대시보드 프로필정보 가져오기
+  public MembersVO getMembers(MembersVO vo) {
+    return dashboardDAO.getMembers(vo);
+  }
+  
+	
 
 	@Override	//프로젝트 지원자 리스트 가져오기
 	public void getProjApplicantsList(DashboardVO vo) {
@@ -48,7 +55,8 @@ public class DashboardServiceImpl implements DashboardService{
     dashboardDAO.updateApplyParticipantIn(vo);
     
   }
-	
+
+
 	
 	
 

@@ -31,6 +31,8 @@ public class DashboardController {
 	public String getDashboard(ActivityLogVO vo, Model model, HttpSession session) {
 		
 		DashboardVO dashboardVO = new DashboardVO();
+		MembersVO membersVO = new MembersVO();
+		
 		int membersNo = ((MembersVO)session.getAttribute("members")).getMembersNo();
 		dashboardVO.setMemberNo( membersNo );//세션의 회원번호를 가져와서 vo에 담는다 
 		
@@ -43,6 +45,10 @@ public class DashboardController {
 		model.addAttribute("projApply", dashboardVO.getProjApply());
 		model.addAttribute("projApprove", dashboardVO.getProjApprove());
 		model.addAttribute("projParticipant", dashboardVO.getProjParticipant());
+		
+		//회원 프로필 가져옴
+		membersVO.setMembersNo(membersNo);
+		model.addAttribute("members", dashboardService.getMembers(membersVO));
 		
 		//회원이 올린 프로젝트공고에 지원한 지원자 리스트 가져옴
 		
@@ -96,7 +102,6 @@ public class DashboardController {
 	@RequestMapping("/moveToFileList")
 	public String moveToFileList(ProjParticipantsVO vo, HttpSession session) {
 	  session.setAttribute("projNo", vo.getProjNo());
-	  System.out.println("세션확인!!!!!!!!!!!!!!!!!!!!!!!!!!!-> " + session.getAttribute("projNo"));
 	  return "redirect:/getFilesList";
 	}
 	

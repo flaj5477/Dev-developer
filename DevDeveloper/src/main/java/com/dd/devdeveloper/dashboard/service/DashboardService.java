@@ -17,6 +17,9 @@ public interface DashboardService {
 	//프로젝트 지원 상태 가져오기
 	public DashboardVO getProjApplyStatus(DashboardVO vo);
 	
+	//프로필 정보 가져오기
+	public MembersVO getMembers(MembersVO vo);
+	
 	//프로젝트공고에 지원한 지원자 리스트
 	public void getProjApplicantsList(DashboardVO vo);
 	

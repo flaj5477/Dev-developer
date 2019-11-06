@@ -1,12 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
 <title>${wiki.manualTitle}-DD</title>
 <script>
+	var manualContents = "${wiki.manualContents }";
+
+	if(manualContents  == null || manualContents  == ""){
+		alert("접근불가!");
+		history.go(-1);//첫번째 방법
+		//history.back();//두번째 방법
+	}
+	
+
 
 	$(function(){
+		
 		btnControl();
 	});
+	
+	function add(){
+	     
+	}
 
 	function btnControl(){
 		$('#btnDelWiki').on('click', function(){

@@ -36,7 +36,7 @@ public class WikiServiceImpl implements WikiService {
 		return path;
 	}
 
-	// 단건조회
+	// 단건조회 위키 보기
 	@Override
 	public WikiVO getWiki(WikiVO vo) {
 		String contents = null;
@@ -309,7 +309,16 @@ public class WikiServiceImpl implements WikiService {
 		try {
 			fileStream = new FileInputStream(filePath);// 파일 스트림 생성
 
-			// if (fileStream.available() < 0) { //파일이 비었으면? jsp에서처리
+			int byteCount = fileStream.read();
+			
+			if (byteCount == -1)  {
+			    System.out.println("SOME ERRORS!");
+			    fileStream.close();
+			    return manualContents = "";
+			}
+			else
+			    System.out.println("NO ERRORS!");
+			
 			// 버퍼 선언
 			byte[] readBuffer = new byte[fileStream.available()];
 			while (fileStream.read(readBuffer) != -1) {
@@ -321,9 +330,10 @@ public class WikiServiceImpl implements WikiService {
 			// }
 		} catch (Exception e) {
 			e.getStackTrace();
-			System.out.println("파일읽기오류!!!!!!!!!!!!!");
+			//System.out.println("파일읽기오류!!!!!!!!!!!!!");
+			return manualContents = "";
 		} finally {
-
+			
 		}
 		return manualContents;
 	} // end - readText()

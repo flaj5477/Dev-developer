@@ -51,7 +51,6 @@
 	
  -->
 <body>
-${wikiMap }
 	<%-- <form action="getwiki" method="post">
 		<c:forEach items="${wikiMap }" var="wiki">
 			${wiki.manualNo}	<a href=${wiki.manualOriUrl}>${wiki.manualOriUrl} </a> 

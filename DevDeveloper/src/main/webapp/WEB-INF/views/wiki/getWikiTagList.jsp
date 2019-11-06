@@ -14,7 +14,7 @@ div h5 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 200px;
+  width: 100px;
   height: 40px;
 }
 </style>

@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +44,18 @@ public class WikiServiceImpl implements WikiService {
 		WikiVO wiki = wikiDAO.getWiki(vo);
 
 		contents = readText(wiki.getManualContentsPath());
-
+		System.out.println();
+		System.out.println(contents+ "==========================================%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%=");
+		
+		if(contents.isEmpty()) {
+			wiki.setManualContentsCheck(0);
+			System.out.println("000000000000000000000000000000000000000000000000000000");
+		}
+		else {
+			wiki.setManualContentsCheck(1);
+			System.out.println("1111111111111111111111111111111111111111111111111");
+		}
+		
 		wiki.setManualContents(contents);
 
 		return wiki;
@@ -261,8 +273,8 @@ public class WikiServiceImpl implements WikiService {
 	 * 위키원문 등록된 태그 리스트 뿌려주기
 	 */
 	@Override
-	public List<Map<String,Object>> getWikiTagList() {
-		List<Map<String,Object>> tagList = wikiDAO.getWikiTagList();
+	public List<LinkedHashMap<String,Object>> getWikiTagList() {
+		List<LinkedHashMap<String,Object>> tagList = wikiDAO.getWikiTagList();
 		
 		return tagList;
 	}
@@ -308,21 +320,41 @@ public class WikiServiceImpl implements WikiService {
 
 		try {
 			fileStream = new FileInputStream(filePath);// 파일 스트림 생성
-
+			
+			
+			
 			int byteCount = fileStream.read();
+			
+			fileStream.mark(0);
 			
 			if (byteCount == -1)  {
 			    System.out.println("SOME ERRORS!");
 			    fileStream.close();
 			    return manualContents = "";
+			} else {
+				System.out.println("NO ERRORS!");
+				
 			}
-			else
-			    System.out.println("NO ERRORS!");
+			fileStream.close();
+			
+			fileStream = new FileInputStream(filePath);
+			
+			int noCount = 0;	//파일내용 카운터
 			
 			// 버퍼 선언
 			byte[] readBuffer = new byte[fileStream.available()];
 			while (fileStream.read(readBuffer) != -1) {
+				noCount++;
+				System.out.println(noCount+"==============================================");
 			}
+			
+//			if (noCount == 0)  {	// 파일내용이없으면 바로 리턴
+//			    System.out.println("SOME ERRORS!");
+//			    fileStream.close();
+//			    return manualContents = "";
+//			} else {
+//				System.out.println("NO ERRORS!");
+//			}
 
 			manualContents = new String(readBuffer); // 출력
 

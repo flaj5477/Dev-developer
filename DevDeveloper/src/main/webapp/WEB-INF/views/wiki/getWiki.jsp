@@ -7,9 +7,8 @@
 <meta charset="UTF-8">
 <title>${wiki.manualTitle}-DD</title>
 <script>
-	var manualContents = "${wiki.manualContents }";
 
-	if(manualContents  == null || manualContents  == ""){
+	if(${wiki.manualContentsCheck } == 0){
 		alert("접근불가!");
 		history.go(-1);//첫번째 방법
 		//history.back();//두번째 방법

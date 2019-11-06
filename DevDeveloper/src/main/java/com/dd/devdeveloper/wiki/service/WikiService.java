@@ -1,5 +1,6 @@
 package com.dd.devdeveloper.wiki.service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,5 +42,5 @@ public interface WikiService {
 	public Map<Integer, Object> getWikiTrans(WikiVO vo);
 
 	//위키 태그리스트 보기
-	public List<Map<String,Object>> getWikiTagList();
+	public List<LinkedHashMap<String, Object>> getWikiTagList();
 }

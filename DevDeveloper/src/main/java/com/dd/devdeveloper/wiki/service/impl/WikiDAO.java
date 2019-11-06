@@ -1,5 +1,6 @@
 package com.dd.devdeveloper.wiki.service.impl;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,7 +62,7 @@ public class WikiDAO {
 	}
 
 	//위키원문 등록된 태그 리스트 뿌려주기
-	public List<Map<String, Object>> getWikiTagList() {
+	public List<LinkedHashMap<String, Object>> getWikiTagList() {
 		return mybatis.selectList("WikiDAO.getWikiTagList");
 	}
 }

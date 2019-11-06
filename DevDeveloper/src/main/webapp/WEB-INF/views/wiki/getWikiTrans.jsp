@@ -69,10 +69,10 @@
 
 	$(function(){
 		deleteWiki();
-		startTrans();
+		/* startTrans();
 		hover();
 		btnClose();
-		otherTransClick();
+		otherTransClick(); */
 	});
 
 	/*

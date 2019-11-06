@@ -7,24 +7,61 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</head>
 <style>
-div h5 {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100px;
-  height: 40px;
-}
+/* div h5 {
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+  /* white-space: nowrap; */
+/*   width: 100px;
+  height: 40px; */
+} */
 </style>
-<body>
-<div class="row">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+	$(function(){
+		hover();
+		tagClick();
+	});
+
+	
+	/*
+		곽동우
+		20191103
+		다른번역 클릭
+	*/
+	function tagClick(){
+		$('body').on('click','.card-body',function(){
 			
+			tagTitle = $(this).attr('id');
+			
+			location.href = "wikihome?select=tags&page=1&searchVal=" + tagTitle;
+		});
+	}
+
+
+
+	function hover(){
+		$('.card-body').hover(function() {	// on이벤트? 해줘야됨
+			$(this).css("background-color", "#f4f5f7");
+		}, function(){
+			$(this).css("background-color", "transparent ");
+		});
+	}
+
+</script>
+</head>
+
+<body>
+
+<div class="row pb-3">
+	<button type="button" class="btn btn-danger" onclick="location.href='wikihome'">목록</button>
+</div>
+
+<div class="row">	
 			<c:forEach items="${tagList}" var="tag">
 	            <div class="col-xl-3 col-lg-6">
 	              <div class="card card-stats mb-4 mb-xl-0">
-	                <div class="card-body">
+	                <div class="card-body"  id="${tag.manualTags }">
 	                  <div class="row">
 	                    <div class="col">
 	                      <span class="h2 font-weight-bold text-uppercase mb-0">${tag.manualTags }</span>
@@ -37,7 +74,7 @@ div h5 {
 	                    </div>
 	                  </div>
 	                  <p class="mt-3 mb-0 text-muted text-sm">
-	                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+	                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>${tag.countTags }개</span>
 	                    <span class="text-nowrap">${tag.countTags }개</span>
 	                  </p>
 	                </div>

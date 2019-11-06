@@ -65,15 +65,22 @@
 
 
 </style>
-
+  <style>
+  .toggler { width: 500px; height: 200px; position: relative; }
+  #button { padding: .5em 1em; text-decoration: none; }
+  #effect { position: relative; }
+  .newClass { width: 240px;  padding: 1em; letter-spacing: 0; margin: 0; }
+  .anotherNewClass { text-indent: 40px; letter-spacing: .2em; width: 410px; height: 100px; padding: 30px; margin: 10px; font-size: 1.1em; }
+  </style>
 <script>
 
 	$(function(){
-		deleteWiki();
-		startTrans();
-		hover();
-		btnClose();
-		otherTransClick();
+		deleteWiki();		//위키삭제
+		startTrans();		//번역시작 번역라인클릭
+		hover();			//마우스올라간 번역라인 색바꾸기
+		btnClose();			//번역편집창 닫기
+		otherTransClick();	//번역편집창에서 다른번역 가져오기
+		hideOtherTrans();	//	''		  다른번역 숨기기
 	});
 
 	/*
@@ -309,14 +316,28 @@
 		});//each
 	}//wikiTransLineResult
 
+	/*
+		20191106
+		곽동우
+		otherTrans 숨기기
+	*/
+	function hideOtherTrans(){
+		$( ".transEdit" ).on( "click", function() {
+			alert("와!")
+		      $( "[name = rEdit]" ).switchClass( "col", "col hide", 1000 );
+		      $( "[name = lEdit]" ).switchClass( "anotherNewClass", "newClass", 1000 );
+		    });
+	}
 </script>
 </head>
 <body>
-	${wiki.manualNo}<br>
-	${wiki.manualTitle}<br>
-	${wiki.manualContentsPath}<br>
-	${wiki.manualOriUrl}<br>
-	${wiki.manualTags}<br>
+	<div>
+		${wiki.manualNo}<br>
+		${wiki.manualTitle}<br>
+		${wiki.manualContentsPath}<br>
+		${wiki.manualOriUrl}<br>
+		${wiki.manualTags}<br>
+	</div>
 	<form name="frm" id="frm" action="updateWikiForm" method="post">
 		<input type="hidden" name="manualNo" value="${wiki.manualNo}">
 	
@@ -348,7 +369,7 @@
 					<div class="row">
 						
 						<%-- 번역편집기 왼쪽 --%>
-						<div class="col">
+						<div class="col" name="rEdit">
 							<div class="row">
 								<span class="badge badge-primary" id="${entry.key}">
 									${wiki.manualTitle}_번역_${entry.key} </span>
@@ -367,7 +388,7 @@
 						</div>
 						
 						<%-- 번역편집기 오른쪽 --%>
-						<div class="col">
+						<div class="col" name="lEdit">
 							<span class="row nav nav-pills justify-content-end">
 									<i name="btn-trans-close" class="ni ni-fat-remove"></i>
 							</span>

@@ -53,7 +53,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="answer"
 				   type="com.dd.devdeveloper.qna.AnswerVO"/>
 		<typeAlias alias="question"
-				   type="com.dd.devdeveloper.qna.QuestionVO"/>				   
+				   type="com.dd.devdeveloper.qna.QuestionVO"/>		
+		<typeAlias alias="rec"
+				   type="com.dd.devdeveloper.qna.RecListVO"/>			   		   
 		<!-- 경민 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
 		<typeAlias alias="files"
 			type="com.dd.devdeveloper.files.FilesVO"/>

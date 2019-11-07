@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-	pageName = "위키가이드";
+	pageName = "위키가이드";	
 
 	$(function() {
 		//transTitle();
@@ -57,7 +57,11 @@
 			<a href ="getWiki?manualNo=${wiki.manualNo}">${wiki.manualContents}</a> <br>
 		</c:forEach>
 	</form> --%>
-
+	<c:if test="${sessionScope.members.membersGrade eq 5}">
+		<span class="col-3 text-right">
+			<a href="insertWikiForm" class="btn btn-sm btn-primary">문서등록</a>
+		</span>
+	</c:if>
 	<div class="card shadow">
 		<div class="card-header border-0">
 			<div class="row align-items-center">
@@ -98,9 +102,6 @@
 					</form>
 				</div>
 				
-				<span class="col-3 text-right">
-					<a href="insertWikiForm" class="btn btn-sm btn-primary">문서등록</a>
-				</span>
 				
 			</div>
 		</div>

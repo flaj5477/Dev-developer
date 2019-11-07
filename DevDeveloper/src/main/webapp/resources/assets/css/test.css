@@ -5,7 +5,7 @@
 
 
 .main-qqqcontent {
-    width: 1080px;
+    width: 100%;
     max-width: none !important;
     margin: 0px auto;
     margin-top: 30px;
@@ -14,11 +14,11 @@
 
 .main-qqqcontainer {
     display: inline-block;
-    width: 940px;
+    width: 85%;
     float: left;
     min-height: 500px;
     padding-right: 0px;
-    margin-left : -160px;
+ 
 }
 
 .main-qqqfilter {
@@ -740,4 +740,18 @@
 
 .form-qqqcontrol {
 	
+}
+.main-info-form .preview,
+.main-qna-qqqform .preview {
+    padding: 0px 0px;
+}
+
+.main-qna-qqqform .tags {
+    padding-left: 12px;
+}
+
+
+.main-info-form h5,
+.main-qna-qqqform h5 {
+    margin-top: 0px;
 }

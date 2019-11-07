@@ -4,12 +4,14 @@ import lombok.Data;
 
 @Data
 public class QuestionVO {
-	private int qNo;
+	private int qqNo;
 	private int membersNo;
-	private String qTitle;
-	private String qContents;
-	private String qCode;
-	private String qDate;
-	private int qViews;
-	private String qTags;
+	private String qqTitle;
+	private String qqContents;
+	private String qqCode;
+	private String qqDate;
+	private int qqViews;
+	private String qqTags;
+	private String membersId;
+	private String membersPw;
 }

@@ -38,7 +38,7 @@
 	</select>
 	
 	<!-- 회원의 프로젝트 지원상태 상세 -->
-	<select id="getProjStatusDetail" parameterType="projParticipants" resultType="projParticipants">
+	<select id="getProjStatusDetail" parameterType="projApplicants" resultType="projApplicants">
 		select  a.proj_no   "projNo",
           		b.proj_title  "projTitle", 
           		a.apply_no "applyNo"
@@ -49,13 +49,37 @@
 	</select>
 	
 	<!-- 회원의 프로젝트 지원 취소 -->
-	<delete id="deleteApply" parameterType="projParticipants">
+	<delete id="deleteApply" parameterType="projApplicants">
 		delete PROJ_APPLICANTS where apply_no=#{applyNo}
 	</delete>
 	
 	<!-- 프로젝트 승인 확인 -->
-	<update id="updateApplyParticipantIn" parameterType="projParticipants">
+	<update id="updateApplyParticipantIn" parameterType="projApplicants">
 		update PROJ_APPLICANTS set status='참여' where apply_no=#{applyNo}
 	</update>
+	
+	
+	<!-- 프로젝트 지원자 리스트 -->
+	<select id="getProjApplicantsList" parameterType="projApplicants" resultType="projApplicants">
+		select 	apply_no, 
+				members_no, 
+				proj_no, 
+				status, 
+				participant_name 
+		from PROJ_APPLICANTS_STATUS_VIEW
+		where proj_no in ( select proj_no from PROJECTS where members_no=#{pmNo})
+		order by status_no
+	</select>
+	
+	<!-- 내가 올린 프로젝트 리스트 가져오기 -->
+	<select id="getMyProjects" parameterType="projects" resultType="projects">
+		select 	proj_no, 
+				proj_title, 
+				proj_members_cnt, 
+				proj_store_url 
+		from PROJECTS 
+		where members_no=#{membersNo}
+	</select>
+	
 </mapper>
 

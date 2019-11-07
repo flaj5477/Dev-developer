@@ -38,7 +38,8 @@
 </script>
 <style type="text/css">
 <!--
-출석률 표시하는거 고정크기 지정 -->.col-fixed {
+출석률 표시하는거 고정크기 지정
+		-->.col-fixed {
 	position: relative;
 	min-height: 1px;
 	padding-right: 5px;
@@ -63,7 +64,8 @@
 		width: 800px;
 	}
 	.col-fluid {
-		width: calc(100% - 300px);
+		width: calc(100% - 
+		 300px);
 	}
 }
 
@@ -72,7 +74,8 @@
 		width: 800px;
 	}
 	.col-fluid {
-		width: calc(100% - 300px);
+		width: calc(100% - 
+		 300px);
 	}
 }
 
@@ -81,7 +84,8 @@
 		width: 800px;
 	}
 	.col-fluid {
-		width: calc(100% - 300px);
+		width: calc(100% - 
+		 300px);
 	}
 }
 
@@ -98,7 +102,7 @@
 			<div class="container-fluid">
 				<div class="header-body">
 					<div class="row">
-						<div class="col-xl-4 col-lg-5 col-md-6 mb-5 mb-xl-0">
+						<div class="col-xl-4 col-lg-8 col-md-6 mb-5 mb-xl-0">
 							<!-- 프로필 -->
 							<div class="card card-profile shadow">
 								<div class="row justify-content-center">
@@ -116,20 +120,15 @@
 								</div>
 								<div class="card-body pt-0 pt-md-4 mt-5">
 									<div class="text-center">
-									<div class="row justify-content-center">
-										<div class="col-2 align-self-center">
-											<img src="./images/grade/2.png" width="70px">
-										</div>
-										<div class="col-3 justify-content-center">
-											<h2>
-											${members.membersName}
-											</h2>
-											<div class="h4 font-weight-300">
-											${members.membersId}
+										<div class="row justify-content-center">
+											<div class="col-2 align-self-center">
+												<img src="./images/grade/2.png" width="70px">
+											</div>
+											<div class="col-3 justify-content-center">
+												<h2>${members.membersName}</h2>
+												<div class="h4 font-weight-300">${members.membersId}</div>
 											</div>
 										</div>
-									</div>
-									
 										<div class="h5 mt-4">
 											<i class="fas fa-map-marker-alt"></i> ${members.membersAddr}
 										</div>
@@ -141,27 +140,34 @@
 										<div id="drawing" class="align-self-center">
 											<svg class=" col-fixed" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100%" height="84">
 												<c:forEach var="activityLog" items="${activityLogList}" varStatus="status">
-													<c:if test="${status.index % 7 == 0 }">		<!-- 일요일이면 g태그 열기 -->
-														<g transform="translate(<fmt:formatNumber value="${status.index/7*10}" pattern="#" />, 0)">
+													<c:if test="${status.index % 7 == 0 }">
+														<!-- 일요일이면 g태그 열기 -->
+														<g transform="translate(<fmt:formatNumber value="
+															${status.index/7*10}" pattern="#" />, 0)">
+
+													
+													
+													
+													
 													</c:if>
 													<!-- col-fixed 의 width인 620에 대한 % -->
 													<rect width="1%" height="10%" class="${activityLog.activityScore }" x="0" y="${status.index%7*14 }"></rect>
-													<c:if test="${status.index % 7 == 6 }">		<!-- 토요일이면 g태그 닫기 -->
+													<c:if test="${status.index % 7 == 6 }">
+														<!-- 토요일이면 g태그 닫기 -->
 														</g>
 													</c:if>
 												</c:forEach>
 											</svg>
 										</div>
-										<p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
 										<a href="#">Show more</a>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col col-xl-8 col-lg-7 col-md-6">
+						<div class="col col-xl-8 col-lg-4 col-md-6">
 							<!-- 프로젝트 상태 카드 -->
 							<div class="row">
-								<div class="col-xl-3 col-lg-6">
+								<div class="col-xl-3 col-lg-12">
 									<a data-toggle="modal" data-target="#exampleModal"> <!-- 모달 창 걸기 -->
 										<div class="card card-stats mb-4 mb-xl-0">
 											<div class="card-body proj-modal">
@@ -182,7 +188,7 @@
 										</div>
 									</a>
 								</div>
-								<div class="col-xl-3 col-lg-6">
+								<div class="col-xl-3 col-lg-12">
 									<a data-toggle="modal" data-target="#exampleModal">
 										<div class="card card-stats mb-4 mb-xl-0">
 											<div class="card-body proj-modal">
@@ -203,7 +209,7 @@
 										</div>
 									</a>
 								</div>
-								<div class="col-xl-3 col-lg-6">
+								<div class="col-xl-3 col-lg-12">
 									<a data-toggle="modal" data-target="#exampleModal">
 										<div class="card card-stats mb-4 mb-xl-0">
 											<div class="card-body proj-modal">
@@ -224,7 +230,7 @@
 										</div>
 									</a>
 								</div>
-								<div class="col-xl-3 col-lg-6">
+								<div class="col-xl-3 col-lg-12">
 									<a data-toggle="modal" data-target="#exampleModal">
 										<div class="card card-stats mb-4 mb-xl-0">
 											<div class="card-body proj-modal">
@@ -246,60 +252,100 @@
 									</a>
 								</div>
 							</div>
-							
 							<div class="row  mb-4 mt-3">
-							<div class="col-xl-6">
-				<div class="card shadow">
-					<div class="card-header border-0">
-						<div class="row align-items-center">
-							<div class="col">
-								<h3 class="mb-0">프로젝트 관리</h3>
-							</div>
-							<div class="col text-right">
-								<a href="#!" class="btn btn-sm btn-primary">See all</a>
-							</div>
-						</div>
-					</div>
-					<div class="table-responsive">
-						<!-- Projects table -->
-						<table class="table align-items-center table-flush">
-							<thead class="thead-light">
-								<tr>
-									<th scope="col">프로젝트</th>
-									<th scope="col">참여자</th>
-									<th scope="col">진척률</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th scope="row">Facebook</th>
-									<td>1,480</td>
-									<td>
-										<div class="d-flex align-items-center">
-											<span class="mr-2">60%</span>
-											<div>
-												<div class="progress">
-													<div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+								<div class="col-xl-12 col-lg-15">
+									<div class="card bg-gradient-default shadow">
+										<div class="card-header bg-transparent border-0">
+											<div class="row align-items-center">
+												<div class="col">
+													<h3 class="text-white mb-0">프로젝트 관리</h3>
+												</div>
+												<div class="col text-right">
+													<button type="button" class="btn btn-primary">파일 관리</button>
 												</div>
 											</div>
 										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+										<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+											<ol class="carousel-indicators">
+												<c:forEach var="myProject" items="${myProjectsList}" varStatus="status">
+													<c:choose>
+														<c:when test="${status.index == 0}">
+															<li data-target="#carouselExampleIndicators" data-slide-to="${status.index }" class="active"></li>
+														</c:when>
+														<c:otherwise>
+															<li data-target="#carouselExampleIndicators" data-slide-to="${status.index }"></li>
+														</c:otherwise>
+													</c:choose>
+												</c:forEach>
+											</ol>
+											<div class="carousel-inner">
+												<c:forEach var="myProject" items="${myProjectsList}" varStatus="status">
+													<c:choose>
+														<c:when test="${status.index == 0}">
+															<div class="carousel-item pl-5 pr-5 active" id="${myProject.projNo }${myProject.projTitle}">
+														</c:when>
+														<c:otherwise>
+															<div class="carousel-item pl-5 pr-5" id="${myProject.projNo }${myProject.projTitle}">
+														</c:otherwise>
+													</c:choose>
+													<div class="table-responsive">
+														<table class="table align-items-center table-flush table-dark">
+															<caption class="mt--3" style="caption-side: top;">${myProject.projTitle}</caption>
+															<thead class="thead-dark text-light">
+																<tr>
+																	<th scope="col" class="text-light">지원자 번호</th>
+																	<th scope="col" class="text-light">이름</th>
+																	<th scope="col" class="text-light">지원상태</th>
+																	<th scope="col" class="text-light">진척률</th>
+																	<th scope="col" class="text-light"></th>
+																</tr>
+															</thead>
+															<tbody>
+																<c:forEach var="projApplicant" items="${projApplicantsList}">
+																<c:if test="${projApplicant.projNo == myProject.projNo }">
+																	<tr>
+																		<th scope="row">${projApplicant.membersNo }</th>
+																		<td>${projApplicant.participantName }</td>
+																		<td>${projApplicant.status }</td>
+																		<td>
+																			<div class="d-flex align-items-center">
+																				<span class="mr-2">60%</span>
+																				<div>
+																					<div class="progress">
+																						<div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+																					</div>
+																				</div>
+																			</div>
+																		</td>
+																		<td>
+																			<button type="button" class="btn btn-secondary">보기버튼</button>
+																		</td>
+																	</tr>
+																</c:if>
+																</c:forEach>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</c:forEach>
+										</div>	<!-- div짝이 안맞는건 div 여는 태그가 c:choose문 안에 있어서 그럼 -->
+										<br> <br> <br>
+									</div>
+									<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+									</a> <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span>
+									</a>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- Card stats 여기 프로젝트 카드 있던 곳-->
-				<div class="row"></div>
 			</div>
 		</div>
+		<!-- Card stats 여기 프로젝트 카드 있던 곳-->
+		<div class="row"></div>
 	</div>
-	
+	</div>
+	</div>
 	<!-- 프로젝트 모달 -->
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -333,106 +379,98 @@
 	</div>
 	<!-- 모달 제어 스크립트 (데이터 담기) -->
 	<script>
-		$('#exampleModal').on(
-						'show.bs.modal',
-						function(event) {
-							//프로젝트 지원, 프로젝트 승인, 프로젝트 참여 상태의 테이블을 만들어서 보여줘야함
-							var button = $(event.relatedTarget) // Button that triggered the modal
-							var status = button.find(".proj_status").html();
-							var ajaxRow = "";
+		$('#exampleModal').on('show.bs.modal', function(event) {
+			//프로젝트 지원, 프로젝트 승인, 프로젝트 참여 상태의 테이블을 만들어서 보여줘야함
+			var button = $(event.relatedTarget) // Button that triggered the modal
+			var status = button.find(".proj_status").html();
+			var ajaxRow = "";
 
-							console.log(status);
-							$.ajax({
-										url : "getProjStatusDetail/" + status,
-										type : 'GET',
-										dataType : 'json',
-										async : false, //동기화 방식으로 해야 데이터를 다 받아 온 후에 실행한다.
-										/* data : JSON.stringify({
-											status : encodeURI(status)
-										}), */
-										contentType : 'application/json;charset=utf-8',
-										success : function(data) { //데이터 받아오기 성공하면 
-											//테이블 생성
-											console.log(data.length);
-											console.log(data[0].projTitle);
+			console.log(status);
+			$.ajax({
+				url : "getProjStatusDetail/" + status,
+				type : 'GET',
+				dataType : 'json',
+				async : false, //동기화 방식으로 해야 데이터를 다 받아 온 후에 실행한다.
+				/* data : JSON.stringify({
+					status : encodeURI(status)
+				}), */
+				contentType : 'application/json;charset=utf-8',
+				success : function(data) { //데이터 받아오기 성공하면 
+					//테이블 생성
+					console.log(data.length);
+					console.log(data[0].projTitle);
 
-											for (i = 0; i < data.length; i++) {
-												//이부분 함수로 만들어서 status가 지원일때, 승인일때, 참여일때, 버튼과 클릭이벤트 따로 주기
-												ajaxRow += CreateTableRow(status, data);
-													
-													/* 
-													"<tr id=" + data[i].projNo + ">"
-														+ "<td>"
-														+ data[i].projTitle
-														+ "</td>"
-														+ "<td>"
-														+ "<button type=\"button\" class=\"btn btn-default\">지원 취소</button>"
-														+ "</td>" + "</tr>"; */
-											}
-										},
-										error : function(xhr, status, message) {
-											alert(" status: " + status + " er:"
-													+ message);
-										}
-									});
+					for (i = 0; i < data.length; i++) {
+						//이부분 함수로 만들어서 status가 지원일때, 승인일때, 참여일때, 버튼과 클릭이벤트 따로 주기
+						ajaxRow += CreateTableRow(status, data);
 
-							//모달 띄우기
-							var modal = $(this);
-							$(this).find("#exampleModalLabel").html(status);
-							$(this).find("#tbody").append(ajaxRow); //여기서 모달을 다시 띄우면 그 전에 열었던 모달창에 더 추가된다. 정보가 계속 누적됨;;;
-						});
-		
+						/* 
+						"<tr id=" + data[i].projNo + ">"
+							+ "<td>"
+							+ data[i].projTitle
+							+ "</td>"
+							+ "<td>"
+							+ "<button type=\"button\" class=\"btn btn-default\">지원 취소</button>"
+							+ "</td>" + "</tr>"; */
+					}
+				},
+				error : function(xhr, status, message) {
+					alert(" status: " + status + " er:" + message);
+				}
+			});
+
+			//모달 띄우기
+			var modal = $(this);
+			$(this).find("#exampleModalLabel").html(status);
+			$(this).find("#tbody").append(ajaxRow); //여기서 모달을 다시 띄우면 그 전에 열었던 모달창에 더 추가된다. 정보가 계속 누적됨;;;
+		});
+
 		//status 별로 다른 테이블 값 생성
-		function CreateTableRow(status, data){
-			var row="";
-			if(status=="지원"){
+		function CreateTableRow(status, data) {
+			var row = "";
+			if (status == "지원") {
 				row = "<tr id=" + data[i].applyNo + ">"
-				+ "<td>"
-				+ data[i].projTitle
-				+ "</td>"
-				+ "<td>"
-				+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './deleteApply?applyNo=" + data[i].applyNo + "' \">지원 취소</button>" 
-				+ "</td>" + "</tr>"; 
-			}
-			else if(status=="승인"){
+						+ "<td>"
+						+ data[i].projTitle
+						+ "</td>"
+						+ "<td>"
+						+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './deleteApply?applyNo="
+						+ data[i].applyNo + "' \">지원 취소</button>" + "</td>"
+						+ "</tr>";
+			} else if (status == "승인") {
 				row = "<tr id=" + data[i].applyNo + ">"
-				+ "<td>"
-				+ data[i].projTitle
-				+ "</td>"
-				+ "<td>"
-				+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './updateApplyParticipantIn?applyNo=" + data[i].applyNo + "' \">승인 확인</button>" 
-				+ "</td>" + "</tr>"; 
-			}
-			else if(status=="참여"){
+						+ "<td>"
+						+ data[i].projTitle
+						+ "</td>"
+						+ "<td>"
+						+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './updateApplyParticipantIn?applyNo="
+						+ data[i].applyNo + "' \">승인 확인</button>" + "</td>"
+						+ "</tr>";
+			} else if (status == "참여") {
 				row = "<tr id=" + data[i].applyNo + ">"
-				+ "<td>"
-				+ data[i].projTitle
-				+ "</td>"
-				+ "<td>"
-				+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './moveToFileList?projNo=" + data[i].projNo + "' \">파일 관리</button>" 
-				+ "</td>" + "</tr>"; 
-			}
-			else if(status=="완료"){
-				
-			}
-			else if(status=="관리"){
-				
+						+ "<td>"
+						+ data[i].projTitle
+						+ "</td>"
+						+ "<td>"
+						+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './moveToFileList?projNo="
+						+ data[i].projNo + "' \">파일 관리</button>" + "</td>"
+						+ "</tr>";
+			} else if (status == "완료") {
+
+			} else if (status == "관리") {
+
 			}
 			return row;
 		}
-		
 
 		//모달 닫기
-		$('#exampleModal').on('hide.bs.modal', function(e){
+		$('#exampleModal').on('hide.bs.modal', function(e) {
 
 			$("#tbody").html("");
 
 			e.stopImmediatePropagation();
 
 		});
-		
-		
-		
 	</script>
 	<div class="container-fluid mt--7">
 		<div class="row">

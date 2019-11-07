@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.dd.devdeveloper.board.BoardVO;
 import com.dd.devdeveloper.common.paging.Paging;
-import com.dd.devdeveloper.projects.ProjParticipantsVO;
+import com.dd.devdeveloper.projects.ProjApplicantsVO;
 import com.dd.devdeveloper.projects.ProjectsVO;
 
 public interface ProjectsService {
@@ -17,5 +17,5 @@ public interface ProjectsService {
 	ProjectsVO getProjects(ProjectsVO vo);
 
 	//프로젝트 지원
-	void applyProjects(ProjParticipantsVO vo);
+	void applyProjects(ProjApplicantsVO vo);
 }

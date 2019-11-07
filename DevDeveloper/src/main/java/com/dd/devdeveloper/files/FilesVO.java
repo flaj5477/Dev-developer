@@ -2,6 +2,8 @@ package com.dd.devdeveloper.files;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -20,6 +22,7 @@ public class FilesVO {
 	private String filesType;
 	private int filesSize;
 	private String filesImport;
+	private MultipartFile filesUpload;
 	private String filesTrash;
 	private Date filesDelday;
 	

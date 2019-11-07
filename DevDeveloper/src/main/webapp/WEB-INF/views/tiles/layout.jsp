@@ -41,7 +41,8 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Brand -->
-      <a class="navbar-brand pt-0" href="./index.html">
+      <!-- <a class="navbar-brand pt-0" href="./index.html"> -->
+      <a class="navbar-brand pt-0" href="getFilesList">
         <img src="${pageContext.request.contextPath}/images/profile/DevDeveloper.png" class="navbar-brand-img" alt="...">
       </a>
       <!-- User -->

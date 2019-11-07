@@ -4,6 +4,21 @@
 
 <mapper namespace="QnaDAO">
  
+ <select id="qnaList" parameterType="question" resultType="question">
+ 	select 	a.q_no 				as "qqNo",
+ 			a.members_no 		as "membersNo",
+ 			a.q_title 			as "qqTitle",
+ 			a.q_contents 		as "qqContents",
+ 			a.q_code 			as "qqCode",  
+ 			a.q_date 			as "qqDate",
+ 			a.q_views		    as "qqViews",
+ 			a.q_tags			as "qqTags",
+ 			m.members_id		as "membersId",
+      		m.members_pw	    as "membersPw"
+      		
+ 			from members m join question a
+ 			on a.members_no = m.members_no
+ </select>
 	
  
 </mapper>

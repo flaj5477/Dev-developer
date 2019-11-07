@@ -159,25 +159,55 @@ public class WikiServiceImpl implements WikiService {
 		//일단 테스트용
 		
 		String path = vo.getManualContentsPath();
-		String sTag = "<p>";
-		String eTag = "</p>";
 		
 		String contents = readText(path);
 		
-		/////////////////태그잘라서 map에담기
-		String date[] = contents.split(sTag);
+		int start;
+		int line = 0;
 		
 		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();
-		int lineNum = 0;	//
 		
-		for (int i = 0; i < date.length; i++) {
-			date[i] = date[i].split(eTag)[0];
-			if (!date[i].isEmpty()) {
-				lineMap.put(lineNum++, date[i]);
+		do {
+			start = contents.indexOf("<");
+			int end = contents.indexOf(">");
+			
+			if(start != -1) {
+				
+				String sTag = contents.substring(start, end+1);
+				String eTag =  "</"+contents.substring(start+1, end)+">";
+				int eTagLength = eTag.length();
+				
+				
+				int idx = contents.indexOf(eTag);
+				
+				lineMap.put(line, contents.substring(0, idx+eTagLength));
+				//data.add(text.substring(0, idx+4));
+				contents = contents.substring(idx+eTagLength);
+				line++;
 			}
-		}
-		
-		////////////////////////////////
+		}while(start != -1);
+							
+							//		위에껄로바꿈
+							//		
+							//		String sTag = "<p>";
+							//		String eTag = "</p>";
+							//
+							//		//contents.indexof()
+							//		
+							//		/////////////////태그잘라서 map에담기
+							//		String date[] = contents.split(sTag);
+							//		
+							//		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();
+							//		int lineNum = 0;	//
+							//		
+							//		for (int i = 0; i < date.length; i++) {
+							//			date[i] = date[i].split(eTag)[0];
+							//			if (!date[i].isEmpty()) {
+							//				lineMap.put(lineNum++, date[i]);
+							//			}
+							//		}
+							//		
+							//		////////////////////////////////
 		return lineMap;
 	}
 	
@@ -223,10 +253,40 @@ public class WikiServiceImpl implements WikiService {
 	public List<Map<Integer, Object>> getWikiTrans(WikiVO vo) {
 		
 		String path = vo.getManualContentsPath();
-		String sTag = "<p>";
-		String eTag = "</p>";
 		
 		String contents = readText(path);
+		
+		
+		int start;
+		int lineNum = 0;
+		
+		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();
+		Map<Integer, Object> transLineMap = new HashMap<Integer, Object>(); //라인별로 번역된거만 담음
+		
+		do {
+			start = contents.indexOf("<");
+			int end = contents.indexOf(">");
+			
+			if(start != -1) {
+				
+				String sTag = contents.substring(start, end+1);
+				String eTag =  "</"+contents.substring(start+1, end)+">";
+				int eTagLength = eTag.length();
+				
+				
+				int idx = contents.indexOf(eTag);
+				
+				lineMap.put(lineNum, contents.substring(0, idx+eTagLength));
+				transLineMap.put(lineNum, null);	//본문 라인길이만큼 만들어준다
+				//data.add(text.substring(0, idx+4));
+				contents = contents.substring(idx+eTagLength);
+				lineNum++;
+			}
+		}while(start != -1);
+		
+		
+		
+		
 		
 		/*
 //		////////////////////////getTransWikiForm(WikiVO vo) 랑 비슷한 처리 나중에 합쳐?
@@ -248,19 +308,20 @@ public class WikiServiceImpl implements WikiService {
 		*/
 		
 		/////////////////태그잘라서 map에담기
-		String date[] = contents.split(sTag);
 		
-		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();
-		Map<Integer, Object> transLineMap = new HashMap<Integer, Object>();	//라인별로 번역된거만 담음
-		int lineNum = 0;	//
-		
-		for (int i = 0; i < date.length; i++) {
-			date[i] = date[i].split(eTag)[0];
-			if (!date[i].isEmpty()) {
-				lineMap.put(lineNum++, date[i]);
-				transLineMap.put(lineNum, null);	//본문 라인길이만큼 만들어준다
-			}
-		}
+//		String date[] = contents.split(sTag);
+//		
+//		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();
+//		Map<Integer, Object> transLineMap = new HashMap<Integer, Object>();	//라인별로 번역된거만 담음
+//		int lineNum = 0;	//
+//		
+//		for (int i = 0; i < date.length; i++) {
+//			date[i] = date[i].split(eTag)[0];
+//			if (!date[i].isEmpty()) {
+//				lineMap.put(lineNum++, date[i]);
+//				transLineMap.put(lineNum, null);	//본문 라인길이만큼 만들어준다
+//			}
+//		}
 		
 		////////////////////////////////
 		

@@ -23,7 +23,7 @@
 	href="${pageContext.request.contextPath}/resources/assets/css/argon-dashboard.css?v=1.1.0"
 	rel="stylesheet" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/loginstyle.css"> 
+	href="${pageContext.request.contextPath}/resources/assets/css/loginstyle.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -32,7 +32,8 @@
 
 <body id="loginform">
 
-	<form action="login" method="POST" class="loginform" style ="background: #A18EF4;" >
+	<form action="login" method="POST" class="loginform"
+		style="background: #A18EF4;">
 		<svg class="loginform" id="ryan" viewBox="0 0 120 120"
 			xmlns="http://www.w3.org/2000/svg">
             <path d="M0,150 C0,65 120,65 120,150" fill="#e0a243"
@@ -72,14 +73,12 @@
 				d="M40,105 C10,140 110,140 80,105 L80,105 L70,111 L60,105 L50,111 L40,105"
 				fill="#fff" />
         </svg>
-		<input type="text" placeholder="아이디" name="membersId" id = "loginid"class="loginform"> <input
-			type="password" placeholder="비밀번호" name="membersPw" id="loginpw" class="loginform">
-		  
-		  <br>
-		  <div class="form-group">
-					<span class="font-weight-bold text-black"
-						id="spanLoginCheck"></span>
-				</div>
+		<input type="text" placeholder="아이디" name="membersId" id="loginid"
+			class="loginform"> <input type="password" placeholder="비밀번호"
+			name="membersPw" id="loginpw" class="loginform"> <br>
+		<div class="form-group">
+			<span class="font-weight-bold text-black" id="spanLoginCheck"></span>
+		</div>
 
 		<div class="text-center" class="loginform">
 			<button type="button" id="loginBtn" class="btn btn-primary my-4">로그인</button>
@@ -87,49 +86,40 @@
 
 	</form>
 
- <script>
-
- $('#loginBtn').click(function() {
-		var id = $('#loginid').val();
-		var pw = $('#loginpw').val();
+	<script>
+		$('#loginBtn').click(function() {
+			var id = $('#loginid').val();
+			var pw = $('#loginpw').val();
 			$.ajax({
-			type : 'POST',
-			url : 'login',
-			data : {
-				membersId : id,
-				membersPw : pw,
+				type : 'POST',
+				url : 'login',
+				data : {
+					membersId : id,
+					membersPw : pw,
 				},
 				success : function(data) {
 					if (data == 0) { //로그인 실패시
 						console.log(data);
 						$('#spanLoginCheck').text('로그인 정보를 정확히 입력해주세요.');
-					}  else { //로그인 성공시
-						if(loginmode == 'page'){
+					} else { //로그인 성공시
+						if (loginmode == 'page') {
 							console.log(data);
-							location.href = '${sessionScope.prepage}';	
-						}else{
+							location.href = '${sessionScope.prepage}';
+						} else {
 							location.href = 'getDashboard'
 						}
-						
+
 					}
 				}
 			});
 		});
+	</script>
 
-</script>   
-
-
-<script
+	<script
 		src="${pageContext.request.contextPath}/resources/assets/js/loginscript.js"></script>
-<script
-		src="${pageContext.request.contextPath}/resources/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>	
- 
+	<script
+		src="${pageContext.request.contextPath}/resources/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
-
-
-
- 
-	
 </html>

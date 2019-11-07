@@ -10,8 +10,8 @@
 
 	if("${wiki.manualContentsCheck }" == 0){
 		alert("접근불가!");
-		history.go(-1);//첫번째 방법
-		//history.back();//두번째 방법
+		//history.go(-1);//첫번째 방법
+		history.back();//두번째 방법
 	}
 	
 
@@ -44,6 +44,10 @@
 		
 		$('#btnTransWiki').on('click', function(){
 			$("#frm").attr("action", "transWikiForm").submit();
+			/* $("#frm").attr({
+				"action": "transWikiForm",
+				"method": "get"
+			}).submit(); */
 		});
 		
 		$('#btnGetTransWiki').on('click', function(){

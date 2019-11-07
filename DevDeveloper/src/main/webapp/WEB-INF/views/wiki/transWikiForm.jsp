@@ -398,6 +398,7 @@
 		</div>
 	
 		<input type="hidden" name="manualNo" value="${wiki.manualNo}">
+		<input type="hidden" name="manualContentsPath" value="${wiki.manualContentsPath}">
 	
 		<div class="col">
 			<div class="row align-items-center">

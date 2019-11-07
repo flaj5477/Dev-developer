@@ -114,7 +114,7 @@ public class WikiController {
 	 * 2019-10-29
 	 * 위키번역폼 이동
 	 */
-	@RequestMapping(value = "/transWikiForm", method = RequestMethod.POST)
+	@RequestMapping(value = "/transWikiForm")
 	public String transWikiForm(@ModelAttribute("wiki") WikiVO vo, Model model) {	//
 		
 		

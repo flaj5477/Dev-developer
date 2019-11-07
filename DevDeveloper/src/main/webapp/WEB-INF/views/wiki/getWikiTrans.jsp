@@ -121,6 +121,7 @@
 		${wiki.manualTags}<br>
 	
 		<input type="hidden" name="manualNo" value="${wiki.manualNo}">
+		<input type="hidden" name="manualContentsPath" value="${wiki.manualContentsPath}">
 		
 		<div class="nav-wrapper">
 		    <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text">

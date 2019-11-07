@@ -24,6 +24,11 @@ public class DashboardDAO {
 		mybatis.selectList("DashboardDAO.getActivityLogList", vo); //리턴을 안해도 vo에 자동으로 들어간다
 	}
 	
+	//대시보드 프로필 정보 가져오기
+	public MembersVO getMembers(MembersVO vo) {
+	  return mybatis.selectOne("DashboardDAO.getMembers", vo);
+	}
+	
 	//프로젝트 지원상태 
 	public DashboardVO getProjApplyStatus(DashboardVO vo) {
 		return mybatis.selectOne( "DashboardDAO.getProjApplyStatus" , vo);

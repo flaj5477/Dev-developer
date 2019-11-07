@@ -7,13 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	pageName = "위키가이드";
 
 	$(function() {
 		//transTitle();
+		hover();
 	});
 	
 	/* 
@@ -23,6 +23,15 @@
 		var form = document.frm;
 		form.manualNo.value = n;
 		form.submit();
+	}
+	
+	
+	function hover(){
+		$('[name=wikitd]').hover(function() {	// on이벤트? 해줘야됨
+			$(this).css("background-color", "#f4f5f7");
+		}, function(){
+			$(this).css("background-color", "transparent ");
+		});
 	}
 
 /* 	function transTitle() {
@@ -76,7 +85,7 @@
 						</select>
 						<div class="row mb-3">
 							<div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-xs-7">
-								<input class="form-control" name="searchVal" placeholder="Search" type="text">
+								<input class="form-control" name="searchVal" placeholder="Search" type="text" value="${param.searchVal }">
 								<input type="hidden" name="page" value="1">
 								
 							</div>
@@ -109,7 +118,7 @@
 				<tbody>
 
 					<c:forEach items="${wikiMap }" var="wiki">
-						<tr id="wikitd"
+						<tr name="wikitd"
 							onclick="location.href='getWiki?manualNo=${wiki.manualNo}'">
 							<th scope="row">
 								<div class="media-body">

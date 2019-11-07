@@ -71,7 +71,7 @@
 								AND MANUAL_TITLE LIKE '%' || #{searchVal} || '%'
 							</if>
 							<if test="select == 'tags'">
-								AND MANUAL_TAGS LIKE '%' || #{searchVal} || '%'
+								AND NVL(MANUAL_TAGS, '기타') LIKE '%' || #{searchVal} || '%'
 							</if>
 						</if>
 				</where>
@@ -128,7 +128,7 @@
 					AND MANUAL_TITLE LIKE '%' || #{searchVal} || '%'
 				</if>
 				<if test="select == 'tags'">
-					AND MANUAL_TAGS LIKE '%' || #{searchVal} || '%'
+					AND NVL(MANUAL_TAGS, '기타') LIKE '%' || #{searchVal} || '%'
 				</if>
 			</if>
 		</where>
@@ -140,6 +140,7 @@
 	  <delete id="deleteWiki" parameterType="wiki">
 	  	delete WIKI_GUIDE
 	  	where MANUAL_NO = ${manualNo}
+	  	
 	  </delete>
 	  
 	  
@@ -171,7 +172,7 @@
 						MANUAL_LINE			as		"manualLine",
 						MANUAL_BEFORE		as		"manualBefore",
 						MANUAL_AFTER		as		"manualAfter",
-						TO_CHAR(TRANS_DATE,'YYYY-MM-DD')	as 		"translDate",
+						TO_CHAR(TRANS_DATE,'YYYY-MM-DD hh:mm:ss')	as 		"translDate",
 						MANUAL_NO			as 		"manualNo",
 						MEMBERS_NO			as 		"membersNo"
 						
@@ -195,4 +196,51 @@
 		) a ) b WHERE no BETWEEN #{first} AND #{last} -->
 	</select>
 	 
+	 <!-- 
+	 	곽동우
+	 	20191105
+	 	게시글 위키번역(게시글 전체라인) 들고오기
+	  -->
+	 <select id="getWikiTrans" parameterType="wiki" resultType="Map">
+			SELECT 	a.TRANS_NO									as		"transNo",
+			        a.MANUAL_LINE								as		"manualLine",
+			        a.MANUAL_BEFORE								as		"manualBefore",
+			        a.MANUAL_AFTER								as		"manualAfter",
+			        TO_CHAR(a.TRANS_DATE,'YYYY-MM-DD hh:mm:ss')	as 		"translDate",
+			        a.MANUAL_NO									as 		"manualNo",
+			        a.MEMBERS_NO								as 		"membersNo"
+									
+			FROM WIKI_GUIDE_TRANS a, (select MANUAL_NO, MANUAL_LINE, max(trans_date) as trans_date
+			                          from WIKI_GUIDE_TRANS
+			                          group by MANUAL_LINE, MANUAL_NO 
+			                          having MANUAL_NO = #{manualNo} ) b
+			where a.MANUAL_NO = b.MANUAL_NO and a.MANUAL_LINE = b.MANUAL_LINE and a.trans_date = b.trans_date
+			order by a.MANUAL_LINE
+
+	 </select>
+	 
+	 
+	 <!-- 
+	 	곽동우
+	 	20191105
+	 	태그별 위키 갯수
+	  -->
+	  <select id="getWikiTagList" parameterType="wikiTag" resultType="Map">
+	  		<!-- SELECT 	NVL(MANUAL_TAGS, '기타') 		as manualTags , 
+	  				COUNT(nvl(MANUAL_TAGS, '기타'))  as countTag
+			FROM WIKI_GUIDE
+			GROUP BY MANUAL_TAGS
+			ORDER BY countTag DESC -->
+			select a.TAGS_NO 		as "tagsNo", 
+				   a.TAGS_TITLE		as "tagsTitle", 
+				   a.TAGS_CONTENTS	as "tagsContents", 
+				   b.manualTags		as "manualTags", 
+				   b.countTags		as "countTags"
+			from tags a right join (SELECT NVL(MANUAL_TAGS, '기타') as manualTags , COUNT(nvl(MANUAL_TAGS, '기타')) as countTags
+					                  FROM WIKI_GUIDE
+					                  GROUP BY MANUAL_TAGS
+					                  ORDER BY countTags DESC) b
+			on a.TAGS_TITLE = b.manualTags
+			order by b.manualTags
+	  </select>
 </mapper>

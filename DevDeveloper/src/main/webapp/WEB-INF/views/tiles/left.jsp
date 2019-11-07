@@ -18,7 +18,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="${pageContext.request.contextPath}/wikihome">
+            <a class="nav-link " href="${pageContext.request.contextPath}/getWikiTagList">
               <i class="ni ni-single-02 text-yellow"></i> 위키가이드
             </a>
           </li>

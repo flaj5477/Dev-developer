@@ -10,10 +10,9 @@ public class TestsRecordVO {
 	private int membersNo; // MEMBERS_NO
 	private int membersGrade; // Members_grade
 	private int testsNo; // TESTS_NO  
-	private Timestamp testsDate; // TESTS_DATE 
+	private Timestamp testsDate; // TESTS_DATE  UTF + 09:00
 	private int testsScore; // TESTS_SCORE 
 	private String testsResult; // TESTS_RESULTS
 	private int testsTime; // TESTS_TIME
-	
 	private Timestamp utcTestsDate; // UTC + 00:00
 }

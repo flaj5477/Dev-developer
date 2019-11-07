@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>Insert title here</title>
 <script>
 	pageName = "Q & A";
@@ -27,14 +30,14 @@
 
 </head>
 <body id="qq">
-
+<div class="container-fluid mt--3">
 <div class="row mb-4">
 			<div class=""
 				style="padding-left: 110px;">
 				<input class="form-control" name="searchVal" placeholder="Search"
 					type="text" style="border: #686ce4 1px solid; display:inline-block; width:240px;"> <input
 					type="hidden" name="page" value="1">
-				<button class="btn btn-icon btn-3 btn-primary" type="button" style="margin-left: 599px;
+				<button class="btn btn-icon btn-3 btn-primary" type="button" style="margin-left: 0px;
 				background-color :#793bea">
 					질문하기</button>	
 			</div>
@@ -53,12 +56,10 @@
 						</ul>
 						<ul class="main-qqqfilter sub-qqqfilter pull-left qqqtabs">
 						</ul>
-
 					</div>
 					<table class="question-qqqtable">
 						<tbody>
-
-
+							<c:forEach items="${qnaList}" var="qna"> 
 							<tr>
 								<td style="width: 21%; padding-left: 5px;">
 									<ul class="question-qqqstatistic">
@@ -69,13 +70,13 @@
 											<div>0</div> 좋아요
 										</li>
 										<li>
-											<div>0</div> 조회수
+											<div>${qna.qqViews}</div> 조회수			
 										</li>
 									</ul>
 								</td>
 								<td class="question-qqqcontent">
 									<div class="question-qqqtitle">
-										<a href="#">제목</a>
+										<a href="#">${qna.qqTitle}</a>
 									</div>
 									<div class="rowqqq question-qqqmeta">
 										<div class="pull-left">
@@ -86,21 +87,22 @@
 										</div>
 										<div class="pull-right">
 											<span class="question-qqqauthor"> <a href="#">
-													memebersname&nbsp; </a> <span class="question-qqqdate">2시간
-													전</span>
+													${qna.membersId }&nbsp; </a> <span class="question-qqqdate">${qna.qqDate}</span>
 
 											</span>
 										</div>
 									</div>
 								</td>
 							</tr>
-
+							</c:forEach> 
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
+
 
 
 

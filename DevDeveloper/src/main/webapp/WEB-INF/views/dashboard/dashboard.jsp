@@ -12,6 +12,8 @@
 	pageName = "Dashboard";
 </script>
 <script>
+
+
 <!--도트 색 표시-->
 	$(document).ready(function() {
 		var rect1 = $('.A').attr({

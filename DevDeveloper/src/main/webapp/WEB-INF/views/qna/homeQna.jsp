@@ -31,8 +31,6 @@
 </head>
 <body id="qq">
 <div class="container-fluid mt--3">
-<div class="row">
-<div class="col">
 <div class="row mb-4">
 			<div class=""
 				style="padding-left: 110px;">
@@ -104,8 +102,8 @@
 		</div>
 	</div>
 </div>
-</div>
-</div>
+
+
 
 
 

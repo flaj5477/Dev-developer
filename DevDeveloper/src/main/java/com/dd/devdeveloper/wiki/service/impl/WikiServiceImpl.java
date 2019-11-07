@@ -44,16 +44,13 @@ public class WikiServiceImpl implements WikiService {
 		WikiVO wiki = wikiDAO.getWiki(vo);
 
 		contents = readText(wiki.getManualContentsPath());
-		System.out.println();
-		System.out.println(contents+ "==========================================%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%=");
 		
+		//텍스트파일 비었는지 확인
 		if(contents.isEmpty()) {
 			wiki.setManualContentsCheck(0);
-			System.out.println("000000000000000000000000000000000000000000000000000000");
 		}
 		else {
 			wiki.setManualContentsCheck(1);
-			System.out.println("1111111111111111111111111111111111111111111111111");
 		}
 		
 		wiki.setManualContents(contents);
@@ -155,7 +152,7 @@ public class WikiServiceImpl implements WikiService {
 	/*
 	 * 곽동우
 	 * 20191029
-	 * 위키번역
+	 * 위키번역폼
 	 */
 	@Override
 	public Map<Integer, Object> getTransWikiForm(WikiVO vo) {
@@ -184,7 +181,16 @@ public class WikiServiceImpl implements WikiService {
 		return lineMap;
 	}
 	
-	
+	/*
+	 * 20191107
+	 * 곽동우
+	 * 게시글 번역들고옴
+	 */
+//	@Override
+//	public Map<Integer, Object> getTransWiki(WikiVO vo) {
+//		
+//	}
+//	
 	
 	/*
 	 * 20191031
@@ -214,7 +220,7 @@ public class WikiServiceImpl implements WikiService {
 	 * 위키번역된문서 뿌려주기
 	 */
 	@Override
-	public Map<Integer, Object> getWikiTrans(WikiVO vo) {
+	public List<Map<Integer, Object>> getWikiTrans(WikiVO vo) {
 		
 		String path = vo.getManualContentsPath();
 		String sTag = "<p>";
@@ -222,6 +228,7 @@ public class WikiServiceImpl implements WikiService {
 		
 		String contents = readText(path);
 		
+		/*
 //		////////////////////////getTransWikiForm(WikiVO vo) 랑 비슷한 처리 나중에 합쳐?
 //		Map<Integer, String> oriLineMap = new HashMap<Integer, String>();		//원본 라인별분리
 //		
@@ -238,17 +245,20 @@ public class WikiServiceImpl implements WikiService {
 //			}
 //		}while(idx != -1);	// </p>가 있으면 반복
 //		//////////////////////////////
+		*/
 		
 		/////////////////태그잘라서 map에담기
 		String date[] = contents.split(sTag);
 		
 		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();
+		Map<Integer, Object> transLineMap = new HashMap<Integer, Object>();	//라인별로 번역된거만 담음
 		int lineNum = 0;	//
 		
 		for (int i = 0; i < date.length; i++) {
 			date[i] = date[i].split(eTag)[0];
 			if (!date[i].isEmpty()) {
 				lineMap.put(lineNum++, date[i]);
+				transLineMap.put(lineNum, null);	//본문 라인길이만큼 만들어준다
 			}
 		}
 		
@@ -261,9 +271,14 @@ public class WikiServiceImpl implements WikiService {
 			String transContents = (String) transList.get(i).get("manualAfter");						//		오라클 NUMBER 형 컬럼의 데이터를 HashMap 타입으로 받아 java에서 사용하려고 하니 발생
 			
 			lineMap.put(transline, transContents);
+			transLineMap.put(transline, transContents);	// 번역된거 해당라인에 넣음
 		}
 		
-		return lineMap;
+		List<Map<Integer, Object>> transInfoList = new ArrayList<Map<Integer,Object>>(); 
+		transInfoList.add(lineMap);
+		transInfoList.add(transLineMap);
+		
+		return transInfoList;
 	}//getWikiTrans - end
 	
 

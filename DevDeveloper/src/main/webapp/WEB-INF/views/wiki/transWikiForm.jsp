@@ -80,7 +80,8 @@
 		hover();			//마우스올라간 번역라인 색바꾸기
 		btnClose();			//번역편집창 닫기
 		otherTransClick();	//번역편집창에서 다른번역 가져오기
-		hideOtherTrans();	//	''		  다른번역 숨기기
+		//hideOtherTrans();	//	''		  다른번역 숨기기
+		startTrans();
 	});
 
 	/*
@@ -168,6 +169,11 @@
 		$('body').on('click','.otherTrans',function(){
 			var transArea = $(".transEdit.open #transContents");
 			var otherTransVal = $(this).attr('id','otcontents').text();	//왜 날짜 회원번호도 같이?
+			
+			//otherTransVal = otherTransVal.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+			
+			//otherTransVal.text();
+			
 			transArea.text(otherTransVal);
 					
 		});
@@ -242,6 +248,8 @@
 						alert("등록됨");
 						transArea.val('');
 						getWikiTransLine(manualLine, manualNo);	//메뉴얼번호 메뉴얼라인수 넘겨줌
+						$("#transContent"+manualLine).html(manualAfter);
+						
 					}
 				},
 				error:function(xht, status, message){
@@ -309,8 +317,10 @@
 					 .append($('<td>').html('<button id=\'btnDelete\'>삭제</button>'))
 					 .append($('<input type=\'hidden\' id=\'hidden_userId\'>').val(item.id))
 					 .appendTo('tbody'); */
+			   var manualAfterBr = (item.manualAfter).replace(/(\n|\r\n)/g, '<br>');	//br치환
+					 
 			   $('<div>').attr('class','row otherTrans')
-			   	.append($('<div id="otcontents" >').html(item.manualAfter))
+			   	.append($('<div id="otcontents" >').html(manualAfterBr))
 			   	.append($('<badge class="badge badge-primary">').html("<br>"+item.translDate+" / "+item.membersNo))
 				.appendTo('#othertrans_'+manualLine);
 		});//each
@@ -321,12 +331,24 @@
 		곽동우
 		otherTrans 숨기기
 	*/
-	function hideOtherTrans(){
+	/* function hideOtherTrans(){
 		$( ".transEdit" ).on( "click", function() {
 			alert("와!")
 		      $( "[name = rEdit]" ).switchClass( "col", "col hide", 1000 );
 		      $( "[name = lEdit]" ).switchClass( "anotherNewClass", "newClass", 1000 );
 		    });
+	} */
+	
+	/*
+		20191107
+		곽동우
+		otherTrans 숨기기
+	*/
+	function setTrans(){
+		for(var i in transList) {
+			console.log(i);
+			
+		}
 	}
 </script>
 </head>
@@ -358,9 +380,22 @@
 
 			<hr>
 			<%-- 위키 번역 문장 뿌려줌 --%>
-			<c:forEach var="entry" items="${transWiki}">
-				<div class="translate open" id="translate${entry.key}">
-					${entry.value }
+			
+			<c:forEach var="entry" items="${transWiki}" varStatus="status">
+				<div class="translate open col" id="translate${entry.key}">
+					<div class="row">
+						<div class="col">${entry.value }</div>
+						
+						<c:choose>
+							<c:when test="${not empty transList.get(status.index)}">
+								<div class="translated col font-italic" id="transContent${entry.key}">${transList.get(status.index)}</div>
+							</c:when>
+							<c:when test="${empty transList.get(status.index)}">
+								<div class="untranslated col font-italic" id="transContent${entry.key}">${transList.get(status.index)}</div>
+							</c:when>
+						</c:choose>
+						
+					</div>
 				</div>
 				
 				
@@ -372,7 +407,7 @@
 						<div class="col" name="rEdit">
 							<div class="row">
 								<span class="badge badge-primary" id="${entry.key}">
-									${wiki.manualTitle}_번역_${entry.key} </span>
+									${wiki.manualTitle}/번역_${entry.key} </span>
 							</div>
 							<div class="row" id="oriContents">
 								${entry.value }

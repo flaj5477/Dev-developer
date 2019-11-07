@@ -8,7 +8,7 @@
 <title>${wiki.manualTitle}-DD</title>
 <script>
 
-	if(${wiki.manualContentsCheck } == 0){
+	if("${wiki.manualContentsCheck }" == 0){
 		alert("접근불가!");
 		history.go(-1);//첫번째 방법
 		//history.back();//두번째 방법

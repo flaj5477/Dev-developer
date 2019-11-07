@@ -67,11 +67,6 @@
 	                      <span class="h2 font-weight-bold text-uppercase mb-0">${tag.manualTags }</span>
 	                      <h5 class="card-title text-muted mb-0">${tag.tagsContents }</h5>
 	                    </div>
-	                    <div class="col-auto">
-	                      <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-	                        <i class="fas fa-chart-bar"></i>
-	                      </div>
-	                    </div>
 	                  </div>
 	                  <p class="mt-3 mb-0 text-muted text-sm">
 	                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>${tag.countTags }개</span>

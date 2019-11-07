@@ -172,7 +172,7 @@
 						MANUAL_LINE			as		"manualLine",
 						MANUAL_BEFORE		as		"manualBefore",
 						MANUAL_AFTER		as		"manualAfter",
-						TO_CHAR(TRANS_DATE,'YYYY-MM-DD hh:mm:ss')	as 		"translDate",
+						TO_CHAR(TRANS_DATE,'YYYY-MM-DD hh:MI:ss')	as 		"translDate",
 						MANUAL_NO			as 		"manualNo",
 						MEMBERS_NO			as 		"membersNo"
 						
@@ -241,6 +241,6 @@
 					                  GROUP BY MANUAL_TAGS
 					                  ORDER BY countTags DESC) b
 			on a.TAGS_TITLE = b.manualTags
-			order by b.manualTags
+			order by UPPER(b.manualTags)
 	  </select>
 </mapper>

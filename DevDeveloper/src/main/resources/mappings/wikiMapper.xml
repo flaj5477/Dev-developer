@@ -231,6 +231,15 @@
 
 	 </select>
 	 
+	 <!-- 
+	 	곽동우
+	 	20191108
+	 	위키 번역 삭제
+	  -->
+	<delete id="delWikiTrans" parameterType="int">
+			DELETE FROM WIKI_GUIDE_TRANS 
+			WHERE TRANS_NO = #{transNo}
+	</delete>	 
 	 
 	 <!-- 
 	 	곽동우

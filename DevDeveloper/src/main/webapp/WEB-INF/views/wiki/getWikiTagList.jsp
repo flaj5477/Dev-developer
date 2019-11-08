@@ -53,7 +53,7 @@
 	</div>
 	
 	<div>
-			<h1>위키가이드</h1>
+			<h1>위키가이드 태그목록</h1>
 	</div>
 	
 	<div class="row" id="wikiList">	

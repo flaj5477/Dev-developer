@@ -94,12 +94,6 @@
 			          <h1 class="ct-title" id="content">${wiki.manualTitle}</h1>
 			        </div>
 		        </div>
-		        <div class="col">
-			        <div class="nav nav-pills justify-content-end">
-			        	<button type="button" id="btnGetTransWiki" class="btn btn-primary">번역본보기</button>
-			        	<button type="button" id="btnTransWiki" class="btn btn-success">번역하기</button>
-			        </div>
-		        </div>
 		    </div>
 		
 			<hr>

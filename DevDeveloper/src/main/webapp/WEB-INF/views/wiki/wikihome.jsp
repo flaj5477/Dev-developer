@@ -148,12 +148,12 @@
 										${wiki.manualTags} </span></td>
 								<td>
 									<div class="d-flex align-items-center">
-										<span class="mr-2">60%</span>
+										<span class="mr-2">${wiki.manualTransPercent }%</span>
 										<div>
 											<div class="progress">
-												<div class="progress-bar bg-warning" role="progressbar"
-													aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-													style="width: 60%;"></div>
+												<div class="progress-bar bg-success" role="progressbar"
+													aria-valuenow="${wiki.manualTransPercent }%" aria-valuemin="0" aria-valuemax="100"
+													style="width:${wiki.manualTransPercent }%;"></div>
 											</div>
 										</div>
 									</div>

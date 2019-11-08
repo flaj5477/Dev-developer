@@ -8,6 +8,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style type="text/css">
+a {
+  color : "blue";
+}
+</style>
 <script>
 	pageName = "위키가이드";	
 
@@ -124,9 +129,9 @@
 				<table class="table align-items-center table-flush">
 					<thead class="thead-light">
 						<tr>
-							<th scope="col">No</th>
-							<th scope="col">Title</th>
-							<th scope="col">Tags</th>
+							<th scope="col">No</th> 
+							<th class="col-3" scope="col">Title</th>
+							<th scope="col"><a href="getWikiTagList">Tags</a></th>
 							<th scope="col">Completion</th>
 							<th scope="col"></th>
 						</tr>
@@ -144,8 +149,17 @@
 								</th>
 								<td id="${wiki.manualNo}" class="title">${wiki.manualTitle}
 								</td>
-								<td><span class="badge badge-dot mr-4">
-										${wiki.manualTags} </span></td>
+								<td><span>
+										<c:choose>
+											<c:when test="${wiki.manualTags eq null}">
+												<a href = "wikihome?select=tags&page=1&searchVal=기타">기타</a>
+											</c:when>
+											<c:when test="${not empty wiki.manualTags}">
+												<a href = "wikihome?select=tags&page=1&searchVal=${wiki.manualTags}">${wiki.manualTags}</a>		
+											</c:when>
+										</c:choose>
+									</span>
+								</td>
 								<td>
 									<div class="d-flex align-items-center">
 										<span class="mr-2">${wiki.manualTransPercent }%</span>

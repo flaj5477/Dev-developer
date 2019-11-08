@@ -86,6 +86,7 @@
 		otherTransClick();	//번역편집창에서 다른번역 가져오기
 		//hideOtherTrans();	//	''		  다른번역 숨기기
 		startTrans();
+		delWikiTrans();
 		
 	});
 
@@ -191,6 +192,21 @@
 			
 			transArea.text(otherTransVal);
 					
+		});
+	}
+	
+	/*
+		곽동우
+		20191108
+		번역삭제
+	*/
+	function delWikiTrans(){
+		$('body').on('click','[name=deltransbtn]',function(event){
+			event.stopPropagation();
+			var $transNo = $(this).parent().parent().attr('id');
+			
+			$.ajax({
+			});
 		});
 	}
 	
@@ -334,8 +350,12 @@
 					 .appendTo('tbody'); */
 			   var manualAfterBr = (item.manualAfter).replace(/(\n|\r\n)/g, '<br>');	//br치환
 					 
-			   $('<div>').attr('class','col otherTrans pr-2')
-			   	.append($('<div id="otcontents" class="row" >').html(manualAfterBr))
+			   $('<div>').attr({
+				   			'class': 'col otherTrans pr-2 ',
+				   			"id" : item.transNo
+			   		})
+				.append($('<div class="row nav nav-pills justify-content-end">').html('<i name="deltransbtn" class="ni ni-fat-remove">'))			   		
+			   	.append($('<div id="otcontents" class="row" >').html(manualAfterBr))   
 			   	.append($('<div class="row nav nav-pills justify-content-end">')
 			   			.append($('<badge class="badge badge-primary ml-3">').html("<br>"+item.translDate+" / "+"<a href=' getWiki= "+item.membersNo +"'>"+item.membersNo+"</a>" )))
 				.appendTo('#othertrans_'+manualLine);

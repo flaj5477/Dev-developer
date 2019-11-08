@@ -68,6 +68,7 @@ public class WikiDAO {
 	
 	//위키 번역 수 가져오기
 	public int getTransCount(int manualNo) {
-		return mybatis.selectOne("WikiDAO.getTransCount",manualNo);
+		Integer count = mybatis.selectOne("WikiDAO.getTransCount",manualNo);
+		return  count != null ? count : 0 ;
 	}
 }

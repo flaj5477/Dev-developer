@@ -91,7 +91,7 @@
 	<div id="subject"></div>	
 	<div id="content">
 		<form action="ready" name="frm" method="post">
-			<table id="chooseTab" border="1" style="width:500px">
+			<table id="chooseTab" border="1" style="width:550px">
 				<thead>
 					<tr align="center">
 						<th>선택</th>

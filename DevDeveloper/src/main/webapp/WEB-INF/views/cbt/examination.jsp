@@ -11,26 +11,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function() {
-		screenControl();
-		getDisplayInfo();
 		toast();
 	});
-	
-	function screenControl() {
-		$('#max').click(function() {
-			document.documentElement.requestFullscreen();
-		});
-	}
-	
-	function getDisplayInfo() {
-		var size = {
-		  width: window.innerWidth || document.body.clientWidth,
-		  height: window.innerHeight || document.body.clientHeight
-		}
-		console.log(size.width);
-		console.log(size.height);
-		return size;
-	}
+
 	function toast() {
 		var level = parseInt("${param.testsNo}"); //  command의 vo객체를 통해 form 태그의 값을 가져왔음!
 		frm.testsNo.value = level; // frm 태그에 레벨 값 저장
@@ -41,6 +24,7 @@
 			 document.frm.submit();
 		});
 	}
+	
 	function popup(){
 		var url = "viewer";
         var name = "_blank"
@@ -62,8 +46,6 @@
 		 				<span class="sr-only"></span>
 				</div>
 		</div>
-		<button id="max">크게</button>
-		<button id="min">작게</button>
 	</form>	
 </div>
 </body>

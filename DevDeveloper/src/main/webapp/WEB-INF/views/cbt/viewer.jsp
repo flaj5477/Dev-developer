@@ -43,16 +43,19 @@
 			dataType : 'JSON'
 		}) // 호출 Mapping URI
 		.done(function(data) {
-			let idx = randomWrite(data.length);
-			$.each(data, function(num) {
-				var no = 1 + parseInt([num]);
-				var quest = data[idx[num]].testsQContents;
-				var ex1 = data[idx[num]].testsQEx1;
-				var ex2 = data[idx[num]].testsQEx2;
-				var ex3 = data[idx[num]].testsQEx3;
-				var ex4 = data[idx[num]].testsQEx4;
-				var answer = data[idx[num]].testsQAnswer;
-				var unit = data[idx[num]].testsQUnit;
+			let rand = randomWrite(data.length);
+			$.each(data, function(idx) {
+				var randEx = [];
+				var randIdx = 4;
+				console.log(data);
+				var no = 1 + parseInt([idx]);
+				var quest = data[rand[idx]].testsQContents;
+				var ex1 = data[rand[idx]].testsQEx1;
+				var ex2 = data[rand[idx]].testsQEx2;
+				var ex3 = data[rand[idx]].testsQEx3;
+				var ex4 = data[rand[idx]].testsQEx4;
+				var answer = data[rand[idx]].testsQAnswer;
+				var unit = data[rand[idx]].testsQUnit;
 				$('div').append('<p>' + no + '.' + quest + '<br> 1.' + ex1 + '<br> 2.' + ex2 + '<br> 3.' + ex3 + '<br> 4.' + ex4 + '<br>' + answer + '<br>' + unit + '</p>');
 			});
 		});

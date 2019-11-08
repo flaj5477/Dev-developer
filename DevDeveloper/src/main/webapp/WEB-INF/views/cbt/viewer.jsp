@@ -8,10 +8,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-	$(document).ready(function() {
-		testInfo();
 
-	});
 	var title;
 	var contents;
 	var volume;
@@ -43,20 +40,23 @@
 			dataType : 'JSON'
 		}) // 호출 Mapping URI
 		.done(function(data) {
-			let rand = randomWrite(data.length);
+			var rand = randomWrite(data.length);
 			$.each(data, function(idx) {
-				var randEx = [];
-				var randIdx = 4;
-				console.log(data);
 				var no = 1 + parseInt([idx]);
 				var quest = data[rand[idx]].testsQContents;
 				var ex1 = data[rand[idx]].testsQEx1;
 				var ex2 = data[rand[idx]].testsQEx2;
 				var ex3 = data[rand[idx]].testsQEx3;
 				var ex4 = data[rand[idx]].testsQEx4;
+				var vdata = [ex1,ex2,ex3,ex4];
+				var vrand = randomWrite();
+				var rex = [];
 				var answer = data[rand[idx]].testsQAnswer;
 				var unit = data[rand[idx]].testsQUnit;
-				$('div').append('<p>' + no + '.' + quest + '<br> 1.' + ex1 + '<br> 2.' + ex2 + '<br> 3.' + ex3 + '<br> 4.' + ex4 + '<br>' + answer + '<br>' + unit + '</p>');
+				for (var i=0;i<vdata.length;i++) {
+					rex.push(vdata[vrand[i]]);
+				}
+				$('div').append('<p>' + no + '.' + quest + '<br> 1.' + rex[0] + '<br> 2.' + rex[1] + '<br> 3.' + rex[2] + '<br> 4.' + rex[3] + '<br> 정답: ' + answer + '<br>' + unit + '</p>');
 			});
 		});
 	}
@@ -65,11 +65,23 @@
 		var i = 0;
 		let idx = [];
 		let set = size;
-		while (i < volume) {
-			let n = Math.floor(Math.random() * set);
-			if (!sameNum(n)) {
-				idx.push(n); // 배열에 저장
-				i++;
+		if(size != null) { // 문제 랜덤출제
+			while (i < volume) {
+				let n = Math.floor(Math.random() * set);
+				if (!sameNum(n)) {
+					idx.push(n); // 배열에 저장
+					i++;
+				}
+			}
+		}
+		else { // 보기 랜덤출력
+			set = 4;
+			while (i < 4) {
+				let n = Math.floor(Math.random() * set);
+				if (!sameNum(n)) {
+					idx.push(n);
+					i++;
+				}
 			}
 		}
 		function sameNum(n) { // 중복제거
@@ -85,7 +97,7 @@
 	
 </script>
 </head>
-<body>
+<body onload="testInfo()">
 	<div>
 		<h2>hi!</h2>
 	</div>

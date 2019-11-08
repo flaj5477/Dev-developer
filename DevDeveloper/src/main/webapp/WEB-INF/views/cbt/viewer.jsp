@@ -5,17 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>CBT Viewer</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-
 	var title = null;
 	var contents = null;
 	var volume = 0;
 	var passValue = 0;
 	var min = 0;
 	var sec = 0;
-	var time = 0;
+	var setTime = 0;
 	var level = parseInt("${param.testsNo}");
 	function testInfo() {
 		let idx;
@@ -39,12 +37,12 @@
 	
 	function timeCount() {
 		var restTime = setInterval(function() {
-			var getTime = sec - time;
-			var getMin = parseInt(getTime/60);
-			var getSec = getTime%60;
+			var getTime = sec - setTime;
+			var restMin = parseInt(getTime/60);
+			var restSec = getTime%60;
 			if(getTime > 0) {
-				console.log(getMin+'분 '+getSec+'초');
-				time++;
+				console.log(restMin+'분 '+restSec+'초');
+				setTime++;
 			}
 			else {
 				clearInterval(restTime);
@@ -117,7 +115,7 @@
 </script>
 </head>
 <body onload="testInfo()">
-<div>
+<div class="cbtViewer">
 </div>
 </body>
 </html>

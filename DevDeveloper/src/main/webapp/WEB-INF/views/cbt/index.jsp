@@ -44,7 +44,7 @@
 							 .attr('value','refuse');
 	    }
 	    else if(restCond >= 0 && grade < 5) {
-	    	setInterval("indexCheck()",1000);
+	    	setInterval(indexCheck,1000);
 	    	$('#restTime').empty();
 	    	if(year != 0) {
 	    		$('#restTime').append(year+'년 ');

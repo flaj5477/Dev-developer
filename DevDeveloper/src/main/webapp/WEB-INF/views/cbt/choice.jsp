@@ -11,7 +11,7 @@
 <script src="${pageContext.request.contextPath}/resources/assets/js/format.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
-	var readyTime;
+	var readyTime = null;
 	var curLevel = parseInt('${members.membersGrade}'); // String -> Number 변환
 	
 	$(document).ready(function() {
@@ -91,7 +91,7 @@
 	<div id="subject"></div>	
 	<div id="content">
 		<form action="ready" name="frm" method="post">
-			<table id="chooseTab" border="1" style="width:500px">
+			<table id="chooseTab" border="1" style="width:550px">
 				<thead>
 					<tr align="center">
 						<th>선택</th>

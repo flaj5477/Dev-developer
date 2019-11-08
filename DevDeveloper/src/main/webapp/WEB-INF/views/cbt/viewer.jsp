@@ -5,17 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>CBT Viewer</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-
-	var title;
-	var contents;
-	var volume;
-	var passValue;
-	var time;
+	var title = null;
+	var contents = null;
+	var volume = 0;
+	var passValue = 0;
+	var min = 0;
+	var sec = 0;
+	var setTime = 0;
 	var level = parseInt("${param.testsNo}");
-
 	function testInfo() {
 		let idx;
 		$.ajax('getTestInfo/' + level, {
@@ -26,12 +25,30 @@
 				contents = data.testsContents;
 				volume = data.testsQVolume;
 				passValue = data.testsPassCriterion;
-				time = data.testsTimeLimit;
+				min = data.testsTimeLimit;
+				sec = min * 60;		
 			},
 			complete : function() {
+				timeCount();
 				questList();
 			}
 		});
+	}
+	
+	function timeCount() {
+		var restTime = setInterval(function() {
+			var getTime = sec - setTime;
+			var restMin = parseInt(getTime/60);
+			var restSec = getTime%60;
+			if(getTime > 0) {
+				console.log(restMin+'분 '+restSec+'초');
+				setTime++;
+			}
+			else {
+				clearInterval(restTime);
+				alert('시간초과');
+			}
+		},1000);
 	}
 	
 	function questList() {
@@ -98,8 +115,7 @@
 </script>
 </head>
 <body onload="testInfo()">
-	<div>
-		<h2>hi!</h2>
-	</div>
+<div class="cbtViewer">
+</div>
 </body>
 </html>

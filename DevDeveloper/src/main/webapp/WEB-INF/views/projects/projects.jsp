@@ -8,6 +8,10 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>상세 프로젝트</title>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
 <!-- Favicon -->
 <link href="./resources/assets/img/brand/favicon.png" rel="icon" type="image/png">
 <!-- Fonts -->
@@ -21,6 +25,7 @@
 	rel="stylesheet" />
 <!-- CSS Files -->
 <link href="./resources/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
+
 </head>
 
 <body class="">
@@ -35,11 +40,6 @@
 						<a href="./applyProjectsForm?projNo=${project.projNo }" class="btn btn-lg btn-primary">지원하기</a>
 					</div>
 					
-					<!--  임시 파일링크  -->
-					<div class="col-4 text-right">
-						<a href="./getFilesList" class="btn btn-lg btn-primary">파일이동</a>
-					</div>
-				
 				</div>
 			</div>
 			<div class="card-body">
@@ -60,7 +60,25 @@
 						<div class="display-4">Technologies</div>
 						<div>${project.projTags }</div><br>
 						<div class="display-4">Descriptions</div>
-						<div>${project.projContents }</div><br>
+						<div id="projContents">${project.projContents }</div><br>
+						<script> //프로젝트 내용에 공백을 <br>태그로 치환해서 출력하기
+						$(document).ready(function() {
+							var text = $('#projContents').text();
+							var result = text.replace(/(\n|\r\n)/g, '<br>
+							');
+							
+							//var result = replaceAll(text,"(\r\n|\r|\n|\n\r)", "<br>");
+
+							console.log(result);
+							
+							$('#projContents').html(result);
+						});
+						
+						function replaceAll(str, searchStr, replaceStr) {
+							  return str.split(searchStr).join(replaceStr);
+						}
+							
+						</script>
 					</div>
 
 				</form>

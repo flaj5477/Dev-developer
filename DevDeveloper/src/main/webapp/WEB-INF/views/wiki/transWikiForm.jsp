@@ -63,6 +63,9 @@
   border : 0px;
 }
 
+.col.otherTrans.pr-2 {
+    max-width: 95%;
+}
 
 </style>
   <style>
@@ -83,6 +86,7 @@
 		otherTransClick();	//번역편집창에서 다른번역 가져오기
 		//hideOtherTrans();	//	''		  다른번역 숨기기
 		startTrans();
+		delWikiTrans();
 		
 	});
 
@@ -137,8 +141,6 @@
 			
 			
 			var manualLine = $(".transEdit.open .badge").attr('id');
-			console.log(manualNo);
-			console.log(manualLine);
 			getWikiTransLine(manualLine, manualNo);
 			
 		});
@@ -182,7 +184,7 @@
 	function otherTransClick(){
 		$('body').on('click','.otherTrans',function(){
 			var transArea = $(".transEdit.open #transContents");
-			var otherTransVal = $(this).attr('id','otcontents').text();	//왜 날짜 회원번호도 같이?
+			var otherTransVal = $(this).children().eq(0).html();	//왜 날짜 회원번호도 같이?
 			
 			//otherTransVal = otherTransVal.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
 			
@@ -190,6 +192,21 @@
 			
 			transArea.text(otherTransVal);
 					
+		});
+	}
+	
+	/*
+		곽동우
+		20191108
+		번역삭제
+	*/
+	function delWikiTrans(){
+		$('body').on('click','[name=deltransbtn]',function(event){
+			event.stopPropagation();
+			var $transNo = $(this).parent().parent().attr('id');
+			
+			$.ajax({
+			});
 		});
 	}
 	
@@ -333,9 +350,14 @@
 					 .appendTo('tbody'); */
 			   var manualAfterBr = (item.manualAfter).replace(/(\n|\r\n)/g, '<br>');	//br치환
 					 
-			   $('<div>').attr('class','row otherTrans')
-			   	.append($('<div id="otcontents" >').html(manualAfterBr))
-			   	.append($('<badge class="badge badge-primary">').html("<br>"+item.translDate+" / "+item.membersNo))
+			   $('<div>').attr({
+				   			'class': 'col otherTrans pr-2 ',
+				   			"id" : item.transNo
+			   		})
+				.append($('<div class="row nav nav-pills justify-content-end">').html('<i name="deltransbtn" class="ni ni-fat-remove">'))			   		
+			   	.append($('<div id="otcontents" class="row" >').html(manualAfterBr))   
+			   	.append($('<div class="row nav nav-pills justify-content-end">')
+			   			.append($('<badge class="badge badge-primary ml-3">').html("<br>"+item.translDate+" / "+"<a href=' getWiki= "+item.membersNo +"'>"+item.membersNo+"</a>" )))
 				.appendTo('#othertrans_'+manualLine);
 		});//each
 	}//wikiTransLineResult
@@ -406,12 +428,6 @@
 					<div class="ct-page-title">
 			          <h1 class="ct-title" id="content">${wiki.manualTitle}</h1>
 			        </div>
-			        <div class="col">
-			        <div class="nav nav-pills justify-content-end">
-			        	<button type="button" id="btnGetTransWiki" class="btn btn-primary">번역본 보기</button>
-			        	<button type="button" id="btnOriWiki" class="btn btn-success">원문보기</button>
-			        </div>
-		        </div>
 		        </div>
 		    </div>
 
@@ -440,7 +456,7 @@
 				<div class="transEdit hide">
 					<div class="row">
 						
-						<%-- 번역편집기 왼쪽 --%>
+						<%-- 번역편집기 오른쪽  --%>
 						<div class="col" name="rEdit">
 							<div class="row">
 								<span class="badge badge-primary" id="${entry.key}">
@@ -459,8 +475,8 @@
 							</div>
 						</div>
 						
-						<%-- 번역편집기 오른쪽 --%>
-						<div class="col" name="lEdit">
+						<%-- 번역편집기 왼쪽 --%>
+						<div class="col mr--3" name="lEdit">
 							<span class="row nav nav-pills justify-content-end">
 									<i name="btn-trans-close" class="ni ni-fat-remove"></i>
 							</span>

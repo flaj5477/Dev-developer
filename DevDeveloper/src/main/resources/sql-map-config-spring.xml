@@ -23,8 +23,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		  
 		<typeAlias alias="projects"
 			type="com.dd.devdeveloper.projects.ProjectsVO" />
-		<typeAlias alias="projParticipants"
-			type="com.dd.devdeveloper.projects.ProjParticipantsVO"/>
+		<typeAlias alias="projApplicants"
+			type="com.dd.devdeveloper.projects.ProjApplicantsVO"/>
 		<typeAlias alias="activityLog"
 			type="com.dd.devdeveloper.dashboard.ActivityLogVO"/>
 		<typeAlias alias="dashboard"
@@ -35,7 +35,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="wiki"
 			type="com.dd.devdeveloper.wiki.WikiVO"/>
 		<typeAlias alias="wikiTrans"
-			type="com.dd.devdeveloper.wiki.WikiTransVO"/>			
+			type="com.dd.devdeveloper.wiki.WikiTransVO"/>
+		<typeAlias alias="wikiTag"
+			type="com.dd.devdeveloper.wiki.WikiTagVO"/>
+					
 			
 		<!-- 동규 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
 		<typeAlias alias="testsRecord"
@@ -50,10 +53,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="answer"
 				   type="com.dd.devdeveloper.qna.AnswerVO"/>
 		<typeAlias alias="question"
-				   type="com.dd.devdeveloper.qna.QuestionVO"/>				   
+				   type="com.dd.devdeveloper.qna.QuestionVO"/>		
+		<typeAlias alias="rec"
+				   type="com.dd.devdeveloper.qna.RecListVO"/>			   		   
 		<!-- 경민 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->
 		<typeAlias alias="files"
 			type="com.dd.devdeveloper.files.FilesVO"/>
+			
 		
 		
 		

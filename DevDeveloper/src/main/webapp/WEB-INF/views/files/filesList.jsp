@@ -31,13 +31,28 @@
 
 <script>
 	pageName = "프로젝트 파일";
-	
+
 	function fImport() {
-		$.ajax({
-		})
+		$.ajax({})
 	}
-			/* uri:"./filesImport.jsp", */
-	 
+	/* uri:"./filesImport.jsp", */
+	
+	var formData = new FormData($('#fileForm')[0]); 
+		$.ajax({ type: "POST", enctype: 'multipart/form-data',
+				url: '/multipartUpload.do', data: formData, // 필수 
+				processData: false, // 필수
+				contentType: false, // 필수
+				cache: false, // 필수
+				success: function (result) { 
+				}, 
+				error: function (e) { 
+				} 
+			});
+
+
+	
+	function fn_insertBoard(){ var comSubmit = new ComSubmit("frm"); comSubmit.setUrl("<c:url value='/sample/insertBoard.do' />"); comSubmit.submit(); }
+
 </script>
 </head>
 
@@ -73,17 +88,52 @@
 										</div>
 									</form>
 								</div>
-								
+
+								<!-- Modal -->
+								<div class="modal fade" id="upmodal" tabindex="-1" role="dialog"
+									aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">파일 업로드</h5>
+												타이틀<input type="text"> 코멘트<input type="text"><br/>
+										
+												<form id="fileForm" action="upload" method="post" enctype="multipart/form-data">
+													<input type="file" value="파일 선택" name="filesUpload" multiple="true" /> 
+													<input type="submit" value="업로드" />
+												</form>
+												
+
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+												
+											</div>
+											<div class="modal-body">...</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Close</button>
+												<button type="button" class="btn btn-primary">Save
+													changes</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
 								<div class="col-9 pull-right">
 									<button type="button" class="btn btn-primary btn">새폴더</button>
 
-									<button type="button" class="btn btn-primary btn" onclick="location.href='filesImport' ">중요</button> <!-- ./import -->
+									<button type="button" class="btn btn-primary btn"
+										onclick="location.href='filesImport' ">중요</button>
+									<!-- ./import -->
 
 									<button type="button" class="btn btn-primary btn">휴지통</button>
 
 									<button type="button" class="btn btn-primary btn">미리보기</button>
 
-									<button type="button" class="btn btn-primary btn">업로드</button>
+									<button type="button" class="btn btn-primary btn" id=""
+										data-toggle="modal" data-target="#upmodal">업로드</button>
 
 									<button type="button" class="btn btn-primary btn">다운로드</button>
 
@@ -136,15 +186,21 @@
 							<c:forEach var="files" items="${list}">
 								<tr>
 									<%-- <td><input type="checkbox" name="chk_files" value="${files.filesNo}"> --%>
-									<td>
-									<c:if test="${files.filesImport=='Y'}"><input type="checkbox" value="${files.filesNo}" name="chk_files" checked></c:if>
-									<c:if test="${files.filesImport==null}"><input type="checkbox" value="${files.filesNo}" name="chk_files" ></c:if>
-										<%-- ${files.filesType} --%><c:if test="${files.filesType=='F'}" ><i class="far fa-file"></i>
+									<td><c:if test="${files.filesImport=='Y'}">
+											<input type="checkbox" value="${files.filesNo}"
+												name="chk_files" checked>
+										</c:if> <c:if test="${files.filesImport==null}">
+											<input type="checkbox" value="${files.filesNo}"
+												name="chk_files">
+										</c:if> <%-- ${files.filesType} --%> <c:if
+											test="${files.filesType=='F'}">
+											<i class="far fa-file"></i>
                 						${files.filesTitle}
-                						 </c:if> <c:if test="${files.filesType=='D'}"><i class="far fa-folder"></i>
-										  <a href="./getFilesList?filesGroupNo=${files.filesNo}">${files.filesTitle}</a>
-										</c:if>
-									</td> <!-- <input type="checkbox" name="chk_info" value="HTML">HTML -->
+                						 </c:if> <c:if test="${files.filesType=='D'}">
+											<i class="far fa-folder"></i>
+											<a href="./getFilesList?filesGroupNo=${files.filesNo}">${files.filesTitle}</a>
+										</c:if></td>
+									<!-- <input type="checkbox" name="chk_info" value="HTML">HTML -->
 									<td>${files.filesComment }</td>
 									<td>${files.membersNo }</td>
 									<td>${files.filesUploadDate }</td>
@@ -189,7 +245,6 @@
 			</div>
 		</div>
 	</footer>
-	</div>
 
 	<!--   Core   -->
 	<script src="./resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
@@ -212,10 +267,10 @@
 	<script>
 		$("input[name='chk_files']").on("click", function() {
 			console.log(this);
-			
+
 			$.ajax({
 				url : "${pageContext.request.contextPath}/filesImport",
-				type: "POST",
+				type : "POST",
 				data : {
 					"filesNo" : $(this).val()
 				},

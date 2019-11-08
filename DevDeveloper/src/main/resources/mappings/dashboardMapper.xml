@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DashboardDAO">
+	<!-- 활동 로그 조회 -->
+	<resultMap type="com.dd.devdeveloper.dashboard.ActivityLogVO" id="ActivityLogMap">
+		<result column="activity_Date" property="activityDate" />
+		<result column="activity_Score" property="activityScore"/>
+	</resultMap>
+	<select id="getActivityLogList"
+			statementType="CALLABLE"
+			parameterType="com.dd.devdeveloper.dashboard.DashboardVO">
+		{ CALL active_log_select(
+			#{memberNo}, 
+			#{activityLogList, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=ActivityLogMap }
+		) }
+	</select>
+	
+	<!-- 대시보드 프로필 정보 조회 -->
+	<select id="getMembers" parameterType="members" resultType="members">
+		select 	members_no, 
+				members_id, 
+				members_name, 
+				members_image, 
+				members_addr, 
+				members_mail 
+		from members 
+		where MEMBERS_NO = #{membersNo}
+	</select>
+	
+	<!-- 프로젝트 지원 상태 조회 -->
+	<select id="getProjApplyStatus" parameterType = "dashboard" resultType="dashboard">
+		select 	(select count(*) from proj_applicants where members_no=#{memberNo} AND status='지원') proj_apply,
+          		(select count(*) from proj_applicants where members_no=#{memberNo} AND status='승인') proj_approve,
+          		(select count(*) from proj_applicants where members_no=#{memberNo} AND status='참여') proj_participant
+		from dual
+	</select>
+	
+	<!-- 회원의 프로젝트 지원상태 상세 -->
+	<select id="getProjStatusDetail" parameterType="projApplicants" resultType="projApplicants">
+		select  a.proj_no   "projNo",
+          		b.proj_title  "projTitle", 
+          		a.apply_no "applyNo"
+		from PROJ_APPLICANTS a join PROJECTS b 
+                               on a.proj_no = b.proj_no 
+		where a.members_no=#{membersNo} 
+		and a.status=#{status}
+	</select>
+	
+	<!-- 회원의 프로젝트 지원 취소 -->
+	<delete id="deleteApply" parameterType="projApplicants">
+		delete PROJ_APPLICANTS where apply_no=#{applyNo}
+	</delete>
+	
+	<!-- 프로젝트 승인 확인 -->
+	<update id="updateApplyParticipantIn" parameterType="projApplicants">
+		update PROJ_APPLICANTS set status='참여' where apply_no=#{applyNo}
+	</update>
+	
+	
+	<!-- 프로젝트 지원자 리스트 -->
+	<select id="getProjApplicantsList" parameterType="projApplicants" resultType="projApplicants">
+		select 	apply_no, 
+				members_no, 
+				proj_no, 
+				status, 
+				participant_name 
+		from PROJ_APPLICANTS_STATUS_VIEW
+		where proj_no in ( select proj_no from PROJECTS where members_no=#{pmNo})
+		order by status_no
+	</select>
+	
+	<!-- 내가 올린 프로젝트 리스트 가져오기 -->
+	<select id="getMyProjects" parameterType="projects" resultType="projects">
+		select 	proj_no, 
+				proj_title, 
+				proj_members_cnt, 
+				proj_store_url 
+		from PROJECTS 
+		where members_no=#{membersNo}
+	</select>
+	
+</mapper>
+

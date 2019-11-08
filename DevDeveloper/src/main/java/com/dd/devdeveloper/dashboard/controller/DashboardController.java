@@ -19,7 +19,8 @@ import com.dd.devdeveloper.dashboard.ActivityLogVO;
 import com.dd.devdeveloper.dashboard.DashboardVO;
 import com.dd.devdeveloper.dashboard.service.DashboardService;
 import com.dd.devdeveloper.members.MembersVO;
-import com.dd.devdeveloper.projects.ProjParticipantsVO;
+import com.dd.devdeveloper.projects.ProjApplicantsVO;
+import com.dd.devdeveloper.projects.ProjectsVO;
 
 @Controller
 public class DashboardController {
@@ -31,6 +32,10 @@ public class DashboardController {
 	public String getDashboard(ActivityLogVO vo, Model model, HttpSession session) {
 		
 		DashboardVO dashboardVO = new DashboardVO();
+		MembersVO membersVO = new MembersVO();
+		ProjApplicantsVO projParticipantsVO = new ProjApplicantsVO();
+		ProjectsVO projectsVO = new ProjectsVO();
+		
 		int membersNo = ((MembersVO)session.getAttribute("members")).getMembersNo();
 		dashboardVO.setMemberNo( membersNo );//세션의 회원번호를 가져와서 vo에 담는다 
 		
@@ -44,7 +49,17 @@ public class DashboardController {
 		model.addAttribute("projApprove", dashboardVO.getProjApprove());
 		model.addAttribute("projParticipant", dashboardVO.getProjParticipant());
 		
-		//회원이 올린 프로젝트공고에 지원한 지원자 리스트 가져옴
+		//회원 프로필 가져옴
+		membersVO.setMembersNo(membersNo);
+		model.addAttribute("members", dashboardService.getMembers(membersVO));
+		
+		//내가 올린 프로젝트 리스트
+		projectsVO.setMembersNo(membersNo);
+		model.addAttribute("myProjectsList", dashboardService.getProjects(projectsVO) );
+		
+		//내가 올린 프로젝트공고에 지원한 지원자 리스트 가져옴
+		projParticipantsVO.setPmNo(membersNo);
+		model.addAttribute( "projApplicantsList", dashboardService.getProjApplicantsList(projParticipantsVO) );
 		
 		//Q&A리스트 가져옴
 		
@@ -61,8 +76,8 @@ public class DashboardController {
 	//회원의 프로젝트 지원상태 상세 모달 가져옴
 	@ResponseBody
 	@RequestMapping(value="/getProjStatusDetail/{status}", method=RequestMethod.GET)
-	public List<ProjParticipantsVO> getProjStatusDetail(	@PathVariable String status,
-														ProjParticipantsVO vo, 
+	public List<ProjApplicantsVO> getProjStatusDetail(	@PathVariable String status,
+														ProjApplicantsVO vo, 
 														HttpSession session, 
 														//Model model,
 														ModelMap map) {
@@ -80,23 +95,22 @@ public class DashboardController {
 	
 	//지원취소
 	@RequestMapping("/deleteApply") 
-	public String deleteApply(ProjParticipantsVO vo) {
+	public String deleteApply(ProjApplicantsVO vo) {
 	  dashboardService.deleteApply(vo);
 	  return "redirect:/getDashboard";
 	}
 	
 	//승인확인
 	@RequestMapping("/updateApplyParticipantIn")
-	public String updateApplyParticipantIn(ProjParticipantsVO vo) {
+	public String updateApplyParticipantIn(ProjApplicantsVO vo) {
 	  dashboardService.updateApplyParticipantIn(vo);
     return "redirect:/getDashboard";
 	}
 	
 	//파일관리 페이지로 이동
 	@RequestMapping("/moveToFileList")
-	public String moveToFileList(ProjParticipantsVO vo, HttpSession session) {
+	public String moveToFileList(ProjApplicantsVO vo, HttpSession session) {
 	  session.setAttribute("projNo", vo.getProjNo());
-	  System.out.println("세션확인!!!!!!!!!!!!!!!!!!!!!!!!!!!-> " + session.getAttribute("projNo"));
 	  return "redirect:/getFilesList";
 	}
 	

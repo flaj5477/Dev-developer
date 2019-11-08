@@ -4,21 +4,44 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
 <title>위키수정</title>
 	<script>
+		var myEditor;
+	
 		$(function(){
 			checkForm();
+			
+			
+			ClassicEditor
+		     .create( document.querySelector( '#manualContents' ) , {
+		    	// 제거 하고싶은 플러그인 (배열)
+				 removePlugins: [ 'ImageUpload' , 'mediaEmbed']
+			 })
+		     .then( editor => {
+		            console.log( 'Editor was initialized', editor );
+		            myEditor = editor;
+		        } )
+		     .catch( error => {
+		         console.error( error );
+		     } );
+			
 		});
 		
 		function checkForm(){
+			//var editor_val = CKEDITOR.instances.manualContents.document.getBody().getChild(0).getText() ;
+			
 			$("#btnfrm").on("click",function(){
-				if($("#manualTitle").val() == ''){
+				if($("#manualTitle").val() == '') {
 					alert("제목을 입력해야합니다")
 					return;
-				} else if($("#manualContents").val() == ''){
-					alert("내용을 입력해야합니다")
+				} 
+				if (myEditor.getData()=="") {
+					alert('내용을 입력 하세요');
+					myEditor.editing.view.focus()
 					return;
 				}
+				
 				$("#frm").submit();
 			});
 		}

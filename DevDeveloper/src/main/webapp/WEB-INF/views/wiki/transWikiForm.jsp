@@ -33,10 +33,11 @@
   padding: 5px;
 }
 
+/*
 .transEdit .row > *:not(:first-child) {
   border-left: solid gray 0.5px;
 }
-
+ */
 .ni-fat-remove{
   font-size: 20px;
 }
@@ -64,21 +65,31 @@
 
 
 </style>
-
+  <style>
+  .toggler { width: 500px; height: 200px; position: relative; }
+  #button { padding: .5em 1em; text-decoration: none; }
+  #effect { position: relative; }
+  .newClass { width: 240px;  padding: 1em; letter-spacing: 0; margin: 0; }
+  .anotherNewClass { text-indent: 40px; letter-spacing: .2em; width: 410px; height: 100px; padding: 30px; margin: 10px; font-size: 1.1em; }
+  </style>
 <script>
-
+	var membersGrade = '${sessionScope.members.membersGrade}';
+	
 	$(function(){
-		deleteWiki();
+		btnControl();		//위키삭제
+		startTrans();		//번역시작 번역라인클릭
+		hover();			//마우스올라간 번역라인 색바꾸기
+		btnClose();			//번역편집창 닫기
+		otherTransClick();	//번역편집창에서 다른번역 가져오기
+		//hideOtherTrans();	//	''		  다른번역 숨기기
 		startTrans();
-		hover();
-		btnClose();
-		otherTransClick();
+		
 	});
 
 	/*
-		위키삭제 클릭이벤트
+		위키버튼 클릭이벤트
 	*/
-	function deleteWiki(){
+	function btnControl(){
 		$('#btnDelWiki').on('click', function(){
 			/* document.frm.action.value = "deleteWiki";
 			document.frm.submit(); */
@@ -90,7 +101,19 @@
 				return;
 			}
 		});
-	}//end-deleteWiki()
+		
+		$('#btnOriWiki').on('click', function(){
+			$("#frm").attr("action", "getWiki").submit();
+		});
+		
+		$('#btnTransWiki').on('click', function(){
+			$("#frm").attr("action", "transWikiForm").submit();
+		});
+		
+		$('#btnGetTransWiki').on('click', function(){
+			$("#frm").attr("action", "getWikiTrans").submit();
+		});
+	}//버튼클릭이벤트 끝
 	
 	/*
 		곽동우
@@ -160,6 +183,11 @@
 		$('body').on('click','.otherTrans',function(){
 			var transArea = $(".transEdit.open #transContents");
 			var otherTransVal = $(this).attr('id','otcontents').text();	//왜 날짜 회원번호도 같이?
+			
+			//otherTransVal = otherTransVal.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+			
+			//otherTransVal.text();
+			
 			transArea.text(otherTransVal);
 					
 		});
@@ -234,6 +262,8 @@
 						alert("등록됨");
 						transArea.val('');
 						getWikiTransLine(manualLine, manualNo);	//메뉴얼번호 메뉴얼라인수 넘겨줌
+						$("#transContent"+manualLine).html(manualAfter);
+						
 					}
 				},
 				error:function(xht, status, message){
@@ -262,11 +292,28 @@
 				alert("상태값 : "+status + " Http에러메세지 :"+msg);
 			},
 			success:function(data){
+				if(data.length == 0) {
+					wikiTransEmpty(manualLine);
+					return;
+				}
 				wikiTransLineResult(data, manualLine);
 			}
 		});
 	}
 	
+	/*
+		곽동우
+		20191105
+		번역없는라인
+	*/
+	function wikiTransEmpty(manualLine){
+		$('#othertrans_'+manualLine).empty();
+		
+		$('<div>').attr('class','row otherTrans')
+	   	 .append($('<div id="otcontents" >').attr("align", "center").html("번역이 없어요 "))
+		 .append($('<i class="ni ni-fat-remove">'))
+		 .appendTo('#othertrans_'+manualLine);
+	}
 	
 	/*
 		곽동우
@@ -284,23 +331,74 @@
 					 .append($('<td>').html('<button id=\'btnDelete\'>삭제</button>'))
 					 .append($('<input type=\'hidden\' id=\'hidden_userId\'>').val(item.id))
 					 .appendTo('tbody'); */
+			   var manualAfterBr = (item.manualAfter).replace(/(\n|\r\n)/g, '<br>');	//br치환
+					 
 			   $('<div>').attr('class','row otherTrans')
-			   	.append($('<div id="otcontents" >').html(item.manualAfter))
+			   	.append($('<div id="otcontents" >').html(manualAfterBr))
 			   	.append($('<badge class="badge badge-primary">').html("<br>"+item.translDate+" / "+item.membersNo))
 				.appendTo('#othertrans_'+manualLine);
 		});//each
 	}//wikiTransLineResult
 
+	/*
+		20191106
+		곽동우
+		otherTrans 숨기기
+	*/
+	/* function hideOtherTrans(){
+		$( ".transEdit" ).on( "click", function() {
+			alert("와!")
+		      $( "[name = rEdit]" ).switchClass( "col", "col hide", 1000 );
+		      $( "[name = lEdit]" ).switchClass( "anotherNewClass", "newClass", 1000 );
+		    });
+	} */
+	
+	/*
+		20191107
+		곽동우
+		otherTrans 숨기기
+	*/
+	function setTrans(){
+		for(var i in transList) {
+			console.log(i);
+			
+		}
+	}
 </script>
 </head>
 <body>
-	${wiki.manualNo}<br>
-	${wiki.manualTitle}<br>
-	${wiki.manualContentsPath}<br>
-	${wiki.manualOriUrl}<br>
-	${wiki.manualTags}<br>
 	<form name="frm" id="frm" action="updateWikiForm" method="post">
+		<div>
+		
+			<c:if test="${sessionScope.members.membersGrade eq 5}">
+				<span class="col-3 text-right">
+					<button type="button" id="btnDelWiki" class="btn btn-danger">삭제</button>
+					<button class="btn btn-primary">수정</button>
+				</span>
+			</c:if>
+			${wiki.manualNo}<br>
+			${wiki.manualTitle}<br>
+			${wiki.manualContentsPath}<br>
+			${wiki.manualOriUrl}<br>
+			${wiki.manualTags}<br>
+		</div>
+	
+		<div class="nav-wrapper">
+		    <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+		        <li class="nav-item">
+		            <a class="nav-link mb-sm-3 mb-md-0" id="btnOriWiki" data-toggle="tab" href="#" role="tab" aria-controls="tabs-icons-text-1" aria-selected="false"><i class="ni ni-cloud-upload-96 mr-2"></i>원문보기</a>
+		        </li>
+		        <li class="nav-item">
+		            <a class="nav-link mb-sm-3 mb-md-0 active" id="btnTransWiki" data-toggle="tab" href="#" role="tab" aria-controls="tabs-icons-text-2" aria-selected="true"><i class="ni ni-bell-55 mr-2"></i>번역하기</a>
+		        </li>
+		        <li class="nav-item">
+		            <a class="nav-link mb-sm-3 mb-md-0" id="btnGetTransWiki" data-toggle="tab" href="#" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="ni ni-calendar-grid-58 mr-2"></i>번역본보기</a>
+		        </li>
+		    </ul>
+		</div>
+	
 		<input type="hidden" name="manualNo" value="${wiki.manualNo}">
+		<input type="hidden" name="manualContentsPath" value="${wiki.manualContentsPath}">
 	
 		<div class="col">
 			<div class="row align-items-center">
@@ -308,20 +406,33 @@
 					<div class="ct-page-title">
 			          <h1 class="ct-title" id="content">${wiki.manualTitle}</h1>
 			        </div>
-		        </div>
-		        <div class="col">
+			        <div class="col">
 			        <div class="nav nav-pills justify-content-end">
-			        	<button type="button" id="btnDelWiki" class="btn btn-danger">삭제</button>
-			        	<button class="btn btn-primary">수정</button>
+			        	<button type="button" id="btnGetTransWiki" class="btn btn-primary">번역본 보기</button>
+			        	<button type="button" id="btnOriWiki" class="btn btn-success">원문보기</button>
 			        </div>
+		        </div>
 		        </div>
 		    </div>
 
 			<hr>
 			<%-- 위키 번역 문장 뿌려줌 --%>
-			<c:forEach var="entry" items="${transWiki}">
-				<div class="translate open" id="translate${entry.key}">
-					${entry.value }
+			
+			<c:forEach var="entry" items="${transWiki}" varStatus="status">
+				<div class="translate open col" id="translate${entry.key}">
+					<div class="row">
+						<div class="col">${entry.value }</div>
+						
+						<c:choose>
+							<c:when test="${not empty transList.get(status.index)}">
+								<div class="translated col font-italic" id="transContent${entry.key}">${transList.get(status.index)}</div>
+							</c:when>
+							<c:when test="${empty transList.get(status.index)}">
+								<div class="untranslated col font-italic" id="transContent${entry.key}">${transList.get(status.index)}</div>
+							</c:when>
+						</c:choose>
+						
+					</div>
 				</div>
 				
 				
@@ -330,10 +441,10 @@
 					<div class="row">
 						
 						<%-- 번역편집기 왼쪽 --%>
-						<div class="col">
+						<div class="col" name="rEdit">
 							<div class="row">
 								<span class="badge badge-primary" id="${entry.key}">
-									${wiki.manualTitle}_번역_${entry.key} </span>
+									${wiki.manualTitle}/번역_${entry.key} </span>
 							</div>
 							<div class="row" id="oriContents">
 								${entry.value }
@@ -349,7 +460,7 @@
 						</div>
 						
 						<%-- 번역편집기 오른쪽 --%>
-						<div class="col">
+						<div class="col" name="lEdit">
 							<span class="row nav nav-pills justify-content-end">
 									<i name="btn-trans-close" class="ni ni-fat-remove"></i>
 							</span>

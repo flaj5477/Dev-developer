@@ -13,6 +13,7 @@
   </title>
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800" rel="stylesheet">
   <!-- Icons, 현재 상대경로로 되있어서, 절대경로로 지정(${pageContext.request.contextPath}) -->
   <link href="${pageContext.request.contextPath}/resources/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
   <link href="${pageContext.request.contextPath}/resources/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
@@ -20,6 +21,7 @@
   <link href="${pageContext.request.contextPath}/resources/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  
   <script>
   
   	
@@ -41,7 +43,8 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Brand -->
-      <a class="navbar-brand pt-0" href="./index.html">
+      <!-- <a class="navbar-brand pt-0" href="./index.html"> -->
+      <a class="navbar-brand pt-0" href="getFilesList">
         <img src="${pageContext.request.contextPath}/images/profile/DevDeveloper.png" class="navbar-brand-img" alt="...">
       </a>
       <!-- User -->
@@ -177,15 +180,15 @@
         <!-- User -->
         <c:choose>
         	<c:when test="${empty sessionScope.members.membersId}">
+        	<div>
 				<a data-toggle="modal" href="signup" data-target="#modal-testNew"
-				role="button"> <span
-				class="btn btn-secondary" id="btn-testNew">회원가입</span>
+				role="button" style="color:#dfebff;"> 회원가입
 				</a>
 				&nbsp;&nbsp;
 				<a data-toggle="modal" href="login2" data-target="#modal-testNew2"
-				role="button"> <span
-				class="btn btn-secondary" id="btn-testNew">로그인</span>
+				role="button" style="color:#dfebff;">로그인
 				</a>
+				</div>
         	</c:when>
         	<c:otherwise>
         <ul class="navbar-nav align-items-center d-none d-md-flex">

@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.dd.devdeveloper.projects.ProjParticipantsVO;
+import com.dd.devdeveloper.projects.ProjApplicantsVO;
 import com.dd.devdeveloper.projects.ProjectsVO;
 
 @Repository
@@ -23,7 +23,7 @@ public class ProjectsDAO {
 	}
 
 	//프로젝트 지원 
-	public void applyProjects(ProjParticipantsVO vo) {	
+	public void applyProjects(ProjApplicantsVO vo) {	
 		// TODO Auto-generated method stub
 		mybatis.insert("ProjectsDAO.applyProjects", vo);
 	}

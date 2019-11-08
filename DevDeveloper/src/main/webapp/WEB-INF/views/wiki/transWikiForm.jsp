@@ -169,7 +169,7 @@
 	}
 	
 	function hover(){
-		$('.translate, .otherTrans').hover(function() {	// on이벤트? 해줘야됨
+		$('.translate, .otherTrans, .ni-fat-remove').hover(function() {	// on이벤트? 해줘야됨
 			$(this).css("background-color", "#f4f5f7");
 		}, function(){
 			$(this).css("background-color", "transparent ");
@@ -202,11 +202,33 @@
 	*/
 	function delWikiTrans(){
 		$('body').on('click','[name=deltransbtn]',function(event){
-			event.stopPropagation();
+			
+			event.stopPropagation();	//버블링 제어 
+			
 			var $transNo = $(this).parent().parent().attr('id');
 			
-			$.ajax({
-			});
+			var check = confirm("정말 삭제?");
+			
+			if(check){
+				$.ajax({
+					url: "delWikiTrans",
+					type: "POST",
+					dataType: 'text',	//받는 데이터타입
+					data: { transNo : $transNo },	//request로 받아쓰면됨	(getparameter)
+					/* success: function(data){
+						if(data == 1) alert("삭제성공");
+					} */
+						error:function(request,status,error){
+					        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						},
+					    success : function(data) {
+					    	$('#'+$transNo).detach();
+					    },
+					    complete : function() {
+					         
+					    }
+				});
+			}
 		});
 	}
 	
@@ -456,8 +478,8 @@
 				<div class="transEdit hide">
 					<div class="row">
 						
-						<%-- 번역편집기 오른쪽  --%>
-						<div class="col" name="rEdit">
+						<%-- 번역편집기 왼쪽    --%>
+						<div class="col" name="lEdit">
 							<div class="row">
 								<span class="badge badge-primary" id="${entry.key}">
 									${wiki.manualTitle}/번역_${entry.key} </span>
@@ -475,8 +497,8 @@
 							</div>
 						</div>
 						
-						<%-- 번역편집기 왼쪽 --%>
-						<div class="col mr--3" name="lEdit">
+						<%-- 번역편집기 오른쪽--%>
+						<div class="col mr--3" name="rEdit">
 							<span class="row nav nav-pills justify-content-end">
 									<i name="btn-trans-close" class="ni ni-fat-remove"></i>
 							</span>

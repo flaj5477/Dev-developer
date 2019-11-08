@@ -401,7 +401,15 @@ public class WikiServiceImpl implements WikiService {
 		return tagList;
 	}
 
-	
+	/*
+	 * 곽동우
+	 * 20191108
+	 * 위키 번역 삭제하기
+	 */
+	@Override
+	public int delWikiTrans(WikiTransVO tVo) {
+		return wikiDAO.delWikiTrans(tVo);
+	}
 	
 	////////// 파일
 

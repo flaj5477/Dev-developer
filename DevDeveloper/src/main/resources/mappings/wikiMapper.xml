@@ -13,8 +13,8 @@
 		<selectKey keyProperty="manualNo" resultType="int" order="BEFORE">  <!-- seq에담는다 타입은 int -->
 			select NVL(max(MANUAL_NO),0)+1 from wiki_guide
 		</selectKey>
-		insert into wiki_guide(MANUAL_NO, MANUAL_CONTENTS_PATH, MANUAL_ORI_URL, MANUAL_TAGS, MANUAL_TITLE) 
-		values( #{manualNo}, #{manualContentsPath} ,#{manualOriUrl} ,#{manualTags} ,#{manualTitle} )
+		insert into wiki_guide(MANUAL_NO, MANUAL_CONTENTS_PATH, MANUAL_ORI_URL, MANUAL_TAGS, MANUAL_TITLE, MANUAL_TOTALLINE) 
+		values( #{manualNo}, #{manualContentsPath} ,#{manualOriUrl} ,#{manualTags} ,#{manualTitle} ,#{manualTotalline} )
 		<!-- values( #{manualNo}, #{manualContentsPath} ,#{manualOriUrl} ,#{manualTags} ,#{manualTitle} ) -->
 	</insert>
 	
@@ -44,8 +44,8 @@
 						MANUAL_CONTENTS_PATH	as		"manualContentsPath",
 						MANUAL_ORI_URL			as		"manualOriUrl",
 						MANUAL_TAGS				as		"manualTags",
-						MANUAL_TITLE			as 		"manualTitle"
-						
+						MANUAL_TITLE			as 		"manualTitle",
+						MANUAL_TOTALLINE		as		"manualTotalline"
 				FROM wiki_guide
 				<!-- 
 				<![CDATA[ 
@@ -87,6 +87,18 @@
 		) a ) b WHERE no BETWEEN #{first} AND #{last}
 	</select>
 	
+	
+	<!-- 곽동우
+		 위키번역률확인
+		 20191108
+		 dkgkdkgkdk
+	 -->
+	<select id="getTransCount" parameterType="int" resultType="int">
+		SELECT count(manual_line)
+		FROM wiki_guide_trans
+		GROUP BY manual_no
+		HAVING manual_no = #{manualNo}
+	</select>
 	
 	<!-- 
 		곽동우
@@ -243,4 +255,15 @@
 			on a.TAGS_TITLE = b.manualTags
 			order by UPPER(b.manualTags)
 	  </select>
+	  
+	  <!-- 
+	  	곽동우
+	  	20191108
+	  	멤버아이디 받아오기
+	   -->
+	   <select id="getMemberId" parameterType="int" resultType="String">
+	   		SELECT members_id
+			FROM members
+			WHERE members_no = #{no};
+	   </select>
 </mapper>

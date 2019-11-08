@@ -84,9 +84,24 @@ public class WikiServiceImpl implements WikiService {
 		// 제목에 태그제거하기
 		for (int i = 0; i < wikiList.size(); i++) {
 			String res = (String) wikiList.get(i).get("manualTitle");
-
+			
+			
 			res = removeTag(res);
 			wikiList.get(i).put("manualTitle", res);
+			
+			////번역률계산
+			if(wikiList.get(i).containsKey("manualTotalline")) {
+				int totalLine = Integer.parseInt( String.valueOf( wikiList.get(i).get("manualTotalline") ) );
+				int manualNo = Integer.parseInt( String.valueOf( wikiList.get(i).get("manualNo") ) ) ;
+				
+				int transCount = wikiDAO.getTransCount(manualNo);
+				
+				int transPercent = (int) ((double)transCount/totalLine*100);
+				wikiList.get(i).put("manualTransPercent", transPercent);
+				
+				System.out.println(transPercent+"-========================================");
+			}
+			
 		}
 
 		return wikiList;
@@ -106,7 +121,38 @@ public class WikiServiceImpl implements WikiService {
 		}
 
 		vo.setManualContentsPath(path);
-
+		
+		/////////////////////////////////////////
+		//위키 총 라인등록
+		String contents = vo.getManualContents();
+		
+		int start;
+		int line = 0;
+		
+		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();
+		
+		do {
+			start = contents.indexOf("<");
+			int end = contents.indexOf(">");
+			
+			if(start != -1) {
+				
+				String sTag = contents.substring(start, end+1);
+				String eTag =  "</"+contents.substring(start+1, end)+">";
+				int eTagLength = eTag.length();
+				
+				
+				int idx = contents.indexOf(eTag);
+				
+				lineMap.put(line, contents.substring(0, idx+eTagLength));
+				//data.add(text.substring(0, idx+4));
+				contents = contents.substring(idx+eTagLength);
+				line++;
+			}
+		}while(start != -1);
+		/////////////////////////////////////////////////////////
+		vo.setManualTotalline(line);
+		
 		return wikiDAO.insertWiki(vo);
 	}
 

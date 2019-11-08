@@ -9,7 +9,9 @@ public class WikiVO {
 	private String manualOriUrl;		//메뉴얼 원문 url
 	private String manualTags;			//메뉴얼 적용태그
 	private String manualTitle;			//메뉴얼 제목
+	private int manualTotalline;		//메뉴얼 총라인수
 	
+	private int manualTransPercent;		//메뉴얼 번역률
 	private String manualContents;		//메뉴얼 원문 내용
 	private int first;					//페이징시 첫데이터번호
 	private int last;					//페이징시 마지막데이터번호

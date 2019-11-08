@@ -65,4 +65,9 @@ public class WikiDAO {
 	public List<LinkedHashMap<String, Object>> getWikiTagList() {
 		return mybatis.selectList("WikiDAO.getWikiTagList");
 	}
+	
+	//위키 번역 수 가져오기
+	public int getTransCount(int manualNo) {
+		return mybatis.selectOne("WikiDAO.getTransCount",manualNo);
+	}
 }

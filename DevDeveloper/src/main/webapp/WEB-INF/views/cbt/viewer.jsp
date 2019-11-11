@@ -57,50 +57,75 @@
 			dataType : 'JSON'
 		}) // 호출 Mapping URI
 		.done(function(data) {
-			var rand = randomWrite(data.length);
+			var oldUnit = "";
 			$.each(data, function(idx) {
 				var no = 1 + parseInt([idx]);
-				var quest = data[rand[idx]].testsQContents;
-				var ex1 = data[rand[idx]].testsQEx1;
-				var ex2 = data[rand[idx]].testsQEx2;
-				var ex3 = data[rand[idx]].testsQEx3;
-				var ex4 = data[rand[idx]].testsQEx4;
+				var quest = data[idx].testsQContents;
+				var ex1 = data[idx].testsQEx1;
+				var ex2 = data[idx].testsQEx2;
+				var ex3 = data[idx].testsQEx3;
+				var ex4 = data[idx].testsQEx4;
 				var vdata = [ex1,ex2,ex3,ex4];
 				var vrand = randomWrite();
 				var rex = [];
-				var answer = data[rand[idx]].testsQAnswer;
-				var unit = data[rand[idx]].testsQUnit;
-				for (var i=0;i<vdata.length;i++) {
+				var answer = data[idx].testsQAnswer;
+				var newUnit = data[idx].testsQUnit;
+				var caption = "";
+				for (var i=0;i<vdata.length;i++) { // 보기 랜덤 배열 Push
 					rex.push(vdata[vrand[i]]);
 				}
-				
+				if(oldUnit != newUnit) { 
+					caption = '<caption>'+newUnit+'</caption>';
+				}
+				oldUnit = newUnit; // 과목단위로 과목명 출력 중복방지
+				console.log(oldUnit);
+				var str = 
+					'<table id="contentsTab" style="width:550px">'
+						+caption
+						+'<tr>'
+							+'<td><div>'+no+'.</div></td>'
+							+'<td><div>'+quest+'</div></td>'
+						+'</tr>'
+					+'</table>'
+					+'<table id="exTab" style="width:550px">'
+						+'<tr>'
+							+'<td><div><input type="radio" name="questNum'+no+'" value="1">'+rex[0]+'</div></td>'
+						+'</tr>'
+						+'<tr>'
+							+'<td><div><input type="radio" name="questNum'+no+'" value="2">'+rex[1]+'</div></td>'
+						+'</tr>'
+						+'<tr>'
+							+'<td><div><input type="radio" name="questNum'+no+'" value="3">'+rex[2]+'</div></td>'
+						+'</tr>'
+						+'<tr>'
+							+'<td><div><input type="radio" name="questNum'+no+'" value="4">'+rex[3]+'</div></td>'
+						+'</tr>'
+					+'</table>';
+				$('#viewerDiv').append(str);
 			});
 		});
 	}
-
-	function randomWrite(size) {
+	/*
+			SELECT *
+		FROM (
+		SELECT  ROW_NUMBER() OVER(PARTITION BY q.tests_q_unit order by tests_q_unit,DBMS_RANDOM.RANDOM) NUM,
+		          tests_q_unit, tests_q_no, tests_no, tests_q_contents, tests_q_ex1, tests_q_ex2, tests_q_ex3, tests_q_ex4,
+		       tests_q_answer
+		FROM tests_q q
+		WHERE tests_no = 5) 
+		WHERE num <= 4;
+	*/
+	function randomWrite() { // 보기 랜덤 배열 function
 		var i = 0;
 		let idx = [];
-		let set = size;
-		if(size != null) { // 문제 랜덤출제
-			while (i < volume) {
-				let n = Math.floor(Math.random() * set);
-				if (!sameNum(n)) {
-					idx.push(n); // 배열에 저장
-					i++;
-				}
+		let size = 4;
+		while (i < 4) {
+			let n = Math.floor(Math.random() * size);
+			if (!sameNum(n)) {
+				idx.push(n);
+				i++;
 			}
-		}
-		else { // 보기 랜덤출력
-			set = 4;
-			while (i < 4) {
-				let n = Math.floor(Math.random() * set);
-				if (!sameNum(n)) {
-					idx.push(n);
-					i++;
-				}
-			}
-		}
+		}		
 		function sameNum(n) { // 중복제거
 			for (var i = 0; i < idx.length; i++) {
 				if (n === idx[i]) {
@@ -114,62 +139,10 @@
 	
 </script>
 </head>
-
-
-
-<script>
-
-var no = 1 + parseInt([idx]);
-var quest = data[rand[idx]].testsQContents;
-var ex1 = data[rand[idx]].testsQEx1;
-var ex2 = data[rand[idx]].testsQEx2;
-var ex3 = data[rand[idx]].testsQEx3;
-var ex4 = data[rand[idx]].testsQEx4;
-var vdata = [ex1,ex2,ex3,ex4];
-var vrand = randomWrite();
-var rex = [];
-var answer = data[rand[idx]].testsQAnswer;
-var unit = data[rand[idx]].testsQUnit;
-for (var i=0;i<vdata.length;i++) {
-	rex.push(vdata[vrand[i]]);
-}
-$('<tr>').append($('<td>').html('<div>'+no+'.'+'</div>'))
-		 .append($('<td>').html('<'))
-</script>
 <body onload="testInfo()">
 <div class="cbtViewer">
 	<div>
-		<div>
-			<div>
-				<table>
-					<caption>정보처리</caption>
-					<tbody id="contentsTabBody">
-						<tr>
-							<td><div>1.</div></td>
-							<td><div>문제1</div></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div>
-				<table>
-					<tbody id="exTabBody">
-						<tr>
-							<td><div><input type="radio" name="quest1" value="1">지문1</div></td>
-						</tr>
-						<tr>
-							<td><div><input type="radio" name="quest1" value="2">지문2</div></td>
-						</tr>
-						<tr>
-							<td><div><input type="radio" name="quest1" value="3">지문3</div></td>
-						</tr>
-						<tr>
-							<td><div><input type="radio" name="quest1" value="4">지문4</div></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
+		<div id="viewerDiv"></div>
 	</div>
 </div>
 </body>

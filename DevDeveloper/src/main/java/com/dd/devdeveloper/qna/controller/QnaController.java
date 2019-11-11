@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.qna.QuestionVO;
 import com.dd.devdeveloper.qna.service.QnaService;
 
@@ -17,9 +18,9 @@ public class QnaController {
 		
 		//qna목록
 		@RequestMapping("/homeQna")
-		public String qnaList(Model model, QuestionVO vo) {
-			model.addAttribute("qnaList", qnaService.qnaList(vo));
-			
+		public String qnaList(Model model, QuestionVO vo, Paging paging) {
+			model.addAttribute("qnaList", qnaService.qnaList(vo, paging));
+			model.addAttribute("paging", paging);
 			return "qna/homeQna";
 		}
 		

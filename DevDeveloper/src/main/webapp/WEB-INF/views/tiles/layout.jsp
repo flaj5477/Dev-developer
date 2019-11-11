@@ -23,7 +23,6 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   
   <script>
-  
   	
   	$(document).ready(function(){	
   			//페이지 이름 표시

@@ -33,26 +33,10 @@
 	pageName = "프로젝트 파일";
 
 	function fImport() {
+//	 uri:"./filesImport.jsp"
 		$.ajax({})
 	}
-	/* uri:"./filesImport.jsp", */
 	
-	var formData = new FormData($('#fileForm')[0]); 
-		$.ajax({ type: "POST", enctype: 'multipart/form-data',
-				url: '/multipartUpload.do', data: formData, // 필수 
-				processData: false, // 필수
-				contentType: false, // 필수
-				cache: false, // 필수
-				success: function (result) { 
-				}, 
-				error: function (e) { 
-				} 
-			});
-
-
-	
-	function fn_insertBoard(){ var comSubmit = new ComSubmit("frm"); comSubmit.setUrl("<c:url value='/sample/insertBoard.do' />"); comSubmit.submit(); }
-
 </script>
 </head>
 
@@ -96,14 +80,13 @@
 										<div class="modal-content">
 											<div class="modal-header">
 												<h5 class="modal-title" id="exampleModalLabel">파일 업로드</h5>
-												타이틀<input type="text"> 코멘트<input type="text"><br/>
-										
-												<form id="fileForm" action="upload" method="post" enctype="multipart/form-data">
-													<input type="file" value="파일 선택" name="filesUpload" multiple="true" /> 
+												<form id="fileForm" action="filesUpload?projNo=${projNo }" method="post" enctype="multipart/form-data">
+												타이틀<input type="text" name="filesTitle"> 코멘트<input type="text" name="filesComment">								
+													<input type="file" value="파일 선택" name="uploadFile" multiple="true" />
+													<%-- <input type="hidden" name="projNo" value=${projNo }/> --%>
 													<input type="submit" value="업로드" />
 												</form>
 												
-
 												<button type="button" class="close" data-dismiss="modal"
 													aria-label="Close">
 													<span aria-hidden="true">&times;</span>
@@ -237,6 +220,7 @@
 						href="https://www.creative-tim.com/presentation" class="nav-link"
 						target="_blank">About Us</a></li>
 					<li class="nav-item"><a href="http://blog.creative-tim.com"
+	
 						class="nav-link" target="_blank">Blog</a></li>
 					<li class="nav-item"><a
 						href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"

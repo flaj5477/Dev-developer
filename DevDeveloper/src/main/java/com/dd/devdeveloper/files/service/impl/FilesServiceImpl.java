@@ -35,7 +35,7 @@ public class FilesServiceImpl implements FilesService {
 	}
 	
 	@Override
-	public List<LinkedHashMap<String, Object>> getImportList(Paging paging, FilesVO vo) { // 페이징 설정
+	public List<LinkedHashMap<String, Object>> getImportList(Paging paging, FilesVO vo) { //
 		if(paging.getPage() == null) {
 			paging.setPage(1);
 		}
@@ -51,6 +51,17 @@ public class FilesServiceImpl implements FilesService {
 		
 		return  filesList;
 	}
+	
+	@Override
+	public void filesUpload(FilesVO vo) { //여기서 DAO ㄱㄱ
+		filesDAO.filesUpload(vo);
+
+	}
+	
+	@Override
+	public void filesUpdate(FilesVO vo) {
+		
+	}
 
 	@Override
 	public void filesImport(FilesVO vo) {
@@ -58,11 +69,9 @@ public class FilesServiceImpl implements FilesService {
 		
 	}
 	
-	
 	@Override
 	public void filesTrash(FilesVO vo) {
 		  filesDAO.filesTrash(vo);
 	}
-	
-		
+
 }

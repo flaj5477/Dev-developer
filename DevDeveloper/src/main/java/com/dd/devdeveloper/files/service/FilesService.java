@@ -12,10 +12,16 @@ public interface FilesService {
 	List<LinkedHashMap<String, Object>> getFilesList(Paging paging, FilesVO vo);
 	
 	List<LinkedHashMap<String, Object>> getImportList(Paging paging, FilesVO vo);
+	
+	// 업로드
+	void filesUpload(FilesVO vo);
+	
+	// 수정
+	void filesUpdate(FilesVO vo);
 				
-	//파일 임포트
+	// 파일 임포트
 	void filesImport(FilesVO vo);
 	
 	void filesTrash(FilesVO vo);
-	
+
 }

@@ -11,6 +11,18 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/inline/ckeditor.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
+
+/*ck에디터~	*/
+div[contenteditable] {
+    outline: 1px solid #81DAF5;
+}
+
+.ck-editor__editable {
+    max-height: 100px;
+    min-width : 100%;
+}
+/* ~~~ */
+
 .hide{
   display: none;
 }
@@ -79,7 +91,7 @@
   </style>
 <script>
 	var membersGrade = '${sessionScope.members.membersGrade}';
-	
+	var myEditor;
 	$(function(){
 		btnControl();		//위키삭제
 		startTrans();		//번역시작 번역라인클릭
@@ -92,10 +104,7 @@
 		
 
 	    
-			/* var allEditors = document.querySelectorAll('.editor');
-			for (var i = 0; i < allEditors.length; ++i) {
-				InlineEditor.create(allEditors[i]);
-			} */
+			
 	
 		
 	});
@@ -136,7 +145,7 @@
 	*/
 	function startTrans(){
 		$('.translate').on('click', function(){
-			var id = $(this).attr("id");
+			var id = $(this).attr("id");		//아이디 ex)translate13 .. 14..
 			var manualNo = ${wiki.manualNo};
 			
 			
@@ -149,8 +158,20 @@
 			$(this).nextAll().filter(".transEdit.hide").first().attr("class", "transEdit open");	//편집창 열어줌gfdgf
 			//$(this+'transEdit hide').first().attr("class", "transEdit");
 			
-			
 			var manualLine = $(".transEdit.open .badge").attr('id');
+			
+			//InlineEditor.create(document.querySelector('.editor'+manualLine));		//따로닫아줘야하나?
+			InlineEditor	//ck 에디터 사용
+	           .create( document.querySelector( '.editor'+manualLine ) )
+	           .then( editor => {
+		            console.log( 'Editor was initialized', editor );
+		            myEditor = editor;
+		        } )
+	           .catch( error => {
+	               console.error( error );
+	           } );
+				
+					
 			getWikiTransLine(manualLine, manualNo);
 			
 		});
@@ -165,6 +186,8 @@
 		//편집창 숨기고 기존문장 보이게
 		$('.translate.hide').attr("class", "translate");	
 		$('.transEdit.open').attr("class", "transEdit hide");	//다른곳에 편집창 열려있으면 숨김
+		
+		myEditor = null;
 	}
 	
 	/*
@@ -249,7 +272,7 @@
 		파파고api사용
 	*/
 	function papagoTrans(){
-		var manualBefore= $(".transEdit.open #oriContents").html();
+		var manualBefore= $(".transEdit.open #oriContents").text();
 		
 		var check = confirm("파파고번역을 불러올까요?")
 		
@@ -279,20 +302,27 @@
 	*/
 	function insertWikiTrans(){
 		
-		var transArea = $(".transEdit.open #transContents");
+		//var transArea = $(".transEdit.open #transContents");
+		var manualLine = $(".transEdit.open .badge").attr('id');
+		var transArea = $(".transEdit.open .editor");
 		var transVal = transArea.val();
 		
-		if(transVal == '') {
+		/* if(transVal == '') {
 			alert("번역을 입력해야합니다")
+			return; */
+		if (myEditor.getData()=="") {
+			alert('내용을 입력 하세요');
+			myEditor.editing.view.focus()
 			return;
 		} else {
 			//$("#frm").attr("action", "transWiki").submit();
 			
-			var manualLine = $(".transEdit.open .badge").attr('id');
+			
 			var manualBefore= $(".transEdit.open #oriContents").html();
-			var manualAfter = transVal;
-			var manualNo = ${wiki.manualNo};
-			var membersNo = 1;
+			/* var manualAfter = transVal; */
+			var manualAfter = myEditor.getData()	//ck에디터 값 가져옴
+			var manualNo = '${wiki.manualNo}';
+			var membersNo = '${sessionScope.members.membersNo}';
 			
 			//var param = JSON.stringify($("#frm").serializeObject());	//단건일때 //다건일땐 변환애줘야됨
 			$.ajax({
@@ -501,8 +531,8 @@
 								<div class="row">	
 									<textarea class="form-control form-control-alternative2"
 									id="transContents" name="transContents" rows="3" placeholder="번역이필요합니다"></textarea>
-									<div class="editor">
-								        <p>This is some sample content.</p>
+									<div class="editor${entry.key}">
+								        ${entry.value }
 								    </div>
 								</div>
 								<div class="row">
@@ -517,6 +547,7 @@
 										<i name="btn-trans-close" class="ni ni-fat-remove"></i>
 								</span>
 								<div class="scrollspy-example" id="othertrans_${entry.key}">
+									
 									<div class="row">
 										다른사람 번역한거 표시
 									</div>

@@ -91,13 +91,12 @@
 	<!-- 곽동우
 		 위키번역률확인
 		 20191108
-		 dkgkdkgkdk
 	 -->
 	<select id="getTransCount" parameterType="int" resultType="int">
-		SELECT count(manual_line)
+		SELECT count(count(manual_no))              
 		FROM wiki_guide_trans
-		GROUP BY manual_no
-		HAVING manual_no = #{manualNo}
+		WHERE manual_no = #{manualNo}
+		GROUP BY manual_line
 	</select>
 	
 	<!-- 

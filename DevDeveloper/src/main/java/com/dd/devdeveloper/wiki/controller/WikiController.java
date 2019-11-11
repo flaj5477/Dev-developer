@@ -160,7 +160,6 @@ public class WikiController {
 	@ResponseBody
 	public Map transWiki(@RequestBody WikiTransVO tVo, Model model) {
 		tVo.setTranslDate("오류");	//널이면 오류남
-		tVo.setMembersNo(88); 	//테스트용
 		wikiService.insertWikiTrans(tVo);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("result", true);

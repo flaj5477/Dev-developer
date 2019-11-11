@@ -64,7 +64,7 @@
 							 .append($('<th>').html(volume))
 							 .append($('<th>').html(passValue))
 							 .append($('<th>').html(time))
-							 .appendTo('tbody');
+							 .appendTo('#readyTabBody');
 		});
 	}
 	
@@ -80,7 +80,7 @@
 </script>
 </head>
 <body>
-<div class="ready" id="tabs" style="width:600px; left:445px">
+<div class="cbtReady" id="tabs" style="width:600px; left:445px">
 	<form action="examination" name="frm" method="post">
 		<input type="hidden" name="testsNo"/>
 		<ul id="subjects">
@@ -99,7 +99,7 @@
 						<th>응시시간(분)</th>
 					</tr>
 				</thead>
-				<tbody></tbody>
+				<tbody id="readyTabBody"></tbody>
 			</table>
 			<div id="comment1"></div>
 		</div>

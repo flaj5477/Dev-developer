@@ -347,7 +347,7 @@
 							  <div class="modal-dialog modal-dialog-centered modal-lg">
 							    <div class="modal-content">
 							      <div class="modal-header">
-							        <h5 class="modal-title" id="exampleModalCenterTitle">${members.membersName}님의 응시기록</h5>
+							        <h5 class="modal-title" id="recordModalTitle">${members.membersName}님의 응시기록</h5>
 							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							          <span aria-hidden="true">&times;</span>
 							        </button>

@@ -116,12 +116,39 @@
 </head>
 <body onload="testInfo()">
 <div class="cbtViewer">
-</div>
-<div id="test">
-<input type="radio" name="quest1" value="1">sfsaffsadsa 
-<input type="radio" name="quest1" value="2">
-<input type="radio" name="quest1" value="3">
-<input type="radio" name="quest1" value="4">
+	<div>
+		<div>
+			<div>
+				<table>
+					<caption>정보처리</caption>
+					<tbody>
+						<tr>
+							<td><div>1.</div></td>
+							<td><div>문제1</div></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div>
+				<table>
+					<tbody>
+						<tr>
+							<td><div><input type="radio" name="quest1" value="1">지문1</div></td>
+						</tr>
+						<tr>
+							<td><div><input type="radio" name="quest1" value="2">지문2</div></td>
+						</tr>
+						<tr>
+							<td><div><input type="radio" name="quest1" value="3">지문3</div></td>
+						</tr>
+						<tr>
+							<td><div><input type="radio" name="quest1" value="4">지문4</div></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>
 </body>
 </html>

@@ -620,7 +620,7 @@
 		//모달 닫기
 		$('#projApplyModal').on('hide.bs.modal', function(e) {
 
-			$(".modal-body").html("");
+			$("#projApplyModal .modal-body").html("");
 
 			e.stopImmediatePropagation();
 

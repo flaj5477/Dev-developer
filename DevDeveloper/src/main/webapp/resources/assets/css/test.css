@@ -831,3 +831,10 @@ input.insert[type="text"] {
 	font-size: 0.775rem;
 	font-family: 'Noto Sans KR', sans-serif
 }
+
+
+
+.page-item.active .page-link {
+	background-color: #793bea;
+    border-color: #ffffff;
+}

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,10 +39,10 @@
 			 onclick="location.href='insertQna'">
 					질문하기</button>	
 					<form name ="searchform">
-			<input type="hidden" name="page" value="1">
 			<input class="form-control" name="searchVal" placeholder="Search"
-					type="text" style="border: #686ce4 1px solid; width:180px;  float :right"> 
-					</form>
+					type="text" style="border: #686ce4 1px solid; width:180px;  float :right">
+					<input type="hidden" name="page" value="1"> 
+				</form>	
 		</div>
 	
 		<div class="col-xs-12">
@@ -88,7 +88,6 @@
 										<div class="pull-right">
 											<span class="question-qqqauthor"> <a href="#">
 													${qna.membersId }&nbsp; </a> <span class="question-qqqdate">${qna.qqDate}</span>
-
 											</span>
 										</div>
 									</div>
@@ -97,18 +96,18 @@
 							</c:forEach> 
 						</tbody>
 					</table>
+					<my:paging paging="${paging}" jsFunc="go_page" />
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-
+	
 	<script>
 		function go_page(p) {
-
-		/* 	document.searchfrm.page.value = p */
-			document.searchfrm.submit()
+		 	document.searchform.page.value = p 
+			document.searchform.submit()
 		}
 	</script>
 

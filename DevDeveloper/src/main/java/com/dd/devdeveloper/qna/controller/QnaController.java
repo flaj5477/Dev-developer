@@ -35,6 +35,6 @@ public class QnaController {
 		public String insertQnaPost(QuestionVO vo) {
 			System.out.println("-----------컨트롤러-----------");
 			qnaService.insertQna(vo);
-			return "qna/insertQna";
+			return "redirect:/homeQna";
 		}
 }

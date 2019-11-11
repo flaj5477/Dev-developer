@@ -36,12 +36,12 @@
 								<p style="font-size: 0.8rem">테스트</p>
 							</div>
 							<div class="form-group">
-								<input class ="insert" type="text" name="qqTitle" autofocus
+								<input class ="insert" type="text" name="qTitle" autofocus
 									placeholder=" 제목을 입력하세요." autocomplete="off" maxlength="99"
 									id="id_title" />
 							</div>
 							<div class="form-group">
-								<textarea name="qqContents" cols="40" rows="10" id="id_content" placeholder="에디터넣기">
+								<textarea name="qContents" cols="40" rows="10" id="id_content" placeholder="에디터넣기">
 </textarea>
 
 							</div>
@@ -57,7 +57,7 @@
 							</div>
 							<div class="qqrow item" style="margin-top: 15px">
 
-								<button class="btn btn-darkblue" type="button" id="qqqbutton">
+								<button class="btn btn-darkblue" type="submit" id="qqqbutton">
 								등록하기</button>
 							</div>
 						</form>
@@ -72,21 +72,21 @@
 	</div>
 	
 	
-	<script>
+<!-- 	<script>
 		$(document).ready(function(){
 		$("#qqqbutton").click(function(){
-			var title = $(".qqTitle").val();
-			var content = $(".qqContent").val();
+			var title = $(".qTitle").val();
+			var content = $(".qContent").val();
 			
 			if(title==""){
 				alert("제목을 입력하세요");
-				//document.insertQna.qqTitle.focus();
+				//document.insertQna.qTitle.focus();
 				return;
 			
 			}
 			if(content==""){
 				alert("내용을 입력하세요");
-				//document.insertQna.qqContent.focus();
+				//document.insertQna.qContent.focus();
 				return;
 			}
 			
@@ -95,7 +95,7 @@
 
 		}
 
-	</script>
+	</script> -->
 
 
 </body>

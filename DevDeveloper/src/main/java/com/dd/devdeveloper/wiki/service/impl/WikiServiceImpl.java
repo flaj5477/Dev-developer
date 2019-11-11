@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -223,10 +225,22 @@ public class WikiServiceImpl implements WikiService {
 				String eTag =  "</"+contents.substring(start+1, end)+">";
 				int eTagLength = eTag.length();
 				
-				
 				int idx = contents.indexOf(eTag);
+				String lineContents = contents.substring(0, idx+eTagLength);
 				
-				lineMap.put(line, contents.substring(0, idx+eTagLength));
+				//정규식으로 뺄놈들 설정
+				Pattern p = Pattern.compile("(^<figure|figure>$|^<table|<p>&nbsp;</p>)");
+				Matcher m = p.matcher(lineContents);
+				
+				if(m.find()) {
+					lineContents = "";
+				}
+				
+//				a뭐지???
+//				if(sTag.equals("<")) {					
+//				}
+				
+				lineMap.put(line, lineContents);
 				//data.add(text.substring(0, idx+4));
 				contents = contents.substring(idx+eTagLength);
 				line++;
@@ -254,6 +268,18 @@ public class WikiServiceImpl implements WikiService {
 							//		}
 							//		
 							//		////////////////////////////////
+
+		/*
+		 * for(Integer key : lineMap.keySet()){
+		 * 
+		 * String value = (String) lineMap.get(key);
+		 * 
+		 * System.out.println(key+" : "+value);
+		 * 
+		 * }
+		 */
+		 
+		
 		return lineMap;
 	}
 	

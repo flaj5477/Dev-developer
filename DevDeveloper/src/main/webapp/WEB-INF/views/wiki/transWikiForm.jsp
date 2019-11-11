@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="./resources/json.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/inline/ckeditor.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
 .hide{
@@ -87,6 +89,14 @@
 		//hideOtherTrans();	//	''		  다른번역 숨기기
 		startTrans();
 		delWikiTrans();
+		
+
+	    
+			/* var allEditors = document.querySelectorAll('.editor');
+			for (var i = 0; i < allEditors.length; ++i) {
+				InlineEditor.create(allEditors[i]);
+			} */
+	
 		
 	});
 
@@ -170,7 +180,7 @@
 	
 	function hover(){
 		$('.translate, .otherTrans, .ni-fat-remove').hover(function() {	// on이벤트? 해줘야됨
-			$(this).css("background-color", "#f4f5f7");
+			$(this).css("background-color", "#f0f0f0");
 		}, function(){
 			$(this).css("background-color", "transparent ");
 		});
@@ -457,61 +467,65 @@
 			<%-- 위키 번역 문장 뿌려줌 --%>
 			
 			<c:forEach var="entry" items="${transWiki}" varStatus="status">
-				<div class="translate open col" id="translate${entry.key}">
-					<div class="row">
-						<div class="col">${entry.value }</div>
-						
-						<c:choose>
-							<c:when test="${not empty transList.get(status.index)}">
-								<div class="translated col font-italic" id="transContent${entry.key}">${transList.get(status.index)}</div>
-							</c:when>
-							<c:when test="${empty transList.get(status.index)}">
-								<div class="untranslated col font-italic" id="transContent${entry.key}">${transList.get(status.index)}</div>
-							</c:when>
-						</c:choose>
-						
-					</div>
-				</div>
-				
-				
-				<%-- 변역등록 편집기 --%>	
-				<div class="transEdit hide">
-					<div class="row">
-						
-						<%-- 번역편집기 왼쪽    --%>
-						<div class="col" name="lEdit">
-							<div class="row">
-								<span class="badge badge-primary" id="${entry.key}">
-									${wiki.manualTitle}/번역_${entry.key} </span>
-							</div>
-							<div class="row" id="oriContents">
-								${entry.value }
-							</div>
-							<div class="row">	
-								<textarea class="form-control form-control-alternative2"
-								id="transContents" name="transContents" rows="3" placeholder="번역이필요합니다"></textarea>
-							</div>
-							<div class="row">
-								<a href='javascript:void(0);' onclick="insertWikiTrans();" class="btn btn-sm btn-primary">번역등록</a>
-								<a href='javascript:void(0);' onclick="papagoTrans();" class="btn btn-sm btn-primary">구글번역</a>
-							</div>
+				<c:if test="${not empty entry.value}">
+					<div class="translate open col" id="translate${entry.key}">
+						<div class="row">
+							<div class="col">${entry.value }</div>
+							
+							<c:choose>	<%-- 번역있으면 출력해줌  (transList 컨트롤러에서 따로 들고온거임)  --%>
+								<c:when test="${not empty transList.get(status.index)}">
+									<div class="translated col font-italic" id="transContent${entry.key}">${transList.get(status.index)}</div>
+								</c:when>
+								<c:when test="${empty transList.get(status.index)}">
+									<div class="untranslated col font-italic" id="transContent${entry.key}">${transList.get(status.index)}</div>
+								</c:when>
+							</c:choose>
+							
 						</div>
-						
-						<%-- 번역편집기 오른쪽--%>
-						<div class="col mr--3" name="rEdit">
-							<span class="row nav nav-pills justify-content-end">
-									<i name="btn-trans-close" class="ni ni-fat-remove"></i>
-							</span>
-							<div class="scrollspy-example" id="othertrans_${entry.key}">
+					</div>
+					
+					
+					<%-- 변역등록 편집기 --%>	
+					<div class="transEdit hide">
+						<div class="row">
+							
+							<%-- 번역편집기 왼쪽    --%>
+							<div class="col" name="lEdit">
 								<div class="row">
-									다른사람 번역한거 표시
+									<span class="badge badge-primary" id="${entry.key}">
+										${wiki.manualTitle}/번역_${entry.key} </span>
+								</div>
+								<div class="row" id="oriContents">
+									${entry.value }
+								</div>
+								<div class="row">	
+									<textarea class="form-control form-control-alternative2"
+									id="transContents" name="transContents" rows="3" placeholder="번역이필요합니다"></textarea>
+									<div class="editor">
+								        <p>This is some sample content.</p>
+								    </div>
+								</div>
+								<div class="row">
+									<a href='javascript:void(0);' onclick="insertWikiTrans();" class="btn btn-sm btn-primary">번역등록</a>
+									<a href='javascript:void(0);' onclick="papagoTrans();" class="btn btn-sm btn-primary">구글번역</a>
 								</div>
 							</div>
-						
+							
+							<%-- 번역편집기 오른쪽--%>
+							<div class="col mr--3" name="rEdit">
+								<span class="row nav nav-pills justify-content-end">
+										<i name="btn-trans-close" class="ni ni-fat-remove"></i>
+								</span>
+								<div class="scrollspy-example" id="othertrans_${entry.key}">
+									<div class="row">
+										다른사람 번역한거 표시
+									</div>
+								</div>
+							
+							</div>
+						</div>
 					</div>
-				</div>
-				</div>
-				
+				</c:if>
 			</c:forEach>
 		</div>
 	</form>

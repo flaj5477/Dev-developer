@@ -40,4 +40,14 @@
 		WHERE tests_no = #{testsNo}
 	]]>
 	</select>
+	<!--  회원의 응시기록 조회 -->
+	<select id="getRecordList" resultType="map" parameterType="testsRecord"> 
+	<![CDATA[
+		SELECT t.tests_title, t.tests_contents, TO_CHAR(ta.tests_date,'YYYY/MM/DD') AS "TESTS_DATE", ta.tests_score, ta.tests_results, ta.tests_time
+		FROM tests t JOIN tests_apply ta
+		ON t.tests_no = ta.tests_no
+		WHERE ta.members_no = #{membersNo}
+		ORDER BY ta.tests_apply_no
+	]]>
+	</select>
 </mapper>

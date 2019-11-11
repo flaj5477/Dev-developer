@@ -14,12 +14,17 @@ public class QnaServiceImpl implements QnaService {
 	
 	@Autowired QnaDAO qnaDAO;
 
-
+	//목록
 	@Override
-	public List<QuestionVO> qnaList(QuestionVO vo) {
-		
-		
+	public List<QuestionVO> qnaList(QuestionVO vo) {	
 		return qnaDAO.qnaList(vo);
+	}
+
+	//질문등록
+	@Override
+	public void insertQna(QuestionVO vo) {
+			qnaDAO.insertQna(vo);
+		
 	}
 
 }

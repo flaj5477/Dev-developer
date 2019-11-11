@@ -15,4 +15,5 @@ public class MembersVO {
 	private String membersTel;
 	private String membersBk;
 	private String membersMail;
+	
 }

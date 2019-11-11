@@ -77,7 +77,6 @@
 										<td>${projects.membersNo }</td>
 									</tr>
 								</c:forEach>
-
 							</tbody>
 						</table>
 					</div>

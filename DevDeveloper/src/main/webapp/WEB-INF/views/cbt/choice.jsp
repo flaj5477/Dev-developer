@@ -39,7 +39,7 @@
 							 .append($('<th>').html(title))
 							 .append($('<th>').html(contents))
 							 .append($('<th>').html(force))
-							 .appendTo('tbody');
+							 .appendTo('#choiceTabBody');
 				}
 			});
 		});
@@ -87,7 +87,7 @@
 </script>
 </head>
 <body>
-<div class ="levelChoice" align="center">
+<div class ="cbtChoice" align="center">
 	<div id="subject"></div>	
 	<div id="content">
 		<form action="ready" name="frm" method="post">
@@ -100,7 +100,7 @@
 						<th>난이도</th>
 					</tr>
 				</thead>
-				<tbody></tbody>
+				<tbody id="choiceTabBody"></tbody>
 			</table>
 		</form>
 	</div>

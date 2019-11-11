@@ -37,7 +37,7 @@
 </script>
 </head>
 <body>
-<div id="screen-lock" align="center">
+<div class="cbtExamination" id="screen-lock" align="center">
 	<form action="viewer" name="frm" method="post">
 		<input type="hidden" name="testsNo">
 		<div id="toast">

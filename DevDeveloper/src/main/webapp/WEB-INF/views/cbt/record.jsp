@@ -35,7 +35,7 @@
 								$(this).text(min+'분'+sec+'초');	
 							}
 						}))
-						.appendTo('tbody');
+						.appendTo('#recTabBody');
 			});
 			if(data == '') {
 				$('#recordCap').html('응시기록이 없네요!');
@@ -58,7 +58,7 @@
 				<th>응시시간</th>
 			</tr>
 		</thead>
-		<tbody></tbody>
+		<tbody id="recTabBody"></tbody>
 	</table>
 </div>
 </body>

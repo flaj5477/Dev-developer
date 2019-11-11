@@ -60,10 +60,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="files"
 			type="com.dd.devdeveloper.files.FilesVO"/>
 			
-		
-		
-		
-		
+			
 	</typeAliases>
 
 </configuration>

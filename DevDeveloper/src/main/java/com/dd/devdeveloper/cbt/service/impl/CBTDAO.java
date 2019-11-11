@@ -1,6 +1,7 @@
 package com.dd.devdeveloper.cbt.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,9 @@ public class CBTDAO {
 	//시험문제 조회
 	public List<TestsQVO> getQuestList(TestsQVO tqvo) {
 		return mybatis.selectList("CBTDAO.getQuestList",tqvo);
+	}
+	//응시기록 조회
+	public List<Map<String,Object>> getRecordList(TestsRecordVO recvo) {
+		return mybatis.selectList("CBTDAO.getRecordList",recvo);
 	}
 }

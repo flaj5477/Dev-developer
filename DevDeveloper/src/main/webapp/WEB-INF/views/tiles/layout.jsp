@@ -13,7 +13,6 @@
   </title>
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800" rel="stylesheet">
   <!-- Icons, 현재 상대경로로 되있어서, 절대경로로 지정(${pageContext.request.contextPath}) -->
   <link href="${pageContext.request.contextPath}/resources/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
   <link href="${pageContext.request.contextPath}/resources/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
@@ -23,7 +22,6 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   
   <script>
-  
   	
   	$(document).ready(function(){	
   			//페이지 이름 표시

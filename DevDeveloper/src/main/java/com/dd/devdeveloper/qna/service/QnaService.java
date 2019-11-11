@@ -11,4 +11,6 @@ public interface QnaService {
 	//목록
 	List<QuestionVO> qnaList(QuestionVO vo);
 	
+	//질문등록
+	void insertQna(QuestionVO vo);
 }

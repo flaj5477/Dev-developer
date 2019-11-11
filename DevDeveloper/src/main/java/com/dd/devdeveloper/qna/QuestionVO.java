@@ -13,5 +13,7 @@ public class QuestionVO {
 	private int qqViews;
 	private String qqTags;
 	private String membersId;
-	private String membersPw;
+	
+	
+	private String searchVal;		//검색값
 }

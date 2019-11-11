@@ -14,8 +14,15 @@ public class QnaDAO {
 		@Autowired SqlSessionTemplate mybatis;
 
 		public List<QuestionVO> qnaList(QuestionVO vo) {
-				
+			
 			return mybatis.selectList("QnaDAO.qnaList",vo);
+		}
+
+		
+		
+		public void insertQna(QuestionVO vo) {
+			mybatis.insert("QnaDAO.insertQna", vo);
+			
 		}
 		
 }

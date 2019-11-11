@@ -21,6 +21,9 @@ import com.dd.devdeveloper.dashboard.service.DashboardService;
 import com.dd.devdeveloper.members.MembersVO;
 import com.dd.devdeveloper.projects.ProjApplicantsVO;
 import com.dd.devdeveloper.projects.ProjectsVO;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
+
+import net.sf.json.JSONArray;
 
 @Controller
 public class DashboardController {
@@ -59,7 +62,10 @@ public class DashboardController {
 		
 		//내가 올린 프로젝트공고에 지원한 지원자 리스트 가져옴
 		projParticipantsVO.setPmNo(membersNo);
-		model.addAttribute( "projApplicantsList", dashboardService.getProjApplicantsList(projParticipantsVO) );
+		List<ProjApplicantsVO> projApplicantsList = dashboardService.getProjApplicantsList(projParticipantsVO) ;
+		JSONArray jsonArray = new JSONArray();
+		model.addAttribute( "projApplicantsList", projApplicantsList);
+		model.addAttribute("jsonProjApplicantsList", jsonArray.fromObject(projApplicantsList)  );
 		
 		//Q&A리스트 가져옴
 		

@@ -73,7 +73,7 @@
 				for (var i=0;i<vdata.length;i++) {
 					rex.push(vdata[vrand[i]]);
 				}
-				$('div').append('<p>' + no + '.' + quest + '<br> 1.' + rex[0] + '<br> 2.' + rex[1] + '<br> 3.' + rex[2] + '<br> 4.' + rex[3] + '<br> 정답: ' + answer + '<br>' + unit + '</p>');
+				$('.cbtViewer').append('<p>' + no + '.' + quest + '<br> 1.' + rex[0] + '<br> 2.' + rex[1] + '<br> 3.' + rex[2] + '<br> 4.' + rex[3] + '<br> 정답: ' + answer + '<br>' + unit + '</p>');
 			});
 		});
 	}
@@ -116,6 +116,12 @@
 </head>
 <body onload="testInfo()">
 <div class="cbtViewer">
+</div>
+<div id="test">
+<input type="radio" name="quest1" value="1">sfsaffsadsa 
+<input type="radio" name="quest1" value="2">
+<input type="radio" name="quest1" value="3">
+<input type="radio" name="quest1" value="4">
 </div>
 </body>
 </html>

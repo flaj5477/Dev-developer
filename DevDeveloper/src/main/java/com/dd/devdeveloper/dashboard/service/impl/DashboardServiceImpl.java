@@ -38,7 +38,14 @@ public class DashboardServiceImpl implements DashboardService{
 
 	@Override	//프로젝트 지원자 리스트 가져오기
 	public List<ProjApplicantsVO> getProjApplicantsList(ProjApplicantsVO projParticipantsVO) {
-	  return dashboardDAO.getProjApplicantsList(projParticipantsVO);
+	  List<ProjApplicantsVO> projApplicantsList = dashboardDAO.getProjApplicantsList(projParticipantsVO); 
+	  //자소서 공백 <br>태그로 치환
+	  for(int i=0;i<projApplicantsList.size();i++) {
+	    String coverLetter = projApplicantsList.get(i).getCoverLetter().replaceAll("(\r\n|\r|\n|\n\r)", "<br>");
+	    projApplicantsList.get(i).setCoverLetter(coverLetter);
+	    System.out.println(coverLetter);
+	  }
+	  return projApplicantsList;
 	}
 
 	@Override 	//회원의 프로젝트 지원상태 상세 모달 가져옴

@@ -24,16 +24,6 @@
 			 document.frm.submit();
 		});
 	}
-	
-	function popup(){
-		var url = "viewer";
-        var name = "_blank"
-        var option = "status = 0, toolbar = 0, menubar = 0, scrollbars = 0, resizable = 0, location = 0, fullscreen = 1"
-        var viewer = window.open(url, name, option);
-        viewer.moveTo(0,0);
-        viewer.resizeTo(screen.width,screen.height);
-   	}
-	
 </script>
 </head>
 <body>

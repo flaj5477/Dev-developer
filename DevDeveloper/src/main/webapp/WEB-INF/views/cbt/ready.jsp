@@ -56,12 +56,16 @@
 		.done(function(data) {
 				var title = data.testsTitle;
 				var contents = data.testsContents;
-				var volume = data.testsQVolume;
+				var unitVolume = data.testsUnitVolume;
+				var unitQVolume = data.testsUnitQVolume;
+				var allQVolume = data.testsAllQVolume;
 				var passValue = data.testsPassCriterion;
 				var time = data.testsTimeLimit;
 					$('<tr>').append($('<th>').html(title))
 							 .append($('<th>').html(contents))
-							 .append($('<th>').html(volume))
+							 .append($('<th>').html(unitVolume))
+							 .append($('<th>').html(unitQVolume))
+							 .append($('<th>').html(allQVolume))
 							 .append($('<th>').html(passValue))
 							 .append($('<th>').html(time))
 							 .appendTo('#readyTabBody');
@@ -94,7 +98,9 @@
 					<tr align="center">
 						<th>시험명</th>
 						<th>상세</th>
-						<th>문항수</th>
+						<th>과목수</th>
+						<th>과목 별 문항수</th>
+						<th>총 문항수</th>
 						<th>통과점수</th>
 						<th>응시시간(분)</th>
 					</tr>

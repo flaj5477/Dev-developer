@@ -9,21 +9,24 @@
 <script>
 	var title = null;
 	var contents = null;
-	var volume = 0;
+	var unitVolume = 0;
+	var unitQVolume = 0;
+	var allQVolume = 0;
 	var passValue = 0;
 	var min = 0;
 	var sec = 0;
 	var setTime = 0;
 	var level = parseInt("${param.testsNo}");
 	function testInfo() {
-		let idx;
-		$.ajax('getTestInfo/' + level, {
+		$.ajax('getTestInfo/'+level, {
 			type : 'GET',
 			dataType : 'JSON',
 			success : function(data) {
 				title = data.testsTitle;
 				contents = data.testsContents;
-				volume = data.testsQVolume;
+				unitVolume = parseInt(data.testsUnitVolume);
+				unitQVolume = parseInt(data.testsUnitQVolume);
+				allQVolume = parseInt(data.testsAllQVolume);
 				passValue = data.testsPassCriterion;
 				min = data.testsTimeLimit;
 				sec = min * 60;		
@@ -52,7 +55,7 @@
 	}
 	
 	function questList() {
-		$.ajax('getQuestList/' + level, {
+		$.ajax('getQuestList/'+level+'/'+unitQVolume, {
 			type : 'GET',
 			dataType : 'JSON'
 		}) // 호출 Mapping URI
@@ -105,16 +108,7 @@
 			});
 		});
 	}
-	/*
-			SELECT *
-		FROM (
-		SELECT  ROW_NUMBER() OVER(PARTITION BY q.tests_q_unit order by tests_q_unit,DBMS_RANDOM.RANDOM) NUM,
-		          tests_q_unit, tests_q_no, tests_no, tests_q_contents, tests_q_ex1, tests_q_ex2, tests_q_ex3, tests_q_ex4,
-		       tests_q_answer
-		FROM tests_q q
-		WHERE tests_no = 5) 
-		WHERE num <= 4;
-	*/
+	
 	function randomWrite() { // 보기 랜덤 배열 function
 		var i = 0;
 		let idx = [];

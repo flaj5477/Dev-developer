@@ -35,11 +35,13 @@
 	<!-- 시험 자료 조회 -->
 	<select id="getQuestList" resultType="testsQ" parameterType="testsQ">
 	<![CDATA[
-		SELECT tests_q_no, tests_no, tests_q_contents, tests_q_ex1, tests_q_ex2, tests_q_ex3, tests_q_ex4,
-      		   tests_q_answer, tests_q_unit
-		FROM tests_q
-		WHERE tests_no = #{testsNo}
-		ORDER BY tests_q_unit,DBMS_RANDOM.RANDOM
+		SELECT *
+		FROM (SELECT  ROW_NUMBER() OVER(PARTITION BY tests_q_unit ORDER BY tests_q_unit,DBMS_RANDOM.RANDOM) AS UNITNUM,
+		              tests_q_unit, tests_q_no, tests_no, tests_q_contents, tests_q_ex1, tests_q_ex2, tests_q_ex3, tests_q_ex4,
+		              tests_q_answer
+		      FROM tests_q
+		      WHERE tests_no = #{testsNo}) 
+		WHERE UNITNUM <= #{testsUnitQVolume}
 	]]>
 	<!-- DBMS_RANDOM.RANDOM : 해당 컬럼을 기준으로 문제 랜덤배열 and SORTING -->
 	</select>

@@ -16,4 +16,7 @@ public class QuestionVO {
 	
 	
 	private String searchVal;		//검색값
+	private int first;	//페이징 시작 게시글 번호
+	private int last;	//페이징 종료 게시글 번호
+	private String orderby; //정렬
 }

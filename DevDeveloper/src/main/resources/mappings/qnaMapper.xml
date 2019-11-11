@@ -5,30 +5,54 @@
 <mapper namespace="QnaDAO">
  
 	<select id="qnaList" parameterType="question" resultType="question">
-	 	select 	a.q_no 				as "qqNo",
-	 			a.members_no 		as "membersNo",
-	 			a.q_title 			as "qqTitle",
-	 			a.q_contents 		as "qqContents",
-	 			a.q_code 			as "qqCode",  
-	 			a.q_date 			as "qqDate",
-	 			a.q_views		    as "qqViews",
-	 			a.q_tags			as "qqTags",
+	select b.* from(select rownum no, a.* from(
+	    select 	q.q_no 				as "qqNo",
+	 			q.members_no 		as "membersNo",
+	 			q.q_title 			as "qqTitle",
+	 			q.q_contents 		as "qqContents",
+	 			q.q_code 			as "qqCode",  
+	 			q.q_date 			as "qqDate",
+	 			q.q_views		    as "qqViews",
+	 			q.q_tags			as "qqTags",
 	 			m.members_id		as "membersId"
 	      		
-	 			from members m join question a
-	 			on a.members_no = m.members_no
+	 			from members m join question q
+	 			on q.members_no = m.members_no
 	 	<where>
 			<if test="searchVal != null and searchVal != '' "> 
 					and q_title LIKE '%' || #{searchVal} || '%'
 					or q_contents LIKE '%' || #{searchVal} || '%'
 			</if>
-		</where>		
-	 	
+		</where>	
+		<choose>	
+			<when test="orderby != null and orderby != '' ">	<!--  '' 체크해줘야됨 -->
+				ORDER BY ${orderby} DESC
+			</when>
+			<otherwise>
+				ORDER BY q_no DESC
+			</otherwise>
+		</choose>	
+	 	 ) a ) b where no between #{first} and #{last}
 	 </select>
 	
 	<insert id="insertQna" parameterType="question">
 		insert into question(q_no, q_title, q_contents, members_no) 
 		values( (select max(q_no)+1 from question),#{qqTitle},#{qqContents},#{membersNo})
 	</insert>	
+	
+	
+	
+	
+		<!-- 전체 질문 갯수(페이징)-->
+	<select id="getCountQna" parameterType="question" resultType="int">
+		select count(*) as "getCountQna"
+		from question
+		<where>
+			<if test="searchVal != null and searchVal != '' "> 
+					AND q_title LIKE '%' || #{searchVal} || '%'
+					or q_contents LIKE '%' || #{searchVal} || '%'
+			</if>
+		</where>
+	</select>
  
 </mapper>

@@ -352,8 +352,8 @@
 							          <span aria-hidden="true">&times;</span>
 							        </button>
 							      </div>
-							      <div class="modal-body">
-							        <jsp:include page="../cbt/record.jsp"></jsp:include>
+						      		<div class="modal-body" id="recBody">
+							        	<jsp:include page="../cbt/record.jsp"></jsp:include>
 							      </div>
 							    </div>
 							  </div>
@@ -403,7 +403,7 @@
 	<!-- 모달 제어 스크립트 (데이터 담기) -->
 	<script>
 	$('#recModal').on('hidden.bs.modal', function () {
-			$('.modal-body').remove();
+			$(this).find('#recBody').remove();
 		})
 		
 		$('#exampleModal').on('show.bs.modal', function(event) {

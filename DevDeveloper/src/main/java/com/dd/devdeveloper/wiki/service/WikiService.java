@@ -39,8 +39,12 @@ public interface WikiService {
 	public List<Map<String, Object>> getWikiTransLine(WikiTransVO vo); 
 	
 	//위키 번역된거 뿌리기
-	public Map<Integer, Object> getWikiTrans(WikiVO vo);
+	public List<Map<Integer, Object>> getWikiTrans(WikiVO vo);
 
 	//위키 태그리스트 보기
 	public List<LinkedHashMap<String, Object>> getWikiTagList();
+
+	
+	//위키 번역 삭제
+	public int delWikiTrans(WikiTransVO tVo);
 }

@@ -6,9 +6,9 @@ function formatDifficulty(value) {
 	case 1 : str='Easy'; break;
 	case 2 : str='Normal'; break;
 	case 3 : str='Hard'; break;
-	case 4 : str='Professional'; break;
-	case 5 : str='Management'; break;
-	}
+	case 4 : str='Master'; break;
+	case 5 : str='Ultimate'; break;
+	}	
 	return str;
 }
 function formatGrade(value) {

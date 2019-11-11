@@ -8,22 +8,34 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style type="text/css">
+a {
+  color : "blue";
+}
+</style>
 <script>
-	pageName = "위키가이드";
+	pageName = "위키가이드";	
 
 	$(function() {
 		//transTitle();
 		hover();
+		dropodwn();
 	});
 	
 	/* 
 		게시글 클릭(n) 하면 n번 게시글 이동
 	 */
-	function formSubmit(n) {
+	/* function formSubmit(n) {
 		var form = document.frm;
 		form.manualNo.value = n;
 		form.submit();
-	}
+	} */
+	
+	/* function getWiki(){
+		$('[name=wikitd]').on('click',function(){
+			$("#frmWiki").attr("action" , "getWiki").submit();
+		});
+	} */
 	
 	
 	function hover(){
@@ -33,7 +45,20 @@
 			$(this).css("background-color", "transparent ");
 		});
 	}
+	
+/* 	$('html').click(function(e) { 
+		if(!$(e.target).hasClass("dropdown")) { 
+			alert('영역 밖입니다.'); 
+		} 
+	}); */
 
+
+	function dropodwn(){
+		$('.dropdown').on('click', function(event){
+			event.stopPropagation();	
+		});
+	}
+	
 /* 	function transTitle() {
 		var title = $('.title');
 		$.each(title, function(idx, item) {
@@ -57,7 +82,11 @@
 			<a href ="getWiki?manualNo=${wiki.manualNo}">${wiki.manualContents}</a> <br>
 		</c:forEach>
 	</form> --%>
-
+	<c:if test="${sessionScope.members.membersGrade eq 5}">
+		<span class="col-3 text-right">
+			<a href="insertWikiForm" class="btn btn-sm btn-primary">문서등록</a>
+		</span>
+	</c:if>
 	<div class="card shadow">
 		<div class="card-header border-0">
 			<div class="row align-items-center">
@@ -98,68 +127,76 @@
 					</form>
 				</div>
 				
-				<span class="col-3 text-right">
-					<a href="insertWikiForm" class="btn btn-sm btn-primary">문서등록</a>
-				</span>
 				
 			</div>
 		</div>
 		<div class="table-responsive">
-			<table class="table align-items-center table-flush">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col">No</th>
-						<th scope="col">Title</th>
-						<th scope="col">Tags</th>
-						<th scope="col">Completion</th>
-						<th scope="col"></th>
-					</tr>
-				</thead>
-				<tbody>
-
-					<c:forEach items="${wikiMap }" var="wiki">
-						<tr name="wikitd"
-							onclick="location.href='getWiki?manualNo=${wiki.manualNo}'">
-							<th scope="row">
-								<div class="media-body">
-									<span class="mb-0 text-sm">${wiki.manualNo}</span>
-								</div>
-
-							</th>
-							<td id="${wiki.manualNo}" class="title">${wiki.manualTitle}
-							</td>
-							<td><span class="badge badge-dot mr-4">
-									${wiki.manualTags} </span></td>
-							<td>
-								<div class="d-flex align-items-center">
-									<span class="mr-2">60%</span>
-									<div>
-										<div class="progress">
-											<div class="progress-bar bg-warning" role="progressbar"
-												aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-												style="width: 60%;"></div>
+			<form id="frmWiki" name="frmWiki">
+				<table class="table align-items-center table-flush">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">No</th> 
+							<th class="col-3" scope="col">Title</th>
+							<th scope="col"><a href="getWikiTagList">Tags</a></th>
+							<th scope="col">Completion</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					
+					<tbody>
+	
+						<c:forEach items="${wikiMap }" var="wiki">
+							<tr name="wikitd" onclick="location.href='getWiki?manualNo=${wiki.manualNo}'"> <%--  --%>
+								<th scope="row">
+									<div class="media-body">
+										<span class="mb-0 text-sm">${wiki.manualNo}</span>
+									</div>
+	
+								</th>
+								<td id="${wiki.manualNo}" class="title">${wiki.manualTitle}
+								</td>
+								<td><span>
+										<c:choose>
+											<c:when test="${wiki.manualTags eq null}">
+												<a href = "wikihome?select=tags&page=1&searchVal=기타">기타</a>
+											</c:when>
+											<c:when test="${not empty wiki.manualTags}">
+												<a href = "wikihome?select=tags&page=1&searchVal=${wiki.manualTags}">${wiki.manualTags}</a>		
+											</c:when>
+										</c:choose>
+									</span>
+								</td>
+								<td>
+									<div class="d-flex align-items-center">
+										<span class="mr-2">${wiki.manualTransPercent }%</span>
+										<div>
+											<div class="progress">
+												<div class="progress-bar bg-success" role="progressbar"
+													aria-valuenow="${wiki.manualTransPercent }%" aria-valuemin="0" aria-valuemax="100"
+													style="width:${wiki.manualTransPercent }%;"></div>
+											</div>
 										</div>
 									</div>
-								</div>
-							</td>
-							<td class="text-right">
-								<div class="dropdown">
-									<a class="btn btn-sm btn-icon-only text-light" href="#"
-										role="button" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false"> <i class="fas fa-ellipsis-v"></i>
-									</a>
-									<div
-										class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-										<a class="dropdown-item" href="#">Action</a> <a
-											class="dropdown-item" href="#">Another action</a> <a
-											class="dropdown-item" href="#">Something else here</a>
+								</td>
+								<td class="text-right" >
+									<div class="dropdown" > <!-- onclick="event.cancelBubble=true" -->
+										<a class="btn btn-sm btn-icon-only text-light" href="#"
+											role="button" data-toggle="dropdown" aria-haspopup="true"
+											aria-expanded="false"> <i class="fas fa-ellipsis-v"></i>
+										</a>
+										<div
+											class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+											<a class="dropdown-item" href="#">Action</a> <a
+												class="dropdown-item" href="#">Another action</a> <a
+												class="dropdown-item" href="#">Something else here</a>
+										</div>
 									</div>
-								</div>
-							</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</form>
 		</div>
 	</div>
 	<my:paging paging="${paging}" jsFunc="go_page" />

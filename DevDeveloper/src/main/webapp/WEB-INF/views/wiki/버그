@@ -9,6 +9,44 @@
 			
 			페이지 이동하면 셀렉트박스 값 변경됨 ex)태그검색후 2페이지이동 하면 제목검색 2페이지출력
 			
-			
+			번역폼에서 번역보기 가면 값못가져와서? 번역한거만 뿌려짐
+
+
 할거
 		번역 편집창  다른사람번역 숨기기
+		
+		번역 보기 번역된 라인 마우스올리면 원문나오게
+		
+		추천수? 넣기
+		
+		멤버no 아이디로 바꾸기
+		
+		번역홈 에서 태그누르면 그태그로검색
+		
+		원본 수정하면 바뀐부분 찾아서 자동으로 번역테이블 메뉴얼라인 업데이트 해주기
+		
+		테이블수정
+			---------번역기록
+			-------------	멤버 id 추가
+			
+			번역원본? 추가?
+				번역완성도 체크
+				원문 라인별로넣고	/	번역되면 상태 1 안되면 0
+				
+			번역
+		
+		
+		
+		멤버 id 조인으로 받아와야?????
+		
+	SELECT 	a.TRANS_NO			as		"transNo",
+    a.MANUAL_LINE			as		"manualLine",
+    a.MANUAL_BEFORE		as		"manualBefore",
+    a.MANUAL_AFTER		as		"manualAfter",
+    TO_CHAR(a.TRANS_DATE,'YYYY-MM-DD hh:MI:ss')	as 		"translDate",
+    a.MANUAL_NO			as 		"manualNo",
+    a.MEMBERS_NO			as 		"membersNo",
+    b.MEMBERS_ID    as     "membersId"
+    
+FROM wiki_guide_trans a, MEMBERS b
+where a.MEMBERS_NO = b.MEMBERS_NO;

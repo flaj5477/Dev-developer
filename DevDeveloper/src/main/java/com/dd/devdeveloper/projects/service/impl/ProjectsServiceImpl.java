@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.dd.devdeveloper.board.BoardVO;
 import com.dd.devdeveloper.common.paging.Paging;
-import com.dd.devdeveloper.projects.ProjParticipantsVO;
+import com.dd.devdeveloper.projects.ProjApplicantsVO;
 import com.dd.devdeveloper.projects.ProjectsVO;
 import com.dd.devdeveloper.projects.service.ProjectsService;
 
@@ -43,7 +43,7 @@ public class ProjectsServiceImpl implements ProjectsService {
 	}
 
 	@Override
-	public void applyProjects(ProjParticipantsVO vo) {		//프로젝트 지원
+	public void applyProjects(ProjApplicantsVO vo) {		//프로젝트 지원
 		// TODO Auto-generated method stub
 		projectsDAO.applyProjects(vo);
 	}

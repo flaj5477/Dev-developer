@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.dd.devdeveloper.common.paging.Paging;
+import com.dd.devdeveloper.members.MembersVO;
 import com.dd.devdeveloper.wiki.WikiTransVO;
 import com.dd.devdeveloper.wiki.WikiVO;
 import com.dd.devdeveloper.wiki.api.PapagoTranslateNMT;
 import com.dd.devdeveloper.wiki.service.WikiService;
+import com.dd.devdeveloper.wiki.service.impl.WikiDAO;
 
 
 //위키컨트롤러 1018 곽동우
@@ -29,7 +33,8 @@ import com.dd.devdeveloper.wiki.service.WikiService;
 public class WikiController {
 	
 	@Autowired WikiService wikiService;
-	
+	@Autowired
+	WikiDAO wikiDAO;
 	/*
 	 * 위키단건
 	 */
@@ -110,10 +115,15 @@ public class WikiController {
 	 * 2019-10-29
 	 * 위키번역폼 이동
 	 */
-	@RequestMapping(value = "/transWikiForm", method = RequestMethod.POST)
+	@RequestMapping(value = "/transWikiForm")
 	public String transWikiForm(@ModelAttribute("wiki") WikiVO vo, Model model) {	//
-   		//테스트
+		
+		
+		System.out.println(vo.getManualNo()+"================================================================");
+		Map<Integer, Object> transList = wikiService.getWikiTrans(vo).get(1);   //번역들고옴	여기서 @Autowired WikiDAO wikiDAO 써도되나? 안쓰고 NEW 하면 에러남
+		
 		model.addAttribute("transWiki", wikiService.getTransWikiForm(vo));
+		model.addAttribute("transList", transList);
 		return "wiki/transWikiForm";
 	}
 	
@@ -131,11 +141,12 @@ public class WikiController {
 	/*
 	 * 곽동우
 	 * 2019-11-05
-	 * 번역보기 
+	 * 번역전체보기 
 	 */
 	@RequestMapping(value= "/getWikiTrans")
 	public String getWikiTrans(WikiVO vo, Model model) {
-		model.addAttribute( "transWiki", wikiService.getWikiTrans(vo) );
+		
+		model.addAttribute( "transWiki", wikiService.getWikiTrans(vo).get(0) );
 		return "wiki/getWikiTrans";
 	}
 	
@@ -183,5 +194,18 @@ public class WikiController {
 		return papagoTrans;
 	}
 	
-
+	/*
+	 * 곽동우
+	 * 2019-11-08
+	 * 번역삭제
+	 */
+	@RequestMapping(value = "/delWikiTrans", method = RequestMethod.POST)
+	@ResponseBody
+	public int delWikiTrans(HttpServletRequest request) {
+		int transNo = Integer.parseInt((String) request.getParameter("transNo"));
+		WikiTransVO tVo = new WikiTransVO();
+		tVo.setTransNo(transNo);
+		
+		return wikiService.delWikiTrans(tVo);
+	}
 }

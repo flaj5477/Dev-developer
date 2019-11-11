@@ -16,7 +16,8 @@
 	<bean id="dataSourceSpied"
 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@39.116.34.40:1521:xe" />
+		<property name="url" value="jdbc:oracle:thin:@39.116.34.40:1521:xe" />  
+		<!-- <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" /> -->
 		<property name="username" value="dd" />
 		<property name="password" value="dd" />
 	</bean>

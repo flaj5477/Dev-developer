@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.members.MembersVO;
-import com.dd.devdeveloper.projects.ProjParticipantsVO;
+import com.dd.devdeveloper.projects.ProjApplicantsVO;
 import com.dd.devdeveloper.projects.ProjectsVO;
 import com.dd.devdeveloper.projects.service.ProjectsService;
 
@@ -33,14 +33,14 @@ public class ProjectsController {
 	}
 	
 	@RequestMapping("/applyProjectsForm")
-	public String applyProjectsForm(ProjParticipantsVO vo, Model model, HttpSession session) {
+	public String applyProjectsForm(ProjApplicantsVO vo, Model model, HttpSession session) {
 		model.addAttribute("projParticipants", vo);
 		session.setAttribute("projNo", vo.getProjNo());
 		return "projects/applyProjectsForm";
 	}
 	
 	@RequestMapping("/applyProjects")
-	public String applyProjects(ProjParticipantsVO vo, HttpSession session) {
+	public String applyProjects(ProjApplicantsVO vo, HttpSession session) {
 		//vo에 지원자 no 담기
 		//vo.setMembersNo(2); /////////////////////////////////////membersId말고 members객체 넣을꺼임 바꿔야함!
 		vo.setMembersNo(  ((MembersVO)session.getAttribute("members")).getMembersNo() );

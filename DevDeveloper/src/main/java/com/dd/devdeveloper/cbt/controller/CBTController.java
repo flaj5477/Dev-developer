@@ -2,7 +2,6 @@ package com.dd.devdeveloper.cbt.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.dd.devdeveloper.cbt.TestsQVO;
 import com.dd.devdeveloper.cbt.TestsRecordVO;
 import com.dd.devdeveloper.cbt.TestsVO;
 import com.dd.devdeveloper.cbt.service.CBTService;
@@ -61,5 +61,17 @@ public class CBTController {
 		recvo.setMembersNo(membersNo.getMembersNo());
 		//cbtService.cbtInsert(recvo);
 		return "/notiles/cbt/examination";
+	}
+	
+	@RequestMapping("cbt/viewer") 
+	public String viewer() {
+		return "/notiles/cbt/viewer";
+	}
+	
+	@RequestMapping(value="cbt/getQuestList/{level}", method=RequestMethod.GET)
+	@ResponseBody
+	public List<TestsQVO> getQuestList(@PathVariable int level, TestsQVO tqvo) {
+		tqvo.setTestsNo(level);
+		return cbtService.getQuestList(tqvo);
 	}
 }

@@ -44,16 +44,13 @@ public class WikiServiceImpl implements WikiService {
 		WikiVO wiki = wikiDAO.getWiki(vo);
 
 		contents = readText(wiki.getManualContentsPath());
-		System.out.println();
-		System.out.println(contents+ "==========================================%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%=");
 		
+		//텍스트파일 비었는지 확인
 		if(contents.isEmpty()) {
 			wiki.setManualContentsCheck(0);
-			System.out.println("000000000000000000000000000000000000000000000000000000");
 		}
 		else {
 			wiki.setManualContentsCheck(1);
-			System.out.println("1111111111111111111111111111111111111111111111111");
 		}
 		
 		wiki.setManualContents(contents);
@@ -87,9 +84,24 @@ public class WikiServiceImpl implements WikiService {
 		// 제목에 태그제거하기
 		for (int i = 0; i < wikiList.size(); i++) {
 			String res = (String) wikiList.get(i).get("manualTitle");
-
+			
+			
 			res = removeTag(res);
 			wikiList.get(i).put("manualTitle", res);
+			
+			////번역률계산
+			if(wikiList.get(i).containsKey("manualTotalline")) {
+				int totalLine = Integer.parseInt( String.valueOf( wikiList.get(i).get("manualTotalline") ) );
+				int manualNo = Integer.parseInt( String.valueOf( wikiList.get(i).get("manualNo") ) ) ;
+				
+				int transCount = wikiDAO.getTransCount(manualNo);
+				
+				int transPercent = (int) ((double)transCount/totalLine*100);
+				wikiList.get(i).put("manualTransPercent", transPercent);
+				
+				System.out.println(transPercent+"-========================================");
+			}
+			
 		}
 
 		return wikiList;
@@ -109,7 +121,38 @@ public class WikiServiceImpl implements WikiService {
 		}
 
 		vo.setManualContentsPath(path);
-
+		
+		/////////////////////////////////////////
+		//위키 총 라인등록
+		String contents = vo.getManualContents();
+		
+		int start;
+		int line = 0;
+		
+		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();
+		
+		do {
+			start = contents.indexOf("<");
+			int end = contents.indexOf(">");
+			
+			if(start != -1) {
+				
+				String sTag = contents.substring(start, end+1);
+				String eTag =  "</"+contents.substring(start+1, end)+">";
+				int eTagLength = eTag.length();
+				
+				
+				int idx = contents.indexOf(eTag);
+				
+				lineMap.put(line, contents.substring(0, idx+eTagLength));
+				//data.add(text.substring(0, idx+4));
+				contents = contents.substring(idx+eTagLength);
+				line++;
+			}
+		}while(start != -1);
+		/////////////////////////////////////////////////////////
+		vo.setManualTotalline(line);
+		
 		return wikiDAO.insertWiki(vo);
 	}
 
@@ -155,36 +198,75 @@ public class WikiServiceImpl implements WikiService {
 	/*
 	 * 곽동우
 	 * 20191029
-	 * 위키번역
+	 * 위키번역폼
 	 */
 	@Override
 	public Map<Integer, Object> getTransWikiForm(WikiVO vo) {
 		//일단 테스트용
 		
 		String path = vo.getManualContentsPath();
-		String sTag = "<p>";
-		String eTag = "</p>";
 		
 		String contents = readText(path);
 		
-		/////////////////태그잘라서 map에담기
-		String date[] = contents.split(sTag);
+		int start;
+		int line = 0;
 		
 		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();
-		int lineNum = 0;	//
 		
-		for (int i = 0; i < date.length; i++) {
-			date[i] = date[i].split(eTag)[0];
-			if (!date[i].isEmpty()) {
-				lineMap.put(lineNum++, date[i]);
+		do {
+			start = contents.indexOf("<");
+			int end = contents.indexOf(">");
+			
+			if(start != -1) {
+				
+				String sTag = contents.substring(start, end+1);
+				String eTag =  "</"+contents.substring(start+1, end)+">";
+				int eTagLength = eTag.length();
+				
+				
+				int idx = contents.indexOf(eTag);
+				
+				lineMap.put(line, contents.substring(0, idx+eTagLength));
+				//data.add(text.substring(0, idx+4));
+				contents = contents.substring(idx+eTagLength);
+				line++;
 			}
-		}
-		
-		////////////////////////////////
+		}while(start != -1);
+							
+							//		위에껄로바꿈
+							//		
+							//		String sTag = "<p>";
+							//		String eTag = "</p>";
+							//
+							//		//contents.indexof()
+							//		
+							//		/////////////////태그잘라서 map에담기
+							//		String date[] = contents.split(sTag);
+							//		
+							//		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();
+							//		int lineNum = 0;	//
+							//		
+							//		for (int i = 0; i < date.length; i++) {
+							//			date[i] = date[i].split(eTag)[0];
+							//			if (!date[i].isEmpty()) {
+							//				lineMap.put(lineNum++, date[i]);
+							//			}
+							//		}
+							//		
+							//		////////////////////////////////
 		return lineMap;
 	}
 	
-	
+	/*
+	 * 20191107
+	 * 곽동우
+	 * 게시글 번역들고옴
+	 */
+//	@Override
+//	public Map<Integer, Object> getTransWiki(WikiVO vo) {
+//		
+//	}
+//	
 	
 	/*
 	 * 20191031
@@ -214,14 +296,45 @@ public class WikiServiceImpl implements WikiService {
 	 * 위키번역된문서 뿌려주기
 	 */
 	@Override
-	public Map<Integer, Object> getWikiTrans(WikiVO vo) {
+	public List<Map<Integer, Object>> getWikiTrans(WikiVO vo) {
 		
 		String path = vo.getManualContentsPath();
-		String sTag = "<p>";
-		String eTag = "</p>";
 		
 		String contents = readText(path);
 		
+		
+		int start;
+		int lineNum = 0;
+		
+		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();
+		Map<Integer, Object> transLineMap = new HashMap<Integer, Object>(); //라인별로 번역된거만 담음
+		
+		do {
+			start = contents.indexOf("<");
+			int end = contents.indexOf(">");
+			
+			if(start != -1) {
+				
+				String sTag = contents.substring(start, end+1);
+				String eTag =  "</"+contents.substring(start+1, end)+">";
+				int eTagLength = eTag.length();
+				
+				
+				int idx = contents.indexOf(eTag);
+				
+				lineMap.put(lineNum, contents.substring(0, idx+eTagLength));
+				transLineMap.put(lineNum, null);	//본문 라인길이만큼 만들어준다
+				//data.add(text.substring(0, idx+4));
+				contents = contents.substring(idx+eTagLength);
+				lineNum++;
+			}
+		}while(start != -1);
+		
+		
+		
+		
+		
+		/*
 //		////////////////////////getTransWikiForm(WikiVO vo) 랑 비슷한 처리 나중에 합쳐?
 //		Map<Integer, String> oriLineMap = new HashMap<Integer, String>();		//원본 라인별분리
 //		
@@ -238,19 +351,23 @@ public class WikiServiceImpl implements WikiService {
 //			}
 //		}while(idx != -1);	// </p>가 있으면 반복
 //		//////////////////////////////
+		*/
 		
 		/////////////////태그잘라서 map에담기
-		String date[] = contents.split(sTag);
 		
-		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();
-		int lineNum = 0;	//
-		
-		for (int i = 0; i < date.length; i++) {
-			date[i] = date[i].split(eTag)[0];
-			if (!date[i].isEmpty()) {
-				lineMap.put(lineNum++, date[i]);
-			}
-		}
+//		String date[] = contents.split(sTag);
+//		
+//		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();
+//		Map<Integer, Object> transLineMap = new HashMap<Integer, Object>();	//라인별로 번역된거만 담음
+//		int lineNum = 0;	//
+//		
+//		for (int i = 0; i < date.length; i++) {
+//			date[i] = date[i].split(eTag)[0];
+//			if (!date[i].isEmpty()) {
+//				lineMap.put(lineNum++, date[i]);
+//				transLineMap.put(lineNum, null);	//본문 라인길이만큼 만들어준다
+//			}
+//		}
 		
 		////////////////////////////////
 		
@@ -261,9 +378,14 @@ public class WikiServiceImpl implements WikiService {
 			String transContents = (String) transList.get(i).get("manualAfter");						//		오라클 NUMBER 형 컬럼의 데이터를 HashMap 타입으로 받아 java에서 사용하려고 하니 발생
 			
 			lineMap.put(transline, transContents);
+			transLineMap.put(transline, transContents);	// 번역된거 해당라인에 넣음
 		}
 		
-		return lineMap;
+		List<Map<Integer, Object>> transInfoList = new ArrayList<Map<Integer,Object>>(); 
+		transInfoList.add(lineMap);
+		transInfoList.add(transLineMap);
+		
+		return transInfoList;
 	}//getWikiTrans - end
 	
 
@@ -279,7 +401,15 @@ public class WikiServiceImpl implements WikiService {
 		return tagList;
 	}
 
-	
+	/*
+	 * 곽동우
+	 * 20191108
+	 * 위키 번역 삭제하기
+	 */
+	@Override
+	public int delWikiTrans(WikiTransVO tVo) {
+		return wikiDAO.delWikiTrans(tVo);
+	}
 	
 	////////// 파일
 

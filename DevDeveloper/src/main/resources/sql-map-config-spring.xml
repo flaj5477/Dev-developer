@@ -23,8 +23,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		  
 		<typeAlias alias="projects"
 			type="com.dd.devdeveloper.projects.ProjectsVO" />
-		<typeAlias alias="projParticipants"
-			type="com.dd.devdeveloper.projects.ProjParticipantsVO"/>
+		<typeAlias alias="projApplicants"
+			type="com.dd.devdeveloper.projects.ProjApplicantsVO"/>
 		<typeAlias alias="activityLog"
 			type="com.dd.devdeveloper.dashboard.ActivityLogVO"/>
 		<typeAlias alias="dashboard"

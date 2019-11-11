@@ -50,7 +50,11 @@ public class FilesController {
 	@RequestMapping("/filesUpload")
 	public String filesUpload(FilesVO vo, MultipartHttpServletRequest multipart, HttpServletRequest request,
 			HttpSession session) {
+		Integer projNo = (Integer) session.getAttribute("projNo");
+		vo.setProjNo(1); // projNo 페이지 만들어지면 갈아끼울것
+		
 		// 첨부파일 업로드하고 파일명 조회
+		
 		MultipartFile multipartFile = multipart.getFile("uploadFile"); // 넘어오는 jsp페이지의 멀티파트파일 name
 		String path = "";
 		if (multipartFile != null && multipartFile.getSize() > 0) {
@@ -74,7 +78,7 @@ public class FilesController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
+			//action="filesUpload?projNo=${projNo }"
 		}
 		int membersNo = ((MembersVO) session.getAttribute("members")).getMembersNo();
 		vo.setMembersNo(membersNo);
@@ -86,54 +90,18 @@ public class FilesController {
 		return "redirect:/getFilesList";
 	}
 
-// 파일 다운로드 예시 1
-//	@RequestMapping("/download/{fileName:.+}")
-//	public void downloadPDFResource(HttpServletRequest request, HttpServletResponse response, @PathVariable("fileName") String fileName) {
-//
-//		String dataDirectory = request.getSession().getServletContext().getRealPath("/resources/image");
-//		Path file = Paths.get(dataDirectory, fileName);
-//		if (Files.exists(file)) {
-//			response.setContentType("application/octet-stream;charset=UTF-8"); // 파일 다운로드 받을 때 컨텍스트 타입: octet
-//			response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
-//			try {
-//				Files.copy(file, response.getOutputStream()); // 다운로드
-//				response.getOutputStream().flush();
-//			} catch (IOException ex) {
-//				ex.printStackTrace();
-//			}
-//		}
-//	}
-
-// 파일 다운로드
-//	@RequestMapping("/download/{fileName:.+}")
-//	public void downloadPDFResource(HttpServletRequest request, HttpServletResponse response,
-//			@PathVariable("fileName") String fileName) {
-//
-//		String dataDirectory = request.getSession().getServletContext().getRealPath("/resources/image");
-//		Path file = Paths.get(dataDirectory, fileName);
-//		if (Files.exists(file)) {
-//			response.setContentType("application/octet-stream;charset=UTF-8"); // 파일 다운로드 받을 때 컨텍스트 타입: octet
-//			response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
-//			try {
-//				Files.copy(file, response.getOutputStream()); // 다운로드
-//				response.getOutputStream().flush();
-//			} catch (IOException ex) {
-//				ex.printStackTrace();
-//			}
-//		}
-//	}
-
 	// 백업파일 다운로드
 
-//	@RequestMapping("/download/{backupFileNm:.+}")
-//	public void downloadBackupResource(HttpServletRequest request, HttpServletResponse response,
+//	@RequestMapping("/download/{filesNo:.+}")
+//	public void filesDownload(HttpServletRequest request, HttpServletResponse response,
 //			@PathVariable("backupFileNm") String fileName) {
-//		Path path = Paths.get(filesPath, filesTitle);
+//		Path path = Paths.get("/resources/download", filesTitle);
 //		if (Files.exists(path)) {
 //			response.setContentType("application/octet-stream;charset=UTF-8"); // 파일의 타입
 //			response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
 //			try {
 //				Files.copy(path, response.getOutputStream());
+////				Files.copy(file, response.getOutputStream());
 //				response.getOutputStream().flush();
 //			} catch (IOException ex) {
 //				ex.printStackTrace();
@@ -146,7 +114,6 @@ public class FilesController {
 		model.addAttribute("list", filesService.getImportList(paging, vo));
 		model.addAttribute("paging", paging);
 		return "files/filesImport";
-
 	}
 
 	// 중요 파일

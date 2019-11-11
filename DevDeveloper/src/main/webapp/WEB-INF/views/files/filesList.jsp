@@ -80,10 +80,11 @@
 										<div class="modal-content">
 											<div class="modal-header">
 												<h5 class="modal-title" id="exampleModalLabel">파일 업로드</h5>
-												<form id="fileForm" action="filesUpload?projNo=${projNo }" method="post" enctype="multipart/form-data">
+												<form id="fileForm" action="filesUpload" method="post" enctype="multipart/form-data">
+													 <%-- <input type="hidden" name="projNo" value=${projNo }/> --%>
+											
 												타이틀<input type="text" name="filesTitle"> 코멘트<input type="text" name="filesComment">								
-													<input type="file" value="파일 선택" name="uploadFile" multiple="true" />
-													<%-- <input type="hidden" name="projNo" value=${projNo }/> --%>
+													<input type="file" value="파일 선택" name="uploadFile" />
 													<input type="submit" value="업로드" />
 												</form>
 												
@@ -115,7 +116,7 @@
 
 									<button type="button" class="btn btn-primary btn">미리보기</button>
 
-									<button type="button" class="btn btn-primary btn" id=""
+									<button type="button" class="btn btn-primary btn" id="" 
 										data-toggle="modal" data-target="#upmodal">업로드</button>
 
 									<button type="button" class="btn btn-primary btn">다운로드</button>
@@ -166,6 +167,12 @@
 							</tr>
 						</thead>
 						<tbody>
+					<%-- 	<c:if test="${files.filesNo }">
+							<a href="./getFilesList?upperFolder=${files.filesNo}">..</a>
+						</c:if>
+						<c:if test="${files.filesImport=='Y'}">
+							<a href="./getFilesList?upperFolder=${files.filesNo}">..</a>
+						</c:if> --%>
 							<c:forEach var="files" items="${list}">
 								<tr>
 									<%-- <td><input type="checkbox" name="chk_files" value="${files.filesNo}"> --%>
@@ -181,7 +188,7 @@
                 						${files.filesTitle}
                 						 </c:if> <c:if test="${files.filesType=='D'}">
 											<i class="far fa-folder"></i>
-											<a href="./getFilesList?filesGroupNo=${files.filesNo}">${files.filesTitle}</a>
+											<a href="./getFilesList?upperFolder=${files.filesNo}">${files.filesTitle}</a>
 										</c:if></td>
 									<!-- <input type="checkbox" name="chk_info" value="HTML">HTML -->
 									<td>${files.filesComment }</td>

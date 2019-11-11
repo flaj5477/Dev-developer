@@ -10,7 +10,7 @@ public interface FilesService {
 		
 	// 파일 전체 조회
 	List<LinkedHashMap<String, Object>> getFilesList(Paging paging, FilesVO vo);
-	
+	// 임포트(중요) 조회
 	List<LinkedHashMap<String, Object>> getImportList(Paging paging, FilesVO vo);
 	
 	// 업로드
@@ -19,9 +19,10 @@ public interface FilesService {
 	// 수정
 	void filesUpdate(FilesVO vo);
 				
-	// 파일 임포트
+	// 임포트(중요)
 	void filesImport(FilesVO vo);
 	
+	// 휴지통
 	void filesTrash(FilesVO vo);
 
 }

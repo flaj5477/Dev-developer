@@ -18,7 +18,7 @@ public class FilesVO {
 	private String filesComment;
 	private Date filesUploadDate;
 	private String filesPath;
-	private int  filesFolder;
+	private int  upperFolder;
 	private String filesType;
 	private int filesSize;
 	private String filesImport;

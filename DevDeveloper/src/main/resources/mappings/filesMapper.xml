@@ -8,12 +8,14 @@
 	<select id="getFilesList" resultType="files">
 		SELECT B.* FROM ( SELECT A.*,ROWNUM RN FROM(
 		select files_no,
+		proj_no,
 		files_title,
 		files_comment,
 		members_no,
 		files_group_no,
 		files_upload_date,
 		files_type,
+		upper_folder,
 		files_size,
 		files_Import,
 		files_Trash
@@ -21,12 +23,15 @@
 		files
 		where 1=1
 		<choose>
-			<when test="filesGroupNo == null or filesGroupNo==''">
-				and files_group_no is null
+			<when test="upperFolder == null or upperFolder ==''">
+				and upper_folder = files_no
 				and proj_no = #{projNo}
 			</when>
 			<otherwise>
-				and files_group_no = #{filesGroupNo}
+			 <![CDATA[
+				 and upper_folder <> files_no
+				and upper_folder = #{upperFolder}
+			]]>
 			</otherwise>
 		</choose>
 		order by files_no
@@ -50,6 +55,7 @@
 		members_no,
 		files_group_no,
 		files_upload_date,
+		upper_folder,
 		files_type,
 		files_Import,
 		files_Trash

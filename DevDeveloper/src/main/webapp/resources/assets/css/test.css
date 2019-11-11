@@ -1,7 +1,6 @@
 #pp {
-	font-family: 'Noto Sans KR', sans-serif;
+	
 	color: #242729;
-	font-size: 13px;
 	line-height: 1.72857;
 	font-weight: 400;
 	min-height: 100%;
@@ -13,7 +12,7 @@
 	width: 100%;
 	display: table;
 }
-
+	
 .rowqqq {
 	margin-right: 0px;
 	margin-left: 0px;
@@ -830,5 +829,5 @@ input.insert[type="text"] {
 	color: white;
 	font-weight: 400;
 	font-size: 0.775rem;
-	
+	font-family: 'Noto Sans KR', sans-serif
 }

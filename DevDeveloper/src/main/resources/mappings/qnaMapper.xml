@@ -13,11 +13,17 @@
 	 			a.q_date 			as "qqDate",
 	 			a.q_views		    as "qqViews",
 	 			a.q_tags			as "qqTags",
-	 			m.members_id		as "membersId",
-	      		m.members_pw	    as "membersPw"
+	 			m.members_id		as "membersId"
 	      		
 	 			from members m join question a
 	 			on a.members_no = m.members_no
+	 	<where>
+			<if test="searchVal != null and searchVal != '' "> 
+					and q_title LIKE '%' || #{searchVal} || '%'
+					or q_contents LIKE '%' || #{searchVal} || '%'
+			</if>
+		</where>		
+	 	
 	 </select>
 	
 	<insert id="insertQna" parameterType="question">

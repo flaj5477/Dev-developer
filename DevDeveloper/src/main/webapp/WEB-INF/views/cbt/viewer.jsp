@@ -73,7 +73,7 @@
 				for (var i=0;i<vdata.length;i++) {
 					rex.push(vdata[vrand[i]]);
 				}
-				$('.cbtViewer').append('<p>' + no + '.' + quest + '<br> 1.' + rex[0] + '<br> 2.' + rex[1] + '<br> 3.' + rex[2] + '<br> 4.' + rex[3] + '<br> 정답: ' + answer + '<br>' + unit + '</p>');
+				
 			});
 		});
 	}
@@ -114,6 +114,28 @@
 	
 </script>
 </head>
+
+
+
+<script>
+
+var no = 1 + parseInt([idx]);
+var quest = data[rand[idx]].testsQContents;
+var ex1 = data[rand[idx]].testsQEx1;
+var ex2 = data[rand[idx]].testsQEx2;
+var ex3 = data[rand[idx]].testsQEx3;
+var ex4 = data[rand[idx]].testsQEx4;
+var vdata = [ex1,ex2,ex3,ex4];
+var vrand = randomWrite();
+var rex = [];
+var answer = data[rand[idx]].testsQAnswer;
+var unit = data[rand[idx]].testsQUnit;
+for (var i=0;i<vdata.length;i++) {
+	rex.push(vdata[vrand[i]]);
+}
+$('<tr>').append($('<td>').html('<div>'+no+'.'+'</div>'))
+		 .append($('<td>').html('<'))
+</script>
 <body onload="testInfo()">
 <div class="cbtViewer">
 	<div>
@@ -121,7 +143,7 @@
 			<div>
 				<table>
 					<caption>정보처리</caption>
-					<tbody>
+					<tbody id="contentsTabBody">
 						<tr>
 							<td><div>1.</div></td>
 							<td><div>문제1</div></td>
@@ -131,7 +153,7 @@
 			</div>
 			<div>
 				<table>
-					<tbody>
+					<tbody id="exTabBody">
 						<tr>
 							<td><div><input type="radio" name="quest1" value="1">지문1</div></td>
 						</tr>

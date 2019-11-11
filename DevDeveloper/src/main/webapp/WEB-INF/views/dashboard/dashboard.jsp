@@ -263,9 +263,7 @@
 												<div class="col">
 													<h3 class="text-white mb-0">프로젝트 관리</h3>
 												</div>
-												<div class="col text-right">
-													<button type="button" class="btn btn-primary">파일 관리</button>
-												</div>
+												
 											</div>
 										</div>
 										<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -293,7 +291,13 @@
 													</c:choose>
 													<div class="table-responsive">
 														<table class="table align-items-center table-flush table-dark">
-															<caption class="mt--3" style="caption-side: top;" id="${myProject.projNo }${myProject.projTitle}">${myProject.projTitle}</caption>
+															<caption class="mt--3" style="caption-side: top;" id="${myProject.projNo }${myProject.projTitle}">
+																${myProject.projTitle}
+																<span>
+																<button type="button" class="btn btn-primary">파일 관리</button>
+																</span>
+															</caption>
+															
 															<thead class="thead-dark text-light">
 																<tr>
 																	<th scope="col" class="text-light">지원자 번호</th>
@@ -304,7 +308,7 @@
 																</tr>
 															</thead>
 															<tbody>
-																<c:forEach var="projApplicant" items="${projApplicantsList}">
+																<c:forEach var="projApplicant" items="${projApplicantsList}" varStatus="i">
 																	<c:if test="${projApplicant.projNo == myProject.projNo }">
 																		<tr>
 																			<input type="hidden" value="${projApplicant.applyNo }"/>
@@ -322,7 +326,7 @@
 																				</div>
 																			</td>
 																			<td>
-																				<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#projApplyModal" id="${projApplicant.applyNo }">보기버튼</button>
+																				<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#projApplyModal" id="${i.index}">보기버튼</button>
 																			</td>
 																		</tr>
 																	</c:if>
@@ -368,7 +372,7 @@
 	</div>
 	</div>
 	</div>
-<<<<<<< HEAD
+
 	<!-- 프로젝트 모달 -->
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -499,8 +503,7 @@
 
 		});
 	</script>
-=======
->>>>>>> branch 'master' of https://github.com/flaj5477/Dev-developer.git
+
 	<div class="container-fluid mt--7">
 		<div class="row mt-5">
 			<div class="col-xl-8 mb-5 mb-xl-0">
@@ -569,6 +572,7 @@
 							<div class="col">
 								<h3 class="mb-0">Social traffic</h3>
 							</div>
+						
 							<div class="col text-right">
 								<a href="#!" class="btn btn-sm btn-primary">See all</a>
 							</div>
@@ -699,6 +703,9 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	
 	<!-- 프로젝트 지원자 모달 스크립트 -->
 	<script>
 		$('#projApplyModal').on('show.bs.modal', function(event) {
@@ -706,31 +713,30 @@
 			var applyNo = button.parent().prevAll().eq(4).attr("value");
 			var projApplicantsList = JSON.parse('${jsonProjApplicantsList}');
 			
-			
-	        console.log(projApplicantsList[0].phoneNo);
+			var i = button.attr('id');	//프로젝트 지원자들중 눌려진 버튼의 아이디 값으로 해당 지원자의 정보를 가져온다
 	     	
 	        var content = "<div class= container> " +
 	        					"<div class=row> " +
 	        						"<div class=col>" +
-	        							"프로필 및 이름 자리" +
+	        							projApplicantsList[i].participantName +
 	        						"</div>" +
 	        					"</div>" +
 	        					"<div class=row> " +
         							"<div class=col>" +
-        								projApplicantsList[0].phoneNo +
+        								projApplicantsList[i].phoneNo +
         							"</div>" +
         							"<div class=col>" +
-        								projApplicantsList[0].email +
+        								projApplicantsList[i].email +
         							"</div>" +
         						"</div>" +
         						"<div class=row> " +
         							"<div class=col>" +
-        								projApplicantsList[0].address +
+        								projApplicantsList[i].address +
         							"</div>" +
         						"</div>" +
         						"<div class=row> " +
     								"<div class=col>" +
-    									projApplicantsList[0].coverLetter +
+    									projApplicantsList[i].coverLetter +
     								"</div>" +
     							"</div>" +
 	        				"</div> ";

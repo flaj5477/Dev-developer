@@ -8,9 +8,6 @@
 <script>
 	function recordList() {
 		var user = Number("${members.membersNo}");
-		var name = "${members.membersName}";
-		$('#subject').html('<p>'+name+'님의 응시기록 입니다.</p>');
-		
 		$.ajax('getRecordList/'+user, {
 			type : 'GET',
 			dataType : 'JSON'
@@ -49,23 +46,20 @@
 </head>
 <body onload="recordList()">
 <div class="cbtRecord">
-	<div id="subject"></div>
-	<div id="content">
-		<table id="recordTab" border="1">
-			<caption id="recordCap"></caption>
-			<thead>
-				<tr align="center">
-					<th>시험명</th>
-					<th>상세</th>
-					<th>응시날짜</th>
-					<th>점수</th>
-					<th>시험결과</th>
-					<th>응시시간</th>
-				</tr>
-			</thead>
-			<tbody></tbody>
-		</table>
-	</div>
+	<table id="recordTab" border="1">
+		<caption id="recordCap"></caption>
+		<thead>
+			<tr align="center">
+				<th>시험명</th>
+				<th>상세</th>
+				<th>응시날짜</th>
+				<th>점수</th>
+				<th>시험결과</th>
+				<th>응시시간</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
 </div>
 </body>
 </html>

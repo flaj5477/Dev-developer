@@ -339,6 +339,23 @@
 									</a>
 								</div>
 							</div>
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">응시기록 열람</button>
+							<!-- Modal --> 
+							<div id="#recModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+							  <div class="modal-dialog modal-dialog-centered modal-lg">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="exampleModalCenterTitle">${members.membersName}님의 응시기록</h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+							        <jsp:include page="../cbt/record.jsp"></jsp:include>
+							      </div>
+							    </div>
+							  </div>
+							</div>	
 						</div>
 					</div>
 				</div>
@@ -382,6 +399,10 @@
 	</div>
 	<!-- 모달 제어 스크립트 (데이터 담기) -->
 	<script>
+	$('#recModal').on('hidden.bs.modal', function () {
+			$('.modal-body').remove();
+		})
+		
 		$('#exampleModal').on('show.bs.modal', function(event) {
 			//프로젝트 지원, 프로젝트 승인, 프로젝트 참여 상태의 테이블을 만들어서 보여줘야함
 			var button = $(event.relatedTarget) // Button that triggered the modal

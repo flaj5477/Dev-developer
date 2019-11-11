@@ -1,6 +1,7 @@
 package com.dd.devdeveloper.cbt.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.dd.devdeveloper.cbt.TestsQVO;
 import com.dd.devdeveloper.cbt.TestsRecordVO;
@@ -18,5 +19,7 @@ public interface CBTService {
 	public void cbtInsert(TestsRecordVO recvo);
 	//시험문제 조회
 	public List<TestsQVO> getQuestList(TestsQVO tqvo);
+	//응시기록 조회
+	public List<Map<String,Object>> getRecordList(TestsRecordVO recvo);
 }
 

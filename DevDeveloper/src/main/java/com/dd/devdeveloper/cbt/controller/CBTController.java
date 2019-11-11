@@ -1,6 +1,7 @@
 package com.dd.devdeveloper.cbt.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -73,5 +74,12 @@ public class CBTController {
 	public List<TestsQVO> getQuestList(@PathVariable int level, TestsQVO tqvo) {
 		tqvo.setTestsNo(level);
 		return cbtService.getQuestList(tqvo);
+	}
+	
+	@RequestMapping(value="getRecordList/{user}", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> getRecordList(@PathVariable int user, TestsRecordVO recvo) {
+		recvo.setMembersNo(user);
+		return cbtService.getRecordList(recvo);
 	}
 }

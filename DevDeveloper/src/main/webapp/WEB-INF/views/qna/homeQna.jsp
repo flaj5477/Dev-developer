@@ -28,7 +28,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/test.css">
 		<link href="//fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800" rel="stylesheet">
+	
 </head>
 <body id = "pp">
 <div class="container-fluid mt--3">

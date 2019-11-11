@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,9 +29,9 @@
 				<div class="qqqcard qqqcard-form">
 					<div class="main-qna-qqqform">
 						<h2 class="title" style="margin: 12px 0px">질문 작성하기</h2>
-						<form method="post">
-							<input type='hidden' name='csrfmiddlewaretoken'
-								value='3BaGTQsAQeKVf0mYREPdRBrvvxGM92lc34FLiQvUVu2CpZ2SuLszqK8hBIVG7qxD' />
+						<form method="post" action="insertQna">
+							<input type="hidden" name="membersNo"
+								value="${sessionScope.members.membersNo}" />
 							<div class="qqqalert qqqalert-secondary mb-20">
 								<p style="font-size: 0.8rem">테스트</p>
 							</div>
@@ -40,14 +41,14 @@
 									id="id_title" />
 							</div>
 							<div class="form-group">
-								<textarea name="content" cols="40" rows="10" id="id_content" placeholder="에디터넣기">
+								<textarea name="qqContents" cols="40" rows="10" id="id_content" placeholder="에디터넣기">
 </textarea>
 
 							</div>
-
+							
 							<div class="qqrow">
 								<div class="col-xs-10 tags">
-									<h5 style="font-size: 12px; color: #6a737c; ">태그</h5>
+									<h5 style="font-size: 12px; color: #6a737c;">태그</h5>
 									<div class="bootstrap-tagsinput">
 									<input class ="insert" type="text" name="tags" id="id_tags"/>
 									</div>

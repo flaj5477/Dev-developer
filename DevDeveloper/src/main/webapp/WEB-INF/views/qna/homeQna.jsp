@@ -70,13 +70,13 @@
 											<div>0</div> 좋아요
 										</li>
 										<li>
-											<div>${qna.qqViews}</div> 조회수			
+											<div>${qna.qViews}</div> 조회수			
 										</li>
 									</ul>
 								</td>
 								<td class="question-qqqcontent">
 									<div class="question-qqqtitle">
-										<a href="#">${qna.qqTitle}</a>
+										<a href="#">${qna.qTitle}</a>
 									</div>
 									<div class="rowqqq question-qqqmeta">
 										<div class="pull-left">
@@ -87,7 +87,7 @@
 										</div>
 										<div class="pull-right">
 											<span class="question-qqqauthor"> <a href="#">
-													${qna.membersId }&nbsp; </a> <span class="question-qqqdate">${qna.qqDate}</span>
+													${qna.membersId }&nbsp; </a> <span class="question-qqqdate">${qna.qDate}</span>
 											</span>
 										</div>
 									</div>

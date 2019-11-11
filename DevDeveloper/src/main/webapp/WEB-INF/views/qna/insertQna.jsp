@@ -29,7 +29,7 @@
 				<div class="qqqcard qqqcard-form">
 					<div class="main-qna-qqqform">
 						<h2 class="title" style="margin: 12px 0px">질문 작성하기</h2>
-						<form method="post" action="insertQna">
+						<form method="post" action="insertQna" name = "insertQna">
 							<input type="hidden" name="membersNo"
 								value="${sessionScope.members.membersNo}" />
 							<div class="qqqalert qqqalert-secondary mb-20">
@@ -57,7 +57,7 @@
 							</div>
 							<div class="qqrow item" style="margin-top: 15px">
 
-								<button class="btn btn-darkblue" type="submit" id="qqqbutton">
+								<button class="btn btn-darkblue" type="button" id="qqqbutton">
 								등록하기</button>
 							</div>
 						</form>
@@ -70,6 +70,33 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<script>
+		$(document).ready(function(){
+		$("#qqqbutton").click(function(){
+			var title = $(".qqTitle").val();
+			var content = $(".qqContent").val();
+			
+			if(title==""){
+				alert("제목을 입력하세요");
+				//document.insertQna.qqTitle.focus();
+				return;
+			
+			}
+			if(content==""){
+				alert("내용을 입력하세요");
+				//document.insertQna.qqContent.focus();
+				return;
+			}
+			
+			document.insertQna.submit();
+			}
+
+		}
+
+	</script>
+
 
 </body>
 </html>

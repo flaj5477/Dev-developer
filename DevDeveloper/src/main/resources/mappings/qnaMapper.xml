@@ -6,15 +6,15 @@
  
 	<select id="qnaList" parameterType="question" resultType="question">
 	select b.* from(select rownum no, a.* from(
-	    select 	q.q_no 				as "qqNo",
-	 			q.members_no 		as "membersNo",
-	 			q.q_title 			as "qqTitle",
-	 			q.q_contents 		as "qqContents",
-	 			q.q_code 			as "qqCode",  
-	 			q.q_date 			as "qqDate",
-	 			q.q_views		    as "qqViews",
-	 			q.q_tags			as "qqTags",
-	 			m.members_id		as "membersId"
+	    select 	q.q_no 				,
+	 			q.members_no 		,
+	 			q.q_title 			,
+	 			q.q_contents 		,
+	 			q.q_code 			,  
+	 			q.q_date 			,
+	 			q.q_views		    ,
+	 			q.q_tags			,
+	 			m.members_id
 	      		
 	 			from members m join question q
 	 			on q.members_no = m.members_no

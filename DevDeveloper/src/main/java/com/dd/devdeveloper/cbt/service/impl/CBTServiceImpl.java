@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,5 +56,10 @@ public class CBTServiceImpl implements CBTService{
 	@Override
 	public List<TestsQVO> getQuestList(TestsQVO tqvo) {
 		return dao.getQuestList(tqvo);
+	}
+
+	@Override
+	public List<Map<String,Object>> getRecordList(TestsRecordVO recvo) {
+		return dao.getRecordList(recvo);
 	}
 }

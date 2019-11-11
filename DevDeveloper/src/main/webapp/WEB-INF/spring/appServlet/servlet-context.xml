@@ -72,6 +72,7 @@
 			<mapping path="/cbt/*" />
 			<mapping path="/getDashboard" />
 			<mapping path="/applyProjects" />
+			<mapping path="/insertQna"/>
 			<exclude-mapping path="" />
 			<beans:ref bean="LoginInterceptor" />
 		</interceptor>

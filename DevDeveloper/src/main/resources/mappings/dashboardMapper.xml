@@ -65,7 +65,11 @@
 				members_no, 
 				proj_no, 
 				status, 
-				participant_name 
+				participant_name,
+				email,
+				phone_no,
+				address,
+				cover_letter
 		from PROJ_APPLICANTS_STATUS_VIEW
 		where proj_no in ( select proj_no from PROJECTS where members_no=#{pmNo})
 		order by status_no

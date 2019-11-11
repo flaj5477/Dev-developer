@@ -37,7 +37,7 @@
 	
 	<insert id="insertQna" parameterType="question">
 		insert into question(q_no, q_title, q_contents, members_no) 
-		values( (select max(q_no)+1 from question),#{qqTitle},#{qqContents},#{membersNo})
+		values( (select max(q_no)+1 from question),#{qTitle},#{qContents},#{membersNo})
 	</insert>	
 	
 	

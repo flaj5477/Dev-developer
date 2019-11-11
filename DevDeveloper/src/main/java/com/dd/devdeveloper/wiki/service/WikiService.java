@@ -43,4 +43,8 @@ public interface WikiService {
 
 	//위키 태그리스트 보기
 	public List<LinkedHashMap<String, Object>> getWikiTagList();
+
+	
+	//위키 번역 삭제
+	public int delWikiTrans(WikiTransVO tVo);
 }

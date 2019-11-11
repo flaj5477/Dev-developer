@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dd.devdeveloper.qna.QuestionVO;
 import com.dd.devdeveloper.qna.service.QnaService;
@@ -15,6 +15,7 @@ public class QnaController {
 
 		@Autowired QnaService qnaService;
 		
+		//qna목록
 		@RequestMapping("/homeQna")
 		public String qnaList(Model model, QuestionVO vo) {
 			model.addAttribute("qnaList", qnaService.qnaList(vo));
@@ -22,11 +23,17 @@ public class QnaController {
 			return "qna/homeQna";
 		}
 		
+		//등록폼
+		@RequestMapping(value ="/insertQna", method=RequestMethod.GET)
+		public String insertQnaGet() {
+			return "qna/insertQna";
+		}
 		
-		@RequestMapping("/insertQna")
-		public String insertQna() {
-			
-			
+		//질문등록하기
+		@RequestMapping(value ="/insertQna", method=RequestMethod.POST)
+		public String insertQnaPost(QuestionVO vo) {
+			System.out.println("-----------컨트롤러-----------");
+			qnaService.insertQna(vo);
 			return "qna/insertQna";
 		}
 }

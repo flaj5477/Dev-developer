@@ -19,7 +19,7 @@ a {
 	$(function() {
 		//transTitle();
 		hover();
-		//getWiki();
+		dropodwn();
 	});
 	
 	/* 
@@ -53,6 +53,12 @@ a {
 	}); */
 
 
+	function dropodwn(){
+		$('.dropdown').on('click', function(event){
+			event.stopPropagation();	
+		});
+	}
+	
 /* 	function transTitle() {
 		var title = $('.title');
 		$.each(title, function(idx, item) {

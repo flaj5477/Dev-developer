@@ -113,6 +113,14 @@
 				}
 			});
 		});
+		
+		
+		$('#loginpw,#loginid').keypress(function(event){
+		     if ( event.which == 13 ) {
+		         $('#loginBtn').click();
+		         return false;
+		     }
+		});
 	</script>
 
 	<script

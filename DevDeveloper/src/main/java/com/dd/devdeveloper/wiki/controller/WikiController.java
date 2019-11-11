@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -193,5 +194,18 @@ public class WikiController {
 		return papagoTrans;
 	}
 	
-
+	/*
+	 * 곽동우
+	 * 2019-11-08
+	 * 번역삭제
+	 */
+	@RequestMapping(value = "/delWikiTrans", method = RequestMethod.POST)
+	@ResponseBody
+	public int delWikiTrans(HttpServletRequest request) {
+		int transNo = Integer.parseInt((String) request.getParameter("transNo"));
+		WikiTransVO tVo = new WikiTransVO();
+		tVo.setTransNo(transNo);
+		
+		return wikiService.delWikiTrans(tVo);
+	}
 }

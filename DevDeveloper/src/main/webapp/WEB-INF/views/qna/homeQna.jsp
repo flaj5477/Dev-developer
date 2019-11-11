@@ -18,8 +18,6 @@
 		<link rel="stylesheet" href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css"> --%>
 <%-- 	<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/ccsss.css">  --%>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/test.css">
 <%-- 	<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/gg.css"> --%>
 <%-- 	<link rel="stylesheet"
@@ -27,23 +25,25 @@
 <%-- 	
 	<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/hh.css">  --%>
-
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/assets/css/test.css">
+		<link href="//fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
+	
 </head>
-<body id="qq">
+<body id = "pp">
 <div class="container-fluid mt--3">
-<div class="row mb-4">
-			<div class=""
-				style="padding-left: 110px;">
-				<input class="form-control" name="searchVal" placeholder="Search"
-					type="text" style="border: #686ce4 1px solid; display:inline-block; width:240px;"> <input
-					type="hidden" name="page" value="1">
-				<button class="btn btn-icon btn-3 btn-primary" type="button" style="margin-left: 0px;
-				background-color :#793bea">
-					질문하기</button>	
-			</div>
-		</div>
-
 	<div class="main-qqqcontent">
+	<div class="mb-4"> <!-- roww -->
+		<form name ="searchform">
+			 <button class="btn btn-darkblue" type="submit" id="qqqbutton"
+			 onclick="location.href='insertQna'">
+					질문하기</button>	
+			<input type="hidden" name="page" value="1">
+			<input class="form-control" name="searchVal" placeholder="Search"
+					type="text" style="border: #686ce4 1px solid; width:180px;  float :right"> 
+					</form>
+		</div>
+	
 		<div class="col-xs-12">
 			<div class="main-qqqcontainer qqqhomepage">
 				<div class="qqqcard qqqcard-tab">
@@ -52,7 +52,6 @@
 							<li class="filter-qqqitem active"><a href="/">최신순</a></li>
 							<li class="filter-qqqitem "><a href="#">dd</a></li>
 							<li class="filter-qqqitem "><a href="#">asd</a></li>
-
 						</ul>
 						<ul class="main-qqqfilter sub-qqqfilter pull-left qqqtabs">
 						</ul>
@@ -61,7 +60,7 @@
 						<tbody>
 							<c:forEach items="${qnaList}" var="qna"> 
 							<tr>
-								<td style="width: 21%; padding-left: 5px;">
+								<td style="width: 27%; padding-left: 25px;">
 									<ul class="question-qqqstatistic">
 										<li>
 											<div>0</div> 답변수
@@ -104,7 +103,13 @@
 </div>
 
 
+	<script>
+		function go_page(p) {
 
+		/* 	document.searchfrm.page.value = p */
+			document.searchfrm.submit()
+		}
+	</script>
 
 
 </body>

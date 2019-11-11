@@ -341,6 +341,23 @@
 									</a>
 								</div>
 							</div>
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">응시기록 열람</button>
+							<!-- Modal --> 
+							<div id="#recModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+							  <div class="modal-dialog modal-dialog-centered modal-lg">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="exampleModalCenterTitle">${members.membersName}님의 응시기록</h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+							        <jsp:include page="../cbt/record.jsp"></jsp:include>
+							      </div>
+							    </div>
+							  </div>
+							</div>	
 						</div>
 					</div>
 				</div>
@@ -351,6 +368,139 @@
 	</div>
 	</div>
 	</div>
+<<<<<<< HEAD
+	<!-- 프로젝트 모달 -->
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">프로젝트</h5>
+					<h5 class="modal-title" id="exampleModalLabel"></h5>
+					<button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body mt--4">
+					<table class="table align-items-center table-flush text-center">
+						<thead class="thead-light">
+							<tr>
+								<th>프로젝트 이름</th>
+								<th>버튼</th>
+							</tr>
+						</thead>
+						<tbody id="tbody">
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 모달 제어 스크립트 (데이터 담기) -->
+	<script>
+	$('#recModal').on('hidden.bs.modal', function () {
+			$('.modal-body').remove();
+		})
+		
+		$('#exampleModal').on('show.bs.modal', function(event) {
+			//프로젝트 지원, 프로젝트 승인, 프로젝트 참여 상태의 테이블을 만들어서 보여줘야함
+			var button = $(event.relatedTarget) // Button that triggered the modal
+			var status = button.find(".proj_status").html();
+			var ajaxRow = "";
+
+			console.log(status);
+			$.ajax({
+				url : "getProjStatusDetail/" + status,
+				type : 'GET',
+				dataType : 'json',
+				async : false, //동기화 방식으로 해야 데이터를 다 받아 온 후에 실행한다.
+				/* data : JSON.stringify({
+					status : encodeURI(status)
+				}), */
+				contentType : 'application/json;charset=utf-8',
+				success : function(data) { //데이터 받아오기 성공하면 
+					//테이블 생성
+					console.log(data.length);
+					console.log(data[0].projTitle);
+
+					for (i = 0; i < data.length; i++) {
+						//이부분 함수로 만들어서 status가 지원일때, 승인일때, 참여일때, 버튼과 클릭이벤트 따로 주기
+						ajaxRow += CreateTableRow(status, data);
+
+						/* 
+						"<tr id=" + data[i].projNo + ">"
+							+ "<td>"
+							+ data[i].projTitle
+							+ "</td>"
+							+ "<td>"
+							+ "<button type=\"button\" class=\"btn btn-default\">지원 취소</button>"
+							+ "</td>" + "</tr>"; */
+					}
+				},
+				error : function(xhr, status, message) {
+					alert(" status: " + status + " er:" + message);
+				}
+			});
+
+			//모달 띄우기
+			var modal = $(this);
+			$(this).find("#exampleModalLabel").html(status);
+			$(this).find("#tbody").append(ajaxRow); //여기서 모달을 다시 띄우면 그 전에 열었던 모달창에 더 추가된다. 정보가 계속 누적됨;;;
+		});
+
+		//status 별로 다른 테이블 값 생성
+		function CreateTableRow(status, data) {
+			var row = "";
+			if (status == "지원") {
+				row = "<tr id=" + data[i].applyNo + ">"
+						+ "<td>"
+						+ data[i].projTitle
+						+ "</td>"
+						+ "<td>"
+						+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './deleteApply?applyNo="
+						+ data[i].applyNo + "' \">지원 취소</button>" + "</td>"
+						+ "</tr>";
+			} else if (status == "승인") {
+				row = "<tr id=" + data[i].applyNo + ">"
+						+ "<td>"
+						+ data[i].projTitle
+						+ "</td>"
+						+ "<td>"
+						+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './updateApplyParticipantIn?applyNo="
+						+ data[i].applyNo + "' \">승인 확인</button>" + "</td>"
+						+ "</tr>";
+			} else if (status == "참여") {
+				row = "<tr id=" + data[i].applyNo + ">"
+						+ "<td>"
+						+ data[i].projTitle
+						+ "</td>"
+						+ "<td>"
+						+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './moveToFileList?projNo="
+						+ data[i].projNo + "' \">파일 관리</button>" + "</td>"
+						+ "</tr>";
+			} else if (status == "완료") {
+
+			} else if (status == "관리") {
+
+			}
+			return row;
+		}
+
+		//모달 닫기
+		$('#exampleModal').on('hide.bs.modal', function(e) {
+
+			$("#tbody").html("");
+
+			e.stopImmediatePropagation();
+
+		});
+	</script>
+=======
+>>>>>>> branch 'master' of https://github.com/flaj5477/Dev-developer.git
 	<div class="container-fluid mt--7">
 		<div class="row mt-5">
 			<div class="col-xl-8 mb-5 mb-xl-0">

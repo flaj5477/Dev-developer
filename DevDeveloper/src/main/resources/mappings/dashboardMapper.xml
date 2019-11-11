@@ -58,6 +58,11 @@
 		update PROJ_APPLICANTS set status='참여' where apply_no=#{applyNo}
 	</update>
 	
+	<!-- 프로젝트 지원 승인 -->
+	<update id="updateApplytoApproved" parameterType="projApplicants">
+		update PROJ_APPLICANTS set status='승인' where apply_no=#{applyNo}
+	</update>
+	
 	
 	<!-- 프로젝트 지원자 리스트 -->
 	<select id="getProjApplicantsList" parameterType="projApplicants" resultType="projApplicants">

@@ -568,11 +568,21 @@
 				</div>
 				<div class="modal-body"></div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" onclick="location.href = './Apply?applyNo=" >승인하기</button>
+					<button type="button" class="btn btn-primary" onclick="updateApplytoApproved(this)" >승인하기</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<!-- 프로젝트 지원자 승인하기 버튼 클릭 이벤트 -->
+	<script>
+		function updateApplytoApproved(btn){
+			//지원상태를 '승인'으로 할 지원번호 
+			var applyNo = $(btn).parent().prev().find("div").attr('id');
+			
+			window.location.href="./updateApplytoApproved?applyNo=" + applyNo;
+		}
+	</script>
 	
 	
 	
@@ -585,7 +595,7 @@
 			
 			var i = button.attr('id');	//프로젝트 지원자들중 눌려진 버튼의 아이디 값으로 해당 지원자의 정보를 가져온다
 	     	
-	        var content = "<div class= container> " +
+	        var content = "<div class= container id=" + applyNo + "> " +
 	        					"<div class=row> " +
 	        						"<div class=col>" +
 	        							projApplicantsList[i].participantName +
@@ -612,9 +622,8 @@
 	        				"</div> ";
 		
 			
-			//모달창 열기
-			var modal = $(this);
-			$(this).find(".modal-body").append(content); //여기서 모달을 다시 띄우면 그 전에 열었던 모달창에 더 추가된다. 정보가 계속 누적됨;;;
+			//모달창에 내용 달기
+			$("#projApplyModal .modal-body").append(content); //여기서 모달을 다시 띄우면 그 전에 열었던 모달창에 더 추가된다. 정보가 계속 누적됨;;;
 		});
 		
 		//모달 닫기

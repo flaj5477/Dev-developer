@@ -113,6 +113,14 @@ public class DashboardController {
     return "redirect:/getDashboard";
 	}
 	
+	//지원승인(프로젝트 pm이 승인하는거)
+	@RequestMapping("/updateApplytoApproved")
+	public String updateApplytoApproved(ProjApplicantsVO vo) {
+		dashboardService.updateApplytoApproved(vo);
+		return "redirect:/getDashboard";
+	}
+	
+	
 	//파일관리 페이지로 이동
 	@RequestMapping("/moveToFileList")
 	public String moveToFileList(ProjApplicantsVO vo, HttpSession session) {

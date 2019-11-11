@@ -32,20 +32,20 @@ public class ProjectsController {
 		return "projects/projects";
 	}
 	
-	@RequestMapping("/applyProjectsForm")
+	@RequestMapping("/applyProjectsForm")	//지원하기 버튼 누르면 지원폼 출력
 	public String applyProjectsForm(ProjApplicantsVO vo, Model model, HttpSession session) {
 		model.addAttribute("projParticipants", vo);
 		session.setAttribute("projNo", vo.getProjNo());
 		return "projects/applyProjectsForm";
 	}
 	
-	@RequestMapping("/applyProjects")
+	@RequestMapping("/applyProjects")	//지원 폼 정보로 지원하기
 	public String applyProjects(ProjApplicantsVO vo, HttpSession session) {
 		//vo에 지원자 no 담기
 		//vo.setMembersNo(2); /////////////////////////////////////membersId말고 members객체 넣을꺼임 바꿔야함!
 		vo.setMembersNo(  ((MembersVO)session.getAttribute("members")).getMembersNo() );
 		vo.setProjNo((Integer)session.getAttribute("projNo"));
 		projectsService.applyProjects(vo);
-		return "redirect:/projectsList";	//프로젝트 목록 페이지로 돌아감
+		return "redirect:/getProjectsList";	//프로젝트 목록 페이지로 돌아감
 	}
 }

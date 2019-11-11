@@ -64,8 +64,7 @@
 						<script> //프로젝트 내용에 공백을 <br>태그로 치환해서 출력하기
 						$(document).ready(function() {
 							var text = $('#projContents').text();
-							var result = text.replace(/(\n|\r\n)/g, '<br>
-							');
+							var result = text.replace(/(\n|\r\n)/g, "<br>");
 							
 							//var result = replaceAll(text,"(\r\n|\r|\n|\n\r)", "<br>");
 

@@ -47,10 +47,10 @@
 	<!-- 지원하기 -->
 	<insert id="applyProjects" parameterType="projApplicants" >
 		<selectKey keyProperty="applyNo" resultType="int" order="BEFORE">
-			select max(apply_no) +1 from proj_participants
+			select max(apply_no) +1 from proj_applicants
 		</selectKey>
 		
-		insert into proj_participants( 	apply_no, 
+		insert into proj_applicants( 	apply_no, 
 										members_no, 
 										proj_no, 
 										status, 

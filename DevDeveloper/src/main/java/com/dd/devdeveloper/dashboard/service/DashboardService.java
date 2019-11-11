@@ -32,9 +32,14 @@ public interface DashboardService {
 	
 	//프로젝트 승인 확인
 	public void updateApplyParticipantIn(ProjApplicantsVO vo);
+	
+	//프로젝트 지원 승인(프로젝트 pm이 지원 상태를 승인 상태로 바꾸는 것)
+	public void updateApplytoApproved(ProjApplicantsVO vo);
 
 	//내가 올린 프로젝트 리스트
 	 public List<ProjectsVO> getProjects(ProjectsVO projectsVO);
+
+	
 
 
 	

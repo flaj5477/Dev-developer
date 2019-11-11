@@ -34,10 +34,11 @@
 <div class="container-fluid mt--3">
 	<div class="main-qqqcontent">
 	<div class="mb-4"> <!-- roww -->
-		<form name ="searchform">
+		
 			 <button class="btn btn-darkblue" type="submit" id="qqqbutton"
 			 onclick="location.href='insertQna'">
 					질문하기</button>	
+					<form name ="searchform">
 			<input type="hidden" name="page" value="1">
 			<input class="form-control" name="searchVal" placeholder="Search"
 					type="text" style="border: #686ce4 1px solid; width:180px;  float :right"> 

@@ -38,7 +38,7 @@
 							<input type="hidden" name="membersNo"
 								value="${sessionScope.members.membersNo}" />
 							<div class="qqqalert qqqalert-secondary mb-20">
-								<p style="font-size: 0.8rem">테스트</p>
+								<p style="font-size: 0.8rem"><img src="https://i.imgur.com/CUtuI2T.png">버튼으로 코드를 넣을 수 있습니다.</p>
 							</div>
 							<div class="form-group">
 								<input class ="insert" type="text" name="qTitle" autofocus

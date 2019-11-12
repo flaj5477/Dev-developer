@@ -38,6 +38,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 			type="com.dd.devdeveloper.wiki.WikiTransVO"/>
 		<typeAlias alias="wikiTag"
 			type="com.dd.devdeveloper.wiki.WikiTagVO"/>
+		<typeAlias alias="WikiRec"
+			type="com.dd.devdeveloper.wiki.WikiRecVO"/>
+			
 					
 			
 		<!-- 동규 :이 파일을 고칠때는 pull,고침,바로commit,push 다 하기!!!! -->

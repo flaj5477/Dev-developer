@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.members.MembersVO;
+import com.dd.devdeveloper.wiki.WikiRecVO;
 import com.dd.devdeveloper.wiki.WikiTransVO;
 import com.dd.devdeveloper.wiki.WikiVO;
 import com.dd.devdeveloper.wiki.api.PapagoTranslateNMT;
@@ -206,5 +207,23 @@ public class WikiController {
 		tVo.setTransNo(transNo);
 		
 		return wikiService.delWikiTrans(tVo);
+	}
+	
+	/*==============
+	  	곽동우
+	  	20191112
+	  	번역추천
+	 ================*/
+	@RequestMapping(value = "/wikiTransRec", method = RequestMethod.POST)
+	@ResponseBody
+	public int wikiTransRec(HttpServletRequest request) {
+		int manualNo = Integer.parseInt(request.getParameter("manualNo"));
+		int transNo = Integer.parseInt(request.getParameter("transNo"));
+		int membersNo = Integer.parseInt(request.getParameter("membersNo"));
+		
+		System.out.println(manualNo +""+ transNo + membersNo);
+		
+		
+		return 1;
 	}
 }

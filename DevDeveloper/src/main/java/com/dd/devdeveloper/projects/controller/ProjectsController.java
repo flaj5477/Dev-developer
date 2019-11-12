@@ -34,10 +34,35 @@ public class ProjectsController {
 	
 	@RequestMapping("/applyProjectsForm")	//지원하기 버튼 누르면 지원폼 출력
 	public String applyProjectsForm(ProjApplicantsVO vo, Model model, HttpSession session) {
-		model.addAttribute("projParticipants", vo);
-		session.setAttribute("projNo", vo.getProjNo());
-		return "projects/applyProjectsForm";
+		
+	  vo.setMembersNo( ((MembersVO)session.getAttribute("members")).getMembersNo() ); //session의 멤버id를 vo에 담는다.
+	  
+	  System.out.println("vo검사::::::::::::::::::::" + vo.getMembersNo() + vo.getProjNo()  );
+	  
+	  
+	  //프로젝트 지원 중복 검사
+	  if( projectsService.applyDuplicationInspect(vo) == 0 ) {  //지원이력이 없으면 0이 반환된다.
+	    //프로젝트 지원가능 등급인지 검사 
+	    if( projectsService.projRequireInspect(vo) == 1 ) { //지원가능 등급이면 1, 등급 미달이면 0이 반환된다.
+	      model.addAttribute("projParticipants", vo);
+	      return "projects/applyProjectsForm";
+	    }else {
+	      //지원가능 등급이 아니라고 경고창 띄우기
+	      model.addAttribute("errorMsg", "지원가능 등급이 아닙니다.");
+	      model.addAttribute("url", "./getProjectsList");
+	      return "common/Error";
+	    }
+	  }else {
+	    //중복 지원이라고 경고창 띄우기
+	    model.addAttribute("errorMsg", "이미 지원하셨습니다.");
+      model.addAttribute("url", "./getProjectsList");
+      return "common/Error";
+	  }
+
+	  
 	}
+	
+	
 	
 	@RequestMapping("/applyProjects")	//지원 폼 정보로 지원하기
 	public String applyProjects(ProjApplicantsVO vo, HttpSession session) {

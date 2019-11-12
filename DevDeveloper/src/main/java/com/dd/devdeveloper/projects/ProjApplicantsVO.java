@@ -16,4 +16,5 @@ public class ProjApplicantsVO {
 	
 	private String projTitle;
 	private int pmNo; //프로젝트 pm(공고낸사람)번호
+	
 }

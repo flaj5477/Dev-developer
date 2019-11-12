@@ -71,7 +71,7 @@
 			<!-- 세션(로그인) 확인이 필요한 경로추가 -->
 			<mapping path="/cbt/*" />
 			<mapping path="/getDashboard" />
-			<mapping path="/applyProjects" />
+			<mapping path="/applyProjectsForm" />
 			<mapping path="/insertQna"/>
 			<exclude-mapping path="" />
 			<beans:ref bean="LoginInterceptor" />

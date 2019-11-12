@@ -18,4 +18,10 @@ public interface ProjectsService {
 
 	//프로젝트 지원
 	void applyProjects(ProjApplicantsVO vo);
+	
+	//프로젝트 지원 전 중복 검사
+	int applyDuplicationInspect(ProjApplicantsVO vo);
+
+	//프로젝트 지원 전 등급 검사
+  int projRequireInspect(ProjApplicantsVO vo);
 }

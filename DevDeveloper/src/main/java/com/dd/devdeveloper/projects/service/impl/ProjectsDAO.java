@@ -32,4 +32,16 @@ public class ProjectsDAO {
 	public int getCountWiki(ProjectsVO vo) {
 		return mybatis.selectOne("ProjectsDAO.getCountProj", vo);
 	}
+	
+	 //프로젝트 지원 전 중복 검사
+  public int applyDuplicationInspect(ProjApplicantsVO vo) {
+    System.out.println("프로젝트 지원 전 중복 검사 DAO까지 왔땅");
+    return mybatis.selectOne("ProjectsDAO.applyDuplicationInspect", vo);
+  }
+
+  //프로젝트 지원 전 등급 검사
+  public int projRequireInspect(ProjApplicantsVO vo) {
+    System.out.println("프로젝트 지원 전 등급 검사 DAO까지 왔땅");
+    return mybatis.selectOne("ProjectsDAO.projRequireInspect", vo);
+  }
 }

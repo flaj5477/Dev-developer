@@ -18,6 +18,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
  
         if(user == null){
         	session.setAttribute("prepage", request.getRequestURI());
+        	
         	System.out.println("========uri=================" + request.getRequestURI());
             response.sendRedirect(request.getSession().getServletContext().getContextPath()+"/login"); // 절대경로지정
             return false;

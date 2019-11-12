@@ -44,6 +44,24 @@
 		where proj_no = #{projNo}
 	</select>
 	
+	<!-- 지원 전 중복검사 -->
+	<select id="applyDuplicationInspect" resultType="int">
+		select count(*) 
+		from proj_applicants 
+		where members_no = #{membersNo}
+		and proj_no=#{projNo}
+	</select>
+	
+	<!-- 지원 전 등급검사 -->
+	<select id="projRequireInspect" resultType="int">
+		select count(*) 
+		from members 
+		where members_no=#{membersNo} 
+		and MEMBERS_GRADE >= (	select PROJ_REQUIRE 
+								from projects 
+								where proj_no=#{projNo}	)
+	</select>
+	
 	<!-- 지원하기 -->
 	<insert id="applyProjects" parameterType="projApplicants" >
 		<selectKey keyProperty="applyNo" resultType="int" order="BEFORE">

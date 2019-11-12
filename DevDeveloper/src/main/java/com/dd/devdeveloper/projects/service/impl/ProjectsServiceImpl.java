@@ -48,5 +48,14 @@ public class ProjectsServiceImpl implements ProjectsService {
 		projectsDAO.applyProjects(vo);
 	}
 
+	@Override //프로젝트 지원 전 중복 검사
+  public int applyDuplicationInspect(ProjApplicantsVO vo) {
+   return projectsDAO.applyDuplicationInspect(vo);
+  }
+
+  @Override //프로젝트 지원 전 등급 검사
+  public int projRequireInspect(ProjApplicantsVO vo) {
+    return projectsDAO.projRequireInspect(vo);
+  }
 
 }

@@ -17,9 +17,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
         MembersVO user = (MembersVO) session.getAttribute("members");
  
         if(user == null){
-        	session.setAttribute("prepage", request.getRequestURI());
+        	session.setAttribute("prepage", request.getRequestURI()+"?"+request.getQueryString());
         	
-        	System.out.println("========uri=================" + request.getRequestURI());
+        	System.out.println("========uri=================" + request.getRequestURI()+"?"+request.getQueryString());
             response.sendRedirect(request.getSession().getServletContext().getContextPath()+"/login"); // 절대경로지정
             return false;
         }

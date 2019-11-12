@@ -101,7 +101,7 @@ div[contenteditable] {
 		//hideOtherTrans();	//	''		  다른번역 숨기기
 		startTrans();
 		delWikiTrans();
-		
+		wikiTransRec();
 
 	    
 			
@@ -217,7 +217,7 @@ div[contenteditable] {
 	function otherTransClick(){
 		$('body').on('click','.otherTrans',function(){
 			var transArea = $(".transEdit.open #transContents");
-			var otherTransVal = $(this).children().eq(0).html();	//왜 날짜 회원번호도 같이?
+			var otherTransVal = $(this).children().eq(1).html();	//왜 날짜 회원번호도 같이?
 			
 			//otherTransVal = otherTransVal.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
 			
@@ -265,6 +265,37 @@ div[contenteditable] {
 		});
 	}
 	
+	/*
+		곽동우
+		20191112
+		번역추천
+	*/
+	function wikiTransRec(){
+		$("body").on("click", ".ni-favourite-28", function(event){
+			event.stopPropagation();	//버블링 제어 
+			
+			var manualNo = "${wiki.manualNo}";
+			var transNo = $(this).parent().parent().attr('id');
+			var membersNo = "${sessionScope.members.membersNo}";
+						//$(this).next().children('a').text(); 등록한놈아이디
+			
+			$.ajax({
+				url: 'wikiTransRec',
+				type: 'post',
+				data : { manualNo : manualNo,
+						 transNo : transNo,
+						 membersNo : membersNo  },
+				success: function(){
+					alert("성공");
+				},
+				error:function(){
+					alert("실패");
+				}
+			});
+		});
+	}
+	
+	
 	
 	/*
 		곽동우
@@ -280,7 +311,7 @@ div[contenteditable] {
 			$.ajax({
 				url: "papagoTrans",
 				type: 'POST',
-				dataType: 'json',//데이타 타입
+				dataType: 'json',//결과 데이타 타입
 				data: { oriContents : manualBefore },
 				success: function(data){
 					$(".transEdit.open #transContents").val(data.message.result.translatedText);
@@ -419,7 +450,7 @@ div[contenteditable] {
 				.append($('<div class="row nav nav-pills justify-content-end">').html('<i name="deltransbtn" class="ni ni-fat-remove">'))			   		
 			   	.append($('<div id="otcontents" class="row" >').html(manualAfterBr))   
 			   	.append($('<div class="row nav nav-pills justify-content-end">')
-			   			.append($('<badge class="badge badge-primary ml-3">').html("<br>"+item.translDate+" / "+"<a href=' getWiki= "+item.membersNo +"'>"+item.membersNo+"</a>" )))
+			   			.append($('<i class="ni ni-favourite-28">')).append($('<badge class="badge badge-primary ml-3">').html("<br>"+item.translDate+" / "+"<a href=' getWiki= "+item.membersNo +"'>"+item.membersNo+"</a>" )))
 				.appendTo('#othertrans_'+manualLine);
 		});//each
 	}//wikiTransLineResult

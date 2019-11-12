@@ -23,6 +23,10 @@ div[contenteditable] {
 }
 /* ~~~ */
 
+.red{
+  color: red;
+}
+
 .hide{
   display: none;
 }
@@ -274,8 +278,12 @@ div[contenteditable] {
 		$("body").on("click", ".ni-favourite-28", function(event){
 			event.stopPropagation();	//버블링 제어 
 			
+			var clickObj = $(this);
+			
 			var manualNo = "${wiki.manualNo}";
-			var transNo = $(this).parent().parent().attr('id');
+			var transNo = clickObj.parent().parent().attr('id');
+			
+			
 			var membersNo = "${sessionScope.members.membersNo}";
 						//$(this).next().children('a').text(); 등록한놈아이디
 			
@@ -287,6 +295,7 @@ div[contenteditable] {
 						 membersNo : membersNo  },
 				success: function(){
 					alert("성공");
+					clickObj.addClass("red");
 				},
 				error:function(){
 					alert("실패");

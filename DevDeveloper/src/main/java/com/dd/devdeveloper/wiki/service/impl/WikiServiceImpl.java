@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dd.devdeveloper.common.paging.Paging;
+import com.dd.devdeveloper.wiki.WikiRecVO;
 import com.dd.devdeveloper.wiki.WikiTransVO;
 import com.dd.devdeveloper.wiki.WikiVO;
 import com.dd.devdeveloper.wiki.service.WikiService;
@@ -306,6 +307,7 @@ public class WikiServiceImpl implements WikiService {
 	}
 	
 	
+	
 	/*
 		곽동우
 		20191101
@@ -435,6 +437,16 @@ public class WikiServiceImpl implements WikiService {
 	@Override
 	public int delWikiTrans(WikiTransVO tVo) {
 		return wikiDAO.delWikiTrans(tVo);
+	}
+	
+	
+	/* ==============
+	 곽동우
+	 20191112
+	 위키번역추천
+	 ================*/
+	public int wikiTransRec(WikiRecVO rvo) {
+		return wikiDAO.wikiTransRec(rvo);
 	}
 	
 	////////// 파일

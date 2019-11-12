@@ -50,3 +50,106 @@
     
 FROM wiki_guide_trans a, MEMBERS b
 where a.MEMBERS_NO = b.MEMBERS_NO;
+
+
+
+
+
+
+
+============================================================
+ CREATE TABLE WIKI_TRANS_REC 
+   (	MANUAL_NO NUMBER(30,0), 
+      TRANS_NO NUMBER(30,0), 
+      MEMBERS_NO NUMBER(30,0)
+   );
+   ALTER TABLE WIKI_TRANS_REC
+   ADD CONSTRAINT WIKI_TRANS_REC_PK PRIMARY KEY (MANUAL_NO, TRANS_NO, MEMBERS_NO);
+   ALTER TABLE WIKI_TRANS_REC
+   ADD CONSTRAINT WIKI_TRANS_REC_FK1 FOREIGN KEY (MANUAL_NO, TRANS_NO)
+   REFERENCES WIKI_GUIDE_TRANS(MANUAL_NO, TRANS_NO) ON DELETE CASCADE ENABLE;
+   
+   select * from wiki_trans_rec;
+   
+   INSERT INTO wiki_trans_rec (manual_no, trans_no, members_no)
+   values(54,1104,3);
+   
+   commit;
+   
+   
+   select trans_no
+   from WIKI_TRANS_REC
+   where MANUAL_NO = 54 and MEMBERS_NO = 1;
+   
+   
+   
+   SELECT 	a.TRANS_NO			as		"transNo",
+						a.MANUAL_LINE			as		"manualLine",
+						a.MANUAL_BEFORE		as		"manualBefore",
+						a.MANUAL_AFTER		as		"manualAfter",
+						TO_CHAR(a.TRANS_DATE,'YYYY-MM-DD hh:MI:ss')	as 		"translDate",
+						a.MANUAL_NO			as 		"manualNo",
+						a.MEMBERS_NO			as 		"membersNo",
+            b.MEMBERS_NO as "tete"
+						
+				FROM wiki_guide_trans a full outer join WIKI_TRANS_REC b
+        on a.TRANS_NO = b.TRANS_NO
+        where a.MANUAL_NO = 54
+        AND MANUAL_LINE = 0;
+        
+  
+  SELECT 	TRANS_NO			as		"transNo",
+      MANUAL_LINE			as		"manualLine",
+      MANUAL_BEFORE		as		"manualBefore",
+      MANUAL_AFTER		as		"manualAfter",
+      TO_CHAR(TRANS_DATE,'YYYY-MM-DD hh:MI:ss')	as 		"translDate",
+      MANUAL_NO			as 		"manualNo",
+      MEMBERS_NO			as 		"membersNo"
+  FROM wiki_guide_trans  
+      where MANUAL_NO = 54
+     AND MANUAL_LINE = 0;
+          
+          
+          
+            select trans_no, 'x' as x
+   from WIKI_TRANS_REC
+   where MANUAL_NO = 54 and MEMBERS_NO = 1;
+   
+   
+   SELECT 	distinct(a.TRANS_NO)			as		"transNo",
+      a.MANUAL_LINE			as		"manualLine",
+      a.MANUAL_BEFORE		as		"manualBefore",
+      a.MANUAL_AFTER		as		"manualAfter",
+      TO_CHAR(a.TRANS_DATE,'YYYY-MM-DD hh:MI:ss')	as 		"translDate",
+      a.MANUAL_NO			as 		"manualNo",
+      a.MEMBERS_NO			as 		"작성자",
+      b.MEMBERS_NO    as      "추천인"
+      
+  FROM wiki_guide_trans a  , WIKI_TRANS_REC b
+      where a.MANUAL_NO = 54
+     AND MANUAL_LINE = 0
+     and a.trans_no = b.trans_no(+)
+     order by a.trans_no;
+   
+   
+   
+     SELECT 	distinct(a.TRANS_NO)			as		"transNo",
+      a.MANUAL_LINE			as		"manualLine",
+      a.MANUAL_BEFORE		as		"manualBefore",
+      a.MANUAL_AFTER		as		"manualAfter",
+      TO_CHAR(a.TRANS_DATE,'YYYY-MM-DD hh:MI:ss')	as 		"translDate",
+      a.MANUAL_NO			as 		"manualNo",
+      a.MEMBERS_NO			as 		"작성자",
+      b.x,
+      b.members_no   as "추천"
+  FROM wiki_guide_trans a  , (select trans_no, members_no, 'x' as x from WIKI_TRANS_REC where MEMBERS_NO = 0 ) b
+      where MANUAL_NO = 55
+     AND MANUAL_LINE = 0
+     and a.trans_no = b.trans_no(+)
+     order by a.trans_no;
+     
+     
+     select trans_no, 's' as x from WIKI_TRANS_REC;
+     
+     
+     select trans_no, 'x' as x from WIKI_TRANS_REC where MEMBERS_NO = 1;

@@ -272,6 +272,15 @@
 	   <select id="getMemberId" parameterType="int" resultType="String">
 	   		SELECT members_id
 			FROM members
-			WHERE members_no = #{no};
+			WHERE members_no = #{no}
 	   </select>
+	   
+	   <!-- 
+	   	 20191112
+	   	 위키번역 추천
+	    -->
+	    <insert id="wikiTransRec" parameterType="wikiRec" >
+	    	INSERT INTO wiki_trans_rec (manual_no, trans_no, members_no)
+   			values(#{manualNo}, #{transNo}, #{membersNo})
+	    </insert>
 </mapper>

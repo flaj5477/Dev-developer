@@ -216,14 +216,8 @@ public class WikiController {
 	 ================*/
 	@RequestMapping(value = "/wikiTransRec", method = RequestMethod.POST)
 	@ResponseBody
-	public int wikiTransRec(HttpServletRequest request) {
-		int manualNo = Integer.parseInt(request.getParameter("manualNo"));
-		int transNo = Integer.parseInt(request.getParameter("transNo"));
-		int membersNo = Integer.parseInt(request.getParameter("membersNo"));
-		
-		System.out.println(manualNo +""+ transNo + membersNo);
-		
-		
-		return 1;
+	public int wikiTransRec(WikiRecVO rvo) {
+				
+		return wikiService.wikiTransRec(rvo);
 	}
 }

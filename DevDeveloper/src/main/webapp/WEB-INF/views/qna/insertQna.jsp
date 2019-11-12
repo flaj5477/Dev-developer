@@ -17,6 +17,11 @@
 	<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/js/test3.js"> --%>
 <link href="//fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+<%-- <link href="${pageContext.request.contextPath}/resources/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css" rel="stylesheet">
+ --%> 
+ 
+ 
 	<script>
 	pageName = "Q & A";
 </script>
@@ -71,6 +76,12 @@
 		</div>
 	</div>
 	
+	        <script>
+          
+                CKEDITOR.replace( 'id_content' ,{height: 500, 
+                	  filebrowserUploadUrl: 'qnaUpload.jsp'
+                });
+            </script>
 	
 <!-- 	<script>
 		$(document).ready(function(){

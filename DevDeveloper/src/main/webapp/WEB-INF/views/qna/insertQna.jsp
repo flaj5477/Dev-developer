@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>dd</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/test.css">
+	href="${pageContext.request.contextPath}/resources/assets/css/qna.css">
 <%-- <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/test2.css">
 	<link rel="stylesheet"

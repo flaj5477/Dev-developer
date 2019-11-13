@@ -180,11 +180,11 @@
         	<c:when test="${empty sessionScope.members.membersId}">
         	<div>
 				<a data-toggle="modal" href="signup" data-target="#modal-testNew"
-				role="button" style="color:#dfebff;"> 회원가입
+				role="button" style="color:#e8e8e8;"> 회원가입
 				</a>
 				&nbsp;&nbsp;
 				<a data-toggle="modal" href="login2" data-target="#modal-testNew2"
-				role="button" style="color:#dfebff;">로그인
+				role="button" style="color:#e8e8e8;">로그인
 				</a>
 				</div>
         	</c:when>
@@ -246,7 +246,7 @@
   	<div id="modal-testNew" class="modal fade" tabindex="-1" role="dialog"
 		aria-labelledby="테스트정보 등록" aria-describedby="테스트 모달">
 		<div class="modal-dialog" >
-			<div class="modal-content" style="background: #3d516b; width:550px;"></div>
+			<div class="modal-content" style="background: #f0f2ff; width:550px;"></div>
 		</div>
 	</div>
 	

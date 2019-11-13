@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>dd</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/test.css">
+	href="${pageContext.request.contextPath}/resources/assets/css/qna.css">
 <%-- <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/test2.css">
 	<link rel="stylesheet"
@@ -35,8 +35,6 @@
 					<div class="main-qna-qqqform">
 						<h2 class="title" style="margin: 12px 0px">질문 작성하기</h2>
 						<form method="post" action="insertQna" name = "insertQna">
-							<input type="hidden" name="membersNo"
-								value="${sessionScope.members.membersNo}" />
 							<div class="qqqalert qqqalert-secondary mb-20">
 								<p style="font-size: 0.8rem"><img src="https://i.imgur.com/CUtuI2T.png">버튼으로 코드를 넣을 수 있습니다.</p>
 							</div>

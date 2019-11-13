@@ -45,16 +45,20 @@
 
 .filebox label {
 	display: inline-block;
-	padding: .5em .75em;
-	color: #999;
+	color: #fff;
 	font-size: inherit;
 	line-height: normal;
-	vertical-align: middle;
-	background-color: #fdfdfd;
+	/* vertical-align: middle; */
+	background-color: #5e72e4;
 	cursor: pointer;
-	border: 1px solid #ebebeb;
+	border: 1px solid transparent;
 	border-bottom-color: #e2e2e2;
 	border-radius: .25em;
+	letter-spacing: 0.025em;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 0.375rem;	
+    padding: 0.535rem 1rem;
 }
 
 .filebox .upload-name {
@@ -64,11 +68,12 @@
 	font-size: inherit;
 	font-family: inherit;
 	line-height: normal;
-	vertical-align: middle;
-	background-color: #f5f5f5;
+	/* vertical-align: middle; */
+	background-color: #ffffff;
 	border: 1px solid #ebebeb;
 	border-bottom-color: #e2e2e2;
 	border-radius: .25em;
+	color: #c0c6cc;
 	-webkit-appearance: none;
 	/* 네이티브 외형 감추기 */
 	-moz-appearance: none;
@@ -82,9 +87,9 @@
 
 form#signForm {
 	width: 320px;
-	padding: 60px 25px 80px;
-	margin: 50px auto;
-	background: #A18EF4;
+	padding: 10px 25px 10px;
+	margin: 30px auto;
+	background: #f0f2ff;
 	display: flex;
 	flex-direction: column;
 }
@@ -112,13 +117,13 @@ form#signForm {
 			<div class="custom-control custom-radio mb-3" style ="display : inline-block">
 				<input name="membersType" class="custom-control-input"
 					id="customRadio5" checked="checked" type="radio" value="일반">
-				<label class="custom-control-label" for="customRadio5" style="color : white">일반</label>
+				<label class="custom-control-label" for="customRadio5" style="color : #6e767d">일반</label>
 			</div>
 			&nbsp;
 			<div class="custom-control custom-radio mb-3" style ="display : inline-block">
 				<input name="membersType" class="custom-control-input"
 					id="customRadio6" value="기업" type="radio"> <label
-					class="custom-control-label" for="customRadio6" style="color : white">기업</label>
+					class="custom-control-label" for="customRadio6" style="color : #6e767d">기업</label>
 			</div>
 		</div>
 
@@ -187,7 +192,7 @@ form#signForm {
 					style="width: 40%; display: inline-block" placeholder="　우편번호"
 					name="sample3_postcode" id="sample3_postcode" type="text"
 					readonly="readonly" > &nbsp;&nbsp;
-				<button style="padding: 9px" type="button" class="btn btn-secondary"
+				<button style="padding: 0.525rem 0.7rem; background-color : #5e72e4; color : white" type="button" class="btn" 
 					onclick="sample3_execDaumPostcode()">
 					<i class="fa fa-search"></i> 우편번호 찾기
 				</button>
@@ -212,7 +217,7 @@ form#signForm {
 
  		<div class="filebox">
 			<input class="upload-name" value="프로필사진" disabled="disabled">
-			<label for="ex_filename">업로드</label> <input type="file"
+			<label for="ex_filename" style ="margin-left: 10px">업로드</label> <input type="file"
 				id="ex_filename" name="membersImage4" class="upload-hidden"
 				onchange="fileCheck(this)" accept="image/jpeg, image/png"><br>jpg,jpeg,png 파일만 가능합니다.
 		</div> 
@@ -225,7 +230,7 @@ form#signForm {
 	</div>  -->
 
 		<div class="text-center">
-			<button type="submit" class="btn btn-primary mt-4" id="usercheck">회원가입</button>
+			<button type="submit" class="btn btn-primary mt-4" id="usercheck" style ="padding: 0.535rem 1rem">회원가입</button>
 		</div>
 		<br>
 		<br> <input type="hidden" id="membersAddr" name="membersAddr" />

@@ -37,7 +37,7 @@
 			 <button class="btn btn-darkblue" type="submit" id="qqqbutton"
 			 onclick="location.href='insertQna'">
 					질문하기</button>	
-					<form name ="searchform">
+					<form name ="searchform" method ="post">
 			<input class="form-control" name="searchVal" placeholder="Search"
 					type="text" style="border: #686ce4 1px solid; width:180px;  float :right">
 					<input type="hidden" name="page" value="1"> 

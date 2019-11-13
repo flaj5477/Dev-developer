@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,7 +39,8 @@ public class CBTController {
 		return "cbt/choice";
 	}
 	
-	@RequestMapping(value="cbt/getTestList", method=RequestMethod.GET)
+	@RequestMapping(value="cbt/getTestList",
+					method=RequestMethod.GET)
 	@ResponseBody
 	public List<TestsVO> getTestList() {
 		return cbtService.getTestList();
@@ -49,7 +51,8 @@ public class CBTController {
 		return "cbt/ready";
 	}
 	
-	@RequestMapping(value="cbt/getTestInfo/{level}", method=RequestMethod.GET)
+	@RequestMapping(value="cbt/getTestInfo/{level}",
+					method=RequestMethod.GET)
 	@ResponseBody
 	public TestsVO getTest(@PathVariable int level, TestsVO tvo) {
 		tvo.setTestsNo(level);
@@ -69,7 +72,8 @@ public class CBTController {
 		return "/notiles/cbt/viewer";
 	}
 	
-	@RequestMapping(value="cbt/getQuestList/{level}/{allocate}", method=RequestMethod.GET)
+	@RequestMapping(value="cbt/getQuestList/{level}/{allocate}",
+					method=RequestMethod.GET)
 	@ResponseBody
 	public List<TestsQVO> getQuestList(@PathVariable int level, @PathVariable int allocate, TestsQVO tqvo) {
 		tqvo.setTestsNo(level);
@@ -77,10 +81,19 @@ public class CBTController {
 		return cbtService.getQuestList(tqvo);
 	}
 	
-	@RequestMapping(value="getRecordList/{user}", method=RequestMethod.GET)
+	@RequestMapping(value="getRecordList/{user}",
+					method=RequestMethod.GET)
 	@ResponseBody
 	public List<Map<String,Object>> getRecordList(@PathVariable int user, TestsRecordVO recvo) {
 		recvo.setMembersNo(user);
 		return cbtService.getRecordList(recvo);
+	}
+	
+	@RequestMapping(value="cbt/questionMapping",
+					method=RequestMethod.POST,
+					consumes="application/json")
+	@ResponseBody
+	public List<Map<String,String>> markedList(@RequestBody List<Map<String,String>> mark) {
+		return cbtService.markedList(mark);
 	}
 }

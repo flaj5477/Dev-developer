@@ -19,6 +19,8 @@
 	var permisMin = 0;
 	var permisSec = 0;
 	var size = 0;
+	var nolist = [];
+	var questkey = [];
 	function testInfo() {
 		$.ajax('getTestInfo/'+level, {
 			type : 'GET',
@@ -41,7 +43,8 @@
 				radioList();
 				//timeCount();
 				radioEvent();
-				noExpEvent();
+				noexpEvent();
+				submitEvent();
 			}
 		});
 	}
@@ -63,7 +66,7 @@
 			}
 			else {
 				clearInterval(restTime);
-				alert('시간초과');
+				complete(true);
 			}
 			$('#restTime').html(restMin+'분 '+restSec+'초');
 		},1000);
@@ -79,6 +82,7 @@
 			var oldUnit = "";
 			size = data.length;
 			$.each(data, function(idx) {
+				questkey.push(data[idx].testsQNo);
 				var no = 1 + parseInt([idx]);
 				var quest = data[idx].testsQContents;
 				var ex1 = data[idx].testsQEx1;
@@ -169,32 +173,67 @@
 	function radioEvent() { //radio Matching
 		var value = null;
 		var no = null;
+		
 		$('#questView input:radio').change(function() {
 			value = $(this).val();
 			no = $(this).attr('data');
 			$('#putView').find('[data="'+no+'"]').val([value]);
-			noExpEvent(no);
+			noexpEvent(no);
 		});
 		
 		$('#putView input:radio').change(function() {
 			value = $(this).val();
 			no = $(this).attr('data');
 			$('#questView').find('[data="'+no+'"]').val([value]);
-			noExpEvent(no);
+			noexpEvent(no);
 		});
 	}
 	
-	function noExpEvent(no) {
+	function noexpEvent(no) {
+		nolist[no] = true;
 		$('#footer').empty();
 		for(var i=1;i<=size;i++) {
 			var str = 
 					'<div>'
-						+'<button type="button" id="noExp'+i+'">'+i
+						+'<button type="button" id="explain'+i+'" value="'+i+'">'+i
 					+'</div>';
 			$('#footer').append(str);
-			if(i == no) {
-				$('#noExp'+i).hide();
+			
+			if(nolist[i] == true) {
+				$('#explain'+i).hide();
+			} 
+		}
+	}
+	
+	function submitEvent() {
+		$('#submit').on('click',function() {
+			complete(true);
+		});
+	}
+	
+	function complete(step) {
+		var param = "";
+		var marklist = [];
+		if(step == true) {
+			for(var i=1;i<=size;i++) {
+				var markobj = {
+						"key" : questkey[i-1],
+						"value" : parseInt($('[name="putNum'+(i)+'"]:checked').val())
+				};
+				marklist.push(markobj);
 			}
+			param = JSON.stringify(marklist);
+			console.log(param);
+			$.ajax({
+				url:'questionMapping',
+				type:'POST',
+				dataType:'json',
+				contentType:'application/json',
+				data: param,
+				success: function() {
+						location.replace('process');
+				}
+			});
 		}
 	}
 
@@ -211,6 +250,9 @@
 		<div id="putView" style="width:40%; float:right"></div>
 	</div>
 	<div id="footer"></div>
+	<div>
+		<button type="button" id="submit">제출하기</button>
+	</div>
 </div>
 </body>
 </html>

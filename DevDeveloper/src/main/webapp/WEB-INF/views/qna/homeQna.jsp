@@ -14,8 +14,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <%-- <script
 		src="${pageContext.request.contextPath}/resources/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-		 
-		<link rel="stylesheet" href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css"> --%>
+<link rel="stylesheet" href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css"> --%>
 <%-- 	<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/ccsss.css">  --%>
 <%-- 	<link rel="stylesheet"
@@ -27,7 +26,7 @@
 	href="${pageContext.request.contextPath}/resources/assets/css/hh.css">  --%>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/qna.css">
-		<link href="//fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
+<link href="//fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
 	
 </head>
 <body id = "pp">
@@ -38,7 +37,7 @@
 			 <button class="btn btn-darkblue" type="submit" id="qqqbutton"
 			 onclick="location.href='insertQna'">
 					질문하기</button>	
-					<form name ="searchform">
+					<form name ="searchform" method ="post">
 			<input class="form-control" name="searchVal" placeholder="Search"
 					type="text" style="border: #686ce4 1px solid; width:180px;  float :right">
 					<input type="hidden" name="page" value="1"> 
@@ -76,7 +75,7 @@
 								</td>
 								<td class="question-qqqcontent">
 									<div class="question-qqqtitle">
-										<a href="#">${qna.qTitle}</a>
+										<a href="qnaNo?qNo=${qna.qNo}">${qna.qTitle}</a>
 									</div>
 									<div class="rowqqq question-qqqmeta">
 										<div class="pull-left">

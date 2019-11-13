@@ -62,4 +62,14 @@ public class CBTServiceImpl implements CBTService{
 	public List<Map<String,Object>> getRecordList(TestsRecordVO recvo) {
 		return dao.getRecordList(recvo);
 	}
+
+	@Override
+	public List<Map<String, String>> markedList(List<Map<String, String>> mark) {
+		return null;
+	}
+
+	@Override
+	public List<TestsQVO> getMatchList(List<Map<String, String>> match) {
+		return null;
+	}
 }

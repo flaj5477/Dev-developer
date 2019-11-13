@@ -13,4 +13,8 @@ public interface QnaService {
 	
 	//질문등록
 	void insertQna(QuestionVO vo);
+	
+	//상세보기
+	QuestionVO getQna(QuestionVO vo);
+	
 }

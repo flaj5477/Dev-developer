@@ -20,11 +20,6 @@
 		connection();
 	});
 	
-	history.pushState(null, null, "#noback");
-	$(window).bind("hashchange", function(){
-	  	history.pushState(null, null, "#noback");
-	});
-
 	function readyBox() {
 		$('#subjects').css('height','55px');
 		$('#content1,#content2,#content3').css({

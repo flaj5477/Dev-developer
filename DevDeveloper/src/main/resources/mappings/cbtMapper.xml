@@ -59,4 +59,11 @@
 		ORDER BY ta.tests_apply_no
 	]]>
 	</select>
+	<!-- 시험 정답 조회 -->
+	<select id="getMatchList" resultType="testsQ" parameterType="map">
+	<![CDATA[
+		SELECT tests_q_answer, tests_q_unit FROM tests_q
+		WHERE tests_q_no = #{questkey};
+	]]>
+	</select>
 </mapper>

@@ -17,7 +17,7 @@ public class QnaController {
 		@Autowired QnaService qnaService;
 		
 		//qna목록
-		@RequestMapping("/homeQna")
+		@RequestMapping("/qna")
 		public String qnaList(Model model, QuestionVO vo, Paging paging) {
 			model.addAttribute("qnaList", qnaService.qnaList(vo, paging));
 			model.addAttribute("paging", paging);

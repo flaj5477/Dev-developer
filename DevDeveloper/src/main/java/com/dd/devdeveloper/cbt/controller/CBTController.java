@@ -69,11 +69,11 @@ public class CBTController {
 		return "/notiles/cbt/viewer";
 	}
 	
-	@RequestMapping(value="cbt/getQuestList/{level}/{unit}", method=RequestMethod.GET)
+	@RequestMapping(value="cbt/getQuestList/{level}/{allocate}", method=RequestMethod.GET)
 	@ResponseBody
-	public List<TestsQVO> getQuestList(@PathVariable int level, @PathVariable int unit, TestsQVO tqvo) {
+	public List<TestsQVO> getQuestList(@PathVariable int level, @PathVariable int allocate, TestsQVO tqvo) {
 		tqvo.setTestsNo(level);
-		tqvo.setTestsUnitQVolume(unit);
+		tqvo.setAllocate(allocate);
 		return cbtService.getQuestList(tqvo);
 	}
 	

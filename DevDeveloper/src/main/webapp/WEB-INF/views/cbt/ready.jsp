@@ -52,20 +52,21 @@
 	function testInfo() {
 		var level = parseInt("${param.testsNo}"); //  command의 vo객체를 통해 form 태그의 값을 가져왔음!
 		frm.testsNo.value = level; // frm 태그에 레벨 값 저장
-		$.ajax('getTestInfo/'+level, { type:'GET', dataType:'JSON'}) // 호출 Mapping URI
+		$.ajax('getTestInfo/'+level, {  // 호출 Mapping URI
+			type:'GET',
+			dataType:'JSON'
+		})
 		.done(function(data) {
 				var title = data.testsTitle;
 				var contents = data.testsContents;
 				var unitVolume = data.testsUnitVolume;
-				var unitQVolume = data.testsUnitQVolume;
-				var allQVolume = data.testsAllQVolume;
+				var questVolume = data.testsQVolume;
 				var passValue = data.testsPassCriterion;
 				var time = data.testsTimeLimit;
 					$('<tr>').append($('<th>').html(title))
 							 .append($('<th>').html(contents))
 							 .append($('<th>').html(unitVolume))
-							 .append($('<th>').html(unitQVolume))
-							 .append($('<th>').html(allQVolume))
+							 .append($('<th>').html(questVolume))
 							 .append($('<th>').html(passValue))
 							 .append($('<th>').html(time))
 							 .appendTo('#readyTabBody');
@@ -99,7 +100,6 @@
 						<th>시험명</th>
 						<th>상세</th>
 						<th>과목수</th>
-						<th>과목 별 문항수</th>
 						<th>총 문항수</th>
 						<th>통과점수</th>
 						<th>응시시간(분)</th>

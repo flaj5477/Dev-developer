@@ -26,7 +26,7 @@
 	<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/hh.css">  --%>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/test.css">
+	href="${pageContext.request.contextPath}/resources/assets/css/qna.css">
 		<link href="//fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
 	
 </head>

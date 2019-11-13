@@ -215,10 +215,10 @@
 		var param = "";
 		var marklist = [];
 		if(step == true) {
-			for(var i=0;i<size;i++) {
+			for(var i=1;i<=size;i++) {
 				var markobj = {
-						"key" : questkey[i],
-						"value" : parseInt($('[name="putNum'+i+'"]:checked').val())
+						"key" : questkey[i-1],
+						"value" : parseInt($('[name="putNum'+(i)+'"]:checked').val())
 				};
 				marklist.push(markobj);
 			}

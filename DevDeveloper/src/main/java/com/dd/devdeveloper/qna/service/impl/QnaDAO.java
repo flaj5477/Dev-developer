@@ -31,5 +31,11 @@ public class QnaDAO {
 		public int getCountQna(QuestionVO vo) {
 			return mybatis.selectOne("QnaDAO.getCountQna", vo);
 		}
+
+
+		//상세보기
+		public QuestionVO getQna(QuestionVO vo) {
+			return mybatis.selectOne("QnaDAO.getQna",vo);
+		}
 		
 }

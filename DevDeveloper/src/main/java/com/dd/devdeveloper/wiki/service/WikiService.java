@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.dd.devdeveloper.common.paging.Paging;
+import com.dd.devdeveloper.wiki.WikiRecVO;
 import com.dd.devdeveloper.wiki.WikiTransVO;
 import com.dd.devdeveloper.wiki.WikiVO;
 
@@ -47,4 +48,10 @@ public interface WikiService {
 	
 	//위키 번역 삭제
 	public int delWikiTrans(WikiTransVO tVo);
+	
+	//위키번역 추천
+	public int wikiTransRec(WikiRecVO rvo);
+	
+	//위키번역 추천취소
+	public int wikiTransRecDel(WikiRecVO rvo);
 }

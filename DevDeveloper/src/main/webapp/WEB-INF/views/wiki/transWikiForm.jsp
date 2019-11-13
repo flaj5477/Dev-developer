@@ -23,6 +23,10 @@ div[contenteditable] {
 }
 /* ~~~ */
 
+.red{
+  color: red;
+}
+
 .hide{
   display: none;
 }
@@ -268,30 +272,54 @@ div[contenteditable] {
 	/*
 		곽동우
 		20191112
-		번역추천
+		번역추천버튼클릭
 	*/
 	function wikiTransRec(){
 		$("body").on("click", ".ni-favourite-28", function(event){
 			event.stopPropagation();	//버블링 제어 
 			
+			var clickObj = $(this);
+			
 			var manualNo = "${wiki.manualNo}";
-			var transNo = $(this).parent().parent().attr('id');
+			var transNo = clickObj.parent().parent().attr('id');
+			
+			
 			var membersNo = "${sessionScope.members.membersNo}";
 						//$(this).next().children('a').text(); 등록한놈아이디
 			
-			$.ajax({
-				url: 'wikiTransRec',
-				type: 'post',
-				data : { manualNo : manualNo,
-						 transNo : transNo,
-						 membersNo : membersNo  },
-				success: function(){
-					alert("성공");
-				},
-				error:function(){
-					alert("실패");
-				}
-			});
+			if(clickObj.hasClass("red") === true){	//이미추천한거면
+				alert("추천취소?")
+				$.ajax({
+					url: 'wikiTransRecDel',
+					type: 'post',
+					data : { manualNo : manualNo,
+							 transNo : transNo,
+							 membersNo : membersNo  },
+					success: function(){
+						alert("성공");
+						clickObj.removeClass("red");
+					},
+					error:function(){
+						alert("실패");
+					}
+				});
+			} else{	//추천안된거면
+						
+				$.ajax({
+					url: 'wikiTransRec',
+					type: 'post',
+					data : { manualNo : manualNo,
+							 transNo : transNo,
+							 membersNo : membersNo  },
+					success: function(){
+						alert("성공");
+						clickObj.addClass("red");
+					},
+					error:function(){
+						alert("실패");
+					}
+				});
+			}
 		});
 	}
 	
@@ -391,12 +419,17 @@ div[contenteditable] {
 	*/
 	function getWikiTransLine(manualLine, manualNo){
 		
+		var membersNo = '${sessionScope.members.membersNo}';
+		if(membersNo == null || membersNo == "") { membersNo = 0 };
+		
 		$.ajax({
 			url:'getWikiTransLine',
 			type:'POST', 	//요청방식
 			dataType:'json',	//결과데이터타입
 			data: JSON.stringify({manualLine: manualLine,
-								  manualNo: manualNo}),
+								  manualNo: manualNo,
+								  loginNo : membersNo,
+								  orderby : 'rec'}),
 			contentType: 'application/json',
 			error:function(xhr, status, msg){
 				alert("상태값 : "+status + " Http에러메세지 :"+msg);
@@ -442,7 +475,15 @@ div[contenteditable] {
 					 .append($('<input type=\'hidden\' id=\'hidden_userId\'>').val(item.id))
 					 .appendTo('tbody'); */
 			   var manualAfterBr = (item.manualAfter).replace(/(\n|\r\n)/g, '<br>');	//br치환
-					 
+			   
+			   
+			   
+			   if(item.myTransRec == 'o'){
+				   var recBtn = $('<i class="ni ni-favourite-28 red">');
+			   }else {
+				   var recBtn = $('<i class="ni ni-favourite-28">');
+			   }
+			  
 			   $('<div>').attr({
 				   			'class': 'col otherTrans pr-2 ',
 				   			"id" : item.transNo
@@ -450,7 +491,7 @@ div[contenteditable] {
 				.append($('<div class="row nav nav-pills justify-content-end">').html('<i name="deltransbtn" class="ni ni-fat-remove">'))			   		
 			   	.append($('<div id="otcontents" class="row" >').html(manualAfterBr))   
 			   	.append($('<div class="row nav nav-pills justify-content-end">')
-			   			.append($('<i class="ni ni-favourite-28">')).append($('<badge class="badge badge-primary ml-3">').html("<br>"+item.translDate+" / "+"<a href=' getWiki= "+item.membersNo +"'>"+item.membersNo+"</a>" )))
+			   			.append("추천수"+item.rec).append( recBtn ).append($('<badge class="badge badge-primary ml-3">').html("<br>"+item.translDate+" / "+"<a href=' getWiki= "+item.membersNo +"'>"+item.membersNo+"</a>" )))
 				.appendTo('#othertrans_'+manualLine);
 		});//each
 	}//wikiTransLineResult

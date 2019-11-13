@@ -13,7 +13,7 @@
 	$(document).ready(function() {
 		toast();
 	});
-
+	
 	function toast() {
 		var level = parseInt("${param.testsNo}"); //  command의 vo객체를 통해 form 태그의 값을 가져왔음!
 		frm.testsNo.value = level; // frm 태그에 레벨 값 저장

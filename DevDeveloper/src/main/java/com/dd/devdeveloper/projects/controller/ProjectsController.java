@@ -39,7 +39,7 @@ public class ProjectsController {
 	  
 	  System.out.println("vo검사::::::::::::::::::::" + vo.getMembersNo() + vo.getProjNo()  );
 	  
-	  
+	   
 	  //프로젝트 지원 중복 검사
 	  if( projectsService.applyDuplicationInspect(vo) == 0 ) {  //지원이력이 없으면 0이 반환된다.
 	    //프로젝트 지원가능 등급인지 검사 

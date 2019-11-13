@@ -55,4 +55,21 @@
 		</where>
 	</select>
  
+ 
+ 	<!-- 상세조회 -->	
+ 	<select id="getQna" resultType="question">
+		select 	q.q_no 				,
+	 			q.members_no 		,
+	 			q.q_title 			,
+	 			q.q_contents 		,
+	 			q.q_code 			,  
+	 			q.q_date 			,
+	 			q.q_views		    ,
+	 			q.q_tags			,
+	 			m.members_id
+	      		
+	 			from members m join question q
+	 			on q.members_no = m.members_no
+				where q_no = #{qNo}
+	</select>
 </mapper>

@@ -43,5 +43,11 @@ public class QnaServiceImpl implements QnaService {
 			qnaDAO.insertQna(vo);
 		
 	}
+	//상세보기
+	@Override
+	public QuestionVO getQna(QuestionVO vo) {
+		
+		return qnaDAO.getQna(vo);
+	}
 
 }

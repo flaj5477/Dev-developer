@@ -17,4 +17,5 @@ public interface QnaService {
 	//상세보기
 	QuestionVO getQna(QuestionVO vo);
 	
+	void updateViews(int qNo);
 }

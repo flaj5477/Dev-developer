@@ -13,7 +13,7 @@ public class QuestionVO {
 	private int qViews;
 	private String qTags;
 	private String membersId;
-	
+	private String membersImage;
 	
 	private String searchVal;		//검색값
 	private int first;	//페이징 시작 게시글 번호
@@ -104,6 +104,12 @@ public class QuestionVO {
 	
 	
 	
+	public String getMembersImage() {
+		return membersImage;
+	}
+	public void setMembersImage(String membersImage) {
+		this.membersImage = membersImage;
+	}
 	@Override
 	public String toString() {
 		return "QuestionVO [qNo=" + qNo + ", membersNo=" + membersNo + ", qTitle=" + qTitle + ", qContents=" + qContents

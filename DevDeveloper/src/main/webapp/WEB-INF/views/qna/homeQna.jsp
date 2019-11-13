@@ -47,9 +47,10 @@
 		<div class="col-xs-12">
 			<div class="main-qqqcontainer qqqhomepage">
 				<div class="qqqcard qqqcard-tab">
-					<div class="main-qqqtopbar-wrapper">
+					<div class="main-qqqtopbar-wrapper" style="
+    font-size: 13px;">
 						<ul class="main-qqqfilter sub-qqqfilter pull-qqqright qqqtabs">
-							<li class="filter-qqqitem active"><a href="/">최신순</a></li>
+							<li class="filter-qqqitem active"><a href="qna">최신순</a></li>
 							<li class="filter-qqqitem "><a href="#">dd</a></li>
 							<li class="filter-qqqitem "><a href="#">asd</a></li>
 						</ul>

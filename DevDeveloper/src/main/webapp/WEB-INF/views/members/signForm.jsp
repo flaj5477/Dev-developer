@@ -82,9 +82,9 @@
 
 form#signForm {
 	width: 320px;
-	padding: 60px 25px 80px;
-	margin: 50px auto;
-	background: #A18EF4;
+	padding: 10px 25px 10px;
+	margin: 30px auto;
+	background: #f0f2ff;
 	display: flex;
 	flex-direction: column;
 }
@@ -112,13 +112,13 @@ form#signForm {
 			<div class="custom-control custom-radio mb-3" style ="display : inline-block">
 				<input name="membersType" class="custom-control-input"
 					id="customRadio5" checked="checked" type="radio" value="일반">
-				<label class="custom-control-label" for="customRadio5" style="color : white">일반</label>
+				<label class="custom-control-label" for="customRadio5" style="color : #6e767d">일반</label>
 			</div>
 			&nbsp;
 			<div class="custom-control custom-radio mb-3" style ="display : inline-block">
 				<input name="membersType" class="custom-control-input"
 					id="customRadio6" value="기업" type="radio"> <label
-					class="custom-control-label" for="customRadio6" style="color : white">기업</label>
+					class="custom-control-label" for="customRadio6" style="color : #6e767d">기업</label>
 			</div>
 		</div>
 
@@ -187,7 +187,7 @@ form#signForm {
 					style="width: 40%; display: inline-block" placeholder="　우편번호"
 					name="sample3_postcode" id="sample3_postcode" type="text"
 					readonly="readonly" > &nbsp;&nbsp;
-				<button style="padding: 9px" type="button" class="btn btn-secondary"
+				<button style="padding: 9px; background-color : #5e72e4; color : white" type="button" class="btn" 
 					onclick="sample3_execDaumPostcode()">
 					<i class="fa fa-search"></i> 우편번호 찾기
 				</button>

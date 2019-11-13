@@ -19958,7 +19958,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   vertical-align: middle;
 }
 
-code[class*="language-"],
+/* code[class*="language-"], 쓰는분 있으면 다시 해제*/
 pre[class*="language-"] {
   font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
   font-size: 14px;

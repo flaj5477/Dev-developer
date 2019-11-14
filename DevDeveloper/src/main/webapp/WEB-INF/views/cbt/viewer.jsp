@@ -8,12 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	var level = parseInt("${param.testsNo}");
-	var title = null;
-	var contents = null;
-	var unitVolume = 0;
-	var questVolume = 0;
 	var allocate = 0;
-	var passValue = 0;
 	var min = 0;
 	var sec = 0;
 	var permisMin = 0;
@@ -21,27 +16,30 @@
 	var size = 0;
 	var nolist = [];
 	var questKey = [];
+	var offset = [];
+	
 	function testInfo() {
 		$.ajax('getTestInfo/'+level, {
 			type : 'GET',
 			dataType : 'JSON',
 			success : function(data) {
-				title = data.testsTitle;
-				contents = data.testsContents;
-				unitVolume = parseInt(data.testsUnitVolume);
-				questVolume = parseInt(data.testsQVolume);
+				var title = data.testsTitle;
+				var contents = data.testsContents;
+				var unitVolume = parseInt(data.testsUnitVolume);
+				var questVolume = parseInt(data.testsQVolume);
 				allocate = parseInt(questVolume/unitVolume);
-				passValue = data.testsPassCriterion;
 				min = data.testsTimeLimit;
 				sec = min * 60;
 				permisMin = parseInt(sec/60);
 				permisSec = sec%60;
+				$('#header').prepend(title+' <br> '+contents+' <br> ${members.membersName}');
+				$('#permisTime').prepend(permisMin+'분 '+permisSec+'초');
+				$('#restTime').prepend(permisMin+'분 '+permisSec+'초');
 			},
 			complete : function() {
-				viewerBox();
 				questList(); // 동기전송
 				radioList();
-				//timeCount();
+				timeCount();
 				radioEvent();
 				expEvent();
 				focusEvent();
@@ -49,27 +47,21 @@
 			}
 		});
 	}
-	
-	function viewerBox() {
-		$('#header').prepend(title+' <br> '+contents+' <br> ${members.membersName}');
-		$('#permisTime').prepend(permisMin+'분 '+permisSec+'초');
-		$('#restTime').prepend(permisMin+'분 '+permisSec+'초');
-	}
-	
+
 	function timeCount() {
 		var setTime = 0;
 		var restTime = setInterval(function() {
 			var getTime = sec - setTime;
 			var restMin = parseInt(getTime/60);
 			var restSec = getTime%60;
+			$('#restTime').html(restMin+'분 '+restSec+'초');
 			if(getTime > 0) {
 				setTime++;
 			}
 			else {
 				clearInterval(restTime);
-				complete(true);
+				complete();
 			}
-			$('#restTime').html(restMin+'분 '+restSec+'초');
 		},1000);
 	}
 	
@@ -129,6 +121,7 @@
 						+'</table>'
 					+'</div>';
 				$('#questView').append(str);
+				offset.push($('#questNo'+no).offset());
 			});
 		});
 	}
@@ -192,12 +185,11 @@
 		});
 	}
 	
-	function expEvent(no) {
+	function expEvent(no) { // 안 푼 문제, 버튼 추가 이벤트
 		if(no != null) {
 			nolist[no-1] = true; // 리스트에 값이 있는가?
 			$('#footer').empty();		
 		}
-		console.log(nolist);
 		for(var i=1;i<=size;i++) {
 			var str = 
 					'<div>'
@@ -210,11 +202,7 @@
 		}
 	}
 	
-	function focusEvent() {
-		var offset = [];
-		for (var i=1;i<=size;i++) {
-			offset.push($('#questNo'+i).offset());
-		}
+	function focusEvent() { // 안 푼 문제 버튼 focus 이벤트
 		$('#footer>div>button').click(function() { // #footer> : footer태그의 자식만 찾음
 			var value = parseInt($(this).text());
 			$('html, body').animate({
@@ -223,10 +211,13 @@
 		})
 	}
 	
-	function submitEvent() {
+	function submitEvent() { // 제출 버튼에 관한 이벤트
 		$('#submit').on('click',function() {
-			console.log(markCheck());
-			//complete(true);
+			var markcheck = markCheck();
+			if(markcheck != true) {
+				// 모달 띄우기
+			}
+			complete();
 		});
 	}
 	
@@ -239,30 +230,28 @@
 		return true;
 	}
 	
-	function complete(step) {
+	function complete() { // ajax 컨트롤러로 요청
 		var param = "";
 		var marklist = [];
-		if(step == true) {
-			for(var i=1;i<=size;i++) {
-				var markobj = {
-						"key" : questKey[i-1],
-						"value" : parseInt($('[name="putNum'+(i)+'"]:checked').val())
-				};
-				marklist.push(markobj);
-			}
-			param = JSON.stringify(marklist);
-			console.log(param);
-			$.ajax({
-				url:'questionMapping',
-				type:'POST',
-				dataType:'json',
-				contentType:'application/json',
-				data: param,
-				success: function() {
-						location.replace('processing');
-				}
-			});
+		for(var i=1;i<=size;i++) {
+			var markobj = {
+					"key" : questKey[i-1],
+					"value" : parseInt($('[name="putNum'+(i)+'"]:checked').val())
+			};
+			marklist.push(markobj);
 		}
+		param = JSON.stringify(marklist);
+		console.log(param);
+		$.ajax({
+			url:'questionMapping',
+			type:'POST',
+			dataType:'json',
+			contentType:'application/json',
+			data: param,
+			success: function() {
+				//location.replace('processing');
+			}
+		});
 	}
 
 </script>

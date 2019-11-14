@@ -34,8 +34,7 @@
 								var sec = times%60;
 								$(this).text(min+'분'+sec+'초');	
 							}
-						}))
-						.appendTo('#recTabBody');
+						})).appendTo('#recTabBody');
 			});
 			if(data == '') {
 				$('#recordCap').html('응시기록이 없네요!');

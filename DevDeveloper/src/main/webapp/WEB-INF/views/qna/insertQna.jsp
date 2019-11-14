@@ -18,8 +18,8 @@
 	href="${pageContext.request.contextPath}/resources/assets/js/test3.js"> --%>
 <link href="//fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
-<%-- <link href="${pageContext.request.contextPath}/resources/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css" rel="stylesheet">
- --%> 
+<link href="${pageContext.request.contextPath}/resources/ckeditor/plugins/codesnippet/lib/highlight/styles/obsidian.css" rel="stylesheet">
+ 
  
  
 	<script>

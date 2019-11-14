@@ -176,8 +176,6 @@ public class WikiController {
 	@RequestMapping(value="/getWikiTransLine", method = RequestMethod.POST, consumes="application/json")
 	@ResponseBody
 	public List<Map<String, Object>> getWikiTransLine(@RequestBody WikiTransVO tVo, Model model) {
-		//model.addAttribute("user", userService.getUser(vo));
-		System.out.println(tVo);
 		return wikiService.getWikiTransLine(tVo);
 	}
 	
@@ -219,5 +217,17 @@ public class WikiController {
 	public int wikiTransRec(WikiRecVO rvo) {
 				
 		return wikiService.wikiTransRec(rvo);
+	}
+	
+	/*==============
+  	곽동우
+  	20191113
+  	번역취소
+ 	================*/
+	@RequestMapping(value = "/wikiTransRecDel", method = RequestMethod.POST)
+	@ResponseBody
+	public int wikiTransRecDel(WikiRecVO rvo) {
+				
+		return wikiService.wikiTransRecDel(rvo);
 	}
 }

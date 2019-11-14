@@ -66,10 +66,19 @@
 	 			q.q_date 			,
 	 			q.q_views		    ,
 	 			q.q_tags			,
-	 			m.members_id
+	 			m.members_id		,
+	 			m.members_image
 	      		
 	 			from members m join question q
 	 			on q.members_no = m.members_no
 				where q_no = #{qNo}
 	</select>
+	
+	
+	
+	<update id="updateViews" parameterType="int"> 
+
+		UPDATE question set q_views = q_views + 1 where q_no = #{qNo}
+
+	</update>
 </mapper>

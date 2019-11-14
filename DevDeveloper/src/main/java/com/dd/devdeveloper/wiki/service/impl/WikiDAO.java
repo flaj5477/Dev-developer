@@ -54,6 +54,7 @@ public class WikiDAO {
 
 	//위키번역받기(라인별)
 	public List<Map<String, Object>> getWikiTransLine(WikiTransVO vo) {
+		System.out.println(vo.getOrderby()+"=======================");
 		return mybatis.selectList("WikiDAO.getWikiTransLine", vo);
 	}
 	
@@ -82,5 +83,11 @@ public class WikiDAO {
 	//위키번역추천
 	public int wikiTransRec(WikiRecVO rvo) {
 		return mybatis.insert("WikiDAO.wikiTransRec", rvo);
+	}
+
+	//위키번역추천취소
+	public int wikiTransRecDel(WikiRecVO rvo) {
+		// TODO Auto-generated method stub
+		return mybatis.delete("WikiDAO.wikiTransRecDel", rvo);
 	}
 }

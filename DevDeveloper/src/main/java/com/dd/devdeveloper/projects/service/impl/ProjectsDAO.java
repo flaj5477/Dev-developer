@@ -44,4 +44,9 @@ public class ProjectsDAO {
     System.out.println("프로젝트 지원 전 등급 검사 DAO까지 왔땅");
     return mybatis.selectOne("ProjectsDAO.projRequireInspect", vo);
   }
+  
+  //프로젝트 입력
+  public void insertProjects(ProjectsVO vo) {
+	  
+  }
 }

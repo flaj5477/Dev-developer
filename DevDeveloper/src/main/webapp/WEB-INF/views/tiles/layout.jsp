@@ -62,9 +62,17 @@
           <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="${pageContext.request.contextPath}/resources/assets/img/theme/team-1-800x800.jpg
-">
+            <c:choose>
+        	<c:when test="${not empty sessionScope.members.membersId}">
+                <img alt="Image placeholder" src="${pageContext.request.contextPath}/images/profile/${sessionScope.members.membersImage}
+">				
               </span>
+             </c:when>
+             <c:otherwise>
+             <img alt="Image placeholder" src="${pageContext.request.contextPath}/resources/assets/img/theme/team-1-800x800.jpg
+">				
+			</c:otherwise>
+			</c:choose>
             </div>
           </a>
           <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
@@ -88,7 +96,7 @@
               <span>Support</span>
             </a>
             <div class="dropdown-divider"></div>
-            <a href="#!" class="dropdown-item">
+            <a href="${pageContext.request.contextPath}/logout" class="dropdown-item">
               <i class="ni ni-user-run"></i>
               <span>Logout</span>
             </a>

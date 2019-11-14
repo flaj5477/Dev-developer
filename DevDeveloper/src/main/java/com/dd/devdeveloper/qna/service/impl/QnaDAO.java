@@ -37,5 +37,12 @@ public class QnaDAO {
 		public QuestionVO getQna(QuestionVO vo) {
 			return mybatis.selectOne("QnaDAO.getQna",vo);
 		}
+
+
+
+		public void updateViews(int qNo) {
+			 mybatis.update("QnaDAO.updateViews",qNo);
+			
+		}
 		
 }

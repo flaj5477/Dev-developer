@@ -398,7 +398,9 @@ public class WikiServiceImpl implements WikiService {
 //		}
 		
 		////////////////////////////////
-		
+		if(vo.getOrderby() == null) {	//따로 정렬안하면 추천순으로 정렬
+			vo.setOrderby("rec");
+		}
 		List<Map<String, Object>> transList = wikiDAO.getWikiTrans(vo);
 		
 		for(int i = 0; i < transList.size(); i++) {
@@ -447,6 +449,15 @@ public class WikiServiceImpl implements WikiService {
 	 ================*/
 	public int wikiTransRec(WikiRecVO rvo) {
 		return wikiDAO.wikiTransRec(rvo);
+	}
+	
+	/* ==============
+	 곽동우
+	 20191113
+	 위키번역추천취소
+	 ================*/
+	public int wikiTransRecDel(WikiRecVO rvo) {
+		return wikiDAO.wikiTransRecDel(rvo);
 	}
 	
 	////////// 파일

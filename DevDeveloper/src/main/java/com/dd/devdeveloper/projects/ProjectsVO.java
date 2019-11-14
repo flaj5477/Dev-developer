@@ -17,6 +17,8 @@ public class ProjectsVO {
 	private int projPrice;
 	private String projStoreUrl;
 	private String projTags;
+	private Date projStartDate;
+	private Date projEndDate;
 	private String membersName;
 	
 	

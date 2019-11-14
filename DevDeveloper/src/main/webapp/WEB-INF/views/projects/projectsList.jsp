@@ -41,15 +41,20 @@
 
 				<form name="searchfrm">
 					<div class="row mb-3">
-						<div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-xs-7">
+						<div class="col-xl-3 col-lg-4 col-md-8 col-sm-6 col-xs-7">
 							<input class="form-control" name="searchVal" placeholder="Search" type="text">
 							<input type="hidden" name="page" value="1">
 							
 						</div>
-						<div >
+						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
 							<button class="btn btn-icon btn-2 btn-primary">
 								<span class="btn-inner--icon"><i class="fas fa-search"></i></span>
 							</button>
+						</div>
+						
+						<div class="col-xl-8 col-lg-7 col-md-12 col-sm-12 col-xs-12 text-right">
+						<!-- 로그인 한 사람만 버튼 보이게!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+							<a href="insertProjectForm" class="btn btn-lg btn-primary">프로젝트 등록</a>
 						</div>
 					</div>
 				</form>

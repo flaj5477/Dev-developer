@@ -58,8 +58,6 @@ public class ProjectsController {
       model.addAttribute("url", "./getProjectsList");
       return "common/Error";
 	  }
-
-	  
 	}
 	
 	
@@ -72,5 +70,17 @@ public class ProjectsController {
 		vo.setProjNo((Integer)session.getAttribute("projNo"));
 		projectsService.applyProjects(vo);
 		return "redirect:/getProjectsList";	//프로젝트 목록 페이지로 돌아감
+	}
+	
+	@RequestMapping("/insertProjectForm") //프로젝트 등록
+	public String insertProjectForm() {
+	  return "projects/insertProjectForm";   //프로젝트 등록 폼으로 이동
+	}
+	
+	
+	@RequestMapping("/insertProject") //프로젝트 등록
+	public String insertProject(ProjectsVO vo) {
+		System.out.println(vo);
+	  return "redirect:/getProjectsList";   //프로젝트 목록 페이지로 돌아감
 	}
 }

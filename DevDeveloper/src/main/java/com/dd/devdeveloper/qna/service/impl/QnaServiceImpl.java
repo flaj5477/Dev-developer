@@ -50,4 +50,10 @@ public class QnaServiceImpl implements QnaService {
 		return qnaDAO.getQna(vo);
 	}
 
+	@Override
+	public void updateViews(int qNo) {
+		 qnaDAO.updateViews(qNo);
+		
+	}
+
 }

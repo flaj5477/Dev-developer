@@ -109,8 +109,8 @@ a {
 							<button>검색</button>
 						</div> --%>
 						<select name="select">
-								<option value="title">제목
-								<option value="tags">태그
+								<option value="title" <c:if test="${param.select == 'title'}">selected</c:if>  >제목
+								<option value="tags" <c:if test="${param.select == 'tags'}">selected</c:if>  >태그
 						</select>
 						<div class="row mb-3">
 							<div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-xs-7">
@@ -138,7 +138,7 @@ a {
 							<th scope="col">No</th> 
 							<th class="col-3" scope="col">Title</th>
 							<th scope="col"><a href="getWikiTagList">Tags</a></th>
-							<th scope="col">Completion</th>
+							<th scope="col">번역률</th>
 							<th scope="col"></th>
 						</tr>
 					</thead>

@@ -99,7 +99,7 @@ public class WikiServiceImpl implements WikiService {
 				
 				int transCount = wikiDAO.getTransCount(manualNo);
 				
-				int transPercent = (int) ((double)transCount/totalLine*100);
+				int transPercent = (int) ((double)transCount/(totalLine-1)*100);
 				wikiList.get(i).put("manualTransPercent", transPercent);
 				
 				System.out.println(transPercent+"-========================================");

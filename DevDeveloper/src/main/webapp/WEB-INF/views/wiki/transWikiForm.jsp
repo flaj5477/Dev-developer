@@ -491,7 +491,7 @@ div[contenteditable] {
 				.append($('<div class="row nav nav-pills justify-content-end">').html('<i name="deltransbtn" class="ni ni-fat-remove">'))			   		
 			   	.append($('<div id="otcontents" class="row" >').html(manualAfterBr))   
 			   	.append($('<div class="row nav nav-pills justify-content-end">')
-			   			.append("추천수"+item.rec).append( recBtn ).append($('<badge class="badge badge-primary ml-3">').html("<br>"+item.translDate+" / "+"<a href=' getWiki= "+item.membersNo +"'>"+item.membersNo+"</a>" )))
+			   			.append("추천수"+item.rec).append( recBtn ).append($('<badge class="badge badge-primary ml-3">').html("<br>"+item.translDate+" / "+"<a href=' getWiki= "+item.membersNo +"'>"+item.membersId+"</a>" )))
 				.appendTo('#othertrans_'+manualLine);
 		});//each
 	}//wikiTransLineResult

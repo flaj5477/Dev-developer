@@ -100,4 +100,8 @@
 		</where>
 	</select>
 	
+	<insert id="insertProjects">
+		
+	</insert>
+	
 </mapper>

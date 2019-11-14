@@ -235,7 +235,8 @@
 				        a.MANUAL_NO									as 		"manualNo",
 				        a.MEMBERS_NO								as 		"membersNo",
 				        nvl(b.rec1,0)                				as      "rec" ,
-				        c."myTransRec"
+				        c."myTransRec",
+               			 d.MEMBERS_ID                  				  as      "membersId"
 				FROM WIKI_GUIDE_TRANS a, 
 				              (  select count(trans_no) as rec1, trans_no
 				                  from WIKI_TRANS_REC
@@ -247,12 +248,14 @@
 				                           WHERE MANUAL_NO = #{manualNo}
 				                           AND MANUAL_LINE = #{manualLine}
 				                           AND a.trans_no = b.trans_no(+)
-				                           order by a.trans_no) c
+				                           order by a.trans_no) c,
+                                                  members d
 				WHERE a.trans_no = b.trans_no(+)
 				and a.TRANS_NO = c."transNo"
+        		and a.MEMBERS_NO = d.MEMBERS_NO
 				and a.MANUAL_NO = #{manualNo}
 				and a.MANUAL_LINE = #{manualLine}
-				order by "rec" desc   
+				order by "rec" desc
 		     
 		     
 		     </if>
@@ -287,15 +290,15 @@
 			<!--  -->
 			<if test="orderby == 'rec'">
 				select * from(
-					  SELECT 	a.TRANS_NO									as		"transNo",
-					          a.MANUAL_LINE									as		"manualLine",
-					          a.MANUAL_BEFORE								as		"manualBefore",
-					          a.MANUAL_AFTER								as		"manualAfter",
-					          TO_CHAR(a.TRANS_DATE,'YYYY-MM-DD hh:mi:ss')	as 		"translDate",
-					          a.MANUAL_NO									as 		"manualNo",
-					          a.MEMBERS_NO									as 		"membersNo",
-					          nvl(b.rec1,0)               					as   	"rec",
-					          DENSE_RANK() OVER(PARTITION BY a.MANUAL_LINE ORDER BY nvl(b.rec1,0) DESC, a.TRANS_DATE) AS rec_rank
+					  SELECT 	  a.TRANS_NO									as		"transNo",
+						          a.MANUAL_LINE									as		"manualLine",
+						          a.MANUAL_BEFORE								as		"manualBefore",
+						          a.MANUAL_AFTER								as		"manualAfter",
+						          TO_CHAR(a.TRANS_DATE,'YYYY-MM-DD hh:mi:ss')	as 		"translDate",
+						          a.MANUAL_NO									as 		"manualNo",
+						          a.MEMBERS_NO									as 		"membersNo",
+						          nvl(b.rec1,0)               					as   	"rec",
+						          DENSE_RANK() OVER(PARTITION BY a.MANUAL_LINE ORDER BY nvl(b.rec1,0) DESC, a.TRANS_DATE) AS rec_rank
 					  FROM WIKI_GUIDE_TRANS a, 
 					                (  select count(trans_no) as rec1, trans_no
 					                    from WIKI_TRANS_REC

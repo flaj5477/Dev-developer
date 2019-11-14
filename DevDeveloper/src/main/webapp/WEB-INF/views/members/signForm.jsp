@@ -474,7 +474,7 @@ $("#membersId").blur(function() {
 							} else {
 								console.log('false');
 								$('#id_check')
-										.text('5~12자의 영문 소문자, 숫자, 특수문자만 사용 가능합니다.');
+										.text('5~12자의 영문 소문자, 숫자만 사용 가능합니다.');
 								$('#id_check').css('color',
 										'crimson');
 								$('#idv').attr('class','form-group has-danger');

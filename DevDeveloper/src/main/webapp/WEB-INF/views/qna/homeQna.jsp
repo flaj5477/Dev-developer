@@ -38,9 +38,11 @@
 			 onclick="location.href='insertQna'">
 					질문하기</button>	
 					<form name ="searchform" method ="post">
-			<input class="form-control" name="searchVal" placeholder="Search"
+			<input class="form-control" name="searchVal" placeholder="Search" value="${questionVO.searchVal}"
 					type="text" style="border: #686ce4 1px solid; width:180px;  float :right">
 					<input type="hidden" name="page" value="1"> 
+				 	<input type="hidden" id="orderby" name="orderby" value=""> 
+					
 				</form>	
 		</div>
 	
@@ -51,8 +53,8 @@
     font-size: 13px;">
 						<ul class="main-qqqfilter sub-qqqfilter pull-qqqright qqqtabs">
 							<li class="filter-qqqitem active"><a href="qna">최신순</a></li>
-							<li class="filter-qqqitem "><a href="#">dd</a></li>
-							<li class="filter-qqqitem "><a href="#">asd</a></li>
+							<li class="filter-qqqitem">좋아요</li>
+							<li class="filter-qqqitem"id="q_views">조회수</li>
 						</ul>
 						<ul class="main-qqqfilter sub-qqqfilter pull-left qqqtabs">
 						</ul>
@@ -109,6 +111,14 @@
 		 	document.searchform.page.value = p 
 			document.searchform.submit()
 		}
+		
+		$(document).ready(function(){ // When the DOM is Ready, then bind the click
+		    $(".filter-qqqitem").click(function(){
+		        var id = $(this).attr('id');
+		        document.searchform.orderby.value = id 
+				document.searchform.submit()
+		    });
+		});
 	</script>
 
 

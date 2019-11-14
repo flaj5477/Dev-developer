@@ -79,22 +79,6 @@
 												</div>
 										</a></li>
 									</ul>
-									<!--                                     <div class="col-xs-3 author">
-                                        <a href="/user/601" target="_blank">
-                                            <span class="author-avatar">
-                                                <img src="/media/user/base/001.png">
-                                            </span>
-                                            <span class="author-name">목동하정우</span>
-                                        </a>
-                                        <span class="author-reputation">0</span>
-                                    </div>
-                                    <div class="col-xs-9 text-right question-content-tags tags">
-                                        
-                                            
-                                                <a href="/tag/etc/question" class="tags-item category">
-                                                    <img src="">etc
-                                                </a>
-                                    </div> -->
 								</div>
 							</div>
 						</div>
@@ -124,7 +108,6 @@
 					data-toggle="answer_create"
 					data-href="/tag/etc/question/323/answer/create">작성한 답변
 					등록하기</button> -->
-					
 					<button class="btn btn-darkblue" type="submit" id="qqqbutton">
 								답변하기</button>
 <!-- 				<button class="btn btn-darkblue hide" type="button"
@@ -132,7 +115,6 @@
 				<button class="btn btn-darkblue hide" type="button"
 					data-toggle="answer_cancel">취소하기</button>
 				<p class="error text-left" id="answer_error"></p> -->
-
 			</div>
 		</div>
 		</c:when>

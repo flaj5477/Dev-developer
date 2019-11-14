@@ -93,7 +93,7 @@ public class CBTController {
 					method=RequestMethod.POST,
 					consumes="application/json")
 	@ResponseBody
-	public List<Map<String,String>> markedList(@RequestBody List<Map<String,String>> mark) {
-		return cbtService.markedList(mark);
+	public void markedList(@RequestBody List<Map<String,Integer>> mark) {
+		cbtService.markMatchProc(mark);
 	}
 }

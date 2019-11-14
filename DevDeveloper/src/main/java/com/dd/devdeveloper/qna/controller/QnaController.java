@@ -45,7 +45,7 @@ public class QnaController {
 		//상세보기
 		@RequestMapping(value ="/qnaNo")
 		public String getQna(QuestionVO vo,Model model, HttpSession session) {
-			qnaService.updateViews(qnaService.getQna(vo).getqNo());
+			qnaService.updateViews(vo.getqNo());
 			 model.addAttribute("qna",qnaService.getQna(vo));
 //			 session.setAttribute("title", vo.getqTitle());
 			 

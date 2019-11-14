@@ -18543,6 +18543,9 @@ article h5+figure {
 .datepicker {
   border-radius: 0.375rem;
   direction: ltr;
+  
+  
+  
 }
 
 .datepicker-inline {
@@ -18732,7 +18735,7 @@ article h5+figure {
 .datepicker table tr td.selected:hover,
 .datepicker table tr td.selected.highlighted:hover,
 .datepicker table tr td.day.range:hover {
-  background: #5e72e4;
+ 
   color: #fff;
 }
 
@@ -18740,7 +18743,6 @@ article h5+figure {
 .datepicker table tr td.active.highlighted,
 .datepicker table tr td.active:hover,
 .datepicker table tr td.active.highlighted:hover {
-  background: #5e72e4;
   color: #fff;
   box-shadow: none;
 }

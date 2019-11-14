@@ -19,13 +19,8 @@ public interface CBTService {
 	public void cbtInsert(TestsRecordVO recvo);
 	//시험문제 조회
 	public List<TestsQVO> getQuestList(TestsQVO tqvo);
-	
 	//시험결과 저장
-	public List<Map<String,String>> markedList(List<Map<String,String>> mark);
-	
-	//답안 조회
-	public List<TestsQVO> getMatchList(List<Map<String,String>> match);
-	
+	public void markMatchProc(List<Map<String,Integer>> mark);
 	//응시기록 조회
 	public List<Map<String,Object>> getRecordList(TestsRecordVO recvo);
 }

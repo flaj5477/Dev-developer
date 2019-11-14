@@ -24,4 +24,7 @@ public interface ProjectsService {
 
 	//프로젝트 지원 전 등급 검사
   int projRequireInspect(ProjApplicantsVO vo);
+  
+  //프로젝트 입력
+  void insertProjects(ProjectsVO vo);
 }

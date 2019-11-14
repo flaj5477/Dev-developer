@@ -3,6 +3,7 @@ package com.dd.devdeveloper.cbt.service.impl;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,7 @@ import com.dd.devdeveloper.cbt.TestsVO;
 import com.dd.devdeveloper.cbt.service.CBTService;
 
 @Service
-public class CBTServiceImpl implements CBTService{
+public class CBTServiceImpl implements CBTService {
 	
 	@Autowired CBTDAO dao;
 
@@ -64,12 +65,26 @@ public class CBTServiceImpl implements CBTService{
 	}
 
 	@Override
-	public List<Map<String, String>> markedList(List<Map<String, String>> mark) {
-		return null;
-	}
-
-	@Override
-	public List<TestsQVO> getMatchList(List<Map<String, String>> match) {
-		return null;
+	public void markMatchProc(List<Map<String,Integer>> mark) {
+		//SORTING (Lambda)
+		Collections.sort(mark,(Map<String,Integer> m1, Map<String,Integer> m2)-> { // List안에 담긴 Map 객체 정렬
+			return m1.get("key")-m2.get("key");  // 오름차순 정렬
+		});
+		System.out.println(mark);
+		
+		List<Map<String,Object>> match = dao.getAnswerList(mark);
+		
+		System.out.println(match);
+		
+		/* https://dublin-java.tistory.com/12
+		//SORTING (Anonymous Class)
+		Collections.sort(mark,new Comparator<Map<String,Integer>>() {
+			@Override
+   			public int compare(Map<String,Integer> m1, Map<String,Integer> m2) {
+       			return m2.get("key")-m1.get("key");  // o2가 앞에 있으면 내림차순.
+  			}
+		});	
+		*/
+		
 	}
 }

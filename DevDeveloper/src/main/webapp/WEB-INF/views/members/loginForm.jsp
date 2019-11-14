@@ -115,7 +115,7 @@
 			});
 		});
 		
-		
+		//엔터키로 버튼클릭
 		$('#loginpw,#loginid').keypress(function(event){
 		     if ( event.which == 13 ) {
 		         $('#loginBtn').click();

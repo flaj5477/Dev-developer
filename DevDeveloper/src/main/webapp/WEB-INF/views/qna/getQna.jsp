@@ -119,20 +119,37 @@
 		</div>
 		</c:when>
 		<c:otherwise>
-		<div style ="text-align:center">답변작성하려면로그인</div>
+		<div style ="text-align:center">답변작성하려면	<a data-toggle="modal" href="login2" data-target="#modal-login"
+	role="button">로그인
+	</a></div>
 		<br><br>
 		</c:otherwise>
 		</c:choose>
 	</div>
 </div>
+  	<div id="modal-login" class="modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="로그인" aria-describedby="테스트 모달">
+		<div class="modal-dialog">
+			<div class="modal-content" style="background: #5561A5; width:70%;"></div>
+		</div>
+	</div> 
+	 
 
 
 
-	        <script>
-          
+	 
+
+	 <script>
+	  
+	 
                 CKEDITOR.replace( 'id_content' ,{height: 300, 
                 	  filebrowserUploadUrl: 'qnaUpload.jsp'
                 });
-            </script>
+                
+            	$('#modal-login').on('show.bs.modal', function (e) {
+            		 
+            	    $(this).find('.modal-content').load("login2");
+            	});
+     </script>
 </body>
 </html>

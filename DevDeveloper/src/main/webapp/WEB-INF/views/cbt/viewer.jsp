@@ -20,7 +20,7 @@
 	var permisSec = 0;
 	var size = 0;
 	var nolist = [];
-	var questkey = [];
+	var questKey = [];
 	function testInfo() {
 		$.ajax('getTestInfo/'+level, {
 			type : 'GET',
@@ -43,7 +43,8 @@
 				radioList();
 				//timeCount();
 				radioEvent();
-				noexpEvent();
+				expEvent();
+				focusEvent();
 				submitEvent();
 			}
 		});
@@ -82,7 +83,7 @@
 			var oldUnit = "";
 			size = data.length;
 			$.each(data, function(idx) {
-				questkey.push(data[idx].testsQNo);
+				questKey.push(data[idx].testsQNo);
 				var no = 1 + parseInt([idx]);
 				var quest = data[idx].testsQContents;
 				var ex1 = data[idx].testsQEx1;
@@ -104,27 +105,29 @@
 				}
 				oldUnit = newUnit; // 과목단위로 과목명 출력 중복방지
 				var str = 
-					'<table id="contentsTab" style="width:550px">'
-						+caption
-						+'<tr>'
-							+'<td><div>'+no+'.</div></td>'
-							+'<td><div>'+quest+'</div></td>'
-						+'</tr>'
-					+'</table>'
-					+'<table id="exTab" style="width:550px">'
-						+'<tr>'
-							+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="1">'+rex[0]+'</div></td>'
-						+'</tr>'
-						+'<tr>'
-							+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="2">'+rex[1]+'</div></td>'
-						+'</tr>'
-						+'<tr>'
-							+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="3">'+rex[2]+'</div></td>'
-						+'</tr>'
-						+'<tr>'
-							+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="4">'+rex[3]+'</div></td>'
-						+'</tr>'
-					+'</table>';
+					'<div id="questNo'+no+'">'
+						+'<table id="contentsTab" style="width:550px">'
+							+caption
+							+'<tr>'
+								+'<td><div>'+no+'.</div></td>'
+								+'<td><div>'+quest+'</div></td>'
+							+'</tr>'
+						+'</table>'
+						+'<table id="exTab" style="width:550px">'
+							+'<tr>'
+								+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="1">'+rex[0]+'</div></td>'
+							+'</tr>'
+							+'<tr>'
+								+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="2">'+rex[1]+'</div></td>'
+							+'</tr>'
+							+'<tr>'
+								+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="3">'+rex[2]+'</div></td>'
+							+'</tr>'
+							+'<tr>'
+								+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="4">'+rex[3]+'</div></td>'
+							+'</tr>'
+						+'</table>'
+					+'</div>';
 				$('#questView').append(str);
 			});
 		});
@@ -178,37 +181,62 @@
 			value = $(this).val();
 			no = $(this).attr('data');
 			$('#putView').find('[data="'+no+'"]').val([value]);
-			noexpEvent(no);
+			expEvent(no);
 		});
 		
 		$('#putView input:radio').change(function() {
 			value = $(this).val();
 			no = $(this).attr('data');
 			$('#questView').find('[data="'+no+'"]').val([value]);
-			noexpEvent(no);
+			expEvent(no);
 		});
 	}
 	
-	function noexpEvent(no) {
-		nolist[no] = true;
-		$('#footer').empty();
+	function expEvent(no) {
+		if(no != null) {
+			nolist[no-1] = true; // 리스트에 값이 있는가?
+			$('#footer').empty();		
+		}
+		console.log(nolist);
 		for(var i=1;i<=size;i++) {
 			var str = 
 					'<div>'
-						+'<button type="button" id="explain'+i+'" value="'+i+'">'+i
+						+'<button type="button" id="explain'+i+'">'+i
 					+'</div>';
-			$('#footer').append(str);
-			
-			if(nolist[i] == true) {
+			$('#footer').append(str);	
+			if(nolist[i-1] == true) {
 				$('#explain'+i).hide();
 			} 
 		}
 	}
 	
+	function focusEvent() {
+		var offset = [];
+		for (var i=1;i<=size;i++) {
+			offset.push($('#questNo'+i).offset());
+		}
+		$('#footer>div>button').click(function() { // #footer> : footer태그의 자식만 찾음
+			var value = parseInt($(this).text());
+			$('html, body').animate({
+				scrollTop:offset[value-1].top		
+			},10);
+		})
+	}
+	
 	function submitEvent() {
 		$('#submit').on('click',function() {
-			complete(true);
+			console.log(markCheck());
+			//complete(true);
 		});
+	}
+	
+	function markCheck() { // marking 덜 된것이 있는지 체크
+		for(var i=0;i<size;i++) {
+			if(nolist[i] != true) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	function complete(step) {
@@ -217,7 +245,7 @@
 		if(step == true) {
 			for(var i=1;i<=size;i++) {
 				var markobj = {
-						"key" : questkey[i-1],
+						"key" : questKey[i-1],
 						"value" : parseInt($('[name="putNum'+(i)+'"]:checked').val())
 				};
 				marklist.push(markobj);
@@ -231,7 +259,7 @@
 				contentType:'application/json',
 				data: param,
 				success: function() {
-						location.replace('process');
+						location.replace('processing');
 				}
 			});
 		}

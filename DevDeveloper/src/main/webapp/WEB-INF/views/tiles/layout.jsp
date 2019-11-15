@@ -192,7 +192,7 @@
 				</a>
 				&nbsp;&nbsp;
 				<a data-toggle="modal" href="login2" data-target="#modal-login"
-				role="button" style="color:#e8e8e8;">로그인</a>
+				role="button" style="color:#e8e8e8;" id="pop">로그인</a>
 
 				</div>
         	</c:when>
@@ -290,7 +290,7 @@
 	
 	$('#modal-login').on('show.bs.modal', function (e) {
 		
-		if(e.relatedTarget.innerText =='로그인'){
+		if(e.relatedTarget.id =='pop'){
 			loginmode = 'popup';
 		}else{
 			loginmode ='wiki';

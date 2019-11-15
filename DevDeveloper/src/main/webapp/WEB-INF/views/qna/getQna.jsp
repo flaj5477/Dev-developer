@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,7 +91,7 @@
 			<div class="col-xs-12 qqqcard qqqcard-tab">
                 <div class="main-qqqtopbar-wrapper">
                     <h2 class="title pull-left">
-                        1 답변
+                        ${fn:length(ans)} 답변
                     </h2>                   
                     
                 </div>

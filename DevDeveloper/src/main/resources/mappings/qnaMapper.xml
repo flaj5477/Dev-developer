@@ -14,7 +14,8 @@
 	 			q.q_date 			,
 	 			q.q_views		    ,
 	 			q.q_tags			,
-	 			m.members_id     		
+	 			m.members_id     	,
+	 			(select count(a_no) from answer where q_no= q.q_no) a_count   	
 	 			from members m join question q
 	 			on q.members_no = m.members_no
 	 	<where>

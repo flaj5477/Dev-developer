@@ -66,7 +66,7 @@
 								<td style="width: 27%; padding-left: 25px;">
 									<ul class="question-qqqstatistic">
 										<li>
-											<div>0</div> 답변수
+											<div>${qna.aCount}</div> 답변수
 										</li>
 										<li>
 											<div>0</div> 좋아요

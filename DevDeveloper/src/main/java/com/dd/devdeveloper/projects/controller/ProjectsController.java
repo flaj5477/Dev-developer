@@ -1,12 +1,20 @@
 package com.dd.devdeveloper.projects.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.dd.devdeveloper.common.CustomDateEditor2;
 import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.members.MembersVO;
 import com.dd.devdeveloper.projects.ProjApplicantsVO;
@@ -79,8 +87,32 @@ public class ProjectsController {
 	
 	
 	@RequestMapping("/insertProject") //프로젝트 등록
-	public String insertProject(ProjectsVO vo) {
+	public String insertProject(ProjectsVO vo, HttpSession session) {
 		System.out.println(vo);
+		vo.setMembersNo(  ((MembersVO)session.getAttribute("members")).getMembersNo() );
+		projectsService.insertProject(vo);
 	  return "redirect:/getProjectsList";   //프로젝트 목록 페이지로 돌아감
+	}
+	
+	
+	@RequestMapping("/deleteProject") //프로젝트 삭제
+	public String deleteProject(ProjectsVO vo) {
+		projectsService.deleteProject(vo);
+		return "redirect:/getProjectsList";   //프로젝트 목록 페이지로 돌아감
+	}
+	
+	
+	@InitBinder //컨트롤러 들어옵면 이거 먼저 실행하고 매핑한다.
+	public void initBinder(WebDataBinder binder){
+		System.out.println("=====================================");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor2(format, false));
+	}
+	
+	@RequestMapping("/updateProjectForm") //프로젝트 수정
+	public String updateProjectForm(ProjectsVO vo) {
+		//프로젝트 정보 가져와서
+		
+	  return "projects/updateProjectForm";   //프로젝트 수정 폼으로 이동
 	}
 }

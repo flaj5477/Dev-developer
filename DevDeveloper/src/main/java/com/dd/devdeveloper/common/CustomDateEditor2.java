@@ -45,9 +45,12 @@ public class CustomDateEditor2 extends PropertyEditorSupport {
 		}
 		else {
 			try {
-				text = text.replace("/", "-");
+				//text = text.replace("-", "/");
 				setValue(new java.sql.Date(this.dateFormat.parse(text).getTime()) );  //util.Date를 sql.Date로 변환
+				
+				System.out.println("sql date로 변환 _________________" + new java.sql.Date(this.dateFormat.parse(text).getTime()));
 			}
+			
 			catch (ParseException ex) {
 				throw new IllegalArgumentException("Could not parse date: " + ex.getMessage(), ex);
 			}

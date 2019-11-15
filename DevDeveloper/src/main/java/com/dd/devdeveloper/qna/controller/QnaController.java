@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.members.MembersVO;
+import com.dd.devdeveloper.qna.AnswerVO;
 import com.dd.devdeveloper.qna.QuestionVO;
 import com.dd.devdeveloper.qna.service.QnaService;
 
@@ -42,13 +43,25 @@ public class QnaController {
 			return "redirect:/qna";
 		}
 		
+		//답변등록하기
+		@RequestMapping(value ="/insertAnq", method=RequestMethod.POST)
+		public String insertAnq(AnswerVO vo,HttpSession session,Model model) {	
+			MembersVO membersNo = (MembersVO) session.getAttribute("members");
+			vo.setMembersNo(membersNo.getMembersNo());
+
+			qnaService.insertAnq(vo);
+			return "redirect:/qnaNo?qNo="+vo.getqNo();
+		}
+		
 		//상세보기
 		@RequestMapping(value ="/qnaNo")
-		public String getQna(QuestionVO vo,Model model, HttpSession session) {
+		public String getQna(QuestionVO vo,Model model, HttpSession session, AnswerVO avo) {
 			qnaService.updateViews(vo.getqNo());
 			 model.addAttribute("qna",qnaService.getQna(vo));
 //			 session.setAttribute("title", vo.getqTitle());
-			 
+			 avo.setqNo(vo.getqNo());
+			 model.addAttribute("ans",qnaService.getAnq(avo));
+			 System.out.println("dddddddddd"+qnaService.getAnq(avo));
 			 
 			return "qna/getQna";
 		}

@@ -26,5 +26,11 @@ public interface ProjectsService {
   int projRequireInspect(ProjApplicantsVO vo);
   
   //프로젝트 입력
-  void insertProjects(ProjectsVO vo);
+  void insertProject(ProjectsVO vo);
+  
+  //프로젝트 삭제
+  void deleteProject(ProjectsVO vo);
+  
+  //프로젝트 수정
+  void updateProject(ProjectsVO vo);
 }

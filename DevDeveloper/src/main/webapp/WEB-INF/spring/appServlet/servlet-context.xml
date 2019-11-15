@@ -41,13 +41,14 @@
 			<mapping path="/getDashboard" />
 			<mapping path="/applyProjectsForm" />
 			<mapping path="/insertQna" />
+			<mapping path="/insertProjectForm" />
 			<exclude-mapping path="" />
 			<beans:ref bean="LoginInterceptor" />
 		</interceptor>
 	</interceptors>
-	<!-- <beans:bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="webBindingInitializer">
-			<bean class="com.dd.devdeveloper.common.CustomDateEditor2" />
-		</property>
-	</beans:bean> -->
+ 	<beans:bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<beans:property name="webBindingInitializer">
+			<beans:bean class="com.dd.devdeveloper.common.MyWebBindingInitializer" />
+		</beans:property>
+	</beans:bean> 
 </beans:beans>

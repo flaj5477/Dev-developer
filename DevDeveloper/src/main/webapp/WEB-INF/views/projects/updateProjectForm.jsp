@@ -18,7 +18,7 @@ jQuery UI 라이브러리 js파일
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-<title>프로젝트 등록 폼</title>
+<title>프로젝트 수정 폼</title>
 <style>
 .ck-editor__editable {
 	min-height: 400px;
@@ -26,7 +26,7 @@ jQuery UI 라이브러리 js파일
 }
 </style>
 <script>
-	pageName = "프로젝트 등록";
+	pageName = "프로젝트 수정";
 </script>
 <script>
 	
@@ -34,8 +34,6 @@ jQuery UI 라이브러리 js파일
 	var myEditor;
 	$(function(){
 		 checkForm();
-		 
-		 
 		
 		 ClassicEditor
 	     .create( document.querySelector( '#editor' ) , {

@@ -127,6 +127,10 @@
 		</c:choose>
 	</div>
 </div>
+  
+  
+  
+  
   	<div id="modal-login" class="modal fade" tabindex="-1" role="dialog"
 		aria-labelledby="로그인" aria-describedby="테스트 모달">
 		<div class="modal-dialog">

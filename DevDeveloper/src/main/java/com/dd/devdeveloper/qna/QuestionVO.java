@@ -14,7 +14,7 @@ public class QuestionVO {
 	private String qTags;
 	private String membersId;
 	private String membersImage;
-	
+	private int aCount;
 	private String searchVal;		//검색값
 	private int first;	//페이징 시작 게시글 번호
 	private int last;	//페이징 종료 게시글 번호
@@ -22,6 +22,12 @@ public class QuestionVO {
 	
 	
 	
+	public int getaCount() {
+		return aCount;
+	}
+	public void setaCount(int aCount) {
+		this.aCount = aCount;
+	}
 	public int getqNo() {
 		return qNo;
 	}
@@ -110,19 +116,16 @@ public class QuestionVO {
 	public void setMembersImage(String membersImage) {
 		this.membersImage = membersImage;
 	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "QuestionVO [qNo=" + qNo + ", membersNo=" + membersNo + ", qTitle=" + qTitle + ", qContents=" + qContents
 				+ ", qCode=" + qCode + ", qDate=" + qDate + ", qViews=" + qViews + ", qTags=" + qTags + ", membersId="
-				+ membersId + ", searchVal=" + searchVal + ", first=" + first + ", last=" + last + ", orderby="
-				+ orderby + "]";
+				+ membersId + ", membersImage=" + membersImage + ", aCount=" + aCount + ", searchVal=" + searchVal
+				+ ", first=" + first + ", last=" + last + ", orderby=" + orderby + "]";
+	}
+
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-}

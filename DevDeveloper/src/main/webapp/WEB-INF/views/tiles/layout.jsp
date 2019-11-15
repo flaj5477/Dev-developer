@@ -19,7 +19,7 @@
   <!-- CSS Files -->
   <link href="${pageContext.request.contextPath}/resources/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+   <script src="${pageContext.request.contextPath}/resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
   
   <script>
   	
@@ -191,9 +191,9 @@
 				role="button" style="color:#e8e8e8;"> 회원가입
 				</a>
 				&nbsp;&nbsp;
-				<a data-toggle="modal" href="login2" data-target="#modal-testNew2"
-				role="button" style="color:#e8e8e8;">로그인
-				</a>
+				<a data-toggle="modal" href="login2" data-target="#modal-login"
+				role="button" style="color:#e8e8e8;" id="pop">로그인</a>
+
 				</div>
         	</c:when>
         	<c:otherwise>
@@ -252,14 +252,14 @@
   
   
   	<div id="modal-testNew" class="modal fade" tabindex="-1" role="dialog"
-		aria-labelledby="테스트정보 등록" aria-describedby="테스트 모달">
+		aria-labelledby="회원가입" aria-describedby="테스트 모달">
 		<div class="modal-dialog" >
 			<div class="modal-content" style="background: #f0f2ff; width:550px;"></div>
 		</div>
 	</div>
 	
-  	<div id="modal-testNew2" class="modal fade" tabindex="-1" role="dialog"
-		aria-labelledby="테스트정보 등록" aria-describedby="테스트 모달">
+  	<div id="modal-login" class="modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="로그인" aria-describedby="테스트 모달">
 		<div class="modal-dialog">
 			<div class="modal-content" style="background: #5561A5; width:70%;"></div>
 		</div>
@@ -282,15 +282,19 @@
   </script>
   <script>
      var loginmode = 'page';	
-  
+  	
   	$('#modal-testNew').on('show.bs.modal', function (e) {
 	    $(this).find('.modal-content').load("signup");
 	});
+ 	
 	
-	
-	
-	$('#modal-testNew2').on('show.bs.modal', function (e) {
-		loginmode = 'popup';
+	$('#modal-login').on('show.bs.modal', function (e) {
+		
+		if(e.relatedTarget.id =='pop'){
+			loginmode = 'popup';
+		}else{
+			loginmode ='wiki';
+		}
 	    $(this).find('.modal-content').load("login2");
 	});
   </script>

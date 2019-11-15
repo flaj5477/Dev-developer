@@ -102,7 +102,7 @@
 	</div>
 	</div>
 	<!--   Core   -->
-	<script src="./resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
+	   <script src="./resources/assets/js/plugins/jquery/dist/jquery.min.js"></script> 
 	<script
 		src="./resources/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<!--   Optional JS   -->

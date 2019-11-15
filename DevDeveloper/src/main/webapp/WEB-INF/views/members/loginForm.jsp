@@ -24,8 +24,7 @@
 	rel="stylesheet" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/loginstyle.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 
 
 
 </head>
@@ -105,7 +104,14 @@
 						if (loginmode == 'page') {
 							console.log(data);
 							location.href = '${sessionScope.prepage}';
-						} else {
+							
+						} else if(loginmode =='wiki'){
+							  
+							location.reload();
+							
+						}  
+						else {
+							 
 							location.href = 'getDashboard'
 						}
 				

@@ -191,7 +191,7 @@
 				role="button" style="color:#e8e8e8;"> 회원가입
 				</a>
 				&nbsp;&nbsp;
-				<a data-toggle="modal" href="login2" data-target="#modal-testNew2"
+				<a data-toggle="modal" href="login2" data-target="#modal-login"
 				role="button" style="color:#e8e8e8;">로그인</a>
 
 				</div>
@@ -258,7 +258,7 @@
 		</div>
 	</div>
 	
-  	<div id="modal-testNew2" class="modal fade" tabindex="-1" role="dialog"
+  	<div id="modal-login" class="modal fade" tabindex="-1" role="dialog"
 		aria-labelledby="로그인" aria-describedby="테스트 모달">
 		<div class="modal-dialog">
 			<div class="modal-content" style="background: #5561A5; width:70%;"></div>

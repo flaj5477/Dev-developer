@@ -21,7 +21,7 @@
 	}
 	
 	function indexCheck() {	// 현재시간, 시험응시가능시간의 차이를 1초마다 갱신하는 Function
-		var grade = Number("${members.membersGrade}");
+		var grade = parseInt("${members.membersGrade}");
 		var restStr = "${tr.utcTestsDate}" // GMT + 00:00, 이건 남은시간 계산 용도
 		var permisStr = "${tr.testsDate}"; // GMT + 09:00, 이건 응시가능 날짜 용도
 		var permisDate = Date.parse(restStr); // String -> Date format 

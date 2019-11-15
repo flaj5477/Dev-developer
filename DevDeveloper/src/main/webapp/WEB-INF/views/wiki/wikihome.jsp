@@ -19,7 +19,6 @@ a {
 	$(function() {
 		//transTitle();
 		hover();
-		dropodwn();
 	});
 	
 	/* 
@@ -53,11 +52,11 @@ a {
 	}); */
 
 
-	function dropodwn(){
+/* 	function dropodwn(){
 		$('.dropdown').on('click', function(event){
 			event.stopPropagation();	
 		});
-	}
+	} */
 	
 /* 	function transTitle() {
 		var title = $('.title');
@@ -93,8 +92,8 @@ a {
 				<div class="col">
 					<h3 class="mb-0">목록</h3>
 				</div>
-				<div class="col">
-					<form name="searchfrm">
+				<form name="searchfrm">
+					<div class="col">
 						<%-- <div class="input-group">
 							<select name="select">
 								<option value="title">제목
@@ -108,12 +107,13 @@ a {
 							<input type="hidden" name="page" value="1">
 							<button>검색</button>
 						</div> --%>
-						<select name="select">
+						
+						<div class="row">
+							<select name="select">
 								<option value="title" <c:if test="${param.select == 'title'}">selected</c:if>  >제목
 								<option value="tags" <c:if test="${param.select == 'tags'}">selected</c:if>  >태그
-						</select>
-						<div class="row mb-3">
-							<div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-xs-7">
+							</select>
+							<div>
 								<input class="form-control" name="searchVal" placeholder="Search" type="text" value="${param.searchVal }">
 								<input type="hidden" name="page" value="1">
 								
@@ -124,8 +124,8 @@ a {
 								</button>
 							</div>
 						</div>
-					</form>
-				</div>
+					</div>
+				</form>
 				
 				
 			</div>

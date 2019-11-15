@@ -14,7 +14,7 @@
 
 /*ck에디터~	*/
 div[contenteditable] {
-    outline: 1px solid #81DAF5;
+    outline: 1px solid #848484;
 }
 
 .ck-editor__editable {
@@ -45,11 +45,11 @@ div[contenteditable] {
   padding: 10px;
 }
 
-.row{
-  margin-right: 0px;
-  margin-left: 0px;
+ .row{
+  margin-right: 0px !important;
+  margin-left: 0px !important;
   padding: 5px;
-}
+} 
 
 /*
 .transEdit .row > *:not(:first-child) {
@@ -85,6 +85,10 @@ div[contenteditable] {
     max-width: 95%;
 }
 
+.badge a {
+    color: #000;
+}
+
 </style>
   <style>
   .toggler { width: 500px; height: 200px; position: relative; }
@@ -94,8 +98,8 @@ div[contenteditable] {
   .anotherNewClass { text-indent: 40px; letter-spacing: .2em; width: 410px; height: 100px; padding: 30px; margin: 10px; font-size: 1.1em; }
   </style>
 <script>
-	var membersGrade = '${sessionScope.members.membersGrade}';
-	var myEditor;
+	var membersGrade = '${sessionScope.members.membersGrade}';		//로그인한계정 등급
+	var myEditor;	//ck에디터
 	$(function(){
 		btnControl();		//위키삭제
 		startTrans();		//번역시작 번역라인클릭
@@ -103,9 +107,9 @@ div[contenteditable] {
 		btnClose();			//번역편집창 닫기
 		otherTransClick();	//번역편집창에서 다른번역 가져오기
 		//hideOtherTrans();	//	''		  다른번역 숨기기
-		startTrans();
-		delWikiTrans();
-		wikiTransRec();
+		startTrans();			//번역시작 (번역 라인 클릭시)
+		delWikiTrans();			//번역삭제
+		wikiTransRec();			//추천,추천삭제
 
 	    
 			
@@ -113,6 +117,7 @@ div[contenteditable] {
    		 
     	    $(this).find('.modal-content').load("login2");
     	});
+	
 		
 	});
 
@@ -151,37 +156,36 @@ div[contenteditable] {
 		번역 하기(문장클릭이벤트 번역 open)
 	*/
 	function startTrans(){
-		$('.translate').on('click', function(){
+		$('.translate').off("click").on('click', function(){
 			var id = $(this).attr("id");		//아이디 ex)translate13 .. 14..
 			var manualNo = ${wiki.manualNo};
 			
 			
-			transClose();
+			transClose(id);
 
 			
 			$(this).attr("class", "translate hide");	//클릭한 기존 문장 숨김
 			
 			//translate 다음 클래스 transEdit hide 를 transEdit 로만듬
-			$(this).nextAll().filter(".transEdit.hide").first().attr("class", "transEdit open");	//편집창 열어줌gfdgf
+			$(this).nextAll().filter(".transEdit.hide").first().attr("class", "transEdit open");	//편집창 열어줌
 			//$(this+'transEdit hide').first().attr("class", "transEdit");
 			
 			var manualLine = $(".transEdit.open .badge").attr('id');
 			
-			//InlineEditor.create(document.querySelector('.editor'+manualLine));		//따로닫아줘야하나?
-			InlineEditor	//ck 에디터 사용
-	           .create( document.querySelector( '.editor'+manualLine ), {
-	        	   toolbar: [ "undo", "redo", "bold", "italic", "blockQuote", "heading",  "link", "numberedList", "bulletedList",  "insertTable" ]    
-	           })
-	           .then( editor => {
-		            console.log( 'Editor was initialized', editor );
+			
+			//ck 에디터 생성
+			InlineEditor
+	        .create( document.querySelector( '.editor'+manualLine ), {
+	     	   toolbar: [ "undo", "redo", "bold", "italic", "blockQuote", "heading",  "link", "numberedList", "bulletedList",  "insertTable" ]  //툴바설정  
+	        })
+	        .then( editor => {
 		            myEditor = editor;
 		        } )
-	           .catch( error => {
-	               console.error( error );
-	           } );
-				
+	        .catch( error => {
+	            console.error( error );
+	        } );
 					
-			getWikiTransLine(manualLine, manualNo);
+			getWikiTransLine(manualLine, manualNo);	//위키번역 가져오기
 			
 		});
 	}
@@ -191,13 +195,14 @@ div[contenteditable] {
 		20191031
 		번역종료(편집창닫는다)
 	*/
-	function transClose(){
+	function transClose(id){
 		//편집창 숨기고 기존문장 보이게
 		$('.translate.hide').attr("class", "translate");	
 		$('.transEdit.open').attr("class", "transEdit hide");	//다른곳에 편집창 열려있으면 숨김
 		
-		//$('.ck-editor__editable').detach();
-		myEditor = null;
+		//ck에디터가 존재하면 destroy해라
+		var editor = myEditor;	//ck에디터
+		if (editor) { editor.destroy(true); }
 	}
 	
 	/*
@@ -294,7 +299,6 @@ div[contenteditable] {
 						//$(this).next().children('a').text(); 등록한놈아이디
 			
 			if(clickObj.hasClass("red") === true){	//이미추천한거면
-				alert("추천취소?")
 				$.ajax({
 					url: 'wikiTransRecDel',
 					type: 'post',
@@ -302,7 +306,6 @@ div[contenteditable] {
 							 transNo : transNo,
 							 membersNo : membersNo  },
 					success: function(){
-						alert("성공");
 						clickObj.removeClass("red");
 					},
 					error:function(){
@@ -318,7 +321,6 @@ div[contenteditable] {
 							 transNo : transNo,
 							 membersNo : membersNo  },
 					success: function(){
-						alert("성공");
 						clickObj.addClass("red");
 					},
 					error:function(){
@@ -348,7 +350,8 @@ div[contenteditable] {
 				dataType: 'json',//결과 데이타 타입
 				data: { oriContents : manualBefore },
 				success: function(data){
-					$(".transEdit.open #transContents").val(data.message.result.translatedText);
+					var papagoTrans = data.message.result.translatedText
+					myEditor.setData(papagoTrans);
 				},
 				error:function(xht, status, message){
 					alert(" status: " + status + " er:"+message);
@@ -367,8 +370,9 @@ div[contenteditable] {
 	*/
 	function insertWikiTrans(){
 		
-		if("${sessionScope.members.membersNo}" == null){
-			
+		if("${sessionScope.members}" == ""){
+			$('#wikimodal').click();
+			return
 		}
 		
 		//var transArea = $(".transEdit.open #transContents");
@@ -486,22 +490,29 @@ div[contenteditable] {
 					 .appendTo('tbody'); */
 			   var manualAfterBr = (item.manualAfter).replace(/(\n|\r\n)/g, '<br>');	//br치환
 			   
-			   
-			   
+			   //이미 번역추천 했나?
 			   if(item.myTransRec == 'o'){
-				   var recBtn = $('<i class="ni ni-favourite-28 red">');
+				   var recBtn = $('<i class="ni ni-favourite-28 red">');	//빨간버튼
 			   }else {
-				   var recBtn = $('<i class="ni ni-favourite-28">');
+				   var recBtn = $('<i class="ni ni-favourite-28">');		//회색버튼
 			   }
+			   
+			   //자기번역이면 삭제버튼 보이게
+			   if(item.membersId == "${sessionScope.members.membersId}"){
+				   var delbtn = '<i name="deltransbtn" class="ni ni-fat-remove">' ;
+			   }else{
+				   var delbtn = null;
+			   }
+			   
 			  
 			   $('<div>').attr({
 				   			'class': 'col otherTrans pr-2 ',
 				   			"id" : item.transNo
 			   		})
-				.append($('<div class="row nav nav-pills justify-content-end">').html('<i name="deltransbtn" class="ni ni-fat-remove">'))			   		
+				.append($('<div class="row nav nav-pills justify-content-end">').html(  delbtn  ))			   		
 			   	.append($('<div id="otcontents" class="row" >').html(manualAfterBr))   
 			   	.append($('<div class="row nav nav-pills justify-content-end">')
-			   			.append("추천수"+item.rec).append( recBtn ).append($('<badge class="badge badge-primary ml-3">').html("<br>"+item.translDate+" / "+"<a href=' getWiki= "+item.membersNo +"'>"+item.membersId+"</a>" )))
+			   			.append("추천수"+item.rec).append( recBtn ).append($('<badge class="badge badge-primary ml-3">').html("<br>"+item.translDate+" <br> "+"<a href=' getWiki= "+item.membersNo +"'>"+item.membersId+"</a>" )))
 				.appendTo('#othertrans_'+manualLine);
 		});//each
 	}//wikiTransLineResult
@@ -530,12 +541,40 @@ div[contenteditable] {
 			
 		}
 	}
+	
+	/*
+		20191115
+		곽동우
+		ck에디터 생성
+	*/
+	/* function createCKEditor(manualLine){
+		var Editor;	
+		
+		InlineEditor	//ck 에디터 사용
+        .create( document.querySelector( '.editor'+manualLine ), {
+     	   toolbar: [ "undo", "redo", "bold", "italic", "blockQuote", "heading",  "link", "numberedList", "bulletedList",  "insertTable" ]    
+        })
+        .then( editor => {
+	            console.log( 'Editor was initialized', editor );
+	            Editor = editor;
+	        } )
+        .catch( error => {
+            console.error( error );
+        } );
+		
+		return Editor;
+	} */
 </script>
 </head>
 <body>
 	<form name="frm" id="frm" action="updateWikiForm" method="post">
 		<div>
-		
+		<div id="modal-login" class="modal fade" tabindex="-1" role="dialog"
+			aria-labelledby="로그인" aria-describedby="테스트 모달">
+			<div class="modal-dialog">
+				<div class="modal-content" style="background: #5561A5; width:70%;"></div>
+			</div>
+		</div> 	
 			<c:if test="${sessionScope.members.membersGrade eq 5}">
 				<span class="col-3 text-right">
 					<button type="button" id="btnDelWiki" class="btn btn-danger">삭제</button>
@@ -610,10 +649,8 @@ div[contenteditable] {
 								<div class="row" id="oriContents">
 									${entry.value }
 								</div>
-								<div class="row">	
-									<textarea class="form-control form-control-alternative2"
-									id="transContents" name="transContents" rows="3" placeholder="번역이필요합니다"></textarea>
-									<div class="editor${entry.key}">
+								<div class="row">
+									<div class="editor${entry.key}" id="transContents">
 								        ${entry.value }
 								    </div>
 								</div>
@@ -629,7 +666,6 @@ div[contenteditable] {
 										<i name="btn-trans-close" class="ni ni-fat-remove"></i>
 								</span>
 								<div class="scrollspy-example" id="othertrans_${entry.key}">
-									
 									<div class="row">
 										다른사람 번역한거 표시
 									</div>
@@ -643,13 +679,8 @@ div[contenteditable] {
 		</div>
 	</form>
 		
-	<div id="modal-login" class="modal fade" tabindex="-1" role="dialog"
-		aria-labelledby="로그인" aria-describedby="테스트 모달">
-		<div class="modal-dialog">
-			<div class="modal-content" style="background: #5561A5; width:70%;"></div>
-		</div>
-	</div> 	
+	
 	<a data-toggle="modal" href="login2" data-target="#modal-login"
-	role="button">로그인</a>	
+	role="button" id="wikimodal">로그인</a>	
 </body>
 </html>

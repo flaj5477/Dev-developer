@@ -37,7 +37,13 @@
 				p.proj_contents,
 				p.proj_reg_date,
 				p.proj_due_date,
+				p.proj_require,
+				p.proj_members_cnt,
+				p.proj_type,
+				p.proj_price,
 				p.proj_tags,
+				p.proj_start_date,
+				p.proj_end_date,
         		m.members_name
 		from projects p join members m
     	on p.members_no = m.members_no
@@ -100,8 +106,28 @@
 		</where>
 	</select>
 	
-	<insert id="insertProjects">
-		
+	<!-- 프로젝트 입력 -->
+	<insert id="insertProject" parameterType="projects">
+		insert into projects
+		values ( (select max(proj_no)+1 from projects) ,
+            #{membersNo}, 
+            #{projTitle}, 
+            #{projContents}, 
+            sysdate, 
+            #{projDueDate}, 
+            #{projRequire},
+            #{projMembersCnt},
+            #{projType}, 
+            #{projPrice}, 
+            'url', 
+            #{projTags}, 
+            #{projStartDate}, 
+            #{projEndDate}	)
 	</insert>
 	
+	
+	<!-- 프로젝트 삭제 -->
+	<delete id="deleteProject">
+		delete projects where proj_no=#{projNo}
+	</delete>
 </mapper>

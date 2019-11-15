@@ -18,6 +18,7 @@ public class ProjectsDAO {
 		return mybatis.selectList("ProjectsDAO.getProjectsList", vo);
 	}
 	
+	//프로젝트 상세 가져오기
 	public ProjectsVO getProjects(ProjectsVO vo) {
 		return mybatis.selectOne("ProjectsDAO.getProjects", vo);
 	}
@@ -46,7 +47,17 @@ public class ProjectsDAO {
   }
   
   //프로젝트 입력
-  public void insertProjects(ProjectsVO vo) {
+  public void insertProject(ProjectsVO vo) {
+	  mybatis.insert("ProjectsDAO.insertProject",vo);
+  }
+  
+  //프로젝트 삭제
+  public void deleteProject(ProjectsVO vo) {
+	  mybatis.delete("ProjectsDAO.deleteProject", vo);
+  }
+  
+  //프로젝트 수정
+  public void updateProject(ProjectsVO vo) {
 	  
   }
 }

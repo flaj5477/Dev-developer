@@ -61,7 +61,7 @@
 							<div class="qqrow item" style="margin-top: 15px">
 
 								<button class="btn btn-darkblue" type="submit" id="qqqbutton">
-								등록하기</button>
+								질문하기</button>
 							</div>
 						</form>
 						<div class="qqrow">

@@ -62,9 +62,22 @@ public class ProjectsServiceImpl implements ProjectsService {
 	}
 
 	@Override
-	public void insertProjects(ProjectsVO vo) {
+	public void insertProject(ProjectsVO vo) {
+		projectsDAO.insertProject(vo);
 		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public void deleteProject(ProjectsVO vo) {
+		// TODO Auto-generated method stub
+		projectsDAO.deleteProject(vo);
+	}
+
+	@Override
+	public void updateProject(ProjectsVO vo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

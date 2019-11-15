@@ -37,9 +37,8 @@
 	})
 </script>
 <style type="text/css">
-<!--
-출석률 표시하는거 고정크기 지정
-		-->.col-fixed {
+<!--출석률 표시하는거 고정크기 지정-->
+.col-fixed {
 	position: relative;
 	min-height: 1px;
 	padding-right: 5px;

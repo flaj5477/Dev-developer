@@ -14,8 +14,8 @@
 	 			q.q_date 			,
 	 			q.q_views		    ,
 	 			q.q_tags			,
-	 			m.members_id
-	      		
+	 			m.members_id     	,
+	 			(select count(a_no) from answer where q_no= q.q_no) a_count   	
 	 			from members m join question q
 	 			on q.members_no = m.members_no
 	 	<where>
@@ -35,14 +35,48 @@
 	 	 ) a ) b where no between #{first} and #{last}
 	 </select>
 	
+	
+	<select id="getAnq" parameterType="answer" resultType="answer">
+		    select 	
+		    	a.a_no				,
+		    	a.q_no 				,
+	 			a.members_no 		,
+	 			a.a_contents 		,
+	 			a.a_code 			,  
+	 			a.a_date 			,
+	 			m.members_id     	,
+	 			m.members_image
+	 				
+	 			from members m join answer a
+	 			on a.members_no = m.members_no
+	 			where q_no = ${qNo}
+	 			ORDER BY q_no DESC
+	</select>
+	
+	
+	
+	
+	<!--질문등록-->
 	<insert id="insertQna" parameterType="question">
 		insert into question(q_no, q_title, q_contents, members_no) 
-		values( (select max(q_no)+1 from question),#{qTitle},#{qContents},#{membersNo})
+		values((select max(q_no)+1 from question),#{qTitle},#{qContents},#{membersNo})
 	</insert>	
 	
+	<!-- 답변등록
+	<insert id="insertAnq" parameterType="answer">
+		insert into answer(a_no, q_no, a_contents, members_no) 
+		values((select max(a_no)+1 from answer),8,#{aContents},#{membersNo})
+	</insert>	 -->
 	
+
+	<!--답변등록-->
+	 <insert id="insertAnq" parameterType="answer">
+		insert into answer(a_no, q_no, a_contents, members_no) 
+		values((select max(a_no)+1 from answer),#{qNo},#{aContents},#{membersNo})
+	</insert>	
+
 	
-	
+
 		<!-- 전체 질문 갯수(페이징)-->
 	<select id="getCountQna" parameterType="question" resultType="int">
 		select count(*) as "getCountQna"

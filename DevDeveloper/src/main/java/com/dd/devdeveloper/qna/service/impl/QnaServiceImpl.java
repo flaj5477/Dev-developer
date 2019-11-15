@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.dd.devdeveloper.common.paging.Paging;
+import com.dd.devdeveloper.qna.AnswerVO;
 import com.dd.devdeveloper.qna.QuestionVO;
 import com.dd.devdeveloper.qna.service.QnaService;
 
@@ -43,17 +44,32 @@ public class QnaServiceImpl implements QnaService {
 			qnaDAO.insertQna(vo);
 		
 	}
+	//답변등록
+	@Override
+	public void insertAnq(AnswerVO vo) {
+			qnaDAO.insertAnq(vo);
+		
+	}
+	
 	//상세보기
 	@Override
 	public QuestionVO getQna(QuestionVO vo) {
 		
 		return qnaDAO.getQna(vo);
 	}
-
+	//조회수
 	@Override
 	public void updateViews(int qNo) {
 		 qnaDAO.updateViews(qNo);
 		
 	}
+
+	@Override
+	public List<AnswerVO> getAnq(AnswerVO vo) {
+		
+		return qnaDAO.getAnq(vo);
+	}
+
+
 
 }

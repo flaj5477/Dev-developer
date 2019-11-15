@@ -33,11 +33,23 @@
 		<div class="card bg-secondary shadow">
 			<div class="card-header bg-white border-0">
 				<div class="row align-items-center">
-					<div class="col-8">
-						<h3 class="mb-0 display-3">${project.projTitle }</h3>
+					<div class="col-xl-8">
+					<div class="row">
+						<h3 class="mb-0 pl-3 pr-3 display-3">${project.projTitle }</h3>
+						
+						
+						<a class="dropdown pt-2" href="#" id="navbar-default_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       <i class="fas fa-ellipsis-v fa-2x"></i> 
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
+                        <a class="dropdown-item" href="#" onclick="updateProject()">수정</a>
+                        <a class="dropdown-item" href="#" onclick="deleteProject()">삭제</a>
+                    </div>
+                	</div>
+                    
 					</div>
-					<div class="col-4 text-right">
-						<a href="./applyProjectsForm?projNo=${project.projNo }" class="btn btn-lg btn-primary">지원하기</a>
+					<div class="col-xl-4 text-right">
+						<a href="./applyProjectsForm?projNo=${project.projNo}" class="btn btn-lg btn-primary">지원하기</a>
 					</div>
 					
 				</div>
@@ -62,8 +74,8 @@
 						<div class="display-4">Descriptions</div>
 						<div id="projContents">${project.projContents }</div><br>
 						<script> //프로젝트 내용에 공백을 <br>태그로 치환해서 출력하기
-						$(document).ready(function() {
-							var text = $('#projContents').text();
+						$(document).ready(function replaceBR() {
+							var text = $('#projContents').html();
 							var result = text.replace(/(\n|\r\n)/g, "<br>");
 							
 							//var result = replaceAll(text,"(\r\n|\r|\n|\n\r)", "<br>");
@@ -98,6 +110,31 @@
 			token : "ee6fab19c5a04ac1a32a645abde4613a",
 			application : "argon-dashboard-free"
 		});
+	</script>
+	<script>
+	function deleteProject(){
+	    if(confirm("삭제 하시겠습니까?")){
+	        location.href = "./deleteProject?projNo=${project.projNo}";
+	        return true;
+	    } else {
+	        return false;
+	    }
+	}
+	</script>
+	
+	<script> //수정버튼 누르면 ajax로 데이터 전송
+	function updateProject(){
+	
+		var vo = '${project.projContents}';
+		console.log(vo);
+		
+		    if(confirm("수정 하시겠습니까?")){
+		        location.href = "#";
+		        return true;
+		    } else {
+		        return false;
+		    }
+	}
 	</script>
 </body>
 

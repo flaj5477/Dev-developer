@@ -85,7 +85,8 @@
 					</div>
 				</div>
 			</div>
-					 <div class="col-xs-12 qqqcard qqqcard-tab">
+			<c:if test="${not empty ans}">
+			<div class="col-xs-12 qqqcard qqqcard-tab">
                 <div class="main-qqqtopbar-wrapper">
                     <h2 class="title pull-left">
                         1 답변
@@ -138,6 +139,7 @@
                 </div>
                 </c:forEach>
             </div>
+            </c:if>
             
 			<c:choose>
         	<c:when test="${not empty sessionScope.members.membersId}">

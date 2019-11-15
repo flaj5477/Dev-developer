@@ -191,8 +191,8 @@
 				role="button" style="color:#e8e8e8;"> 회원가입
 				</a>
 				&nbsp;&nbsp;
-				<a data-toggle="modal" href="login2" data-target="#modal-testNew2"
-				role="button" style="color:#e8e8e8;">로그인</a>
+				<a data-toggle="modal" href="login2" data-target="#modal-login"
+				role="button" style="color:#e8e8e8;" id="pop">로그인</a>
 
 				</div>
         	</c:when>
@@ -258,7 +258,7 @@
 		</div>
 	</div>
 	
-  	<div id="modal-testNew2" class="modal fade" tabindex="-1" role="dialog"
+  	<div id="modal-login" class="modal fade" tabindex="-1" role="dialog"
 		aria-labelledby="로그인" aria-describedby="테스트 모달">
 		<div class="modal-dialog">
 			<div class="modal-content" style="background: #5561A5; width:70%;"></div>
@@ -288,9 +288,9 @@
 	});
  	
 	
-	$('#modal-testNew2').on('show.bs.modal', function (e) {
+	$('#modal-login').on('show.bs.modal', function (e) {
 		
-		if(e.relatedTarget.innerText =='로그인'){
+		if(e.relatedTarget.id =='pop'){
 			loginmode = 'popup';
 		}else{
 			loginmode ='wiki';

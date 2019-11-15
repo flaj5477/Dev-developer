@@ -107,7 +107,7 @@
 							
 						} else if(loginmode =='wiki'){
 							  
-							$('#modal-testNew2').modal('hide')
+							location.reload();
 							
 						}  
 						else {

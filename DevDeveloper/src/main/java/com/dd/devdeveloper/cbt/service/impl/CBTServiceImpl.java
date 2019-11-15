@@ -1,5 +1,6 @@
 package com.dd.devdeveloper.cbt.service.impl;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -60,22 +61,14 @@ public class CBTServiceImpl implements CBTService {
 	}
 
 	@Override
-	public List<Map<String,Object>> getRecordList(TestsRecordVO recvo) {
-		return dao.getRecordList(recvo);
-	}
-
-	@Override
-	public void markMatchProc(List<Map<String,Integer>> mark) {
+	public void solutionProc(Map<String,Object> cd) {
+		int score = 0;	
+		@SuppressWarnings("unchecked")
+		List<Map<String,Integer>> mark = (List<Map<String,Integer>>) cd.get("data");
 		//SORTING (Lambda)
 		Collections.sort(mark,(Map<String,Integer> m1, Map<String,Integer> m2)-> { // List안에 담긴 Map 객체 정렬
 			return m1.get("key")-m2.get("key");  // 오름차순 정렬
 		});
-		System.out.println(mark);
-		
-		List<Map<String,Object>> match = dao.getAnswerList(mark);
-		
-		System.out.println(match);
-		
 		/* https://dublin-java.tistory.com/12
 		//SORTING (Anonymous Class)
 		Collections.sort(mark,new Comparator<Map<String,Integer>>() {
@@ -85,6 +78,39 @@ public class CBTServiceImpl implements CBTService {
   			}
 		});	
 		*/
+		// 정답 비교
+		List<Map<String,Object>> solution = dao.getSolutionList(mark);
+		for(Integer i=0;i<mark.size();i++) {
+			Integer markValue = mark.get(i).get("value");
+			if(markValue == null) {
+				markValue = 0;
+			}
+			if(markValue == ((BigDecimal)solution.get(i).get("value")).intValue()) {
+				score ++;
+			}
+		}
+		// 점수계산
+		int quest = (Integer)cd.get("quest"); 
+		int value = score*Math.round((100/quest));
 		
+		// 결과 업데이트
+		TestsRecordVO recvo = new TestsRecordVO();
+		recvo.setTestsApplyNo((Integer)cd.get("rid"));
+		recvo.setMembersNo((Integer)cd.get("user"));
+		recvo.setTestsNo((Integer)cd.get("level"));
+		recvo.setTestsTime((Integer)cd.get("time"));
+		recvo.setTestsScore(value);
+		dao.cbtResultUpdate(recvo);
 	}
+
+	@Override
+	public Map<String,Object> getResult(TestsRecordVO recvo) {
+		return dao.getResult(recvo);
+	}
+	
+	@Override
+	public List<Map<String,Object>> getRecordList(TestsRecordVO recvo) {
+		return dao.getRecordList(recvo);
+	}
+
 }

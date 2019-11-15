@@ -7,7 +7,10 @@
 <title>CBT Viewer</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+	var rid = parseInt("${testsRecordVO.testsApplyNo}");
+	var user = parseInt("${members.membersNo}");
 	var level = parseInt("${param.testsNo}");
+	var questVolume = 0;
 	var allocate = 0;
 	var min = 0;
 	var sec = 0;
@@ -17,6 +20,7 @@
 	var nolist = [];
 	var questKey = [];
 	var offset = [];
+	var setTime = 0;
 	
 	function testInfo() {
 		$.ajax('getTestInfo/'+level, {
@@ -26,7 +30,7 @@
 				var title = data.testsTitle;
 				var contents = data.testsContents;
 				var unitVolume = parseInt(data.testsUnitVolume);
-				var questVolume = parseInt(data.testsQVolume);
+				questVolume = parseInt(data.testsQVolume);
 				allocate = parseInt(questVolume/unitVolume);
 				min = data.testsTimeLimit;
 				sec = min * 60;
@@ -49,7 +53,6 @@
 	}
 
 	function timeCount() {
-		var setTime = 0;
 		var restTime = setInterval(function() {
 			var getTime = sec - setTime;
 			var restMin = parseInt(getTime/60);
@@ -186,8 +189,8 @@
 	}
 	
 	function expEvent(no) { // 안 푼 문제, 버튼 추가 이벤트
-		if(no != null) {
-			nolist[no-1] = true; // 리스트에 값이 있는가?
+		if(no != null) { // 리스트에 값이 있다면..
+			nolist[no-1] = true; // return true;
 			$('#footer').empty();		
 		}
 		for(var i=1;i<=size;i++) {
@@ -201,9 +204,10 @@
 			} 
 		}
 	}
-	
 	function focusEvent() { // 안 푼 문제 버튼 focus 이벤트
-		$('#footer>div>button').click(function() { // #footer> : footer태그의 자식만 찾음
+		$('#footer').on('click','div>button',function() { // div>button : div태그의 자식만을 지칭함(단일대상), on('click',div>button..) :  태그에 대한 부모(이벤트)위임 button이 부모가 된다.
+		//현재 expEvent에서 footer에서 empty()시키기 때문에 empEvent가 두번 째 실행 될 때 기존에 있는 버튼은 사라졌으므로 focusEvent실행되고나서 클릭해도 이벤트 발생이 되지 않는다.
+		// 이벤트 전파, 이벤트 위임 참고
 			var value = parseInt($(this).text());
 			$('html, body').animate({
 				scrollTop:offset[value-1].top		
@@ -240,7 +244,14 @@
 			};
 			marklist.push(markobj);
 		}
-		param = JSON.stringify(marklist);
+		param = JSON.stringify({
+			rid : rid,
+			user : user,
+			level : level,
+			quest : questVolume,
+			time: setTime,
+			data: marklist
+		});
 		console.log(param);
 		$.ajax({
 			url:'questionMapping',
@@ -249,7 +260,7 @@
 			contentType:'application/json',
 			data: param,
 			success: function() {
-				//location.replace('processing');
+				location.replace('processing?testsApplyNo='+rid);
 			}
 		});
 	}
@@ -258,6 +269,7 @@
 </head>
 <body onload="testInfo()">
 <div class="cbtViewer">
+	
 	<div id="header">
 		<div id="permisTime"></div>
 		<div id="restTime"></div>

@@ -29,8 +29,9 @@
 	</select>
 	<!-- 시험 시작 후, 응시기록 추가 -->
 	<insert id="cbtInsert" statementType="CALLABLE" parameterType="testsRecord">
-		call CBT_PROCESS_PKG.CBT_START(#{membersNo},
-					  				   #{testsNo})
+		CALL CBT_PROCESS_PKG.CBT_START(#{membersNo},
+					  				   #{testsNo},
+					  				   #{testsApplyNo, mode=OUT, jdbcType=NUMERIC, javaType=java.lang.Integer})
 	</insert>
 	<!-- 시험 자료 조회 -->
 	<select id="getQuestList" resultType="testsQ" parameterType="testsQ">
@@ -51,17 +52,33 @@
 	</select>
 	
 	<!-- 시험 정답 조회 -->
-	<select id="getAnswerList" resultType="list" parameterType="list">
-		SELECT tests_q_no, tests_q_answer
+	<select id="getSolutionList" resultType="map" parameterType="list">
+		SELECT tests_q_no "key", tests_q_answer "value", tests_q_unit "unit"
 		FROM tests_q
 		WHERE tests_q_no IN
 		 <foreach item="item" index="index" collection="list"
      		 open="(" separator="," close=")">
-        	#{item}
+        	#{item.key}
   		</foreach>
 		ORDER BY tests_q_no
 	</select>
-	
+	<update id="cbtResult" statementType="CALLABLE" parameterType="testsRecord">
+		CALL CBT_PROCESS_PKG.CBT_RESULTS(#{testsApplyNo},
+										#{membersNo},
+					  				    #{testsNo},
+					  				    #{testsScore},
+					  				    #{testsTime})
+	</update>
+	<select id="getResult" resultType="map" parameterType="testsRecord">
+	<![CDATA[
+		SELECT t.tests_title "testsTitle", ta.tests_score "testsScore", ta.tests_results "testsResults", ta.tests_time "testsTime", m.members_grade "membersGrade"
+		FROM tests_apply ta JOIN tests t
+		ON ta.tests_no = t.tests_no
+		JOIN members m
+		ON ta.members_no = m.members_no
+		WHERE tests_apply_no = #{testsApplyNo}
+	]]>
+	</select>
 	<!--  회원의 응시기록 조회 -->
 	<select id="getRecordList" resultType="map" parameterType="testsRecord"> 
 	<![CDATA[

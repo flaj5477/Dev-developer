@@ -7,7 +7,7 @@
 <title>CBT Record</title>
 <script>
 	function recordList() {
-		var user = Number("${members.membersNo}");
+		var user = "${members.membersNo}";
 		$.ajax('getRecordList/'+user, {
 			type : 'GET',
 			dataType : 'JSON'

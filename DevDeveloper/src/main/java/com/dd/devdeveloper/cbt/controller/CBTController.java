@@ -1,5 +1,6 @@
 package com.dd.devdeveloper.cbt.controller;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public class CBTController {
 	public String getTestJudg(TestsRecordVO recvo, Model model, HttpSession session) {
 		MembersVO membersNo = (MembersVO) session.getAttribute("members");
 		recvo.setMembersNo(membersNo.getMembersNo());
-		model.addAttribute("tr", cbtService.getTestJudg(recvo));
+		model.addAttribute("tr", cbtService.getTestJudg(recvo)); // Command(vo) 객체를 담을 때 model.addAttribute ,,
 		return "cbt/index";
 	}
 	
@@ -60,15 +61,13 @@ public class CBTController {
 	}
 	
 	@RequestMapping("cbt/examination") 
-	public String setExamination(TestsRecordVO recvo, HttpSession session) { 
-		MembersVO membersNo = (MembersVO) session.getAttribute("members");
-		recvo.setMembersNo(membersNo.getMembersNo());
-		//cbtService.cbtInsert(recvo);
+	public String examination() { 
 		return "/notiles/cbt/examination";
 	}
 	
 	@RequestMapping("cbt/viewer") 
-	public String viewer() {
+	public String viewer(TestsRecordVO recvo) {
+		cbtService.cbtInsert(recvo);
 		return "/notiles/cbt/viewer";
 	}
 	
@@ -81,19 +80,33 @@ public class CBTController {
 		return cbtService.getQuestList(tqvo);
 	}
 	
-	@RequestMapping(value="getRecordList/{user}",
-					method=RequestMethod.GET)
-	@ResponseBody
-	public List<Map<String,Object>> getRecordList(@PathVariable int user, TestsRecordVO recvo) {
-		recvo.setMembersNo(user);
-		return cbtService.getRecordList(recvo);
-	}
-	
 	@RequestMapping(value="cbt/questionMapping",
 					method=RequestMethod.POST,
 					consumes="application/json")
 	@ResponseBody
-	public void markedList(@RequestBody List<Map<String,Integer>> mark) {
-		cbtService.markMatchProc(mark);
+	public Map<String,Boolean> solutionProc(@RequestBody Map<String,Object> cd) {
+		cbtService.solutionProc(cd);
+		return Collections.singletonMap("result",true); // repsonse 값 하나라도 넘겨주기위해?
+	}
+	
+	@RequestMapping("cbt/processing")
+	public String processing() {
+		return "/notiles/cbt/processing";
+	}
+	
+	@RequestMapping(value="cbt/getResult/{rid}",
+					method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> getResult(@PathVariable int rid, TestsRecordVO recvo) {
+		recvo.setTestsApplyNo(rid);
+		return cbtService.getResult(recvo);
+	}
+	
+	@RequestMapping(value="getRecordList/{user}",
+			method=RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> getRecordList(@PathVariable int user, TestsRecordVO recvo) {
+	recvo.setMembersNo(user);
+	return cbtService.getRecordList(recvo);
 	}
 }

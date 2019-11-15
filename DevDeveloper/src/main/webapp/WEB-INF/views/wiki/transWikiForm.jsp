@@ -109,7 +109,10 @@ div[contenteditable] {
 
 	    
 			
-	
+		$('#modal-login').on('show.bs.modal', function (e) {
+   		 
+    	    $(this).find('.modal-content').load("login2");
+    	});
 		
 	});
 
@@ -359,10 +362,14 @@ div[contenteditable] {
 	/*
 		곽동우
 		20191031
-		위키등록 버튼
+		위키등록 버튼 클릭시
 		위키번역 등록
 	*/
 	function insertWikiTrans(){
+		
+		if("${sessionScope.members.membersNo}" == null){
+			
+		}
 		
 		//var transArea = $(".transEdit.open #transContents");
 		var manualLine = $(".transEdit.open .badge").attr('id');
@@ -636,7 +643,13 @@ div[contenteditable] {
 		</div>
 	</form>
 		
-		
-		
+	<div id="modal-login" class="modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="로그인" aria-describedby="테스트 모달">
+		<div class="modal-dialog">
+			<div class="modal-content" style="background: #5561A5; width:70%;"></div>
+		</div>
+	</div> 	
+	<a data-toggle="modal" href="login2" data-target="#modal-login"
+	role="button">로그인</a>	
 </body>
 </html>

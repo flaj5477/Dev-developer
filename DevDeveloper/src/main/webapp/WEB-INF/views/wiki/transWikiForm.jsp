@@ -166,7 +166,9 @@ div[contenteditable] {
 			
 			//InlineEditor.create(document.querySelector('.editor'+manualLine));		//따로닫아줘야하나?
 			InlineEditor	//ck 에디터 사용
-	           .create( document.querySelector( '.editor'+manualLine ) )
+	           .create( document.querySelector( '.editor'+manualLine ), {
+	        	   toolbar: [ "undo", "redo", "bold", "italic", "blockQuote", "heading",  "link", "numberedList", "bulletedList",  "insertTable" ]    
+	           })
 	           .then( editor => {
 		            console.log( 'Editor was initialized', editor );
 		            myEditor = editor;
@@ -191,6 +193,7 @@ div[contenteditable] {
 		$('.translate.hide').attr("class", "translate");	
 		$('.transEdit.open').attr("class", "transEdit hide");	//다른곳에 편집창 열려있으면 숨김
 		
+		//$('.ck-editor__editable').detach();
 		myEditor = null;
 	}
 	

@@ -69,8 +69,9 @@
 						$('#toast').children('p').html(sec+'초 후 이동합니다.');
 						if(sec<=0) {
 							clearInterval(readyTime);
-							location.replace('ready?testsNo='+level); // 페이지 이동, 뒤로가기 하면 현재 페이지 건너 뛴다, GET
-							//document.frm.submit(); // web에 name = frm인 form태그를 submit, POST
+							frm.level.value = level; // frm 태그에 레벨 값 저장
+							document.frm.submit(); // web에 name = frm인 form태그를 submit, POST
+							//location.replace('ready?testsNo='+level); // 페이지 이동, 뒤로가기 하면 현재 페이지 건너 뛴다, GET				
 						}
 						sec--;
 					},200); // n초마다
@@ -91,6 +92,7 @@
 	<div id="subject"></div>	
 	<div id="content">
 		<form action="ready" name="frm" method="post">
+			<input type="hidden" name="level">
 			<table id="chooseTab" border="1" style="width:550px">
 				<thead>
 					<tr align="center">

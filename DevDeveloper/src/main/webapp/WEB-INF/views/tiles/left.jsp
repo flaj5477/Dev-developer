@@ -28,7 +28,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/loginForm">
+            <a class="nav-link" href="${pageContext.request.contextPath}/tagList">
               <i class="ni ni-key-25 text-info"></i> Tags
             </a>
           </li>

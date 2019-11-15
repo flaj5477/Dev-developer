@@ -36,6 +36,10 @@ public class CBTDAO {
 	public List<TestsQVO> getQuestList(TestsQVO tqvo) {
 		return mybatis.selectList("CBTDAO.getQuestList",tqvo);
 	}
+	//문제답안 조회
+	public List<Map<String,Object>> getAnswerList(List<Map<String,Integer>> mark) {
+		return mybatis.selectList("CBTDAO.getAnswerList",mark);
+	}
 	//응시기록 조회
 	public List<Map<String,Object>> getRecordList(TestsRecordVO recvo) {
 		return mybatis.selectList("CBTDAO.getRecordList",recvo);

@@ -8,67 +8,60 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	var level = parseInt("${param.testsNo}");
-	var title = null;
-	var contents = null;
-	var unitVolume = 0;
-	var questVolume = 0;
 	var allocate = 0;
-	var passValue = 0;
 	var min = 0;
 	var sec = 0;
 	var permisMin = 0;
 	var permisSec = 0;
 	var size = 0;
 	var nolist = [];
-	var questkey = [];
+	var questKey = [];
+	var offset = [];
+	
 	function testInfo() {
 		$.ajax('getTestInfo/'+level, {
 			type : 'GET',
 			dataType : 'JSON',
 			success : function(data) {
-				title = data.testsTitle;
-				contents = data.testsContents;
-				unitVolume = parseInt(data.testsUnitVolume);
-				questVolume = parseInt(data.testsQVolume);
+				var title = data.testsTitle;
+				var contents = data.testsContents;
+				var unitVolume = parseInt(data.testsUnitVolume);
+				var questVolume = parseInt(data.testsQVolume);
 				allocate = parseInt(questVolume/unitVolume);
-				passValue = data.testsPassCriterion;
 				min = data.testsTimeLimit;
 				sec = min * 60;
 				permisMin = parseInt(sec/60);
 				permisSec = sec%60;
+				$('#header').prepend(title+' <br> '+contents+' <br> ${members.membersName}');
+				$('#permisTime').prepend(permisMin+'분 '+permisSec+'초');
+				$('#restTime').prepend(permisMin+'분 '+permisSec+'초');
 			},
 			complete : function() {
-				viewerBox();
 				questList(); // 동기전송
 				radioList();
-				//timeCount();
+				timeCount();
 				radioEvent();
-				noexpEvent();
+				expEvent();
+				focusEvent();
 				submitEvent();
 			}
 		});
 	}
-	
-	function viewerBox() {
-		$('#header').prepend(title+' <br> '+contents+' <br> ${members.membersName}');
-		$('#permisTime').prepend(permisMin+'분 '+permisSec+'초');
-		$('#restTime').prepend(permisMin+'분 '+permisSec+'초');
-	}
-	
+
 	function timeCount() {
 		var setTime = 0;
 		var restTime = setInterval(function() {
 			var getTime = sec - setTime;
 			var restMin = parseInt(getTime/60);
 			var restSec = getTime%60;
+			$('#restTime').html(restMin+'분 '+restSec+'초');
 			if(getTime > 0) {
 				setTime++;
 			}
 			else {
 				clearInterval(restTime);
-				complete(true);
+				complete();
 			}
-			$('#restTime').html(restMin+'분 '+restSec+'초');
 		},1000);
 	}
 	
@@ -82,7 +75,7 @@
 			var oldUnit = "";
 			size = data.length;
 			$.each(data, function(idx) {
-				questkey.push(data[idx].testsQNo);
+				questKey.push(data[idx].testsQNo);
 				var no = 1 + parseInt([idx]);
 				var quest = data[idx].testsQContents;
 				var ex1 = data[idx].testsQEx1;
@@ -104,28 +97,31 @@
 				}
 				oldUnit = newUnit; // 과목단위로 과목명 출력 중복방지
 				var str = 
-					'<table id="contentsTab" style="width:550px">'
-						+caption
-						+'<tr>'
-							+'<td><div>'+no+'.</div></td>'
-							+'<td><div>'+quest+'</div></td>'
-						+'</tr>'
-					+'</table>'
-					+'<table id="exTab" style="width:550px">'
-						+'<tr>'
-							+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="1">'+rex[0]+'</div></td>'
-						+'</tr>'
-						+'<tr>'
-							+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="2">'+rex[1]+'</div></td>'
-						+'</tr>'
-						+'<tr>'
-							+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="3">'+rex[2]+'</div></td>'
-						+'</tr>'
-						+'<tr>'
-							+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="4">'+rex[3]+'</div></td>'
-						+'</tr>'
-					+'</table>';
+					'<div id="questNo'+no+'">'
+						+'<table id="contentsTab" style="width:550px">'
+							+caption
+							+'<tr>'
+								+'<td><div>'+no+'.</div></td>'
+								+'<td><div>'+quest+'</div></td>'
+							+'</tr>'
+						+'</table>'
+						+'<table id="exTab" style="width:550px">'
+							+'<tr>'
+								+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="1">'+rex[0]+'</div></td>'
+							+'</tr>'
+							+'<tr>'
+								+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="2">'+rex[1]+'</div></td>'
+							+'</tr>'
+							+'<tr>'
+								+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="3">'+rex[2]+'</div></td>'
+							+'</tr>'
+							+'<tr>'
+								+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="4">'+rex[3]+'</div></td>'
+							+'</tr>'
+						+'</table>'
+					+'</div>';
 				$('#questView').append(str);
+				offset.push($('#questNo'+no).offset());
 			});
 		});
 	}
@@ -178,63 +174,84 @@
 			value = $(this).val();
 			no = $(this).attr('data');
 			$('#putView').find('[data="'+no+'"]').val([value]);
-			noexpEvent(no);
+			expEvent(no);
 		});
 		
 		$('#putView input:radio').change(function() {
 			value = $(this).val();
 			no = $(this).attr('data');
 			$('#questView').find('[data="'+no+'"]').val([value]);
-			noexpEvent(no);
+			expEvent(no);
 		});
 	}
 	
-	function noexpEvent(no) {
-		nolist[no] = true;
-		$('#footer').empty();
+	function expEvent(no) { // 안 푼 문제, 버튼 추가 이벤트
+		if(no != null) {
+			nolist[no-1] = true; // 리스트에 값이 있는가?
+			$('#footer').empty();		
+		}
 		for(var i=1;i<=size;i++) {
 			var str = 
 					'<div>'
-						+'<button type="button" id="explain'+i+'" value="'+i+'">'+i
+						+'<button type="button" id="explain'+i+'">'+i
 					+'</div>';
-			$('#footer').append(str);
-			
-			if(nolist[i] == true) {
+			$('#footer').append(str);	
+			if(nolist[i-1] == true) {
 				$('#explain'+i).hide();
 			} 
 		}
 	}
 	
-	function submitEvent() {
+	function focusEvent() { // 안 푼 문제 버튼 focus 이벤트
+		$('#footer>div>button').click(function() { // #footer> : footer태그의 자식만 찾음
+			var value = parseInt($(this).text());
+			$('html, body').animate({
+				scrollTop:offset[value-1].top		
+			},10);
+		})
+	}
+	
+	function submitEvent() { // 제출 버튼에 관한 이벤트
 		$('#submit').on('click',function() {
-			complete(true);
+			var markcheck = markCheck();
+			if(markcheck != true) {
+				// 모달 띄우기
+			}
+			complete();
 		});
 	}
 	
-	function complete(step) {
+	function markCheck() { // marking 덜 된것이 있는지 체크
+		for(var i=0;i<size;i++) {
+			if(nolist[i] != true) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	function complete() { // ajax 컨트롤러로 요청
 		var param = "";
 		var marklist = [];
-		if(step == true) {
-			for(var i=1;i<=size;i++) {
-				var markobj = {
-						"key" : questkey[i-1],
-						"value" : parseInt($('[name="putNum'+(i)+'"]:checked').val())
-				};
-				marklist.push(markobj);
-			}
-			param = JSON.stringify(marklist);
-			console.log(param);
-			$.ajax({
-				url:'questionMapping',
-				type:'POST',
-				dataType:'json',
-				contentType:'application/json',
-				data: param,
-				success: function() {
-						location.replace('process');
-				}
-			});
+		for(var i=1;i<=size;i++) {
+			var markobj = {
+					"key" : questKey[i-1],
+					"value" : parseInt($('[name="putNum'+(i)+'"]:checked').val())
+			};
+			marklist.push(markobj);
 		}
+		param = JSON.stringify(marklist);
+		console.log(param);
+		$.ajax({
+			url:'questionMapping',
+			type:'POST',
+			dataType:'json',
+			contentType:'application/json',
+			data: param,
+			success: function() {
+				//location.replace('processing');
+			}
+		});
 	}
 
 </script>

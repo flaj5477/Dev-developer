@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.projects.ProjectsVO;
+import com.dd.devdeveloper.qna.AnswerVO;
 import com.dd.devdeveloper.qna.QuestionVO;
 
 @Repository
@@ -21,10 +22,20 @@ public class QnaDAO {
 		}
 
 		
-		
+		//질문등록하기
 		public void insertQna(QuestionVO vo) {
 			mybatis.insert("QnaDAO.insertQna", vo);
 			
+		}
+		
+		//답변등록하기
+		public void insertAnq(AnswerVO vo) {
+			mybatis.insert("QnaDAO.insertAnq" , vo);
+			
+		}
+		//답변리스트
+		public List<AnswerVO> getAnq(AnswerVO vo) {
+			return mybatis.selectList("QnaDAO.getAnq",vo);
 		}
 		
 		//전체 갯수 가져오기
@@ -44,5 +55,9 @@ public class QnaDAO {
 			 mybatis.update("QnaDAO.updateViews",qNo);
 			
 		}
+
+
+
+
 		
 }

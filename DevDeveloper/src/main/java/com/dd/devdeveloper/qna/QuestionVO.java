@@ -110,19 +110,16 @@ public class QuestionVO {
 	public void setMembersImage(String membersImage) {
 		this.membersImage = membersImage;
 	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "QuestionVO [qNo=" + qNo + ", membersNo=" + membersNo + ", qTitle=" + qTitle + ", qContents=" + qContents
 				+ ", qCode=" + qCode + ", qDate=" + qDate + ", qViews=" + qViews + ", qTags=" + qTags + ", membersId="
-				+ membersId + ", searchVal=" + searchVal + ", first=" + first + ", last=" + last + ", orderby="
-				+ orderby + "]";
+				+ membersId + ", membersImage=" + membersImage + ", searchVal=" + searchVal + ", first=" + first
+				+ ", last=" + last + ", orderby=" + orderby + "]";
+	}
+
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-}

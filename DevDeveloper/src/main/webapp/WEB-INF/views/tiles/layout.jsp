@@ -288,7 +288,7 @@
 	});
  	
 	
-	$('#modal-testNew2').on('show.bs.modal', function (e) {
+	$('#modal-login').on('show.bs.modal', function (e) {
 		
 		if(e.relatedTarget.innerText =='로그인'){
 			loginmode = 'popup';

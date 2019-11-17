@@ -5,7 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>CBT Viewer</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/assets/js/comcbt.js"></script>
 <script>
 	var rid = parseInt("${testsRecordVO.testsApplyNo}");
 	var user = parseInt("${members.membersNo}");
@@ -81,7 +85,7 @@
 					var ex4 = data[idx].testsQEx4;
 					var answer = data[idx].testsQAnswer
 					var vdata = [ex1,ex2,ex3,ex4]; //보기 담기
-					var vrand = randomWrite(); // 4개의 숫자 랜덤 push
+					var vrand = randomExample(); // 4개의 숫자 랜덤 push
 					var rex = []; // 랜덤하게 배열된 보기 담을 공간
 					var answer = data[idx].testsQAnswer;
 					var newUnit = data[idx].testsQUnit;
@@ -90,7 +94,7 @@
 						rex.push(vdata[vrand[i]]); // 배열 값 랜덤 출력
 					}
 					if(oldUnit != newUnit) {  // 문제의 과목이 달라지는 시점
-						caption = '<caption>'+newUnit+'</caption>'; // 새로운 과목을 담음
+						caption = '<caption style="caption-side: top">'+newUnit+'</caption>'; // 새로운 과목을 담음
 					}
 					oldUnit = newUnit; // 과목단위로 과목명 출력 중복방지
 					var str = 
@@ -124,7 +128,7 @@
 				switchFont();
 				radioList();
 				radioEvent();
-				expEvent();
+				questEvent();
 				focusEvent();
 			}
 		});
@@ -167,7 +171,7 @@
 		}		
 	}
 	
-	function randomWrite() { // 보기 랜덤 배열 function
+	function randomExample() { // 보기 랜덤 배열 function
 		var i = 0;
 		let idx = [];
 		let size = 4;
@@ -197,28 +201,28 @@
 			value = $(this).val();
 			no = $(this).attr('data');
 			$('#putView').find('[data="'+no+'"]').val([value]);
-			expEvent(no);
+			questEvent(no);
 		});
 		
 		$('#putView input:radio').change(function() {
 			value = $(this).val();
 			no = $(this).attr('data');
 			$('#questView').find('[data="'+no+'"]').val([value]);
-			expEvent(no);
+			questEvent(no);
 		});
 	}
 	
-	function expEvent(no) { // 안 푼 문제, 버튼 추가 이벤트
+	function questEvent(no) { // 안 푼 문제, 버튼 추가 이벤트
 		if(no != null) { // 리스트에 값이 있다면..
 			nolist[no-1] = true; // return true;
-			$('#footer').empty();		
+			$('#noExp').empty();		
 		}
 		for(var i=1;i<=size;i++) {
 			var str = 
 					'<div>'
 						+'<button type="button" id="explain'+i+'">'+i
 					+'</div>';
-			$('#footer').append(str);	
+			$('#noExp').append(str);	
 			if(nolist[i-1] == true) {
 				$('#explain'+i).hide();
 			} 
@@ -226,7 +230,7 @@
 	}
 	function focusEvent() { // 안 푼 문제 버튼 focus 이벤트
 		$('#footer').on('click','div>button',function() { // div>button : div태그의 자식만을 지칭함(단일대상), on('click',div>button..) :  태그에 대한 부모(이벤트)위임 button이 부모가 된다.
-		//현재 expEvent에서 footer에서 empty()시키기 때문에 empEvent가 두번 째 실행 될 때 기존에 있는 버튼은 사라졌으므로 focusEvent실행되고나서 클릭해도 이벤트 발생이 되지 않는다.
+		//현재 questEvent에서 footer에서 empty()시키기 때문에 empEvent가 두번 째 실행 될 때 기존에 있는 버튼은 사라졌으므로 focusEvent실행되고나서 클릭해도 이벤트 발생이 되지 않는다.
 		// 이벤트 전파, 이벤트 위임 참고
 			offset.splice(0,size); // 기존 offset 값 모두 삭제
 			for(var i=1;i<=size;i++) { // offset값 push
@@ -234,38 +238,40 @@
 			}
 			var value = parseInt($(this).text());
 			$('html, body').animate({
-				scrollTop:offset[value-1].top		
+				scrollTop : offset[value-1].top
 			},10);
 		})
 	}
 	
 	function submitEvent() { // 제출 버튼에 관한 이벤트
 		$('#submitBtn').on('click',function() {
-			var markcheck = markCheck();
-			if(markcheck != true) { // 아직 못 푼 문제가 있다면?
-				// 아직 못 푼 문제가 있다..
-				// 그래도 답안 제출을 하시겠습니까?
-						// BTN YES OR NO
-						// if.. yes
-						// 한번 더 묻기
+			var nomark = markCheck();
+			if(nomark != 0) { // 아직 못 푼 문제가 있다면?
+				$('.modal-body').html('아직 '+nomark+'개의 안 푼 문제가 남아있습니다. <br> 그래도 답안을 제출 하시겠습니까?');		
 			}
-			else { // 문제를 다 풀었다면?
-				// 답안을 제출 하시겠습니까?
-						// BTN YES OR NO
-						// if.. yes
-						// 한번 더 묻기
+			else { 
+				$('.modal-body').html('답안을 제출 하시겠습니까?');		
 			}
-			//solutionProc();
+			// 한번 더 묻기 
+			$('#finalBtn').on('click',function() {
+				$('#cbtSubmitModal').modal('hide');
+				setTimeout(function() {
+					$('.modal-body').html('정말 답안을 제출 하시겠습니까?');
+					$('#cbtSubmitModal').modal('show');
+				},400);
+				//solutionProc();
+			});
 		});
 	}
 	
 	function markCheck() { // marking 덜 된것이 있는지 체크
+		var nomark = 0;
 		for(var i=0;i<size;i++) {
 			if(nolist[i] != true) {
-				return false;
+				nomark ++;
 			}
 		}
-		return true;
+		return nomark;
 	}
 	
 	function solutionProc() { // ajax 컨트롤러로 요청
@@ -314,9 +320,27 @@
 		<div id="questView" style="width:60%; float:left"></div>
 		<div id="putView" style="width:40%; float:right"></div>
 	</div>
-	<div id="footer"></div>
-	<div>
-		<button type="button" id="submitBtn">제출하기</button>
+	<div id="footer">
+		<div id="noExp"></div>
+		<button type="button" class="btn btn-primary" id="submitBtn" data-toggle="modal" data-target="#cbtSubmitModal">제출하기</button>
+		<!-- Modal -->
+		<div class="modal fade" id="cbtSubmitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalCenterTitle">답안제출</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body"></div>
+		      <div class="modal-footer">
+		      	<button type="button" id="finalBtn" class="btn btn-primary">YES</button>
+		        <button type="button" id="resetBtn" class="btn btn-secondary" data-dismiss="modal">NO</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	</div>
 </div>
 </html>

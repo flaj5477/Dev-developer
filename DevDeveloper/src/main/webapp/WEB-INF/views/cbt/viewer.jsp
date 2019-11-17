@@ -22,7 +22,7 @@
 	var offset = [];
 	var setTime = 0;
 	
-	function testInfo() {
+	function getTest() {
 		$.ajax('getTestInfo/'+level, {
 			type : 'GET',
 			dataType : 'JSON',
@@ -41,9 +41,10 @@
 				$('#restTime').prepend(permisMin+'분 '+permisSec+'초');
 			},
 			complete : function() {
+				timeCount();
 				questList(); // 동기전송
 				radioList();
-				timeCount();
+				switchFont();
 				radioEvent();
 				expEvent();
 				focusEvent();
@@ -51,7 +52,6 @@
 			}
 		});
 	}
-
 	function timeCount() {
 		var restTime = setInterval(function() {
 			var getTime = sec - setTime;
@@ -63,9 +63,26 @@
 			}
 			else {
 				clearInterval(restTime);
-				complete();
+				solutionProc();
 			}
 		},1000);
+	}
+	
+	function switchFont() {
+		var defaultSize = parseFloat($('#content').css('fontSize'),10);
+		$("#switchFont").on('click','button',function() {
+			var currentSize = $('#content').css('fontSize');
+			var num = parseFloat(currentSize, 10);	// parseFloat()은 숫자가 아니면 숫자가 아니라는 뜻의 NaN을 반환한다. currentSize의 숫자만 반환
+			var unit = currentSize.slice(-2);	// 끝에서 2자리 문자 px를 반환한다.
+			if(this.id == "small"){
+				num = defaultSize*0.8;
+			} else if(this.id == "medium") {
+				num = defaultSize;
+			} else if(this.id == "large") {
+				num = defaultSize*1.2;
+			}
+			$('#content').css('fontSize', num + unit);
+		});
 	}
 	
 	function questList() {
@@ -221,7 +238,8 @@
 			if(markcheck != true) {
 				// 모달 띄우기
 			}
-			complete();
+			$('.cbtViewer').replaceWith($( ".cbtProcessing" )); // ㅇ
+			//solutionProc();
 		});
 	}
 	
@@ -234,7 +252,7 @@
 		return true;
 	}
 	
-	function complete() { // ajax 컨트롤러로 요청
+	function solutionProc() { // ajax 컨트롤러로 요청
 		var param = "";
 		var marklist = [];
 		for(var i=1;i<=size;i++) {
@@ -254,7 +272,7 @@
 		});
 		console.log(param);
 		$.ajax({
-			url:'questionMapping',
+			url:'solutionProc',
 			type:'POST',
 			dataType:'json',
 			contentType:'application/json',
@@ -267,10 +285,14 @@
 
 </script>
 </head>
-<body onload="testInfo()">
+<body onload="getTest()">
 <div class="cbtViewer">
-	
 	<div id="header">
+		<div id="switchFont">
+			<button type="button" id="small">80%</button>
+			<button type="button" id="medium">100%</button>
+			<button type="button" id="large">120%</button>
+		</div>
 		<div id="permisTime"></div>
 		<div id="restTime"></div>
 	</div>
@@ -283,5 +305,4 @@
 		<button type="button" id="submit">제출하기</button>
 	</div>
 </div>
-</body>
 </html>

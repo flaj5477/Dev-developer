@@ -14,19 +14,18 @@
 	var user = "${members.membersNo}";
 	var level = "${param.testsNo}"; //  command의 vo객체를 통해 form 태그의 값을 가져왔음!
 	var rid = "${param.testsApplyNo}";
-	$(document).ready(function() {
-		comparator();
-	});
+
 	function comparator() {
 		if(rid != '') {
 			result();
 		}
 		else {
-			toast();
+			$('#result').hide();
+			viewerPage();
 		}
 	}
 	
-	function toast() {
+	function viewerPage() {
 		frm.testsNo.value = level; // frm 태그에 레벨 값 저장
 		$('#toast').fadeIn(500,function() {
 			$('#toast').children('p').html('<br>응시용 화면으로 전환합니다.');
@@ -60,7 +59,7 @@
 	}
 </script>
 </head>
-<body>
+<body onload="comparator()">
 <div class="cbtExamination" id="screen-lock" align="center">
 	<form action="viewer" name="frm" method="post">
 		<input type="hidden" name="testsNo">

@@ -16,6 +16,7 @@ public class TagsController {
 	public String tagList(Model model){
 		
 		model.addAttribute("tagList", tagService.tagList());
+		
 		return "tag_jsp/taghome";
 	}
 }

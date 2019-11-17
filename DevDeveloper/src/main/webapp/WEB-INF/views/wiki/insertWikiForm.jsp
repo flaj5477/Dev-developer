@@ -111,6 +111,7 @@
   		<select class="form-control" id="manualTags" name="manualTags" multiple="multiple">
   		
   		</select>
+  		<input type="text" class="form-control" id="manualTags" name="manualTags" placeholder="테그" >
   		<button type="button" id="btnfrm" class="btn btn-primary">등록</button>
 	</form>
 	

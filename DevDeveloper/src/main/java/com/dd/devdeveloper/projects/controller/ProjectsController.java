@@ -113,6 +113,7 @@ public class ProjectsController {
 	public String updateProjectForm(ProjectsVO vo) {
 		//프로젝트 정보 가져와서
 		
+		System.out.println("여기는 컨트롤러 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ " + vo);
 	  return "projects/updateProjectForm";   //프로젝트 수정 폼으로 이동
 	}
 }

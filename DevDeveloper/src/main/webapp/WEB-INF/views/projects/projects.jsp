@@ -29,7 +29,7 @@
 </head>
 
 <body class="">
-<form action="./updateProjectForm" id="frm" >
+<form action="./updateProjectForm" id="frm" method="post">
 	<div class="container-fluid mt--5">
 		<div class="card bg-secondary shadow">
 			<div class="card-header bg-white border-0">
@@ -37,7 +37,7 @@
 					<div class="col-xl-8">
 					<div class="row">
 						<h3 class="mb-0 pl-3 pr-3 display-3" >${project.projTitle }</h3>
-						<input type="hidden" name="projTitle" value="${project.projTitle }"/>
+						
 						
 						<a class="dropdown pt-2" href="#" id="navbar-default_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                        <i class="fas fa-ellipsis-v fa-2x"></i> 
@@ -92,6 +92,19 @@
 			</div>
 		</div>
 	</div>
+	
+	<input type="hidden" name="projNo" value="${project.projNo }"/>
+	<input type="hidden" name="projTitle" value="${project.projTitle }"/>
+	<input type="hidden" name="projContents" value="${project.projContents }"/>
+	<input type="hidden" name="projDueDate" value="${project.projDueDate }"/>
+	<input type="hidden" name="projRequire" value="${project.projRequire }"/>
+	<input type="hidden" name="projMembersCnt" value="${project.projMembersCnt }"/>
+	<input type="hidden" name="projType" value="${project.projType }"/>
+	<input type="hidden" name="projPrice" value="${project.projPrice }"/>
+	<input type="hidden" name="projTags" value="${project.projTags }"/>
+	<input type="hidden" name="projStartDate" value="${project.projStartDate }"/>
+	<input type="hidden" name="projEndDate" value="${project.projEndDate }"/>
+	
 </form>
 	<!--   Core   -->
 	<script src="./resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>

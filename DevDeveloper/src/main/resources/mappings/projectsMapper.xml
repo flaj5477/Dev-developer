@@ -130,4 +130,25 @@
 	<delete id="deleteProject">
 		delete projects where proj_no=#{projNo}
 	</delete>
+	
+	
+	<!-- 프로젝트 수정 -->
+	<update id="updateProject" parameterType="projects">
+	update projects 
+	set proj_title= #{projTitle},
+      	proj_contents= #{projContents},
+      	proj_reg_date= sysdate,
+      	proj_due_date= #{projDueDate},
+      	proj_require= #{projRequire},
+      	proj_members_cnt= #{projMembersCnt},
+      	proj_type= #{projType},
+      	proj_price= #{projPrice},
+      	proj_tags= #{projTags},
+      	proj_start_date= #{projStartDate},
+      	proj_end_date= #{projEndDate}
+	where proj_no=#{projNo}	
+	</update>
+	
+	
+	
 </mapper>

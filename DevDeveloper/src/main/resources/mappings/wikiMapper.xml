@@ -114,6 +114,48 @@
 	 </update>
 	 
 	 
+	 <!-- 
+	 	곽동우
+	 	위키 번역라인 수정정보 등록
+	 	20191117
+	  -->
+	  <update id="updateWikiTransInfo" parameterType="wiki" >
+	  		UPDATE wiki_guide_trans
+			SET manual_upline =
+			  CASE
+			  	<foreach collection="updateInfo" item="info" index="index">
+            		<foreach collection="info" item="line" index="index2">	<!-- 중복라인 처리하는법생각 -->
+            			WHEN manual_line = #{index} THEN #{line}
+            		</foreach>
+        		</foreach>
+			    ELSE manual_line
+			  END
+			WHERE manual_no = #{manualNo}
+	  </update>
+	  
+	  <!-- 
+	 	곽동우
+	 	위키 번역라인 수정
+	 	20191117
+	  -->
+	  <update id="updateWikiTrans" parameterType="wiki">
+	  		UPDATE wiki_guide_trans
+			SET manual_line = manual_upline
+			WHERE manual_no = #{manualNo}
+	  </update>
+	  
+	  
+	  <!-- 
+	 	곽동우
+	 	위키 번역라인 수정
+	 	20191117
+	  -->
+	  <update id="deleteWikiTransInfo" parameterType="wiki">
+		  	UPDATE wiki_guide_trans
+			SET manual_upline = NULL
+			WHERE manual_no = #{manualNo}
+	  </update>
+
 	 
 	 <!-- 
 	 	파일위치조회

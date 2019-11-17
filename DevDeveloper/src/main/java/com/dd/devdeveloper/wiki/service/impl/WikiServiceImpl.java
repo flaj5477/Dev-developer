@@ -163,15 +163,24 @@ public class WikiServiceImpl implements WikiService {
 	@Override
 	public void updateWiki(WikiVO vo) {
 
-		String path = getWikiContentsPath(vo);
+		String path = getWikiContentsPath(vo);	//경로
+		
+		String oriContent = readText(path);
+		String updateContent = vo.getManualContents();	//수정내용
+		
+		List<List<Integer>> updateInfo = getUpdateInfo(oriContent, updateContent);		//수정할 라인정보 가져오기
 
+		System.out.println(updateInfo.toString());
+		
+		vo.setUpdateInfo(updateInfo); 		//vo에 담아준다
+		
 		// 기존파일삭제
 		delFile(path);
 
 		// 새로받은 태그폴더에 저장
 		textToFile ttf = new textToFile();
 		try {
-			path = ttf.textSave(vo.getManualContents(), vo.getManualTags(), vo.getManualTitle()); // txt파일로떨군다
+			path = ttf.textSave(updateContent, vo.getManualTags(), vo.getManualTitle()); // txt파일로떨군다
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -183,7 +192,14 @@ public class WikiServiceImpl implements WikiService {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		wikiDAO.updateWiki(vo);
+		
+		
+		wikiDAO.updateWiki(vo);		//위키원본 수정
+		wikiDAO.updateWikiTransInfo(vo);	// 위키 번역 수정라인정보 등록
+	//	wikiDAO.updateWikiTrans(vo);	// 위키 번역라인 수정적용
+	//	wikiDAO.deleteWikiTransInfo(vo);	// 위키 번역 수정라인정보 삭제
+		
+		
 	}
 
 	/*
@@ -191,7 +207,7 @@ public class WikiServiceImpl implements WikiService {
 	 */
 	@Override
 	public void deleteWiki(WikiVO vo) {
-		String oriPath = getWikiContentsPath(vo);
+		String oriPath = getWikiContentsPath(vo);	//경로받아오기
 		String copyPath = "C:\\Users\\User\\Desktop\\textTest" + "\\" + "trash"; //휴지통
 		fileCopy(oriPath, copyPath);
 		delFile(oriPath);
@@ -328,14 +344,14 @@ public class WikiServiceImpl implements WikiService {
 		
 		String path = vo.getManualContentsPath();
 		
-		String contents = readText(path);
+		String contents = readText(path);	//원본 파일 읽어온다
 		
 		
 		int start;
 		int lineNum = 0;
 		
-		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();
-		Map<Integer, Object> transLineMap = new HashMap<Integer, Object>(); //라인별로 번역된거만 담음
+		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();			//원본 라인별로 담는다
+		Map<Integer, Object> transLineMap = new HashMap<Integer, Object>(); 	//라인별로 번역된거만 담음
 		
 		do {
 			start = contents.indexOf("<");
@@ -350,10 +366,10 @@ public class WikiServiceImpl implements WikiService {
 				
 				int idx = contents.indexOf(eTag);
 				
-				lineMap.put(lineNum, contents.substring(0, idx+eTagLength));
+				lineMap.put(lineNum, contents.substring(0, idx+eTagLength));		//태그잘라서 라인별로 담는다
 				transLineMap.put(lineNum, null);	//본문 라인길이만큼 만들어준다
 				//data.add(text.substring(0, idx+4));
-				contents = contents.substring(idx+eTagLength);
+				contents = contents.substring(idx+eTagLength);		//라인에 담은 태그는 잘라버림
 				lineNum++;
 			}
 		}while(start != -1);
@@ -404,8 +420,8 @@ public class WikiServiceImpl implements WikiService {
 		List<Map<String, Object>> transList = wikiDAO.getWikiTrans(vo);
 		
 		for(int i = 0; i < transList.size(); i++) {
-			int transline = Integer.parseInt( String.valueOf( transList.get(i).get("manualLine") ) );	// java.math.BigDecimal cannot be cast to java.lang.Integer 에러 자바
-			String transContents = (String) transList.get(i).get("manualAfter");						//		오라클 NUMBER 형 컬럼의 데이터를 HashMap 타입으로 받아 java에서 사용하려고 하니 발생
+			int transline = Integer.parseInt( String.valueOf( transList.get(i).get("manualLine") ) );	// java.math.BigDecimal cannot be cast to java.lang.Integer 에러 자바 //		오라클 NUMBER 형 컬럼의 데이터를 HashMap 타입으로 받아 java에서 사용하려고 하니 발생
+			String transContents = (String) transList.get(i).get("manualAfter");						
 			
 			lineMap.put(transline, transContents);
 			transLineMap.put(transline, transContents);	// 번역된거 해당라인에 넣음
@@ -535,7 +551,7 @@ public class WikiServiceImpl implements WikiService {
 //				System.out.println("NO ERRORS!");
 //			}
 
-			manualContents = new String(readBuffer); // 출력
+			manualContents = new String(readBuffer); // 내용담기
 
 			fileStream.close();// 스트림 닫기
 			// }
@@ -610,4 +626,89 @@ public class WikiServiceImpl implements WikiService {
 		} // end - fileCopy
 	}
 
+	
+	
+	/*
+	 * 20191117
+	 * 곽동우
+	 * 
+	 * 원본과 수정본 비교후 번역라인 업데이트 정보 가져온다
+	 * 
+	 */
+	public List<List<Integer>> getUpdateInfo(String oriContent, String updateContent) {
+		
+		Map<Integer, Object> oriLineMap = divLine(oriContent);			//원본 라인별로 담는다
+		Map<Integer, Object> transLineMap = divLine(updateContent); 	//수정본 라인별로 담는다
+		List<List<Integer>> updateInfo = new ArrayList<List<Integer>>(); 	//업데이트정보
+		
+		/*
+		 * 원본 라인을 수정본과 비교해서
+		 * 원본 라인번호를 담고 수정본에 같은 내용 이있으면 그 수정본 라인번호를 맵에 담는다
+		 *  ex) [(원본)1,(수정본)2] [2,3]
+		 */
+		for(int i = 0; i < oriLineMap.size(); i++) {
+			String searchContent = (String) oriLineMap.get(i);	// 수정본과 비교할 원본내용
+			
+			ArrayList<Integer> eqLine = new ArrayList<Integer>();	//같은라인번호 담는배열
+			
+			for(int j = 0; j < transLineMap.size(); j++) {	
+				
+				if(transLineMap.get(j).equals(searchContent)) {	// 수정본 중에 원본과 같은 라인 이면
+					System.out.println(i+","+j + "  "  + searchContent + "  " + transLineMap.get(j));
+					
+					//ArrayList<Integer> infoList = new ArrayList<Integer>();
+					//infoList.add(j);	//같은내용담는다
+					
+					eqLine.add(j);	// 배열에 담는다
+				}
+			} // end - for문
+			
+			updateInfo.add(eqLine);	// 같은라인 정보 들어있는 배열을 update정보에 저장
+			
+		}
+		
+		System.out.println(updateInfo.toString());
+		
+		
+		return updateInfo;
+	}
+	
+	/*
+	 * 20191117
+	 * 곽동우
+	 * 라인 나눠서 
+	 * ex)[1 ,	내용] [2, 내용]
+	 * 리턴해준다
+	 */
+	public Map<Integer, Object> divLine(String contents) {	
+		
+		int start;		//시작태그위치 <
+		int lineNum = 0;	//시작태그 >
+		
+		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();	//리턴할 맵
+		
+		do {
+			start = contents.indexOf("<");
+			int end = contents.indexOf(">");
+			
+			if(start != -1) {
+				
+				String sTag = contents.substring(start, end+1);
+				String eTag =  "</"+contents.substring(start+1, end)+">";
+				int eTagLength = eTag.length();
+				
+				
+				int idx = contents.indexOf(eTag);
+				
+				lineMap.put(lineNum, contents.substring(0, idx+eTagLength));		//태그잘라서 라인별로 담는다
+				//data.add(text.substring(0, idx+4));
+				contents = contents.substring(idx+eTagLength);		//라인에 담은 태그는 잘라버림
+				lineNum++;
+			}
+		}while(start != -1);
+		
+		return lineMap;
+
+	}
+	
 }

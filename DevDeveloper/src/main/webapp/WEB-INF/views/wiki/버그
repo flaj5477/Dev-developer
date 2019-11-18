@@ -335,3 +335,12 @@ SELECT 	a.TRANS_NO									as		"transNo",
 									
 			FROM WIKI_GUIDE_TRANS a
 			order by a.MANUAL_LINE;
+			
+			
+			
+			
+			
+			
+			
+			
+ 태그에서 c#검색하면 못가져옴   주소창 c# 그대로들어가서?

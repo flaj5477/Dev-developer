@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,9 +28,8 @@
 		 checkForm();
 		
 		 
-		 tagSelectBox();	// 태그셀렉트박스
+		 //tagSelectBox();	// 태그셀렉트박스
 		
-		 
 		 //ck에디터 생성
 		 ClassicEditor
 	     .create( document.querySelector( '#manualContents' ) , {
@@ -45,40 +45,28 @@
 	     } );
 		
 		 
+		 $('#manualTags').select2();
+		 
 	});
 	
 	// select2 초기화
-	function tagSelectBox(){
-		/* $('select').select2(
+/* 	function tagSelectBox(){
+		$('#manualTags').on('click',function(){
 			$.ajax({
-				url: 'asd',
+				url: 'getTagList',
 				dataType: 'json',
-				delay: 250,
+				delay: 250,	
 				cache: true,
-				data: function (params) {
-					return { q: params.term }; },
-				processResults: function (data) {
-					return { results: data.results }; },
-				placeholder: 'Search for a repository',
-				minimumInputLength: 1
-			})
-		); */
-		
-		$('select').select2({
-				ajax : {
-					url: 'asd',
-					dataType: 'json',
-					delay: 250,
-					cache: true,
-					data: function (params) {
-						return { q: params.term }; },
-					processResults: function (data) {
-						return { results: data.results }; },
-					placeholder: 'Search for a repository',
-					minimumInputLength: 1
-				}
+				success: function (data) {
+	                      //copy data to 'cache'
+	                      for(var i=0; i<data.length; i++){
+	                      	$('#manualTags').appendTo("<option>"+data.tagsTitle+"</option>");
+	                      }
+	                  }
+			});
 		});
-	}
+		
+	} */
 
 	
 	
@@ -109,7 +97,9 @@
 		<input type="text" class="form-control" id="manualOriUrl" name="manualOriUrl" placeholder="url" >
   		<textarea class="form-control form-control-alternative" id="manualContents" name="manualContents" rows="20" placeholder="내용을 입력해주세요"></textarea>
   		<select class="form-control" id="manualTags" name="manualTags" multiple="multiple">
-  		
+  			<c:forEach items="${tagList}" var="tag">
+  				<option>${tag.tagsTitle }</option>
+  			</c:forEach>
   		</select>
   		<input type="text" class="form-control" id="manualTags" name="manualTags" placeholder="테그" >
   		<button type="button" id="btnfrm" class="btn btn-primary">등록</button>

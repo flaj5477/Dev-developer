@@ -1,6 +1,7 @@
 package com.dd.devdeveloper.tags.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,5 +16,9 @@ public class TagsDAO {
 
 	public List<TagsVO> tagList() {
 		return mybatis.selectList("TagsDAO.tagList");
+	}
+
+	public List<Map<String, Object>> getTagList() {
+		return mybatis.selectList("TagsDAO.getTagList");
 	}
 }

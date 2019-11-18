@@ -57,6 +57,30 @@ public class QnaDAO {
 		}
 
 
+		public void updateQna(QuestionVO vo) {
+			mybatis.update("QnaDAO.updateQna",vo);
+			
+		}
+
+
+		public void deleteQna(QuestionVO vo) {
+		     mybatis.delete("QnaDAO.deleteQna", vo);
+			
+		}
+
+
+		public void deleteAnq(AnswerVO vo) {
+			mybatis.delete("QnaDAO.deleteAnq",vo);
+			
+		}
+
+
+		public void updateAnq(AnswerVO vo) {
+			mybatis.update("QnaDAO.updateAnq",vo);
+			
+		}
+
+
 
 
 		

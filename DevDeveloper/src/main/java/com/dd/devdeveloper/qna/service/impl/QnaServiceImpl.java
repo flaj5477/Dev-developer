@@ -70,6 +70,30 @@ public class QnaServiceImpl implements QnaService {
 		return qnaDAO.getAnq(vo);
 	}
 
+	@Override
+	public void updateQna(QuestionVO vo) {
+		 qnaDAO.updateQna(vo);
+		
+	}
+
+	@Override
+	public void deleteQna(QuestionVO vo) {
+		 qnaDAO.deleteQna(vo);
+		
+	}
+
+	@Override
+	public void deleteAnq(AnswerVO vo) {
+		qnaDAO.deleteAnq(vo);
+		
+	}
+
+	@Override
+	public void updateAnq(AnswerVO vo) {
+		qnaDAO.updateAnq(vo);
+		
+	}
+
 
 
 }

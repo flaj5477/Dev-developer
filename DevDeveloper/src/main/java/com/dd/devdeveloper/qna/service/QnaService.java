@@ -15,14 +15,20 @@ public interface QnaService {
 	//질문등록
 	void insertQna(QuestionVO vo);
 	
+	void updateQna(QuestionVO vo);
+	
+	void deleteQna(QuestionVO vo);
+	
+	void deleteAnq(AnswerVO vo);
 	//답변등록
 	void insertAnq(AnswerVO vo);
-	
+	void updateAnq(AnswerVO vo);
 	List<AnswerVO> getAnq(AnswerVO vo);
 	
 	//상세보기
 	QuestionVO getQna(QuestionVO vo);
 	
 	void updateViews(int qNo);
+	
 	
 }

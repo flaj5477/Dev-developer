@@ -37,8 +37,8 @@
 	})
 </script>
 <style type="text/css">
-<!--출석률 표시하는거 고정크기 지정-->
-.col-fixed {
+<!--
+출석률 표시하는거 고정크기 지정-->.col-fixed {
 	position: relative;
 	min-height: 1px;
 	padding-right: 5px;
@@ -101,7 +101,7 @@
 			<div class="container-fluid">
 				<div class="header-body">
 					<div class="row">
-						<div class="col-xl-4 col-lg-8 col-md-6 mb-5 mb-xl-0">
+						<div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
 							<!-- 프로필 -->
 							<div class="card card-profile shadow">
 								<div class="row justify-content-center">
@@ -114,7 +114,8 @@
 								</div>
 								<div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
 									<div class="d-flex justify-content-between">
-										<a href="#" class="btn btn-sm btn-info mr-4">Connect</a> <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+										<button type="button" class="btn btn-sm btn-info mr-4" data-toggle="modal" data-target=".bd-example-modal-lg">응시기록 열람</button>
+										<!-- <a href="#" class="btn btn-sm btn-info mr-4">Connect</a> --> <a href="#" class="btn btn-sm btn-default float-right">Message</a>
 									</div>
 								</div>
 								<div class="card-body pt-0 pt-md-4 mt-5">
@@ -141,15 +142,7 @@
 												<c:forEach var="activityLog" items="${activityLogList}" varStatus="status">
 													<c:if test="${status.index % 7 == 0 }">
 														<!-- 일요일이면 g태그 열기 -->
-														<g transform="translate(<fmt:formatNumber value="
-															${status.index/7*10}" pattern="#" />, 0)">
-
-													
-													
-													
-													
-													
-													
+														<g transform="translate(<fmt:formatNumber value="${status.index/7*10}" pattern="#" />, 0)">
 													
 													</c:if>
 													<!-- col-fixed 의 width인 620에 대한 % -->
@@ -161,15 +154,12 @@
 												</c:forEach>
 											</svg>
 										</div>
-										<a href="#">Show more</a>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col col-xl-8 col-lg-4 col-md-6">
 							<!-- 프로젝트 상태 카드 -->
-							<div class="row">
-								<div class="col-xl-3 col-lg-12">
+							<div class="row mt-3">
+								<div class="col-xl-6 col-lg-6">
 									<a data-toggle="modal" data-target="#projectModal"> <!-- 모달 창 걸기 -->
 										<div class="card card-stats mb-4 mb-xl-0">
 											<div class="card-body proj-modal">
@@ -190,7 +180,7 @@
 										</div>
 									</a>
 								</div>
-								<div class="col-xl-3 col-lg-12">
+								<div class="col-xl-6 col-lg-6">
 									<a data-toggle="modal" data-target="#projectModal">
 										<div class="card card-stats mb-4 mb-xl-0">
 											<div class="card-body proj-modal">
@@ -211,7 +201,7 @@
 										</div>
 									</a>
 								</div>
-								<div class="col-xl-3 col-lg-12">
+								<div class="col-xl-6 col-lg-6">
 									<a data-toggle="modal" data-target="#projectModal">
 										<div class="card card-stats mb-4 mb-xl-0">
 											<div class="card-body proj-modal">
@@ -232,7 +222,7 @@
 										</div>
 									</a>
 								</div>
-								<div class="col-xl-3 col-lg-12">
+								<div class="col-xl-6 col-lg-6">
 									<a data-toggle="modal" data-target="#projectModal">
 										<div class="card card-stats mb-4 mb-xl-0">
 											<div class="card-body proj-modal">
@@ -254,18 +244,19 @@
 									</a>
 								</div>
 							</div>
+						</div>
+						<div class="col-xl-8 order-xl-1">
 							<div class="row  mb-4 mt-3">
 								<div class="col-xl-12 col-lg-15">
-									<div class="card bg-gradient-default shadow">
+									<div class="card bg-gradient-default shadow" style="min-height: 620px; max-height: 620px">
 										<div class="card-header bg-transparent border-0">
 											<div class="row align-items-center">
 												<div class="col">
 													<h3 class="text-white mb-0">프로젝트 관리</h3>
 												</div>
-												
 											</div>
 										</div>
-										<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+										<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 550px;">
 											<ol class="carousel-indicators">
 												<c:forEach var="myProject" items="${myProjectsList}" varStatus="status">
 													<c:choose>
@@ -278,7 +269,7 @@
 													</c:choose>
 												</c:forEach>
 											</ol>
-											<div class="carousel-inner">
+											<div class="carousel-inner" style="overflow: auto; height: 500px;">
 												<c:forEach var="myProject" items="${myProjectsList}" varStatus="status">
 													<c:choose>
 														<c:when test="${status.index == 0}">
@@ -291,12 +282,10 @@
 													<div class="table-responsive">
 														<table class="table align-items-center table-flush table-dark">
 															<caption class="mt--3" style="caption-side: top;" id="${myProject.projNo }${myProject.projTitle}">
-																${myProject.projTitle}
-																<span>
-																<button type="button" class="btn btn-primary">파일 관리</button>
+																${myProject.projTitle} <span>
+																	<button type="button" class="btn btn-primary">파일 관리</button>
 																</span>
 															</caption>
-															
 															<thead class="thead-dark text-light">
 																<tr>
 																	<th scope="col" class="text-light">지원자 번호</th>
@@ -310,7 +299,7 @@
 																<c:forEach var="projApplicant" items="${projApplicantsList}" varStatus="i">
 																	<c:if test="${projApplicant.projNo == myProject.projNo }">
 																		<tr>
-																			<input type="hidden" value="${projApplicant.applyNo }"/>
+																			<input type="hidden" value="${projApplicant.applyNo }" />
 																			<th scope="row">${projApplicant.membersNo }</th>
 																			<td>${projApplicant.participantName }</td>
 																			<td>${projApplicant.status }</td>
@@ -344,36 +333,29 @@
 									</a>
 								</div>
 							</div>
-							<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">응시기록 열람</button>
-							<!-- Modal --> 
+							
+							<!-- Modal -->
 							<div id="#recModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-							  <div class="modal-dialog modal-dialog-centered modal-lg">
-							    <div class="modal-content">
-							      <div class="modal-header">
-							        <h5 class="modal-title" id="recordModalTitle">${members.membersName}님의 응시기록</h5>
-							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							          <span aria-hidden="true">&times;</span>
-							        </button>
-							      </div>
-						      		<div class="modal-body" id="recBody">
-							        	<jsp:include page="../cbt/record.jsp"></jsp:include>
-							      </div>
-							    </div>
-							  </div>
-							</div>	
+								<div class="modal-dialog modal-dialog-centered modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="recordModalTitle">${members.membersName}님의응시기록</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body" id="recBody">
+											<jsp:include page="../cbt/record.jsp"></jsp:include>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-		<!-- Card stats 여기 프로젝트 카드 있던 곳-->
-		<div class="row"></div>
-	</div>
-	</div>
-	</div>
 
 
-	<div class="container-fluid mt--7">
+<!-- 	<div class="container-fluid mt--7"> -->
 		<div class="row mt-5">
 			<div class="col-xl-8 mb-5 mb-xl-0">
 				<div class="card shadow">
@@ -441,7 +423,6 @@
 							<div class="col">
 								<h3 class="mb-0">Social traffic</h3>
 							</div>
-						
 							<div class="col text-right">
 								<a href="#!" class="btn btn-sm btn-primary">See all</a>
 							</div>
@@ -533,7 +514,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+</div>
 		<!-- Footer -->
 		<footer class="footer">
 			<div class="row align-items-center justify-content-xl-between">
@@ -567,64 +548,61 @@
 				</div>
 				<div class="modal-body"></div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" onclick="updateApplytoApproved(this)" >승인하기</button>
+					<button type="button" class="btn btn-primary" onclick="updateApplytoApproved(this)">승인하기</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
 	<!-- 프로젝트 지원자 승인하기 버튼 클릭 이벤트 -->
 	<script>
-		function updateApplytoApproved(btn){
+		function updateApplytoApproved(btn) {
 			//지원상태를 '승인'으로 할 지원번호 
 			var applyNo = $(btn).parent().prev().find("div").attr('id');
-			
-			window.location.href="./updateApplytoApproved?applyNo=" + applyNo;
+
+			window.location.href = "./updateApplytoApproved?applyNo=" + applyNo;
 		}
 	</script>
-	
-	
-	
 	<!-- 프로젝트 지원자 모달 스크립트 -->
 	<script>
-		$('#projApplyModal').on('show.bs.modal', function(event) {
-			var button = $(event.relatedTarget) // Button that triggered the modal
-			var applyNo = button.parent().prevAll().eq(4).attr("value");
-			var projApplicantsList = JSON.parse('${jsonProjApplicantsList}');
-			
-			var i = button.attr('id');	//프로젝트 지원자들중 눌려진 버튼의 아이디 값으로 해당 지원자의 정보를 가져온다
-	     	
-	        var content = "<div class= container id=" + applyNo + "> " +
-	        					"<div class=row> " +
-	        						"<div class=col>" +
-	        							projApplicantsList[i].participantName +
-	        						"</div>" +
-	        					"</div>" +
-	        					"<div class=row> " +
-        							"<div class=col>" +
-        								projApplicantsList[i].phoneNo +
-        							"</div>" +
-        							"<div class=col>" +
-        								projApplicantsList[i].email +
-        							"</div>" +
-        						"</div>" +
-        						"<div class=row> " +
-        							"<div class=col>" +
-        								projApplicantsList[i].address +
-        							"</div>" +
-        						"</div>" +
-        						"<div class=row> " +
-    								"<div class=col>" +
-    									projApplicantsList[i].coverLetter +
-    								"</div>" +
-    							"</div>" +
-	        				"</div> ";
-		
-			
-			//모달창에 내용 달기
-			$("#projApplyModal .modal-body").append(content); //여기서 모달을 다시 띄우면 그 전에 열었던 모달창에 더 추가된다. 정보가 계속 누적됨;;;
-		});
-		
+		$('#projApplyModal')
+				.on(
+						'show.bs.modal',
+						function(event) {
+							var button = $(event.relatedTarget) // Button that triggered the modal
+							var applyNo = button.parent().prevAll().eq(4).attr(
+									"value");
+							var projApplicantsList = JSON
+									.parse('${jsonProjApplicantsList}');
+
+							var i = button.attr('id'); //프로젝트 지원자들중 눌려진 버튼의 아이디 값으로 해당 지원자의 정보를 가져온다
+
+							var content = "<div class= container id=" + applyNo + "> "
+									+ "<div class=row> " + "<div class=col>"
+									+ projApplicantsList[i].participantName
+									+ "</div>"
+									+ "</div>"
+									+ "<div class=row> "
+									+ "<div class=col>"
+									+ projApplicantsList[i].phoneNo
+									+ "</div>"
+									+ "<div class=col>"
+									+ projApplicantsList[i].email
+									+ "</div>"
+									+ "</div>"
+									+ "<div class=row> "
+									+ "<div class=col>"
+									+ projApplicantsList[i].address
+									+ "</div>"
+									+ "</div>"
+									+ "<div class=row> "
+									+ "<div class=col>"
+									+ projApplicantsList[i].coverLetter
+									+ "</div>" + "</div>" + "</div> ";
+
+							//모달창에 내용 달기
+							$("#projApplyModal .modal-body").append(content); //여기서 모달을 다시 띄우면 그 전에 열었던 모달창에 더 추가된다. 정보가 계속 누적됨;;;
+						});
+
 		//모달 닫기
 		$('#projApplyModal').on('hide.bs.modal', function(e) {
 
@@ -634,12 +612,6 @@
 
 		});
 	</script>
-	
-	
-	
-	
-	
-	
 	<!-- 프로젝트 모달 -->
 	<!-- Modal -->
 	<div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">

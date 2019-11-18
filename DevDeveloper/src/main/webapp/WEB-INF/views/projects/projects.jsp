@@ -30,7 +30,7 @@
 
 <body class="">
 <form action="./updateProjectForm" id="frm" method="post">
-	<div class="container-fluid mt--5">
+	<div class="container-fluid mt-5">
 		<div class="card bg-secondary shadow">
 			<div class="card-header bg-white border-0">
 				<div class="row align-items-center">

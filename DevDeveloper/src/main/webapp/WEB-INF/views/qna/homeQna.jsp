@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +42,7 @@
 			<input class="form-control" name="searchVal" placeholder="Search" value="${questionVO.searchVal}"
 					type="text" style="border: #686ce4 1px solid; width:180px;  float :right">
 					<input type="hidden" name="page" value="1"> 
-				 	<input type="hidden" id="orderby" name="orderby" value=""> 
+				 	<input type="hidden" class ="orderby" id="orderby" name="orderby" value=""> 
 					
 				</form>	
 		</div>
@@ -65,12 +66,21 @@
 							<tr>
 								<td style="width: 27%; padding-left: 25px;">
 									<ul class="question-qqqstatistic">
+									<c:choose>
+									<c:when test ="${qna.aCount eq 0 }">
 										<li>
-											<div>${qna.aCount}</div> 답변수
+											<div class="t">${qna.aCount}</div> 답변수
 										</li>
+									</c:when>
+									<c:otherwise>
+										<li class="ddd">
+											<div class="t">${qna.aCount}</div> 답변수
+										</li>
+									</c:otherwise>
+									</c:choose>																				
 										<li>
 											<div>0</div> 좋아요
-										</li>
+										</li>						
 										<li>
 											<div>${qna.qViews}</div> 조회수			
 										</li>
@@ -89,7 +99,7 @@
 										</div>
 										<div class="pull-right">
 											<span class="question-qqqauthor"> <a href="#">
-													${qna.membersId }&nbsp; </a> <span class="question-qqqdate">${qna.qDate}</span>
+													${qna.membersId}&nbsp; </a> <span class="question-qqqdate">${qna.qDate}</span>
 											</span>
 										</div>
 									</div>
@@ -117,8 +127,28 @@
 		        var id = $(this).attr('id');
 		        document.searchform.orderby.value = id 
 				document.searchform.submit()
+				$("#q_views").attr('class','filter-qqqitem active');
 		    });
 		});
+		
+		
+/*  		  $(function(){
+			  
+			 var order = $(".orderby").val();  
+		  
+			  if(order=='q_views'){
+				  $("#q_views").attr('class','filter-qqqitem active'); 
+
+				 
+			  }
+		  })
+ 
+			  
+		   */
+		 
+		  
+		
+		
 	</script>
 
 

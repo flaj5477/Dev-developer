@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +26,14 @@ import com.dd.devdeveloper.wiki.WikiVO;
 import com.dd.devdeveloper.wiki.service.WikiService;
 import com.dd.devdeveloper.wiki.textFile.textToFile;
 
+//위키 서비스 구현
 @Service
 public class WikiServiceImpl implements WikiService {
 
 	@Autowired
 	WikiDAO wikiDAO;
+	
+	private static final Logger logger = LoggerFactory.getLogger(WikiServiceImpl.class);	//로그
 	
 	// 경로조회
 	@Override

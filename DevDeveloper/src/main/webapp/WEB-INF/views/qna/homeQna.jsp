@@ -72,11 +72,11 @@
 											<div class="t">${qna.aCount}</div> 답변수
 										</li>
 									</c:when>
-									<c:when test ="${qna.aCount > 4 }">
+<%-- 									<c:when test ="${qna.aCount > 4 }">
 										<li class="fff">
 											<div class="t">${qna.aCount}</div> 답변수
 										</li>
-									</c:when>
+									</c:when> --%>
 									<c:otherwise>
 										<li class="ddd">
 											<div class="t">${qna.aCount}</div> 답변수

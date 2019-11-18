@@ -32,7 +32,7 @@
 	});
   	
   	function checkStorage() {
-  		
+  		location.href = '${pageContext.request.contextPath}/cbt/index';
   	}
   	
   </script>

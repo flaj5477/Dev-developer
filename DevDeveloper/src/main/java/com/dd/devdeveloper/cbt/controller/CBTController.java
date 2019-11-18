@@ -71,9 +71,7 @@ public class CBTController {
 	}
 	
 	@RequestMapping("cbt/examination") 
-	public String examination(MembersVO members, HttpSession session) {
-		session.setAttribute("members",members);
-		System.out.println(members);
+	public String examination() {
 		return "/notiles/cbt/examination";
 	}
 
@@ -104,7 +102,6 @@ public class CBTController {
 					method=RequestMethod.GET)
 	@ResponseBody
 	public Map<String,Object> getResult(@PathVariable int rid, TestsRecordVO recvo) {
-		recvo.setTestsApplyNo(rid);
 		return cbtService.getResult(recvo);
 	}
 	

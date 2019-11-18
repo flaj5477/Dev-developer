@@ -31,7 +31,7 @@
 	
 	function viewerPage() {
 		$('.cbtExamination #toast').fadeIn(500).delay(1000).fadeOut(500,function() {
-			  document.viewerForm.submit();
+			  document.frm.submit();
 		});
 	}
 
@@ -56,7 +56,6 @@
 					 .appendTo('#resultTabBody');
 			
 			gradeEvent(newGrade);
-			resultForm.membersGrade.value = newGrade;
 		});
 	}
 	
@@ -84,7 +83,7 @@
 <body onload="execution()">
 <div class="cbtExamination" id="screen-lock" align="center">
 	<div id="examination">
-		<form action="viewer" name="viewerForm" method="post">
+		<form action="viewer" name="frm" method="post">
 			<div id="toast">
 				<p> <br>응시용 화면으로 전환합니다. </p>
 				<div class="spinner-border text-info" style="width: 4rem; height: 4rem;" role="status">
@@ -112,10 +111,7 @@
 		<div id="toast">
 			<p> <br> Dashboard로 이동합니다. </p>
 		</div>
-		<form action="../getDashboard" name="resultForm" method="post">
-			<input type="hidden" name="membersGrade"/>
-			<button type="button" id="exit">CBT종료</button>
-		</form>
+		<button type="button" id="exit">CBT종료</button>
 	</div>
 </div>
 </body>

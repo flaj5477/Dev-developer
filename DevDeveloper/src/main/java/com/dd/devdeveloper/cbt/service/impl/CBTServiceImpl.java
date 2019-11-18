@@ -90,15 +90,15 @@ public class CBTServiceImpl implements CBTService {
 			}
 		}
 		// 점수계산
-		int quest = (Integer)cd.get("quest"); 
-		int value = score*Math.round((100/quest));
+		float quest = ((float)100/(Integer)cd.get("quest"));
+		int resultScore = Math.round(score*quest);
 		// 결과 업데이트
 		TestsRecordVO recvo = new TestsRecordVO();
 		recvo.setTestsApplyNo((Integer)cd.get("rid"));
 		recvo.setMembersNo((Integer)cd.get("user"));
 		recvo.setTestsNo((Integer)cd.get("level"));
 		recvo.setTestsTime((Integer)cd.get("time"));
-		recvo.setTestsScore(value);
+		recvo.setTestsScore(resultScore);
 		dao.cbtResultUpdate(recvo);
 	}
 

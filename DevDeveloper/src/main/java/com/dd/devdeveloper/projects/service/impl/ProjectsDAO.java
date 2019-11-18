@@ -58,6 +58,6 @@ public class ProjectsDAO {
   
   //프로젝트 수정
   public void updateProject(ProjectsVO vo) {
-	  
+	  mybatis.update("ProjectsDAO.updateProject", vo);
   }
 }

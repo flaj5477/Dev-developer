@@ -180,8 +180,8 @@
 		</div>
 		</c:when>
 		<c:otherwise>
-		<div style ="text-align:center">답변 작성을 하시려면 <a data-toggle="modal" href="login2" data-target="#modal-login"
-	role="button"> 로그인</a>이 필요합니다.</div>
+		<div style ="text-align:center">답변작성하려면	<a data-toggle="modal" href="login2" data-target="#modal-login"
+	role="button">로그인</a></div>
 		<br><br>
 		</c:otherwise>
 		</c:choose>

@@ -5,19 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title> CBT Ready </title>
+<title>CBT Ready</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/cbt.css">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-
 	$(document).ready(function() {
-		$("#tabs").tabs();
+		$('#tabs').tabs();
 		readyBox();
-		testInfo();
-		connection();
+		getTest();
+		examinationPage();
 	});
 	
 	function readyBox() {
@@ -40,11 +39,11 @@
 		$('#comment2').append('<br> <b>[시험 메뉴안내]</b>는 응시화면에서 사용되는 <b>주요기능</b>을 소개합니다. <br><br>');
 		$('#tab3').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시험 준비완료&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
 		$('#comment3').append('<br> <b>[시험 시작하기]</b>버튼을 누르시면 <b>잠시 후 시험이 시작됩니다.</b><br><br>');
-		$('#readyBtn').html('<h5>시험 시작하기</h5>');
+		$('#submitBtn').html('<h5>시험 시작하기</h5>');
 		$('#toast').children('p').html('<br>잠시 후 시험이 시작됩니다.');
 	}
 	
-	function testInfo() {
+	function getTest() {
 		var level = parseInt("${param.testsNo}"); //  command의 vo객체를 통해 form 태그의 값을 가져왔음!
 		frm.testsNo.value = level; // frm 태그에 레벨 값 저장
 		$.ajax('getTestInfo/'+level, {  // 호출 Mapping URI
@@ -68,9 +67,9 @@
 		});
 	}
 	
-	function connection() {
-		$('#readyBtn').on('click',function() {
-			$(this).attr('disabled',true);
+	function examinationPage() {
+		$('#submitBtn').on('click',function() {
+			$(this).attr('disabled',true); // 중복 클릭 방지
 			$('#toast').fadeIn(500).delay(500).fadeOut(500,function() {
 				document.frm.submit();
 			});
@@ -115,7 +114,7 @@
 	  				<span class="sr-only"></span>
 				</div>
 			</div>
-			<button type="button" id="readyBtn"></button>
+			<button type="button" id="submitBtn"></button>
 		</div>
 	</form>
 </div>

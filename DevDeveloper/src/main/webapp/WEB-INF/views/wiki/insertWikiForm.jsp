@@ -6,12 +6,19 @@
 <meta charset="UTF-8">
 <script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
 <script src="http://code.jquery.com/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 <title>위키등록</title>
 <style>
 .ck-editor__editable {
     min-height: 400px;
     max-height: 800px;
 }
+
+.select2 {
+	width:100%!important;
+}
+
 </style>
 <script>
 	var myEditor;
@@ -19,11 +26,15 @@
 	$(function(){
 		 checkForm();
 		
+		 
+		 tagSelectBox();	// 태그셀렉트박스
 		
+		 
+		 //ck에디터 생성
 		 ClassicEditor
 	     .create( document.querySelector( '#manualContents' ) , {
 	    	// 제거 하고싶은 플러그인 (배열)
-			 removePlugins: [ 'ImageUpload' , 'mediaEmbed']
+			 toolbar: [ "undo", "redo", "bold", "italic", "blockQuote", "heading",  "link", "numberedList", "bulletedList",  "insertTable" ]  //툴바설정
 		 })
 	     .then( editor => {
 	            console.log( 'Editor was initialized', editor );
@@ -33,33 +44,43 @@
 	         console.error( error );
 	     } );
 		
-		
-		 
-		/*  select2 초기화
-		 $('select').select2(
-			 ajax: {
-			 	url: ,//url 주소,
-			 	dataType: 'json',
-			 	delay: 250,
-			 	cache: true,
-			 // 검색 쿼리를 만든다.
-			 	data: function (params) {
-			 		return {
-			 		q: params.term
-			 		};
-			 	},
-			 // 결과를 표현한다.
-			 processResults: function (data) {
-			 	return {
-			 		results: data.results
-			 	};
-			 }
-			},
-			 placeholder: 'Search for a repository'
-		 }); 
-		*/
 		 
 	});
+	
+	// select2 초기화
+	function tagSelectBox(){
+		/* $('select').select2(
+			$.ajax({
+				url: 'asd',
+				dataType: 'json',
+				delay: 250,
+				cache: true,
+				data: function (params) {
+					return { q: params.term }; },
+				processResults: function (data) {
+					return { results: data.results }; },
+				placeholder: 'Search for a repository',
+				minimumInputLength: 1
+			})
+		); */
+		
+		$('select').select2({
+				ajax : {
+					url: 'asd',
+					dataType: 'json',
+					delay: 250,
+					cache: true,
+					data: function (params) {
+						return { q: params.term }; },
+					processResults: function (data) {
+						return { results: data.results }; },
+					placeholder: 'Search for a repository',
+					minimumInputLength: 1
+				}
+		});
+	}
+
+	
 	
 	function checkForm(){
 		
@@ -87,6 +108,9 @@
 		<input type="text" class="form-control" id="manualTitle" name="manualTitle" placeholder="제목을 입력해주세요" >
 		<input type="text" class="form-control" id="manualOriUrl" name="manualOriUrl" placeholder="url" >
   		<textarea class="form-control form-control-alternative" id="manualContents" name="manualContents" rows="20" placeholder="내용을 입력해주세요"></textarea>
+  		<select class="form-control" id="manualTags" name="manualTags" multiple="multiple">
+  		
+  		</select>
   		<input type="text" class="form-control" id="manualTags" name="manualTags" placeholder="테그" >
   		<button type="button" id="btnfrm" class="btn btn-primary">등록</button>
 	</form>

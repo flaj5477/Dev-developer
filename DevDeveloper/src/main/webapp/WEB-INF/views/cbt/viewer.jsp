@@ -28,7 +28,13 @@
 	var questKey = [];
 	var offset = [];
 	var setTime = 0;
-
+	
+	function getStorage() {
+		localStorage.setItem('rid',rid);
+		localStorage.setItem('user',user);
+		localStorage.setItem('level',level);	
+	}
+	
 	function getTest() {
 		$.ajax('getTestInfo/'+level, {
 			type : 'GET',
@@ -203,10 +209,6 @@
 			value = $(this).val();
 			no = $(this).attr('data');
 			$('#putView').find('[data="'+no+'"]').val([value]);
-			
-			localStorage.setItem('value',value);
-			console.log(localStorage.getItem('value'));
-			
 			questEvent(no);
 		});
 		

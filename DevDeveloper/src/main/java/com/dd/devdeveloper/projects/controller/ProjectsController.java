@@ -99,7 +99,7 @@ public class ProjectsController {
 
 	@InitBinder // 컨트롤러 들어옵면 이거 먼저 실행하고 매핑한다.
 	public void initBinder(WebDataBinder binder) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		binder.registerCustomEditor(Date.class, new CustomDateEditor2(format, false));
 	}
 

@@ -60,18 +60,17 @@ jQuery UI 라이브러리 js파일
 		
 		//var editor_val = CKEDITOR.instances.editor.document.getBody().getChild(0).getText() ;
 		
-		$("#btnfrm").on("click",function(){
+		$("#frm").on("submit",function(){
 			if($("#projectTitle").val() == '') {
 				alert("제목을 입력해야합니다")
-				return;
+				return false;
 			} 
 			if (myEditor.getData()=="") {
 				alert('내용을 입력 하세요');
 				myEditor.editing.view.focus()
-				return;
+				return false;
 			}
-			
-			$("#frm").submit();
+			return true;
 		});
 	}
 </script>
@@ -169,31 +168,31 @@ jQuery UI 라이브러리 js파일
 
 	<script> //프로젝트 최소 참여 등급 설정
 		$(document).ready(function(){
-			var projRequireNo = '${vo.projRequire}';
+			var projRequireNo = parseInt('${vo.projRequire}');
 			var projRequireString = "";
 			
 			switch(projRequireNo){
-			case '0':
+			case 0:
 				projRequireString="브론즈";
 				break;
-			case "1":
+			case 1:
 				projRequireString="실버";
 				break;
-			case '2':
+			case 2:
 				projRequireString="골드";
 				break;
-			case '3':
+			case 3:
 				projRequireString="플래티넘";
 				break;
-			case '4':
+			case 4:
 				projRequireString="다이아";
 				break;
-			case '5':
+			case 5:
 				projRequireString="마스터";
 				break;
 			}
 			
-			$("select#projRequire option:selected").attr("value",projRequireString)
+			$("select#projRequire option:selected").attr("value",'${vo.projRequire}')
 													.html(projRequireString);
 		})
 	</script>

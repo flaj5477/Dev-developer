@@ -19,7 +19,7 @@
 <link href="//fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 <link href="${pageContext.request.contextPath}/resources/ckeditor/plugins/codesnippet/lib/highlight/styles/obsidian.css" rel="stylesheet">
- 
+ <script src="${pageContext.request.contextPath}/resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
  
  
 	<script>
@@ -41,10 +41,10 @@
 							<div class="form-group">
 								<input class ="insert" type="text" name="qTitle" autofocus
 									placeholder=" 제목을 입력하세요." autocomplete="off" maxlength="99"
-									id="id_title" />
+									id="qna_title" />
 							</div>
 							<div class="form-group">
-								<textarea name="qContents" cols="40" rows="10" id="id_content" placeholder="에디터넣기">
+								<textarea name="qContents" cols="40" rows="10" id="qna_content" placeholder="에디터넣기">
 </textarea>
 
 							</div>
@@ -60,7 +60,7 @@
 							</div>
 							<div class="qqrow item" style="margin-top: 15px">
 
-								<button class="btn btn-darkblue" type="submit" id="qqqbutton">
+								<button class="btn btn-darkblue" type="button" id="qqqbutton">
 								질문하기</button>
 							</div>
 						</form>
@@ -76,35 +76,38 @@
 	
 	        <script>
           
-                CKEDITOR.replace( 'id_content' ,{height: 500, 
+                CKEDITOR.replace( 'qna_content' ,{height: 500, 
                 	  filebrowserUploadUrl: 'qnaUpload.jsp'
                 });
             </script>
 	
-<!-- 	<script>
-		$(document).ready(function(){
+ 	<script>
+ 	
+	 	$(document).ready(function(){ 
 		$("#qqqbutton").click(function(){
-			var title = $(".qTitle").val();
-			var content = $(".qContent").val();
+			var title = $("#qna_title").val();
+			var content = CKEDITOR.instances['qna_content'].getData();
 			
 			if(title==""){
 				alert("제목을 입력하세요");
-				//document.insertQna.qTitle.focus();
-				return;
+				document.insertQna.qTitle.focus();
+				return false;
 			
 			}
-			if(content==""){
+			else if(content==""){
 				alert("내용을 입력하세요");
-				//document.insertQna.qContent.focus();
-				return;
+				CKEDITOR.instances['qna_content'].focus();
+				return false;
 			}
 			
 			document.insertQna.submit();
-			}
-
-		}
-
-	</script> -->
+			
+		 }) 
+	 	})
+	 	
+	 	
+	 	
+	</script> 
 
 
 </body>

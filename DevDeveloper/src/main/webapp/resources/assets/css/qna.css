@@ -1138,5 +1138,11 @@ input.insert[type="text"] {
 .answer-detail-content {
     padding-bottom: 25px;
     border-bottom: 1px solid #cdb8f3;
-};
 }
+
+.ddd {
+    
+    border: 1px solid #cdb8f3 !important;
+
+}
+

@@ -25,94 +25,101 @@ import com.dd.devdeveloper.projects.service.ProjectsService;
 public class ProjectsController {
 	@Autowired
 	ProjectsService projectsService;
-	
-	@RequestMapping("/getProjectsList") //프로젝트 목록
+
+	@RequestMapping("/getProjectsList") // 프로젝트 목록
 	public String getProjectsList(ProjectsVO vo, Model model, Paging paging) {
 		model.addAttribute("list", projectsService.getProjectsList(paging, vo));
 		model.addAttribute("paging", paging);
 		return "projects/projectsList";
 	}
-	
-	@RequestMapping("/getProjects")	//프로젝트 공고 상세
+
+	@RequestMapping("/getProjects") // 프로젝트 공고 상세
 	public String getProjects(ProjectsVO vo, Model model, HttpSession session) {
 		model.addAttribute("project", projectsService.getProjects(vo));
-		session.setAttribute("projNo", vo.getProjNo());	//세션에 projNo 추가
+		session.setAttribute("projNo", vo.getProjNo()); // 세션에 projNo 추가
 		return "projects/projects";
 	}
-	
-	@RequestMapping("/applyProjectsForm")	//지원하기 버튼 누르면 지원폼 출력
+
+	@RequestMapping("/applyProjectsForm") // 지원하기 버튼 누르면 지원폼 출력
 	public String applyProjectsForm(ProjApplicantsVO vo, Model model, HttpSession session) {
-		
-	  vo.setMembersNo( ((MembersVO)session.getAttribute("members")).getMembersNo() ); //session의 멤버id를 vo에 담는다.
-	  
-	  System.out.println("vo검사::::::::::::::::::::" + vo.getMembersNo() + vo.getProjNo()  );
-	  
-	   
-	  //프로젝트 지원 중복 검사
-	  if( projectsService.applyDuplicationInspect(vo) == 0 ) {  //지원이력이 없으면 0이 반환된다.
-	    //프로젝트 지원가능 등급인지 검사 
-	    if( projectsService.projRequireInspect(vo) == 1 ) { //지원가능 등급이면 1, 등급 미달이면 0이 반환된다.
-	      model.addAttribute("projParticipants", vo);
-	      return "projects/applyProjectsForm";
-	    }else {
-	      //지원가능 등급이 아니라고 경고창 띄우기
-	      model.addAttribute("errorMsg", "지원가능 등급이 아닙니다.");
-	      model.addAttribute("url", "./getProjectsList");
-	      return "common/Error";
-	    }
-	  }else {
-	    //중복 지원이라고 경고창 띄우기
-	    model.addAttribute("errorMsg", "이미 지원하셨습니다.");
-      model.addAttribute("url", "./getProjectsList");
-      return "common/Error";
-	  }
+
+		vo.setMembersNo(((MembersVO) session.getAttribute("members")).getMembersNo()); // session의 멤버id를 vo에 담는다.
+
+		System.out.println("vo검사::::::::::::::::::::" + vo.getMembersNo() + vo.getProjNo());
+
+		// 프로젝트 지원 중복 검사
+		if (projectsService.applyDuplicationInspect(vo) == 0) { // 지원이력이 없으면 0이 반환된다.
+			// 프로젝트 지원가능 등급인지 검사
+			if (projectsService.projRequireInspect(vo) == 1) { // 지원가능 등급이면 1, 등급 미달이면 0이 반환된다.
+				model.addAttribute("projParticipants", vo);
+				return "projects/applyProjectsForm";
+			} else {
+				// 지원가능 등급이 아니라고 경고창 띄우기
+				model.addAttribute("errorMsg", "지원가능 등급이 아닙니다.");
+				model.addAttribute("url", "./getProjectsList");
+				return "common/Error";
+			}
+		} else {
+			// 중복 지원이라고 경고창 띄우기
+			model.addAttribute("errorMsg", "이미 지원하셨습니다.");
+			model.addAttribute("url", "./getProjectsList");
+			return "common/Error";
+		}
 	}
-	
-	
-	
-	@RequestMapping("/applyProjects")	//지원 폼 정보로 지원하기
+
+	@RequestMapping("/applyProjects") // 지원 폼 정보로 지원하기
 	public String applyProjects(ProjApplicantsVO vo, HttpSession session) {
-		//vo에 지원자 no 담기
-		//vo.setMembersNo(2); /////////////////////////////////////membersId말고 members객체 넣을꺼임 바꿔야함!
-		vo.setMembersNo(  ((MembersVO)session.getAttribute("members")).getMembersNo() );
-		vo.setProjNo((Integer)session.getAttribute("projNo"));
+		// vo에 지원자 no 담기
+		// vo.setMembersNo(2); /////////////////////////////////////membersId말고
+		// members객체 넣을꺼임 바꿔야함!
+		vo.setMembersNo(((MembersVO) session.getAttribute("members")).getMembersNo());
+		vo.setProjNo((Integer) session.getAttribute("projNo"));
 		projectsService.applyProjects(vo);
-		return "redirect:/getProjectsList";	//프로젝트 목록 페이지로 돌아감
+		return "redirect:/getProjectsList"; // 프로젝트 목록 페이지로 돌아감
 	}
-	
-	@RequestMapping("/insertProjectForm") //프로젝트 등록
+
+	@RequestMapping("/insertProjectForm") // 프로젝트 등록
 	public String insertProjectForm() {
-	  return "projects/insertProjectForm";   //프로젝트 등록 폼으로 이동
+		return "projects/insertProjectForm"; // 프로젝트 등록 폼으로 이동
 	}
-	
-	
-	@RequestMapping("/insertProject") //프로젝트 등록
+
+	@RequestMapping("/insertProject") // 프로젝트 등록
 	public String insertProject(ProjectsVO vo, HttpSession session) {
 		System.out.println(vo);
-		vo.setMembersNo(  ((MembersVO)session.getAttribute("members")).getMembersNo() );
+		vo.setMembersNo(((MembersVO) session.getAttribute("members")).getMembersNo());
 		projectsService.insertProject(vo);
-	  return "redirect:/getProjectsList";   //프로젝트 목록 페이지로 돌아감
+		return "redirect:/getProjectsList"; // 프로젝트 목록 페이지로 돌아감
 	}
-	
-	
-	@RequestMapping("/deleteProject") //프로젝트 삭제
+
+	@RequestMapping("/deleteProject") // 프로젝트 삭제
 	public String deleteProject(ProjectsVO vo) {
 		projectsService.deleteProject(vo);
-		return "redirect:/getProjectsList";   //프로젝트 목록 페이지로 돌아감
+		return "redirect:/getProjectsList"; // 프로젝트 목록 페이지로 돌아감
 	}
-	
-	
-	@InitBinder //컨트롤러 들어옵면 이거 먼저 실행하고 매핑한다.
-	public void initBinder(WebDataBinder binder){
-		System.out.println("=====================================");
-		SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
+
+	@InitBinder // 컨트롤러 들어옵면 이거 먼저 실행하고 매핑한다.
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 		binder.registerCustomEditor(Date.class, new CustomDateEditor2(format, false));
 	}
-	
-	@RequestMapping("/updateProjectForm") //프로젝트 수정
-	public String updateProjectForm(ProjectsVO vo) {
-		//프로젝트 정보 가져와서
+
+	@RequestMapping("/updateProjectForm") // 프로젝트 수정
+	public String updateProjectForm(ProjectsVO vo, Model model ) {
+		// 프로젝트 정보 가져와서
+		model.addAttribute("vo", vo); //모델에 담아서 다음 페이지로 넘김
 		
-	  return "projects/updateProjectForm";   //프로젝트 수정 폼으로 이동
+		System.out.println("수정 컨트롤러:::::::::::::::::::::::::::::::::::::::::::::::" + vo);
+		return "projects/updateProjectForm"; // 프로젝트 수정 폼으로 이동
+	}
+	
+	@RequestMapping("/updateProject")
+	public String updateProject(ProjectsVO vo) {
+		
+		System.out.println(vo);
+		
+		projectsService.updateProject(vo);
+		
+		
+		return "redirect:/getProjects?projNo=" + vo.getProjNo(); // 프로젝트 상세 페이지
 	}
 }

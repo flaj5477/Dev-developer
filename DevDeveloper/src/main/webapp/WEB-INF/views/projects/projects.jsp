@@ -29,20 +29,21 @@
 </head>
 
 <body class="">
+<form action="./updateProjectForm" id="frm" method="post">
 	<div class="container-fluid mt--5">
 		<div class="card bg-secondary shadow">
 			<div class="card-header bg-white border-0">
 				<div class="row align-items-center">
 					<div class="col-xl-8">
 					<div class="row">
-						<h3 class="mb-0 pl-3 pr-3 display-3">${project.projTitle }</h3>
+						<h3 class="mb-0 pl-3 pr-3 display-3" >${project.projTitle }</h3>
 						
 						
 						<a class="dropdown pt-2" href="#" id="navbar-default_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                        <i class="fas fa-ellipsis-v fa-2x"></i> 
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
-                        <a class="dropdown-item" href="#" onclick="updateProject()">수정</a>
+                        <button class="dropdown-item"  onclick="updateProject();">수정</button>
                         <a class="dropdown-item" href="#" onclick="deleteProject()">삭제</a>
                     </div>
                 	</div>
@@ -56,7 +57,6 @@
 			</div>
 			<div class="card-body">
 				<!-- 내용 -->
-				<form>
 					<div class="container">
 						<div class="row">
 							<div>
@@ -67,20 +67,18 @@
 									class="rounded-circle">
 								</a>
 							</div>
-							<div class=" ml-3 display-4">${project.membersName }</div>
+							<div class=" ml-3 display-4" name="membersName">${project.membersName }</div>
 						</div><br>
 						<div class="display-4">Technologies</div>
-						<div>${project.projTags }</div><br>
+						<div name="projTags">${project.projTags }</div><br>
 						<div class="display-4">Descriptions</div>
-						<div id="projContents">${project.projContents }</div><br>
+						<div id="projContents" name="projContents">${project.projContents }</div><br>
 						<script> //프로젝트 내용에 공백을 <br>태그로 치환해서 출력하기
 						$(document).ready(function replaceBR() {
 							var text = $('#projContents').html();
 							var result = text.replace(/(\n|\r\n)/g, "<br>");
 							
 							//var result = replaceAll(text,"(\r\n|\r|\n|\n\r)", "<br>");
-
-							console.log(result);
 							
 							$('#projContents').html(result);
 						});
@@ -91,12 +89,23 @@
 							
 						</script>
 					</div>
-
-				</form>
 			</div>
 		</div>
 	</div>
-
+	
+	<input type="hidden" name="projNo" value="${project.projNo }"/>
+	<input type="hidden" name="projTitle" value="${project.projTitle }"/>
+	<input type="hidden" name="projContents" value="${project.projContents }"/>
+	<input type="hidden" name="projDueDate" value="${project.projDueDate }"/>
+	<input type="hidden" name="projRequire" value="${project.projRequire }"/>
+	<input type="hidden" name="projMembersCnt" value="${project.projMembersCnt }"/>
+	<input type="hidden" name="projType" value="${project.projType }"/>
+	<input type="hidden" name="projPrice" value="${project.projPrice }"/>
+	<input type="hidden" name="projTags" value="${project.projTags }"/>
+	<input type="hidden" name="projStartDate" value="${project.projStartDate }"/>
+	<input type="hidden" name="projEndDate" value="${project.projEndDate }"/>
+	
+</form>
 	<!--   Core   -->
 	<script src="./resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
 	<script
@@ -124,16 +133,19 @@
 	
 	<script> //수정버튼 누르면 ajax로 데이터 전송
 	function updateProject(){
-	
-		var vo = '${project.projContents}';
-		console.log(vo);
 		
-		    if(confirm("수정 하시겠습니까?")){
-		        location.href = "#";
-		        return true;
-		    } else {
-		        return false;
-		    }
+		if(confirm("수정 하시겠습니까?")){
+			
+			console.log("이리로 들어왔는데??????");
+
+			$('#frm').attr('action','./updateProjectForm')
+
+			form.submit();	
+			
+			return false;
+		} else {
+		       return false;
+		}
 	}
 	</script>
 </body>

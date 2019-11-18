@@ -77,7 +77,7 @@ public class ProjectsServiceImpl implements ProjectsService {
 	@Override
 	public void updateProject(ProjectsVO vo) {
 		// TODO Auto-generated method stub
-		
+		projectsDAO.updateProject(vo);
 	}
 
 }

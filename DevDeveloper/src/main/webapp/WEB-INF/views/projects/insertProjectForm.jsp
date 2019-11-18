@@ -82,44 +82,17 @@ jQuery UI 라이브러리 js파일
 		<div class="row  mb-3">
 		<div class="col">
 			<label for="projDueDate" class="control-label">공고 마감일 </label> <input id="projDueDate" name="projDueDate" width="276" />
-			<script>
-			$(document).ready(function(){
-	 			 // code
-		 			$('#projDueDate').datepicker({
-	         			uiLibrary: 'bootstrap4',
-	         			 format: 'yyyy/mm/dd'
-	     			});
-	  
-				});     
-			</script>
+
 		</div>
 		
 		<div class="col">
 			<label for="projStartDate" class="control-label">프로젝트 시작일 </label> <input id="projStartDate" name="projStartDate" width="276" />
-			<script>
-			$(document).ready(function(){
-	 			 // code
-		 			$('#projStartDate').datepicker({
-	         			uiLibrary: 'bootstrap4',
-	         			 format:  'yyyy/mm/dd'
-	     			});
-	  
-				});     
-			</script>
+
 		</div>
 		
 		<div class="col">
 			<label for="projEndDate" class="control-label">프로젝트 종료일</label> <input id="projEndDate" name="projEndDate" width="276" />
-			<script>
-			$(document).ready(function(){
-	 			 // code
-		 			$('#projEndDate').datepicker({
-	         			uiLibrary: 'bootstrap4',
-	         			 format:  'yyyy/mm/dd'
-	     			});
-	  
-				});     
-			</script>
+
 		</div>
 		</div>
 		<div class="row  mb-3">
@@ -169,5 +142,27 @@ jQuery UI 라이브러리 js파일
 			</div>
 		</div>
 	</form>
+		<script> //날짜 설정 스크립트
+		$(document).ready(function(){
+			 // 공고 마감일
+ 			$('#projDueDate').datepicker({
+     			uiLibrary: 'bootstrap4',
+     			 format: 'yyyy-mm-dd'
+ 			});
+   	
+			// 프로젝트 시작일
+ 			$('#projStartDate').datepicker({
+     			uiLibrary: 'bootstrap4',
+     			 format:  'yyyy-mm-dd'
+ 			});
+   
+
+			//프로젝트 종료일
+			$('#projEndDate').datepicker({
+    			uiLibrary: 'bootstrap4',
+    			 format:  'yyyy-mm-dd'
+			});
+		});    
+	</script>
 </body>
 </html>

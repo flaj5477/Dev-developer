@@ -80,7 +80,7 @@ public class CBTController {
 		return cbtService.getQuestList(tqvo);
 	}
 	
-	@RequestMapping(value="cbt/questionMapping",
+	@RequestMapping(value="cbt/solutionProc",
 					method=RequestMethod.POST,
 					consumes="application/json")
 	@ResponseBody

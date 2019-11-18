@@ -9,8 +9,9 @@
 		select tags_no as "tagsNo",
 		       tags_title as "tagsTitle",
 		       tags_contents as "tagsContents",
-		       (select count(*) from question where q_tags like '%' || tags.tags_title || '%') as "qCount",
-		       (select count(*) from projects where proj_tags like '%' || tags.tags_title || '%') as "pCount"
+		       (select count(*) from question where q_tags like '%' || tags.tags_title || '/%') as "qCount",
+		       (select count(*) from projects where proj_tags like '%' || tags.tags_title || '/%') as "pCount",
+		       (select count(*) from wiki_guide where MANUAL_TAGS like '%' || tags.tags_title || '/%') as "wCount"
 		from tags
 		order by tags_title 
 	</select>

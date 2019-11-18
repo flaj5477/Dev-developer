@@ -50,7 +50,7 @@
 	 			from members m join answer a
 	 			on a.members_no = m.members_no
 	 			where q_no = ${qNo}
-	 			ORDER BY q_no DESC
+	 			ORDER BY a_no asc
 	</select>
 	
 	
@@ -62,12 +62,7 @@
 		values((select max(q_no)+1 from question),#{qTitle},#{qContents},#{membersNo})
 	</insert>	
 	
-	<!-- 답변등록
-	<insert id="insertAnq" parameterType="answer">
-		insert into answer(a_no, q_no, a_contents, members_no) 
-		values((select max(a_no)+1 from answer),8,#{aContents},#{membersNo})
-	</insert>	 -->
-	
+ 
 
 	<!--답변등록-->
 	 <insert id="insertAnq" parameterType="answer">
@@ -101,7 +96,8 @@
 	 			q.q_views		    ,
 	 			q.q_tags			,
 	 			m.members_id		,
-	 			m.members_image
+	 			m.members_image     ,
+	 			(select count(a_no) from answer where q_no= q.q_no) a_count
 	      		
 	 			from members m join question q
 	 			on q.members_no = m.members_no
@@ -115,4 +111,33 @@
 		UPDATE question set q_views = q_views + 1 where q_no = #{qNo}
 
 	</update>
+	
+	
+	
+	<update id="updateQna" parameterType="question"> 
+
+		UPDATE question set q_title = #{qTitle} , q_contents = #{qContents} where q_no = #{qNo}
+
+	</update>
+			
+			
+			
+	<update id="updateAnq" parameterType="answer"> 
+
+		UPDATE answer set a_contents = #{aContents} where a_no = #{aNo}
+
+	</update>
+	
+	
+		<delete id="deleteQna" parameterType="question">
+		
+		delete from question where q_no = #{qNo}
+		</delete>
+		
+		<delete id="deleteAnq" parameterType="answer">
+		
+		delete from answer where a_no = #{aNo}
+		</delete>
+		
+		
 </mapper>

@@ -820,11 +820,11 @@ input.insert[type="text"] {
     color: #242729 !important;
 }
  */
-#qqqbutton {
-	background-color: #793bea;
+.qqqbutton {
+	background-color: #8a57e6;
 	color: white;
 	font-weight: 400;
-	font-size: 0.775rem;
+	font-size: 0.700rem !important;
 	font-family: 'Noto Sans KR', sans-serif
 }
 
@@ -1146,3 +1146,16 @@ input.insert[type="text"] {
 
 }
 
+.fff {
+    
+    border: 1px solid #9764f3 !important;
+
+}
+
+.qUp{
+	
+	float:right;
+	margin-top:15px;
+	
+	
+}

@@ -139,7 +139,7 @@ public class MembersController {
 		 * mav.addObject("msg", "logout");
 		 */
   		
-  		return "redirect:wikihome";
+  		return "redirect:getDashboard";
   	}
   	
        

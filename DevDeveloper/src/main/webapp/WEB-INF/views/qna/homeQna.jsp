@@ -35,12 +35,12 @@
 	<div class="main-qqqcontent">
 	<div class="mb-4"> <!-- roww -->
 		
-			 <button class="btn btn-darkblue" type="submit" id="qqqbutton"
+			 <button class="btn qqqbutton" 
 			 onclick="location.href='insertQna'">
 					질문하기</button>	
 					<form name ="searchform" method ="post">
 			<input class="form-control" name="searchVal" placeholder="Search" value="${questionVO.searchVal}"
-					type="text" style="border: #686ce4 1px solid; width:180px;  float :right">
+					type="text" style="border: #cdb8f3 1px solid; width:180px;  float :right">
 					<input type="hidden" name="page" value="1"> 
 				 	<input type="hidden" class ="orderby" id="orderby" name="orderby" value=""> 
 					
@@ -69,6 +69,11 @@
 									<c:choose>
 									<c:when test ="${qna.aCount eq 0 }">
 										<li>
+											<div class="t">${qna.aCount}</div> 답변수
+										</li>
+									</c:when>
+									<c:when test ="${qna.aCount > 4 }">
+										<li class="fff">
 											<div class="t">${qna.aCount}</div> 답변수
 										</li>
 									</c:when>

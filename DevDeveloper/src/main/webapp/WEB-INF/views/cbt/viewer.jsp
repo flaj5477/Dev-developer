@@ -280,7 +280,7 @@
 					cbtViewer.empty();
 					$('#toast').fadeIn(1000).delay(1000).fadeOut(1000,function() {
 						flag = 0;
-						//solutionProc();
+						solutionProc();
 					});
 				},200);
 			}
@@ -323,6 +323,7 @@
 			contentType:'application/json',
 			data: param,
 			success: function() {
+				localStorage.setItem('result',true);
 				location.replace('examination');
 			}
 		});

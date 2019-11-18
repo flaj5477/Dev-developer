@@ -13,17 +13,16 @@
 <script>
 	var user = "${members.membersNo}";
 	var rid = "${recvo.testsApplyNo}"; //  command의 vo객체를 통해 form 태그의 값을 가져왔음!
+	var result = Boolean(localStorage.getItem('result'));
 	function comparator() {
-		$('#result').hide();
-		viewerPage();
-		/*
-		if(rid != '') {
-			result();
+		if(result == true) {
+			resultOutput();
+			exit();
 		}
 		else {
-			
+			$('#result').hide();
+			viewerPage();
 		}
-		*/
 	}
 	
 	function viewerPage() {
@@ -31,10 +30,11 @@
 			$('#toast').children('p').html('<br>응시용 화면으로 전환합니다.');
 		}).delay(1000)
 		  .fadeOut(500,function() {
-			 document.frm.submit();
+			  document.frm.submit();
 		});
 	}
-	function result() {
+
+	function resultOutput() {
 		$.ajax('getResult/'+rid, {
 			type : 'GET',
 			dataType : 'JSON'
@@ -53,6 +53,13 @@
 					 .append($('<th>').html(min+'분 '+sec+'초'))
 					 .append($('<th>').html(grade))
 					 .appendTo('#resultTabBody');
+		});
+	}
+	
+	function exit() {
+		$('#exit').on('click',function() {
+			result = localStorage.removeItem('result');
+			location.href = "../getDashboard";
 		});
 	}
 </script>
@@ -79,6 +86,7 @@
 				</thead>
 				<tbody id="resultTabBody"></tbody>
 			</table>
+			<button type="button" id="exit">CBT종료</button>
 		</div>
 	</form>	
 </div>

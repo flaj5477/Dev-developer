@@ -92,7 +92,6 @@ public class CBTServiceImpl implements CBTService {
 		// 점수계산
 		int quest = (Integer)cd.get("quest"); 
 		int value = score*Math.round((100/quest));
-		
 		// 결과 업데이트
 		TestsRecordVO recvo = new TestsRecordVO();
 		recvo.setTestsApplyNo((Integer)cd.get("rid"));

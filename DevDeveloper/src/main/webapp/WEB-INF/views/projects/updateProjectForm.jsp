@@ -77,6 +77,7 @@ jQuery UI 라이브러리 js파일
 </script>
 </head>
 <body>
+<div class="container-fluid mt-5">
 	<form id="frm" name="frm" action="./updateProject" method="post">
 		<input type="hidden" name="projNo" value="${vo.projNo }" inputmode="numeric"/>
 		<div class="row  mb-3">
@@ -106,11 +107,7 @@ jQuery UI 라이브러리 js파일
 			<div class="col">
 				<label for="projMembersCnt" class="control-label">모집인원</label> 
 				
-				<!--//페이지 동작 시 원하는 값을 보여주
-				$(document).ready(function(){
-
-  	  				$("select option[value='010']").attr("selected", true);
-				});  -->
+				
 
 				<select
 					id="projMembersCnt" name="projMembersCnt">
@@ -130,7 +127,7 @@ jQuery UI 라이브러리 js파일
 			<div class="col">
 				<label for="projRequire" class="control-label">최소참여등급</label> <select
 					id="projRequire" name="projRequire">
-					<option value="${vo.projRequire }" selected hidden>${vo.projRequire }</option>
+					<option selected hidden></option>
 					<option value="0">브론즈</option>
 					<option value="1">실버</option>
 					<option value="2">골드</option>
@@ -163,6 +160,43 @@ jQuery UI 라이브러리 js파일
 			</div>
 		</div>
 	</form>
+</div>
+<!--//페이지 동작 시 원하는 값을 보여주
+				$(document).ready(function(){
+
+  	  				$("select option[value='010']").attr("selected", true);
+				});  -->
+
+	<script> //프로젝트 최소 참여 등급 설정
+		$(document).ready(function(){
+			var projRequireNo = '${vo.projRequire}';
+			var projRequireString = "";
+			
+			switch(projRequireNo){
+			case '0':
+				projRequireString="브론즈";
+				break;
+			case "1":
+				projRequireString="실버";
+				break;
+			case '2':
+				projRequireString="골드";
+				break;
+			case '3':
+				projRequireString="플래티넘";
+				break;
+			case '4':
+				projRequireString="다이아";
+				break;
+			case '5':
+				projRequireString="마스터";
+				break;
+			}
+			
+			$("select#projRequire option:selected").attr("value",projRequireString)
+													.html(projRequireString);
+		})
+	</script>
 
 	<script> //날짜 설정 스크립트
 		$(document).ready(function(){

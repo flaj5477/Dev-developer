@@ -73,6 +73,7 @@ jQuery UI 라이브러리 js파일
 </script>
 </head>
 <body>
+<div class="container-fluid mt-5">
 	<form id="frm" name="frm" action="insertProject" method="post">
 		<div class="row  mb-3">
 		<div class="col">
@@ -142,6 +143,7 @@ jQuery UI 라이브러리 js파일
 			</div>
 		</div>
 	</form>
+</div>
 		<script> //날짜 설정 스크립트
 		$(document).ready(function(){
 			 // 공고 마감일

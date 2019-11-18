@@ -14,8 +14,7 @@ a {
 }
 </style>
 <script>
-	pageName = "위키가이드";	
-
+	pageName = "위키가이드";
 	$(function() {
 		//transTitle();
 		hover();
@@ -75,6 +74,7 @@ a {
 	
  -->
 <body>
+${wikiMap }
 	<%-- <form action="getwiki" method="post">
 		<c:forEach items="${wikiMap }" var="wiki">
 			${wiki.manualNo}	<a href=${wiki.manualOriUrl}>${wiki.manualOriUrl} </a> 
@@ -146,7 +146,7 @@ a {
 					<tbody>
 	
 						<c:forEach items="${wikiMap }" var="wiki">
-							<tr name="wikitd" onclick="location.href='getWiki?manualNo=${wiki.manualNo}'"> <%--  --%>
+							<tr name="wikitd" onclick="location.href='getWiki?manualNo=${wiki.manualNo}'">
 								<th scope="row">
 									<div class="media-body">
 										<span class="mb-0 text-sm">${wiki.manualNo}</span>
@@ -162,6 +162,9 @@ a {
 											</c:when>
 											<c:when test="${not empty wiki.manualTags}">
 												<a href = "wikihome?select=tags&page=1&searchVal=${wiki.manualTags}">${wiki.manualTags}</a>		
+											</c:when>
+											<c:when test="${not empty wiki.divTagList}"><%--수정해야됨 --%>
+												<a href = "wikihome?select=tags&page=1&searchVal=${wiki.divTagList}">${wiki.divTagList}</a>		
 											</c:when>
 										</c:choose>
 									</span>

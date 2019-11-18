@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -94,8 +95,15 @@ public class WikiServiceImpl implements WikiService {
 			String res = (String) wikiList.get(i).get("manualTitle");
 			
 			
+			
 			res = removeTag(res);
 			wikiList.get(i).put("manualTitle", res);
+			
+			////////////////////////////////////////////태그나누기태그나누기태그나누기태그나누기태그나누기태그나누기
+			String manualTags = (String) wikiList.get(i).get("manualTags");
+			if(manualTags != null)
+				wikiList.get(i).put("divTagList", Arrays.asList(manualTags.split(",")));	//태그리스트 , 기준으로 나눠담는다
+			//////////////////////태그나누기태그나누기태그나누기태그나누기
 			
 			////번역률계산
 			if(wikiList.get(i).containsKey("manualTotalline")) {
@@ -175,7 +183,7 @@ public class WikiServiceImpl implements WikiService {
 		
 		List<List<Integer>> updateInfo = getUpdateInfo(oriContent, updateContent);		//수정할 라인정보 가져오기
 
-		System.out.println(updateInfo.toString());
+		//System.out.println(updateInfo.toString());
 		
 		vo.setUpdateInfo(updateInfo); 		//vo에 담아준다
 		
@@ -201,8 +209,8 @@ public class WikiServiceImpl implements WikiService {
 		
 		wikiDAO.updateWiki(vo);		//위키원본 수정
 		wikiDAO.updateWikiTransInfo(vo);	// 위키 번역 수정라인정보 등록
-	//	wikiDAO.updateWikiTrans(vo);	// 위키 번역라인 수정적용
-	//	wikiDAO.deleteWikiTransInfo(vo);	// 위키 번역 수정라인정보 삭제
+		wikiDAO.updateWikiTrans(vo);	// 위키 번역라인 수정적용
+		wikiDAO.deleteWikiTransInfo(vo);	// 위키 번역 수정라인정보 삭제
 		
 		
 	}

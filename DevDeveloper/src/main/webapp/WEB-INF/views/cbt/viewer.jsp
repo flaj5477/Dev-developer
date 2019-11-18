@@ -245,6 +245,7 @@
 	
 	function submitEvent() { // 제출 버튼에 관한 이벤트
 		$('#submitBtn').on('click',function() {
+			$(this).prop('disabled',true);
 			var nomark = markCheck();
 			if(nomark != 0) { // 아직 못 푼 문제가 있다면?
 				$('.modal-body').html('아직 '+nomark+'개의 안 푼 문제가 남아있습니다. <br> 그래도 답안을 제출 하시겠습니까?');		
@@ -258,9 +259,10 @@
 				setTimeout(function() {
 					$('.modal-body').html('정말 답안을 제출 하시겠습니까?');
 					$('#cbtSubmitModal').modal('show');
-				},400);
+				},350);
 				//solutionProc();
 			});
+			//$(this).attr('disabled',false);
 		});
 	}
 	

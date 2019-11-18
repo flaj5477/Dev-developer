@@ -71,13 +71,12 @@
 								AND MANUAL_TITLE LIKE '%' || #{searchVal} || '%'
 							</if>
 							<if test="select == 'tags'">
-								AND NVL(MANUAL_TAGS, '기타') LIKE '%' || #{searchVal} || '%'
+								AND NVL(MANUAL_TAGS, '기타') LIKE '%' || #{searchVal} || '/%'
 							</if>
 						</if>
 				</where>
-				
 				<choose>	
-					<when test="orderby != null and orderby != '' ">	<!--  '' 체크해줘야됨 -->
+					<when test="orderby != null and orderby != '' ">	<!--  '' 체크해줘야됨dddd -->
 						ORDER BY ${orderby} DESC
 					</when>
 					<otherwise>
@@ -96,6 +95,7 @@
 		SELECT count(count(manual_no))              
 		FROM wiki_guide_trans
 		WHERE manual_no = #{manualNo}
+		AND manual_line is not null
 		GROUP BY manual_line
 	</select>
 	
@@ -125,10 +125,14 @@
 			  CASE
 			  	<foreach collection="updateInfo" item="info" index="index">
             		<foreach collection="info" item="line" index="index2">	<!-- 중복라인 처리하는법생각 -->
-            			WHEN manual_line = #{index} THEN #{line}
+            			<if test="line == null">
+            				WHEN manual_line = #{index} THEN null
+            			</if>
+            			<if test="line != null">
+            				WHEN manual_line = #{index} THEN #{line}
+            			</if>
             		</foreach>
         		</foreach>
-			    ELSE manual_line
 			  END
 			WHERE manual_no = #{manualNo}
 	  </update>
@@ -349,6 +353,7 @@
 					  WHERE a.trans_no = b.trans_no(+)
 					  and a.MANUAL_NO = #{manualNo} ) r
 				where r.rec_rank = 1
+				and "manualLine" is not null
 			</if>
 			
 	 </select>

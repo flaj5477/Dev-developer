@@ -12,34 +12,36 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
 	var user = "${members.membersNo}";
-	var level = "${param.testsNo}"; //  command의 vo객체를 통해 form 태그의 값을 가져왔음!
-	var rid = "${param.testsApplyNo}";
-
-	function comparator() {
-		if(rid != '') {
-			result();
+	var rid = "${recvo.testsApplyNo}"; //  command의 vo객체를 통해 form 태그의 값을 가져왔음!
+	var level = parseInt("${recvo.testsNo}");
+	var record = Boolean(localStorage.getItem('result'));
+	
+	function execution() {
+		var resultView = $('.cbtResult');
+		if(record == true) {
+			localStorage.setItem('newGrade','${members.membersGrade}');
+			resultOutput();
+			gradeEvent();
+			exit();
 		}
 		else {
-			$('#result').hide();
+			localStorage.setItem('oldGrade','${members.membersGrade}');
+			resultView.empty();
 			viewerPage();
 		}
 	}
 	
 	function viewerPage() {
-		frm.testsNo.value = level; // frm 태그에 레벨 값 저장
-		$('#toast').fadeIn(500,function() {
-			$('#toast').children('p').html('<br>응시용 화면으로 전환합니다.');
-		}).delay(1000)
-		  .fadeOut(500,function() {
-			 frm.membersNo.value = user;
-			 frm.testsNo.value = level;
-			 document.frm.submit();
+		$('.cbtExamination #toast').fadeIn(500).delay(1000).fadeOut(500,function() {
+			  document.frm.submit();
 		});
 	}
-	function result() {
+
+	function resultOutput() {
 		$.ajax('getResult/'+rid, {
 			type : 'GET',
-			dataType : 'JSON'
+			dataType : 'JSON',
+			async : false
 		})
 		.done(function(data) {
 			var title = data.testsTitle;
@@ -53,38 +55,66 @@
 					 .append($('<th>').html(score))
 					 .append($('<th>').html(result))
 					 .append($('<th>').html(min+'분 '+sec+'초'))
-					 .append($('<th>').html(grade))
 					 .appendTo('#resultTabBody');
+		});
+	}
+	
+	function gradeEvent() {
+		var oldGrade = localStorage.getItem('oldGrade');
+		var newGrade = localStorage.getItem('newGrade');
+		if(newGrade == oldGrade) {
+			var chooseGrade = formatGrade(level);
+			$('#grade').html('아쉽게도 '+chooseGrade+' 승급에 실패하였습니다.'); 
+		}
+		else if(newGrade > oldGrade) {
+			var memberGrade = formatGrade(newGrade);
+			$('#grade').html(memberGrade+'등급 승급을 축하합니다.');
+		}
+	}
+	
+	function exit() {
+		$('#exit').on('click',function() {
+			result = localStorage.clear();
+			$('.cbtResult #toast').fadeIn(500).delay(500).fadeOut(500,function() {
+				location.replace('../getDashboard');
+			});
 		});
 	}
 </script>
 </head>
-<body onload="comparator()">
+<body onload="execution()">
 <div class="cbtExamination" id="screen-lock" align="center">
-	<form action="viewer" name="frm" method="post">
-		<input type="hidden" name="testsNo">
-		<input type="hidden" name="membersNo">
-		<div id="toast">
-				<p></p>
+	<div id="examination">
+		<form action="viewer" name="frm" method="post">
+			<div id="toast">
+				<p> <br>응시용 화면으로 전환합니다. </p>
 				<div class="spinner-border text-info" style="width: 4rem; height: 4rem;" role="status">
 		 				<span class="sr-only"></span>
 				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="cbtResult">
+	<div id="result">
+		<table id="resultTab" border="1" style="width:650px">
+			<thead>
+				<tr align="center">
+					<th>시험명</th>
+					<th>점수</th>
+					<th>결과</th>
+					<th>응시시간</th>
+				</tr>
+			</thead>
+			<tbody id="resultTabBody"></tbody>
+		</table>
+		<div id="grade"></div>
+		<div id="comment"></div>
+		<div id="toast">
+			<p> <br> Dashboard로 이동합니다. </p>
 		</div>
-		<div id="result">
-			<table id="resultTab" border="1" style="width:650px">
-				<thead>
-					<tr align="center">
-						<th>시험명</th>
-						<th>점수</th>
-						<th>결과</th>
-						<th>응시시간</th>
-						<th>등급</th>
-					</tr>
-				</thead>
-				<tbody id="resultTabBody"></tbody>
-			</table>
-		</div>
-	</form>	
+		<button type="button" id="exit">CBT종료</button>
+	</div>
 </div>
 </body>
 </html>

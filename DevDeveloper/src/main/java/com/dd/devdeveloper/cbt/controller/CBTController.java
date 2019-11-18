@@ -31,7 +31,7 @@ public class CBTController {
 	public String getTestJudg(TestsRecordVO recvo, Model model, HttpSession session) {
 		MembersVO membersNo = (MembersVO) session.getAttribute("members");
 		recvo.setMembersNo(membersNo.getMembersNo());
-		model.addAttribute("tr", cbtService.getTestJudg(recvo)); // Command(vo) 객체를 담을 때 model.addAttribute ,,
+		model.addAttribute("tr", cbtService.getTestJudg(recvo)); // Command(vo) 객체를 담을 때 model.addAttribute
 		return "cbt/index";
 	}
 	
@@ -60,14 +60,21 @@ public class CBTController {
 		return cbtService.getTest(tvo);
 	}
 	
-	@RequestMapping("cbt/examination") 
-	public String examination() { 
-		return "/notiles/cbt/examination";
+	@RequestMapping("cbt/cbtInsert")
+	//redirect 방식 : a요청을 하였을 때 서비스를 가지고 b로 이동하여 실행한다.
+	public String cbtInsert(TestsRecordVO recvo, HttpSession session) {
+		cbtService.cbtInsert(recvo);
+		session.setAttribute("recvo",recvo);
+		return "redirect:examination"; 
 	}
 	
+	@RequestMapping("cbt/examination") 
+	public String examination() {
+		return "/notiles/cbt/examination";
+	}
+
 	@RequestMapping("cbt/viewer") 
-	public String viewer(TestsRecordVO recvo) {
-		cbtService.cbtInsert(recvo);
+	public String viewer() {
 		return "/notiles/cbt/viewer";
 	}
 	

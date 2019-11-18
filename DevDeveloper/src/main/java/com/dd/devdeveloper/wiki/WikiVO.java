@@ -22,5 +22,5 @@ public class WikiVO {
 	private String orderby;
 	private List<List<Integer>> updateInfo;	//업데이트할 번역 라인정보
 	
-	private int manualContentsCheck;	//메뉴얼내용 null확인
+	private Integer manualContentsCheck;	//메뉴얼내용 null확인
 }

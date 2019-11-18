@@ -1,5 +1,6 @@
 package com.dd.devdeveloper.wiki.service.impl;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,5 +110,10 @@ public class WikiDAO {
 	// 위키 번역 수정라인정보 삭제
 	public void deleteWikiTransInfo(WikiVO vo) {
 		mybatis.update("WikiDAO.deleteWikiTransInfo", vo);
+	}
+	
+	//태그정보받아오기
+	public List<Map<String, Object>> getTagList() {
+		return mybatis.selectList("TagsDAO.getTagList");
 	}
 }

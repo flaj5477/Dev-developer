@@ -12,6 +12,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+	var user = "${members.membersNo}"; // 세션을 통해 가져왔음!
+	var level = "${param.testsNo}"; //  command의 vo객체를 통해 form 태그의 값을 가져왔음!
+	
 	$(document).ready(function() {
 		$('#tabs').tabs();
 		readyBox();
@@ -44,8 +47,6 @@
 	}
 	
 	function getTest() {
-		var level = parseInt("${param.testsNo}"); //  command의 vo객체를 통해 form 태그의 값을 가져왔음!
-		frm.testsNo.value = level; // frm 태그에 레벨 값 저장
 		$.ajax('getTestInfo/'+level, {  // 호출 Mapping URI
 			type:'GET',
 			dataType:'JSON'
@@ -71,6 +72,8 @@
 		$('#submitBtn').on('click',function() {
 			$(this).attr('disabled',true); // 중복 클릭 방지
 			$('#toast').fadeIn(500).delay(500).fadeOut(500,function() {
+				frm.testsNo.value = level; // frm 태그에 레벨 값 저장
+				frm.membersNo.value = user;
 				document.frm.submit();
 			});
 		});
@@ -80,8 +83,9 @@
 </head>
 <body>
 <div class="cbtReady" id="tabs" style="width:600px; left:445px">
-	<form action="examination" name="frm" method="post">
+	<form action="cbtInsert" name="frm" method="post">
 		<input type="hidden" name="testsNo"/>
+		<input type="hidden" name="membersNo"/>
 		<ul id="subjects">
 			<li id="content1"><a id="tab1" href="#tabs-1"></a></li>
 			<li id="content2"><a id="tab2" href="#tabs-2"></a></li>

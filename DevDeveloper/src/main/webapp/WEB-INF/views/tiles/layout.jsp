@@ -28,7 +28,12 @@
 	        $("#pageName").html(pageName);
 	      //메뉴 볼드 설정
 	    	$( 'a.nav-link:contains('+pageName+')' ).addClass('active');
+	      
 	});
+  	
+  	function checkStorage() {
+  		
+  	}
   	
   </script>
 </head>

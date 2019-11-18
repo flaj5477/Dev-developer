@@ -12,27 +12,25 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
 	var user = "${members.membersNo}";
-	var level = "${param.testsNo}"; //  command의 vo객체를 통해 form 태그의 값을 가져왔음!
-	var rid = "${param.testsApplyNo}";
-
+	var rid = "${recvo.testsApplyNo}"; //  command의 vo객체를 통해 form 태그의 값을 가져왔음!
 	function comparator() {
+		$('#result').hide();
+		viewerPage();
+		/*
 		if(rid != '') {
 			result();
 		}
 		else {
-			$('#result').hide();
-			viewerPage();
+			
 		}
+		*/
 	}
 	
 	function viewerPage() {
-		frm.testsNo.value = level; // frm 태그에 레벨 값 저장
 		$('#toast').fadeIn(500,function() {
 			$('#toast').children('p').html('<br>응시용 화면으로 전환합니다.');
 		}).delay(1000)
 		  .fadeOut(500,function() {
-			 frm.membersNo.value = user;
-			 frm.testsNo.value = level;
 			 document.frm.submit();
 		});
 	}
@@ -62,8 +60,6 @@
 <body onload="comparator()">
 <div class="cbtExamination" id="screen-lock" align="center">
 	<form action="viewer" name="frm" method="post">
-		<input type="hidden" name="testsNo">
-		<input type="hidden" name="membersNo">
 		<div id="toast">
 				<p></p>
 				<div class="spinner-border text-info" style="width: 4rem; height: 4rem;" role="status">

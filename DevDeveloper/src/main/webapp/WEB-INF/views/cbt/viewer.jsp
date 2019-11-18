@@ -6,26 +6,29 @@
 <meta charset="UTF-8">
 <title>CBT Viewer</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/cbt.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/assets/js/comcbt.js"></script>
 <script>
-	var rid = parseInt("${testsRecordVO.testsApplyNo}");
-	var user = parseInt("${members.membersNo}");
-	var level = parseInt("${param.testsNo}");
+	var rid = parseInt("${recvo.testsApplyNo}");
+	var user = parseInt("${recvo.membersNo}");
+	var userName = "${members.membersName}";
+	var level = parseInt("${recvo.testsNo}");
 	var questVolume = 0;
 	var allocate = 0;
+	
 	var min = 0;
 	var sec = 0;
 	var permisMin = 0;
 	var permisSec = 0;
+	
 	var size = 0;
 	var nolist = [];
 	var questKey = [];
 	var offset = [];
 	var setTime = 0;
-	
+
 	function getTest() {
 		$.ajax('getTestInfo/'+level, {
 			type : 'GET',
@@ -40,7 +43,7 @@
 				sec = min * 60;
 				permisMin = parseInt(sec/60);
 				permisSec = sec%60;
-				$('#header').prepend(title+' <br> '+contents+' <br> ${members.membersName}');
+				$('#header').prepend(title+'<br>'+contents+'<br>'+userName);
 				$('#permisTime').prepend(permisMin+'분 '+permisSec+'초');
 				$('#restTime').prepend(permisMin+'분 '+permisSec+'초');
 			},
@@ -152,7 +155,6 @@
 		});
 	}
 	
-	
 	function radioList() {
 		for(var i=1;i<=size;i++) {
 			var str =
@@ -201,6 +203,10 @@
 			value = $(this).val();
 			no = $(this).attr('data');
 			$('#putView').find('[data="'+no+'"]').val([value]);
+			
+			localStorage.setItem('value',value);
+			console.log(localStorage.getItem('value'));
+			
 			questEvent(no);
 		});
 		
@@ -228,6 +234,7 @@
 			} 
 		}
 	}
+	
 	function focusEvent() { // 안 푼 문제 버튼 focus 이벤트
 		$('#footer').on('click','div>button',function() { // div>button : div태그의 자식만을 지칭함(단일대상), on('click',div>button..) :  태그에 대한 부모(이벤트)위임 button이 부모가 된다.
 		//현재 questEvent에서 footer에서 empty()시키기 때문에 empEvent가 두번 째 실행 될 때 기존에 있는 버튼은 사라졌으므로 focusEvent실행되고나서 클릭해도 이벤트 발생이 되지 않는다.
@@ -236,33 +243,48 @@
 			for(var i=1;i<=size;i++) { // offset값 push
 				offset.push($('#questNo'+i).offset());
 			}
-			var value = parseInt($(this).text());
+			var value = parseInt($(this).text())-1;
+			var offsetValue = offset[value]["top"];
 			$('html, body').animate({
-				scrollTop : offset[value-1].top
+				scrollTop : offsetValue
 			},10);
 		})
 	}
 	
 	function submitEvent() { // 제출 버튼에 관한 이벤트
-		$('#submitBtn').on('click',function() {
-			$(this).prop('disabled',true);
-			var nomark = markCheck();
+		var flag = 0;
+		var nomark = markCheck();
+		var cbtViewer = $('.cbtViewer');
+		var modalWindow = $('#cbtSubmitModal');
+		$('#confirmBtn').on('click',function() {
+			flag = 1;
 			if(nomark != 0) { // 아직 못 푼 문제가 있다면?
 				$('.modal-body').html('아직 '+nomark+'개의 안 푼 문제가 남아있습니다. <br> 그래도 답안을 제출 하시겠습니까?');		
 			}
 			else { 
-				$('.modal-body').html('답안을 제출 하시겠습니까?');		
+				$('.modal-body').html('최종답안을 제출 하시겠습니까?');		
 			}
-			// 한번 더 묻기 
-			$('#finalBtn').on('click',function() {
-				$('#cbtSubmitModal').modal('hide');
+		});
+		
+		$('#submitBtn').on('click',function() {
+			if(flag == 1) {
+				modalWindow.modal('hide');
 				setTimeout(function() {
 					$('.modal-body').html('정말 답안을 제출 하시겠습니까?');
-					$('#cbtSubmitModal').modal('show');
-				},350);
-				//solutionProc();
-			});
-			//$(this).attr('disabled',false);
+					modalWindow.modal('show');
+				},400);
+			}
+			else if(flag == -1) {
+				modalWindow.modal('hide');
+				setTimeout(function() {
+					cbtViewer.empty();
+					$('#toast').fadeIn(1000).delay(1000).fadeOut(1000,function() {
+						flag = 0;
+						//solutionProc();
+					});
+				},200);
+			}
+			flag = flag*-1;
 		});
 	}
 	
@@ -301,7 +323,7 @@
 			contentType:'application/json',
 			data: param,
 			success: function() {
-				location.replace('processing?testsApplyNo='+rid);
+				location.replace('examination');
 			}
 		});
 	}
@@ -324,24 +346,32 @@
 	</div>
 	<div id="footer">
 		<div id="noExp"></div>
-		<button type="button" class="btn btn-primary" id="submitBtn" data-toggle="modal" data-target="#cbtSubmitModal">제출하기</button>
+		<button type="button" class="btn btn-primary" id="confirmBtn" data-toggle="modal" data-target="#cbtSubmitModal">제출하기</button>
 		<!-- Modal -->
 		<div class="modal fade" id="cbtSubmitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		  <div class="modal-dialog modal-dialog-centered" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <h5 class="modal-title" id="exampleModalCenterTitle">답안제출</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		        <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
 		      </div>
-		      <div class="modal-body"></div>
+		      <div class="modal-body"></div> <!-- Modal 내용 -->
 		      <div class="modal-footer">
-		      	<button type="button" id="finalBtn" class="btn btn-primary">YES</button>
+		      	<button type="button" id="submitBtn" class="btn btn-primary">YES</button>
 		        <button type="button" id="resetBtn" class="btn btn-secondary" data-dismiss="modal">NO</button>
 		      </div>
 		    </div>
 		  </div>
+		</div>
+	</div>
+</div>
+<div class="cbtProcess">
+	<div id="toast">
+		<p> <br> 작성하신 답안을 채점중입니다. <br> 잠시만 기다려주세요. </p>
+		<div class="spinner-border text-info" style="width: 4rem; height: 4rem;" role="status">
+			<span class="sr-only"></span>
 		</div>
 	</div>
 </div>

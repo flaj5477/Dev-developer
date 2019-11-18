@@ -255,10 +255,10 @@
 	
 	function submitEvent() { // 제출 버튼에 관한 이벤트
 		var flag = 0;
-		var nomark = markCheck();
 		var cbtViewer = $('.cbtViewer');
 		var modalWindow = $('#cbtSubmitModal');
 		$('#confirmBtn').on('click',function() {
+			var nomark = markCheck();
 			flag = 1;
 			if(nomark != 0) { // 아직 못 푼 문제가 있다면?
 				$('.modal-body').html('아직 '+nomark+'개의 안 푼 문제가 남아있습니다. <br> 그래도 답안을 제출 하시겠습니까?');		
@@ -278,12 +278,9 @@
 			}
 			else if(flag == -1) {
 				modalWindow.modal('hide');
+				cbtViewer.hide();
 				setTimeout(function() {
-					cbtViewer.empty();
-					$('#toast').fadeIn(1000).delay(1000).fadeOut(1000,function() {
-						flag = 0;
-						solutionProc();
-					});
+					$('#toast').fadeIn(1000).delay(1000).fadeOut(1000,solutionProc);
 				},200);
 			}
 			flag = flag*-1;
@@ -303,9 +300,10 @@
 	function solutionProc() { // ajax 컨트롤러로 요청
 		var marklist = [];
 		for(var i=1;i<=size;i++) {
+			console.log(parseInt($('[name="putNum'+i+'"]:checked').val()));
 			var markobj = {
 					"key" : questKey[i-1],
-					"value" : parseInt($('[name="putNum'+(i)+'"]:checked').val())
+					"value" : parseInt($('[name="putNum'+i+'"]:checked').val())
 			};
 			marklist.push(markobj);
 		}

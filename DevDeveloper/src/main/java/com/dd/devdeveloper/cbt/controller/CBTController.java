@@ -4,9 +4,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,8 +31,8 @@ public class CBTController {
 	
 	@RequestMapping("cbt/index")
 	public String getTestJudg(TestsRecordVO recvo, Model model, HttpSession session) {
-		MembersVO membersNo = (MembersVO) session.getAttribute("members");
-		recvo.setMembersNo(membersNo.getMembersNo());
+		MembersVO members = (MembersVO) session.getAttribute("members");
+		recvo.setMembersNo(members.getMembersNo());
 		model.addAttribute("tr", cbtService.getTestJudg(recvo)); // Command(vo) 객체를 담을 때 model.addAttribute
 		return "cbt/index";
 	}
@@ -93,24 +95,18 @@ public class CBTController {
 	@ResponseBody
 	public Map<String,Boolean> solutionProc(@RequestBody Map<String,Object> cd) {
 		cbtService.solutionProc(cd);
-		return Collections.singletonMap("result",true); // repsonse 값 하나라도 넘겨주기위해?
-	}
-	
-	@RequestMapping("cbt/processing")
-	public String processing() {
-		return "/notiles/cbt/processing";
+		return Collections.singletonMap("result",true); // response 객체에 값 넘겨주기위해 사용
 	}
 	
 	@RequestMapping(value="cbt/getResult/{rid}",
 					method=RequestMethod.GET)
 	@ResponseBody
 	public Map<String,Object> getResult(@PathVariable int rid, TestsRecordVO recvo) {
-		recvo.setTestsApplyNo(rid);
 		return cbtService.getResult(recvo);
 	}
 	
 	@RequestMapping(value="getRecordList/{user}",
-			method=RequestMethod.GET)
+					method=RequestMethod.GET)
 	@ResponseBody
 	public List<Map<String,Object>> getRecordList(@PathVariable int user, TestsRecordVO recvo) {
 	recvo.setMembersNo(user);

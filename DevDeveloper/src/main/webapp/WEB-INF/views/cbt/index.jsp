@@ -127,6 +127,7 @@
 	<div id="subject"></div>
 	<div id="content">
 		<div id="comment"></div>
+		<div id="level"></div>
 		<div id="restTime"></div>
 		<div id="message"></div>
 		<button type="button" id ="submitBtn"></button>

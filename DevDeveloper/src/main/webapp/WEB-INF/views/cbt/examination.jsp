@@ -19,9 +19,7 @@
 	function execution() {
 		var resultView = $('.cbtResult');
 		if(record == true) {
-			localStorage.setItem('newGrade','${members.membersGrade}');
 			resultOutput();
-			gradeEvent();
 			exit();
 		}
 		else {
@@ -49,33 +47,33 @@
 			var time = data.testsTime;
 			var min = parseInt(time/60);
 			var sec = time%60;
-			var grade = formatGrade(data.membersGrade);
 			var result = data.testsResults;
+			var newGrade = data.membersGrade;
 			$('<tr>').append($('<th>').html(title))
 					 .append($('<th>').html(score))
 					 .append($('<th>').html(result))
 					 .append($('<th>').html(min+'분 '+sec+'초'))
 					 .appendTo('#resultTabBody');
+			
+			gradeEvent(newGrade);
 		});
 	}
 	
-	function gradeEvent() {
+	function gradeEvent(newGrade) {
 		var oldGrade = localStorage.getItem('oldGrade');
-		var newGrade = localStorage.getItem('newGrade');
+		var chooseGrade = formatGrade(level);
 		if(newGrade == oldGrade) {
-			var chooseGrade = formatGrade(level);
-			$('#grade').html('아쉽게도 '+chooseGrade+' 승급에 실패하였습니다.'); 
+			$('#grade').html('아쉽게도 '+chooseGrade+' 승급에 실패하였습니다.');
 		}
 		else if(newGrade > oldGrade) {
-			var memberGrade = formatGrade(newGrade);
-			$('#grade').html(memberGrade+'등급 승급을 축하합니다.');
+			$('#grade').html(chooseGrade+'등급 승급을 축하합니다.');
 		}
 	}
 	
 	function exit() {
 		$('#exit').on('click',function() {
-			result = localStorage.clear();
-			$('.cbtResult #toast').fadeIn(500).delay(500).fadeOut(500,function() {
+			record = localStorage.clear();
+			$('.cbtResult #toast').fadeIn(5000).delay(500).fadeOut(500,function() {
 				location.replace('../getDashboard');
 			});
 		});

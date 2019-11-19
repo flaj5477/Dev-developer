@@ -21,6 +21,7 @@ public class WikiVO {
 	private String searchVal;		//검색값
 	private String orderby;
 	private List<List<Integer>> updateInfo;	//업데이트할 번역 라인정보
+	private List<String> divTagList;	//태그 나눠놓은거
 	
 	private Integer manualContentsCheck;	//메뉴얼내용 null확인
 }

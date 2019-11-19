@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dd.devdeveloper.common.paging.Paging;
+import com.dd.devdeveloper.tags.service.TagsService;
 import com.dd.devdeveloper.wiki.WikiRecVO;
 import com.dd.devdeveloper.wiki.WikiTransVO;
 import com.dd.devdeveloper.wiki.WikiVO;
@@ -33,6 +34,7 @@ public class WikiServiceImpl implements WikiService {
 
 	@Autowired
 	WikiDAO wikiDAO;
+	@Autowired TagsService tagsService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(WikiServiceImpl.class);	//로그
 	
@@ -50,8 +52,9 @@ public class WikiServiceImpl implements WikiService {
 	@Override
 	public WikiVO getWiki(WikiVO vo) {
 		String contents = null;
-		WikiVO wiki = wikiDAO.getWiki(vo);
-
+		WikiVO wiki = wikiDAO.getWiki(vo);	//위키정보가져옴
+		String manualTags = wiki.getManualTags();
+		
 		contents = readText(wiki.getManualContentsPath());
 		
 		//텍스트파일 비었는지 확인
@@ -62,7 +65,10 @@ public class WikiServiceImpl implements WikiService {
 			wiki.setManualContentsCheck(1);
 		}
 		
-		wiki.setManualContents(contents);
+		wiki.setManualContents(contents);	//내용
+		
+		wiki.setDivTagList(tagsService.divTag(manualTags));	//태그리스트
+		
 
 		return wiki;
 	}
@@ -102,7 +108,8 @@ public class WikiServiceImpl implements WikiService {
 			////////////////////////////////////////////태그나누기태그나누기태그나누기태그나누기태그나누기태그나누기
 			String manualTags = (String) wikiList.get(i).get("manualTags");
 			if(manualTags != null)
-				wikiList.get(i).put("divTagList", Arrays.asList(manualTags.split(",")));	//태그리스트 , 기준으로 나눠담는다
+				wikiList.get(i).put("divTagList", tagsService.divTag(manualTags));	//태그리스트 , 기준으로 나눠담는다
+			
 			//////////////////////태그나누기태그나누기태그나누기태그나누기
 			
 			////번역률계산

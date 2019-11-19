@@ -300,7 +300,6 @@
 	function solutionProc() { // ajax 컨트롤러로 요청
 		var marklist = [];
 		for(var i=1;i<=size;i++) {
-			console.log(parseInt($('[name="putNum'+i+'"]:checked').val()));
 			var markobj = {
 					"key" : questKey[i-1],
 					"value" : parseInt($('[name="putNum'+i+'"]:checked').val())
@@ -322,9 +321,11 @@
 			dataType:'json',
 			contentType:'application/json',
 			data: param,
-			success: function() {
-				localStorage.setItem('result',true);
-				location.replace('examination');
+			success: function(response) {
+				if(response.result == true) {
+					frm.response.value = true;
+					document.frm.submit();
+				}
 			}
 		});
 	}
@@ -369,11 +370,16 @@
 	</div>
 </div>
 <div class="cbtProcess">
-	<div id="toast">
-		<p> <br> 작성하신 답안을 채점중입니다. <br> 잠시만 기다려주세요. </p>
-		<div class="spinner-border text-info" style="width: 4rem; height: 4rem;" role="status">
-			<span class="sr-only"></span>
-		</div>
+	<div id="process">
+		<form action="examination" name="frm" method="POST">
+			<input type="hidden" name="response"/>
+			<div id="toast">
+				<p> <br> 작성하신 답안을 채점중입니다. <br> 잠시만 기다려주세요. </p>
+				<div class="spinner-border text-info" style="width: 4rem; height: 4rem;" role="status">
+					<span class="sr-only"></span>
+				</div>
+			</div>
+		</form>
 	</div>
 </div>
 </html>

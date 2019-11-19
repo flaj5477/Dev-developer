@@ -25,6 +25,8 @@ jQuery UI 라이브러리 js파일
 	type="text/javascript"></script>
 <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css"
 	rel="stylesheet" type="text/css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 <title>프로젝트 수정 폼</title>
 <style>
 .ck-editor__editable {
@@ -52,6 +54,10 @@ jQuery UI 라이브러리 js파일
 	            //console.log( 'Editor was initialized', editor );
 	            myEditor = editor;
 	        } )
+	        
+	        $('#projTags').select2({	//select2생성
+				 placeholder: "태그 선택"
+		 });
 	});
 	
 
@@ -77,7 +83,7 @@ jQuery UI 라이브러리 js파일
 </head>
 <body>
 <div class="container-fluid mt-5">
-	<form id="frm" name="frm" action="./updateProject" method="post">
+	<form id="frm" name="frm" action="./updateProject" method="post" class="mb-9">
 		<input type="hidden" name="projNo" value="${vo.projNo }" inputmode="numeric"/>
 		<div class="row  mb-3">
 			<div class="col">
@@ -151,11 +157,22 @@ jQuery UI 라이브러리 js파일
 		</div>
 		<textarea class="form-control form-control-alternative" id="editor"
 			name="projContents" rows="20">${vo.projContents }</textarea>
-		<br> <input type="text" class="form-control mb-3" id="projTags"
-			name="projTags" placeholder="테그" value="${vo.projTags }">
+		<br> 
+		<select class="form-control" id="projTags" name="projTags" multiple="multiple">
+	  			<c:forEach items="${tagList}" var="tag">
+	  				<option>${tag.tagsTitle }</option>
+	  			</c:forEach>
+	  			
+	  			<%--수정전 내용 가져오기 --%>
+	  			<c:forEach items="${divTagList }" var="tag">	
+	  				<option selected="selected">${tag}</option>
+	  			</c:forEach>
+	  			
+	  	</select>
+	  		
 		<div class="row">
 			<div class="col-xl-12  text-right">
-				<button type="submit" id="btnfrm" class="btn btn-primary">등록</button>
+				<button type="submit" id="btnfrm" class="btn btn-primary mt-3">등록</button>
 			</div>
 		</div>
 	</form>

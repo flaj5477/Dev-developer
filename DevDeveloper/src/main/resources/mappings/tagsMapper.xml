@@ -17,7 +17,6 @@
 	</select>
 	
 	
-	
 	<!--
 		20191118
 		태그목록 가져오기 ajax
@@ -33,10 +32,6 @@
 		from tags
 		order by tags_title 
 	</select>
-	
-	
-	
-	
 
 </mapper>
 	

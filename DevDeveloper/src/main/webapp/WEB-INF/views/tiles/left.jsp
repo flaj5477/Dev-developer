@@ -9,27 +9,27 @@
           </li>
           <li class="nav-item">
             <a class="nav-link " href="${pageContext.request.contextPath}/qna">
-              <i class="ni ni-planet text-blue"></i> Q & A
+              <i class="ni ni-planet text-purple"></i> Q & A
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="${pageContext.request.contextPath}/getProjectsList">
-              <i class="ni ni-pin-3 text-orange"></i> 프로젝트공고
+              <i class="fas fa-stream text-orange"></i> 프로젝트공고
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="${pageContext.request.contextPath}/wikihome">
-              <i class="ni ni-single-02 text-yellow"></i> 위키가이드
+              <i class="fas fa-atlas text-yellow"></i> 위키가이드
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="#" onclick="checkStorage()">
-              <i class="ni ni-bullet-list-67 text-red"></i> CBT
+              <i class="fas fa-pen-square text-red"></i> CBT
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="${pageContext.request.contextPath}/tagList">
-              <i class="ni ni-key-25 text-info"></i> Tags
+              <i class="fas fa-tags text-info"></i> Tags
             </a>
           </li>
           <li class="nav-item">

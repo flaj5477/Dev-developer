@@ -30,13 +30,47 @@
 	rel="stylesheet" />
 
 <script>
-	pageName = "프로젝트 파일";
+pageName = "프로젝트 파일";
 
-	function fImport() {
-//	 uri:"./filesImport.jsp"
-		$.ajax({})
+	function filesImport() {
+		$.ajax({ type: "POST",
+			url: 'filesImport',
+			data:{filesNo: $('[name="chk_files"]:checked').val()},
+			success: function (result) { 
+				location.reload();
+				
+			},
+			error: function (e) { } });
 	}
 	
+	function filesTrash() {
+		$.ajax({ type: "POST",
+			url: 'filesTrash',
+			data:{filesNo: $('[name="chk_files"]:checked').val()},
+			success: function (result) { 
+				location.reload();
+			
+		},
+		error: function (e) { } });
+	}
+	
+	function filesSearch() {
+		$.ajax({ type: "POST",
+			url: 'filesSearch',
+			data:{filesNo: $('[name="chk_files"]:checked').val()},
+			success: function (result) { 
+				location.reload();
+			
+		},
+		error: function (e) { } });
+	}
+
+	function filesDownload() {
+		var filesNo =  $('[name="chk_files"]:checked').val(); 
+		location.href="download?filesNo=" + filesNo
+
+	}
+
 </script>
 </head>
 
@@ -45,33 +79,40 @@
 		<!-- Table -->
 		<div class="row">
 			<div class="col">
-				</br> </br> </br> </br>
+				</br></br></br></br>
 				<div class="card shadow">
 					<div class="card-header border-0">
 						<h2 class="mb-0">프로젝트명</h2>
-						<br />
+						<div>
+						 	<c:forEach items="${filesRoute}" var="route">
+						 	<a href=""> ${route.filesTitle} /</a>
+						 	
+						 	</c:forEach>
+						 
+						</div>
+						
+						<br/>
 						<div class="btn-card-header-group text-right">
 							<div class="row">
 								<div class="col-3">
-									<form name="searchfrm">
+									<form name="searchfrm" action="filesSearch">
+									<input type="hidden" name="projNo" value='${projNo}'/>
 										<div class="input-group">
 											<select name="select">
 												<option value="title">제목
 												<option value="userNo">작성자
 											</select>
-
 											<div class="input-group-prepend">
 												<span class="input-group-text"><i
 													class="ni ni-zoom-split-in"></i></span>
 											</div>
 											<input class="form-control" name="searchVal">
-											<!--  value=${param.searchVal } getparameter? el에서 value안에값처럼표시 -->
-
-											<input type="hidden" name="page" value="1">
+											<input type="hidden" name="page" value="1" >
 											<button>검색</button>
 										</div>
 									</form>
 								</div>
+
 
 								<!-- Modal -->
 								<div class="modal fade" id="upmodal" tabindex="-1" role="dialog"
@@ -81,7 +122,7 @@
 											<div class="modal-header">
 												<h5 class="modal-title" id="exampleModalLabel">파일 업로드</h5>
 												<form id="fileForm" action="filesUpload" method="post" enctype="multipart/form-data">
-													 <%-- <input type="hidden" name="projNo" value=${projNo }/> --%>
+												 <input type="hidden" name="upperFolder" value="${param.upperFolder}"/>
 											
 												타이틀<input type="text" name="filesTitle"> 코멘트<input type="text" name="filesComment">								
 													<input type="file" value="파일 선택" name="uploadFile" />
@@ -106,23 +147,19 @@
 								</div>
 
 								<div class="col-9 pull-right">
-									<button type="button" class="btn btn-primary btn">새폴더</button>
+									<button type="button" class="btn btn-primary btn" onclick="location.href='filesInsertForm.jsp'">새파일</button>
 
-									<button type="button" class="btn btn-primary btn"
-										onclick="location.href='filesImport' ">중요</button>
-									<!-- ./import -->
-
-									<button type="button" class="btn btn-primary btn">휴지통</button>
+									<button type="button" class="btn btn-primary btn" onclick="filesImport()">중요</button>
+									
+									<button type="button" class="btn btn-primary btn" onclick="filesTrash()">휴지통</button>
 
 									<button type="button" class="btn btn-primary btn">미리보기</button>
 
 									<button type="button" class="btn btn-primary btn" id="" 
 										data-toggle="modal" data-target="#upmodal">업로드</button>
 
-									<button type="button" class="btn btn-primary btn">다운로드</button>
-
-									<button type="button" class="btn btn-primary btn">압축</button>
-
+									<button type="button" class="btn btn-primary btn" onclick="filesDownload()">다운로드</button>
+									
 									<a href="#" class="avatar avatar-sm" data-toggle="tooltip"
 										data-original-title="Ryan Tompson"> <img
 										alt="Image placeholder"
@@ -147,16 +184,11 @@
 								</div>
 							</div>
 						</div>
-						<!--  여기 검색창 -->
-						<!--  아래 한라인에 넣을것 -->
-						<!-- <div class="ni ni-zoom-split-in"> -->
-
 					</div>
-					<!--  href="./getFiles?filesNo=${files.filesNo}">${files.filesTitle }  -->
 				</div>
 				<div class="table-responsive">
 
-					<table class="table align-items-center table-flush">
+					<table class="table align-items-center table-flush" id = "filesRoot">
 						<thead class="thead-light">
 							<tr>
 								<th scope="col">파일명</th>
@@ -167,29 +199,32 @@
 							</tr>
 						</thead>
 						<tbody>
-					<%-- 	<c:if test="${files.filesNo }">
-							<a href="./getFilesList?upperFolder=${files.filesNo}">..</a>
-						</c:if>
-						<c:if test="${files.filesImport=='Y'}">
-							<a href="./getFilesList?upperFolder=${files.filesNo}">..</a>
-						</c:if> --%>
 							<c:forEach var="files" items="${list}">
 								<tr>
-									<%-- <td><input type="checkbox" name="chk_files" value="${files.filesNo}"> --%>
-									<td><c:if test="${files.filesImport=='Y'}">
-											<input type="checkbox" value="${files.filesNo}"
-												name="chk_files" checked>
-										</c:if> <c:if test="${files.filesImport==null}">
-											<input type="checkbox" value="${files.filesNo}"
-												name="chk_files">
-										</c:if> <%-- ${files.filesType} --%> <c:if
-											test="${files.filesType=='F'}">
+									<td>
+										<input type="checkbox" value="${files.filesNo}"	name="chk_files" id="chk_files">
+											<!-- <script>
+											$('#chk_files').click(function() {
+												var chk = $("#chk_files").prop("checkd");
+												if(chk) {
+													$(".chBox").prop("checkecd", true);
+												}else {
+													$(".chBox").prop("checked", false);
+												}
+											});
+											</script> -->
+											
+										<%-- ${files.filesType} --%>
+										 <c:if	test="${files.filesType=='F'}">
 											<i class="far fa-file"></i>
                 						${files.filesTitle}
                 						 </c:if> <c:if test="${files.filesType=='D'}">
 											<i class="far fa-folder"></i>
 											<a href="./getFilesList?upperFolder=${files.filesNo}">${files.filesTitle}</a>
-										</c:if></td>
+										</c:if>
+										<span class="filesImportCheck"><c:if test="${files.filesImport=='Y'}">♥</c:if></span>
+										</td>
+									
 									<!-- <input type="checkbox" name="chk_info" value="HTML">HTML -->
 									<td>${files.filesComment }</td>
 									<td>${files.membersNo }</td>
@@ -203,7 +238,6 @@
 				</div>
 				<div class="card-footer py-4">
 					<my:paging paging="${paging}" jsFunc="go_page" />
-
 				</div>
 			</div>
 		</div>
@@ -254,22 +288,6 @@
 		      token: "ee6fab19c5a04ac1a32a645abde4613a",
 		      application: "argon-dashboard-free"
 		    }); */
-	</script>
-	<script>
-		$("input[name='chk_files']").on("click", function() {
-			console.log(this);
-
-			$.ajax({
-				url : "${pageContext.request.contextPath}/filesImport",
-				type : "POST",
-				data : {
-					"filesNo" : $(this).val()
-				},
-				success : function(data) {
-					console.log(data);
-				}
-			})
-		});
 	</script>
 </body>
 

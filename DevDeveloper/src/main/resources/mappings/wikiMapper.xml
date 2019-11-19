@@ -112,7 +112,14 @@
 		update wiki_guide set
 					MANUAL_TITLE = #{manualTitle},
 					MANUAL_ORI_URL = #{manualOriUrl},
-					MANUAL_TAGS	= #{manualTags},
+					<choose>
+						<when test="manualTags != null">
+						MANUAL_TAGS	= #{manualTags},
+						</when>
+						<when test="manualTags == null">
+						MANUAL_TAGS	= null,
+						</when>
+					</choose>
 					MANUAL_CONTENTS_PATH = #{manualContentsPath}
 		where manual_no = #{manualNo}
 	 </update>

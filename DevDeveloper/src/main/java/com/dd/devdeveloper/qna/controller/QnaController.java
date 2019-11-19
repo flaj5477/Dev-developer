@@ -50,7 +50,7 @@ public class QnaController {
 		}
 		
 		//질문수정폼
-		@RequestMapping(value ="/updateQna", method=RequestMethod.GET)
+		@RequestMapping(value ="/updateQnaForm")
 		public String updateQnaGet(QuestionVO vo, Model model) {
 			
 			model.addAttribute("qna",qnaService.getQna(vo));
@@ -116,7 +116,7 @@ public class QnaController {
 			 model.addAttribute("qna",qnaService.getQna(vo));
 //			 session.setAttribute("title", vo.getqTitle());
 			 avo.setqNo(vo.getqNo());
-			 model.addAttribute("ans",qnaService.getAnq(avo));
+			 model.addAttribute("anslist",qnaService.getAnq(avo));
 			 System.out.println("dddddddddd"+qnaService.getAnq(avo));
 			 
 			return "qna/getQna";

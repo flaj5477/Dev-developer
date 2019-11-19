@@ -30,31 +30,29 @@
 	rel="stylesheet" />
 
 <script>
-	pageName = "휴지통";
+	pageName = "검색";
+
+ 	function filesImport() {
+		$.ajax({ type: "POST",
+			url: 'filesImport',
+			data:{filesNo: $('[name="chk_files"]:checked').val()},
+			success: function (result) { 
+				location.reload();
+				
+			},
+			error: function (e) { } });
+	}
 	
-   	function filesTrash() {
-		
+	function filesTrash() {
 		$.ajax({ type: "POST",
 			url: 'filesTrash',
 			data:{filesNo: $('[name="chk_files"]:checked').val()},
 			success: function (result) { 
 				location.reload();
-				
-			},
-			error: function (e) { } });
-	}
-   	
-   	function deleteFiles() {
-		
-		$.ajax({ type: "POST",
-			url: 'deleteFiles',
-			data:{filesNo: $('[name="chk_files"]:checked').val()},
-			success: function (result) { 
-				location.reload();
-				
-			},
-			error: function (e) { } });
-	}
+			
+		},
+		error: function (e) { } });
+}
 	
 </script>
 </head>
@@ -72,7 +70,8 @@
 						<div class="btn-card-header-group text-right">
 							<div class="row">
 								<div class="col-3">
-									<form name="searchfrm">
+									<form name="searchfrm" action="filesSearch">
+									<input type="hidden" name="projNo" value='${projNo}'/>
 										<div class="input-group">
 											<select name="select">
 												<option value="title">제목
@@ -83,20 +82,63 @@
 												<span class="input-group-text"><i
 													class="ni ni-zoom-split-in"></i></span>
 											</div>
- 											 <input class="form-control" name="searchVal">
-											 <!--  value=${param.searchVal } getparameter? el에서 value안에값처럼표시 -->
+											<input class="form-control" name="searchVal">
+											<!--  value=${param.searchVal } getparameter? el에서 value안에값처럼표시 -->
 
-											 <input type="hidden" name="page" value="1">
+											<input type="hidden" name="page" value="1">
 											<button>검색</button>
 										</div>
 									</form>
 								</div>
-							
-								<div class="col-9 pull-right">
-									<button type="button" class="btn btn-primary btn" onclick="filesTrash()">복원</button>
 
-									<button type="button" class="btn btn-primary btn" onclick="deleteFiles()">영구 삭제</button>
-																		
+								<!-- Modal -->
+								<div class="modal fade" id="upmodal" tabindex="-1" role="dialog"
+									aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">파일 업로드</h5>
+												<form id="fileForm" action="filesUpload" method="post" enctype="multipart/form-data">
+													 <%-- <input type="hidden" name="projNo" value=${projNo }/> --%>
+											
+												타이틀<input type="text" name="filesTitle"> 코멘트<input type="text" name="filesComment">								
+													<input type="file" value="파일 선택" name="uploadFile" />
+													<input type="submit" value="업로드" />
+												</form>
+												
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+												
+											</div>
+											<div class="modal-body">...</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Close</button>
+												<button type="button" class="btn btn-primary">Save
+													changes</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-9 pull-right">
+									<button type="button" class="btn btn-primary btn">새폴더</button>
+
+									<button type="button" class="btn btn-primary btn" onclick="filesImport()">중요</button>
+									
+									<button type="button" class="btn btn-primary btn" onclick="filesTrash()">휴지통</button>
+
+									<button type="button" class="btn btn-primary btn">미리보기</button>
+
+									<button type="button" class="btn btn-primary btn" id="" 
+										data-toggle="modal" data-target="#upmodal">업로드</button>
+
+									<button type="button" class="btn btn-primary btn">다운로드</button>
+
+									<button type="button" class="btn btn-primary btn">압축</button>
+
 									<a href="#" class="avatar avatar-sm" data-toggle="tooltip"
 										data-original-title="Ryan Tompson"> <img
 										alt="Image placeholder"
@@ -124,6 +166,7 @@
 					</div>
 				</div>
 				<div class="table-responsive">
+
 					<table class="table align-items-center table-flush">
 						<thead class="thead-light">
 							<tr>
@@ -137,17 +180,30 @@
 						<tbody>
 							<c:forEach var="files" items="${list}">
 								<tr>
-									<td>										
+									<td>
 										<input type="checkbox" value="${files.filesNo}"	name="chk_files" id="chk_files">
+											<!-- <script>
+											$('#chk_files').click(function() {
+												var chk = $("#chk_files").prop("checkd");
+												if(chk) {
+													$(".chBox").prop("checkecd", true);
+												}else {
+													$(".chBox").prop("checked", false);
+												}
+											});
+											</script> -->
+											
 										<%-- ${files.filesType} --%>
-										<c:if test="${files.filesType=='F'}" ><i class="far fa-file"></i> 
-                						 ${files.filesTitle} 
-                						</c:if> 
-                						  <c:if test="${files.filesType=='D'}"><i class="far fa-folder"></i>
-										   <a href="./getFilesList?upperFolder=${files.filesNo}">${files.filesTitle}</a>
+										 <c:if	test="${files.filesType=='F'}">
+											<i class="far fa-file"></i>
+                						${files.filesTitle}
+                						 </c:if> <c:if test="${files.filesType=='D'}">
+											<i class="far fa-folder"></i>
+											<a href="./getFilesList?upperFolder=${files.filesNo}">${files.filesTitle}</a>
 										</c:if>
-									</td>
-																		
+										<span class="filesImportCheck"><c:if test="${files.filesImport=='Y'}">♥</c:if></span>
+										</td>
+									
 									<!-- <input type="checkbox" name="chk_info" value="HTML">HTML -->
 									<td>${files.filesComment }</td>
 									<td>${files.membersNo }</td>
@@ -155,11 +211,13 @@
 									<td>${files.filesSize }</td>
 								</tr>
 							</c:forEach>
+
 						</tbody>
-					</table>		
+					</table>
 				</div>
 				<div class="card-footer py-4">
 					<my:paging paging="${paging}" jsFunc="go_page" />
+
 				</div>
 			</div>
 		</div>
@@ -183,6 +241,7 @@
 						href="https://www.creative-tim.com/presentation" class="nav-link"
 						target="_blank">About Us</a></li>
 					<li class="nav-item"><a href="http://blog.creative-tim.com"
+	
 						class="nav-link" target="_blank">Blog</a></li>
 					<li class="nav-item"><a
 						href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"
@@ -191,7 +250,7 @@
 			</div>
 		</div>
 	</footer>
-	
+
 	<!--   Core   -->
 	<script src="./resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
 	<script
@@ -200,9 +259,16 @@
 	<!--   Argon JS   -->
 	<script src="./resources/assets/js/argon-dashboard.min.js?v=1.1.0"></script>
 	<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-		<!-- function go_page(p) {
+	<script>
+		function go_page(p) {
 			location.href = "getFilesList?page=" + p
-		} -->
-	</body>
+		}
+		/*  window.TrackJS &&
+		    TrackJS.install({
+		      token: "ee6fab19c5a04ac1a32a645abde4613a",
+		      application: "argon-dashboard-free"
+		    }); */
+	</script>
+</body>
 
 </html>

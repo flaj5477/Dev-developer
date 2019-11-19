@@ -10,6 +10,7 @@ import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.projects.ProjectsVO;
 import com.dd.devdeveloper.qna.AnswerVO;
 import com.dd.devdeveloper.qna.QuestionVO;
+import com.dd.devdeveloper.qna.RecListVO;
 
 @Repository
 public class QnaDAO {
@@ -80,7 +81,24 @@ public class QnaDAO {
 			
 		}
 
+		public void insertRec(RecListVO vo) {
+			mybatis.insert("QnaDAO.insertRec",vo);
+		}
 
+
+		public int readRec(RecListVO vo) {
+			 return mybatis.selectOne("QnaDAO.readRec",vo);
+			
+		}
+
+
+		public void deleteRec(RecListVO vo) {
+			 mybatis.delete("QnaDAO.deleteRec",vo);
+			
+		}
+
+
+		  
 
 
 		

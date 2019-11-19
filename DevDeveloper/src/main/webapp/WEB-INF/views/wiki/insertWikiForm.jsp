@@ -93,19 +93,19 @@
 </script>
 </head>
 <body>
-위키등록페이지
-	<form id="frm" name="frm" action="insertWiki" method="post">
-		<input type="text" class="form-control" id="manualTitle" name="manualTitle" placeholder="제목을 입력해주세요" >
-		<input type="text" class="form-control" id="manualOriUrl" name="manualOriUrl" placeholder="url" >
-  		<textarea class="form-control form-control-alternative" id="manualContents" name="manualContents" rows="20" placeholder="내용을 입력해주세요"></textarea>
-  		<select class="form-control" id="manualTags" name="manualTags" multiple="multiple">
-  			<c:forEach items="${tagList}" var="tag">
-  				<option>${tag.tagsTitle }</option>
-  			</c:forEach>
-  		</select>
-  		<button type="button" id="btnfrm" class="btn btn-primary">등록</button>
-	</form>
-	
+	<div class="main p-5">
+		<form id="frm" name="frm" action="insertWiki" method="post">
+			<input type="text" class="form-control" id="manualTitle" name="manualTitle" placeholder="제목을 입력해주세요" >
+			<input type="text" class="form-control" id="manualOriUrl" name="manualOriUrl" placeholder="url" >
+	  		<textarea class="form-control form-control-alternative" id="manualContents" name="manualContents" rows="20" placeholder="내용을 입력해주세요"></textarea>
+	  		<select class="form-control" id="manualTags" name="manualTags" multiple="multiple">
+	  			<c:forEach items="${tagList}" var="tag">
+	  				<option>${tag.tagsTitle }</option>
+	  			</c:forEach>
+	  		</select>
+	  		<button type="button" id="btnfrm" class="btn btn-primary">등록</button>
+		</form>
+	</div>
 
 	
 </body>

@@ -15,4 +15,16 @@ public interface TagsService {
 
 	//태그 나누기
 	public List<String> divTag(String tagVal);
+
+	//관리자 태그관리페이지
+	public Object tagManageForm();
+	
+	//관리자 태그등록
+	public Object insertTag();
+	
+	//관리자 태그삭제
+	public Object deleteTag();
+	
+	//관리자 태그수정
+	public Object updateTag();
 }

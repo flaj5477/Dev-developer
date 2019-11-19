@@ -47,7 +47,7 @@
       </button>
       <!-- Brand -->
       <!-- <a class="navbar-brand pt-0" href="./index.html"> -->
-      <a class="navbar-brand pt-0" href="getFilesList">
+      <a class="navbar-brand pt-0" href="./qna">
         <img src="${pageContext.request.contextPath}/images/profile/DevDeveloper.png" class="navbar-brand-img" alt="...">
       </a>
       <!-- User -->

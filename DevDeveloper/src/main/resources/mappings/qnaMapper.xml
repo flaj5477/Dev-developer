@@ -140,4 +140,21 @@
 		</delete>
 		
 		
+	<insert id="insertRec" parameterType="rec">
+		insert into rec_list
+		values((select max(rec_no)+1 from rec_list),#{qaNo},#{qaType},#{membersNo})
+	</insert>
+		
+		
+	<select id="readRec" resultType="int">
+		select count(*)
+		from rec_list
+		where qa_no = #{qaNo} and qa_type = #{qaType} and members_No =#{membersNo}
+	</select>
+	
+	<delete id="deleteRec" parameterType="rec">
+		delete from rec_list
+		where qa_no = #{qaNo} and qa_type = #{qaType} and members_No =#{membersNo}
+	</delete>	
+		
 </mapper>

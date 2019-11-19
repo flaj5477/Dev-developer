@@ -75,8 +75,10 @@
 							<tbody>
 								<c:forEach var="projects" items="${list}">
 									<tr>
-										<td><a href="./getProjects?projNo=${projects.projNo}">${projects.projTitle }</a><br>
-											<span>${projects.projTags}</span>
+										<td><a class="display-4" href="./getProjects?projNo=${projects.projNo}">${projects.projTitle }</a><br>
+											<c:forEach var="tag" items="${projects.projTagsList }">
+												<span class="badge badge-default">${tag}</span>&nbsp&nbsp
+											</c:forEach>
 										</td>
 										<td>${projects.projRegDate }</td>
 										<td>

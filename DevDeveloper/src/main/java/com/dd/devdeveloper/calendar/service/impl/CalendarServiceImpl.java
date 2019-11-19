@@ -36,7 +36,7 @@ public class CalendarServiceImpl implements CalendarService {
 			XSSFSheet sheet = workbook.getSheetAt(0);
 
 			// 한줄씩 반복문
-			for (int i = 0; i < sheet.getLastRowNum() + 1; ++i) {
+			for (int i = 1; i < sheet.getLastRowNum() + 1; ++i) {  //두번째 줄부터 읽기
 				XSSFRow row = sheet.getRow(i);
 
 				// 행이 존재하기 않으면 패스

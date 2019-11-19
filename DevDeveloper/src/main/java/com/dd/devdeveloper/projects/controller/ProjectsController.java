@@ -151,5 +151,10 @@ public class ProjectsController {
 		return "redirect:/getProjects?projNo=" + vo.getProjNo(); // 프로젝트 상세 페이지
 	}
 	
+	@RequestMapping("/kakao") //카카오메시지 보내기 임시 페이지
+	public String kakao() {
+		return "projects/kakao";
+	}
+	
 	
 }

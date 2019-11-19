@@ -45,7 +45,9 @@
 	     } );
 		
 		 
-		 $('#manualTags').select2();
+		 $('#manualTags').select2({	//select2생성
+				 placeholder: "태그 선택"
+		 });
 		 
 	});
 	
@@ -101,14 +103,10 @@
   				<option>${tag.tagsTitle }</option>
   			</c:forEach>
   		</select>
-  		<input type="text" class="form-control" id="manualTags" name="manualTags" placeholder="테그" >
   		<button type="button" id="btnfrm" class="btn btn-primary">등록</button>
 	</form>
 	
 
-	
-	
-	
 	
 </body>
 </html>

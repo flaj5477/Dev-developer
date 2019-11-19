@@ -74,7 +74,6 @@ a {
 	
  -->
 <body>
-${wikiMap }
 	<%-- <form action="getwiki" method="post">
 		<c:forEach items="${wikiMap }" var="wiki">
 			${wiki.manualNo}	<a href=${wiki.manualOriUrl}>${wiki.manualOriUrl} </a> 
@@ -155,20 +154,20 @@ ${wikiMap }
 								</th>
 								<td id="${wiki.manualNo}" class="title">${wiki.manualTitle}
 								</td>
-								<td><span>
-										<c:choose>
-											<c:when test="${wiki.manualTags eq null}">
-												<a href = "wikihome?select=tags&page=1&searchVal=기타">기타</a>
-											</c:when>
-											<c:when test="${not empty wiki.manualTags}">
-												<a href = "wikihome?select=tags&page=1&searchVal=${wiki.manualTags}">${wiki.manualTags}</a>		
-											</c:when>
-											<c:when test="${not empty wiki.divTagList}"><%--수정해야됨 --%>
-												<a href = "wikihome?select=tags&page=1&searchVal=${wiki.divTagList}">${wiki.divTagList}</a>		
-											</c:when>
-										</c:choose>
-									</span>
-								</td>
+									<td>
+										<span>
+											<c:choose>
+												<c:when test="${wiki.manualTags eq null}">
+													<a href = "wikihome?select=tags&page=1&searchVal=기타">기타</a>
+												</c:when>
+												<c:when test="${not empty wiki.manualTags}">
+													<c:forEach items="${wiki.divTagList }" var="tag" varStatus="index">
+														<a href = "wikihome?select=tags&page=1&searchVal=${tag}">${tag}</a>
+													</c:forEach>		
+												</c:when>
+											</c:choose>
+										</span>
+									</td>
 								<td>
 									<div class="d-flex align-items-center">
 										<span class="mr-2">${wiki.manualTransPercent }%</span>

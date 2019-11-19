@@ -1,22 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 <title>위키수정</title>
+<style>
+.ck-editor__editable {
+    min-height: 400px;
+    max-height: 800px;
+}
+
+.select2 {
+	width:100%!important;
+}
+
+</style>
 	<script>
 		var myEditor;
 	
 		$(function(){
-			checkForm();
+			 checkForm();
 			
+			 
+			 //tagSelectBox();	// 태그셀렉트박스
 			
-			ClassicEditor
+			 //ck에디터 생성
+			 ClassicEditor
 		     .create( document.querySelector( '#manualContents' ) , {
 		    	// 제거 하고싶은 플러그인 (배열)
-				 removePlugins: [ 'ImageUpload' , 'mediaEmbed']
+				 toolbar: [ "undo", "redo", "bold", "italic", "blockQuote", "heading",  "link", "numberedList", "bulletedList",  "insertTable" ]  //툴바설정
 			 })
 		     .then( editor => {
 		            console.log( 'Editor was initialized', editor );
@@ -26,6 +44,11 @@
 		         console.error( error );
 		     } );
 			
+			 
+			 $('#manualTags').select2({	//select2생성
+					 placeholder: "태그 선택"
+			 });
+			 
 		});
 		
 		function checkForm(){
@@ -52,10 +75,18 @@
 	위키수정페이지
 		<form id="frm" name="frm" action="updateWiki" method="post">
 			<input type="hidden" name="manualNo" value="${wiki.manualNo}"/>
-			<input type="text" class="form-control" id="manualTitle" name="manualTitle" placeholder="등록할 제목" value="${wiki.manualTitle}">
-			<input type="text" class="form-control" id="manualOriUrl" name="manualOriUrl" placeholder="참고페이지url" value="${wiki.manualOriUrl}">
-	  		<textarea class="form-control form-control-alternative" id="manualContents" name="manualContents" rows="20" placeholder="문서입력">${wiki.manualContents }</textarea>
-	  		<input type="text" class="form-control" id="manualTags" name="manualTags" placeholder="테그" value="${wiki.manualTags}">
+			<input type="text" class="form-control" id="manualTitle" name="manualTitle" placeholder="제목을 입력해주세요" value="${wiki.manualTitle}">
+			<input type="text" class="form-control" id="manualOriUrl" name="manualOriUrl" placeholder="url" value="${wiki.manualOriUrl}">
+	  		<textarea class="form-control form-control-alternative" id="manualContents" name="manualContents" rows="20" placeholder="내용을 입력해주세요">${wiki.manualContents }</textarea>
+	  		<select class="form-control" id="manualTags" name="manualTags" multiple="multiple">
+	  			<c:forEach items="${tagList}" var="tag">
+	  				<option>${tag.tagsTitle }</option>
+	  			</c:forEach>
+	  			<%--수정전 내용 가져오기 --%>
+	  			<c:forEach items="${wiki.divTagList }" var="tag">	
+	  				<option selected="selected">${tag}</option>
+	  			</c:forEach>
+	  		</select>
 	  		<button type="button" id="btnfrm" class="btn btn-primary">수정</button>
 		</form>
 	</body>

@@ -30,7 +30,7 @@ public class TagsServiceImpl implements TagsService{
 	/*========
 	 * 20191118
 	 * 곽동우
-	 * 태그목록보기 ajax 
+	 * 태그목록보기
 	 ============*/
 	@Override
 	public List<Map<String, Object>> getTagList() {

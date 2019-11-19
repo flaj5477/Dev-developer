@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.members.MembersVO;
+import com.dd.devdeveloper.tags.controller.TagsController;
+import com.dd.devdeveloper.tags.service.TagsService;
 import com.dd.devdeveloper.wiki.WikiRecVO;
 import com.dd.devdeveloper.wiki.WikiTransVO;
 import com.dd.devdeveloper.wiki.WikiVO;
@@ -34,6 +36,7 @@ import com.dd.devdeveloper.wiki.service.impl.WikiDAO;
 public class WikiController {
 	
 	@Autowired WikiService wikiService;
+	@Autowired TagsService tagsService;
 	@Autowired
 	WikiDAO wikiDAO;
 	/*
@@ -57,10 +60,11 @@ public class WikiController {
 	}
 	
 	/*
-	 * 관리자-위키작성페이지 이동
+	 * 관리자-위키등록폼 이동
 	 */
 	@RequestMapping("/insertWikiForm")
-	public String insertWikiForm() {
+	public String insertWikiForm(Model model) {
+		model.addAttribute("tagList", tagsService.getTagList());	//등록폼으로 태그목록던져줌
 		return "wiki/insertWikiForm";
 	}
 	
@@ -84,6 +88,7 @@ public class WikiController {
 	 */
 	@RequestMapping("/updateWikiForm")
 	public String updateWikiForm(WikiVO vo, Model model) {
+		model.addAttribute("tagList", tagsService.getTagList());	//등록폼으로 태그목록던져줌
 		model.addAttribute("wiki", wikiService.getWiki(vo));
 		return "wiki/updateWikiForm";
 	}
@@ -161,7 +166,7 @@ public class WikiController {
 	@ResponseBody
 	public Map transWiki(@RequestBody WikiTransVO tVo, Model model) {
 		tVo.setTranslDate("오류");	//널이면 오류남
-		wikiService.insertWikiTrans(tVo);
+		wikiService.insertWikiTrans(tVo);	//위키번역등록
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("result", true);
 		

@@ -28,7 +28,12 @@
 	        $("#pageName").html(pageName);
 	      //메뉴 볼드 설정
 	    	$( 'a.nav-link:contains('+pageName+')' ).addClass('active');
+	      
 	});
+  	
+  	function checkStorage() {
+  		location.href = '${pageContext.request.contextPath}/cbt/index';
+  	}
   	
   </script>
 </head>
@@ -42,7 +47,7 @@
       </button>
       <!-- Brand -->
       <!-- <a class="navbar-brand pt-0" href="./index.html"> -->
-      <a class="navbar-brand pt-0" href="getFilesList">
+      <a class="navbar-brand pt-0" href="./qna">
         <img src="${pageContext.request.contextPath}/images/profile/DevDeveloper.png" class="navbar-brand-img" alt="...">
       </a>
       <!-- User -->
@@ -243,11 +248,11 @@
     </nav>
     <!-- End Navbar -->
     <div class="header bg-gradient-primary pb-7"></div>
-    <div class="container-fluid mt-5">
+<!--     <div class="container-fluid mt-5"> -->
     	<!-- 내용 -->
     	<tiles:insertAttribute name="content"></tiles:insertAttribute>
     
-    </div>
+ <!--    </div> -->
   </div>
   
   

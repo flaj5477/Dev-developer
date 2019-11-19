@@ -1,5 +1,6 @@
 package com.dd.devdeveloper.wiki.service.impl;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,22 +18,27 @@ public class WikiDAO {
 	
 	@Autowired SqlSessionTemplate mybatis;
 	
+	//위키 단건가져오기
 	public WikiVO getWiki(WikiVO vo) {
 		return mybatis.selectOne("WikiDAO.getWiki", vo);
 	}
 
+	//위키목록가져오기
 	public List<Map<String, Object>> getWikiMap(WikiVO vo) {
 		return mybatis.selectList("WikiDAO.getWikiMap", vo);
 	}
 
+	//위키 등록
 	public int insertWiki(WikiVO vo) {
 		return mybatis.insert("WikiDAO.insertWiki", vo);
 	}
 	
+	//위키원본 수정
 	public int updateWiki(WikiVO vo) {
 		return mybatis.update("WikiDAO.updateWiki", vo);
 	}
 
+	//위키 경로가져오기
 	public WikiVO getWikiContentsPath(WikiVO vo) {
 		return mybatis.selectOne("WikiDAO.getWikiContentsPath", vo);
 	}
@@ -89,5 +95,25 @@ public class WikiDAO {
 	public int wikiTransRecDel(WikiRecVO rvo) {
 		// TODO Auto-generated method stub
 		return mybatis.delete("WikiDAO.wikiTransRecDel", rvo);
+	}
+
+	//위키 번역라인 수정
+	public void updateWikiTrans(WikiVO vo) {
+		mybatis.update("WikiDAO.updateWikiTrans", vo);
+	}
+
+	// 위키 번역라인 수정정보 등록
+	public void updateWikiTransInfo(WikiVO vo) {
+		mybatis.update("WikiDAO.updateWikiTransInfo", vo);
+	}
+
+	// 위키 번역 수정라인정보 삭제
+	public void deleteWikiTransInfo(WikiVO vo) {
+		mybatis.update("WikiDAO.deleteWikiTransInfo", vo);
+	}
+	
+	//태그정보받아오기
+	public List<Map<String, Object>> getTagList() {
+		return mybatis.selectList("TagsDAO.getTagList");
 	}
 }

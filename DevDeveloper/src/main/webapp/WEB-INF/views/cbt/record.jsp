@@ -7,7 +7,7 @@
 <title>CBT Record</title>
 <script>
 	function recordList() {
-		var user = Number("${members.membersNo}");
+		var user = "${members.membersNo}";
 		$.ajax('getRecordList/'+user, {
 			type : 'GET',
 			dataType : 'JSON'
@@ -32,7 +32,12 @@
 							else {
 								var min = parseInt(times/60);
 								var sec = times%60;
-								$(this).text(min+'분'+sec+'초');	
+								if(min == 0) {
+									$(this).text(sec+'초');	
+								}
+								else {
+									$(this).text(min+'분'+sec+'초');	
+								}
 							}
 						})).appendTo('#recTabBody');
 			});
@@ -45,7 +50,7 @@
 </head>
 <body onload="recordList()">
 <div class="cbtRecord">
-	<table id="recordTab" border="1">
+	<table id="recordTab" border="1" style="width:700px">
 		<caption id="recordCap"></caption>
 		<thead>
 			<tr align="center">

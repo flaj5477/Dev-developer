@@ -1,5 +1,7 @@
 package com.dd.devdeveloper.wiki;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -18,6 +20,8 @@ public class WikiVO {
 	private String select;			//검색 분류 선택 (태그,제목)
 	private String searchVal;		//검색값
 	private String orderby;
+	private List<List<Integer>> updateInfo;	//업데이트할 번역 라인정보
+	private List<String> divTagList;	//태그 나눠놓은거
 	
-	private int manualContentsCheck;	//메뉴얼내용 null확인
+	private Integer manualContentsCheck;	//메뉴얼내용 null확인
 }

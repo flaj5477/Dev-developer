@@ -65,19 +65,24 @@
 	display: inline-block;
 	padding: .5em .75em;
 	/* label의 패딩값과 일치 */
-	font-size: inherit;
+	font-size: 14px;
 	font-family: inherit;
 	line-height: normal;
 	/* vertical-align: middle; */
 	background-color: #ffffff;
 	border: 1px solid #ebebeb;
 	border-bottom-color: #e2e2e2;
-	border-radius: .25em;
+	border-radius: 0.375rem;
 	color: #c0c6cc;
 	-webkit-appearance: none;
 	/* 네이티브 외형 감추기 */
 	-moz-appearance: none;
 	appearance: none;
+	box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
+    border: 0;
+    transition: box-shadow .15s ease;
+    height: calc(2.75rem + 2px);
+    padding-left: 20px;
 }
 
 .eheck_font {
@@ -219,7 +224,9 @@ form#signForm {
 			<input class="upload-name" value="프로필사진" disabled="disabled">
 			<label for="ex_filename" style ="margin-left: 10px">업로드</label> <input type="file"
 				id="ex_filename" name="membersImage4" class="upload-hidden"
-				onchange="fileCheck(this)" accept="image/jpeg, image/png"><br>jpg,jpeg,png 파일만 가능합니다.
+				onchange="fileCheck(this)" accept="image/jpeg, image/png"><br><div style="
+    				font-size: 14px;
+   						 color: #aeb1b5;">&nbsp;&nbsp;JPG,JPEG,PNG 파일만 가능합니다.</div>
 		</div> 
 
 

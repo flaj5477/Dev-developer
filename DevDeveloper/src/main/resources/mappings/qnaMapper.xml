@@ -14,8 +14,8 @@
 	 			q.q_date 			,
 	 			q.q_views		    ,
 	 			q.q_tags			,
-	 			m.members_id
-	      		
+	 			m.members_id     	,
+	 			(select count(a_no) from answer where q_no= q.q_no) a_count   	
 	 			from members m join question q
 	 			on q.members_no = m.members_no
 	 	<where>
@@ -35,14 +35,43 @@
 	 	 ) a ) b where no between #{first} and #{last}
 	 </select>
 	
+	
+	<select id="getAnq" parameterType="answer" resultType="answer">
+		    select 	
+		    	a.a_no				,
+		    	a.q_no 				,
+	 			a.members_no 		,
+	 			a.a_contents 		,
+	 			a.a_code 			,  
+	 			a.a_date 			,
+	 			m.members_id     	,
+	 			m.members_image
+	 				
+	 			from members m join answer a
+	 			on a.members_no = m.members_no
+	 			where q_no = ${qNo}
+	 			ORDER BY a_no asc
+	</select>
+	
+	
+	
+	
+	<!--질문등록-->
 	<insert id="insertQna" parameterType="question">
 		insert into question(q_no, q_title, q_contents, members_no) 
-		values( (select max(q_no)+1 from question),#{qTitle},#{qContents},#{membersNo})
+		values((select max(q_no)+1 from question),#{qTitle},#{qContents},#{membersNo})
 	</insert>	
 	
+ 
+
+	<!--답변등록-->
+	 <insert id="insertAnq" parameterType="answer">
+		insert into answer(a_no, q_no, a_contents, members_no) 
+		values((select max(a_no)+1 from answer),#{qNo},#{aContents},#{membersNo})
+	</insert>	
+
 	
-	
-	
+
 		<!-- 전체 질문 갯수(페이징)-->
 	<select id="getCountQna" parameterType="question" resultType="int">
 		select count(*) as "getCountQna"
@@ -67,7 +96,8 @@
 	 			q.q_views		    ,
 	 			q.q_tags			,
 	 			m.members_id		,
-	 			m.members_image
+	 			m.members_image     ,
+	 			(select count(a_no) from answer where q_no= q.q_no) a_count
 	      		
 	 			from members m join question q
 	 			on q.members_no = m.members_no
@@ -81,4 +111,50 @@
 		UPDATE question set q_views = q_views + 1 where q_no = #{qNo}
 
 	</update>
+	
+	
+	
+	<update id="updateQna" parameterType="question"> 
+
+		UPDATE question set q_title = #{qTitle} , q_contents = #{qContents} where q_no = #{qNo}
+
+	</update>
+			
+			
+			
+	<update id="updateAnq" parameterType="answer"> 
+
+		UPDATE answer set a_contents = #{aContents} where a_no = #{aNo}
+
+	</update>
+	
+	
+		<delete id="deleteQna" parameterType="question">
+		
+		delete from question where q_no = #{qNo}
+		</delete>
+		
+		<delete id="deleteAnq" parameterType="answer">
+		
+		delete from answer where a_no = #{aNo}
+		</delete>
+		
+		
+	<insert id="insertRec" parameterType="rec">
+		insert into rec_list
+		values((select max(rec_no)+1 from rec_list),#{qaNo},#{qaType},#{membersNo})
+	</insert>
+		
+		
+	<select id="readRec" resultType="int">
+		select count(*)
+		from rec_list
+		where qa_no = #{qaNo} and qa_type = #{qaType} and members_No =#{membersNo}
+	</select>
+	
+	<delete id="deleteRec" parameterType="rec">
+		delete from rec_list
+		where qa_no = #{qaNo} and qa_type = #{qaType} and members_No =#{membersNo}
+	</delete>	
+		
 </mapper>

@@ -1,6 +1,8 @@
 package com.dd.devdeveloper.projects;
 
 import java.sql.Date;
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -26,4 +28,7 @@ public class ProjectsVO {
 	private int last;	//페이징 종료 게시글 번호
 	private String searchVal; //검색 값
 	private String orderby; // 정렬
+	
+	private List<String> projTagsList; //태그 리스트
+	
 }

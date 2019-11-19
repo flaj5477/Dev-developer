@@ -14,7 +14,14 @@
 			select NVL(max(MANUAL_NO),0)+1 from wiki_guide
 		</selectKey>
 		insert into wiki_guide(MANUAL_NO, MANUAL_CONTENTS_PATH, MANUAL_ORI_URL, MANUAL_TAGS, MANUAL_TITLE, MANUAL_TOTALLINE) 
-		values( #{manualNo}, #{manualContentsPath} ,#{manualOriUrl} ,#{manualTags} ,#{manualTitle} ,#{manualTotalline} )
+		<choose>
+			<when test="manualTags != null">
+			values( #{manualNo}, #{manualContentsPath} ,#{manualOriUrl} ,#{manualTags} ,#{manualTitle} ,#{manualTotalline} )
+			</when>
+			<when test="manualTags == null">
+			values( #{manualNo}, #{manualContentsPath} ,#{manualOriUrl} , null ,#{manualTitle} ,#{manualTotalline} )
+			</when>
+		</choose>
 		<!-- values( #{manualNo}, #{manualContentsPath} ,#{manualOriUrl} ,#{manualTags} ,#{manualTitle} ) -->
 	</insert>
 	
@@ -57,12 +64,9 @@
 							AND MANUAL_TITLE LIKE '%' || #{manualTitle} || '%'
 						</if>
 				
-				
 						<if test="manualTags != null and manualTags != '' ">
 							AND MANUAL_TAGS LIKE '%' || #{manualTags} || '%'
 						</if> -->
-						
-						
 						<if test="searchVal != null and searchVal != '' "> 
 							<!-- <if test="manualTitle != null and manualTitle != '' ">
 								AND MANUAL_TITLE LIKE '%' || #{manualTitle} || '%'
@@ -71,13 +75,12 @@
 								AND MANUAL_TITLE LIKE '%' || #{searchVal} || '%'
 							</if>
 							<if test="select == 'tags'">
-								AND NVL(MANUAL_TAGS, '기타') LIKE '%' || #{searchVal} || '%'
+								AND NVL(MANUAL_TAGS, '기타') LIKE '%' || #{searchVal} || ',%'
 							</if>
 						</if>
 				</where>
-				
 				<choose>	
-					<when test="orderby != null and orderby != '' ">	<!--  '' 체크해줘야됨 -->
+					<when test="orderby != null and orderby != '' ">	<!--  '' 체크해줘야됨dddd -->
 						ORDER BY ${orderby} DESC
 					</when>
 					<otherwise>
@@ -96,6 +99,7 @@
 		SELECT count(count(manual_no))              
 		FROM wiki_guide_trans
 		WHERE manual_no = #{manualNo}
+		AND manual_line is not null
 		GROUP BY manual_line
 	</select>
 	
@@ -108,12 +112,65 @@
 		update wiki_guide set
 					MANUAL_TITLE = #{manualTitle},
 					MANUAL_ORI_URL = #{manualOriUrl},
-					MANUAL_TAGS	= #{manualTags},
+					<choose>
+						<when test="manualTags != null">
+						MANUAL_TAGS	= #{manualTags},
+						</when>
+						<when test="manualTags == null">
+						MANUAL_TAGS	= null,
+						</when>
+					</choose>
 					MANUAL_CONTENTS_PATH = #{manualContentsPath}
 		where manual_no = #{manualNo}
 	 </update>
 	 
 	 
+	 <!-- 
+	 	곽동우
+	 	위키 번역라인 수정정보 등록
+	 	20191117
+	  -->
+	  <update id="updateWikiTransInfo" parameterType="wiki" >
+	  		UPDATE wiki_guide_trans
+			SET manual_upline =
+			  CASE
+			  	<foreach collection="updateInfo" item="info" index="index">
+            		<foreach collection="info" item="line" index="index2">	<!-- 중복라인 처리하는법생각 -->
+            			<if test="line == null">
+            				WHEN manual_line = #{index} THEN null
+            			</if>
+            			<if test="line != null">
+            				WHEN manual_line = #{index} THEN #{line}
+            			</if>
+            		</foreach>
+        		</foreach>
+			  END
+			WHERE manual_no = #{manualNo}
+	  </update>
+	  
+	  <!-- 
+	 	곽동우
+	 	위키 번역라인 수정
+	 	20191117
+	  -->
+	  <update id="updateWikiTrans" parameterType="wiki">
+	  		UPDATE wiki_guide_trans
+			SET manual_line = manual_upline
+			WHERE manual_no = #{manualNo}
+	  </update>
+	  
+	  
+	  <!-- 
+	 	곽동우
+	 	위키 번역라인 수정
+	 	20191117
+	  -->
+	  <update id="deleteWikiTransInfo" parameterType="wiki">
+		  	UPDATE wiki_guide_trans
+			SET manual_upline = NULL
+			WHERE manual_no = #{manualNo}
+	  </update>
+
 	 
 	 <!-- 
 	 	파일위치조회
@@ -307,6 +364,7 @@
 					  WHERE a.trans_no = b.trans_no(+)
 					  and a.MANUAL_NO = #{manualNo} ) r
 				where r.rec_rank = 1
+				and "manualLine" is not null
 			</if>
 			
 	 </select>

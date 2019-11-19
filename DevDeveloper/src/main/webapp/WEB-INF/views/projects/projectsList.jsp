@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,10 +32,11 @@
 <script>
 	pageName = "프로젝트공고";
 </script>
+
 </head>
 
 <body class="">
-	<div class="container-fluid mt--3">
+	<div class="container-fluid mt-5">
 		<!-- Table -->
 		<div class="row">
 			<div class="col">
@@ -53,7 +55,7 @@
 						</div>
 						
 						<div class="col-xl-8 col-lg-7 col-md-12 col-sm-12 col-xs-12 text-right">
-						<!-- 로그인 한 사람만 버튼 보이게!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+					
 							<a href="insertProjectForm" class="btn btn-lg btn-primary">프로젝트 등록</a>
 						</div>
 					</div>
@@ -65,20 +67,39 @@
 								<tr>
 									<th scope="col">Project</th>
 									<th scope="col">공고일</th>
-									<th scope="col">마감일</th>
+									<th scope="col">마감</th> <!-- 마감일 - 오늘날짜 -->
+									<th scope="col">프로젝트  기간</th>
 									<th scope="col">공고자</th>
-									<th scope="col">Users</th>
-									<th scope="col">Completion</th>
-									<th scope="col"></th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="projects" items="${list}">
 									<tr>
-										<td><a href="./getProjects?projNo=${projects.projNo}">${projects.projTitle }</a>
+										<td><a class="display-4" href="./getProjects?projNo=${projects.projNo}">${projects.projTitle }</a><br>
+											<c:forEach var="tag" items="${projects.projTagsList }">
+												<span class="badge badge-default">${tag}</span>&nbsp&nbsp
+											</c:forEach>
 										</td>
 										<td>${projects.projRegDate }</td>
-										<td>${projects.projDueDate }</td>
+										<td>
+											<span>
+												<jsp:useBean id="toDay" class="java.util.Date" />
+												<fmt:parseNumber var="toDay_N" value="${toDay.time / (1000*60*60*24)}" integerOnly="true"></fmt:parseNumber>
+												<fmt:parseDate var="projDueDate" value="${projects.projDueDate }" pattern="yyyy-MM-dd"></fmt:parseDate>
+												<fmt:parseNumber var="projDueDate_N" value="${projDueDate.time / (1000*60*60*24)}" integerOnly="true"></fmt:parseNumber>
+											  	D-${projDueDate_N - toDay_N}
+											 </span>
+											 <div>
+												<div class="progress">
+													<div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="${(projDueDate_N - toDay_N)/30*100}" aria-valuemin="0" aria-valuemax="100" style="width: ${(projDueDate_N - toDay_N)/30*100}%;"></div>
+												</div>
+											</div>
+										</td>
+										<td><fmt:parseDate var="projStartDate" value="${projects.projStartDate }" pattern="yyyy-MM-dd"></fmt:parseDate>
+											<fmt:parseNumber var="projStartDate_N" value="${projStartDate.time / (1000*60*60*24)}" integerOnly="true"></fmt:parseNumber>
+											<fmt:parseDate var="projEndDate" value="${projects.projEndDate }" pattern="yyyy-MM-dd"></fmt:parseDate>
+											<fmt:parseNumber var="projEndDate_N" value="${projEndDate.time / (1000*60*60*24)}" integerOnly="true"></fmt:parseNumber>
+											 ${projEndDate_N - projStartDate_N}일</td>
 										<td>${projects.membersNo }</td>
 									</tr>
 								</c:forEach>

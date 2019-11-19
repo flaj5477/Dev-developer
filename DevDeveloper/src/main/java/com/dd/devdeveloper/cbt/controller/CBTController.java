@@ -1,5 +1,6 @@
 package com.dd.devdeveloper.cbt.controller;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -19,18 +20,21 @@ import com.dd.devdeveloper.cbt.TestsRecordVO;
 import com.dd.devdeveloper.cbt.TestsVO;
 import com.dd.devdeveloper.cbt.service.CBTService;
 import com.dd.devdeveloper.members.MembersVO;
+import com.dd.devdeveloper.members.service.MembersService;
 
 @Controller
 public class CBTController {
 	
 	@Autowired
 	CBTService cbtService;
+	@Autowired
+	MembersService membersService;
 	
 	@RequestMapping("cbt/index")
 	public String getTestJudg(TestsRecordVO recvo, Model model, HttpSession session) {
-		MembersVO membersNo = (MembersVO) session.getAttribute("members");
-		recvo.setMembersNo(membersNo.getMembersNo());
-		model.addAttribute("tr", cbtService.getTestJudg(recvo));
+		MembersVO members = (MembersVO) session.getAttribute("members");
+		recvo.setMembersNo(members.getMembersNo());
+		model.addAttribute("tr", cbtService.getTestJudg(recvo)); // Command(vo) 객체를 담을 때 model.addAttribute
 		return "cbt/index";
 	}
 	
@@ -60,13 +64,18 @@ public class CBTController {
 	}
 	
 	@RequestMapping("cbt/examination") 
-	public String setExamination(TestsRecordVO recvo, HttpSession session) { 
-		MembersVO membersNo = (MembersVO) session.getAttribute("members");
-		recvo.setMembersNo(membersNo.getMembersNo());
-		//cbtService.cbtInsert(recvo);
-		return "/notiles/cbt/examination";
+	public String examination() {
+		return "cbt/examination";
 	}
 	
+	@RequestMapping("cbt/insertRecord")
+	//redirect 방식 : a요청을 하였을 때 서비스를 가지고 b로 이동하여 실행한다.
+	public String cbtInsert(TestsRecordVO recvo, HttpSession session) {
+		cbtService.cbtInsert(recvo);
+		session.setAttribute("recvo",recvo);
+		return "redirect:viewer"; 
+	}
+
 	@RequestMapping("cbt/viewer") 
 	public String viewer() {
 		return "/notiles/cbt/viewer";
@@ -81,19 +90,33 @@ public class CBTController {
 		return cbtService.getQuestList(tqvo);
 	}
 	
+	@RequestMapping(value="cbt/solutionProc",
+					method=RequestMethod.POST,
+					consumes="application/json")
+	@ResponseBody
+	public Map<String,Boolean> solutionProc(@RequestBody Map<String,Object> cd, HttpSession session) {
+		cbtService.solutionProc(cd);
+		// 멤버 등급 업데이트 후, members 세션 리로드 (조회)
+		MembersVO members = (MembersVO) session.getAttribute("members");
+		session.setAttribute("members",membersService.getmembers(members));
+		return Collections.singletonMap("result",true); // response 객체에 값 넘겨주기위해 사용
+		
+	}
+	
+	@RequestMapping(value="cbt/getResult",
+					method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> getResult(HttpSession session) {
+		TestsRecordVO recvo = (TestsRecordVO) session.getAttribute("recvo");
+		Map<String,Object> resultMap = cbtService.getResult(recvo);
+		return resultMap;
+	}
+	
 	@RequestMapping(value="getRecordList/{user}",
 					method=RequestMethod.GET)
 	@ResponseBody
 	public List<Map<String,Object>> getRecordList(@PathVariable int user, TestsRecordVO recvo) {
-		recvo.setMembersNo(user);
-		return cbtService.getRecordList(recvo);
-	}
-	
-	@RequestMapping(value="cbt/questionMapping",
-					method=RequestMethod.POST,
-					consumes="application/json")
-	@ResponseBody
-	public void markedList(@RequestBody List<Map<String,Integer>> mark) {
-		cbtService.markMatchProc(mark);
+	recvo.setMembersNo(user);
+	return cbtService.getRecordList(recvo);
 	}
 }

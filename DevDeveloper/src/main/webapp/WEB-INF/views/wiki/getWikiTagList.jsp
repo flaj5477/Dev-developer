@@ -22,7 +22,7 @@
 	/*
 		곽동우
 		20191103
-		다른번역 클릭
+		태그 클릭
 	*/
 	function tagClick(){
 		$('body').on('click','#wikiList li',function(){
@@ -57,25 +57,6 @@
 	</div>
 	
 	<div class="row" id="wikiList">	
-			<%-- <c:forEach items="${tagList}" var="tag">
-	            <div class="col-xl-3 col-lg-6">
-	              <div class="card card-stats mb-4 mb-xl-0">
-	                <div class="card-body"  id="${tag.manualTags }">
-	                  <div class="row">
-	                    <div class="col">
-	                      <span class="h2 font-weight-bold text-uppercase mb-0">${tag.manualTags }</span>
-	                      <h5 class="card-title text-muted mb-0">${tag.tagsContents }</h5>
-	                    </div>
-	                  </div>
-	                  <p class="mt-3 mb-0 text-muted text-sm">
-	                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>${tag.countTags }개</span>
-	                    <span class="text-nowrap">${tag.countTags }개</span>
-	                  </p>
-	                </div>
-	              </div>
-	            </div>
-            </c:forEach> --%>
-            
             <div id="${tag.manualTags }">
             	<ul>
 		            <c:forEach items="${tagList}" var="tag">

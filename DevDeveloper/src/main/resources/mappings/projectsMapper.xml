@@ -3,6 +3,18 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ProjectsDAO">
+
+	<!-- 전체 프로젝트 공고 갯수 (페이징)-->
+	<select id="getCountProj" parameterType="projects" resultType="int">
+		select count(*) as "getCountProj"
+		from projects
+		<where>
+			<!-- proj_due_date > sysdate  -->
+			<if test="searchVal != null and searchVal != '' "> 
+					AND PROJ_TITLE LIKE '%' || #{searchVal} || '%'
+			</if>
+		</where>
+	</select>
 	
 	<!-- 전체조회 -->
 	<select id="getProjectsList" parameterType="projects" resultType="projects">
@@ -11,9 +23,13 @@
 				members_no, 
 				proj_title, 
 				proj_reg_date, 
-				proj_due_date
+				proj_due_date,
+				proj_start_date, 
+				proj_end_date,
+				proj_tags
 		from projects 
 		<where>
+			<!-- proj_due_date > sysdate  -->
 			<if test="searchVal != null and searchVal != '' "> 
 					AND PROJ_TITLE LIKE '%' || #{searchVal} || '%'
 			</if>
@@ -23,7 +39,7 @@
 				ORDER BY ${orderby} DESC
 			</when>
 			<otherwise>
-				ORDER BY proj_no DESC
+				ORDER BY proj_reg_date DESC   <!-- 공고일 올라온 순서대로 화면 출력 -->
 			</otherwise>
 		</choose>
 	 ) a ) b WHERE no BETWEEN #{first} AND #{last}      
@@ -37,7 +53,13 @@
 				p.proj_contents,
 				p.proj_reg_date,
 				p.proj_due_date,
+				p.proj_require,
+				p.proj_members_cnt,
+				p.proj_type,
+				p.proj_price,
 				p.proj_tags,
+				p.proj_start_date,
+				p.proj_end_date,
         		m.members_name
 		from projects p join members m
     	on p.members_no = m.members_no
@@ -89,19 +111,51 @@
 	</insert>
 	
 	
-	<!-- 전체 프로젝트 공고 갯수 (페이징)-->
-	<select id="getCountProj" parameterType="projects" resultType="int">
-		select count(*) as "getCountProj"
-		from projects
-		<where>
-			<if test="searchVal != null and searchVal != '' "> 
-					AND PROJ_TITLE LIKE '%' || #{searchVal} || '%'
-			</if>
-		</where>
-	</select>
 	
-	<insert id="insertProjects">
-		
+	
+	<!-- 프로젝트 입력 -->
+	<insert id="insertProject" parameterType="projects">
+		insert into projects
+		values ( (select max(proj_no)+1 from projects) ,
+            #{membersNo}, 
+            #{projTitle}, 
+            #{projContents}, 
+            sysdate, 
+            #{projDueDate}, 
+            #{projRequire},
+            #{projMembersCnt},
+            #{projType}, 
+            #{projPrice}, 
+            'url', 
+            #{projTags}, 
+            #{projStartDate}, 
+            #{projEndDate}	)
 	</insert>
+	
+	
+	<!-- 프로젝트 삭제 -->
+	<delete id="deleteProject">
+		delete projects where proj_no=#{projNo}
+	</delete>
+	
+	
+	<!-- 프로젝트 수정 -->
+	<update id="updateProject" parameterType="projects">
+	update projects 
+	set proj_title= #{projTitle},
+      	proj_contents= #{projContents},
+      	proj_reg_date= sysdate,
+      	proj_due_date= #{projDueDate},
+      	proj_require= #{projRequire},
+      	proj_members_cnt= #{projMembersCnt},
+      	proj_type= #{projType},
+      	proj_price= #{projPrice},
+      	proj_tags= #{projTags},
+      	proj_start_date= #{projStartDate},
+      	proj_end_date= #{projEndDate}
+	where proj_no=#{projNo}	
+	</update>
+	
+	
 	
 </mapper>

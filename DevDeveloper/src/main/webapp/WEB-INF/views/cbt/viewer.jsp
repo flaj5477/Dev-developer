@@ -29,12 +29,11 @@
 	var offset = [];
 	var setTime = 0;
 	
-	function getStorage() {
-		localStorage.setItem('rid',rid);
-		localStorage.setItem('user',user);
-		localStorage.setItem('level',level);	
-	}
-	
+	history.pushState(null, null, '#noback');
+    $(window).bind('hashchange', function() {
+        history.pushState(null, null, '#noback');
+    });
+    
 	function getTest() {
 		$.ajax('getTestInfo/'+level, {
 			type : 'GET',
@@ -60,6 +59,7 @@
 			}
 		});
 	}
+
 	function timeCount() {
 		var restTime = setInterval(function() {
 			var getTime = sec - setTime;

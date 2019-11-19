@@ -5,7 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>CBT Home</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/cbt.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/assets/js/format.js"></script>
 <script>	
 	var grade = parseInt("${members.membersGrade}");
@@ -127,6 +130,26 @@
 	<div id="subject"></div>
 	<div id="content">
 		<div id="comment"></div>
+		<div class="card-group" style="width:600px">
+			<div class="card text-white mb-3" style="max-width: 18rem;">
+				<img src="${pageContext.request.contextPath}/images/grade/0.png" class="card-img-top" alt="..." width="70px">
+			</div>
+			<div class="card">
+				<img src="${pageContext.request.contextPath}/images/grade/1.png" class="card-img-top" alt="..." width="70px">
+			</div>
+			<div class="card">
+			  	<img src="${pageContext.request.contextPath}/images/grade/2.png" class="card-img-top" alt="..." width="70px">
+			</div>
+			 <div class="card">
+			  	<img src="${pageContext.request.contextPath}/images/grade/3.png" class="card-img-top" alt="..." width="70px">
+			</div>
+			 <div class="card">
+			  	<img src="${pageContext.request.contextPath}/images/grade/4.png" class="card-img-top" alt="..." width="70px">
+			</div>
+			 <div class="card">
+			  	<img src="${pageContext.request.contextPath}/images/grade/5.png" class="card-img-top" alt="..." width="70px">
+			</div>
+		</div>
 		<div id="level"></div>
 		<div id="restTime"></div>
 		<div id="message"></div>

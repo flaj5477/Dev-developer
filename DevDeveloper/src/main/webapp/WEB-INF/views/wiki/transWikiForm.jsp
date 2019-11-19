@@ -412,9 +412,10 @@ div[contenteditable] {
 					if(response.result == true){	// 서버에서 등록후에 true라고 넘어오면
 						//userList();
 						alert("등록됨");
-						transArea.val('');
+						myEditor.setData('');	//텍스트에어리어 초기화
 						getWikiTransLine(manualLine, manualNo);	//메뉴얼번호 메뉴얼라인수 넘겨줌
-						$("#transContent"+manualLine).html(manualAfter);
+						//$("#transContent"+manualLine).html(manualAfter);
+						
 						
 					}
 				},
@@ -567,120 +568,128 @@ div[contenteditable] {
 </script>
 </head>
 <body>
-	<form name="frm" id="frm" action="updateWikiForm" method="post">
-		<div>
-		<div id="modal-login" class="modal fade" tabindex="-1" role="dialog"
-			aria-labelledby="로그인" aria-describedby="테스트 모달">
-			<div class="modal-dialog">
-				<div class="modal-content" style="background: #5561A5; width:70%;"></div>
+	<div class="main p-5">
+		<form name="frm" id="frm" action="updateWikiForm" method="post">
+			<div>
+			<div id="modal-login" class="modal fade" tabindex="-1" role="dialog"
+				aria-labelledby="로그인" aria-describedby="테스트 모달">
+				<div class="modal-dialog">
+					<div class="modal-content" style="background: #5561A5; width:70%;"></div>
+				</div>
+			</div> 	
+				<c:if test="${sessionScope.members.membersGrade eq 5}">
+					<span class="col-3 text-right">
+						<button type="button" id="btnDelWiki" class="btn btn-danger">삭제</button>
+						<button class="btn btn-primary">수정</button>
+					</span>
+				</c:if>
 			</div>
-		</div> 	
-			<c:if test="${sessionScope.members.membersGrade eq 5}">
-				<span class="col-3 text-right">
-					<button type="button" id="btnDelWiki" class="btn btn-danger">삭제</button>
-					<button class="btn btn-primary">수정</button>
-				</span>
-			</c:if>
-			${wiki.manualNo}<br>
-			${wiki.manualTitle}<br>
-			${wiki.manualContentsPath}<br>
-			${wiki.manualOriUrl}<br>
-			${wiki.manualTags}<br>
-		</div>
-	
-		<div class="nav-wrapper">
-		    <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
-		        <li class="nav-item">
-		            <a class="nav-link mb-sm-3 mb-md-0" id="btnOriWiki" data-toggle="tab" href="#" role="tab" aria-controls="tabs-icons-text-1" aria-selected="false"><i class="ni ni-cloud-upload-96 mr-2"></i>원문보기</a>
-		        </li>
-		        <li class="nav-item">
-		            <a class="nav-link mb-sm-3 mb-md-0 active" id="btnTransWiki" data-toggle="tab" href="#" role="tab" aria-controls="tabs-icons-text-2" aria-selected="true"><i class="ni ni-bell-55 mr-2"></i>번역하기</a>
-		        </li>
-		        <li class="nav-item">
-		            <a class="nav-link mb-sm-3 mb-md-0" id="btnGetTransWiki" data-toggle="tab" href="#" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="ni ni-calendar-grid-58 mr-2"></i>번역본보기</a>
-		        </li>
-		    </ul>
-		</div>
-	
-		<input type="hidden" name="manualNo" value="${wiki.manualNo}">
-		<input type="hidden" name="manualContentsPath" value="${wiki.manualContentsPath}">
-	
-		<div class="col">
-			<div class="row align-items-center">
-				<div class="col">
-					<div class="ct-page-title">
-			          <h1 class="ct-title" id="content">${wiki.manualTitle}</h1>
-			        </div>
-		        </div>
-		    </div>
-
-			<hr>
-			<%-- 위키 번역 문장 뿌려줌 --%>
-			
-			<c:forEach var="entry" items="${transWiki}" varStatus="status">
-				<c:if test="${not empty entry.value}">
-					<div class="translate open col" id="translate${entry.key}">
-						<div class="row">
-							<div class="col">${entry.value }</div>
-							
-							<c:choose>	<%-- 번역있으면 출력해줌  (transList 컨트롤러에서 따로 들고온거임)  --%>
-								<c:when test="${not empty transList.get(status.index)}">
-									<div class="translated col font-italic" id="transContent${entry.key}">${transList.get(status.index)}</div>
+		
+			<div class="nav-wrapper">
+			    <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+			        <li class="nav-item">
+			            <a class="nav-link mb-sm-3 mb-md-0" id="btnOriWiki" data-toggle="tab" href="#" role="tab" aria-controls="tabs-icons-text-1" aria-selected="false"><i class="ni ni-cloud-upload-96 mr-2"></i>원문보기</a>
+			        </li>
+			        <li class="nav-item">
+			            <a class="nav-link mb-sm-3 mb-md-0 active" id="btnTransWiki" data-toggle="tab" href="#" role="tab" aria-controls="tabs-icons-text-2" aria-selected="true"><i class="ni ni-bell-55 mr-2"></i>번역하기</a>
+			        </li>
+			        <li class="nav-item">
+			            <a class="nav-link mb-sm-3 mb-md-0" id="btnGetTransWiki" data-toggle="tab" href="#" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="ni ni-calendar-grid-58 mr-2"></i>번역본보기</a>
+			        </li>
+			    </ul>
+			</div>
+		
+			<input type="hidden" name="manualNo" value="${wiki.manualNo}">
+			<input type="hidden" name="manualContentsPath" value="${wiki.manualContentsPath}">
+		
+			<div class="col">
+				<div class="row align-items-center">
+					<div class="col">
+						<div class="ct-page-title">
+				          <h1 class="ct-title" id="content">${wiki.manualTitle}</h1>
+				          <span>
+							<c:choose>
+								<c:when test="${wiki.manualTags eq null}">
+									<span class="badge badge-default" style="color: white"><a href = "wikihome?select=tags&page=1&searchVal=기타" style="color: white">기타</a></span>
 								</c:when>
-								<c:when test="${empty transList.get(status.index)}">
-									<div class="untranslated col font-italic" id="transContent${entry.key}">${transList.get(status.index)}</div>
+								<c:when test="${not empty wiki.manualTags}">
+									<c:forEach items="${wiki.divTagList }" var="tag" varStatus="index">
+										<span class="badge badge-default" ><a href = "javascript:clickTag(event,'${tag}')" style="color: white">${tag}</a></span>
+									</c:forEach>		
 								</c:when>
 							</c:choose>
-							
-						</div>
-					</div>
-					
-					
-					<%-- 변역등록 편집기 --%>	
-					<div class="transEdit hide">
-						<div class="row">
-							
-							<%-- 번역편집기 왼쪽    --%>
-							<div class="col" name="lEdit">
-								<div class="row">
-									<span class="badge badge-primary" id="${entry.key}">
-										${wiki.manualTitle}/번역_${entry.key} </span>
-								</div>
-								<div class="row" id="oriContents">
-									${entry.value }
-								</div>
-								<div class="row">
-									<div class="editor${entry.key}" id="transContents">
-								        ${entry.value }
-								    </div>
-								</div>
-								<div class="row">
-									<a href='javascript:void(0);' onclick="insertWikiTrans();" class="btn btn-sm btn-primary">번역등록</a>
-									<a href='javascript:void(0);' onclick="papagoTrans();" class="btn btn-sm btn-primary">구글번역</a>
-								</div>
+						  </span>
+				        </div>
+			        </div>
+			    </div>
+	
+				<hr>
+				<%-- 위키 번역 문장 뿌려줌 --%>
+				
+				<c:forEach var="entry" items="${transWiki}" varStatus="status">
+					<c:if test="${not empty entry.value}">
+						<div class="translate open col" id="translate${entry.key}">
+							<div class="row">
+								<div class="col">${entry.value }</div>
+								
+								<c:choose>	<%-- 번역있으면 출력해줌  (transList 컨트롤러에서 따로 들고온거임)  --%>
+									<c:when test="${not empty transList.get(status.index)}">
+										<div class="translated col font-italic" id="transContent${entry.key}">${transList.get(status.index)}</div>
+									</c:when>
+									<c:when test="${empty transList.get(status.index)}">
+										<div class="untranslated col font-italic" id="transContent${entry.key}">${transList.get(status.index)}</div>
+									</c:when>
+								</c:choose>
+								
 							</div>
-							
-							<%-- 번역편집기 오른쪽--%>
-							<div class="col mr--3" name="rEdit">
-								<span class="row nav nav-pills justify-content-end">
-										<i name="btn-trans-close" class="ni ni-fat-remove"></i>
-								</span>
-								<div class="scrollspy-example" id="othertrans_${entry.key}">
+						</div>
+						
+						
+						<%-- 변역등록 편집기 --%>	
+						<div class="transEdit hide">
+							<div class="row">
+								
+								<%-- 번역편집기 왼쪽    --%>
+								<div class="col" name="lEdit">
 									<div class="row">
-										다른사람 번역한거 표시
+										<span class="badge badge-primary" id="${entry.key}">
+											${wiki.manualTitle}/번역_${entry.key} </span>
+									</div>
+									<div class="row" id="oriContents">
+										${entry.value }
+									</div>
+									<div class="row">
+										<div class="editor${entry.key}" id="transContents">
+									        ${entry.value }
+									    </div>
+									</div>
+									<div class="row">
+										<a href='javascript:void(0);' onclick="insertWikiTrans();" class="btn btn-sm btn-primary">번역등록</a>
+										<a href='javascript:void(0);' onclick="papagoTrans();" class="btn btn-sm btn-primary">구글번역</a>
 									</div>
 								</div>
-							
+								
+								<%-- 번역편집기 오른쪽--%>
+								<div class="col mr--3" name="rEdit">
+									<span class="row nav nav-pills justify-content-end">
+											<i name="btn-trans-close" class="ni ni-fat-remove"></i>
+									</span>
+									<div class="scrollspy-example" id="othertrans_${entry.key}">
+										<div class="row">
+											다른사람 번역한거 표시
+										</div>
+									</div>
+								
+								</div>
 							</div>
 						</div>
-					</div>
-				</c:if>
-			</c:forEach>
-		</div>
-	</form>
-		
+					</c:if>
+				</c:forEach>
+			</div>
+		</form>
+	</div>
 	
 	<a data-toggle="modal" href="login2" data-target="#modal-login"
-	role="button" id="wikimodal">로그인</a>	
+	role="button" id="wikimodal" style="display: none">로그인</a>	
 </body>
 </html>

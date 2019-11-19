@@ -14,7 +14,14 @@
 			select NVL(max(MANUAL_NO),0)+1 from wiki_guide
 		</selectKey>
 		insert into wiki_guide(MANUAL_NO, MANUAL_CONTENTS_PATH, MANUAL_ORI_URL, MANUAL_TAGS, MANUAL_TITLE, MANUAL_TOTALLINE) 
-		values( #{manualNo}, #{manualContentsPath} ,#{manualOriUrl} ,#{manualTags} ,#{manualTitle} ,#{manualTotalline} )
+		<choose>
+			<when test="manualTags != null">
+			values( #{manualNo}, #{manualContentsPath} ,#{manualOriUrl} ,#{manualTags} ,#{manualTitle} ,#{manualTotalline} )
+			</when>
+			<when test="manualTags == null">
+			values( #{manualNo}, #{manualContentsPath} ,#{manualOriUrl} , null ,#{manualTitle} ,#{manualTotalline} )
+			</when>
+		</choose>
 		<!-- values( #{manualNo}, #{manualContentsPath} ,#{manualOriUrl} ,#{manualTags} ,#{manualTitle} ) -->
 	</insert>
 	

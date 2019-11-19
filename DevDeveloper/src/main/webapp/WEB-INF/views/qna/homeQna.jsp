@@ -31,6 +31,7 @@
 	
 </head>
 <body id = "pp">
+
 <div class="container-fluid mt--3">
 	<div class="main-qqqcontent">
 	<div class="mb-4"> <!-- roww -->
@@ -53,9 +54,9 @@
 					<div class="main-qqqtopbar-wrapper" style="
     font-size: 13px;">
 						<ul class="main-qqqfilter sub-qqqfilter pull-qqqright qqqtabs">
-							<li class="filter-qqqitem active"><a href="qna">최신순</a></li>
-							<li class="filter-qqqitem">좋아요</li>
-							<li class="filter-qqqitem"id="q_views">조회수</li>
+							<li class="filter-qqqitem <c:if test='${questionVO.orderby == "q_new" or empty questionVO.orderby}'>active</c:if>"><a href="qna">최신순</a></li>
+							<li class="filter-qqqitem <c:if test='${questionVO.orderby == "q_like"}'>active</c:if>" >좋아요</li>
+							<li class="filter-qqqitem <c:if test='${questionVO.orderby == "q_views"}'>active</c:if>" id="q_views">조회수</li>
 						</ul>
 						<ul class="main-qqqfilter sub-qqqfilter pull-left qqqtabs">
 						</ul>
@@ -132,7 +133,7 @@
 		        var id = $(this).attr('id');
 		        document.searchform.orderby.value = id 
 				document.searchform.submit()
-				$("#q_views").attr('class','filter-qqqitem active');
+				
 		    });
 		});
 		

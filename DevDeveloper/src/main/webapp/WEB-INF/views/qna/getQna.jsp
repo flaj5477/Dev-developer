@@ -25,6 +25,11 @@
 
 
 <body id="pp">
+
+	<form name = 'qnaform' action='updateQnaForm' method = 'post'>
+	<input type="hidden" name="qNo" value="${qna.qNo}">
+	</form>
+	
 	<div class="container-fluid mt--3">
 		<div class="main-qqqcontent">
 			<div class="col-xs-12 qqqcard">
@@ -83,30 +88,24 @@
 			 onclick="location.href='qna'">
 					목록보기</button>				
 					<c:if test="${not empty sessionScope.members.membersId}">							 
-					<button class="btn qqqbutton" 
-					 id="ani">
+					<button class="btn qqqbutton" id="ani">
 					답변달기</button>	
 					</c:if>	
 					 <c:if test = "${sessionScope.members.membersNo == qna.membersNo}"> 			
 				<button class="btn qqqbutton" 
-			 onclick="location.href='updateQna?qNo=${qna.qNo}'">
-					질문수정</button>  <button class="btn qqqbutton"
-			 onclick="location.href='deleteQna?qNo=${qna.qNo}'" id="queDel">
-					질문삭제</button>			
+			 onclick="document.qnaform.submit()">질문수정</button> 
+			  <button class="btn qqqbutton" id="queDel">질문삭제</button>			
 					</c:if>
-				</div>
-			
-			</div>
-			 
-			<c:if test="${not empty ans}">
+				</div>	
+			</div>	 
+			<c:if test="${not empty anslist}">
 			<div class="col-xs-12 qqqcard qqqcard-tab">
                 <div class="main-qqqtopbar-wrapper">
                     <h2 class="title pull-left">
-                        ${fn:length(ans)} 답변                
-                    </h2>                   
-                    
+                        ${fn:length(anslist)} 답변                
+                    </h2>                               
                 </div>
-				<c:forEach items="${ans}" var="ans">
+				<c:forEach items="${anslist}" var="ans">
                 <div class="main-question-answer">
                 	
                     <div class="answer-detail-content answer-selection">
@@ -150,15 +149,14 @@
                    <c:if test = "${sessionScope.members.membersNo == ans.membersNo }">
                 <div class ="qUp"> <button class="btn qqqbutton" id="ansUpdate">
 					답변수정</button>
-				 <button class="btn qqqbutton" 
-			 onclick="location.href='deleteAnq?aNo=${ans.aNo}&qNo=${ans.qNo}'" id="ansDel">
+				 <button class="btn qqqbutton" id="ansDel"
+				 onclick="dddd(${ans.aNo})">
 					답변삭제</button></div>
 					</c:if>
                 </div>
                 </c:forEach>
             </div>
-            </c:if>
-            
+            </c:if>   
 			<c:choose>
         	<c:when test="${not empty sessionScope.members.membersId}">
 				<div class="col-xs-12 qqqcard pl-10" id="ansUpdatee">
@@ -172,15 +170,13 @@
 						있습니다.
 					</p>
 				</div>
-
 				<div class="form-group">
 					<textarea name="aContents" cols="40" rows="10" id="ans_content"
 						placeholder="에디터">
 					</textarea>
 				</div>
 					<button class="btn qqqbutton" type="submit" id="ansbutton">
-								답변하기</button>
-				 
+								답변하기</button>				 
 				</form>
 			</div>
 			<div id ="asd"></div>
@@ -196,9 +192,7 @@
 		 
 </div>
   
-  
- 
-  
+
   	<div id="modal-login" class="modal fade" tabindex="-1" role="dialog"
 		aria-labelledby="로그인" aria-describedby="테스트 모달">
 		<div class="modal-dialog">
@@ -206,16 +200,12 @@
 		</div>
 	</div> 
 
-	 
-
 	 <script>
- 
                 CKEDITOR.replace( 'ans_content' ,{height: 300, 
                 	  filebrowserUploadUrl: 'qnaUpload.jsp'
                 });
                 
-            	$('#modal-login').on('show.bs.modal', function (e) {
-            		 
+            	$('#modal-login').on('show.bs.modal', function (e) {	 
             	    $(this).find('.modal-content').load("login2");
             	});
      </script>
@@ -239,10 +229,8 @@
 			})
 		})
  	})
-
      </script>
      <script>
-     
      	 $(document).ready(function(){ 
 		$("#ansbutton").click(function(){
 			var content = CKEDITOR.instances['ans_content'].getData();
@@ -281,6 +269,7 @@
 		 }) 
 	 	})
 	 	</script>	 -->
+	 	
 	 	<script>
 		$("#ani").click(function(){
 
@@ -290,24 +279,22 @@
 		
 		    });
 	 	
-	 	</script>
-	 	<script> 
+	 
 	 	
-	 		$("#ansDel").click(function(){ 
-	 		if(confirm("정말 삭제하시겠습니까 ?") == true){ 
-	 			 
+	 		function dddd(aNo){ 
+	 		if(confirm("정말 삭제하시겠습니까 ?")){ 
+	 			location.href='deleteAnq?aNo='+aNo; 
 	 		}else{
-	 		
-	 			return ; 
+	 				
+	 			return false ; 
 	 		} 
-	 		});
+	 		};
 
 	 		$("#queDel").click(function(){ 
-		 		if(confirm("정말 삭제하시겠습니까 ?") == true){ 
-		 			 
+		 		if(confirm("정말 삭제하시겠습니까 ?")){ 
+		 			location.href='deleteQna?qNo=${qna.qNo}';
 		 		}else{
-		 		
-		 			return ; 
+		 			return false; 
 		 		} 
 		 		})
 	 		

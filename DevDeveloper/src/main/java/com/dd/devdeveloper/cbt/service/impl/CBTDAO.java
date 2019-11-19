@@ -44,6 +44,7 @@ public class CBTDAO {
 	public void cbtResultUpdate(TestsRecordVO recvo) {
 		mybatis.update("CBTDAO.cbtResult",recvo);
 	}
+	//시험결과 조회
 	public Map<String,Object> getResult(TestsRecordVO recvo) {
 		return mybatis.selectOne("CBTDAO.getResult",recvo);
 	}

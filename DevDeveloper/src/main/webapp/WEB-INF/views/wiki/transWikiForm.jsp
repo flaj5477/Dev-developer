@@ -414,7 +414,7 @@ div[contenteditable] {
 						alert("등록됨");
 						myEditor.setData('');	//텍스트에어리어 초기화
 						getWikiTransLine(manualLine, manualNo);	//메뉴얼번호 메뉴얼라인수 넘겨줌
-						//$("#transContent"+manualLine).html(manualAfter);
+						$("#transContent"+manualLine).html(manualAfter);	//번역 라인에 등록
 						
 						
 					}

@@ -44,8 +44,11 @@ public class TagsServiceImpl implements TagsService{
 	 ============*/
 	@Override
 	public List<String> divTag(String tagVal){
+		List<String> divTagList = null;
+		if(tagVal != null) {
+			divTagList = new ArrayList<>(Arrays.asList(tagVal.split(",")));	//tagVal 받아서 나눈후에 list에 담는다
+		}
 		
-		List<String> divTagList = new ArrayList<>(Arrays.asList(tagVal.split(",")));	//tagVal 받아서 나눈후에 list에 담는다
 
 		return divTagList;
 	}

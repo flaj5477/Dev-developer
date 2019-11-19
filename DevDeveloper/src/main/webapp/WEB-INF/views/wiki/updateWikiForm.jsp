@@ -72,6 +72,26 @@
 	</script>
 </head>
 	<body>
+<<<<<<< HEAD
+		<div class="main p-5">
+			<form id="frm" name="frm" action="updateWiki" method="post">
+				<input type="hidden" name="manualNo" value="${wiki.manualNo}"/>
+				<input type="text" class="form-control" id="manualTitle" name="manualTitle" placeholder="제목을 입력해주세요" value="${wiki.manualTitle}">
+				<input type="text" class="form-control" id="manualOriUrl" name="manualOriUrl" placeholder="url" value="${wiki.manualOriUrl}">
+		  		<textarea class="form-control form-control-alternative" id="manualContents" name="manualContents" rows="20" placeholder="내용을 입력해주세요">${wiki.manualContents }</textarea>
+		  		<select class="form-control" id="manualTags" name="manualTags" multiple="multiple">
+		  			<c:forEach items="${tagList}" var="tag">
+		  				<option>${tag.tagsTitle }</option>
+		  			</c:forEach>
+		  			<%--수정전 내용 가져오기 --%>
+		  			<c:forEach items="${wiki.divTagList }" var="tag">	
+		  				<option selected="selected">${tag}</option>
+		  			</c:forEach>
+		  		</select>
+		  		<button type="button" id="btnfrm" class="btn btn-primary">수정</button>
+			</form>
+		</div>
+=======
 	위키수정페이지
 		<form id="frm" name="frm" action="updateWiki" method="post">
 			<input type="hidden" name="manualNo" value="${wiki.manualNo}"/>
@@ -91,5 +111,6 @@
 	  		</select>
 	  		<button type="button" id="btnfrm" class="btn btn-primary">수정</button>
 		</form>
+>>>>>>> branch 'master' of https://github.com/flaj5477/Dev-developer.git
 	</body>
 </html>

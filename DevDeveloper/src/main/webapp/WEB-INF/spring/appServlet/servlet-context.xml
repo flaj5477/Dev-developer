@@ -43,6 +43,10 @@
 			<mapping path="/insertQna" />
 			<mapping path="/insertProjectForm" />
 			<mapping path="/getProjects" />
+			<mapping path="/insertWikiForm" />
+			<mapping path="/updateWikiForm" />
+			<mapping path="/deleteWiki" />
+			<mapping path="/insertWiki" />
 			<exclude-mapping path="" />
 			<beans:ref bean="LoginInterceptor" />
 		</interceptor>

@@ -9,7 +9,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link " href="${pageContext.request.contextPath}/qna">
-              <i class="ni ni-planet text-purple"></i> Q & A
+              <i class="ni ni-planet text-default"></i> Q & A
             </a>
           </li>
           <li class="nav-item">
@@ -19,7 +19,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link " href="${pageContext.request.contextPath}/wikihome">
-              <i class="fas fa-atlas text-yellow"></i> 위키가이드
+              <i class="fas fa-atlas text-purple"></i> 위키가이드
             </a>
           </li>
           <li class="nav-item">

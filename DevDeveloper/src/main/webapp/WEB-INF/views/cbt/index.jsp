@@ -32,10 +32,7 @@
 	});
 	
 	function indexBox() {
-		$('#subject').html('<h2> 레벨테스트 </h2>');
-		$('#comment').append('레벨테스트는 CBT방식으로 최대한 객관성을 얻고자 <br>') // append 내용을 추가
-					 .append('한국산업인력공단과 이 사이트를 만든 개발자들이 협력하여 <br>')
-					 .append('출제한 문제이므로 참고바랍니다. <br><br>');	
+		$('#subject').append('<h2> 레벨테스트 </h2>');	
 	    $('#level').html('현재 등급 '+memberGrade+' <br><br>'); 
 	}
 	

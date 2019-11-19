@@ -151,9 +151,5 @@ public class ProjectsController {
 		return "redirect:/getProjects?projNo=" + vo.getProjNo(); // 프로젝트 상세 페이지
 	}
 	
-	@RequestMapping("/getProjCalendar")
-	public String getProjCalendar() {
-		
-		return "files/calendar"; //캘린더 페이지로 이동
-	}
+	
 }

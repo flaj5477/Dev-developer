@@ -82,10 +82,12 @@
 	  			<c:forEach items="${tagList}" var="tag">
 	  				<option>${tag.tagsTitle }</option>
 	  			</c:forEach>
+	  			
 	  			<%--수정전 내용 가져오기 --%>
 	  			<c:forEach items="${wiki.divTagList }" var="tag">	
 	  				<option selected="selected">${tag}</option>
 	  			</c:forEach>
+	  			
 	  		</select>
 	  		<button type="button" id="btnfrm" class="btn btn-primary">수정</button>
 		</form>

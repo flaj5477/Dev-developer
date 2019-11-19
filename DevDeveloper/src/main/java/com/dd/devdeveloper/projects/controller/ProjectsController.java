@@ -2,6 +2,7 @@ package com.dd.devdeveloper.projects.controller;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Level;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,23 +21,43 @@ import com.dd.devdeveloper.members.MembersVO;
 import com.dd.devdeveloper.projects.ProjApplicantsVO;
 import com.dd.devdeveloper.projects.ProjectsVO;
 import com.dd.devdeveloper.projects.service.ProjectsService;
+import com.dd.devdeveloper.tags.service.TagsService;
 
 @Controller
 public class ProjectsController {
 	@Autowired
 	ProjectsService projectsService;
+	
+	@Autowired
+	TagsService tagsService;
 
 	@RequestMapping("/getProjectsList") // 프로젝트 목록
 	public String getProjectsList(ProjectsVO vo, Model model, Paging paging) {
-		model.addAttribute("list", projectsService.getProjectsList(paging, vo));
+		List<ProjectsVO> projectsList = projectsService.getProjectsList(paging, vo);
+		
+		for(int i=0;i<projectsList.size();i++) {
+			String tags = projectsList.get(i).getProjTags(); //스트링으로 연결되어있는 tags를
+			ProjectsVO t_project = projectsList.get(i);
+			t_project.setProjTagsList(tagsService.divTag(tags)); //잘라서 list 형식으로 넣어줌
+			projectsList.set(i, t_project);
+		}
+		
+		model.addAttribute("list", projectsList);
 		model.addAttribute("paging", paging);
+
 		return "projects/projectsList";
 	}
 
 	@RequestMapping("/getProjects") // 프로젝트 공고 상세
 	public String getProjects(ProjectsVO vo, Model model, HttpSession session) {
-		model.addAttribute("project", projectsService.getProjects(vo));
+		
+		ProjectsVO project = projectsService.getProjects(vo);
+		project.setProjTagsList(tagsService.divTag(project.getProjTags())); //스트링 형식 tags를 잘라서 tagsList에 넣어줌
+		
+		model.addAttribute("project", project );
+		model.addAttribute("loginMembersNo", ((MembersVO) session.getAttribute("members")).getMembersNo() );
 		session.setAttribute("projNo", vo.getProjNo()); // 세션에 projNo 추가
+		
 		return "projects/projects";
 	}
 
@@ -79,7 +100,9 @@ public class ProjectsController {
 	}
 
 	@RequestMapping("/insertProjectForm") // 프로젝트 등록
-	public String insertProjectForm() {
+	public String insertProjectForm(Model model) {
+		
+		model.addAttribute("tagList", tagsService.getTagList());	//등록폼으로 태그목록던져줌
 		return "projects/insertProjectForm"; // 프로젝트 등록 폼으로 이동
 	}
 
@@ -109,6 +132,11 @@ public class ProjectsController {
 		model.addAttribute("vo", vo); //모델에 담아서 다음 페이지로 넘김
 		
 		System.out.println("수정 컨트롤러:::::::::::::::::::::::::::::::::::::::::::::::" + vo);
+		
+		model.addAttribute("tagList", tagsService.getTagList());	//수정폼으로 태그목록(Tags테이블에 있는거)던져줌
+		
+		model.addAttribute("divTagList", tagsService.divTag(vo.getProjTags())); //게시글에 등록된 태그 잘라주는거
+		
 		return "projects/updateProjectForm"; // 프로젝트 수정 폼으로 이동
 	}
 	

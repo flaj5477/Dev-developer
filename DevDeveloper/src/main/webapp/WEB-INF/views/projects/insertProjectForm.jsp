@@ -18,6 +18,8 @@ jQuery UI 라이브러리 js파일
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 <title>프로젝트 등록 폼</title>
 <style>
 .ck-editor__editable {
@@ -46,6 +48,11 @@ jQuery UI 라이브러리 js파일
 	            //console.log( 'Editor was initialized', editor );
 	            myEditor = editor;
 	        } )
+	        
+	     
+	    $('#projTags').select2({
+	    	 placeholder: "태그 선택"
+	    });
 	});
 	
 	//폼 체크
@@ -88,7 +95,7 @@ jQuery UI 라이브러리 js파일
 </head>
 <body>
 	<div class="container-fluid mt-5">
-		<form id="frm" name="frm" action="insertProject" method="post">
+		<form id="frm" name="frm" action="insertProject" method="post" class="mb-9">
 			<div class="row  mb-3">
 				<div class="col">
 					<label for="projTitle" class="control-label">제목</label> <input type="text" class="form-control" id="projTitle" name="projTitle" placeholder="제목을 입력해주세요">
@@ -143,13 +150,37 @@ jQuery UI 라이브러리 js파일
 				</div>
 			</div>
 			<textarea class="form-control form-control-alternative" id="editor" name="projContents" rows="20" placeholder="여기는 프로젝트 입력하는 곳입니다."></textarea>
-			<br> <input type="text" class="form-control mb-3" id="projTags" name="projTags" placeholder="테그">
+			<br> 
+			<!-- <input type="text" class="form-control mb-3" id="projTags" name="projTags" placeholder="테그"> -->
+			<select class="form-control mb-3" id="projTags" name="projTags" multiple="multiple">
+  			<c:forEach items="${tagList}" var="tag">
+  				<option>${tag.tagsTitle }</option>
+  			</c:forEach>
+  			</select>
 			<div class="row">
-				<div class="col-xl-12  text-right">
+				<div class="col-xl-12  text-right mt-3">
 					<button type="button" id="btnfrm" class="btn btn-primary">등록</button>
 				</div>
 			</div>
 		</form>
+		<!-- Footer -->
+		<footer class="footer">
+			<div class="row align-items-center justify-content-xl-between">
+				<div class="col-xl-6">
+					<div class="copyright text-center text-xl-left text-muted">
+						© 2018 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+					</div>
+				</div>
+				<div class="col-xl-6">
+					<ul class="nav nav-footer justify-content-center justify-content-xl-end">
+						<li class="nav-item"><a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a></li>
+						<li class="nav-item"><a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a></li>
+						<li class="nav-item"><a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a></li>
+						<li class="nav-item"><a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a></li>
+					</ul>
+				</div>
+			</div>
+		</footer>
 	</div>
 	<script> //날짜 설정 스크립트
 		$(document).ready(function(){

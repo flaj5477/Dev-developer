@@ -87,10 +87,10 @@
 				<button class="btn qqqbutton" 
 			 onclick="location.href='qna'">
 					목록보기</button>				
-					<c:if test="${not empty sessionScope.members.membersId}">							 
+					<c:if test="${not empty sessionScope.members.membersId}">					 
 					<button class="btn qqqbutton" id="ani">
 					답변달기</button>	
-					</c:if>	
+					</c:if>
 					 <c:if test = "${sessionScope.members.membersNo == qna.membersNo}"> 			
 				<button class="btn qqqbutton" 
 			 onclick="document.qnaform.submit()">질문수정</button> 
@@ -150,7 +150,7 @@
                 <div class ="qUp"> <button class="btn qqqbutton" id="ansUpdate">
 					답변수정</button>
 				 <button class="btn qqqbutton" id="ansDel"
-				 onclick="dddd(${ans.aNo})">
+				 onclick="dddd(${ans.aNo},${ans.qNo})">
 					답변삭제</button></div>
 					</c:if>
                 </div>
@@ -183,13 +183,13 @@
 		</div>
 		</c:when>
 		<c:otherwise>
-		<div style ="text-align:center">답변작성하려면	<a data-toggle="modal" href="login2" data-target="#modal-login"
-	role="button">로그인</a></div>
+		<div style ="text-align:center">답변을 작성하려면<a data-toggle="modal" href="login2" data-target="#modal-login"
+	role="button"> 로그인</a>이 필요합니다.</div>
 		<br><br>
 		</c:otherwise>
 		</c:choose>
 	</div>
-		 
+		 <div id="ffff"></div>
 </div>
   
 
@@ -273,7 +273,7 @@
 	 	<script>
 		$("#ani").click(function(){
 
-			var offset = $("#asd").offset();
+			var offset = $("#ffff").offset();
 
 			$("html").animate({scrollTop:offset.top}, 1000);
 		
@@ -281,11 +281,11 @@
 	 	
 	 
 	 	
-	 		function dddd(aNo){ 
+	 		function dddd(aNo,qNo){ 
 	 		if(confirm("정말 삭제하시겠습니까 ?")){ 
-	 			location.href='deleteAnq?aNo='+aNo; 
+	 			location.href='deleteAnq?aNo='+aNo+'&qNo='+qNo; 
 	 		}else{
-	 				
+	 			
 	 			return false ; 
 	 		} 
 	 		};

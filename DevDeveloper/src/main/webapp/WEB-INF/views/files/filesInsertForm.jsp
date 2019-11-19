@@ -8,8 +8,10 @@
 
 <head>
 <meta charset="utf-8" />
+
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 <title>Argon Dashboard - Free Dashboard for Bootstrap 4 by
 	Creative Tim</title>
 <!-- Favicon -->
@@ -28,34 +30,21 @@
 <!-- CSS Files -->
 <link href="./resources/assets/css/argon-dashboard.css?v=1.1.0"
 	rel="stylesheet" />
+	
+<script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+
+<title>파일등록</title>
+
+<style>
+.ck-editor__editable {
+	min-height: 400px;
+	max-height: 800px;
+}
+</style>
 
 <script>
-	pageName = "휴지통";
-	
-   	function filesTrash() {
-		
-		$.ajax({ type: "POST",
-			url: 'filesTrash',
-			data:{filesNo: $('[name="chk_files"]:checked').val()},
-			success: function (result) { 
-				location.reload();
-				
-			},
-			error: function (e) { } });
-	}
-   	
-   	function deleteFiles() {
-		
-		$.ajax({ type: "POST",
-			url: 'deleteFiles',
-			data:{filesNo: $('[name="chk_files"]:checked').val()},
-			success: function (result) { 
-				location.reload();
-				
-			},
-			error: function (e) { } });
-	}
-	
+	pageName = "새 파일";
 </script>
 </head>
 
@@ -68,35 +57,82 @@
 				<div class="card shadow">
 					<div class="card-header border-0">
 						<h2 class="mb-0">프로젝트명</h2>
+						<div>
+							<!-- 		  <script>
+						 	var route=[${filesRoute}];
+						 	function prontArr(item) {
+						 		document.write(item);
+						 	}
+						 	route.forEach(printArr);
+						 </script> -->
+						</div>
 						<br />
 						<div class="btn-card-header-group text-right">
 							<div class="row">
 								<div class="col-3">
-									<form name="searchfrm">
+									<form name="searchfrm" action="filesSearch">
+										<input type="hidden" name="projNo" value='${projNo}' />
 										<div class="input-group">
 											<select name="select">
 												<option value="title">제목
 												<option value="userNo">작성자
 											</select>
-
 											<div class="input-group-prepend">
 												<span class="input-group-text"><i
 													class="ni ni-zoom-split-in"></i></span>
 											</div>
- 											 <input class="form-control" name="searchVal">
-											 <!--  value=${param.searchVal } getparameter? el에서 value안에값처럼표시 -->
-
-											 <input type="hidden" name="page" value="1">
+											<input class="form-control" name="searchVal"> <input
+												type="hidden" name="page" value="1">
 											<button>검색</button>
 										</div>
 									</form>
 								</div>
-							
-								<div class="col-9 pull-right">
-									<button type="button" class="btn btn-primary btn" onclick="filesTrash()">복원</button>
 
-									<button type="button" class="btn btn-primary btn" onclick="deleteFiles()">영구 삭제</button>
-																		
+								<%-- <!-- Modal -->
+								<div class="modal fade" id="upmodal" tabindex="-1" role="dialog"
+									aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">파일 업로드</h5>
+												<form id="fileForm" action="filesUpload" method="post"
+													enctype="multipart/form-data">
+													<input type="hidden" name="upperFolder"
+														value="${param.upperFolder}" /> 타이틀<input type="text"
+														name="filesTitle"> 코멘트<input type="text"
+														name="filesComment"> <input type="file"
+														value="파일 선택" name="uploadFile" /> <input type="submit"
+														value="업로드" />
+												</form>
+
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+
+											</div>
+											<div class="modal-body">...</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Close</button>
+												<button type="button" class="btn btn-primary">Save
+													changes</button>
+											</div>
+										</div>
+									</div>
+								</div> --%>
+
+								<div class="col-9 pull-right">
+									<button type="button" class="btn btn-primary btn" onclick="">등록</button>
+
+									<button type="button" class="btn btn-primary btn" onclick="">수정</button>
+
+									<button type="button" class="btn btn-primary btn" onclick="">삭제</button>
+
+									<!-- <button type="button" class="btn btn-primary btn" id=""
+										data-toggle="modal" data-target="#upmodal">업로드</button> -->
+
+
 									<a href="#" class="avatar avatar-sm" data-toggle="tooltip"
 										data-original-title="Ryan Tompson"> <img
 										alt="Image placeholder"
@@ -124,43 +160,22 @@
 					</div>
 				</div>
 				<div class="table-responsive">
-					<table class="table align-items-center table-flush">
-						<thead class="thead-light">
-							<tr>
-								<th scope="col">파일명</th>
-								<th scope="col">코멘트</th>
-								<th scope="col">Users</th>
-								<th scope="col">업데이트 날짜</th>
-								<th scope="col">파일 크기</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="files" items="${list}">
-								<tr>
-									<td>										
-										<input type="checkbox" value="${files.filesNo}"	name="chk_files" id="chk_files">
-										<%-- ${files.filesType} --%>
-										<c:if test="${files.filesType=='F'}" ><i class="far fa-file"></i> 
-                						 ${files.filesTitle} 
-                						</c:if> 
-                						  <c:if test="${files.filesType=='D'}"><i class="far fa-folder"></i>
-										   <a href="./getFilesList?upperFolder=${files.filesNo}">${files.filesTitle}</a>
-										</c:if>
-									</td>
-																		
-									<!-- <input type="checkbox" name="chk_info" value="HTML">HTML -->
-									<td>${files.filesComment }</td>
-									<td>${files.membersNo }</td>
-									<td>${files.filesUploadDate }</td>
-									<td>${files.filesSize }</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>		
+					<form id="frm" name="frm" action="insertWiki" method="post"> <!-- 수정~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+						<input type="text" class="form-control" id="manualTitle"
+							name="manualTitle" placeholder="제목을 입력해주세요"> <input
+							type="text" class="form-control" id="manualOriUrl"
+							name="manualOriUrl" placeholder="url">
+						<textarea class="form-control form-control-alternative"
+							id="manualContents" name="manualContents" rows="20"
+							placeholder="내용을 입력해주세요"></textarea>
+						<input type="text" class="form-control" id="manualTags"
+							name="manualTags" placeholder="테그">
+						<button type="button" id="btnfrm" class="btn btn-primary">등록</button>
+					</form>
 				</div>
-				<div class="card-footer py-4">
+				<%-- <div class="card-footer py-4">
 					<my:paging paging="${paging}" jsFunc="go_page" />
-				</div>
+				</div> --%>
 			</div>
 		</div>
 	</div>
@@ -191,7 +206,7 @@
 			</div>
 		</div>
 	</footer>
-	
+
 	<!--   Core   -->
 	<script src="./resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
 	<script
@@ -200,9 +215,7 @@
 	<!--   Argon JS   -->
 	<script src="./resources/assets/js/argon-dashboard.min.js?v=1.1.0"></script>
 	<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-		<!-- function go_page(p) {
-			location.href = "getFilesList?page=" + p
-		} -->
-	</body>
+
+</body>
 
 </html>

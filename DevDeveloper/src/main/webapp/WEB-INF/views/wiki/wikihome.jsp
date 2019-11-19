@@ -129,7 +129,7 @@ a {
 						</div>
 					</form>
 					<div class="col">
-						<div class="text-right">
+						<div class="nav nav-pills justify-content-end"> 
 							<c:if test="${sessionScope.members.membersGrade eq 5}">
 								<div>
 									<span class="col-3 text-right">

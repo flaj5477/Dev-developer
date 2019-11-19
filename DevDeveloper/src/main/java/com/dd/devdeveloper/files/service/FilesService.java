@@ -14,6 +14,15 @@ public interface FilesService {
 	// 임포트(중요) 조회
 	List<LinkedHashMap<String, Object>> getImportList(Paging paging, FilesVO vo);
 	
+	// 휴지통 조회
+	List<LinkedHashMap<String, Object>> getTrashList(Paging paging, FilesVO vo);
+	
+	// 검색
+	List<LinkedHashMap<String, Object>> getFilesSearch(Paging paging, FilesVO vo);
+	 
+	//파일 경로
+	public String getFilesPath(FilesVO vo);
+	
 	// 업로드
 	void filesUpload(FilesVO vo);
 	
@@ -25,5 +34,11 @@ public interface FilesService {
 	
 	// 휴지통
 	void filesTrash(FilesVO vo);
-
+	
+	// 삭제
+	void deleteFiles(FilesVO vo);
+	
+	// 루트
+	List<FilesVO> getFilesRoute(FilesVO vo);
+	
 }

@@ -5,7 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>CBT Home</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/cbt.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/assets/js/format.js"></script>
 <script>	
 	var grade = parseInt("${members.membersGrade}");
@@ -29,10 +32,7 @@
 	});
 	
 	function indexBox() {
-		$('#subject').html('<h2> 레벨테스트 </h2>');
-		$('#comment').append('레벨테스트는 CBT방식으로 최대한 객관성을 얻고자 <br>') // append 내용을 추가
-					 .append('한국산업인력공단과 이 사이트를 만든 개발자들이 협력하여 <br>')
-					 .append('출제한 문제이므로 참고바랍니다. <br><br>');	
+		$('#subject').append('<h2> 레벨테스트 </h2>');	
 	    $('#level').html('현재 등급 '+memberGrade+' <br><br>'); 
 	}
 	
@@ -127,6 +127,26 @@
 	<div id="subject"></div>
 	<div id="content">
 		<div id="comment"></div>
+		<div class="card-group" style="width:600px">
+			<div class="card text-white mb-3" style="max-width: 18rem;">
+				<img src="${pageContext.request.contextPath}/images/grade/0.png" class="card-img-top" alt="..." width="70px">
+			</div>
+			<div class="card">
+				<img src="${pageContext.request.contextPath}/images/grade/1.png" class="card-img-top" alt="..." width="70px">
+			</div>
+			<div class="card">
+			  	<img src="${pageContext.request.contextPath}/images/grade/2.png" class="card-img-top" alt="..." width="70px">
+			</div>
+			 <div class="card">
+			  	<img src="${pageContext.request.contextPath}/images/grade/3.png" class="card-img-top" alt="..." width="70px">
+			</div>
+			 <div class="card">
+			  	<img src="${pageContext.request.contextPath}/images/grade/4.png" class="card-img-top" alt="..." width="70px">
+			</div>
+			 <div class="card">
+			  	<img src="${pageContext.request.contextPath}/images/grade/5.png" class="card-img-top" alt="..." width="70px">
+			</div>
+		</div>
 		<div id="level"></div>
 		<div id="restTime"></div>
 		<div id="message"></div>

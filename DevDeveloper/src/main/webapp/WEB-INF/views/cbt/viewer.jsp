@@ -28,13 +28,7 @@
 	var questKey = [];
 	var offset = [];
 	var setTime = 0;
-	
-	function getStorage() {
-		localStorage.setItem('rid',rid);
-		localStorage.setItem('user',user);
-		localStorage.setItem('level',level);	
-	}
-	
+    
 	function getTest() {
 		$.ajax('getTestInfo/'+level, {
 			type : 'GET',
@@ -60,6 +54,7 @@
 			}
 		});
 	}
+
 	function timeCount() {
 		var restTime = setInterval(function() {
 			var getTime = sec - setTime;
@@ -332,6 +327,7 @@
 </script>
 </head>
 <body onload="getTest()">
+<div id="noback"></div>
 <div class="cbtViewer">
 	<div id="header">
 		<div id="switchFont">

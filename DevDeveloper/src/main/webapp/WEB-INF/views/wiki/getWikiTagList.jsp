@@ -22,7 +22,7 @@
 	/*
 		곽동우
 		20191103
-		다른번역 클릭
+		태그 클릭
 	*/
 	function tagClick(){
 		$('body').on('click','#wikiList li',function(){

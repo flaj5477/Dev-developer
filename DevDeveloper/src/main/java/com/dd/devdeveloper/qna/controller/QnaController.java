@@ -128,11 +128,21 @@ public class QnaController {
 		  public String like(RecListVO vo, HttpSession session){
 			 MembersVO membersNo = (MembersVO) session.getAttribute("members");
 			 vo.setMembersNo(membersNo.getMembersNo());
-			 HashMap<String, Object> hm = new HashMap<String, Object>();
-			 hm.put("qaNo", vo.getQaNo());
-			 hm.put("membersNo", vo.getMembersNo());
-			 System.out.println("dsfsffsdfdsfsdsfsf"+vo);
-
+			 
+		/*
+		 * HashMap<String, Object> hm = new HashMap<String, Object>(); hm.put("qaNo",
+		 * vo.getQaNo()); hm.put("membersNo", vo.getMembersNo());
+		 */
+			 int result = qnaService.readRec(vo);
+			 System.out.println("11111111111"+result);
+			 
+			 if(result == 0) {
+				 qnaService.insertRec(vo);
+			 }else {
+				 qnaService.deleteRec(vo);
+			 }
+			 
+			 
 		return "" ;
 		 }
 }

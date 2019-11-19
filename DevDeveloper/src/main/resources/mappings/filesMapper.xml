@@ -5,6 +5,13 @@
 
 <mapper namespace="FilesDAO">
 
+	<select id="getFilesRoute" resultType="files" parameterType="files">
+		SELECT files_no, proj_no, files_title
+		FROM files
+		START WITH files_no = #{upperFolder}
+		CONNECT BY PRIOR upper_folder = files_no
+	</select>
+
 	<select id="getFilesList" resultType="files">
 		SELECT B.* FROM ( SELECT A.*,ROWNUM RN FROM(
 		select files_no,
@@ -21,10 +28,12 @@
 		files_Trash
 		from
 		files
-		where 1=1
+		<![CDATA[
+		where (files_Trash <> 'Y' or files_Trash is null)
+		]]>
 		<choose>
 			<when test="upperFolder == null or upperFolder ==''">
-				and upper_folder = files_no
+				and upper_folder is null
 				and proj_no = #{projNo}
 			</when>
 			<otherwise>
@@ -38,13 +47,18 @@
 		)A)B WHERE RN between #{first} and #{last}
 	</select>
 
+
 	<!-- filesinsert(upload) -->
 	<insert id="filesInsertProc" statementType="CALLABLE" parameterType="files">
 		{call FILES_UPLOAD		(#{projNo},
 								 #{membersNo},
 								 #{filesTitle},
 								 #{filesComment},
-								 #{filesPath} )}						
+								 #{filesPath},
+								 #{upperFolder},
+								 #{filesType},
+								 #{filesSize} )}
+								 
 	</insert>
 		
 	<select id="getImportList" parameterType="files"
@@ -63,47 +77,81 @@
 		files
 		where files_Import='Y'
 	</select>
+	
+	<select id="getTrashList" parameterType="files"
+		resultType="files">
+		select files_no,
+		files_title,
+		files_comment,
+		members_no,
+		files_group_no,
+		files_upload_date,
+		upper_folder,
+		files_type,
+		files_Import,
+		files_Trash
+		from
+		files
+		where files_Trash='Y'
+	</select>
+	
 
+	<select id="getFilesSearch" parameterType="files"
+		resultType="files">
+		select *
+		from files
+		where proj_no = #{projNo}
+			<if test="searchVal != null and searchVal != '' ">
+				<if test="select == 'title'">
+					AND FILES_TITLE LIKE '%' || #{searchVal} || '%'
+				</if>
+				<if test="select == 'userNo'">
+					AND  MEMBERS_NO LIKE '%' || #{searchVal} || '%'
+				</if>
+			</if>
+	</select>
+	
 	<select id="getCountFiles" parameterType="files"
 		resultType="int">
 		select count(*) as "getCountFiles"
 		from files
-		<where>
+		where proj_no = #{projNo}
 			<if test="searchVal != null and searchVal != '' ">
 				<if test="select == 'title'">
-					AND FILES_NO LIKE '%' || #{searchVal} || '%'
+					AND FILES_TITLE LIKE '%' || #{searchVal} || '%'
 				</if>
-				<if test="select == 'usersNo'">
-					AND MANUAL_TAGS LIKE '%' || #{searchVal} || '%'
+				<if test="select == 'userNo'">
+					AND  MEMBERS_NO LIKE '%' || #{searchVal} || '%'
 				</if>
 			</if>
-		</where>
 	</select>
 
 	<update id="filesImport" parameterType="files">
 		update files
 		set
-		files_import = 'Y'
-		where files_no=${filesNo}
+		files_import = case when files_import = 'Y' then 'N'
+							when files_import is null or files_import = 'N' then 'Y' end
+		where files_no = ${filesNo}
 	</update>
 
-	<update id="getFilesTrash" parameterType="files">
+	<update id="filesTrash" parameterType="files">
 		update files
 		set
-		files_Trash = 'Y'
-		where files_no=${filesNo}
+		files_trash = case when files_trash = 'Y' then 'N'
+							when files_trash is null or files_trash = 'N' then 'Y' end
+		where files_no = ${filesNo}
 	</update>
-
-	<select id="getFiles" resultType="files">
-		select f.files_no,
-		f.files_title,
-		f.files_comment,
-		m.members_no,
-		f.files_upload_date,
-		f.files_size
-		from files f join members m
-		on f.members_no = m.members_no
+	
+	<!-- 삭제  -->
+	  <delete id="deleteFiles" parameterType="files">
+	  	delete files
+	  	where files_no = ${filesNo}
+	  </delete>
+	  
+	<!-- 다운로드시 단건 조회 -->
+	<select id="getFiles" resultType="files" parameterType = "files">
+		select * 
+		from files 
 		where files_no = #{filesNo}
 	</select>
-
 </mapper>

@@ -30,13 +30,37 @@
 	rel="stylesheet" />
 
 <script>
-	pageName = "프로젝트 파일";
+	pageName = "중요";
 	
-	function fImport() {
-		$.ajax({
-		})
+ 	function fielsImport() {
+		
+		$.ajax({ type: "POST", enctype: 'multipart/form-data',
+			url: 'filesImport',
+			data:{filesNo: $('[name="chk_files"]:checked').val()},
+			success: function (result) { 
+				location.reload();
+				
+			},
+			error: function (e) { } });
 	}
-			/* uri:"./filesImport.jsp", */
+ 	
+	function filesTrash() {
+		
+		$.ajax({ type: "POST",
+			url: 'filesTrash',
+			data:{filesNo: $('[name="chk_files"]:checked').val()},
+			success: function (result) { 
+				location.reload();
+				
+			},
+			error: function (e) { } });
+	}
+
+	function filesDownload() {
+		var filesNo =  $('[name="chk_files"]:checked').val(); 
+		location.href="download?filesNo=" + filesNo
+	}
+	
 </script>
 </head>
 
@@ -72,21 +96,15 @@
 										</div>
 									</form>
 								</div>
-							<form name="importfrm">
+							
 								<div class="col-9 pull-right">
-									<button type="button" class="btn btn-primary btn">새폴더</button>
+									<button type="button" class="btn btn-primary btn" onclick="fielsImport()">중요</button>
 
-									<button type="button" class="btn btn-primary btn" onclick="location.href='filesImport' ">중요</button> <!-- ./import -->
-
-									<button type="button" class="btn btn-primary btn">휴지통</button>
+									<button type="button" class="btn btn-primary btn" onclick="filesTrash()">휴지통</button>
 
 									<button type="button" class="btn btn-primary btn">미리보기</button>
 
-									<button type="button" class="btn btn-primary btn">업로드</button>
-
-									<button type="button" class="btn btn-primary btn">다운로드</button>
-
-									<button type="button" class="btn btn-primary btn">압축</button>
+									<button type="button" class="btn btn-primary btn" onclick="filesDownload()">다운로드</button>
 
 									<a href="#" class="avatar avatar-sm" data-toggle="tooltip"
 										data-original-title="Ryan Tompson"> <img
@@ -112,10 +130,7 @@
 								</div>
 							</div>
 						</div>
-						
-
 					</div>
-					<!--  href="./getFiles?filesNo=${files.filesNo}">${files.filesTitle }  -->
 				</div>
 				<div class="table-responsive">
 
@@ -132,12 +147,16 @@
 						<tbody>
 							<c:forEach var="files" items="${list}">
 								<tr>
-									<td><input type="checkbox" name="filesNo" value="${files.filesNo}">
-										<%-- ${files.filesType} --%><c:if test="${files.filesType=='F'}" ><i class="far fa-file"></i>
+									<td>
+										<input type="checkbox" value="${files.filesNo}"	name="chk_files" id="chk_files">
+										<%-- ${files.filesType} --%>
+										<c:if test="${files.filesType=='F'}" >
+										<i class="far fa-file"></i>
                 						${files.filesTitle}
                 						 </c:if> <c:if test="${files.filesType=='D'}"><i class="far fa-folder"></i>
-										  <a href="./getFilesList?filesGroupNo=${files.filesNo}">${files.filesTitle}</a>
+										  <a href="./getFilesList?upperFolder=${files.filesNo}">${files.filesTitle}</a>
 										</c:if>
+										<span class="filesImportCheck"><c:if test="${files.filesImport=='Y'}">♥</c:if></span> <!-- 기존꺼 긁어옴 -->
 									</td> <!-- <input type="checkbox" name="chk_info" value="HTML">HTML -->
 									<td>${files.filesComment }</td>
 									<td>${files.membersNo }</td>
@@ -147,12 +166,10 @@
 							</c:forEach>
 
 						</tbody>
-					</table>
-					</form>
+					</table>		
 				</div>
 				<div class="card-footer py-4">
 					<my:paging paging="${paging}" jsFunc="go_page" />
-
 				</div>
 			</div>
 		</div>

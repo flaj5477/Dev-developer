@@ -7,6 +7,7 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
 <script src="http://code.jquery.com/jquery.min.js"></script>
 <title>위키등록</title>
+<!-- 위 세줄 -->
 <style>
 .ck-editor__editable {
     min-height: 400px;
@@ -19,7 +20,7 @@
 	$(function(){
 		 checkForm();
 		
-		
+		//에디터
 		 ClassicEditor
 	     .create( document.querySelector( '#manualContents' ) , {
 	    	// 제거 하고싶은 플러그인 (배열)
@@ -91,7 +92,7 @@
   		<button type="button" id="btnfrm" class="btn btn-primary">등록</button>
 	</form>
 	
-
+<!-- textarea 넣을것 -->
 	
 	
 	

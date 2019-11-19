@@ -4,6 +4,10 @@
     <!-- Navigation -->
         <ul class="navbar-nav">
           <li class="nav-item">
+          <a class=" nav-link" href="${pageContext.request.contextPath}/getDashboard" ><i class="ni ni-tv-2 text-primary"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
           <a class=" nav-link" href="getFilesList"> <i class="ni ni-folder-17 text-blue"></i> 파일
             </a>
           </li>
@@ -13,7 +17,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="#">
+            <a class="nav-link " href="getFilesTrash">
               <i class="material-icons">delete</i> 휴지통
             </a>
           </li>

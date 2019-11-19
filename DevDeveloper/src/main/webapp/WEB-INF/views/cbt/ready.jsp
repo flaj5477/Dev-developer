@@ -30,7 +30,7 @@
 		});
 		$('#tab1').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시험 안내사항&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
 		$('#comment1').append('<br> <b>[시험 안내사항]</b>은 난이도 별 시험상세정보 및 시험 유의사항 안내입니다. <br><br>')
-					  .append('1.시험에 응시 하면, <b>1개월</b>의 <b>유예기간</b>이 주어지며 유예기간이 지난 <br>')
+					  .append('1.시험에 응시 하면, <b>10일</b>의 <b>유예기간</b>이 주어지며 유예기간이 지난 <br>')
 					  .append('&nbsp;&nbsp;&nbsp;<b>1개월 후</b>에 <b>재 응시</b>가 가능합니다. <br>')
 					  .append('2.시험이 시작 된 후, <b>강제종료</b>되면 <b>중도포기</b>로 <b>불합격</b>처리 되며 <br>')
 					  .append('&nbsp;&nbsp;&nbsp;응시자 책임으로 간주합니다. <br>')
@@ -72,8 +72,8 @@
 		$('#submitBtn').on('click',function() {
 			$(this).attr('disabled',true); // 중복 클릭 방지
 			$('#toast').fadeIn(500).delay(500).fadeOut(500,function() {
-				frm.testsNo.value = level; // frm 태그에 레벨 값 저장
-				frm.membersNo.value = user;
+				frm.level.value = level; // frm 태그에 레벨 값 저장
+				localStorage.setItem('level',level);
 				document.frm.submit();
 			});
 		});
@@ -83,9 +83,8 @@
 </head>
 <body>
 <div class="cbtReady" id="tabs" style="width:600px; left:445px">
-	<form action="cbtInsert" name="frm" method="post">
-		<input type="hidden" name="testsNo"/>
-		<input type="hidden" name="membersNo"/>
+	<form action="examination" name="frm" method="post">
+		<input type="hidden" name="level"/>
 		<ul id="subjects">
 			<li id="content1"><a id="tab1" href="#tabs-1"></a></li>
 			<li id="content2"><a id="tab2" href="#tabs-2"></a></li>

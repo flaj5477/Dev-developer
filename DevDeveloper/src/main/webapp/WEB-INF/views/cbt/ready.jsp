@@ -71,11 +71,8 @@
 		$('#submitBtn').on('click',function() {
 			$('#readyBtn').attr('disabled',true); // 중복 클릭 방지
 			modalView.modal('hide');
-			$('#toast').fadeIn(500).delay(500).fadeOut(500,function() {
-				frm.level.value = level; // frm 태그에 레벨 값 저장
-				localStorage.setItem('level',level);
-				document.frm.submit();
-			});
+			frm.level.value = level;
+			document.frm.submit();
 		});
 		
 		$('#homeBtn').on('click',function() {
@@ -115,12 +112,6 @@
 		</div>
 		<div id="tabs-3">
 			<div id="comment3"></div>
-			<div id="toast">
-				<p>	<br> 잠시 후 시험이 시작됩니다. </p>
-				<div class="spinner-border text-info" style="width: 4rem; height: 4rem;" role="status">
-	  				<span class="sr-only"></span>
-				</div>
-			</div>
 		<button type="button" class="btn btn-primary" id="readyBtn" data-toggle="modal" data-target="#cbtReadyModal">시험 시작하기</button>
 		<!-- Modal -->
 		<div class="modal fade" id="cbtReadyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

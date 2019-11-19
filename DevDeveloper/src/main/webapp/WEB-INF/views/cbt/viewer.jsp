@@ -28,11 +28,6 @@
 	var questKey = [];
 	var offset = [];
 	var setTime = 0;
-	
-	history.pushState(null, null, '#noback');
-    $(window).bind('hashchange', function() {
-        history.pushState(null, null, '#noback');
-    });
     
 	function getTest() {
 		$.ajax('getTestInfo/'+level, {
@@ -332,6 +327,7 @@
 </script>
 </head>
 <body onload="getTest()">
+<div id="noback"></div>
 <div class="cbtViewer">
 	<div id="header">
 		<div id="switchFont">

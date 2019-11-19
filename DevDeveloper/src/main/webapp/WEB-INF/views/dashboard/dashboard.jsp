@@ -101,7 +101,7 @@
 			<div class="container-fluid">
 				<div class="header-body">
 					<div class="row">
-						<div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+						<div class="col-xl-5 order-xl-2 mb-5 mb-xl-0">
 							<!-- 프로필 -->
 							<div class="card card-profile shadow">
 								<div class="row justify-content-center">
@@ -245,7 +245,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-xl-8 order-xl-1">
+						<div class="col-xl-7 order-xl-1">
 							<div class="row  mb-4 mt-3">
 								<div class="col-xl-12 col-lg-15">
 									<div class="card bg-gradient-default shadow" style="min-height: 620px; max-height: 620px">
@@ -282,8 +282,12 @@
 													<div class="table-responsive">
 														<table class="table align-items-center table-flush table-dark">
 															<caption class="mt--3" style="caption-side: top;" id="${myProject.projNo }${myProject.projTitle}">
-																${myProject.projTitle} <span>
-																	<button type="button" class="btn btn-primary">파일 관리</button>
+																${myProject.projTitle} 
+																<span>
+																	<a href="./getProjects?projNo=${myProject.projNo}" class="btn btn-sm btn-primary" >공고 관리</a>
+																</span>
+																<span>
+																	<a href="./moveToFileList?projNo=${myProject.projNo}" class="btn btn-sm btn-primary" >파일 관리</a>
 																</span>
 															</caption>
 															<thead class="thead-dark text-light">

@@ -40,31 +40,31 @@
 							<div class="row">
 								<div class="col">
 									공고 마감일: 
-									${project.projDueDate }
+									<strong>${project.projDueDate }</strong>
 								</div>
 								<div class="col">
 									근무기간:
-									${project.projStartDate } ~ ${project.projEndDate }	
+									<strong>${project.projStartDate } ~ ${project.projEndDate }</strong>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col">
 									모집인원: 
-									${project.projMembersCnt }명
+									<strong>${project.projMembersCnt }명</strong>
 								</div>
 								<div class="col">
 									최소 지원 등급: 
-									${project.projRequire }
+									<strong>${project.projRequire }</strong>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col">
 									프로젝트 타입:
-									${project.projType }
+									<strong>${project.projType }</strong>
 								</div>
 								<div class="col">
 									프로젝트 예산: 
-									${project.projPrice }
+									<strong>${project.projPrice }</strong>
 								</div>
 							</div>
 						</div>

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.qna.AnswerVO;
 import com.dd.devdeveloper.qna.QuestionVO;
+import com.dd.devdeveloper.qna.RecListVO;
 import com.dd.devdeveloper.qna.service.QnaService;
 
 @Service
@@ -91,6 +92,27 @@ public class QnaServiceImpl implements QnaService {
 	@Override
 	public void updateAnq(AnswerVO vo) {
 		qnaDAO.updateAnq(vo);
+		
+	}
+
+	@Override
+	public void insertRec(RecListVO vo) {
+		 qnaDAO.insertRec(vo);
+		
+	}
+
+	@Override
+	public int readRec(RecListVO vo) {
+		int result = qnaDAO.readRec(vo);
+		
+		
+		 
+		return qnaDAO.readRec(vo);
+	}
+
+	@Override
+	public void deleteRec(RecListVO vo) {
+		 qnaDAO.deleteRec(vo);
 		
 	}
 

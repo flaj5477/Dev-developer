@@ -87,4 +87,9 @@ public class CalendarServiceImpl implements CalendarService {
 		}	
 		return list;
 	}
+
+	@Override
+	public List<ProjCalendarVO> getProjCalendarData(ProjCalendarVO vo) { //DB데이터 조회
+		return projCalendarDAO.getProjCalendarData(vo);
+	}
 }

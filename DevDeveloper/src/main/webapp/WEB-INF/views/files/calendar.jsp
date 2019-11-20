@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,18 +11,78 @@
 <script src='./resources/calendar/interaction/main.js'></script>
 <script src='./resources/calendar/daygrid/main.js'></script>
 <script src='./resources/calendar/timegrid/main.js'></script>
+<script src='./resources/calendar/core/locales-all.js'></script>
+<script src='./resources/calendar/moment/main.js'></script>
+<script src='./resources/calendar/moment/main.esm.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/af.js"></script>
 <script>
-	document.addEventListener('DOMContentLoaded', function() {
-		var calendarEl = document.getElementById('calendar');
+	$(function(){
+		getcalList();
+		//calRender(data);
+	})
 
-		var calendar = new FullCalendar.Calendar(calendarEl, {
+	function getcalList(){
+		 //DB데이터 가져오기
+		$.ajax({
+				url : 'getProjCalendarData?projNo=1',		//projNo를 값으로 넘김
+				type : 'GET',		//조회 요청
+				contentType : 'application/json;charset=utf-8',
+				dataType : 'json',
+				success : calRender,
+				error : function(xhr, status, msg) {
+					alert("상태값 :" + status + " Http에러메시지 :" + msg);
+				}
+			});
+	}
+	
+	function inputData(data){ //data는 list<Map>형식임 
+		console.log(data);
+	
+	} 
+	
+	//캘린더 화면에 출력
+	function calRender(data){
+		
+		console.log(data);
+		
+		var calendarEl = document.getElementById('calendar');  //캘린더 아이디 가져오고
+		var calendar = new FullCalendar.Calendar(calendarEl, { // 캘린더 생성
 			plugins : [ 'interaction', 'dayGrid', 'timeGrid' ],
 			header : {
 				left : 'prev,next today',
 				center : 'title',
 				right : 'dayGridMonth,timeGridWeek,timeGridDay'
 			},
-			defaultDate : '2019-08-12',
+			defaultDate : moment(),  //오늘 날짜
+			navLinks : true, // can click day/week names to navigate views
+			selectable : true,
+			selectMirror : true,
+			editable : true,
+			eventLimit : true,
+			eventClick: function(info){
+				//showCalDetail(info);
+			},
+			dataClick: function(info){
+				//showCalAdd(info);
+			},
+			droppable: true,
+			events:data
+		});
+		calendar.render();	
+	}
+	
+	/* document.addEventListener('DOMContentLoaded', function() {
+		var calendarEl = document.getElementById('calendar');  //캘린더 아이디 가져오고
+
+		//$('#calendar').fullCalendar({
+		var calendar = new FullCalendar.Calendar(calendarEl, { // 캘린더 생성
+			plugins : [ 'interaction', 'dayGrid', 'timeGrid' ],
+			header : {
+				left : 'prev,next today',
+				center : 'title',
+				right : 'dayGridMonth,timeGridWeek,timeGridDay'
+			},
+			defaultDate : '2019-08-12',  //오늘 날짜로 수정
 			navLinks : true, // can click day/week names to navigate views
 			selectable : true,
 			selectMirror : true,
@@ -29,16 +91,19 @@
 				if (title) {
 					calendar.addEvent({
 						title : title,
-						start : arg.start,
+						start : arg.start,  //클릭한 날짜 
 						end : arg.end,
-						allDay : arg.allDay
+						allDay : arg.allDay	//종일로 해서 들어감
 					})
 				}
 				calendar.unselect()
 			},
 			editable : true,
 			eventLimit : true, // allow "more" link when too many events
-			events : [ {
+			// eventSources: [{
+			//	url: 'getProjCalendarData?projNo=1' 
+			// } ] 
+	 		events : [ {
 				title : 'All Day Event',
 				start : '2019-08-01'
 			}, {
@@ -80,11 +145,12 @@
 				title : 'Click for Google',
 				url : 'http://google.com/',
 				start : '2019-08-28'
-			} ]
+			} ] 
 		});
 
-		calendar.render();
-	});
+		calendar.render(); //캘린더 그리기
+	}); */
+	
 </script>
 <style>
 body {

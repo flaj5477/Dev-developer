@@ -10,5 +10,10 @@ import com.dd.devdeveloper.calendar.ProjCalendarVO;
 
 
 public interface CalendarService {
+	//엑셀로 업로드
 	public List<ProjCalendarVO> uploadExcelFile(MultipartFile excelFile);
+	
+	//DB데이터 가져오기
+	public List<ProjCalendarVO> getProjCalendarData(ProjCalendarVO vo);
+	
 }

@@ -34,6 +34,8 @@
 			//fill : '#ebedf0'
 			fill : '#EBE3F6'
 		})
+		
+		
 	})
 </script>
 <style type="text/css">
@@ -137,16 +139,16 @@
 										</div>
 										<hr class="my-4">
 										<!-- 출석률 도트 -->
-										<div id="drawing" class="align-self-center">
-											<svg class=" col-fixed" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100%" height="84">
+										<div id="drawing" class="align-self-center" style="overflow: auto">
+											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100%" height="97">
 												<c:forEach var="activityLog" items="${activityLogList}" varStatus="status">
 													<c:if test="${status.index % 7 == 0 }">
 														<!-- 일요일이면 g태그 열기 -->
-														<g transform="translate(<fmt:formatNumber value="${status.index/7*10}" pattern="#" />, 0)">
+														<g transform="translate(<fmt:formatNumber value="${status.index/7*14}" pattern="#" />, 0)">
 													
 													</c:if>
 													<!-- col-fixed 의 width인 620에 대한 % -->
-													<rect width="1%" height="10%" class="${activityLog.activityScore }" x="0" y="${status.index%7*14 }"></rect>
+													<rect width="10" height="10" class="${activityLog.activityScore }" x="0" y="${status.index%7*14 }"></rect>
 													<c:if test="${status.index % 7 == 6 }">
 														<!-- 토요일이면 g태그 닫기 -->
 														</g>
@@ -542,15 +544,15 @@
 	<!-- 프로젝트 지원자 모달 -->
 	<!-- Modal -->
 	<div class="modal fade" id="projApplyModal" tabindex="-1" role="dialog" aria-labelledby="projApplyModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="projApplyModalLabel">프로젝트 지원자</h5>
+					<h5 class="display-4 text-primary" id="projApplyModalLabel">프로젝트 지원자</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body"></div>
+				<div class="modal-body" style="word-break: break-all;"></div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" onclick="updateApplytoApproved(this)">승인하기</button>
 				</div>
@@ -581,11 +583,11 @@
 							var i = button.attr('id'); //프로젝트 지원자들중 눌려진 버튼의 아이디 값으로 해당 지원자의 정보를 가져온다
 
 							var content = "<div class= container id=" + applyNo + "> "
-									+ "<div class=row> " + "<div class=col>"
+									+ "<div class='row mb-3'> " + "<div class=col>"
 									+ projApplicantsList[i].participantName
 									+ "</div>"
 									+ "</div>"
-									+ "<div class=row> "
+									+ "<div class='row mb-3'> "
 									+ "<div class=col>"
 									+ projApplicantsList[i].phoneNo
 									+ "</div>"
@@ -593,12 +595,12 @@
 									+ projApplicantsList[i].email
 									+ "</div>"
 									+ "</div>"
-									+ "<div class=row> "
+									+ "<div class='row mb-3'> "
 									+ "<div class=col>"
 									+ projApplicantsList[i].address
 									+ "</div>"
 									+ "</div>"
-									+ "<div class=row> "
+									+ "<div class='row mb-3'> "
 									+ "<div class=col>"
 									+ projApplicantsList[i].coverLetter
 									+ "</div>" + "</div>" + "</div> ";
@@ -619,16 +621,18 @@
 	<!-- 프로젝트 모달 -->
 	<!-- Modal -->
 	<div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">프로젝트</h5>
-					<h5 class="modal-title" id="projectModalLabel"></h5>
+				
+					<div class="display-3 text-primary ml-3">프로젝트&nbsp</div>
+					<div class="display-3 text-primary" id="projectModalLabel"></div>
+				
 					<button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body mt--4">
+				<div class="modal-body mt--4 table-responsive">
 					<table class="table align-items-center table-flush text-center">
 						<thead class="thead-light">
 							<tr>
@@ -641,8 +645,7 @@
 					</table>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
+					<button type="button" class="btn btn-primary modal-close" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>

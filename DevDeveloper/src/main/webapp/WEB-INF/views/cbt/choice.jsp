@@ -55,14 +55,14 @@
 		$('#comment').html('<p> 진행 하시려면 선택완료 버튼을 눌러주세요. </p>')
 					 .prepend('<p> 현재등급 : '+memberGrade+'</p> <p> 합격 시 등급 : '+chooseGrade+'</p>');
 		$('#submitBtn').show()
-					   .html('선택완료')
-					   .css('background-color','#81A8D6');
+					   .html('선택완료');
 		clearInterval(readyTime); // radio 버튼누르면 반복실행 Clear
 	}
 	
 	function readyPage() {
 		$('#submitBtn').on('click',function() {
-			var sec = 3; // 클릭 시, 초기화
+			$(this).attr('disabled',true);
+			var sec = 2; // 클릭 시, 초기화
 			var level = $('[name ="testsNo"]:checked').val();
 			if(level != null) {
 				$('#toast').fadeIn(500).delay(10,function() {
@@ -75,12 +75,13 @@
 							//location.replace('ready?testsNo='+level); // 페이지 이동, 뒤로가기 하면 현재 페이지 건너 뛴다, GET				
 						}
 						sec--;
-					},200); // n초마다
+					},100); // n초마다
 				});
 			}
 		});
 		//선택취소..
 		$('#resetBtn').on('click',function() {
+			$('#submitBtn').attr('disabled',false);
 			clearInterval(readyTime); // 조건 만족 시, 반복 실행 종료
 			$('#toast').stop().fadeOut(500); // setInterval 작업을 STOP()한 후에 fadeOut처리 해야 제대로 된다.
 			chooseEvent(); // 버튼 한번 더 누르면 반복 Clear하고 chooseEvent로 return
@@ -96,9 +97,9 @@
 	<div id="content">
 		<form action="ready" name="frm" method="post">
 			<input type="hidden" name="level">
-			<table id="chooseTab" border="1" style="width:700px" class="table">
+			<table id="chooseTab" class="table" border="1">
 				<thead class="thead-dark">
-					<tr align="center">
+					<tr>
 						<th>선택</th>
 						<th>시험명</th>
 						<th>상세설명</th>
@@ -110,11 +111,11 @@
 		</form>
 		<div id="comment" class="alert alert-secondary" role="alert">
 		</div>
-		<button type="button" id="submitBtn">선택완료</button>
+		<button type="button" id="submitBtn" class="btn btn-primary">선택완료</button>
 	</div>
 	<div id="toast">
 		<br><p></p><br>
-		<button type="button" id="resetBtn">선택취소</button>
+		<button type="button" id="resetBtn" class="btn btn-light">선택취소</button>
 	</div>
 </div>
 </body>

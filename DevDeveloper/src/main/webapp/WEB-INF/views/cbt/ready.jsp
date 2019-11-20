@@ -24,24 +24,16 @@
 	});
 	
 	function readyBox() {
-		$('#subjects').css('height','55px');
-		$('#content1,#content2,#content3').css({
-			height:'48px',
-			margin:'0 0 5px 5px'
-		});
-		$('#tab1').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시험 안내사항&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
-		$('#comment1').append('<br> <b>[시험 안내사항]</b>은 난이도 별 시험상세정보 및 시험 유의사항 안내입니다. <br><br>')
+		$('#comment1').append('<b>[시험 안내사항]</b>은 난이도 별 시험상세정보 및 시험 유의사항 안내입니다. <br><br>')
 					  .append('1.시험에 응시 하면, <b>10일</b>의 <b>유예기간</b>이 주어지며 유예기간이 지난 <br>')
 					  .append('&nbsp;&nbsp;&nbsp;<b>1개월 후</b>에 <b>재 응시</b>가 가능합니다. <br>')
-					  .append('2.시험이 시작 된 후, <b>강제종료</b>되면 <b>중도포기</b>로 <b>불합격</b>처리 되며 <br>')
+					  .append('<br>2.시험이 시작 된 후, <b>강제종료</b>되면 <b>중도포기</b>로 <b>불합격</b>처리 되며 <br>')
 					  .append('&nbsp;&nbsp;&nbsp;응시자 책임으로 간주합니다. <br>')
-					  .append('3.<b>시간초과</b> 시, 시험이 <b>즉시종료</b>되며, 이전까지 체크된 답안으로<br>')
+					  .append('<br>3.<b>시간초과</b> 시, 시험이 <b>즉시종료</b>되며, 이전까지 체크된 답안으로<br>')
 					  .append('&nbsp;&nbsp;&nbsp;점수를 채점합니다. <br>')
-					  .append('4.<b>시험종료</b> 후, 결과는 <b>즉시</b> 나오며 결과에 따라 응시기록 및 등급이<br>')
+					  .append('<br>4.<b>시험종료</b> 후, 결과는 <b>즉시</b> 나오며 결과에 따라 응시기록 및 등급이<br>')
 					  .append('&nbsp;&nbsp;&nbsp;<b>자동 업데이트</b> 됩니다. <br>');
-		$('#tab2').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시험 메뉴안내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
 		$('#comment2').append('<br> <b>[시험 메뉴안내]</b>는 응시화면에서 사용되는 <b>주요기능</b>을 소개합니다. <br><br>');
-		$('#tab3').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시험 준비완료&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
 		$('#comment3').append('<br> <b>[시험 시작하기]</b>버튼을 누르시면 <b>잠시 후 시험이 시작됩니다.</b><br><br>');
 	}
 	
@@ -84,18 +76,18 @@
 </script>
 </head>
 <body>
-<div class="cbtReady" id="tabs" style="width:600px; left:445px">
+<div class="cbtReady" id="tabs">
 	<form action="examination" name="frm" method="post">
 		<input type="hidden" name="level"/>
 		<ul id="subjects">
-			<li id="content1"><a id="tab1" href="#tabs-1"></a></li>
-			<li id="content2"><a id="tab2" href="#tabs-2"></a></li>
-			<li id="content3"><a id="tab3" href="#tabs-3"></a></li>
+			<li id="content1"><a id="tab1" href="#tabs-1">시험 안내사항</a></li>
+			<li id="content2"><a id="tab2" href="#tabs-2">시험 메뉴안내</a></li>
+			<li id="content3"><a id="tab3" href="#tabs-3">시험 준비완료</a></li>
 		</ul>
 		<div id="tabs-1">
-			<table id="chooseTab" border="1" style="width:550px; text-align:center">
-				<thead>
-					<tr align="center">
+			<table id="chooseTab" class="table" border="1">
+				<thead class="thead-dark">
+					<tr>
 						<th>시험명</th>
 						<th>상세</th>
 						<th>과목수</th>

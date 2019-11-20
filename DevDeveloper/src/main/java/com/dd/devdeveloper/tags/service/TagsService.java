@@ -15,6 +15,9 @@ public interface TagsService {
 
 	//태그 나누기
 	public List<String> divTag(String tagVal);
+	
+	//태그 하나면 ,찍어줌
+	public String checkTag(String tag);
 
 	//관리자 태그관리페이지
 	public Object tagManageForm();

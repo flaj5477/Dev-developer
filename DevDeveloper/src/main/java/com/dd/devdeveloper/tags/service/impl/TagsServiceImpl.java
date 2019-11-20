@@ -52,5 +52,41 @@ public class TagsServiceImpl implements TagsService{
 
 		return divTagList;
 	}
+
+	@Override
+	public String checkTag(String tag) {
+		
+		char tagLastVal = tag.charAt(tag.length()-1);
+		
+		if(tagLastVal != ',') {//,없으면 마지막에 붙여줌
+			tag = tag+",";
+		}
+		
+		return tag;
+	}
+
+	@Override
+	public Object tagManageForm() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object insertTag() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object deleteTag() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object updateTag() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

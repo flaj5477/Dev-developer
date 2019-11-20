@@ -40,22 +40,22 @@ public class CalendarController {
 	}
 
 	// 엑셀 업로드 폼
-	@RequestMapping(value = "/excelUploadForm", method = RequestMethod.GET)
-	public String ExcelForm() {
-		return "manager/manager/managerExcelUpload";
-	}
+	/*
+	 * @RequestMapping(value = "/excelUploadForm", method = RequestMethod.GET)
+	 * public String ExcelForm() { return "manager/manager/managerExcelUpload"; }
+	 */
 
 	//엑셀 업로드 처리
 	@RequestMapping(value = "excelUpload", method = RequestMethod.POST)
-	public String ExcelUplod(MultipartHttpServletRequest request, Model model) {
+	public String ExcelUplod(ProjCalendarVO vo, MultipartHttpServletRequest request, Model model) {
 
 		MultipartFile file = null;
 		Iterator<String> iterator = request.getFileNames();
 		if (iterator.hasNext()) {
 			file = request.getFile(iterator.next());
 		}
-
-		List<ProjCalendarVO> list = calendarService.uploadExcelFile(file);
+		//System.out.println("컨트롤러로 프로젝트 번호 잘 넘어오는지 확인" + vo.getProjNo());
+		List<ProjCalendarVO> list = calendarService.uploadExcelFile(file, vo.getProjNo());
 
 		/*
 		 * for (ProjCalendarVO vo : list) { if (vo == null) { continue; }

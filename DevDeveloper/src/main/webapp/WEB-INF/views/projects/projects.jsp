@@ -54,7 +54,7 @@
 								</div>
 								<div class="col">
 									최소 지원 등급: 
-									<strong>${project.projRequire }</strong>
+									<strong id="projRequire">${project.projRequire }</strong>
 								</div>
 							</div>
 							<div class="row">
@@ -170,6 +170,32 @@
 				$("#navbar-default_dropdown_1").attr("style","visibility:visible")
 			
 			}
+			
+			//최소 지원등급 숫자->문자로 고치기
+			var projRequire = "";
+			
+			switch("${project.projRequire}"){
+			case "0":
+				projRequire = "브론즈";
+				break;
+			case "1":
+				projRequire = "실버";
+				break;
+			case "2":
+				projRequire = "골드";
+				break;
+			case "3":
+				projRequire = "플래티넘";
+				break;
+			case "4":
+				projRequire = "다이아";
+				break;
+			case "5":
+				projRequire = "마스터";
+				break;
+			}
+			
+			$("#projRequire").html(projRequire);
 		})
 	</script>
 </body>

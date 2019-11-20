@@ -11,7 +11,7 @@
            		#{projNo},
             	#{startDate},
             	#{endDate},
-            	#{developerNo},
+            	(select members_no from members where members_id=#{developerId}),
             	#{taskComplete} )
 	</insert>
 	

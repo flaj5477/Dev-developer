@@ -3,4 +3,6 @@ $(document).ready(function(){
 	$(window).on("contextmenu dragstart selectstart",function(){ 
         return false;    
 	});
+	$('#pageName').html('CBT');
 });
+

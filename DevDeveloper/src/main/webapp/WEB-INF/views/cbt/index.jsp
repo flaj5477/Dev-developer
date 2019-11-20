@@ -10,6 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/assets/js/format.js"></script>
+<script src="${pageContext.request.contextPath}/resources/assets/js/comcbt.js"></script>
 <script>	
 	var grade = parseInt("${members.membersGrade}");
 	var memberGrade = formatGrade(grade);

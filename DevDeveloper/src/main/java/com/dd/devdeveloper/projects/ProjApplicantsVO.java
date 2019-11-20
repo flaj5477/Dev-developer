@@ -14,6 +14,10 @@ public class ProjApplicantsVO {
 	private String address;
 	private String coverLetter;
 	
+	//join members
+	private String membersImage;
+	private String membersId;
+	
 	private String projTitle;
 	private int pmNo; //프로젝트 pm(공고낸사람)번호
 	

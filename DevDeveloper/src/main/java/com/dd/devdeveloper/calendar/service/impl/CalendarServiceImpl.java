@@ -24,7 +24,7 @@ public class CalendarServiceImpl implements CalendarService {
 	@Autowired ProjCalendarDAO projCalendarDAO ;
 	
 	@Override
-	public List<ProjCalendarVO> uploadExcelFile(MultipartFile excelFile) {
+	public List<ProjCalendarVO> uploadExcelFile(MultipartFile excelFile, int projNo) {
 
 		List<ProjCalendarVO> list = new ArrayList<ProjCalendarVO>();
 
@@ -45,6 +45,7 @@ public class CalendarServiceImpl implements CalendarService {
 				}
 
 				ProjCalendarVO vo = new ProjCalendarVO(); // 엑셀 한줄을 저장할 객체
+				vo.setProjNo(projNo); //프로젝트 넘어 입력
 
 				// 엑셀 파일의 각각의 값 읽어 오기
 				for (int j = 0; j < row.getLastCellNum(); ++j) {
@@ -54,22 +55,22 @@ public class CalendarServiceImpl implements CalendarService {
 						case 0:
 							vo.setTaskTitle(cell.getStringCellValue());
 							break;
+						/*
+						 * case 1: vo.setProjNo(((int) cell.getNumericCellValue())); break;
+						 */
 						case 1:
-							vo.setProjNo(((int) cell.getNumericCellValue()));
-							break;
-						case 2:
 							// 자바 util->sql
 							Date StartDate = new Date(cell.getDateCellValue().getTime());
 							vo.setStartDate(StartDate);
 							break;
-						case 3:
+						case 2:
 							Date EndDate = new Date(cell.getDateCellValue().getTime());
 							vo.setEndDate(EndDate);
 							break;
-						case 4:
-							vo.setDeveloperNo(((int) cell.getNumericCellValue()));
+						case 3:
+							vo.setDeveloperId(((String) cell.getStringCellValue())); //사용자 id로 받아옴 나중에 DB에 넣을때 id로 no검색해서 넣을꺼임
 							break;
-						case 5:
+						case 4:
 							vo.setTaskComplete(cell.getStringCellValue());
 							break;
 						}

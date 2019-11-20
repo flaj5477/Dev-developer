@@ -66,16 +66,19 @@
 	
 	<!-- 프로젝트 지원자 리스트 -->
 	<select id="getProjApplicantsList" parameterType="projApplicants" resultType="projApplicants">
-		select 	apply_no, 
-				members_no, 
-				proj_no, 
-				status, 
-				participant_name,
-				email,
-				phone_no,
-				address,
-				cover_letter
-		from PROJ_APPLICANTS_STATUS_VIEW
+		select 	p.apply_no, 
+				p.members_no, 
+				p.proj_no, 
+				p.status, 
+				p.participant_name,
+				p.email,
+				p.phone_no,
+				p.address,
+				p.cover_letter,
+        		m.members_image,
+        		m.members_id
+		from PROJ_APPLICANTS_STATUS_VIEW p join members m
+    	on p.members_no = m.members_no
 		where proj_no in ( select proj_no from PROJECTS where members_no=#{pmNo})
 		order by status_no
 	</select>

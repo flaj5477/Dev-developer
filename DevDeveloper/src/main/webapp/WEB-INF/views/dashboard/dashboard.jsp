@@ -39,61 +39,11 @@
 	})
 </script>
 <style type="text/css">
-<!--
-출석률 표시하는거 고정크기 지정-->.col-fixed {
-	position: relative;
-	min-height: 1px;
-	padding-right: 5px;
-	padding-left: 5px;
-	float: left;
-	width: 100%;
-	border: 1px solid black;
-}
-
-.col-fluid {
-	position: relative;
-	min-height: 1px;
-	padding-right: 5px;
-	padding-left: 5px;
-	float: left;
-	width: 100%;
-	border: 1px solid black;
-}
-
-@media ( min-width : 768px) and (max-width: 991px) {
-	.col-fixed {
-		width: 800px;
-	}
-	.col-fluid {
-		width: calc(100% - 
-		 300px);
-	}
-}
-
-@media ( min-width : 992px) and (max-width: 1199px) {
-	.col-fixed {
-		width: 800px;
-	}
-	.col-fluid {
-		width: calc(100% - 
-		 300px);
-	}
-}
-
-@media ( min-width : 1200px) {
-	.col-fixed {
-		width: 800px;
-	}
-	.col-fluid {
-		width: calc(100% - 
-		 300px);
-	}
-}
-
-.proj-modal:hover {
-	box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px
-		rgba(0, 0, 0, .08);
-	transform: translateY(-1px);
+.cover_letter_box{
+	background-color: #f5f7f9;
+    border: 1px solid #e6ecf1;
+    padding: 1.25rem;
+    border-radius: .25rem;
 }
 </style>
 </head>
@@ -306,7 +256,11 @@
 																	<c:if test="${projApplicant.projNo == myProject.projNo }">
 																		<tr>
 																			<input type="hidden" value="${projApplicant.applyNo }" />
-																			<th scope="row">${projApplicant.membersNo }</th>
+																			<th scope="row">
+																				<span class="size-100 img-rounded " data-toggle="tooltip" data-original-title="${projApplicant.membersId }" style="margin-left:auto;">
+																					<img src="./images/profile/${projApplicant.membersImage }" class="size-100">
+																				</span>
+																			</th>
 																			<td>${projApplicant.participantName }</td>
 																			<td>${projApplicant.status }</td>
 																			<td>
@@ -482,8 +436,8 @@
 	<div class="modal fade" id="projApplyModal" tabindex="-1" role="dialog" aria-labelledby="projApplyModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="display-4 text-primary" id="projApplyModalLabel">프로젝트 지원자</h5>
+				<div class="modal-header bg-primary">
+					<h5 class="display-4 text-secondary" id="projApplyModalLabel">프로젝트 지원자</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -519,9 +473,13 @@
 							var i = button.attr('id'); //프로젝트 지원자들중 눌려진 버튼의 아이디 값으로 해당 지원자의 정보를 가져온다
 
 							var content = "<div class= container id=" + applyNo + "> "
-									+ "<div class='row mb-3'> " + "<div class=col>"
+									+ "<div class='row mb-5'> " 
+									+ "<span class='size-100 img-rounded ' data-toggle='tooltip' data-original-title='" + projApplicantsList[i].membersId + "' style='margin-left:auto;'>"
+									+ "<img src='./images/profile/" + projApplicantsList[i].membersImage + "' class='size-100'>"
+									+ "</span>"
+									+ "<h1 class= 'col' style='margin: auto 0;'>"
 									+ projApplicantsList[i].participantName
-									+ "</div>"
+									+ "</h1>"
 									+ "</div>"
 									+ "<div class='row mb-3'> "
 									+ "<div class=col>"
@@ -531,12 +489,12 @@
 									+ projApplicantsList[i].email
 									+ "</div>"
 									+ "</div>"
-									+ "<div class='row mb-3'> "
+									+ "<div class='row mb-5'> "
 									+ "<div class=col>"
 									+ projApplicantsList[i].address
 									+ "</div>"
 									+ "</div>"
-									+ "<div class='row mb-3'> "
+									+ "<div class='row cover_letter_box'> "
 									+ "<div class=col>"
 									+ projApplicantsList[i].coverLetter
 									+ "</div>" + "</div>" + "</div> ";

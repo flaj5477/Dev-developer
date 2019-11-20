@@ -21,8 +21,11 @@ public class ProjectsVO {
 	private String projTags;
 	private Date projStartDate;
 	private Date projEndDate;
-	private String membersName;
 	
+	//join members
+	private String membersId;
+	private String membersName;
+	private String membersImage;
 	
 	private int first;	//페이징 시작 게시글 번호
 	private int last;	//페이징 종료 게시글 번호

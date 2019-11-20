@@ -17,7 +17,7 @@
 	<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/js/test3.js"> --%>
 <link href="//fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
-<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script> <!-- @@@ 이거 에디터 스크립트입니다. -->
 <link href="${pageContext.request.contextPath}/resources/ckeditor/plugins/codesnippet/lib/highlight/styles/obsidian.css" rel="stylesheet">
  <script src="${pageContext.request.contextPath}/resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
  
@@ -73,14 +73,14 @@
 			</div>
 		</div>
 	</div>
-	
+	<!-- 이 밑 부분 에디터 넣는 부분입니다@@@@@  --> 
 	        <script>
           
                 CKEDITOR.replace( 'qna_content' ,{height: 500, 
                 	  filebrowserUploadUrl: 'qnaUpload.jsp'
                 });
-            </script>
-	
+            </script> 
+	<!-- 이까지 -->
  	<script>
  	
 	 	$(document).ready(function(){ 

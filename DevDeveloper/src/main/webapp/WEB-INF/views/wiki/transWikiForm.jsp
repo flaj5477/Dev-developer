@@ -513,7 +513,7 @@ div[contenteditable] {
 				.append($('<div class="row nav nav-pills justify-content-end">').html(  delbtn  ))			   		
 			   	.append($('<div id="otcontents" class="row" >').html(manualAfterBr))   
 			   	.append($('<div class="row nav nav-pills justify-content-end">')
-			   			.append("추천수"+item.rec).append( recBtn ).append($('<badge class="badge badge-primary ml-3">').html("<br>"+item.translDate+" <br> "+"<a href=' getWiki= "+item.membersNo +"'>"+item.membersId+"</a>" )))
+			   			.append("추천수"+item.rec).append( recBtn ).append($('<badge class="badge badge-primary ml-3">').html("<br>"+item.translDate+" <br> "+item.membersId+"</a>" )))//"<a href=' getWiki= "+item.membersNo +"'>"+
 				.appendTo('#othertrans_'+manualLine);
 		});//each
 	}//wikiTransLineResult

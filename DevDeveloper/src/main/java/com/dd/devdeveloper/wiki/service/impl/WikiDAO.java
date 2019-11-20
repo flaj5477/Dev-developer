@@ -116,4 +116,9 @@ public class WikiDAO {
 	public List<Map<String, Object>> getTagList() {
 		return mybatis.selectList("TagsDAO.getTagList");
 	}
+
+	//나의 위키번역 리스트 가져오기
+	public List<WikiTransVO> getMyWikiTransList() {
+		return null;		//수정해야됨
+	}
 }

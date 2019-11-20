@@ -215,7 +215,7 @@ public class WikiServiceImpl implements WikiService {
 //			e.printStackTrace();
 //		}
 		
-		vo.setManualTags(tagsService.checkTag(vo.getManualTags()));	//태그가 하나면 , 을 끝에 붙여준다
+		vo.setManualTags(tagsService.checkTag(vo.getManualTags()));	//태그가 끝에 , 없으면 ,붙여줌
 		
 		
 		wikiDAO.updateWiki(vo);		//위키원본 수정
@@ -499,6 +499,17 @@ public class WikiServiceImpl implements WikiService {
 	public int wikiTransRecDel(WikiRecVO rvo) {
 		return wikiDAO.wikiTransRecDel(rvo);
 	}
+	
+	
+	/* ==============
+	 곽동우
+	 20191113
+	 위키번역추천취소
+	 ================*/
+	public List<WikiTransVO> getMyWikiTransList() {
+		return wikiDAO.getMyWikiTransList();
+	}	
+	
 	
 	////////// 파일
 

@@ -54,4 +54,7 @@ public interface WikiService {
 	
 	//위키번역 추천취소
 	public int wikiTransRecDel(WikiRecVO rvo);
+
+	//나의 위키 번역내용
+	public List<WikiTransVO> getMyWikiTransList();
 }

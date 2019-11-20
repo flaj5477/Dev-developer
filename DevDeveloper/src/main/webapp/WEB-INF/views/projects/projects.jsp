@@ -70,12 +70,12 @@
 						</div>
 						
 						<div class="col-xl-2">
-						<div class="row ml-5">
-							<div>
-								<a href="#" class="avatar avatar-lg" data-toggle="tooltip" data-original-title="Jessica Doe"> <img alt="Image placeholder" src="./resources/assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
-								</a>
-							</div>
-							<div class=" ml-3 display-4" name="membersName">${project.membersName }</div>
+						<div class="row pr-3">
+
+								<span class="size-100 img-rounded " data-toggle="tooltip" data-original-title="${project.membersId }" style="margin-left:auto;">
+									<img src="./images/profile/${project.membersImage }" class="size-100">
+								</span>
+
 						</div>
 					</div>
 					</div>

@@ -19,15 +19,18 @@
 	<!-- 전체조회 -->
 	<select id="getProjectsList" parameterType="projects" resultType="projects">
 	SELECT b.* FROM ( SELECT rownum no, a.* FROM (
-		select 	proj_no, 
-				members_no, 
-				proj_title, 
-				proj_reg_date, 
-				proj_due_date,
-				proj_start_date, 
-				proj_end_date,
-				proj_tags
-		from projects 
+		select 	p.proj_no, 
+				p.members_no, 
+				p.proj_title, 
+				p.proj_reg_date, 
+				p.proj_due_date,
+				p.proj_start_date, 
+				p.proj_end_date,
+				p.proj_tags,
+				m.members_id,
+				m.members_image
+		from projects p join members m
+		on p.members_no = m.members_no
 		<where>
 			<!-- proj_due_date > sysdate  -->
 			<if test="searchVal != null and searchVal != '' "> 
@@ -60,7 +63,9 @@
 				p.proj_tags,
 				p.proj_start_date,
 				p.proj_end_date,
-        		m.members_name
+        		m.members_name,
+        		m.members_id,
+        		m.members_image
 		from projects p join members m
     	on p.members_no = m.members_no
 		where proj_no = #{projNo}

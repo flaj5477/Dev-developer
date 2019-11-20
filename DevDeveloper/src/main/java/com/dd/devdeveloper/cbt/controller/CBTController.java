@@ -24,7 +24,7 @@ import com.dd.devdeveloper.members.service.MembersService;
 
 @Controller
 public class CBTController {
-	
+
 	@Autowired
 	CBTService cbtService;
 	@Autowired

@@ -33,11 +33,15 @@
 	}
 	
 	function viewerPage() {
-		$('.cbtExamination #toast').fadeIn(500).delay(1000).fadeOut(500,function() {
-			localStorage.setItem('oldGrade','${members.membersGrade}');
-			frm.membersNo.value = user;
-			frm.testsNo.value = param;
-			document.frm.submit();
+		var $toast = $('.cbtExamination #toast');
+		$toast.fadeIn(500).delay(1000).fadeOut(500,function() {
+			$toast.children('p').html('<br> 응시용 화면으로 전환합니다.');
+			$toast.fadeIn(750).delay(1500).fadeOut(750,function() {
+				localStorage.setItem('oldGrade','${members.membersGrade}');
+				frm.membersNo.value = user;
+				frm.testsNo.value = param;
+				document.frm.submit();
+			});
 		});
 	}
 
@@ -106,7 +110,7 @@
 			<input type="hidden" name="membersNo"/>
 			<input type="hidden" name="testsNo"/>
 			<div id="toast">
-				<p> <br>응시용 화면으로 전환합니다. </p>
+				<p> <br> 잠시 후 시험이 시작됩니다. </p>
 				<div class="spinner-border text-info" style="width: 4rem; height: 4rem;" role="status">
 		 				<span class="sr-only"></span>
 				</div>

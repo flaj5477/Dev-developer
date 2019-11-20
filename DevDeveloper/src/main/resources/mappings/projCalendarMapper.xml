@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CalendarDAO">
+
+	<insert id="insertProjCalendar">
+		insert into PROJ_CALENDAR
+		values(	(select NVL(max(task_no),0)+1 from PROJ_CALENDAR),
+            	#{taskTitle},
+           		#{projNo},
+            	#{startDate},
+            	#{endDate},
+            	#{developerNo},
+            	#{taskComplete} )
+	</insert>
+</mapper>

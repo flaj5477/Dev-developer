@@ -69,7 +69,6 @@ public class QnaController {
 		@RequestMapping(value ="/updateAnq", method=RequestMethod.GET)
 		public String updateAnqGet(AnswerVO vo, Model model) {
 	 
-			System.out.println(""+vo);
 			qnaService.updateAnq(vo);
 			return "redirect:/qnaNo?qNo="+vo.getqNo();
 		}

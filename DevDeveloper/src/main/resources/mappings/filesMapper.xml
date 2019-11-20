@@ -4,12 +4,15 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="FilesDAO">
-
+	
 	<select id="getFilesRoute" resultType="files" parameterType="files">
-		SELECT files_no, proj_no, files_title
+		
+		SELECT files_no, proj_no, files_title, level
 		FROM files
 		START WITH files_no = #{upperFolder}
 		CONNECT BY PRIOR upper_folder = files_no
+		order by level desc
+		
 	</select>
 
 	<select id="getFilesList" resultType="files">
@@ -18,16 +21,17 @@
 		proj_no,
 		files_title,
 		files_comment,
-		members_no,
+		f.members_no,
 		files_group_no,
 		files_upload_date,
 		files_type,
 		upper_folder,
 		files_size,
 		files_Import,
-		files_Trash
+		files_Trash,
+		m.members_name
 		from
-		files
+		files f inner join members m on f.members_no = m.members_no
 		<![CDATA[
 		where (files_Trash <> 'Y' or files_Trash is null)
 		]]>
@@ -47,7 +51,6 @@
 		)A)B WHERE RN between #{first} and #{last}
 	</select>
 
-
 	<!-- filesinsert(upload) -->
 	<insert id="filesInsertProc" statementType="CALLABLE" parameterType="files">
 		{call FILES_UPLOAD		(#{projNo},
@@ -57,8 +60,7 @@
 								 #{filesPath},
 								 #{upperFolder},
 								 #{filesType},
-								 #{filesSize} )}
-								 
+								 #{filesSize} )}							 
 	</insert>
 		
 	<select id="getImportList" parameterType="files"
@@ -94,7 +96,6 @@
 		files
 		where files_Trash='Y'
 	</select>
-	
 
 	<select id="getFilesSearch" parameterType="files"
 		resultType="files">
@@ -154,4 +155,5 @@
 		from files 
 		where files_no = #{filesNo}
 	</select>
+	
 </mapper>

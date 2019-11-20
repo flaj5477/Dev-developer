@@ -434,4 +434,25 @@
 	    	AND   trans_no =  #{transNo}
 	    	AND   members_no = #{membersNo}
 	    </delete>
+	    
+	     <!-- 
+	   	 20191120
+	   	 나의 위키번역 내역가져오기
+	    -->
+	    <select id="getMyWikiTransList" parameterType="int" resultType="wikiTrans">
+	    	SELECT 		a.TRANS_NO			as		"transNo",
+						a.MANUAL_LINE			as		"manualLine",
+						a.MANUAL_BEFORE		as		"manualBefore",
+						a.MANUAL_AFTER		as		"manualAfter",
+						TO_CHAR(a.TRANS_DATE,'YYYY-MM-DD hh:MI:ss')		as 		"translDate",
+						a.MANUAL_NO			as 		"manualNo",
+						a.MEMBERS_NO			as 		"membersNo",
+            			b.MANUAL_TITLE    as  "manualTitle"
+						
+			FROM wiki_guide_trans a, WIKI_GUIDE b
+			WHERE a.MEMBERS_NO = #{manualNo}
+      		AND a.MANUAL_NO = b.MANUAL_NO
+      		AND a.MANUAL_LINE is not null
+      		order by a.TRANS_DATE desc
+	    </select>
 </mapper>

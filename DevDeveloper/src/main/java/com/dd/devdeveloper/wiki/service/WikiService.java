@@ -56,5 +56,5 @@ public interface WikiService {
 	public int wikiTransRecDel(WikiRecVO rvo);
 
 	//나의 위키 번역내용
-	public List<WikiTransVO> getMyWikiTransList();
+	public List<WikiTransVO> getMyWikiTransList(int membersNo);
 }

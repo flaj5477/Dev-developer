@@ -24,4 +24,6 @@ public class WikiTransVO extends WikiVO{
 	private String myTransRec;	//추천여부확인
 	private int rec;		//추천수
 	private String orderby;	//정렬?
+	
+	
 }

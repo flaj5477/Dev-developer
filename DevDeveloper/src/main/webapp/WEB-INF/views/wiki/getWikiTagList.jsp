@@ -13,7 +13,7 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-pageName = "위키가이드";
+	pageName = "위키가이드";
 	$(function(){
 		hover();
 		tagClick();

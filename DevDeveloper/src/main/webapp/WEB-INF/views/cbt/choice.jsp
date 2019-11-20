@@ -53,7 +53,7 @@
 		var memberGrade = formatGrade(grade);
 		$('#toast').children('p').html('Loading..');
 		$('#comment').html('<p> 진행 하시려면 선택완료 버튼을 눌러주세요. </p>')
-					 .prepend('<br> <p> 현재등급 : '+memberGrade+'</p> <p> 합격 시 등급 : '+chooseGrade+'</p>');
+					 .prepend('<p> 현재등급 : '+memberGrade+'</p> <p> 합격 시 등급 : '+chooseGrade+'</p>');
 		$('#submitBtn').show()
 					   .html('선택완료')
 					   .css('background-color','#81A8D6');

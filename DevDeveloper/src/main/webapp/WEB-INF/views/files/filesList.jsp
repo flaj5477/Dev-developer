@@ -113,7 +113,6 @@ pageName = "프로젝트 파일";
 									</form>
 								</div>
 
-
 								<!-- Modal -->
 								<div class="modal fade" id="upmodal" tabindex="-1" role="dialog"
 									aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -125,7 +124,7 @@ pageName = "프로젝트 파일";
 												 <input type="hidden" name="upperFolder" value="${param.upperFolder}"/>
 											
 												타이틀<input type="text" name="filesTitle"> 코멘트<input type="text" name="filesComment">								
-													<input type="file" value="파일 선택" name="uploadFile" />
+													<input type="file" value="파일 선택" name="uploadFile" multiple />
 													<input type="submit" value="업로드" />
 												</form>
 												
@@ -227,9 +226,9 @@ pageName = "프로젝트 파일";
 									
 									<!-- <input type="checkbox" name="chk_info" value="HTML">HTML -->
 									<td>${files.filesComment }</td>
-									<td>${files.membersNo }</td>
+									<td>${files.membersName }</td>
 									<td>${files.filesUploadDate }</td>
-									<td>${files.filesSize }</td>
+									<!--  <td><c:if test= "${files.filesSize=='F'}">KB</c:if></td> -->
 								</tr>
 							</c:forEach>
 

@@ -185,7 +185,7 @@
 		위키 전체수 가져오기(페이징)
 	 -->
 	 <select id="getCountWiki" parameterType="wiki" resultType="int">
-		select count(*)  as  "getCountWiki" 
+		select count(*)  as  "getCountWiki"
 		from wiki_guide
 		<where>
 			<if test="searchVal != null and searchVal != '' "> 
@@ -375,7 +375,7 @@
 	 	위키 번역 삭제
 	  -->
 	<delete id="delWikiTrans" parameterType="int">
-			DELETE FROM WIKI_GUIDE_TRANS 
+			DELETE FROM WIKI_GUIDE_TRANS
 			WHERE TRANS_NO = #{transNo}
 	</delete>	 
 	 

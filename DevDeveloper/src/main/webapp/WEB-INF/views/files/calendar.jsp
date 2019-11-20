@@ -15,6 +15,7 @@
 <script src='./resources/calendar/moment/main.js'></script>
 <script src='./resources/calendar/moment/main.esm.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/af.js"></script>
+
 <script>
 	$(function(){
 		getcalList();

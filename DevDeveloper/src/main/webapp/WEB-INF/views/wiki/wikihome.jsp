@@ -156,7 +156,7 @@ a {
 						<tbody>
 		
 							<c:forEach items="${wikiMap }" var="wiki">
-								<tr name="wikitd" onclick="location.href='getWiki?manualNo=${wiki.manualNo}'">
+								<tr name="wikitd"">
 									<th scope="row">
 										<div class="media-body">
 											<span class="mb-0 text-sm">${wiki.manualNo}</span>
@@ -164,18 +164,18 @@ a {
 		
 									</th>
 									<td id="${wiki.manualNo}" class="title">
-										<div class="cutline">${wiki.manualTitle}</div>
+										<div class="cutline"><a href="getWiki?manualNo=${wiki.manualNo}">${wiki.manualTitle}</a></div>
 									</td>
 									<td>
 										<div class="cutline2">
 											<span>
 												<c:choose>
 													<c:when test="${wiki.manualTags eq null}">
-														<span class="badge badge-default"><a href = "wikihome?select=tags&page=1&searchVal=기타">기타</a></span>
+														<a href = "wikihome?select=tags&page=1&searchVal=기타"><span class="badge badge-default">기타</span></a>
 													</c:when>
 													<c:when test="${not empty wiki.manualTags}">
 														<c:forEach items="${wiki.divTagList }" var="tag" varStatus="index" begin="0" end="2">
-															<span class="badge badge-default"><a href = "javascript:clickTag(event,'${tag}')">${tag}</a></span>
+															<a href = "javascript:clickTag(event,'${tag}')"><span class="badge badge-default">${tag}</span></a>
 														</c:forEach>		
 													</c:when>
 												</c:choose>

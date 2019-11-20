@@ -14,7 +14,7 @@
 }
 </style>
 <script>
-
+	pageName = "위키가이드";
 	if("${wiki.manualContentsCheck }" == 0){
 		alert("접근불가!");
 		//history.go(-1);//첫번째 방법

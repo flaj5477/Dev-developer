@@ -20,3 +20,56 @@
 	-moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
 	box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
 }
+div.cbtIndex, div.cbtChoice {
+	top: 10%;
+	left: 33%;
+	position: fixed;
+	bottom: 80px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+div.cbtReady {	
+	left: 33%;
+	margin : 50px;	
+}
+div.cbtIndex #subject, div.cbtChoice #subject {
+	margin: 15px 0;
+	padding: 25px 0;
+}
+div.cbtIndex #content, div.cbtChoice #content {
+	top: 20%;
+	left: 33%;
+	width: 800px;
+	height: 500px;
+	padding: 10px;
+	margin: 20px;
+	text-align: center;
+	vertical-align: middle;
+	border: 1px solid rgba(102,186,255,0.4);
+	box-shadow: 5px 5px 10px #000;
+}
+
+div.card-group {
+	padding: 25px 0 15px 0;
+	margin: 5px;
+}
+div.card {
+	padding: 0 15px 10px 15px;
+	vertical-align: middle;
+	border: 1px solid rgba(102,186,255,0.4);
+}
+.card-img-top {
+	padding: 0 -5px -5px 0;
+}
+
+div#content form {
+	vertical-align: middle;
+	left: 50%;
+	padding: 5px 40px;
+}
+input[type=radio] {
+	 font-size:14px;
+	 width:18px;
+	 height:18px;
+}

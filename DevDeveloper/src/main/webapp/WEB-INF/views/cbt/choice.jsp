@@ -21,7 +21,6 @@
 	});
 
 	function choiceBox() {
-		$('#subject').html('<h2>난이도 선택</h2> <br>');
 		$('#submitBtn').hide();
 		$('#resetBtn').css('background-color','white');   	
 	}
@@ -90,13 +89,15 @@
 </script>
 </head>
 <body>
-<div class ="cbtChoice" align="center">
-	<div id="subject"></div>	
+<div class ="cbtChoice">
+	<div id="subject">
+		<p class="h1" style="color:black"><br>LEVEL CHOICE</p>
+	</div>	
 	<div id="content">
 		<form action="ready" name="frm" method="post">
 			<input type="hidden" name="level">
-			<table id="chooseTab" border="1" style="width:550px">
-				<thead>
+			<table id="chooseTab" border="1" style="width:700px" class="table">
+				<thead class="thead-dark">
 					<tr align="center">
 						<th>선택</th>
 						<th>시험명</th>
@@ -107,13 +108,14 @@
 				<tbody id="choiceTabBody"></tbody>
 			</table>
 		</form>
+		<div id="comment" class="alert alert-secondary" role="alert">
+		</div>
+		<button type="button" id="submitBtn">선택완료</button>
 	</div>
-	<div id="comment"></div>
 	<div id="toast">
 		<br><p></p><br>
 		<button type="button" id="resetBtn">선택취소</button>
 	</div>
-	<button type="button" id="submitBtn">선택완료</button>
 </div>
 </body>
 </html>

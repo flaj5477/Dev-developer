@@ -32,8 +32,16 @@
 	});
 	
 	function indexBox() {
-		$('#subject').append('<h2> 레벨테스트 </h2>');	
-	    $('#level').html('현재 등급 '+memberGrade+' <br><br>'); 
+		var color;
+		switch(grade) {
+		case 0: color = 'darkgray'; break;
+		case 1: color = 'saddlebrown'; break;
+		case 2: color = 'lightgray'; break;
+		case 3: color = 'gold'; break;
+		case 4: color = 'cornflowerblue'; break;
+		case 5: color = 'orangered'; break;
+		}
+		$('#grade'+(grade+1)).css('background-color',color);
 	}
 	
 	setInterval(timeCount,1000);
@@ -65,48 +73,52 @@
 	}
 	
 	function indexCase(code) {
+		var $restTimeText = $('#restTime').children('p');
 		switch(code) {
 		case 1 : 
-			$('#message').html('이미 최고레벨에 도달 하셨습니다.<br><br>');
+			$('#message').children('p').html('이미 최고레벨에 도달 하셨습니다.<br><br>');
 			$('#submitBtn').html('응시불가')
-				 			 .css('background-color','red')
+				 			 .attr('class','btn btn-danger')
 							 .attr('value','refuse');
 			break;
 		case 2 :
-			$('#restTime').empty();
+			$restTimeText.empty();
 	    	if(year != 0) {
-	    		$('#restTime').append(year+'년 ');
+	    		$restTimeText.append(year+'년 ');
 	    	}
 	    	if(month != 0) {
-	    		$('#restTime').append(month+'월 ');
+	    		$restTimeText.append(month+'월 ');
 	    	}
 	    	if(day != 0) {
-	    		$('#restTime').append(day+'일 ');
+	    		$restTimeText.append(day+'일 ');
 	    	}
 	    	if(hour != 0) {
-	    		$('#restTime').append(hour+'시간 ');
+	    		$restTimeText.append(hour+'시간 ');
 	    	}
 	    	if(min != 0) {
-	    		$('#restTime').append(min+'분 ');
+	    		$restTimeText.append(min+'분 ');
 	    	}
 	    	if(sec != 0) {
-	    		$('#restTime').append(sec+'초 ');
+	    		$restTimeText.append(sec+'초 ');
 	    	}
-	    	$('#restTime').append('후에 잠금해제 <br><br>');
-	    	$('#message').html(permis.substring(0,4)+'년 '+ // String 문자열 자르기(SubString) permisString.substring(0,4);
-								permis.substring(5,7)+'월 '+
-								permis.substring(8,10)+'일 '+
-								permis.substring(11,13)+'시'+
-								permis.substring(14,16)+'분 '+
-								permis.substring(17,19)+'초 이후 응시가 가능합니다. <br><br>');
+	    	$restTimeText.append('후에 잠금해제 <br><br>');
+	    	$('#message').children('p').html('<b>'+permis.substring(0,4)+'년 '+ // String 문자열 자르기(SubString) permisString.substring(0,4);
+										permis.substring(5,7)+'월 '+
+										permis.substring(8,10)+'일 '+
+										permis.substring(11,13)+'시'+
+										permis.substring(14,16)+'분 '+
+										permis.substring(17,19)+'초 이후 응시가 가능합니다. </b><br><br>')
+										.css('color','orangered');
+								
 	   		$('#submitBtn').html('응시불가')
-	   						 .css('background-color','red')
+	   						 .attr('class','btn btn-danger')
 	   						 .attr('value','refuse');
 	   		break;
 		case 3 : 
-			$('#message').html('응시가 가능합니다.<br><br>');
+			$('#message').children('p').html('<b> 응시가 가능합니다. </b> <br><br>')
+									   .css('color','black')
 	    	$('#submitBtn').html('시험시작')
-	    					 .css('background-color','#81A8D6')
+	    					 .attr('class','btn btn-primary')
 	    					 .attr('value','accept');
 	    	break;
 		}
@@ -123,33 +135,45 @@
 </script>
 </head>
 <body>
-<div class="cbtIndex" align="center">
-	<div id="subject"></div>
+<div class="cbtIndex">
+	<div id="subject">
+		<p class="h1" style="color:black">Dev Developer CBT</p>
+	</div>
 	<div id="content">
 		<div id="comment"></div>
-		<div class="card-group" style="width:600px">
-			<div class="card text-white mb-3" style="max-width: 18rem;">
-				<img src="${pageContext.request.contextPath}/images/grade/0.png" class="card-img-top" alt="..." width="70px">
+		<div class="card-group">
+			<div class="card">
+				<span style="font-color:black">Unranked</span>
+				<img src="${pageContext.request.contextPath}/images/grade/0.png" class="card-img-top" id="grade1">
 			</div>
 			<div class="card">
-				<img src="${pageContext.request.contextPath}/images/grade/1.png" class="card-img-top" alt="..." width="70px">
+				<span style="font-color:black">Bronze</span>
+				<img src="${pageContext.request.contextPath}/images/grade/1.png" class="card-img-top" id="grade2">
 			</div>
 			<div class="card">
-			  	<img src="${pageContext.request.contextPath}/images/grade/2.png" class="card-img-top" alt="..." width="70px">
+				<span style="font-color:black">Silver</span>
+			  	<img src="${pageContext.request.contextPath}/images/grade/2.png" class="card-img-top" id="grade3">
 			</div>
 			 <div class="card">
-			  	<img src="${pageContext.request.contextPath}/images/grade/3.png" class="card-img-top" alt="..." width="70px">
+			 	<span style="font-color:black">Gold</span>
+			  	<img src="${pageContext.request.contextPath}/images/grade/3.png" class="card-img-top" id="grade4">
 			</div>
 			 <div class="card">
-			  	<img src="${pageContext.request.contextPath}/images/grade/4.png" class="card-img-top" alt="..." width="70px">
+			 	<span style="font-color:black">Diamond</span>
+			  	<img src="${pageContext.request.contextPath}/images/grade/4.png" class="card-img-top" id="grade5" >
 			</div>
 			 <div class="card">
-			  	<img src="${pageContext.request.contextPath}/images/grade/5.png" class="card-img-top" alt="..." width="70px">
+			 	<span style="font-color:black">Challenger</span>
+			  	<img src="${pageContext.request.contextPath}/images/grade/5.png" class="card-img-top" id="grade6">
 			</div>
 		</div>
 		<div id="level"></div>
-		<div id="restTime"></div>
-		<div id="message"></div>
+		<div id="restTime" class="alert alert-warning" role="alert">
+			<p class="h5" style="color:orangered"></p>
+		</div>
+		<div id="message" class="alert alert-info" role="alert">
+			<p class="h5"></p>
+		</div>
 		<button type="button" id ="submitBtn"></button>
 	</div>
 </div>

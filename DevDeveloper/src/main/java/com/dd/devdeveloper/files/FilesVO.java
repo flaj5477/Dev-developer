@@ -27,6 +27,7 @@ public class FilesVO {
 	private Date filesDelday;
 	private String uploadFilename;
 	private String getFilesRoute;
+	private String membersName;
 	
 	private int first;	//페이징
 	private int last;	//페이징

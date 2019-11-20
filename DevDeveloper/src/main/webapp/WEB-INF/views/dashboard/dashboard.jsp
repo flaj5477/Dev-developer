@@ -425,7 +425,7 @@
 					<div class="card-header border-0">
 						<div class="row align-items-center">
 							<div class="col">
-								<h3 class="mb-0">Social traffic</h3>
+								<h3 class="mb-0">최근 나의 위키번역</h3>
 							</div>
 							<div class="col text-right">
 								<a href="#!" class="btn btn-sm btn-primary">See all</a>
@@ -437,82 +437,18 @@
 						<table class="table align-items-center table-flush">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col">Referral</th>
-									<th scope="col">Visitors</th>
-									<th scope="col"></th>
+									<th scope="col">번역위치</th>
+									<th scope="col">번역내용</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<th scope="row">Facebook</th>
-									<td>1,480</td>
-									<td>
-										<div class="d-flex align-items-center">
-											<span class="mr-2">60%</span>
-											<div>
-												<div class="progress">
-													<div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">Facebook</th>
-									<td>5,480</td>
-									<td>
-										<div class="d-flex align-items-center">
-											<span class="mr-2">70%</span>
-											<div>
-												<div class="progress">
-													<div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">Google</th>
-									<td>4,807</td>
-									<td>
-										<div class="d-flex align-items-center">
-											<span class="mr-2">80%</span>
-											<div>
-												<div class="progress">
-													<div class="progress-bar bg-gradient-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">Instagram</th>
-									<td>3,678</td>
-									<td>
-										<div class="d-flex align-items-center">
-											<span class="mr-2">75%</span>
-											<div>
-												<div class="progress">
-													<div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">twitter</th>
-									<td>2,645</td>
-									<td>
-										<div class="d-flex align-items-center">
-											<span class="mr-2">30%</span>
-											<div>
-												<div class="progress">
-													<div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"></div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
+								<%-- 번역내역 원하는 개수만큼 출력 --%>
+								<c:forEach items="${myWikiTransList}" var="trans" end="5" >
+									<tr>
+										<th scope="row"><a href="getWiki?manualNo=${trans.manualNo }">${trans.manualTitle}/${trans.manualLine}</a></th>
+										<th scope="row">${trans.manualAfter }</th>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>

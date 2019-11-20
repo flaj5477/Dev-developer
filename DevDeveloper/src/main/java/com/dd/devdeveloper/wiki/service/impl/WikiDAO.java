@@ -118,7 +118,7 @@ public class WikiDAO {
 	}
 
 	//나의 위키번역 리스트 가져오기
-	public List<WikiTransVO> getMyWikiTransList() {
-		return null;		//수정해야됨
+	public List<WikiTransVO> getMyWikiTransList(int membersNo) {
+		return mybatis.selectList("WikiDAO.getMyWikiTransList", membersNo);
 	}
 }

@@ -503,11 +503,11 @@ public class WikiServiceImpl implements WikiService {
 	
 	/* ==============
 	 곽동우
-	 20191113
-	 위키번역추천취소
+	 20191120
+	 나의 위키번역 내역 가져오기
 	 ================*/
-	public List<WikiTransVO> getMyWikiTransList() {
-		return wikiDAO.getMyWikiTransList();
+	public List<WikiTransVO> getMyWikiTransList(int membersNo) {
+		return wikiDAO.getMyWikiTransList(membersNo);
 	}	
 	
 	

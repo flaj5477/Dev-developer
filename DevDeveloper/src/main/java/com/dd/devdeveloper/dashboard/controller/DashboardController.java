@@ -21,6 +21,7 @@ import com.dd.devdeveloper.dashboard.service.DashboardService;
 import com.dd.devdeveloper.members.MembersVO;
 import com.dd.devdeveloper.projects.ProjApplicantsVO;
 import com.dd.devdeveloper.projects.ProjectsVO;
+import com.dd.devdeveloper.wiki.WikiTransVO;
 import com.dd.devdeveloper.wiki.service.WikiService;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 
@@ -72,8 +73,7 @@ public class DashboardController {
 		//Q&A리스트 가져옴
 		
 		//위키리스트 가져옴
-		wikiService.getMyWikiTransList();	// 나의 위키번역내용 가져오기
-		
+		model.addAttribute("myWikiTransList", wikiService.getMyWikiTransList(membersNo) ); ;	// 나의 위키번역내용 가져오기
 		//CBT기록 가져
 		
 		//return "dashboard/svgtest";

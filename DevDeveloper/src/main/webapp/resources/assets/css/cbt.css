@@ -23,11 +23,11 @@
 }
 div.cbtIndex, div.cbtChoice {
 	margin: 80px 0;
-	top: 10%;
+	top: 8%;
 	left: 33%;
 	position: fixed;
 	width: 800px;
-	height: 600px;
+	height: 675px;
 	bottom: 80px;
 	text-align: center;
 	vertical-align: middle;
@@ -87,6 +87,11 @@ div.cbtChoice #comment p {
 	padding: 5px;
 	text-align: center;
 	vertical-align: middle;
+}
+div.cbtChoice #submitBtn {
+	width: 160px;
+	height: 40px;
+	font-size: 16px;
 }
 input[type=radio] {
 	 font-size:14px;
@@ -156,6 +161,28 @@ div.cbtReady #cbtReadyModal {
 	left: 4%;
 	position: fixed;
 }
+
+div.cbtViewer #questView table {
+	width:550px;
+}
+
+div.cbtViewer #putView {
+	position: absolute;	
+	top: 125px;
+	right: 240px;
+	padding: 3px 10px;
+}
+
+div.cbtViewer #noExp {
+	margin : 3px;
+	left: 3%;
+}
+
+div.cbtViewer #confirm {
+	margin : 3px;
+	left: 3%;
+}
+
 div.cbtProcess #toast {
 	display:none;
 	width: 400px;

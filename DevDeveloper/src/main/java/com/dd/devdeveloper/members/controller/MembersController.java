@@ -98,7 +98,7 @@ public class MembersController {
    			}
    		}
    		membersService.insertMembers(vo);
-   		return "redirect:wikihome";
+   		return "redirect:getDashboard";
    	}
           
      //로그인폼 

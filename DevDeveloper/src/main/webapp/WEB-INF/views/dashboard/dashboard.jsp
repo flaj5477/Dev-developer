@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,66 +36,19 @@
 			//fill : '#ebedf0'
 			fill : '#EBE3F6'
 		})
-		
-		
+
 	})
 </script>
 <style type="text/css">
-<!--
-출석률 표시하는거 고정크기 지정-->.col-fixed {
-	position: relative;
-	min-height: 1px;
-	padding-right: 5px;
-	padding-left: 5px;
-	float: left;
-	width: 100%;
-	border: 1px solid black;
+.cover_letter_box {
+	background-color: #f5f7f9;
+	border: 1px solid #e6ecf1;
+	padding: 1.25rem;
+	border-radius: .25rem;
 }
 
-.col-fluid {
-	position: relative;
-	min-height: 1px;
-	padding-right: 5px;
-	padding-left: 5px;
-	float: left;
-	width: 100%;
-	border: 1px solid black;
-}
-
-@media ( min-width : 768px) and (max-width: 991px) {
-	.col-fixed {
-		width: 800px;
-	}
-	.col-fluid {
-		width: calc(100% - 
-		 300px);
-	}
-}
-
-@media ( min-width : 992px) and (max-width: 1199px) {
-	.col-fixed {
-		width: 800px;
-	}
-	.col-fluid {
-		width: calc(100% - 
-		 300px);
-	}
-}
-
-@media ( min-width : 1200px) {
-	.col-fixed {
-		width: 800px;
-	}
-	.col-fluid {
-		width: calc(100% - 
-		 300px);
-	}
-}
-
-.proj-modal:hover {
-	box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px
-		rgba(0, 0, 0, .08);
-	transform: translateY(-1px);
+.df{
+  height: 76px
 }
 </style>
 </head>
@@ -117,7 +72,8 @@
 								<div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
 									<div class="d-flex justify-content-between">
 										<button type="button" class="btn btn-sm btn-info mr-4" data-toggle="modal" data-target=".bd-example-modal-lg">응시기록 열람</button>
-										<!-- <a href="#" class="btn btn-sm btn-info mr-4">Connect</a> --> <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+										<!-- <a href="#" class="btn btn-sm btn-info mr-4">Connect</a> -->
+										<a href="#" class="btn btn-sm btn-default float-right">Message</a>
 									</div>
 								</div>
 								<div class="card-body pt-0 pt-md-4 mt-5">
@@ -145,6 +101,7 @@
 													<c:if test="${status.index % 7 == 0 }">
 														<!-- 일요일이면 g태그 열기 -->
 														<g transform="translate(<fmt:formatNumber value="${status.index/7*14}" pattern="#" />, 0)">
+													
 													
 													</c:if>
 													<!-- col-fixed 의 width인 620에 대한 % -->
@@ -284,12 +241,8 @@
 													<div class="table-responsive">
 														<table class="table align-items-center table-flush table-dark">
 															<caption class="mt--3" style="caption-side: top;" id="${myProject.projNo }${myProject.projTitle}">
-																${myProject.projTitle} 
-																<span>
-																	<a href="./getProjects?projNo=${myProject.projNo}" class="btn btn-sm btn-primary" >공고 관리</a>
-																</span>
-																<span>
-																	<a href="./moveToFileList?projNo=${myProject.projNo}" class="btn btn-sm btn-primary" >파일 관리</a>
+																${myProject.projTitle} <span> <a href="./getProjects?projNo=${myProject.projNo}" class="btn btn-sm btn-primary">공고 관리</a>
+																</span> <span> <a href="./moveToFileList?projNo=${myProject.projNo}" class="btn btn-sm btn-primary">파일 관리</a>
 																</span>
 															</caption>
 															<thead class="thead-dark text-light">
@@ -306,7 +259,8 @@
 																	<c:if test="${projApplicant.projNo == myProject.projNo }">
 																		<tr>
 																			<input type="hidden" value="${projApplicant.applyNo }" />
-																			<th scope="row">${projApplicant.membersNo }</th>
+																			<th scope="row"><span class="size-100 img-rounded " data-toggle="tooltip" data-original-title="${projApplicant.membersId }" style="margin-left: auto;"> <img src="./images/profile/${projApplicant.membersImage }" class="size-100">
+																			</span></th>
 																			<td>${projApplicant.participantName }</td>
 																			<td>${projApplicant.status }</td>
 																			<td>
@@ -339,13 +293,12 @@
 									</a>
 								</div>
 							</div>
-							
 							<!-- Modal -->
 							<div id="#recModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 								<div class="modal-dialog modal-dialog-centered modal-lg">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h5 class="modal-title" id="recordModalTitle">${members.membersName}님의응시기록</h5>
+											<h5 class="modal-title" id="recordModalTitle">${members.membersName}님의 응시기록</h5>
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 											</button>
@@ -359,327 +312,347 @@
 						</div>
 					</div>
 				</div>
-
-
-<!-- 	<div class="container-fluid mt--7"> -->
-		<div class="row mt-5">
-			<div class="col-xl-8 mb-5 mb-xl-0">
-				<div class="card shadow">
-					<div class="card-header border-0">
-						<div class="row align-items-center">
-							<div class="col">
-								<h3 class="mb-0">Question리스트</h3>
+				<!-- 	<div class="container-fluid mt--7"> -->
+				<div class="row mt-5">
+					<div class="col-xl-6 mb-5 mb-xl-0">
+						<div class="card shadow">
+							<div class="card-header border-0">
+								<div class="row align-items-center">
+									<div class="col">
+										<h3 class="mb-0">최근 질문</h3>
+									</div>
+									<div class="col text-right">
+										<a href="#!" class="btn btn-sm btn-primary">See all</a>
+									</div>
+								</div>
 							</div>
-							<div class="col text-right">
-								<a href="#!" class="btn btn-sm btn-primary">See all</a>
-							</div>
-						</div>
-					</div>
-					<div class="table-responsive">
-						<!-- Projects table -->
-						<table class="table align-items-center table-flush">
-							<thead class="thead-light">
-								<tr>
-									<th scope="col">Page name</th>
-									<th scope="col">Visitors</th>
-									<th scope="col">Unique users</th>
-									<th scope="col">Bounce rate</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th scope="row">/argon/</th>
-									<td>4,569</td>
-									<td>340</td>
-									<td><i class="fas fa-arrow-up text-success mr-3"></i> 46,53%</td>
-								</tr>
-								<tr>
-									<th scope="row">/argon/index.html</th>
-									<td>3,985</td>
-									<td>319</td>
-									<td><i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%</td>
-								</tr>
-								<tr>
-									<th scope="row">/argon/charts.html</th>
-									<td>3,513</td>
-									<td>294</td>
-									<td><i class="fas fa-arrow-down text-warning mr-3"></i> 36,49%</td>
-								</tr>
-								<tr>
-									<th scope="row">/argon/tables.html</th>
-									<td>2,050</td>
-									<td>147</td>
-									<td><i class="fas fa-arrow-up text-success mr-3"></i> 50,87%</td>
-								</tr>
-								<tr>
-									<th scope="row">/argon/profile.html</th>
-									<td>1,795</td>
-									<td>190</td>
-									<td><i class="fas fa-arrow-down text-danger mr-3"></i> 46,53%</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div class="col-xl-4">
-				<div class="card shadow">
-					<div class="card-header border-0">
-						<div class="row align-items-center">
-							<div class="col">
-								<h3 class="mb-0">최근 나의 위키번역</h3>
-							</div>
-							<div class="col text-right">
-								<a href="#!" class="btn btn-sm btn-primary">See all</a>
+							<div class="table-responsive">
+								<!-- Projects table -->
+								<table class="table align-items-center table-flush">
+									<thead class="thead-light">
+										<tr>
+											<th scope="col">질문명</th>
+											<th scope="col">답변수</th>
+											<th scope="col">좋아요</th>
+											<th scope="col">작성날짜</th>
+											<!-- 태그or좋아요넣기 -->
+										</tr>
+									</thead>
+									<tbody>
+									<%-- 	<th scope="row">${fn:substring(qna.qContents,0,8)}</th> --%>
+								<c:forEach items="${myQnaList}" var="qna" end="4">
+										<tr>
+											<th scope="row" class="df"><a href="qnaNo?qNo=${qna.qNo}">${fn:substring(qna.qTitle,0,15)}</a></th>
+											<th scope="row" class="df">${qna.aCount}</th>
+											<th scope="row" class="df">${qna.aCount}</th>
+											<th scope="row" class="df">${qna.qDate}</th>
+											
+										</tr>
+								</c:forEach>		
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
-					<div class="table-responsive">
-						<!-- Projects table -->
-						<table class="table align-items-center table-flush">
+					<div class="col-xl-6 mb-5 mb-xl-0">
+						<div class="card shadow">
+							<div class="card-header border-0">
+								<div class="row align-items-center">
+									<div class="col">
+										<h3 class="mb-0">최근 답변</h3>
+									</div>
+									<div class="col text-right">
+										<a href="#!" class="btn btn-sm btn-primary">See all</a>
+									</div>
+								</div>
+							</div>
+							<div class="table-responsive">
+								<!-- Projects table -->
+								<table class="table align-items-center table-flush">
+									<thead class="thead-light">
+										<tr>
+											<th scope="col">질문명</th>
+											<th scope="col">답변내용</th>
+											<th scope="col">좋아요</th>
+											<th scope="col">작성날짜</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${myAnqList}" var="anq" end="4">
+										<tr>
+											<th scope="row" class="df"><a href="qnaNo?qNo=${anq.qNo}">${anq.qTitle}</a></th>
+											<th scope="row" class="df">${fn:substring(anq.aContents,0,8)}</th>
+											<th scope="row" class="df"></th>
+											<th scope="row" class="df">${anq.aDate}</th>
+										</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row mt-5">
+					<div class="col">
+						<div class="card shadow">
+							<div class="card-header border-0">
+								<div class="row align-items-center">
+									<div class="col">
+										<h3 class="mb-0">최근 나의 위키번역</h3>
+									</div>
+			
+								</div>
+							</div>
+							<div class="table-responsive">
+								<!-- Projects table -->
+								<table class="table align-items-center table-flush">
+									<thead class="thead-light">
+										<tr>
+											<th scope="col">번역위치</th>
+											<th scope="col">번역내용</th>
+										</tr>
+									</thead>
+									<tbody>
+										<%-- 번역내역 원하는 개수만큼 출력 --%>
+										<c:forEach items="${myWikiTransList}" var="trans" end="5">
+											<tr>
+												<th scope="row"><a href="getWiki?manualNo=${trans.manualNo }">${trans.manualTitle}/${trans.manualLine}</a></th>
+												<th scope="row">${trans.manualAfter }</th>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Footer -->
+				<footer class="footer">
+					<div class="row align-items-center justify-content-xl-between">
+						<div class="col-xl-6">
+							<div class="copyright text-center text-xl-left text-muted">
+								© 2018 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+							</div>
+						</div>
+						<div class="col-xl-6">
+							<ul class="nav nav-footer justify-content-center justify-content-xl-end">
+								<li class="nav-item"><a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a></li>
+								<li class="nav-item"><a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a></li>
+								<li class="nav-item"><a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a></li>
+								<li class="nav-item"><a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a></li>
+							</ul>
+						</div>
+					</div>
+				</footer>
+			</div>
+		</div>
+		<!-- 프로젝트 지원자 모달 -->
+		<!-- Modal -->
+		<div class="modal fade" id="projApplyModal" tabindex="-1" role="dialog" aria-labelledby="projApplyModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header bg-primary">
+						<h5 class="display-4 text-secondary" id="projApplyModalLabel">프로젝트 지원자</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" style="word-break: break-all;"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" onclick="updateApplytoApproved(this)">승인하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 프로젝트 지원자 승인하기 버튼 클릭 이벤트 -->
+		<script>
+			function updateApplytoApproved(btn) {
+				//지원상태를 '승인'으로 할 지원번호 
+				var applyNo = $(btn).parent().prev().find("div").attr('id');
+
+				window.location.href = "./updateApplytoApproved?applyNo="
+						+ applyNo;
+			}
+		</script>
+		<!-- 프로젝트 지원자 모달 스크립트 -->
+		<script>
+			$('#projApplyModal')
+					.on(
+							'show.bs.modal',
+							function(event) {
+								var button = $(event.relatedTarget) // Button that triggered the modal
+								var applyNo = button.parent().prevAll().eq(4)
+										.attr("value");
+								var projApplicantsList = JSON
+										.parse('${jsonProjApplicantsList}');
+
+								var i = button.attr('id'); //프로젝트 지원자들중 눌려진 버튼의 아이디 값으로 해당 지원자의 정보를 가져온다
+
+								var content = "<div class= container id=" + applyNo + "> "
+										+ "<div class='row mb-5'> "
+										+ "<span class='size-100 img-rounded ' data-toggle='tooltip' data-original-title='" + projApplicantsList[i].membersId + "' style='margin-left:auto;'>"
+										+ "<img src='./images/profile/" + projApplicantsList[i].membersImage + "' class='size-100'>"
+										+ "</span>"
+										+ "<h1 class= 'col' style='margin: auto 0;'>"
+										+ projApplicantsList[i].participantName
+										+ "</h1>"
+										+ "</div>"
+										+ "<div class='row mb-3'> "
+										+ "<div class=col>"
+										+ projApplicantsList[i].phoneNo
+										+ "</div>"
+										+ "<div class=col>"
+										+ projApplicantsList[i].email
+										+ "</div>"
+										+ "</div>"
+										+ "<div class='row mb-5'> "
+										+ "<div class=col>"
+										+ projApplicantsList[i].address
+										+ "</div>"
+										+ "</div>"
+										+ "<div class='row cover_letter_box'> "
+										+ "<div class=col>"
+										+ projApplicantsList[i].coverLetter
+										+ "</div>" + "</div>" + "</div> ";
+
+								//모달창에 내용 달기
+								$("#projApplyModal .modal-body")
+										.append(content); //여기서 모달을 다시 띄우면 그 전에 열었던 모달창에 더 추가된다. 정보가 계속 누적됨;;;
+							});
+
+			//모달 닫기
+			$('#projApplyModal').on('hide.bs.modal', function(e) {
+
+				$("#projApplyModal .modal-body").html("");
+
+				e.stopImmediatePropagation();
+
+			});
+		</script>
+		<!-- 프로젝트 모달 -->
+		<!-- Modal -->
+		<div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div class="display-3 text-primary ml-3">프로젝트&nbsp</div>
+						<div class="display-3 text-primary" id="projectModalLabel"></div>
+						<button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body mt--4 table-responsive">
+						<table class="table align-items-center table-flush text-center">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col">번역위치</th>
-									<th scope="col">번역내용</th>
+									<th>프로젝트 이름</th>
+									<th>버튼</th>
 								</tr>
 							</thead>
-							<tbody>
-								<%-- 번역내역 원하는 개수만큼 출력 --%>
-								<c:forEach items="${myWikiTransList}" var="trans" end="5" >
-									<tr>
-										<th scope="row"><a href="getWiki?manualNo=${trans.manualNo }">${trans.manualTitle}/${trans.manualLine}</a></th>
-										<th scope="row">${trans.manualAfter }</th>
-									</tr>
-								</c:forEach>
+							<tbody id="projectModaltbody">
 							</tbody>
 						</table>
 					</div>
-				</div>
-			</div>
-</div>
-		<!-- Footer -->
-		<footer class="footer">
-			<div class="row align-items-center justify-content-xl-between">
-				<div class="col-xl-6">
-					<div class="copyright text-center text-xl-left text-muted">
-						© 2018 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary modal-close" data-dismiss="modal">Close</button>
 					</div>
 				</div>
-				<div class="col-xl-6">
-					<ul class="nav nav-footer justify-content-center justify-content-xl-end">
-						<li class="nav-item"><a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a></li>
-						<li class="nav-item"><a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a></li>
-						<li class="nav-item"><a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a></li>
-						<li class="nav-item"><a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a></li>
-					</ul>
-				</div>
-			</div>
-		</footer>
-	</div>
-	</div>
-	<!-- 프로젝트 지원자 모달 -->
-	<!-- Modal -->
-	<div class="modal fade" id="projApplyModal" tabindex="-1" role="dialog" aria-labelledby="projApplyModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="display-4 text-primary" id="projApplyModalLabel">프로젝트 지원자</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body" style="word-break: break-all;"></div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" onclick="updateApplytoApproved(this)">승인하기</button>
-				</div>
 			</div>
 		</div>
-	</div>
-	<!-- 프로젝트 지원자 승인하기 버튼 클릭 이벤트 -->
-	<script>
-		function updateApplytoApproved(btn) {
-			//지원상태를 '승인'으로 할 지원번호 
-			var applyNo = $(btn).parent().prev().find("div").attr('id');
+		<!-- 프로젝트 모달 제어 스크립트 (데이터 담기) -->
+		<script>
+			$('#projectModal').on('show.bs.modal', function(event) {
+				//프로젝트 지원, 프로젝트 승인, 프로젝트 참여 상태의 테이블을 만들어서 보여줘야함
+				var button = $(event.relatedTarget) // Button that triggered the modal
+				var status = button.find(".proj_status").html();
+				var ajaxRow = "";
 
-			window.location.href = "./updateApplytoApproved?applyNo=" + applyNo;
-		}
-	</script>
-	<!-- 프로젝트 지원자 모달 스크립트 -->
-	<script>
-		$('#projApplyModal')
-				.on(
-						'show.bs.modal',
-						function(event) {
-							var button = $(event.relatedTarget) // Button that triggered the modal
-							var applyNo = button.parent().prevAll().eq(4).attr(
-									"value");
-							var projApplicantsList = JSON
-									.parse('${jsonProjApplicantsList}');
+				console.log(status);
+				$.ajax({
+					url : "getProjStatusDetail/" + status,
+					type : 'GET',
+					dataType : 'json',
+					async : false, //동기화 방식으로 해야 데이터를 다 받아 온 후에 실행한다.
+					/* data : JSON.stringify({
+						status : encodeURI(status)
+					}), */
+					contentType : 'application/json;charset=utf-8',
+					success : function(data) { //데이터 받아오기 성공하면 
+						//테이블 생성
+						/* 					console.log(data.length);
+						 console.log(data[0].projTitle); */
 
-							var i = button.attr('id'); //프로젝트 지원자들중 눌려진 버튼의 아이디 값으로 해당 지원자의 정보를 가져온다
+						for (i = 0; i < data.length; i++) {
+							//이부분 함수로 만들어서 status가 지원일때, 승인일때, 참여일때, 버튼과 클릭이벤트 따로 주기
+							ajaxRow += CreateTableRow(status, data);
 
-							var content = "<div class= container id=" + applyNo + "> "
-									+ "<div class='row mb-3'> " + "<div class=col>"
-									+ projApplicantsList[i].participantName
-									+ "</div>"
-									+ "</div>"
-									+ "<div class='row mb-3'> "
-									+ "<div class=col>"
-									+ projApplicantsList[i].phoneNo
-									+ "</div>"
-									+ "<div class=col>"
-									+ projApplicantsList[i].email
-									+ "</div>"
-									+ "</div>"
-									+ "<div class='row mb-3'> "
-									+ "<div class=col>"
-									+ projApplicantsList[i].address
-									+ "</div>"
-									+ "</div>"
-									+ "<div class='row mb-3'> "
-									+ "<div class=col>"
-									+ projApplicantsList[i].coverLetter
-									+ "</div>" + "</div>" + "</div> ";
+							/* 
+							"<tr id=" + data[i].projNo + ">"
+								+ "<td>"
+								+ data[i].projTitle
+								+ "</td>"
+								+ "<td>"
+								+ "<button type=\"button\" class=\"btn btn-default\">지원 취소</button>"
+								+ "</td>" + "</tr>"; */
+						}
+					},
+					error : function(xhr, status, message) {
+						alert(" status: " + status + " er:" + message);
+					}
+				});
 
-							//모달창에 내용 달기
-							$("#projApplyModal .modal-body").append(content); //여기서 모달을 다시 띄우면 그 전에 열었던 모달창에 더 추가된다. 정보가 계속 누적됨;;;
-						});
+				//모달 띄우기
+				var modal = $(this);
+				$(this).find("#projectModalLabel").html(status);
+				$(this).find("#projectModaltbody").append(ajaxRow); //여기서 모달을 다시 띄우면 그 전에 열었던 모달창에 더 추가된다. 정보가 계속 누적됨;;;
+			});
 
-		//모달 닫기
-		$('#projApplyModal').on('hide.bs.modal', function(e) {
-
-			$("#projApplyModal .modal-body").html("");
-
-			e.stopImmediatePropagation();
-
-		});
-	</script>
-	<!-- 프로젝트 모달 -->
-	<!-- Modal -->
-	<div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-				
-					<div class="display-3 text-primary ml-3">프로젝트&nbsp</div>
-					<div class="display-3 text-primary" id="projectModalLabel"></div>
-				
-					<button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body mt--4 table-responsive">
-					<table class="table align-items-center table-flush text-center">
-						<thead class="thead-light">
-							<tr>
-								<th>프로젝트 이름</th>
-								<th>버튼</th>
-							</tr>
-						</thead>
-						<tbody id="projectModaltbody">
-						</tbody>
-					</table>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary modal-close" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- 프로젝트 모달 제어 스크립트 (데이터 담기) -->
-	<script>
-		$('#projectModal').on('show.bs.modal', function(event) {
-			//프로젝트 지원, 프로젝트 승인, 프로젝트 참여 상태의 테이블을 만들어서 보여줘야함
-			var button = $(event.relatedTarget) // Button that triggered the modal
-			var status = button.find(".proj_status").html();
-			var ajaxRow = "";
-
-			console.log(status);
-			$.ajax({
-				url : "getProjStatusDetail/" + status,
-				type : 'GET',
-				dataType : 'json',
-				async : false, //동기화 방식으로 해야 데이터를 다 받아 온 후에 실행한다.
-				/* data : JSON.stringify({
-					status : encodeURI(status)
-				}), */
-				contentType : 'application/json;charset=utf-8',
-				success : function(data) { //데이터 받아오기 성공하면 
-					//테이블 생성
-					/* 					console.log(data.length);
-					 console.log(data[0].projTitle); */
-
-					for (i = 0; i < data.length; i++) {
-						//이부분 함수로 만들어서 status가 지원일때, 승인일때, 참여일때, 버튼과 클릭이벤트 따로 주기
-						ajaxRow += CreateTableRow(status, data);
-
-						/* 
-						"<tr id=" + data[i].projNo + ">"
+			//status 별로 다른 테이블 값 생성
+			function CreateTableRow(status, data) {
+				var row = "";
+				if (status == "지원") {
+					row = "<tr id=" + data[i].applyNo + ">"
 							+ "<td>"
 							+ data[i].projTitle
 							+ "</td>"
 							+ "<td>"
-							+ "<button type=\"button\" class=\"btn btn-default\">지원 취소</button>"
-							+ "</td>" + "</tr>"; */
-					}
-				},
-				error : function(xhr, status, message) {
-					alert(" status: " + status + " er:" + message);
+							+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './deleteApply?applyNo="
+							+ data[i].applyNo + "' \">지원 취소</button>" + "</td>"
+							+ "</tr>";
+				} else if (status == "승인") {
+					row = "<tr id=" + data[i].applyNo + ">"
+							+ "<td>"
+							+ data[i].projTitle
+							+ "</td>"
+							+ "<td>"
+							+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './updateApplyParticipantIn?applyNo="
+							+ data[i].applyNo + "' \">승인 확인</button>" + "</td>"
+							+ "</tr>";
+				} else if (status == "참여") {
+					row = "<tr id=" + data[i].applyNo + ">"
+							+ "<td>"
+							+ data[i].projTitle
+							+ "</td>"
+							+ "<td>"
+							+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './moveToFileList?projNo="
+							+ data[i].projNo + "' \">파일 관리</button>" + "</td>"
+							+ "</tr>";
+				} else if (status == "완료") {
+
+				} else if (status == "관리") {
+
 				}
-			});
-
-			//모달 띄우기
-			var modal = $(this);
-			$(this).find("#projectModalLabel").html(status);
-			$(this).find("#projectModaltbody").append(ajaxRow); //여기서 모달을 다시 띄우면 그 전에 열었던 모달창에 더 추가된다. 정보가 계속 누적됨;;;
-		});
-
-		//status 별로 다른 테이블 값 생성
-		function CreateTableRow(status, data) {
-			var row = "";
-			if (status == "지원") {
-				row = "<tr id=" + data[i].applyNo + ">"
-						+ "<td>"
-						+ data[i].projTitle
-						+ "</td>"
-						+ "<td>"
-						+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './deleteApply?applyNo="
-						+ data[i].applyNo + "' \">지원 취소</button>" + "</td>"
-						+ "</tr>";
-			} else if (status == "승인") {
-				row = "<tr id=" + data[i].applyNo + ">"
-						+ "<td>"
-						+ data[i].projTitle
-						+ "</td>"
-						+ "<td>"
-						+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './updateApplyParticipantIn?applyNo="
-						+ data[i].applyNo + "' \">승인 확인</button>" + "</td>"
-						+ "</tr>";
-			} else if (status == "참여") {
-				row = "<tr id=" + data[i].applyNo + ">"
-						+ "<td>"
-						+ data[i].projTitle
-						+ "</td>"
-						+ "<td>"
-						+ "<button type=\"button\" class=\"btn btn-default\" onclick=\"location.href = './moveToFileList?projNo="
-						+ data[i].projNo + "' \">파일 관리</button>" + "</td>"
-						+ "</tr>";
-			} else if (status == "완료") {
-
-			} else if (status == "관리") {
-
+				return row;
 			}
-			return row;
-		}
 
-		//모달 닫기
-		$('#projectModal').on('hide.bs.modal', function(e) {
+			//모달 닫기
+			$('#projectModal').on('hide.bs.modal', function(e) {
 
-			$("#projectModaltbody").html("");
+				$("#projectModaltbody").html("");
 
-			e.stopImmediatePropagation();
+				e.stopImmediatePropagation();
 
-		});
-	</script>
+			});
+		</script>
 </body>
 </html>

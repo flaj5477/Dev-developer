@@ -33,16 +33,7 @@
 	});
 	
 	function indexBox() {
-		var color;
-		switch(grade) {
-		case 0: color = 'darkgray'; break;
-		case 1: color = 'saddlebrown'; break;
-		case 2: color = 'lightgray'; break;
-		case 3: color = 'gold'; break;
-		case 4: color = 'cornflowerblue'; break;
-		case 5: color = 'orangered'; break;
-		}
-		$('#grade'+(grade+1)).css('background-color',color);
+		$('#grade'+(grade+1)).css('background-color','aquamarine');
 	}
 	
 	setInterval(timeCount,1000);
@@ -74,10 +65,11 @@
 	}
 	
 	function indexCase(code) {
-		var $restTimeText = $('#restTime').children('p');
+		var $restTimeText = $('#restTime');
 		switch(code) {
 		case 1 : 
-			$('#message').children('p').html('이미 최고레벨에 도달 하셨습니다.<br><br>');
+			$('#message').attr('class','alert alert-danger');
+			$('#permis').html('이미 최고레벨에 도달 하셨습니다.<br><br>');
 			$('#submitBtn').html('응시불가')
 				 			 .attr('class','btn btn-danger')
 							 .attr('value','refuse');
@@ -103,20 +95,22 @@
 	    		$restTimeText.append(sec+'초 ');
 	    	}
 	    	$restTimeText.append('후에 잠금해제 <br><br>');
-	    	$('#message').children('p').html('<b>'+permis.substring(0,4)+'년 '+ // String 문자열 자르기(SubString) permisString.substring(0,4);
+	    	$('#permis').html('<b>'+permis.substring(0,4)+'년 '+ // String 문자열 자르기(SubString) permisString.substring(0,4);
 										permis.substring(5,7)+'월 '+
 										permis.substring(8,10)+'일 '+
 										permis.substring(11,13)+'시'+
 										permis.substring(14,16)+'분 '+
-										permis.substring(17,19)+'초 이후 응시가 가능합니다. </b><br><br>')
+										permis.substring(17,19)+'초 이후 응시가 가능합니다. </b><br>')
 										.css('color','orangered');
 								
 	   		$('#submitBtn').html('응시불가')
 	   						 .attr('class','btn btn-danger')
 	   						 .attr('value','refuse');
+	   		$('#message').attr('class','alert alert-danger');
 	   		break;
-		case 3 : 
-			$('#message').children('p').html('<b> 응시가 가능합니다. </b> <br><br>')
+		case 3 :
+			$('#message').attr('class','alert alert-primary');
+			$('#permis').html('<b> 응시가 가능합니다. </b> <br><br>')
 									   .css('color','black')
 	    	$('#submitBtn').html('시험시작')
 	    					 .attr('class','btn btn-primary')
@@ -141,7 +135,6 @@
 		<p class="h1" style="color:black">Dev Developer CBT</p>
 	</div>
 	<div id="content">
-		<div id="comment"></div>
 		<div class="card-group">
 			<div class="card">
 				<span style="font-color:black">Unranked</span>
@@ -169,11 +162,9 @@
 			</div>
 		</div>
 		<div id="level"></div>
-		<div id="restTime" class="alert alert-warning" role="alert">
-			<p class="h5" style="color:orangered"></p>
-		</div>
-		<div id="message" class="alert alert-info" role="alert">
-			<p class="h5"></p>
+		<div id="message" role="alert">
+			<p class="h5" id="restTime" style="color:orangered"></p>
+			<p class="h5" id="permis"></p>
 		</div>
 		<button type="button" id ="submitBtn"></button>
 	</div>

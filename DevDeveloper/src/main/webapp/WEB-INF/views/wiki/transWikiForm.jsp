@@ -98,6 +98,7 @@ div[contenteditable] {
   .anotherNewClass { text-indent: 40px; letter-spacing: .2em; width: 410px; height: 100px; padding: 30px; margin: 10px; font-size: 1.1em; }
   </style>
 <script>
+	pageName = "위키가이드";
 	var membersGrade = '${sessionScope.members.membersGrade}';		//로그인한계정 등급
 	var myEditor;	//ck에디터
 	$(function(){
@@ -238,7 +239,7 @@ div[contenteditable] {
 			
 			//otherTransVal.text();
 			
-			transArea.text(otherTransVal);
+			myEditor.setData(otherTransVal);	//텍스트입력창에 값저장
 					
 		});
 	}
@@ -289,6 +290,11 @@ div[contenteditable] {
 		$("body").on("click", ".ni-favourite-28", function(event){
 			event.stopPropagation();	//버블링 제어 
 			
+			if("${sessionScope.members}" == ""){
+				$('#wikimodal').click();
+				return
+			}
+			
 			var clickObj = $(this);
 			
 			var manualNo = "${wiki.manualNo}";
@@ -306,6 +312,7 @@ div[contenteditable] {
 							 transNo : transNo,
 							 membersNo : membersNo  },
 					success: function(){
+						
 						clickObj.removeClass("red");
 					},
 					error:function(){
@@ -568,6 +575,9 @@ div[contenteditable] {
 </script>
 </head>
 <body>
+<button type="button" class="btn btn-info" data-container="body" data-toggle="popover" data-color="info" data-placement="top" data-content="This is a very beautiful popover, show some love.">
+  Info popover
+</button>
 	<div class="main p-5">
 		<form name="frm" id="frm" action="updateWikiForm" method="post">
 			<div>

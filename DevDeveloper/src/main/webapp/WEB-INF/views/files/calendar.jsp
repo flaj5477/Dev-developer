@@ -168,7 +168,7 @@ body {
 </head>
 <body>
 	<div class="container-fluid mt-5">
-		<form action="./excelUpload" id="formUpload" name="formUpload" method="post" enctype="multipart/form-data">
+		<form action="./excelUpload?projNo=1" id="formUpload" name="formUpload" method="post" enctype="multipart/form-data">
 			<input type="file" id="fileInput" name="fileInput" value="엑셀업로드 작업" accept=".xlsx"> <br>
 			<br>
 			<input type="submit" value="파일업로드">

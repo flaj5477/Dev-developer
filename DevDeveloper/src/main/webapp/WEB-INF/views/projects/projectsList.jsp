@@ -100,7 +100,9 @@
 											<fmt:parseDate var="projEndDate" value="${projects.projEndDate }" pattern="yyyy-MM-dd"></fmt:parseDate>
 											<fmt:parseNumber var="projEndDate_N" value="${projEndDate.time / (1000*60*60*24)}" integerOnly="true"></fmt:parseNumber>
 											 ${projEndDate_N - projStartDate_N}일</td>
-										<td>${projects.membersNo }</td>
+										<td><span class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="${projects.membersId }">
+												<img src="./images/profile/${projects.membersImage }">
+											</span></td>
 									</tr>
 								</c:forEach>
 							</tbody>

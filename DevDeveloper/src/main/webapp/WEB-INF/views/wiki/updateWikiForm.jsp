@@ -22,6 +22,9 @@
 
 </style>
 	<script>
+	
+		pageName = "위키가이드";
+		
 		var myEditor;
 	
 		$(function(){

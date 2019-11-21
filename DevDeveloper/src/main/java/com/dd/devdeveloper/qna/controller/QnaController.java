@@ -79,7 +79,7 @@ public class QnaController {
 		 * MembersVO membersNo = (MembersVO) session.getAttribute("members");
 		 * vo.setMembersNo(membersNo.getMembersNo());
 		 */
-			System.out.println(""+vo);
+			System.out.println("9999999999999"+vo);
 			qnaService.updateAnq(vo);
 			return "redirect:/qnaNo?qNo="+vo.getqNo();
 		}

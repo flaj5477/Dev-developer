@@ -16,6 +16,11 @@
 <link href="./resources/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
 <!-- CSS Files -->
 <link href="./resources/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
+
+<script>
+	pageName = "프로젝트공고";
+</script>
+
 </head>
 <body class="">
 <div>
@@ -54,7 +59,7 @@
 								</div>
 								<div class="col">
 									최소 지원 등급: 
-									<strong>${project.projRequire }</strong>
+									<strong id="projRequire">${project.projRequire }</strong>
 								</div>
 							</div>
 							<div class="row">
@@ -70,12 +75,12 @@
 						</div>
 						
 						<div class="col-xl-2">
-						<div class="row ml-5">
-							<div>
-								<a href="#" class="avatar avatar-lg" data-toggle="tooltip" data-original-title="Jessica Doe"> <img alt="Image placeholder" src="./resources/assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
-								</a>
-							</div>
-							<div class=" ml-3 display-4" name="membersName">${project.membersName }</div>
+						<div class="row pr-3">
+
+								<span class="size-100 img-rounded " data-toggle="tooltip" data-original-title="${project.membersId }" style="margin-left:auto;">
+									<img src="./images/profile/${project.membersImage }" class="size-100">
+								</span>
+
 						</div>
 					</div>
 					</div>
@@ -170,6 +175,32 @@
 				$("#navbar-default_dropdown_1").attr("style","visibility:visible")
 			
 			}
+			
+			//최소 지원등급 숫자->문자로 고치기
+			var projRequire = "";
+			
+			switch("${project.projRequire}"){
+			case "0":
+				projRequire = "브론즈";
+				break;
+			case "1":
+				projRequire = "실버";
+				break;
+			case "2":
+				projRequire = "골드";
+				break;
+			case "3":
+				projRequire = "플래티넘";
+				break;
+			case "4":
+				projRequire = "다이아";
+				break;
+			case "5":
+				projRequire = "마스터";
+				break;
+			}
+			
+			$("#projRequire").html(projRequire);
 		})
 	</script>
 </body>

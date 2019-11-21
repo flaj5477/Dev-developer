@@ -8,6 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	pageName = "Q & A";
+</script>
 </head>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/qna.css">
@@ -40,7 +43,6 @@
 							<span>조회수 ${qna.qViews}</span> <span>답변수 ${qna.aCount}</span> <span>좋아요
 								0</span>
 							<%-- <span>등록일 ${qna.qDate }</span> --%>
-							<input type="hidden" value="1" name="qaType" class="qType">
 						</div>
 					</h3>
 					<div class="question-detail-content" style="border-bottom: 1px solid #cdb8f3;">
@@ -50,7 +52,7 @@
 						<div class="question-content-left">
 							<ul>
 								<li class="question-vote-count" style="margin-bottom: 5px;">0</li>
-								<li><a id="rec_update"> <i class="fa fa-star fa-2x"
+								<li><a class="rec_update" type="1"> <i class="fa fa-star fa-2x"
 										aria-hidden="true"></i>
 								</a></li>
 							</ul>
@@ -112,9 +114,7 @@
                         <div class="answer-content-left">
                             <ul>
 								<li class="question-vote-count" style="margin-bottom: 5px;">0</li>
-								<li><a href="javascript:;"
-									data-href="/tag/etc/question/323/bookmark"
-									data-toggle="baseajax"> <i class="fa fa-star fa-2x"
+								<li><a class="rec_update" type="2"> <i class="fa fa-star fa-2x"
 										aria-hidden="true"></i>
 								</a></li>
 							</ul>
@@ -138,16 +138,16 @@
 												<div class="user-info">
 													<h6 class="user-name">${ans.membersId}</h6>
 													<h6 class="contribution-time" style="font-size: 0.670rem;">${ans.aDate}에 작성</h6>
-													<input type="hidden" value="${ans.aNo}" id= "${ans.aNo}">
 												</div>
 										</a></li>
 									</ul>
 								</div>
 							</div>       
                         </div>
-                    </div>
+                    </div> <%-- <input type="hidden" value="${ans.aNo}" id= "aa"> --%>
                    <c:if test = "${sessionScope.members.membersNo == ans.membersNo }">
-                <div class ="qUp"> <button class="btn qqqbutton" id="ansUpdate">
+                   <input type="hidden" id= "sdf" value="${ans.aNo}">
+                <div class ="qUp"> <button class="btn qqqbutton dd" id="ansUpdate" value="${ans.aNo}">
 					답변수정</button>
 				 <button class="btn qqqbutton" id="ansDel"
 				 onclick="dddd(${ans.aNo},${ans.qNo})">
@@ -163,6 +163,7 @@
 			<div class="main-answer-form" id="answer_form">
 				<form method="post" action="insertAnq" id ="anq">
 				<input type ="hidden" name ="qNo" value="${qna.qNo}"></input>
+				<input type ="hidden" id = "zd"name ="" value=""></input>
 				<h2 class="title">답변 작성</h2>
 				<div class="qqqalert qqqalert-secondary mb-20">
 					<p style="font-size: 0.8rem">
@@ -175,8 +176,7 @@
 						placeholder="에디터">
 					</textarea>
 				</div>
-					<button class="btn qqqbutton" type="submit" id="ansbutton">
-								답변하기</button>				 
+					<button class="btn qqqbutton" type="submit" id="ansbutton">답변하기</button>				 
 				</form>
 			</div>
 			<div id ="asd"></div>
@@ -212,8 +212,8 @@
      
      <script>
  	$(function(){
-		$("#rec_update").click(function(){
-		var type = $(".qType").val(); //없애기
+		$(".rec_update").click(function(){
+		var type = $(this).attr('type'); 
 			
 			$.ajax({
 				url: "recUpdate",
@@ -244,16 +244,19 @@
 		 }) 
 	 	})
 	 	</script>
-<!-- 	 <script>
-	 var a = $("#aa").val();
+	 <script>
+	 
 	 $(document).ready(function(){ 
 	 $(function(){
-			$("#ansUpdate").click(function(){
+			$(".dd").click(function(){
 				$("#anq").attr("action", "updateAnq");
 				$("#ansbutton").attr("id","ansupdatebutton")
-				$("#anoo").attr("value",a)
+				$("#ansupdatebutton").text("답글수정")
+				var a =$(this).val();
+				$("#zd").attr("name",'aNo')
+				$("#zd").attr("value",a)
 				
-				var offset = $("#asd").offset();
+				var offset = $("#ffff").offset();
 
 				$("html").animate({scrollTop:offset.top}, 1000);
 			

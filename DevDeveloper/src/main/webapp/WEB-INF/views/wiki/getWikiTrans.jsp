@@ -66,7 +66,7 @@
 </style>
 
 <script>
-
+	pageName = "위키가이드";
 	$(function(){
 		btnControl();
 		/* startTrans();

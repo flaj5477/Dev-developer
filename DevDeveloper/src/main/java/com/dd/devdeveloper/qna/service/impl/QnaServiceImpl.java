@@ -116,6 +116,17 @@ public class QnaServiceImpl implements QnaService {
 		
 	}
 
+	@Override
+	public List<QuestionVO> qnaMyList(int membersNo) {
+		return qnaDAO.qnaMyList(membersNo);
+	}
+
+	@Override
+	public List<QuestionVO> anqMyList(int membersNo) {
+		 
+		return qnaDAO.anqMyList(membersNo);
+	}
+
 
 
 }

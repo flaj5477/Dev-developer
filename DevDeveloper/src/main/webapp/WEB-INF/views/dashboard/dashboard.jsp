@@ -100,12 +100,12 @@
 												<c:forEach var="activityLog" items="${activityLogList}" varStatus="status">
 													<c:if test="${status.index % 7 == 0 }">
 														<!-- 일요일이면 g태그 열기 -->
-														<g transform="translate(<fmt:formatNumber value="${status.index/7*14}" pattern="#" />, 0)">
+														<g transform="translate(<fmt:formatNumber value="${status.index/7*13}" pattern="#" />, 0)">
 													
 													
 													</c:if>
 													<!-- col-fixed 의 width인 620에 대한 % -->
-													<rect width="10" height="10" class="${activityLog.activityScore }" x="0" y="${status.index%7*14 }"></rect>
+													<rect width="9" height="9" class="${activityLog.activityScore }" x="0" y="${status.index%7*13 }"></rect>
 													<c:if test="${status.index % 7 == 6 }">
 														<!-- 토요일이면 g태그 닫기 -->
 														</g>
@@ -130,9 +130,10 @@
 														<span class="h2 font-weight-bold mb-0">${projApply } </span>
 													</div>
 													<div class="col-auto">
-														<div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+											<!-- 			<div class="icon icon-shape bg-warning text-white rounded-circle shadow">
 															<i class="fas fa-chart-pie"></i>
-														</div>
+														</div> -->
+														<img src="./images/icon/pie-chart_1.png" class="size-50"/>
 													</div>
 												</div>
 											</div>
@@ -151,9 +152,10 @@
 														<span class="h2 font-weight-bold mb-0">${projApprove}</span>
 													</div>
 													<div class="col-auto">
-														<div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+														<!-- <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
 															<i class="fas fa-users"></i>
-														</div>
+														</div> -->
+														<img src="./images/icon/pie-chart_2.png" class="size-50"/>
 													</div>
 												</div>
 											</div>
@@ -172,9 +174,10 @@
 														<span class="h2 font-weight-bold mb-0">${projParticipant}</span>
 													</div>
 													<div class="col-auto">
-														<div class="icon icon-shape bg-info text-white rounded-circle shadow">
+														<!-- <div class="icon icon-shape bg-info text-white rounded-circle shadow">
 															<i class="fas fa-percent"></i>
-														</div>
+														</div> -->
+														<img src="./images/icon/pie-chart_3.png" class="size-50"/>
 													</div>
 												</div>
 											</div>
@@ -193,9 +196,10 @@
 														<span class="h2 font-weight-bold mb-0">0</span>
 													</div>
 													<div class="col-auto">
-														<div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+														<!-- <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
 															<i class="fas fa-chart-pie"></i>
-														</div>
+														</div> -->
+														<img src="./images/icon/pie-chart_4.png" class="size-50"/>
 													</div>
 												</div>
 											</div>

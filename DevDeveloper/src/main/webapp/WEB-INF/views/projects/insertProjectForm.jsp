@@ -146,7 +146,7 @@ jQuery UI 라이브러리 js파일
 					</select>
 				</div>
 				<div class="col">
-					<label for="projPrice" class="control-label">프로젝트 비용(원)</label> <input id="projPrice" name="projPrice" type="number" value=0 style="text-align: right;">
+					<label for="projPrice" class="control-label">프로젝트 비용(만원)</label> <input id="projPrice" name="projPrice" type="number" value=0 style="text-align: right;">
 				</div>
 			</div>
 			<textarea class="form-control form-control-alternative" id="editor" name="projContents" rows="20" placeholder="여기는 프로젝트 입력하는 곳입니다."></textarea>

@@ -52,7 +52,7 @@
 						<div class="question-content-left">
 							<ul>
 								<li class="question-vote-count" style="margin-bottom: 5px;">0</li>
-								<li><a class="rec_update" type="1"> <i class="fa fa-star fa-2x"
+								<li><a class="rec_update" type="1" no="${qna.qNo}"> <i class="fa fa-star fa-2x"
 										aria-hidden="true"></i>
 								</a></li>
 							</ul>
@@ -114,7 +114,7 @@
                         <div class="answer-content-left">
                             <ul>
 								<li class="question-vote-count" style="margin-bottom: 5px;">0</li>
-								<li><a class="rec_update" type="2"> <i class="fa fa-star fa-2x"
+								<li><a class="rec_update" type="2" no="${ans.aNo}"> <i class="fa fa-star fa-2x"
 										aria-hidden="true"></i>
 								</a></li>
 							</ul>
@@ -214,12 +214,12 @@
  	$(function(){
 		$(".rec_update").click(function(){
 		var type = $(this).attr('type'); 
-			
+		var no = $(this).attr('no');
 			$.ajax({
 				url: "recUpdate",
                 type: "POST",
                 data: {
-                	qaNo: '${qna.qNo}',
+                	qaNo: no,
                 	qaType: type
                     
                 },

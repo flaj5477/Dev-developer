@@ -43,6 +43,12 @@
 
 				<form name="searchfrm">
 					<div class="row mb-3">
+						<div class="col-xl-1">
+							<select name="select">
+									<option value="title" <c:if test="${param.select == 'title'}">selected</c:if>  >제목
+									<option value="tags" <c:if test="${param.select == 'tags'}">selected</c:if>  >태그
+							</select>
+						</div>
 						<div class="col-xl-3 col-lg-4 col-md-8 col-sm-6 col-xs-7">
 							<input class="form-control" name="searchVal" placeholder="Search" type="text">
 							<input type="hidden" name="page" value="1">
@@ -54,7 +60,7 @@
 							</button>
 						</div>
 						
-						<div class="col-xl-8 col-lg-7 col-md-12 col-sm-12 col-xs-12 text-right">
+						<div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-xs-12 text-right">
 					
 							<a href="insertProjectForm" class="btn btn-lg btn-primary">프로젝트 등록</a>
 						</div>

@@ -328,8 +328,8 @@
 									<thead class="thead-light">
 										<tr>
 											<th scope="col">질문명</th>
-											<th scope="col">좋아요</th>
 											<th scope="col">답변수</th>
+											<th scope="col">좋아요</th>
 											<th scope="col">작성날짜</th>
 											<!-- 태그or좋아요넣기 -->
 										</tr>

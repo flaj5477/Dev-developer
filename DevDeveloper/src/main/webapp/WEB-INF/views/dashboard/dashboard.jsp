@@ -100,12 +100,12 @@
 												<c:forEach var="activityLog" items="${activityLogList}" varStatus="status">
 													<c:if test="${status.index % 7 == 0 }">
 														<!-- 일요일이면 g태그 열기 -->
-														<g transform="translate(<fmt:formatNumber value="${status.index/7*14}" pattern="#" />, 0)">
+														<g transform="translate(<fmt:formatNumber value="${status.index/7*13}" pattern="#" />, 0)">
 													
 													
 													</c:if>
 													<!-- col-fixed 의 width인 620에 대한 % -->
-													<rect width="10" height="10" class="${activityLog.activityScore }" x="0" y="${status.index%7*14 }"></rect>
+													<rect width="9" height="9" class="${activityLog.activityScore }" x="0" y="${status.index%7*13 }"></rect>
 													<c:if test="${status.index % 7 == 6 }">
 														<!-- 토요일이면 g태그 닫기 -->
 														</g>

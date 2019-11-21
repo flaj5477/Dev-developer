@@ -34,7 +34,13 @@
 		<where>
 			<!-- proj_due_date > sysdate  -->
 			<if test="searchVal != null and searchVal != '' "> 
-					AND PROJ_TITLE LIKE '%' || #{searchVal} || '%'
+					
+					<if test="select == 'title'">
+						AND PROJ_TITLE LIKE '%' || #{searchVal} || '%'
+					</if>
+					<if test="select == 'tags'">
+						AND NVL(PROJ_TAGS, '기타') LIKE '%' || #{searchVal} || ',%'
+					</if>
 			</if>
 		</where>
 		<choose>	

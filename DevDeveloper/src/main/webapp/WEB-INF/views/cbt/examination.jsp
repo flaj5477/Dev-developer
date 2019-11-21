@@ -113,7 +113,7 @@
 	
 	function exit() {
 		// 결과 도출 후, 스토리지 삭제
-		//localStorage.clear(); 
+		localStorage.clear(); 
 		$('#exitBtn').on('click',function() {
 			$('.cbtResult #toast').fadeIn(500).delay(500).fadeOut(500,function() {
 				location.replace('../getDashboard');

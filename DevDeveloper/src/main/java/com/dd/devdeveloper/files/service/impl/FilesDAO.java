@@ -19,9 +19,10 @@ public class FilesDAO {
 	SqlSessionTemplate mybatis;
 	
 	// 파일 전체
-	public List<LinkedHashMap<String, Object>> getFilesList(FilesVO vo) {
+	public List<FilesVO> getFilesList(FilesVO vo) {
 		return mybatis.selectList("FilesDAO.getFilesList", vo);
 	}
+	
 	// 파일 임포트
 	public List<LinkedHashMap<String, Object>> getImportList(FilesVO vo) {
 		return mybatis.selectList("FilesDAO.getImportList", vo);

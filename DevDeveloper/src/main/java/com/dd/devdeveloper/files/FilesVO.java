@@ -28,6 +28,8 @@ public class FilesVO {
 	private String uploadFilename;
 	private String getFilesRoute;
 	private String membersName;
+	private String projTitle;
+	private String filesSizeTrans;
 	
 	private int first;	//페이징
 	private int last;	//페이징

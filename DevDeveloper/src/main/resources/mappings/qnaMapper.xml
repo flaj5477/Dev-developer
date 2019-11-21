@@ -14,7 +14,17 @@
 	 			q.q_views		    ,
 	 			q.q_tags			,
 	 			m.members_id     	,
-	 			(select count(a_no) from answer where q_no= q.q_no) a_count   	
+	 			(select count(a_no) from answer where q_no= q.q_no) a_count   	,
+	 			( select count(*) 
+      			from (
+                    select r.rec_no, r.qa_no q_no, r.qa_type 
+                    from rec_list r
+                    where qa_type = 1
+                    union 
+                    select r.rec_no, a.q_no, r.qa_type  from rec_list r join answer a 
+                    on r.qa_no = a.a_no
+                    where r.qa_type = 2)
+     			 where q_no = q.a_no) rec_count
 	 			from members m join question q
 	 			on q.members_no = m.members_no
 	 	<where>

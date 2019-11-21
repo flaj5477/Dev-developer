@@ -98,6 +98,19 @@ public class QnaDAO {
 		}
 
 
+		public List<QuestionVO> qnaMyList(int membersNo) {
+			
+			return mybatis.selectList("QnaDAO.qnaMyList",membersNo);
+			
+		}
+
+
+		public List<QuestionVO> anqMyList(int membersNo) {
+			
+			return mybatis.selectList("QnaDAO.anqMyList",membersNo);
+		}
+
+
 		  
 
 

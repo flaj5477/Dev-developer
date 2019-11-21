@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>dd</title>
+<script>
+	pageName = "Q & A";
+</script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/qna.css">
 <%-- <link rel="stylesheet"

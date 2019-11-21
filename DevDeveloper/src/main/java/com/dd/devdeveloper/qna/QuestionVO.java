@@ -14,7 +14,10 @@ public class QuestionVO {
 	private String qTags;
 	private String membersId;
 	private String membersImage;
-	private int aCount;
+	private int aCount;  //답변수
+	private String aNo;
+	private String aContents;
+	private String aDate;
 	private String searchVal;		//검색값
 	private int first;	//페이징 시작 게시글 번호
 	private int last;	//페이징 종료 게시글 번호
@@ -110,22 +113,42 @@ public class QuestionVO {
 	
 	
 	
+	public String getaNo() {
+		return aNo;
+	}
+	public void setaNo(String aNo) {
+		this.aNo = aNo;
+	}
+	public String getaContents() {
+		return aContents;
+	}
+	public void setaContents(String aContents) {
+		this.aContents = aContents;
+	}
+	public String getaDate() {
+		return aDate;
+	}
+	public void setaDate(String aDate) {
+		this.aDate = aDate;
+	}
 	public String getMembersImage() {
 		return membersImage;
 	}
 	public void setMembersImage(String membersImage) {
 		this.membersImage = membersImage;
 	}
-	
-	
-	
 	@Override
 	public String toString() {
 		return "QuestionVO [qNo=" + qNo + ", membersNo=" + membersNo + ", qTitle=" + qTitle + ", qContents=" + qContents
 				+ ", qCode=" + qCode + ", qDate=" + qDate + ", qViews=" + qViews + ", qTags=" + qTags + ", membersId="
-				+ membersId + ", membersImage=" + membersImage + ", aCount=" + aCount + ", searchVal=" + searchVal
-				+ ", first=" + first + ", last=" + last + ", orderby=" + orderby + "]";
+				+ membersId + ", membersImage=" + membersImage + ", aCount=" + aCount + ", aNo=" + aNo + ", aContents="
+				+ aContents + ", aDate=" + aDate + ", searchVal=" + searchVal + ", first=" + first + ", last=" + last
+				+ ", orderby=" + orderby + "]";
 	}
+	
+	
+	
+
 
 	}
 	

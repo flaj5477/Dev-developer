@@ -93,4 +93,10 @@ public class CalendarServiceImpl implements CalendarService {
 	public List<ProjCalendarVO> getProjCalendarData(ProjCalendarVO vo) { //DB데이터 조회
 		return projCalendarDAO.getProjCalendarData(vo);
 	}
+
+	@Override
+	public List<ProjCalendarVO> getToDoList(ProjCalendarVO vo) {
+		// TODO Auto-generated method stub
+		return projCalendarDAO.getToDoList(vo);
+	}
 }

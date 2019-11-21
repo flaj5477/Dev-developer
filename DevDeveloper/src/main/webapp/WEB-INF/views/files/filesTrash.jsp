@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -140,7 +141,7 @@
 									<td>										
 										<input type="checkbox" value="${files.filesNo}"	name="chk_files" id="chk_files">
 										<%-- ${files.filesType} --%>
-										<c:if test="${files.filesType=='F'}" ><i class="far fa-file"></i> 
+										<c:if test="${files.filesType=='F'}" ><!-- <i class="far fa-file"></i>  -->
                 						 ${files.filesTitle} 
                 						</c:if> 
                 						  <c:if test="${files.filesType=='D'}"><i class="far fa-folder"></i>
@@ -150,9 +151,9 @@
 																		
 									<!-- <input type="checkbox" name="chk_info" value="HTML">HTML -->
 									<td>${files.filesComment }</td>
-									<td>${files.membersNo }</td>
-									<td>${files.filesUploadDate }</td>
-									<td>${files.filesSize }</td>
+									<td>${files.membersName }</td>
+									<td><fmt:formatDate value="${files.filesUploadDate}" pattern="yyyy-MM-dd"/></td>
+									<td><c:if test="${files.filesType=='F'}">${files.filesSizeTrans}</c:if></td>
 								</tr>
 							</c:forEach>
 						</tbody>

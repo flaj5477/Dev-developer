@@ -118,7 +118,7 @@ form#signForm {
 
 	<form action="signup" method="post" id="signForm"
 		enctype="multipart/form-data" style="width: 450px">
-		<div style="text-align : center; padding:0px 0px 7px 0px;">
+<!-- 		<div style="text-align : center; padding:0px 0px 7px 0px;">
 			<div class="custom-control custom-radio mb-3" style ="display : inline-block">
 				<input name="membersType" class="custom-control-input"
 					id="customRadio5" checked="checked" type="radio" value="일반">
@@ -130,7 +130,7 @@ form#signForm {
 					id="customRadio6" value="기업" type="radio"> <label
 					class="custom-control-label" for="customRadio6" style="color : #6e767d">기업</label>
 			</div>
-		</div>
+		</div> -->
 
 
 		<div class="form-group">

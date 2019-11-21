@@ -84,9 +84,9 @@
             <div class=" dropdown-header noti-title">
               <h6 class="text-overflow m-0">Welcome!</h6>
             </div>
-            <a href="${pageContext.request.contextPath}/examples/profile.html" class="dropdown-item">
-              <i class="ni ni-single-02"></i>
-              <span>My profile</span>
+            <a href="${pageContext.request.contextPath}/getDashboard" class="dropdown-item">
+              <i class="ni ni-tv-2 text-primary"></i>
+              <span>Dashboard</span>
             </a>
             <a href="${pageContext.request.contextPath}/examples/profile.html" class="dropdown-item">
               <i class="ni ni-settings-gear-65"></i>
@@ -218,9 +218,9 @@
               <div class=" dropdown-header noti-title">
                 <h6 class="text-overflow m-0">Welcome!</h6>
               </div>
-              <a href="#" class="dropdown-item">
-                <i class="ni ni-single-02"></i>
-                <span>My profile</span>
+              <a href="${pageContext.request.contextPath}/getDashboard" class="dropdown-item">
+                <i class="ni ni-tv-2 text-primary"></i>
+                <span>Dashboard</span>
               </a>
               <a href="#" class="dropdown-item">
                 <i class="ni ni-settings-gear-65"></i>

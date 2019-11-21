@@ -12,7 +12,6 @@
 		START WITH files_no = #{upperFolder}
 		CONNECT BY PRIOR upper_folder = files_no
 		order by level desc
-		
 	</select>
 
 	<select id="getFilesList" resultType="files">
@@ -68,15 +67,16 @@
 		select files_no,
 		files_title,
 		files_comment,
-		members_no,
+		f.members_no,
 		files_group_no,
 		files_upload_date,
 		upper_folder,
 		files_type,
 		files_Import,
-		files_Trash
+		files_Trash,
+		m.members_name
 		from
-		files
+		files f inner join members m on f.members_no = m.members_no
 		where files_Import='Y'
 	</select>
 	
@@ -85,15 +85,16 @@
 		select files_no,
 		files_title,
 		files_comment,
-		members_no,
+		f.members_no,
 		files_group_no,
 		files_upload_date,
 		upper_folder,
 		files_type,
 		files_Import,
-		files_Trash
+		files_Trash,
+		m.members_name
 		from
-		files
+		files f inner join members m on f.members_no = m.members_no
 		where files_Trash='Y'
 	</select>
 

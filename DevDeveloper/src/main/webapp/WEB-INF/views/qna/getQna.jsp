@@ -8,6 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	pageName = "Q & A";
+</script>
 </head>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/qna.css">
@@ -40,7 +43,6 @@
 							<span>조회수 ${qna.qViews}</span> <span>답변수 ${qna.aCount}</span> <span>좋아요
 								0</span>
 							<%-- <span>등록일 ${qna.qDate }</span> --%>
-							<input type="hidden" value="1" name="qaType" class="qType">
 						</div>
 					</h3>
 					<div class="question-detail-content" style="border-bottom: 1px solid #cdb8f3;">
@@ -50,7 +52,7 @@
 						<div class="question-content-left">
 							<ul>
 								<li class="question-vote-count" style="margin-bottom: 5px;">0</li>
-								<li><a id="rec_update"> <i class="fa fa-star fa-2x"
+								<li><a class="rec_update" type="1"> <i class="fa fa-star fa-2x"
 										aria-hidden="true"></i>
 								</a></li>
 							</ul>
@@ -112,9 +114,7 @@
                         <div class="answer-content-left">
                             <ul>
 								<li class="question-vote-count" style="margin-bottom: 5px;">0</li>
-								<li><a href="javascript:;"
-									data-href="/tag/etc/question/323/bookmark"
-									data-toggle="baseajax"> <i class="fa fa-star fa-2x"
+								<li><a class="rec_update" type="2"> <i class="fa fa-star fa-2x"
 										aria-hidden="true"></i>
 								</a></li>
 							</ul>
@@ -212,8 +212,8 @@
      
      <script>
  	$(function(){
-		$("#rec_update").click(function(){
-		var type = $(".qType").val(); //없애기
+		$(".rec_update").click(function(){
+		var type = $(this).attr('type'); 
 			
 			$.ajax({
 				url: "recUpdate",

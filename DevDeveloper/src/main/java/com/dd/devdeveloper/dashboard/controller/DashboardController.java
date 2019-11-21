@@ -21,6 +21,7 @@ import com.dd.devdeveloper.dashboard.service.DashboardService;
 import com.dd.devdeveloper.members.MembersVO;
 import com.dd.devdeveloper.projects.ProjApplicantsVO;
 import com.dd.devdeveloper.projects.ProjectsVO;
+import com.dd.devdeveloper.qna.service.QnaService;
 import com.dd.devdeveloper.wiki.WikiTransVO;
 import com.dd.devdeveloper.wiki.service.WikiService;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
@@ -32,7 +33,7 @@ public class DashboardController {
 	
 	@Autowired DashboardService dashboardService;
 	@Autowired WikiService wikiService;
-
+	@Autowired QnaService qnaService;
 	
 	@RequestMapping("/getDashboard") //대시보드 페이지 가져오기
 	public String getDashboard(ActivityLogVO vo, Model model, HttpSession session) {
@@ -71,7 +72,8 @@ public class DashboardController {
 		model.addAttribute("jsonProjApplicantsList", jsonArray.fromObject(projApplicantsList)  );
 		
 		//Q&A리스트 가져옴
-		
+		model.addAttribute("myQnaList", qnaService.qnaMyList(membersNo));
+		model.addAttribute("myAnqList", qnaService.anqMyList(membersNo));
 		//위키리스트 가져옴
 		model.addAttribute("myWikiTransList", wikiService.getMyWikiTransList(membersNo) ); ;	// 나의 위키번역내용 가져오기
 		//CBT기록 가져

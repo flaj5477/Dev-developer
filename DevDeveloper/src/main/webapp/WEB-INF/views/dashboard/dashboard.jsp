@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -313,7 +315,7 @@
 							<div class="card-header border-0">
 								<div class="row align-items-center">
 									<div class="col">
-										<h3 class="mb-0">Question리스트</h3>
+										<h3 class="mb-0">최근 질문</h3>
 									</div>
 									<div class="col text-right">
 										<a href="#!" class="btn btn-sm btn-primary">See all</a>
@@ -325,43 +327,24 @@
 								<table class="table align-items-center table-flush">
 									<thead class="thead-light">
 										<tr>
-											<th scope="col">Page name</th>
-											<th scope="col">Visitors</th>
-											<th scope="col">Unique users</th>
-											<th scope="col">Bounce rate</th>
+											<th scope="col">질문명</th>
+											<th scope="col">좋아요</th>
+											<th scope="col">답변수</th>
+											<th scope="col">작성날짜</th>
+											<!-- 태그or좋아요넣기 -->
 										</tr>
 									</thead>
 									<tbody>
+									<%-- 	<th scope="row">${fn:substring(qna.qContents,0,8)}</th> --%>
+								<c:forEach items="${myQnaList}" var="qna" end="4">
 										<tr>
-											<th scope="row">/argon/</th>
-											<td>4,569</td>
-											<td>340</td>
-											<td><i class="fas fa-arrow-up text-success mr-3"></i> 46,53%</td>
+											<th scope="row"><a href="qnaNo?qNo=${qna.qNo}">${qna.qTitle}</a></th>
+											<th scope="row">${qna.aCount}</th>
+											<th scope="row">${qna.aCount}</th>
+											<th scope="row">${qna.qDate}</th>
+											
 										</tr>
-										<tr>
-											<th scope="row">/argon/index.html</th>
-											<td>3,985</td>
-											<td>319</td>
-											<td><i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%</td>
-										</tr>
-										<tr>
-											<th scope="row">/argon/charts.html</th>
-											<td>3,513</td>
-											<td>294</td>
-											<td><i class="fas fa-arrow-down text-warning mr-3"></i> 36,49%</td>
-										</tr>
-										<tr>
-											<th scope="row">/argon/tables.html</th>
-											<td>2,050</td>
-											<td>147</td>
-											<td><i class="fas fa-arrow-up text-success mr-3"></i> 50,87%</td>
-										</tr>
-										<tr>
-											<th scope="row">/argon/profile.html</th>
-											<td>1,795</td>
-											<td>190</td>
-											<td><i class="fas fa-arrow-down text-danger mr-3"></i> 46,53%</td>
-										</tr>
+								</c:forEach>		
 									</tbody>
 								</table>
 							</div>
@@ -372,7 +355,7 @@
 							<div class="card-header border-0">
 								<div class="row align-items-center">
 									<div class="col">
-										<h3 class="mb-0">Answer리스트</h3>
+										<h3 class="mb-0">최근 답변</h3>
 									</div>
 									<div class="col text-right">
 										<a href="#!" class="btn btn-sm btn-primary">See all</a>
@@ -384,43 +367,21 @@
 								<table class="table align-items-center table-flush">
 									<thead class="thead-light">
 										<tr>
-											<th scope="col">Page name</th>
-											<th scope="col">Visitors</th>
-											<th scope="col">Unique users</th>
-											<th scope="col">Bounce rate</th>
+											<th scope="col">질문명</th>
+											<th scope="col">답변내용</th>
+											<th scope="col">좋아요</th>
+											<th scope="col">작성날짜</th>
 										</tr>
 									</thead>
 									<tbody>
+										<c:forEach items="${myAnqList}" var="anq" end="4">
 										<tr>
-											<th scope="row">/argon/</th>
-											<td>4,569</td>
-											<td>340</td>
-											<td><i class="fas fa-arrow-up text-success mr-3"></i> 46,53%</td>
+											<th scope="row"><a href="qnaNo?qNo=${anq.qNo}">${anq.qTitle}</a></th>
+											<th scope="row">${fn:substring(anq.aContents,0,8)}</th>
+											<th scope="row"></th>
+											<th scope="row">${anq.aDate}</th>
 										</tr>
-										<tr>
-											<th scope="row">/argon/index.html</th>
-											<td>3,985</td>
-											<td>319</td>
-											<td><i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%</td>
-										</tr>
-										<tr>
-											<th scope="row">/argon/charts.html</th>
-											<td>3,513</td>
-											<td>294</td>
-											<td><i class="fas fa-arrow-down text-warning mr-3"></i> 36,49%</td>
-										</tr>
-										<tr>
-											<th scope="row">/argon/tables.html</th>
-											<td>2,050</td>
-											<td>147</td>
-											<td><i class="fas fa-arrow-up text-success mr-3"></i> 50,87%</td>
-										</tr>
-										<tr>
-											<th scope="row">/argon/profile.html</th>
-											<td>1,795</td>
-											<td>190</td>
-											<td><i class="fas fa-arrow-down text-danger mr-3"></i> 46,53%</td>
-										</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>

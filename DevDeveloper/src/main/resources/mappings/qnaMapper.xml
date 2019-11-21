@@ -10,7 +10,6 @@
 	 			q.members_no 		,
 	 			q.q_title 			,
 	 			q.q_contents 		,
-	 			q.q_code 			,  
 	 			q.q_date 			,
 	 			q.q_views		    ,
 	 			q.q_tags			,
@@ -42,7 +41,6 @@
 		    	a.q_no 				,
 	 			a.members_no 		,
 	 			a.a_contents 		,
-	 			a.a_code 			,  
 	 			a.a_date 			,
 	 			m.members_id     	,
 	 			m.members_image
@@ -54,7 +52,38 @@
 	</select>
 	
 	
+	<!--내질문-->
+	<select id = "qnaMyList" parameterType="int" resultType="question">
+		select  q.q_no, 
+				members_no, 
+				q_title,
+				q_date,
+				q_views,
+				q_tags,
+				q_contents,
+				(select count(a_no) from answer where q_no= q.q_no) a_count
+		from question q
+		where members_no = ${membersNo}
+		order by q_no desc
 	
+	</select>
+	
+	<!--내답변-->
+	<select id = "anqMyList" parameterType="int" resultType="question">
+		select  q.q_no, 
+				q.q_title,
+				q.q_tags,
+				a.q_no,
+				a.a_no,
+				a.members_no, 
+				a.a_date,
+				a.a_contents
+		from question q , answer a
+		where a.members_no = ${membersNo} 
+		and a.q_no =q.q_no 
+		order by a_no desc
+	
+	</select>
 	
 	<!--질문등록-->
 	<insert id="insertQna" parameterType="question">
@@ -91,7 +120,6 @@
 	 			q.members_no 		,
 	 			q.q_title 			,
 	 			q.q_contents 		,
-	 			q.q_code 			,  
 	 			q.q_date 			,
 	 			q.q_views		    ,
 	 			q.q_tags			,
@@ -156,5 +184,7 @@
 		delete from rec_list
 		where qa_no = #{qaNo} and qa_type = #{qaType} and members_No =#{membersNo}
 	</delete>	
+		
+		
 		
 </mapper>

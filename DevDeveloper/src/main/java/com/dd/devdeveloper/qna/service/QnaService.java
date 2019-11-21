@@ -38,4 +38,8 @@ public interface QnaService {
 	
 	void deleteRec(RecListVO vo);
 	
+	List<QuestionVO> qnaMyList(int membersNo);
+	
+	List<QuestionVO> anqMyList(int membersNo);
+	
 }

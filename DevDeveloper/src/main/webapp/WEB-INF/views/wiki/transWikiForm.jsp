@@ -204,7 +204,7 @@ div[contenteditable] {
 		//ck에디터가 존재하면 destroy해라
 		if(myEditor != null){   
 			var editor = myEditor;	//ck에디터
-			if (editor) { editor.destroy(true); }
+			if (editor) { editor.destroy(true); }	// ckeditor destroy 두번불러서 에러났다
 		}
 	}
 	
@@ -215,7 +215,8 @@ div[contenteditable] {
 	*/
 	function btnClose(){
 		$('[name="btn-trans-close"]').on("click", function(){
-			transClose();
+			$('.translate.hide').attr("class", "translate");	
+			$('.transEdit.open').attr("class", "transEdit hide");	//다른곳에 편집창 열려있으면 숨김
 		});
 	}
 	

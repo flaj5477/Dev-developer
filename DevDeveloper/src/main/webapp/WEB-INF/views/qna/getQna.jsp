@@ -138,16 +138,15 @@
 												<div class="user-info">
 													<h6 class="user-name">${ans.membersId}</h6>
 													<h6 class="contribution-time" style="font-size: 0.670rem;">${ans.aDate}에 작성</h6>
-													<input type="hidden" value="${ans.aNo}" id= "${ans.aNo}">
 												</div>
 										</a></li>
 									</ul>
 								</div>
 							</div>       
                         </div>
-                    </div>
+                    </div> <%-- <input type="hidden" value="${ans.aNo}" id= "aa"> --%>
                    <c:if test = "${sessionScope.members.membersNo == ans.membersNo }">
-                <div class ="qUp"> <button class="btn qqqbutton" id="ansUpdate">
+                <div class ="qUp"> <button class="btn qqqbutton" id="ansUpdate" value="${ans.aNo}">
 					답변수정</button>
 				 <button class="btn qqqbutton" id="ansDel"
 				 onclick="dddd(${ans.aNo},${ans.qNo})">
@@ -163,6 +162,7 @@
 			<div class="main-answer-form" id="answer_form">
 				<form method="post" action="insertAnq" id ="anq">
 				<input type ="hidden" name ="qNo" value="${qna.qNo}"></input>
+				<input type ="hidden" id = "zd"name ="" value=""></input>
 				<h2 class="title">답변 작성</h2>
 				<div class="qqqalert qqqalert-secondary mb-20">
 					<p style="font-size: 0.8rem">
@@ -175,8 +175,7 @@
 						placeholder="에디터">
 					</textarea>
 				</div>
-					<button class="btn qqqbutton" type="submit" id="ansbutton">
-								답변하기</button>				 
+					<button class="btn qqqbutton" type="submit" id="ansbutton">답변하기</button>				 
 				</form>
 			</div>
 			<div id ="asd"></div>
@@ -244,16 +243,18 @@
 		 }) 
 	 	})
 	 	</script>
-<!-- 	 <script>
-	 var a = $("#aa").val();
+	 <script>
 	 $(document).ready(function(){ 
 	 $(function(){
 			$("#ansUpdate").click(function(){
 				$("#anq").attr("action", "updateAnq");
 				$("#ansbutton").attr("id","ansupdatebutton")
-				$("#anoo").attr("value",a)
+				$("#ansupdatebutton").text("답글수정")
+				var a =$("#ansUpdate").val();
+				$("#zd").attr("name",'aNo')
+				$("#zd").attr("value",a)
 				
-				var offset = $("#asd").offset();
+				var offset = $("#ffff").offset();
 
 				$("html").animate({scrollTop:offset.top}, 1000);
 			

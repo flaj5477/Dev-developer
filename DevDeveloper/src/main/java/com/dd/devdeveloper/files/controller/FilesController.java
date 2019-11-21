@@ -23,8 +23,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.files.FilesVO;
 import com.dd.devdeveloper.files.service.FilesService;
-import com.dd.devdeveloper.files.service.impl.FilesDAO;
 import com.dd.devdeveloper.members.MembersVO;
+import com.dd.devdeveloper.projects.ProjectsVO;
+import com.dd.devdeveloper.projects.service.ProjectsService;
 
 @Controller
 //@SessionAttributes("files")
@@ -32,23 +33,28 @@ public class FilesController {
 
 	@Autowired
 	FilesService filesService;
+
 	@Autowired
-	FilesDAO filesDAO;
+	ProjectsService projectsService;
 
 	// 파일 리스트 맵핑
 	@RequestMapping("/getFilesList")
-	public String getFilesList(Model model, Paging paging, FilesVO vo, HttpServletRequest request) { // Jsp에서 보내온 정보들이
-																										// //자동으로 vo안에
-																										// // 들어간다
+	public String getFilesList(Model model, Paging paging, FilesVO vo, HttpServletRequest request, ProjectsVO voo) { // Jsp에서
+																														// 보내온
+																														// 정보들이
+		// 자동으로 vo안에
+		// // 들어간다
 		HttpSession session = request.getSession();
 //		System.out.println(vo.getUpperFolder());
 //		System.out.println(vo.getFilesNo());
 
 		Integer projNo = (Integer) session.getAttribute("projNo");
-		vo.setProjNo(1); // projNo 페이지 만들어지면 갈아끼울것
+		vo.setProjNo(projNo); // projNo 페이지 만들어지면 갈아끼울것
+		voo.setProjNo(projNo);
 		if (vo.getUpperFolder() != null)
 			model.addAttribute("filesRoute", filesService.getFilesRoute(vo));
 		model.addAttribute("list", filesService.getFilesList(paging, vo)); // 서비스impl 실행해서 모델에 담는다
+		model.addAttribute("project", projectsService.getProjects(voo));
 		model.addAttribute("projNo", projNo);
 		model.addAttribute("paging", paging);
 		return "files/filesList";
@@ -82,10 +88,11 @@ public class FilesController {
 					// vo.setMembersNo(membersNo); 얘 세션 받아와서 넘겨
 					vo.setFilesType("F");
 					vo.setFilesSize(multipartFile.getSize());
-					vo.setUploadFilename(filesName);
+					vo.setFilesPath(filesName);
 					multipartFile.transferTo(imageFile);
 
 					System.out.println("이동 한 파일 위치" + path);
+					System.out.println(filesName);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -93,8 +100,7 @@ public class FilesController {
 			}
 			int membersNo = ((MembersVO) session.getAttribute("members")).getMembersNo();
 			vo.setMembersNo(membersNo);
-			vo.setFilesPath(path);
-
+			
 			System.out.println("------------------------------------프로젝트 넘버" + vo.getProjNo());
 			filesService.filesUpload(vo);
 		}
@@ -105,9 +111,13 @@ public class FilesController {
 	@RequestMapping("/download")
 	public void filesDownload(HttpServletRequest request, HttpServletResponse response, FilesVO vo) {
 		String fileName = filesService.getFilesPath(vo);
-		Path file = Paths.get(fileName);
-		int fileName1 = (fileName.lastIndexOf("\\") + 1);
-		fileName = fileName.substring(fileName1);
+		String path = request.getSession().getServletContext().getRealPath("/resources/upload");
+		Path file = Paths.get(path,fileName);
+		
+
+		//		  Path file = Paths.get(fileName); int fileName1 = (fileName.lastIndexOf("\\")
+//		  + 1); fileName = fileName.substring(fileName1);
+
 		if (Files.exists(file)) {
 			response.setContentType("application/octet-stream;charset=UTF-8");
 			response.addHeader("Content-Disposition", "attachment; filename=" + fileName);

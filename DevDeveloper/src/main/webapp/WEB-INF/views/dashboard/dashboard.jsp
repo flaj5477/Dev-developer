@@ -338,10 +338,10 @@
 									<%-- 	<th scope="row">${fn:substring(qna.qContents,0,8)}</th> --%>
 								<c:forEach items="${myQnaList}" var="qna" end="4">
 										<tr>
-											<th scope="row"><a href="qnaNo?qNo=${qna.qNo}">${qna.qTitle}</a></th>
-											<th scope="row">${qna.aCount}</th>
-											<th scope="row">${qna.aCount}</th>
-											<th scope="row">${qna.qDate}</th>
+											<th scope="row" style="height: 76px"><a href="qnaNo?qNo=${qna.qNo}">${qna.qTitle}</a></th>
+											<th scope="row" style="height: 76px">${qna.aCount}</th>
+											<th scope="row" style="height: 76px">${qna.aCount}</th>
+											<th scope="row" style="height: 76px">${qna.qDate}</th>
 											
 										</tr>
 								</c:forEach>		

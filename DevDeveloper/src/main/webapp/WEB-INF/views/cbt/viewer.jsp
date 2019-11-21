@@ -43,7 +43,10 @@
 				sec = min * 60;
 				permisMin = parseInt(sec/60);
 				permisSec = sec%60;
-				$('#header').prepend(title+'<br>'+contents+'<br>'+userName);
+				$('#title').html(title);
+				$('#subTitle').html(contents);
+				$('#userNo').html('${members.membersNo}');
+				$('#userName').html(userName);
 				$('#permisTime').prepend(permisMin+'분 '+permisSec+'초');
 				$('#restTime').prepend(permisMin+'분 '+permisSec+'초');
 			},
@@ -325,25 +328,66 @@
 		});
 	}
 </script>
+<style>
+div.cbtViewer #header {
+	top: 3%;
+	left: 5%;
+	width: max;
+	height: 200px;
+	position: static;
+}
+div.cbtViewer #title {
+	top: 2%;
+	left: 5%;
+	position: absolute;
+}
+div.cbtViewer #subTitle {
+	top: 2%;
+	left: 20%;
+	position: absolute;
+}
+div.cbtViewer #users {
+	top: 2%;
+	left: 60%;
+	position: absolute;
+}
+</style>
 </head>
 <body onload="getTest()">
-<div id="noback"></div>
 <div class="cbtViewer">
 	<div id="header">
-		<div id="switchFont">
-			<button type="button" id="small">80%</button>
-			<button type="button" id="medium">100%</button>
-			<button type="button" id="large">120%</button>
+		<div id="exam">
+			<span id="title"></span>
+			<span id="subTitle"></span>
 		</div>
-		<div id="permisTime"></div>
-		<div id="restTime"></div>
+		<div id="users">
+			<span id="userNo"></span>
+			<span id="userName"></span>
+		</div>
+		<div id="putTime">
+			<div id="permisTime"></div>
+			<div id="restTime"></div>
+		</div>
+		<div id="menu">
+			<div id="switchFont">
+				<span><button type="button" id="small">80%</button></span>
+				<span><button type="button" id="medium">100%</button></span>
+				<span><button type="button" id="large">120%</button></span>
+			</div>
+			<div>
+				<span id="allVol"></span>
+				<span id="restVol"></span>
+			</div>
+		</div>
 	</div>
 	<div id="content">
 		<div id="questView" style="width:60%; float:left"></div>
 		<div id="putView" style="width:40%; float:right"></div>
 	</div>
 	<div id="footer">
-		<div id="noExp"></div>
+		<div id="noExp">
+			<button type="button" class="btn btn-light" id="noExpBtn"></button>
+		</div>
 		<button type="button" class="btn btn-primary" id="confirmBtn" data-toggle="modal" data-target="#cbtSubmitModal">제출하기</button>
 		<!-- Modal -->
 		<div class="modal fade" id="cbtSubmitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

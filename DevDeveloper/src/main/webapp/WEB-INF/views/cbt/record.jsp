@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>CBT Record</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/cbt.css">
 <script>
 	function recordList() {
 		var user = "${members.membersNo}";
@@ -50,10 +51,10 @@
 </head>
 <body onload="recordList()">
 <div class="cbtRecord">
-	<table id="recordTab" border="1" style="width:700px">
+	<table id="recordTab" class="table" border="1">
 		<caption id="recordCap"></caption>
-		<thead>
-			<tr align="center">
+		<thead style="background-color:black; color:white;">
+			<tr>
 				<th>시험명</th>
 				<th>상세</th>
 				<th>응시날짜</th>

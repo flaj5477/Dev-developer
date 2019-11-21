@@ -33,7 +33,7 @@
 	});
 	
 	function indexBox() {
-		$('#grade'+(grade+1)).css('background-color','orangered');
+		$('#grade'+(grade+1)).css('background-color','aquamarine');
 	}
 	
 	setInterval(timeCount,1000);

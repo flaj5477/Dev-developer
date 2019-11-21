@@ -126,6 +126,7 @@ div.cbtReady #tabs-1 {
 div.cbtReady table#chooseTab {
 	width: 700px;
 	height: 100px;
+	position: fixed;
 	text-align: center;
 	vertical-align: middle;
 }
@@ -133,11 +134,15 @@ div.cbtReady table#chooseTab th{
 	height: 35px;
 	font-size: 15px;
 }
-div.cbtReady #comment1,#comment2,#comment3 {
+div.cbtReady #comment1 {
+	top: 45%;
+	position: fixed;
 	vertical-align: middle;
 	font-size: 20px;
 }
-div.cbtReady #comment3 {
+div.cbtReady #comment2, #comment3 {
+	vertical-align: middle;
+	font-size: 20px;
 	text-align: center;
 	
 }

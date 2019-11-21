@@ -66,7 +66,7 @@ public class CBTServiceImpl implements CBTService {
 		@SuppressWarnings("unchecked")
 		List<Map<String,Integer>> mark = (List<Map<String,Integer>>) cd.get("data");
 		//SORTING (Lambda)
-		Collections.sort(mark,(Map<String,Integer> m1, Map<String,Integer> m2)-> { // List안에 담긴 Map 객체 정렬
+		Collections.sort(mark,(Map<String,Integer> m1, Map<String,Integer> m2)-> { // List안에 담긴 Map 객체 정렬, lambda 형식으로
 			return m1.get("key")-m2.get("key");  // 오름차순 정렬
 		});
 		/* https://dublin-java.tistory.com/12

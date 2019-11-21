@@ -675,7 +675,7 @@ div[contenteditable] {
 									</div>
 									<div class="row">
 										<a href='javascript:void(0);' onclick="insertWikiTrans();" class="btn btn-sm btn-primary">번역등록</a>
-										<a href='javascript:void(0);' onclick="papagoTrans();" class="btn btn-sm btn-primary">구글번역</a>
+										<a href='javascript:void(0);' onclick="papagoTrans();" class="btn btn-sm btn-primary">파파고번역</a>
 									</div>
 								</div>
 								

@@ -60,11 +60,11 @@ div h5 {
 
 <body>
 	<%-- <c:if test="${sessionScope.members.membersGrade eq 5}"> --%>
-		<div class="row nav nav-pills justify-content-end pt-5 pr-5">
+		<!-- <div class="row nav nav-pills justify-content-end pt-5 pr-5">
 			<div class="text-right">
 				<a href="tagManageForm" class="btn btn-lg btn-danger">태그관리</a>
 			</div>
-		</div>
+		</div> -->
 	<%-- </c:if> --%>
 	<div class="row p-5">
 		<c:forEach items="${tagList}" var="tag">

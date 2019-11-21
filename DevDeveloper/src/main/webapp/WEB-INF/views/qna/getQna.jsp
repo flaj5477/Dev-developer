@@ -146,7 +146,8 @@
                         </div>
                     </div> <%-- <input type="hidden" value="${ans.aNo}" id= "aa"> --%>
                    <c:if test = "${sessionScope.members.membersNo == ans.membersNo }">
-                <div class ="qUp"> <button class="btn qqqbutton" id="ansUpdate" value="${ans.aNo}">
+                   <input type="hidden" id= "sdf" value="${ans.aNo}">
+                <div class ="qUp"> <button class="btn qqqbutton dd" id="ansUpdate" value="${ans.aNo}">
 					답변수정</button>
 				 <button class="btn qqqbutton" id="ansDel"
 				 onclick="dddd(${ans.aNo},${ans.qNo})">
@@ -244,13 +245,14 @@
 	 	})
 	 	</script>
 	 <script>
+	 
 	 $(document).ready(function(){ 
 	 $(function(){
-			$("#ansUpdate").click(function(){
+			$(".dd").click(function(){
 				$("#anq").attr("action", "updateAnq");
 				$("#ansbutton").attr("id","ansupdatebutton")
 				$("#ansupdatebutton").text("답글수정")
-				var a =$("#ansUpdate").val();
+				var a =$(this).val();
 				$("#zd").attr("name",'aNo')
 				$("#zd").attr("value",a)
 				

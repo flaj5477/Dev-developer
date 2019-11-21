@@ -130,9 +130,10 @@
 														<span class="h2 font-weight-bold mb-0">${projApply } </span>
 													</div>
 													<div class="col-auto">
-														<div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+											<!-- 			<div class="icon icon-shape bg-warning text-white rounded-circle shadow">
 															<i class="fas fa-chart-pie"></i>
-														</div>
+														</div> -->
+														<img src="./images/icon/pie-chart_1.png" class="size-50"/>
 													</div>
 												</div>
 											</div>
@@ -151,9 +152,10 @@
 														<span class="h2 font-weight-bold mb-0">${projApprove}</span>
 													</div>
 													<div class="col-auto">
-														<div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+														<!-- <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
 															<i class="fas fa-users"></i>
-														</div>
+														</div> -->
+														<img src="./images/icon/pie-chart_2.png" class="size-50"/>
 													</div>
 												</div>
 											</div>
@@ -172,9 +174,10 @@
 														<span class="h2 font-weight-bold mb-0">${projParticipant}</span>
 													</div>
 													<div class="col-auto">
-														<div class="icon icon-shape bg-info text-white rounded-circle shadow">
+														<!-- <div class="icon icon-shape bg-info text-white rounded-circle shadow">
 															<i class="fas fa-percent"></i>
-														</div>
+														</div> -->
+														<img src="./images/icon/pie-chart_3.png" class="size-50"/>
 													</div>
 												</div>
 											</div>
@@ -193,9 +196,10 @@
 														<span class="h2 font-weight-bold mb-0">0</span>
 													</div>
 													<div class="col-auto">
-														<div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+														<!-- <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
 															<i class="fas fa-chart-pie"></i>
-														</div>
+														</div> -->
+														<img src="./images/icon/pie-chart_4.png" class="size-50"/>
 													</div>
 												</div>
 											</div>

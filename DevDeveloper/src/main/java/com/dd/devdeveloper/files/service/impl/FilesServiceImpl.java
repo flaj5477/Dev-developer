@@ -18,7 +18,7 @@ public class FilesServiceImpl implements FilesService {
 	FilesDAO filesDAO;
 
 	@Override
-	public List<LinkedHashMap<String, Object>> getFilesList(Paging paging, FilesVO vo) { // 페이징 설정
+	public List<FilesVO> getFilesList(Paging paging, FilesVO vo) { // 페이징 설정
 		if (paging.getPage() == null) {
 			paging.setPage(1);
 		}
@@ -30,9 +30,23 @@ public class FilesServiceImpl implements FilesService {
 		vo.setFirst(paging.getFirst()); // 시작 레코드 번호
 		vo.setLast(paging.getLast()); // 마지막 레코드 번호
 
-		List<LinkedHashMap<String, Object>> filesList = filesDAO.getFilesList(vo);
+		List<FilesVO> filesList = filesDAO.getFilesList(vo);
 
+		for (FilesVO map : filesList) {
+			map.setFilesSizeTrans(size2String(map.getFilesSize()));
+			
+		}
 		return filesList;
+	}
+	
+	public String size2String(long filesize) {
+		Integer unit = 1024;
+		if (filesize < unit) {
+			return String.format("%d B", filesize);
+		}
+		int exp = (int) (Math.log(filesize) / Math.log(unit));
+
+		return String.format("%.0f %s", filesize / Math.pow(unit, exp), "KMGTPE".charAt(exp - 1));
 	}
 
 	@Override

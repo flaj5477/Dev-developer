@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -102,8 +103,6 @@
 
 									<button type="button" class="btn btn-primary btn" onclick="filesTrash()">휴지통</button>
 
-									<button type="button" class="btn btn-primary btn">미리보기</button>
-
 									<button type="button" class="btn btn-primary btn" onclick="filesDownload()">다운로드</button>
 
 									<a href="#" class="avatar avatar-sm" data-toggle="tooltip"
@@ -133,7 +132,6 @@
 					</div>
 				</div>
 				<div class="table-responsive">
-
 					<table class="table align-items-center table-flush">
 						<thead class="thead-light">
 							<tr>
@@ -151,7 +149,7 @@
 										<input type="checkbox" value="${files.filesNo}"	name="chk_files" id="chk_files">
 										<%-- ${files.filesType} --%>
 										<c:if test="${files.filesType=='F'}" >
-										<i class="far fa-file"></i>
+										<!-- <i class="far fa-file"></i> -->
                 						${files.filesTitle}
                 						 </c:if> <c:if test="${files.filesType=='D'}"><i class="far fa-folder"></i>
 										  <a href="./getFilesList?upperFolder=${files.filesNo}">${files.filesTitle}</a>
@@ -159,9 +157,9 @@
 										<span class="filesImportCheck"><c:if test="${files.filesImport=='Y'}">♥</c:if></span> <!-- 기존꺼 긁어옴 -->
 									</td> <!-- <input type="checkbox" name="chk_info" value="HTML">HTML -->
 									<td>${files.filesComment }</td>
-									<td>${files.membersNo }</td>
-									<td>${files.filesUploadDate }</td>
-									<td>${files.filesSize }</td>
+									<td>${files.membersName }</td>
+									<td><fmt:formatDate value="${files.filesUploadDate}" pattern="yyyy-MM-dd"/></td>
+									<td><c:if	test="${files.filesType=='F'}">${files.filesSizeTrans}</c:if></td>
 								</tr>
 							</c:forEach>
 

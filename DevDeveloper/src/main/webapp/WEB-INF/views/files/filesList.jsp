@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,47 +32,60 @@
 	rel="stylesheet" />
 
 <script>
-pageName = "프로젝트 파일";
+	pageName = "프로젝트 파일";
 
 	function filesImport() {
-		$.ajax({ type: "POST",
-			url: 'filesImport',
-			data:{filesNo: $('[name="chk_files"]:checked').val()},
-			success: function (result) { 
-				location.reload();
-				
+		$.ajax({
+			type : "POST",
+			url : 'filesImport',
+			data : {
+				filesNo : $('[name="chk_files"]:checked').val()
 			},
-			error: function (e) { } });
+			success : function(result) {
+				location.reload();
+
+			},
+			error : function(e) {
+			}
+		});
 	}
-	
+
 	function filesTrash() {
-		$.ajax({ type: "POST",
-			url: 'filesTrash',
-			data:{filesNo: $('[name="chk_files"]:checked').val()},
-			success: function (result) { 
+		$.ajax({
+			type : "POST",
+			url : 'filesTrash',
+			data : {
+				filesNo : $('[name="chk_files"]:checked').val()
+			},
+			success : function(result) {
 				location.reload();
-			
-		},
-		error: function (e) { } });
+
+			},
+			error : function(e) {
+			}
+		});
 	}
-	
+
 	function filesSearch() {
-		$.ajax({ type: "POST",
-			url: 'filesSearch',
-			data:{filesNo: $('[name="chk_files"]:checked').val()},
-			success: function (result) { 
+		$.ajax({
+			type : "POST",
+			url : 'filesSearch',
+			data : {
+				filesNo : $('[name="chk_files"]:checked').val()
+			},
+			success : function(result) {
 				location.reload();
-			
-		},
-		error: function (e) { } });
+
+			},
+			error : function(e) {
+			}
+		});
 	}
 
 	function filesDownload() {
-		var filesNo =  $('[name="chk_files"]:checked').val(); 
-		location.href="download?filesNo=" + filesNo
-
+		var filesNo = $('[name="chk_files"]:checked').val();
+		location.href = "download?filesNo=" + filesNo
 	}
-
 </script>
 </head>
 
@@ -79,24 +94,27 @@ pageName = "프로젝트 파일";
 		<!-- Table -->
 		<div class="row">
 			<div class="col">
-				</br></br></br></br>
+				</br>
+				</br>
+				</br>
+				</br>
 				<div class="card shadow">
 					<div class="card-header border-0">
-						<h2 class="mb-0">프로젝트명</h2>
+						<h2 class="mb-0">${project.projTitle }</h2>
 						<div>
-						 	<c:forEach items="${filesRoute}" var="route">
-						 	<a href=""> ${route.filesTitle} /</a>
-						 	
-						 	</c:forEach>
-						 
+							<c:forEach items="${filesRoute}" var="route">
+								<a href="getFilesList?upperFolder=${route.filesNo}"> ${route.filesTitle} /</a>
+
+							</c:forEach>
+
 						</div>
-						
-						<br/>
+
+						<br />
 						<div class="btn-card-header-group text-right">
 							<div class="row">
 								<div class="col-3">
 									<form name="searchfrm" action="filesSearch">
-									<input type="hidden" name="projNo" value='${projNo}'/>
+										<input type="hidden" name="projNo" value='${projNo}' />
 										<div class="input-group">
 											<select name="select">
 												<option value="title">제목
@@ -106,8 +124,8 @@ pageName = "프로젝트 파일";
 												<span class="input-group-text"><i
 													class="ni ni-zoom-split-in"></i></span>
 											</div>
-											<input class="form-control" name="searchVal">
-											<input type="hidden" name="page" value="1" >
+											<input class="form-control" name="searchVal"> <input
+												type="hidden" name="page" value="1">
 											<button>검색</button>
 										</div>
 									</form>
@@ -120,45 +138,48 @@ pageName = "프로젝트 파일";
 										<div class="modal-content">
 											<div class="modal-header">
 												<h5 class="modal-title" id="exampleModalLabel">파일 업로드</h5>
-												<form id="fileForm" action="filesUpload" method="post" enctype="multipart/form-data">
-												 <input type="hidden" name="upperFolder" value="${param.upperFolder}"/>
-											
-												타이틀<input type="text" name="filesTitle"> 코멘트<input type="text" name="filesComment">								
-													<input type="file" value="파일 선택" name="uploadFile" multiple />
-													<input type="submit" value="업로드" />
+												<form id="fileForm" name="fileForm" action="filesUpload"
+													method="post" enctype="multipart/form-data"
+													onsubmit='return getCmaFileView()'>
+													<input type="hidden" name="upperFolder"
+														value="${param.upperFolder}" /> 타이틀<input type="text"
+														name="filesTitle"> 코멘트<input type="text"
+														name="filesComment"> <input type="file"
+														onchange='getC()' value="파일 선택" id="uploadFile"
+														name="uploadFile" multiple /> <input type="submit"
+														value="업로드" />
 												</form>
-												
+
 												<button type="button" class="close" data-dismiss="modal"
 													aria-label="Close">
 													<span aria-hidden="true">&times;</span>
 												</button>
-												
+
 											</div>
-											<div class="modal-body">...</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
 													data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary">Save
-													changes</button>
 											</div>
 										</div>
 									</div>
 								</div>
 
 								<div class="col-9 pull-right">
-									<button type="button" class="btn btn-primary btn" onclick="location.href='filesInsertForm.jsp'">새파일</button>
+									<button type="button" class="btn btn-primary btn"
+										onclick="location.href='filesInsertForm.jsp'">새파일</button>
 
-									<button type="button" class="btn btn-primary btn" onclick="filesImport()">중요</button>
-									
-									<button type="button" class="btn btn-primary btn" onclick="filesTrash()">휴지통</button>
+									<button type="button" class="btn btn-primary btn"
+										onclick="filesImport()">중요</button>
 
-									<button type="button" class="btn btn-primary btn">미리보기</button>
+									<button type="button" class="btn btn-primary btn"
+										onclick="filesTrash()">휴지통</button>
 
-									<button type="button" class="btn btn-primary btn" id="" 
+									<button type="button" class="btn btn-primary btn" id=""
 										data-toggle="modal" data-target="#upmodal">업로드</button>
 
-									<button type="button" class="btn btn-primary btn" onclick="filesDownload()">다운로드</button>
-									
+									<button type="button" class="btn btn-primary btn"
+										onclick="filesDownload()">다운로드</button>
+
 									<a href="#" class="avatar avatar-sm" data-toggle="tooltip"
 										data-original-title="Ryan Tompson"> <img
 										alt="Image placeholder"
@@ -187,7 +208,7 @@ pageName = "프로젝트 파일";
 				</div>
 				<div class="table-responsive">
 
-					<table class="table align-items-center table-flush" id = "filesRoot">
+					<table class="table align-items-center table-flush" id="filesRoot">
 						<thead class="thead-light">
 							<tr>
 								<th scope="col">파일명</th>
@@ -200,9 +221,8 @@ pageName = "프로젝트 파일";
 						<tbody>
 							<c:forEach var="files" items="${list}">
 								<tr>
-									<td>
-										<input type="checkbox" value="${files.filesNo}"	name="chk_files" id="chk_files">
-											<!-- <script>
+									<td><input type="checkbox" value="${files.filesNo}"
+										name="chk_files" id="chk_files"> <!-- <script>
 											$('#chk_files').click(function() {
 												var chk = $("#chk_files").prop("checkd");
 												if(chk) {
@@ -211,24 +231,23 @@ pageName = "프로젝트 파일";
 													$(".chBox").prop("checked", false);
 												}
 											});
-											</script> -->
-											
-										<%-- ${files.filesType} --%>
-										 <c:if	test="${files.filesType=='F'}">
-											<i class="far fa-file"></i>
+											</script> --> <%-- ${files.filesType} --%> <c:if
+											test="${files.filesType=='F'}">
+											<!-- <i class="far fa-file"></i> -->
                 						${files.filesTitle}
                 						 </c:if> <c:if test="${files.filesType=='D'}">
 											<i class="far fa-folder"></i>
 											<a href="./getFilesList?upperFolder=${files.filesNo}">${files.filesTitle}</a>
-										</c:if>
-										<span class="filesImportCheck"><c:if test="${files.filesImport=='Y'}">♥</c:if></span>
-										</td>
-									
+										</c:if> <span class="filesImportCheck"><c:if
+												test="${files.filesImport=='Y'}">♥</c:if></span></td>
+
 									<!-- <input type="checkbox" name="chk_info" value="HTML">HTML -->
 									<td>${files.filesComment }</td>
 									<td>${files.membersName }</td>
-									<td>${files.filesUploadDate }</td>
-									<!--  <td><c:if test= "${files.filesSize=='F'}">KB</c:if></td> -->
+									<td><fmt:formatDate value="${files.filesUploadDate}"
+											pattern="yyyy-MM-dd" /></td>
+									<td><c:if test="${files.filesType=='F'}">${files.filesSizeTrans}</c:if>
+									</td>
 								</tr>
 							</c:forEach>
 
@@ -260,7 +279,6 @@ pageName = "프로젝트 파일";
 						href="https://www.creative-tim.com/presentation" class="nav-link"
 						target="_blank">About Us</a></li>
 					<li class="nav-item"><a href="http://blog.creative-tim.com"
-	
 						class="nav-link" target="_blank">Blog</a></li>
 					<li class="nav-item"><a
 						href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"
@@ -270,6 +288,24 @@ pageName = "프로젝트 파일";
 		</div>
 	</footer>
 
+	<script>
+		function getCmaFileView() {
+			var fileObj = document.fileForm.uploadFile.files[0];
+
+			if (fileObj == null || fileObj == "") {
+
+				alert('파일을 선택해주세요.');
+
+				fileObjValue = '';
+
+				return false;
+
+			}
+
+			return true;
+
+		}
+	</script>
 	<!--   Core   -->
 	<script src="./resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
 	<script

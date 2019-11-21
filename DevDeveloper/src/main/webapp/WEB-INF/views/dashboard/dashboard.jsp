@@ -46,6 +46,10 @@
 	padding: 1.25rem;
 	border-radius: .25rem;
 }
+
+.df{
+  height: 76px
+}
 </style>
 </head>
 <body>
@@ -338,10 +342,10 @@
 									<%-- 	<th scope="row">${fn:substring(qna.qContents,0,8)}</th> --%>
 								<c:forEach items="${myQnaList}" var="qna" end="4">
 										<tr>
-											<th scope="row" style="height: 76px"><a href="qnaNo?qNo=${qna.qNo}">${qna.qTitle}</a></th>
-											<th scope="row" style="height: 76px">${qna.aCount}</th>
-											<th scope="row" style="height: 76px">${qna.aCount}</th>
-											<th scope="row" style="height: 76px">${qna.qDate}</th>
+											<th scope="row" class="df"><a href="qnaNo?qNo=${qna.qNo}">${fn:substring(qna.qTitle,0,15)}</a></th>
+											<th scope="row" class="df">${qna.aCount}</th>
+											<th scope="row" class="df">${qna.aCount}</th>
+											<th scope="row" class="df">${qna.qDate}</th>
 											
 										</tr>
 								</c:forEach>		
@@ -376,10 +380,10 @@
 									<tbody>
 										<c:forEach items="${myAnqList}" var="anq" end="4">
 										<tr>
-											<th scope="row"><a href="qnaNo?qNo=${anq.qNo}">${anq.qTitle}</a></th>
-											<th scope="row">${fn:substring(anq.aContents,0,8)}</th>
-											<th scope="row"></th>
-											<th scope="row">${anq.aDate}</th>
+											<th scope="row" class="df"><a href="qnaNo?qNo=${anq.qNo}">${anq.qTitle}</a></th>
+											<th scope="row" class="df">${fn:substring(anq.aContents,0,8)}</th>
+											<th scope="row" class="df"></th>
+											<th scope="row" class="df">${anq.aDate}</th>
 										</tr>
 										</c:forEach>
 									</tbody>

@@ -16,6 +16,11 @@
 <link href="./resources/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
 <!-- CSS Files -->
 <link href="./resources/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
+
+<script>
+	pageName = "프로젝트공고";
+</script>
+
 </head>
 <body class="">
 <div>

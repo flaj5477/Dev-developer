@@ -228,7 +228,7 @@
 					'<div>'
 						+'<button type="button" id="explain'+i+'">'+i
 					+'</div>';
-			$('#noExp').append(str);	
+			$('#cbtNoExpModal .modal-body').append(str);	
 			if(nolist[i-1] == true) {
 				$('#explain'+i).hide();
 			} 
@@ -259,10 +259,10 @@
 			var nomark = markCheck();
 			flag = 1;
 			if(nomark != 0) { // 아직 못 푼 문제가 있다면?
-				$('.modal-body').html('아직 '+nomark+'개의 안 푼 문제가 남아있습니다. <br> 그래도 답안을 제출 하시겠습니까?');		
+				$('#cbtSubmitModal .modal-body').html('아직 '+nomark+'개의 안 푼 문제가 남아있습니다. <br> 그래도 답안을 제출 하시겠습니까?');		
 			}
 			else { 
-				$('.modal-body').html('최종답안을 제출 하시겠습니까?');		
+				$('#cbtSubmitModal .modal-body').html('최종답안을 제출 하시겠습니까?');		
 			}
 		});
 		
@@ -270,7 +270,7 @@
 			if(flag == 1) {
 				modalWindow.modal('hide');
 				setTimeout(function() {
-					$('.modal-body').html('정말 답안을 제출 하시겠습니까?');
+					$('#cbtSubmitModal .modal-body').html('정말 답안을 제출 하시겠습니까?');
 					modalWindow.modal('show');
 				},400);
 			}
@@ -386,7 +386,20 @@ div.cbtViewer #users {
 	</div>
 	<div id="footer">
 		<div id="noExp">
-			<button type="button" class="btn btn-light" id="noExpBtn"></button>
+			<button type="button" class="btn btn-info" id="noExpBtn" data-toggle="modal" data-target="#cbtNoExpModal">안 푼 문제</button>
+			<div class="modal fade bd-example-modal-sm" id="cbtNoExpModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalCenterTitle">안 푼 문제</h5>
+		        <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body"></div> <!-- Modal 내용 -->
+		    </div>
+		   </div>
+		  </div>
 		</div>
 		<button type="button" class="btn btn-primary" id="confirmBtn" data-toggle="modal" data-target="#cbtSubmitModal">제출하기</button>
 		<!-- Modal -->

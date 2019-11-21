@@ -39,7 +39,7 @@
 				if(grade < level) { // 자기보다 높은 레벨의 시험만 선택
 					$('<tr>').append($('<th>').html('<input type="radio" name="testsNo" value="'+level+'" onclick="chooseEvent()">')) // testsLevel = VO 변수명
 							 .append($('<th>').html(title))
-							 .append($('<th>').html(contents))
+							 .append($('<td align="left">').html(contents))
 							 .append($('<th>').html(force))
 							 .appendTo('#choiceTabBody');
 				}
@@ -75,7 +75,7 @@
 							//location.replace('ready?testsNo='+level); // 페이지 이동, 뒤로가기 하면 현재 페이지 건너 뛴다, GET				
 						}
 						sec--;
-					},100); // n초마다
+					},300); // n초마다
 				});
 			}
 		});

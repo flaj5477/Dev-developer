@@ -77,7 +77,6 @@
 <body>
 <div class="cbtReady" id="tabs">
 	<div id="ready">
-		<input type="hidden" name="level"/>
 		<ul id="subjects">
 			<li id="content1"><a id="tab1" href="#tabs-1">시험 안내사항</a></li>
 			<li id="content2"><a id="tab2" href="#tabs-2">시험 메뉴안내</a></li>
@@ -105,30 +104,31 @@
 		<div id="tabs-3">
 			<div id="comment3"></div>
 			<form action="examination" name="frm" method="post">
-			<button type="button" class="btn btn-info" id="readyBtn" data-toggle="modal" data-target="#cbtReadyModal">시험 시작하기</button>
-			<!-- Modal -->
-			<div class="modal fade" id="cbtReadyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			  <div class="modal-dialog modal-dialog-centered" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h4 class="modal-title" id="exampleModalCenterTitle"><b>시험안내</b></h4>
-			        <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-			      	시험시작을 기점으로 다음 시험까지 유예기간 <b>10일</b>이 주어집니다. <br>
-			      	<b>시작</b>을 선택하면 시험화면으로 이동합니다. <br>
-			      	<b>홈</b>을 선택하면 메인화면으로 이동합니다.
-			      </div> <!-- Modal 내용 -->
-			      <div class="modal-footer">
-			      	<button type="button" id="homeBtn" class="btn btn-warning">홈으로</button>
-			      	<button type="button" id="submitBtn" class="btn btn-primary">시작</button>
-			        <button type="button" id="resetBtn" class="btn btn-secondary" data-dismiss="modal">취소</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
+				<input type="hidden" name="level"/>
+				<button type="button" class="btn btn-info" id="readyBtn" data-toggle="modal" data-target="#cbtReadyModal">시험 시작하기</button>
+				<!-- Modal -->
+				<div class="modal fade" id="cbtReadyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h4 class="modal-title" id="exampleModalCenterTitle"><b>시험안내</b></h4>
+				        <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				      	시험시작을 기점으로 다음 시험까지 유예기간 <b>10일</b>이 주어집니다. <br>
+				      	<b>시작</b>을 선택하면 시험화면으로 이동합니다. <br>
+				      	<b>홈</b>을 선택하면 메인화면으로 이동합니다.
+				      </div> <!-- Modal 내용 -->
+				      <div class="modal-footer">
+				      	<button type="button" id="homeBtn" class="btn btn-warning">홈으로</button>
+				      	<button type="button" id="submitBtn" class="btn btn-primary">시작</button>
+				        <button type="button" id="resetBtn" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
 			</form>
 		</div>
 	</div>

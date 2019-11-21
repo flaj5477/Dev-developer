@@ -9,7 +9,7 @@
 		select count(*) as "getCountProj"
 		from projects
 		<where>
-			<!-- proj_due_date > sysdate  -->
+			and proj_due_date > sysdate 
 			<if test="searchVal != null and searchVal != '' "> 
 					AND PROJ_TITLE LIKE '%' || #{searchVal} || '%'
 			</if>
@@ -32,7 +32,7 @@
 		from projects p join members m
 		on p.members_no = m.members_no
 		<where>
-			<!-- proj_due_date > sysdate  -->
+			and proj_due_date > sysdate 
 			<if test="searchVal != null and searchVal != '' "> 
 					
 					<if test="select == 'title'">

@@ -321,8 +321,10 @@ div[contenteditable] {
 							 transNo : transNo,
 							 membersNo : membersNo  },
 					success: function(){
-						
 						clickObj.removeClass("red");
+						
+						//추천수가져온다
+						$("#rec"+transNo).html("추천수"+getTransRec(transNo));
 					},
 					error:function(){
 						alert("실패");
@@ -338,6 +340,9 @@ div[contenteditable] {
 							 membersNo : membersNo  },
 					success: function(){
 						clickObj.addClass("red");
+						getTransRec(transNo); //추천수가져온다
+						//추천수가져온다
+						$("#rec"+transNo).html("추천수"+getTransRec(transNo));
 					},
 					error:function(){
 						alert("실패");
@@ -347,6 +352,31 @@ div[contenteditable] {
 		});
 	}
 	
+	/*
+		곽동우
+		20191122
+		번역 추천수 가져오기
+	*/
+	function getTransRec(transNo){
+		
+		var rec;
+		
+		//추천 개수 가져온다
+		$.ajax({
+			url : 'getTransRec',
+			type: 'post',
+			data : { transNo : transNo },
+			async : false,
+			success: function(data){
+				rec = data;
+			},
+			error:function(){
+				alert("실패");
+			}
+		});
+		
+		return rec;
+	}
 	
 	
 	/*
@@ -529,7 +559,7 @@ div[contenteditable] {
 				.append($('<div class="row nav nav-pills justify-content-end">').html(  delbtn  ))			   		
 			   	.append($('<div id="otcontents" class="row" >').html(manualAfterBr))   
 			   	.append($('<div class="row nav nav-pills justify-content-end">')
-			   			.append("추천수"+item.rec).append( recBtn ).append($('<badge class="badge badge-primary ml-3">').html("<br>"+item.translDate+" <br> "+item.membersId+"</a>" )))//"<a href=' getWiki= "+item.membersNo +"'>"+
+			   			.append("<span id =rec"+ item.transNo +">추천수"+item.rec+"</span>").append( recBtn ).append($('<badge class="badge badge-primary ml-3">').html("<br>"+item.translDate+" <br> "+item.membersId+"</a>" )))//"<a href=' getWiki= "+item.membersNo +"'>"+
 				.appendTo('#othertrans_'+manualLine);
 		});//each
 	}//wikiTransLineResult

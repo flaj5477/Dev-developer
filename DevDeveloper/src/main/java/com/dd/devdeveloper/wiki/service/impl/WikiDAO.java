@@ -121,4 +121,9 @@ public class WikiDAO {
 	public List<WikiTransVO> getMyWikiTransList(int membersNo) {
 		return mybatis.selectList("WikiDAO.getMyWikiTransList", membersNo);
 	}
+
+	//특정 위키번역 추천수 가져오기
+	public int getTransRec(int transId) {
+		return mybatis.selectOne("WikiDAO.getTransRec", transId);
+	}
 }

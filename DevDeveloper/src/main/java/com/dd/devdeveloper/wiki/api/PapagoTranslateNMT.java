@@ -32,7 +32,7 @@ public class PapagoTranslateNMT {
             int responseCode = con.getResponseCode();
             BufferedReader br;
             if(responseCode==200) { // 정상 호출
-                br = new BufferedReader(new InputStreamReader(con.getInputStream(),"utf-8"));
+                br = new BufferedReader(new InputStreamReader(con.getInputStream(),"utf-8"));	//인코딩 안한상태로 학원 서버로 올리니 한글깨짐
             } else {  // 에러 발생
                 br = new BufferedReader(new InputStreamReader(con.getErrorStream(),"utf-8"));
             }
@@ -46,11 +46,6 @@ public class PapagoTranslateNMT {
             
             transText = response.toString();
             
-            byte[] enText = transText.getBytes();
-            entransText = new String(enText, "utf-8");
-            
-            System.out.println("인코딩파파고=========================="+entransText + "======================");
-            System.out.println("파파고======="+transText+"=======================================");
         } catch (Exception e) {
             System.out.println(e);
         }

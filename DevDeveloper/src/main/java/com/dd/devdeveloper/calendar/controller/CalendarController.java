@@ -1,5 +1,6 @@
 package com.dd.devdeveloper.calendar.controller;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import javax.xml.ws.soap.AddressingFeature.Responses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,8 +46,27 @@ public class CalendarController {
 	@ResponseBody
 	public List<ProjCalendarVO> getToDoList(ProjCalendarVO vo){
 		List<ProjCalendarVO> list = calendarService.getToDoList(vo);
-		System.out.println("할일 조회 컨트롤러+++++++++++++" + vo);
+		System.out.println("할일 조회 컨트롤러+++++++++++++" + list);
 		return list;
+	}
+	
+	//할일 수정
+	@RequestMapping(value="/updateToDoList", method=RequestMethod.PUT, consumes = "application/json")
+	@ResponseBody
+	public Map updateToDoList(@RequestBody List<ProjCalendarVO> list) {
+		System.out.println("할일수정 컨드롤러 진입!!!!!!!!!!!!!!!!!!");
+		
+		int success = 0;
+		
+		for(int i=0;i<list.size();i++) {
+			success  += calendarService.updateToDoList(list.get(i)); //성공한 갯수 카운트
+		}
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("result", true);
+		map.put("total", list.size());
+		map.put("success", success);
+		return map;
 	}
 
 	// 엑셀 업로드 폼

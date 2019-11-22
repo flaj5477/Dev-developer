@@ -161,24 +161,25 @@ div.cbtReady #cbtReadyModal {
 	left: 4%;
 	position: fixed;
 }
-
+div.cbtViewer {
+	margin-bottom: 100em;
+}
 div.cbtViewer #questView table {
 	width:550px;
 }
-
 div.cbtViewer #putView {
 	position: absolute;	
-	top: 125px;
-	right: 240px;
+	top: 85px;
+	height: 800px;
+	right: 265px;
 	padding: 3px 10px;
+	overflow: scroll;
 }
 
+div.cbtViewer #explain {
+	width: 100px;
+}
 div.cbtViewer #noExp {
-	margin : 3px;
-	left: 3%;
-}
-
-div.cbtViewer #confirm {
 	margin : 3px;
 	left: 3%;
 }

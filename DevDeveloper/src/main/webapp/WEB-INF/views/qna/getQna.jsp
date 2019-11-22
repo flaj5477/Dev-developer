@@ -52,7 +52,7 @@
 						<div class="question-content-left">
 							<ul>
 								<li class="question-vote-count licount" style="margin-bottom: 5px;">${questionVO.qLikeCount}</li>
-								<li><a class="rec_update" type="1" no="${qna.qNo}"> <i class="fa fa-star fa-2x" 
+								<li><a class="rec_update" type="1" no="${qna.qNo}" style="cursor:pointer"> <i class="fa fa-star fa-2x" 
 									
 										aria-hidden="true"></i>
 								</a></li>
@@ -115,7 +115,7 @@
                         <div class="answer-content-left">
                             <ul>
 								<li class="question-vote-count licount" style="margin-bottom: 5px;">${ans.aLikeCount}</li>
-								<li><a class="rec_update" type="2" no="${ans.aNo}"> <i class="fa fa-star fa-2x"
+								<li><a class="rec_update" type="2" no="${ans.aNo}" style="cursor:pointer"> <i class="fa fa-star fa-2x"
 										aria-hidden="true"></i>
 								</a></li>
 							</ul>
@@ -209,7 +209,12 @@
             	$('#modal-login').on('show.bs.modal', function (e) {	 
             	    $(this).find('.modal-content').load("login2");
             	});
-
+		
+            	
+            	     	
+            	
+            	
+        /* ---------------------- */    	
             	
  $(function(){
 		/*--------------------------------
@@ -229,8 +234,13 @@
                     
                 },
                 success: function (data) {
-                	li.html(data);
-                	star.css('color', '#eca912');
+                	li.html(data.count);
+                	
+                	if(data.result == 0){
+                		star.css('color', '#eca912');
+                	}else
+                		star.css('color', '#c1b28f');
+                	
                 }
                 	
                
@@ -313,6 +323,10 @@
 	 			return false; 
 	 		} 
  		})
+ 		
+ 		
+    
+ 		
 })
 	 		
 </script>

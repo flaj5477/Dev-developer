@@ -11,14 +11,6 @@
 </script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/qna.css">
-<%-- <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/test2.css">
-	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/js/test1.js">
-	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/js/test2.js">
-	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/js/test3.js"> --%>
 <link href="//fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script> <!-- @@@ 이거 에디터 스크립트입니다. -->
 <link href="${pageContext.request.contextPath}/resources/ckeditor/plugins/codesnippet/lib/highlight/styles/obsidian.css" rel="stylesheet">

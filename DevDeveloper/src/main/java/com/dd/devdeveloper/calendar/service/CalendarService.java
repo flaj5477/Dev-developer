@@ -18,5 +18,7 @@ public interface CalendarService {
 
 	//하루 할일 가져오기
 	public List<ProjCalendarVO> getToDoList(ProjCalendarVO vo);
+
+	public int updateToDoList(ProjCalendarVO projCalendarVO);
 	
 }

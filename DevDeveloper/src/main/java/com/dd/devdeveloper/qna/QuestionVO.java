@@ -22,9 +22,25 @@ public class QuestionVO {
 	private int first;	//페이징 시작 게시글 번호
 	private int last;	//페이징 종료 게시글 번호
 	private String orderby; //정렬
+	private int qLikeCount;
+	private int count;
 	
 	
 	
+	
+	
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getqLikeCount() {
+		return qLikeCount;
+	}
+	public void setqLikeCount(int qLikeCount) {
+		this.qLikeCount = qLikeCount;
+	}
 	public int getaCount() {
 		return aCount;
 	}
@@ -143,8 +159,12 @@ public class QuestionVO {
 				+ ", qCode=" + qCode + ", qDate=" + qDate + ", qViews=" + qViews + ", qTags=" + qTags + ", membersId="
 				+ membersId + ", membersImage=" + membersImage + ", aCount=" + aCount + ", aNo=" + aNo + ", aContents="
 				+ aContents + ", aDate=" + aDate + ", searchVal=" + searchVal + ", first=" + first + ", last=" + last
-				+ ", orderby=" + orderby + "]";
+				+ ", orderby=" + orderby + ", qLikeCount=" + qLikeCount + ", count=" + count + "]";
 	}
+	
+	
+
+	
 	
 	
 	

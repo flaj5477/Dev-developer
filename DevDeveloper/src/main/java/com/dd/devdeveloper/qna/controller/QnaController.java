@@ -2,6 +2,8 @@ package com.dd.devdeveloper.qna.controller;
 
  
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -111,37 +113,50 @@ public class QnaController {
 		//상세보기
 		@RequestMapping(value ="/qnaNo")
 		public String getQna(QuestionVO vo,Model model, HttpSession session, AnswerVO avo) {
-			qnaService.updateViews(vo.getqNo());
+			 qnaService.updateViews(vo.getqNo());
+			 vo.setqLikeCount(qnaService.countRec(vo.getqNo()));
 			 model.addAttribute("qna",qnaService.getQna(vo));
 //			 session.setAttribute("title", vo.getqTitle());
 			 avo.setqNo(vo.getqNo());
-			 model.addAttribute("anslist",qnaService.getAnq(avo));
-			 System.out.println("dddddddddd"+qnaService.getAnq(avo));
-			 
+			 List<AnswerVO> voo = qnaService.getAnq(avo);
+			 model.addAttribute("anslist",voo);
+		
 			return "qna/getQna";
 		}
 		
 		//좋아요
 		 @ResponseBody
 		 @RequestMapping(value="/recUpdate", method=RequestMethod.POST)
-		  public String like(RecListVO vo, HttpSession session){
+		  public Map<String, Object> like(RecListVO vo, HttpSession session){
 			 MembersVO membersNo = (MembersVO) session.getAttribute("members");
 			 vo.setMembersNo(membersNo.getMembersNo());
-			 
-		/*
-		 * HashMap<String, Object> hm = new HashMap<String, Object>(); hm.put("qaNo",
-		 * vo.getQaNo()); hm.put("membersNo", vo.getMembersNo());
-		 */
+
+		
 			 int result = qnaService.readRec(vo);
 			 System.out.println("11111111111"+result);
+			 int count = 0;
 			 
 			 if(result == 0) {
 				 qnaService.insertRec(vo);
 			 }else {
 				 qnaService.deleteRec(vo);
 			 }
+			 System.out.println("asadasafsadsadsadsadasd"+ vo);
+			 //조회수
+			 if(vo.getQaType() == 1) {
+				count = qnaService.countRec(vo.getQaNo());
+			 }else
+				count = qnaService.acountRec(vo.getQaNo());
 			 
-			 
-		return "" ;
+				
+		 HashMap<String, Object> hm = new HashMap<String, Object>(); 
+		 hm.put("result", result); 
+		 hm.put("count", count);
+			  
+			 return hm; 
 		 }
-}
+		 
+		 
+		 
+ }
+

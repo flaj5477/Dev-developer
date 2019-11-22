@@ -26,4 +26,8 @@ public class ProjCalendarDAO {
 	public List<ProjCalendarVO> getToDoList(ProjCalendarVO vo){
 		return mybatis.selectList("CalendarDAO.getToDoList",vo);
 	}
+
+	public int updateToDoList(ProjCalendarVO projCalendarVO) {
+		return mybatis.update("CalendarDAO.updateToDoList", projCalendarVO);
+	}
 }

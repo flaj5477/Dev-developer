@@ -510,7 +510,19 @@ public class WikiServiceImpl implements WikiService {
 	 ================*/
 	public List<WikiTransVO> getMyWikiTransList(int membersNo) {
 		return wikiDAO.getMyWikiTransList(membersNo);
-	}	
+	}
+	
+	/* ==============
+	 곽동우
+	 20191122
+	 특정 위키번역 추천수 가져오기
+	 ================*/
+	public int getTransRec(int transId) {
+		Integer rec = wikiDAO.getTransRec(transId);
+		System.out.println(rec + "  ===================fdfsd==============");
+		if(rec == null) rec = 0;
+		return rec;
+	}
 	
 	
 	////////// 파일

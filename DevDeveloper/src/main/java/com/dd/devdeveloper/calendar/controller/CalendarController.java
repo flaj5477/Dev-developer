@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.soap.AddressingFeature.Responses;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +29,16 @@ public class CalendarController {
 	//캘린더 홈 화면 출력
 	@RequestMapping("/getProjCalendar")
 	public String getProjCalendar() {
-		
 		return "files/calendar"; //캘린더 페이지로 이동
 	}
 	
 	//캘린더 데이터 조회
 	@RequestMapping(value="/getProjCalendarData", method=RequestMethod.GET)
 	@ResponseBody
-	public List<ProjCalendarVO> getProjCalendarData(ProjCalendarVO vo){
+	public List<ProjCalendarVO> getProjCalendarData(ProjCalendarVO vo, HttpSession session){
+		System.out.println("프로젝트 넘버----------->" + session.getAttribute("projNo"));
+		vo.setProjNo((int)session.getAttribute("projNo"));
+		
 		List<ProjCalendarVO> list = calendarService.getProjCalendarData(vo);
 		System.out.println("캘린더 조회 결과:::::::::::::::::::::::::::::::" + list);
 		return list;
@@ -44,7 +47,8 @@ public class CalendarController {
 	//하루 할일 조회
 	@RequestMapping(value="/getToDoList", method=RequestMethod.GET)
 	@ResponseBody
-	public List<ProjCalendarVO> getToDoList(ProjCalendarVO vo){
+	public List<ProjCalendarVO> getToDoList(ProjCalendarVO vo, HttpSession session){
+		vo.setProjNo((int)session.getAttribute("projNo"));
 		List<ProjCalendarVO> list = calendarService.getToDoList(vo);
 		System.out.println("할일 조회 컨트롤러+++++++++++++" + list);
 		return list;
@@ -77,7 +81,8 @@ public class CalendarController {
 
 	//엑셀 업로드 처리
 	@RequestMapping(value = "excelUpload", method = RequestMethod.POST)
-	public String ExcelUplod(ProjCalendarVO vo, MultipartHttpServletRequest request, Model model) {
+	public String ExcelUplod(ProjCalendarVO vo, MultipartHttpServletRequest request, Model model, HttpSession session) {
+		vo.setProjNo((int)session.getAttribute("projNo"));
 
 		MultipartFile file = null;
 		Iterator<String> iterator = request.getFileNames();

@@ -73,7 +73,7 @@
 									<div class="d-flex justify-content-between">
 										<button type="button" class="btn btn-sm btn-info mr-4" data-toggle="modal" data-target=".bd-example-modal-lg">응시기록 열람</button>
 										<!-- <a href="#" class="btn btn-sm btn-info mr-4">Connect</a> -->
-										<a href="#" class="btn btn-sm btn-default float-right">Message</a>
+										<!-- <a href="#" class="btn btn-sm btn-default float-right">Message</a> -->
 									</div>
 								</div>
 								<div class="card-body pt-0 pt-md-4 mt-5">
@@ -269,10 +269,10 @@
 																			<td>${projApplicant.status }</td>
 																			<td>
 																				<div class="d-flex align-items-center">
-																					<span class="mr-2">60%</span>
+																					<span class="mr-2">${projApplicant.progress }%</span>
 																					<div>
 																						<div class="progress">
-																							<div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="-10" aria-valuemin="0" aria-valuemax="100" style="width: -10%;"></div>
+																							<div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="${projApplicant.progress }" aria-valuemin="0" aria-valuemax="100" style="width: ${projApplicant.progress }%;"></div>
 																						</div>
 																					</div>
 																				</div>

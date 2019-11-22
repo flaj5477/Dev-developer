@@ -79,10 +79,7 @@
 				getCal(date);
 			},
 			droppable : true,
-			events : data,
-			backgroundColor: 'green',
-		      borderColor: 'green',
-		      textColor: 'yellow'
+			events : data
 		});
 		calendar.render();
 	}

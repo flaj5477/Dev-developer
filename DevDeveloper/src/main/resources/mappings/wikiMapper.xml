@@ -312,9 +312,7 @@
         		and a.MEMBERS_NO = d.MEMBERS_NO
 				and a.MANUAL_NO = #{manualNo}
 				and a.MANUAL_LINE = #{manualLine}
-				order by "rec" desc
-		     
-		     
+				order by "rec" desc , a.TRANS_DATE desc
 		     </if>
 		     
 		     <!-- 
@@ -455,4 +453,13 @@
       		AND a.MANUAL_LINE is not null
       		order by a.TRANS_DATE desc
 	    </select>
+	    
+	    <!-- 
+	   	 20191122
+	   	 특정 번역 추천수 가져오기
+	    -->
+	    <select id="getTransRec" parameterType="int" resultType="int">
+	    	select count(*) from WIKI_TRANS_REC where TRANS_NO = #{transNo}
+	    </select>
+	    
 </mapper>

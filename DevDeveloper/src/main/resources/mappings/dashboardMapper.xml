@@ -66,7 +66,20 @@
 	
 	<!-- 프로젝트 지원자 리스트 -->
 	<select id="getProjApplicantsList" parameterType="projApplicants" resultType="projApplicants">
-		select 	p.apply_no, 
+		select apply_no, 
+				members_no, 
+        proj_no, 
+				status, 
+        participant_name,
+				email,
+				phone_no,
+				address,
+				cover_letter,
+        members_image,
+        members_id,
+       case when success_to_do>0 then round((success_to_do/total_to_do)*100) else 0 end progress
+from (
+select 	p.apply_no, 
 				p.members_no, 
 				p.proj_no, 
 				p.status, 
@@ -76,11 +89,13 @@
 				p.address,
 				p.cover_letter,
         		m.members_image,
-        		m.members_id
+        		m.members_id,
+            (select  count(*) from proj_calendar where proj_no=p.proj_no and developer_no=m.members_no) total_to_do,
+            (select count(*) from proj_calendar where proj_no=p.proj_no and developer_no=m.members_no and task_complete='y') success_to_do
 		from PROJ_APPLICANTS_STATUS_VIEW p join members m
     	on p.members_no = m.members_no
-		where proj_no in ( select proj_no from PROJECTS where members_no=#{pmNo})
-		order by status_no
+		where proj_no in ( select proj_no from PROJECTS where members_no= #{pmNo})
+		order by status_no) a
 	</select>
 	
 	<!-- 내가 올린 프로젝트 리스트 가져오기 -->

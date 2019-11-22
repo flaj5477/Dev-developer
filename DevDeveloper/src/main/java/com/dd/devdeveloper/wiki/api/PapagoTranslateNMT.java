@@ -54,6 +54,6 @@ public class PapagoTranslateNMT {
         } catch (Exception e) {
             System.out.println(e);
         }
-		return entransText;
+		return transText+entransText;
 	}
 }

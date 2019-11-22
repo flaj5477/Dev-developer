@@ -18,6 +18,9 @@ public class ProjApplicantsVO {
 	private String membersImage;
 	private String membersId;
 	
+	//진척률
+	private int progress;
+	
 	private String projTitle;
 	private int pmNo; //프로젝트 pm(공고낸사람)번호
 	

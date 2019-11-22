@@ -33,28 +33,54 @@
 <script>
 	pageName = "휴지통";
 	
+	// 복원
    	function filesTrash() {
-		
-		$.ajax({ type: "POST",
-			url: 'filesTrash',
-			data:{filesNo: $('[name="chk_files"]:checked').val()},
-			success: function (result) { 
+	    var trashList = [];
+	    $("input[name='chk_files']:checked").each(function(i) {
+			var trashObj = {};
+			trashObj["filesNo"] = $(this).val();
+			trashList.push(trashObj);
+	    });
+	    var trashData = JSON.stringify(trashList);
+		console.log(trashData);
+	    $.ajax({
+			type : "POST",
+			url : 'filesTrash',
+			dataType : "json",
+			data : trashData,
+			contentType : "application/json",
+			success : function(response) {
 				location.reload();
-				
 			},
-			error: function (e) { } });
+			error : function(xhr, status, msg) {
+				alert("status : " + status + " / err msg : " + msg);
+			}
+		});
 	}
    	
+	// 영구삭제
    	function deleteFiles() {
-		
-		$.ajax({ type: "POST",
-			url: 'deleteFiles',
-			data:{filesNo: $('[name="chk_files"]:checked').val()},
-			success: function (result) { 
+	    var trashList = [];
+	    $("input[name='chk_files']:checked").each(function(i) {
+			var trashObj = {};
+			trashObj["filesNo"] = $(this).val();
+			trashList.push(trashObj);
+	    });
+	    var trashData = JSON.stringify(trashList);
+		console.log(trashData);
+	    $.ajax({
+			type : "POST",
+			url : 'deleteFiles',
+			dataType : "json",
+			data : trashData,
+			contentType : "application/json",
+			success : function(response) {
 				location.reload();
-				
 			},
-			error: function (e) { } });
+			error : function(xhr, status, msg) {
+				alert("status : " + status + " / err msg : " + msg);
+			}
+		});
 	}
 	
 </script>

@@ -17,28 +17,44 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dd.devdeveloper.common.paging.Paging;
 import com.dd.devdeveloper.members.MembersVO;
+import com.dd.devdeveloper.projects.ProjectsVO;
 import com.dd.devdeveloper.qna.AnswerVO;
 import com.dd.devdeveloper.qna.QuestionVO;
 import com.dd.devdeveloper.qna.RecListVO;
 import com.dd.devdeveloper.qna.service.QnaService;
+import com.dd.devdeveloper.tags.service.TagsService;
 
 
 @Controller
 public class QnaController {
 
 		@Autowired QnaService qnaService;
+		@Autowired TagsService tagsService;
 		
 		//qna목록
 		@RequestMapping("/qna")
 		public String qnaList(Model model, QuestionVO vo, Paging paging) {
-			model.addAttribute("qnaList", qnaService.qnaList(vo, paging));
+			List<QuestionVO> qnaList = qnaService.qnaList(vo, paging);
+			 
+			
+			for(int i=0;i<qnaList.size();i++) {
+				String tags = qnaList.get(i).getqTags(); //스트링으로 연결되어있는 tags를
+				QuestionVO qvo = qnaList.get(i);
+				qvo.setDivTagList(tagsService.divTag(tags)); //잘라서 list 형식으로 넣어줌
+				qnaList.set(i, qvo);             // 동우 화정 꺼 참고
+			}
+			
+			
+			
+			model.addAttribute("qnaList", qnaList);
 			model.addAttribute("paging", paging);
 			return "qna/homeQna";
 		}
 		
 		//등록폼
 		@RequestMapping(value ="/insertQna", method=RequestMethod.GET)
-		public String insertQnaGet() {
+		public String insertQnaGet(Model model) {
+			model.addAttribute("tagList", tagsService.getTagList());
 			return "qna/insertQna";
 		}
 		
@@ -56,7 +72,7 @@ public class QnaController {
 		public String updateQnaGet(QuestionVO vo, Model model) {
 			
 			model.addAttribute("qna",qnaService.getQna(vo));
-	
+			model.addAttribute("tagList", tagsService.getTagList());
 			return "qna/updateQna";
 		}
 		

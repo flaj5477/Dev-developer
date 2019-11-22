@@ -519,8 +519,6 @@ public class WikiServiceImpl implements WikiService {
 	 ================*/
 	public int getTransRec(int transId) {
 		Integer rec = wikiDAO.getTransRec(transId);
-		System.out.println(rec + "  ===================fdfsd==============");
-		if(rec == null) rec = 0;
 		return rec;
 	}
 	

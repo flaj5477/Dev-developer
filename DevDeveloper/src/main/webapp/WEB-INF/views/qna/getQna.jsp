@@ -102,7 +102,7 @@
 				</div>	
 			</div>	 
 			<c:if test="${not empty anslist}">
-			<div class="col-xs-12 qqqcard qqqcard-tab">
+			<div class="col-xs-12 qqqcard qqqcard-tab" style="border-top: 1px solid #cdb8f3;">
                 <div class="main-qqqtopbar-wrapper">
                     <h2 class="title pull-left">
                         ${fn:length(anslist)} 답변                

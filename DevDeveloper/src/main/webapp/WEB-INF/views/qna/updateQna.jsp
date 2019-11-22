@@ -23,7 +23,11 @@
 <script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 <link href="${pageContext.request.contextPath}/resources/ckeditor/plugins/codesnippet/lib/highlight/styles/obsidian.css" rel="stylesheet">
  <script src="${pageContext.request.contextPath}/resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
- 
+ <link
+	href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
  
 	<script>
 	pageName = "Q & A";
@@ -57,10 +61,12 @@
 							<div class="qqrow">
 								<div class="col-xs-10 tags">
 									<h5 style="font-size: 12px; color: #6a737c;">태그</h5>
-									<div class="bootstrap-tagsinput">
-									<input class ="insert" type="text" name="tags" id="id_tags"/>
-									</div>
-									<input class ="insert" type="text" name="tags" id="id_tags" style="display: none;">	
+										<select class="form-control" id="manualTags" name="qTags"
+											multiple="multiple">
+											<c:forEach items="${tagList}" var="tag">
+												<option>${tag.tagsTitle }</option>
+											</c:forEach>
+										</select>								
 								</div>
 							</div>
 							<div class="qqrow item" style="margin-top: 15px">

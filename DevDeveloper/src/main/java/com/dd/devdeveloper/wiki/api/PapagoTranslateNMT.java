@@ -45,6 +45,11 @@ public class PapagoTranslateNMT {
             br.close();
             
             transText = response.toString();
+            
+            byte[] enText = transText.getBytes();
+            String entransText = new String(enText, "utf-8");
+            
+            System.out.println("인코딩파파고=========================="+entransText + "======================");
             System.out.println("파파고======="+transText+"=======================================");
         } catch (Exception e) {
             System.out.println(e);

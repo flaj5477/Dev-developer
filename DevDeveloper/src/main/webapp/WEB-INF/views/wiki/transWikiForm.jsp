@@ -121,6 +121,12 @@ div[contenteditable] {
 	
 		
 	});
+	
+	//태그클릭
+	function clickTag(e,tag){
+		//e.stopPropagation();
+		location = "wikihome?select=tags&page=1&searchVal="+encodeURIComponent(tag);	// encodeURIComponent(tag) get방식은 파라미터넘길때 인코딩 해줘야함
+	}
 
 	/*
 		위키버튼 클릭이벤트

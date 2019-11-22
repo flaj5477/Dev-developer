@@ -26,12 +26,15 @@
 	$(function(){
 		
 		btnControl();
+		
 	});
 	
-	function add(){
-	     
+	//태그클릭
+	function clickTag(e,tag){
+		//e.stopPropagation();
+		location = "wikihome?select=tags&page=1&searchVal="+encodeURIComponent(tag);	// encodeURIComponent(tag) get방식은 파라미터넘길때 인코딩 해줘야함
 	}
-
+	
 	function btnControl(){
 		$('#btnDelWiki').on('click', function(){
 			/* document.frm.action.value = "deleteWiki";
@@ -60,6 +63,8 @@
 		$('#btnGetTransWiki').on('click', function(){
 			$("#frm").attr("action", "getWikiTrans").submit();
 		});
+		
+		
 	}
 
 </script>

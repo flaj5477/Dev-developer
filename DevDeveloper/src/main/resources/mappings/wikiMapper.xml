@@ -312,9 +312,7 @@
         		and a.MEMBERS_NO = d.MEMBERS_NO
 				and a.MANUAL_NO = #{manualNo}
 				and a.MANUAL_LINE = #{manualLine}
-				order by "rec" desc
-		     
-		     
+				order by "rec" desc , a.TRANS_DATE desc
 		     </if>
 		     
 		     <!-- 

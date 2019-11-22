@@ -23,5 +23,6 @@ public class ProjCalendarVO {
 	private String title;
 	private String start;
 	private String end;
+	private String color;
 	
 }

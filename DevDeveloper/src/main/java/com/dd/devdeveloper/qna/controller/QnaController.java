@@ -3,6 +3,7 @@ package com.dd.devdeveloper.qna.controller;
  
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -126,14 +127,11 @@ public class QnaController {
 		//좋아요
 		 @ResponseBody
 		 @RequestMapping(value="/recUpdate", method=RequestMethod.POST)
-		  public int like(RecListVO vo, HttpSession session){
+		  public Map<String, Object> like(RecListVO vo, HttpSession session){
 			 MembersVO membersNo = (MembersVO) session.getAttribute("members");
 			 vo.setMembersNo(membersNo.getMembersNo());
-			 
-		/*
-		 * HashMap<String, Object> hm = new HashMap<String, Object>(); hm.put("qaNo",
-		 * vo.getQaNo()); hm.put("membersNo", vo.getMembersNo());
-		 */
+
+		
 			 int result = qnaService.readRec(vo);
 			 System.out.println("11111111111"+result);
 			 int count = 0;
@@ -150,8 +148,12 @@ public class QnaController {
 			 }else
 				count = qnaService.acountRec(vo.getQaNo());
 			 
+				
+		 HashMap<String, Object> hm = new HashMap<String, Object>(); 
+		 hm.put("result", result); 
+		 hm.put("count", count);
 			  
-			 return count; 
+			 return hm; 
 		 }
 		 
 		 

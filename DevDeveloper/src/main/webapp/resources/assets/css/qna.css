@@ -111,7 +111,7 @@
 .main-qqqcontainer .main-qqqfilter .active {
 	border: 1px solid #adb3b9;
 	border-bottom: 0;
-	border-top: 3px solid #793bea;
+	border-top: 3px solid #574775;
 	border-bottom: 2px solid #FFFFFF;
 	background-color: #fff;
 	border-radius: 4px;
@@ -219,7 +219,7 @@
 .question-qqqtable .question-qqqcontent .question-qqqtitle a,
 	.vote-table .vote-content .question-qqqtitle a {
 	font-size: 16px;
-	color: #005999;
+	color: #626971;
 	font-weight: 400;
 }
 
@@ -270,7 +270,7 @@
 	display: inline-block;
 	text-align: center;
 	font-size: 11px;
-	color: #999;
+	color: #6c7279;
 }
 
 .main-question-list .question-qqqstatistic>li, .question-qqqtable .question-qqqstatistic>li
@@ -289,7 +289,7 @@
 	line-height: 3;
 	margin-bottom: 2px;
 	font-size: 14px;
-	color: #6a737c;
+	color: #576471;
 	font-weight: 500;
 }
 
@@ -625,7 +625,7 @@
 }
 
 .qqqcard-tab {
-	border-top: 1px solid #cdb8f3;
+	border-top: 1px solid #574775;
 	margin-top: 30px;
 }
 
@@ -669,7 +669,7 @@
 
 .question-qqqtable .question-qqqauthor a {
 	font-size: 13px;
-	color: #07C;
+	color: #3e74b3;
 }
 
 .qqqhomepage .archive-group-qqqcard {
@@ -821,7 +821,7 @@ input.insert[type="text"] {
 }
  */
 .qqqbutton {
-	background-color: #8a57e6;
+	background-color: #574775;
 	color: white;
 	font-weight: 400;
 	font-size: 0.700rem !important;
@@ -831,7 +831,7 @@ input.insert[type="text"] {
 
 
 .page-item.active .page-link {
-	background-color: #793bea;
+	background-color: #574775;
     border-color: #ffffff;
 }
 
@@ -1142,14 +1142,14 @@ input.insert[type="text"] {
 
 .ddd {
     
-    border: 1px solid #cdb8f3 !important;
-
+  /*   border: 1px solid #cdb8f3 !important; */
+		background-color :#c0d2e6;
 }
 
 .fff {
     
-    border: 1px solid #9764f3 !important;
-
+  /*   border: 1px solid #7ea5d6 !important; */
+		background-color :#d2eaea;
 }
 
 .qUp{

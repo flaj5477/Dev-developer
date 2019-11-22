@@ -45,11 +45,11 @@
 
 .filebox label {
 	display: inline-block;
-	color: #fff;
+	color: black;
 	font-size: inherit;
 	line-height: normal;
 	/* vertical-align: middle; */
-	background-color: #5e72e4;
+	background-color: white;
 	cursor: pointer;
 	border: 1px solid transparent;
 	border-bottom-color: #e2e2e2;
@@ -94,7 +94,7 @@ form#signForm {
 	width: 320px;
 	padding: 10px 25px 10px;
 	margin: 30px auto;
-	background: #f0f2ff;
+	background: #828bc3;
 	display: flex;
 	flex-direction: column;
 }
@@ -102,35 +102,15 @@ form#signForm {
 </head>
 <body>
 	<!-- Table -->
-	<div class="header bg-gradient-primary py-7 py-lg-8">
-		<div class="container">
-			<div class="header-body text-center mb-5">
-				<div>
-					<div>
-						<h1 class="text-white">ddddddddddd!</h1>
-						<p class="text-lead text-light">ㅎddddddddddd.</p>
-					</div>
-				</div>
-			</div>
+	<div class="header py-7 py-lg-8" style="background-color : white">
+		<div class="container" style ='text-align: center;'>
+		<img src="${pageContext.request.contextPath}/images/profile/DevDeveloper.png">
 		</div>
 	</div>
 
 
 	<form action="signup" method="post" id="signForm"
-		enctype="multipart/form-data" style="width: 450px">
-<!-- 		<div style="text-align : center; padding:0px 0px 7px 0px;">
-			<div class="custom-control custom-radio mb-3" style ="display : inline-block">
-				<input name="membersType" class="custom-control-input"
-					id="customRadio5" checked="checked" type="radio" value="일반">
-				<label class="custom-control-label" for="customRadio5" style="color : #6e767d">일반</label>
-			</div>
-			&nbsp;
-			<div class="custom-control custom-radio mb-3" style ="display : inline-block">
-				<input name="membersType" class="custom-control-input"
-					id="customRadio6" value="기업" type="radio"> <label
-					class="custom-control-label" for="customRadio6" style="color : #6e767d">기업</label>
-			</div>
-		</div> -->
+		enctype="multipart/form-data" style="width: 450px; background-color:#828bc3">
 
 
 		<div class="form-group">
@@ -197,7 +177,7 @@ form#signForm {
 					style="width: 40%; display: inline-block" placeholder="　우편번호"
 					name="sample3_postcode" id="sample3_postcode" type="text"
 					readonly="readonly" > &nbsp;&nbsp;
-				<button style="padding: 0.525rem 0.7rem; background-color : #5e72e4; color : white" type="button" class="btn" 
+				<button style="padding: 0.525rem 0.7rem; background-color : #ffffff; color : black" type="button" class="btn" 
 					onclick="sample3_execDaumPostcode()">
 					<i class="fa fa-search"></i> 우편번호 찾기
 				</button>
@@ -226,7 +206,7 @@ form#signForm {
 				id="ex_filename" name="membersImage4" class="upload-hidden"
 				onchange="fileCheck(this)" accept="image/jpeg, image/png"><br><div style="
     				font-size: 14px;
-   						 color: #aeb1b5;">&nbsp;&nbsp;JPG,JPEG,PNG 파일만 가능합니다.</div>
+   						 color: #ffffff;">&nbsp;&nbsp;JPG,JPEG,PNG 파일만 가능합니다.</div>
 		</div> 
 
 
@@ -237,7 +217,8 @@ form#signForm {
 	</div>  -->
 
 		<div class="text-center">
-			<button type="submit" class="btn btn-primary mt-4" id="usercheck" style ="padding: 0.535rem 1rem">회원가입</button>
+			<button type="submit" class="btn btn-primary mt-4" id="usercheck" style ="padding: 0.535rem 1rem ;color: black;
+    background-color: white;" >회원가입</button>
 		</div>
 		<br>
 		<br> <input type="hidden" id="membersAddr" name="membersAddr" />

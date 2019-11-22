@@ -67,6 +67,7 @@ public class DashboardController {
 		//내가 올린 프로젝트공고에 지원한 지원자 리스트 가져옴
 		projParticipantsVO.setPmNo(membersNo);
 		List<ProjApplicantsVO> projApplicantsList = dashboardService.getProjApplicantsList(projParticipantsVO) ;
+		
 		JSONArray jsonArray = new JSONArray();
 		model.addAttribute( "projApplicantsList", projApplicantsList);
 		model.addAttribute("jsonProjApplicantsList", jsonArray.fromObject(projApplicantsList)  );

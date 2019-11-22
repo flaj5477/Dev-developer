@@ -269,10 +269,10 @@
 																			<td>${projApplicant.status }</td>
 																			<td>
 																				<div class="d-flex align-items-center">
-																					<span class="mr-2">60%</span>
+																					<span class="mr-2">${projApplicant.progress }%</span>
 																					<div>
 																						<div class="progress">
-																							<div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="-10" aria-valuemin="0" aria-valuemax="100" style="width: -10%;"></div>
+																							<div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="${projApplicant.progress }" aria-valuemin="0" aria-valuemax="100" style="width: ${projApplicant.progress }%;"></div>
 																						</div>
 																					</div>
 																				</div>

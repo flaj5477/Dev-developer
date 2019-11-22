@@ -221,7 +221,7 @@
 	function questEvent(no) { // 안 푼 문제, 버튼 추가 이벤트
 		if(no != null) { // 리스트에 값이 있다면..
 			nolist[no-1] = true; // return true;
-			$('#noExp').empty();		
+			$('#cbtNoExpModal .modal-body').empty();		
 		}
 		for(var i=1;i<=size;i++) {
 			var str = 
@@ -239,16 +239,17 @@
 		$('#footer').on('click','div>button',function() { // div>button : div태그의 자식만을 지칭함(단일대상), on('click',div>button..) :  태그에 대한 부모(이벤트)위임 button이 부모가 된다.
 		//현재 questEvent에서 footer에서 empty()시키기 때문에 empEvent가 두번 째 실행 될 때 기존에 있는 버튼은 사라졌으므로 focusEvent실행되고나서 클릭해도 이벤트 발생이 되지 않는다.
 		// 이벤트 전파, 이벤트 위임 참고
+			$('#cbtNoExpModal').modal('hide');
 			offset.splice(0,size); // 기존 offset 값 모두 삭제
 			for(var i=1;i<=size;i++) { // offset값 push
 				offset.push($('#questNo'+i).offset());
 			}
 			var value = parseInt($(this).text())-1;
-			var offsetValue = offset[value]["top"];
+			var offsetValue = offset[value].top;
 			$('html, body').animate({
 				scrollTop : offsetValue
 			},10);
-		})
+		});
 	}
 	
 	function submitEvent() { // 제출 버튼에 관한 이벤트
@@ -299,12 +300,12 @@
 		var marklist = [];
 		for(var i=1;i<=size;i++) {
 			var markobj = {
-					"key" : questKey[i-1],
-					"value" : parseInt($('[name="putNum'+i+'"]:checked').val())
+					"key" : questKey[i-1], // 문제 key(no)값
+					"value" : parseInt($('[name="putNum'+i+'"]:checked').val()) // radio 선택한 문제 값
 			};
 			marklist.push(markobj);
 		}
-		var param = JSON.stringify({
+		var param = JSON.stringify({ // 전송할 데이터들..
 			rid : rid,
 			user : user,
 			level : level,
@@ -320,7 +321,7 @@
 			contentType:'application/json',
 			data: param,
 			success: function(response) {
-				if(response.result == true) {
+				if(response.result == true) { // 응답객체.. result = true면 결과창으로 이동
 					frm.response.value = true;
 					document.frm.submit();
 				}
@@ -329,28 +330,6 @@
 	}
 </script>
 <style>
-div.cbtViewer #header {
-	top: 3%;
-	left: 5%;
-	width: max;
-	height: 200px;
-	position: static;
-}
-div.cbtViewer #title {
-	top: 2%;
-	left: 5%;
-	position: absolute;
-}
-div.cbtViewer #subTitle {
-	top: 2%;
-	left: 20%;
-	position: absolute;
-}
-div.cbtViewer #users {
-	top: 2%;
-	left: 60%;
-	position: absolute;
-}
 </style>
 </head>
 <body onload="getTest()">
@@ -387,19 +366,19 @@ div.cbtViewer #users {
 	<div id="footer">
 		<div id="noExp">
 			<button type="button" class="btn btn-info" id="noExpBtn" data-toggle="modal" data-target="#cbtNoExpModal">안 푼 문제</button>
-			<div class="modal fade bd-example-modal-sm" id="cbtNoExpModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-dialog-centered" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalCenterTitle">안 푼 문제</h5>
-		        <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body"></div> <!-- Modal 내용 -->
-		    </div>
-		   </div>
-		  </div>
+			<div class="modal fade" id="cbtNoExpModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+			  <div class="modal-dialog modal-dialog-centered" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalCenterTitle">안 푼 문제</h5>
+			        <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body"></div> <!-- Modal 내용 -->
+			    </div>
+			   </div>
+	 	 	</div>
 		</div>
 		<button type="button" class="btn btn-primary" id="confirmBtn" data-toggle="modal" data-target="#cbtSubmitModal">제출하기</button>
 		<!-- Modal -->

@@ -14,6 +14,7 @@ function formatDifficulty(value) {
 function formatGrade(value) {
 	//등급
 	switch(value) {
+	case 0 : str='Unranked'; break;
 	case 1 : str='Bronze'; break;
 	case 2 : str='Silver'; break;
 	case 3 : str='Gold'; break;

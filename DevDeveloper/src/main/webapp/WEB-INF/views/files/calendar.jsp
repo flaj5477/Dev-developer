@@ -22,7 +22,6 @@
 		getcalList();
 		//calRender(data);
 	})
-
 	function getcalList() {
 		//DB데이터 가져오기
 		$.ajax({
@@ -41,12 +40,8 @@
 		console.log(data);
 
 	}
-
 	//캘린더 화면에 출력
 	function calRender(data) {
-
-		console.log(data);
-
 		var calendarEl = document.getElementById('calendar'); //캘린더 아이디 가져오고
 		var calendar = new FullCalendar.Calendar(calendarEl, { // 캘린더 생성
 			plugins : [ 'interaction', 'dayGrid', 'timeGrid' , 'momentPlugin'],
@@ -55,19 +50,12 @@
 				center : 'title',
 				right : 'dayGridMonth,timeGridWeek,timeGridDay'
 			},
-			//defaultDate : "2019-11-21", //오늘 날짜
 			navLinks : true, // can click day/week names to navigate views
 			selectable : true,
 			selectMirror : true,
-			/* select : function(arg) { //날짜 기간 선택 기능
-				$('#myModal').modal();
-				console.log(arg.start.dateStr);
-				
-			}, */
 			editable : true,
 			eventLimit : true,
 			eventClick : function(info) {
-				//showCalDetail(info);
 				if(event.url) {
                     alert(event.title + "\n" + event.url, "wicked", "width=700,height=600");
                     window.open(event.url);
@@ -113,7 +101,6 @@
 		$("#toDoList").empty();
 
 		$.each(data, function(idx, item) {
-			
 			//taskComplete 값에 따라서 체크 태그 만들기
 			var check = "";
 			if(item.taskComplete == "y"){
@@ -121,7 +108,6 @@
 			} else {
 				check = "<input type='checkbox' name='check' value=" + item.taskComplete + ">";
 			}
-			
 			$('<tr>').attr('id',item.taskNo)
 					.append($('<td>').html(check))
 					.append($('<td>').html(item.title))
@@ -129,8 +115,6 @@
 					.append($('<td>').html(item.taskComplete))
 					.appendTo('#toDoList');
 		})//each	
-		
-		
 		//모달 그리기
 		$('#myModal').modal();
 	}
@@ -141,8 +125,6 @@
 		var cnt = $("#toDoList")[0].childElementCount; //tbody의 행 갯수
 		
 		let list = [];
-		
-		
 		for(i=0;i<cnt;i++){
 			var obj = {};
 			var task_no = parseInt( $("#toDoList").children().eq(i).attr("id") );
@@ -153,9 +135,7 @@
 			
 			list.push(obj);
 		}
-		
 		console.log(list);
-		
 		//DB 수정
 		$.ajax({
 			url : "updateToDoList",

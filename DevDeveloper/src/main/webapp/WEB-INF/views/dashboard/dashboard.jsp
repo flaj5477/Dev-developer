@@ -572,35 +572,19 @@
 					url : "getProjStatusDetail/" + status,
 					type : 'GET',
 					dataType : 'json',
-					async : false, //동기화 방식으로 해야 데이터를 다 받아 온 후에 실행한다.
-					/* data : JSON.stringify({
-						status : encodeURI(status)
-					}), */
+					async : false, //동기화 방식으로 해야 데이터를 다 받아 온 후에 실행한다
 					contentType : 'application/json;charset=utf-8',
 					success : function(data) { //데이터 받아오기 성공하면 
 						//테이블 생성
-						/* 					console.log(data.length);
-						 console.log(data[0].projTitle); */
-
 						for (i = 0; i < data.length; i++) {
 							//이부분 함수로 만들어서 status가 지원일때, 승인일때, 참여일때, 버튼과 클릭이벤트 따로 주기
 							ajaxRow += CreateTableRow(status, data);
-
-							/* 
-							"<tr id=" + data[i].projNo + ">"
-								+ "<td>"
-								+ data[i].projTitle
-								+ "</td>"
-								+ "<td>"
-								+ "<button type=\"button\" class=\"btn btn-default\">지원 취소</button>"
-								+ "</td>" + "</tr>"; */
 						}
 					},
 					error : function(xhr, status, message) {
 						alert(" status: " + status + " er:" + message);
 					}
 				});
-
 				//모달 띄우기
 				var modal = $(this);
 				$(this).find("#projectModalLabel").html(status);

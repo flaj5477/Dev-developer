@@ -99,4 +99,9 @@ public class CalendarServiceImpl implements CalendarService {
 		// TODO Auto-generated method stub
 		return projCalendarDAO.getToDoList(vo);
 	}
+
+	@Override
+	public int updateToDoList(ProjCalendarVO projCalendarVO) { //할일 체크 수정
+		return projCalendarDAO.updateToDoList(projCalendarVO);
+	}
 }

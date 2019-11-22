@@ -31,10 +31,18 @@
 		select	task_title "title",
 				task_complete,
 				developer_no,
-				task_no
+				task_no,
+				proj_no
 		from proj_calendar 
-		where to_date(#{date},'yyyy-mm-dd') 
+		where proj_no = #{projNo} 
+		and to_date(#{date},'yyyy-mm-dd') 
 		between start_date and end_date	
 	</select>
+	
+	<update id="updateToDoList" parameterType="projCalendar">
+		update PROJ_CALENDAR
+		set TASK_COMPLETE = #{taskComplete}
+		where TASK_NO = #{taskNo}
+	</update>
 	
 </mapper>

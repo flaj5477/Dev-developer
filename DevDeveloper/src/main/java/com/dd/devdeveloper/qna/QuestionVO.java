@@ -1,7 +1,6 @@
 package com.dd.devdeveloper.qna;
 
- 
-
+import java.util.List;
 
 public class QuestionVO {
 	private int qNo;
@@ -24,11 +23,17 @@ public class QuestionVO {
 	private String orderby; //정렬
 	private int qLikeCount;
 	private int count;
+	private List<String> divTagList;	//태그 나눠놓은거
 	
 	
 	
 	
-	
+	public List<String> getDivTagList() {
+		return divTagList;
+	}
+	public void setDivTagList(List<String> divTagList) {
+		this.divTagList = divTagList;
+	}
 	public int getCount() {
 		return count;
 	}
@@ -159,8 +164,10 @@ public class QuestionVO {
 				+ ", qCode=" + qCode + ", qDate=" + qDate + ", qViews=" + qViews + ", qTags=" + qTags + ", membersId="
 				+ membersId + ", membersImage=" + membersImage + ", aCount=" + aCount + ", aNo=" + aNo + ", aContents="
 				+ aContents + ", aDate=" + aDate + ", searchVal=" + searchVal + ", first=" + first + ", last=" + last
-				+ ", orderby=" + orderby + ", qLikeCount=" + qLikeCount + ", count=" + count + "]";
+				+ ", orderby=" + orderby + ", qLikeCount=" + qLikeCount + ", count=" + count + ", divTagList="
+				+ divTagList + "]";
 	}
+	 
 	
 	
 

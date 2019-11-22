@@ -99,10 +99,18 @@
 									</div>
 									<div class="rowqqq question-qqqmeta">
 										<div class="pull-left">
-											<div class="tags">
-												<a href="#" class="tags-item category"> <img src="">java
-												</a>
-											</div>
+										 <div class="tags">
+										 	<%-- <c:choose>
+										 	<c:when test="${qna.qTags eq null}">
+										 	</c:when>
+										 	<c:when test="${not empty qna.qTags}"> --%>
+										 	<c:forEach var="tag" items="${qna.divTagList}">
+												<a href="#" class="tags-item category">${tag}</a>
+											</c:forEach>
+								<%-- 			</c:when>
+											</c:choose> --%>
+											</div> 
+											
 										</div>
 										<div class="pull-right">
 											<span class="question-qqqauthor"> <a href="#">

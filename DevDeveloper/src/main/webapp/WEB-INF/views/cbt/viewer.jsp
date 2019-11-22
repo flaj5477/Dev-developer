@@ -163,24 +163,6 @@
 		});
 	}
 	
-	function radioList() {
-		for(var i=1;i<=size;i++) {
-			var str =
-				'<div>'
-					+'<label>'
-					+i+'.'
-					+'</label>'
-					+'<span>'
-						+'<input type="radio" data="'+i+'" name="putNum'+i+'" value="1">'
-						+'<input type="radio" data="'+i+'" name="putNum'+i+'" value="2">'
-						+'<input type="radio" data="'+i+'" name="putNum'+i+'" value="3">'
-						+'<input type="radio" data="'+i+'" name="putNum'+i+'" value="4">'
-					+'</span>'
-				+'</div>';
-			$('#putContent').append(str);
-		}		
-	}
-	
 	function randomExample() { // 보기 랜덤 배열 function
 		var i = 0;
 		let idx = [];
@@ -211,6 +193,24 @@
 		});
 	}
 	
+	function radioList() {
+		for(var i=1;i<=size;i++) {
+			var str =
+					'<div id="radio'+i+'" style="padding:15px 10px 0 0;">'
+					+'<label style="font-weight:bold; margin:0 0 0 7px;">'
+					+i+'.'
+					+'</label>'
+					+'<span style="margin:10px 0 0 3px;">'
+						+'<input type="radio" data="'+i+'" name="putNum'+i+'" value="1">'
+						+'<input type="radio" data="'+i+'" name="putNum'+i+'" value="2">'
+						+'<input type="radio" data="'+i+'" name="putNum'+i+'" value="3">'
+						+'<input type="radio" data="'+i+'" name="putNum'+i+'" value="4">'
+					+'</span>'
+					+'</div>';
+			$('#putContent').append(str);
+		}		
+	}
+	
 	function radioEvent() { //radio Matching
 		var value = null;
 		var no = null;
@@ -233,30 +233,31 @@
 	function questEvent(no) { // 안 푼 문제, 버튼 추가 이벤트
 		if(no != null) { // 리스트에 값이 있다면..
 			nolist[no-1] = true; // return true;
-			$('#noExp').empty();		
+			$('span[name="focusQ"]').remove();
 		}
 		for(var i=1;i<=size;i++) {
 			var str = 
-					'<div>'
-						+'<button type="button" id="explain'+i+'">'+i
-					+'</div>';
-			$('#cbtNoExpModal .modal-body').append(str);	
+					'<span style="margin:0 0 10px 40px;" name="focusQ">'
+						+'<button type="button" id="explain'+i+'" class="btn btn-danger" value="'+i+'"'
+						+'style="width:18px; height:20px; text-align:center; font-size:12px; margin: 0 0 10px 3px;">'
+					+'</span>';
+			$('#radio'+i).append(str);
 			if(nolist[i-1] == true) {
-				$('#explain'+i).hide();
+				$('#explain'+i).remove();
 			} 
 		}
 	}
 	
 	function focusEvent() { // 안 푼 문제 버튼 focus 이벤트
-		$('#footer').on('click','div>button',function() { // div>button : div태그의 자식만을 지칭함(단일대상), on('click',div>button..) :  태그에 대한 부모(이벤트)위임 button이 부모가 된다.
+		$('#putContent').on('click','span>button',function() { // div>button : div태그의 자식만을 지칭함(단일대상), on('click',div>button..) :  태그에 대한 부모(이벤트)위임 button이 부모가 된다.
 		//현재 questEvent에서 footer에서 empty()시키기 때문에 empEvent가 두번 째 실행 될 때 기존에 있는 버튼은 사라졌으므로 focusEvent실행되고나서 클릭해도 이벤트 발생이 되지 않는다.
 		// 이벤트 전파, 이벤트 위임 참고
 			offset.splice(0,size); // 기존 offset 값 모두 삭제
 			for(var i=1;i<=size;i++) { // offset값 push
 				offset.push($('#questNo'+i).offset());
 			}
-			var value = parseInt($(this).text())-1;
-			var offsetValue = offset[value]["top"];
+			var value = parseInt($(this).val())-1;
+			var offsetValue = offset[value].top - $('nav').outerHeight(); // offset 값에서 nav바 높이값 빼기 - 보정값 5
 			$('html, body').animate({
 				scrollTop : offsetValue
 			},10);
@@ -342,89 +343,71 @@
 </script>
 </head>
 <body onload="getTest()">
-<!-- 상단바 -->
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark text-white ">
-   <div class = "container">
-      <div class="navbar-brand" id ="exam">
-         <span id="title"></span>
-         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         <span id="subTitle"></span>
-      </div>
-      <div class="navbar-brand" id ="users">
-         <span id="userNo"></span>
-         <span id="userName"></span>
-      </div>
-      <div id="putTime">
-         <div class = "row">
-            <div id="permisTime"></div>
-         </div>
-         <div class = "row">
-            <div id="restTime"></div>   
-         </div>
-      </div>
-   </div>
-</nav>
-
-<br><br><br>
-
-<div>
+<div class="cbtViewer">
+	<!-- 상단바 -->
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark text-white">
+	   <div class = "container">
+	      <div class="navbar-brand" id ="exam">
+	      	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	         <span id="title"></span>
+	         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	         <span id="subTitle"></span>
+	      </div>
+	      <div class="navbar-brand" id ="users">
+	         <span id="userNo"></span>
+	         <span id="userName"></span>
+	      </div>
+	      <div id="putTime">
+	         <div class = "row">
+	            <div id="permisTime"></div>
+	         </div>
+	         <div class = "row">
+	            <div id="restTime"></div>   
+	         </div>
+	      </div>
+	       <div id="confirm" class="navbar-brand" style="margin:0 0 0 40px;">
+	   		  <button type="button" class="btn btn-primary" id="confirmBtn" data-toggle="modal" data-target="#cbtSubmitModal">제출하기</button>
+		  </div>
+	    </div>
+	</nav>
+	<br><br><br>
    <div class="cbtViewer container">
-      <!-- 글씨 확대/축소 버튼 -->
-      <div class = "btn-group" id = "switchFont">
-      	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         <button type = "button" id = "small" class = "btn btn-dark">80%</button>
-         <button type = "button" id = "medium" class = "btn btn-dark">100%</button>
-         <button type = "button" id = "large" class = "btn btn-dark">120%</button>
+     <!-- 글씨 확대/축소 버튼 -->
+     <div class = "btn-group" id = "switchFont">
+     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type = "button" id = "small" class = "btn btn-dark">80%</button>
+        <button type = "button" id = "medium" class = "btn btn-dark">100%</button>
+        <button type = "button" id = "large" class = "btn btn-dark">120%</button>
+     </div>
+     <div id="content" class="ml-5">
+        <div id="questView" style="width:60%; float:left"></div>
+        <div id="putView" style="width:12%; float:right">
+        	<div id="putSubject" style="background-color: black; color: aliceblue; font-size: 16px; height:40px; margin: 2px 0;">
+        		<h3 style="text-align:center"> 답안 표기란 </h3>
+        	</div>
+        	<div id="putContent" style="background-color: whitesmoke;"></div>
+        </div>
+     </div>
+    </div>
+  	 <!-- Modal -->
+    <div class="modal fade" id="cbtSubmitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">답안제출</h5>
+            <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body"></div> <!-- Modal 내용 -->
+          <div class="modal-footer">
+             <button type="button" id="submitBtn" class="btn btn-primary">YES</button>
+            <button type="button" id="resetBtn" class="btn btn-secondary" data-dismiss="modal">NO</button>
+          </div>
+        </div>
       </div>
-      <div id="content" class="ml-5">
-         <div id="questView" style="width:60%; float:left"></div>
-         <div id="putView" style="width:12%; float:right">
-         	<div id="putSubject" style="background-color: darkorange; color: aliceblue; font-size: 16px; height:30px; margin: 2px 0;"><h4>답안 표기란</h4></div>
-         	<div id="putContent" style="background-color: whitesmoke;"></div>
-        	<div id="putFooter" style="background-color: whitesmoke;">	
-	         	<div id="noExp">
-		         	 <button type="button" class="btn btn-info" id="noExpBtn" data-toggle="modal" data-target="#cbtNoExpModal">안 푼 문제</button>
-			         <div class="modal fade bd-example-modal-sm" id="cbtNoExpModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-				        <div class="modal-dialog modal-dialog-centered" role="document">
-				          <div class="modal-content">
-				            <div class="modal-header">
-				              <h5 class="modal-title" id="exampleModalCenterTitle">안 푼 문제</h5>
-				              <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
-				                <span aria-hidden="true">&times;</span>
-				              </button>
-				            </div>
-				            <div class="modal-body"></div> <!-- Modal 내용 -->
-			        	   </div>
-		          	     </div>
-		        	 </div>
-	       		</div>
-	         	<div id="confirm">
-	         		<button type="button" class="btn btn-primary" id="confirmBtn" data-toggle="modal" data-target="#cbtSubmitModal">제출하기</button>
-			      <!-- Modal -->
-				      <div class="modal fade" id="cbtSubmitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				        <div class="modal-dialog modal-dialog-centered" role="document">
-				          <div class="modal-content">
-				            <div class="modal-header">
-				              <h5 class="modal-title" id="exampleModalCenterTitle">답안제출</h5>
-				              <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
-				                <span aria-hidden="true">&times;</span>
-				              </button>
-				            </div>
-				            <div class="modal-body"></div> <!-- Modal 내용 -->
-				            <div class="modal-footer">
-				               <button type="button" id="submitBtn" class="btn btn-primary">YES</button>
-				              <button type="button" id="resetBtn" class="btn btn-secondary" data-dismiss="modal">NO</button>
-				            </div>
-				          </div>
-				        </div>
-				      </div>
-				 </div>
-			 </div>
-         </div>
-      </div>
-   </div>
+    </div>
 </div>
 <div class="cbtProcess">
    <div id="process">

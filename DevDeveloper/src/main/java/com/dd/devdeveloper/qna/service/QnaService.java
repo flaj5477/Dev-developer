@@ -42,4 +42,7 @@ public interface QnaService {
 	
 	List<QuestionVO> anqMyList(int membersNo);
 	
+	int countRec(int no);
+	int acountRec(int no);
+	
 }

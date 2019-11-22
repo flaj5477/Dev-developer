@@ -62,6 +62,7 @@
   		</foreach>
 		ORDER BY tests_q_no
 	</select>
+	<!-- 시험 결과 업데이트 및 등급 업데이트 -->
 	<update id="cbtResult" statementType="CALLABLE" parameterType="testsRecord">
 		CALL CBT_PROCESS_PKG.CBT_RESULTS(#{testsApplyNo},
 										#{membersNo},

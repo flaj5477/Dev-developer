@@ -59,7 +59,7 @@ div.card-group {
 div.card {
 	padding: 0 15px 10px 15px;
 	vertical-align: middle;
-	border: 1px solid rgba(102,186,255,0.4);
+	
 }
 .card-img-top {
 	padding: 0 -5px -5px 0;
@@ -87,6 +87,11 @@ div.cbtChoice #comment p {
 	padding: 5px;
 	text-align: center;
 	vertical-align: middle;
+}
+div.cbtChoice #submitBtn {
+	width: 160px;
+	height: 40px;
+	font-size: 16px;
 }
 input[type=radio] {
 	 font-size:14px;
@@ -156,6 +161,28 @@ div.cbtReady #cbtReadyModal {
 	left: 4%;
 	position: fixed;
 }
+
+div.cbtViewer #questView table {
+	width:550px;
+}
+
+div.cbtViewer #putView {
+	position: absolute;	
+	top: 125px;
+	right: 240px;
+	padding: 3px 10px;
+}
+
+div.cbtViewer #noExp {
+	margin : 3px;
+	left: 3%;
+}
+
+div.cbtViewer #confirm {
+	margin : 3px;
+	left: 3%;
+}
+
 div.cbtProcess #toast {
 	display:none;
 	width: 400px;

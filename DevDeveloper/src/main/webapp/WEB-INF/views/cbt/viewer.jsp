@@ -75,71 +75,75 @@
 	}
 	
 	function questList() {
-		$.ajax('getQuestList/'+level+'/'+allocate, {
-			type : 'GET',
-			dataType : 'JSON',
-			async : false, // 동기전송
-			success : function(data) {
-				var oldUnit = "";
-				size = data.length;
-				$.each(data, function(idx) {
-					questKey.push(data[idx].testsQNo);
-					var no = 1 + parseInt([idx]);
-					var quest = data[idx].testsQContents;
-					var ex1 = data[idx].testsQEx1;
-					var ex2 = data[idx].testsQEx2;
-					var ex3 = data[idx].testsQEx3;
-					var ex4 = data[idx].testsQEx4;
-					var answer = data[idx].testsQAnswer
-					var vdata = [ex1,ex2,ex3,ex4]; //보기 담기
-					var vrand = randomExample(); // 4개의 숫자 랜덤 push
-					var rex = []; // 랜덤하게 배열된 보기 담을 공간
-					var answer = data[idx].testsQAnswer;
-					var newUnit = data[idx].testsQUnit;
-					var caption = '';
-					for (var i=0;i<4;i++) { // 4지 선다형, 보기 랜덤 배열 Push
-						rex.push(vdata[vrand[i]]); // 배열 값 랜덤 출력
-					}
-					if(oldUnit != newUnit) {  // 문제의 과목이 달라지는 시점
-						caption = '<caption style="caption-side: top">'+newUnit+'</caption>'; // 새로운 과목을 담음
-					}
-					oldUnit = newUnit; // 과목단위로 과목명 출력 중복방지
-					var str = 
-						'<div id="questNo'+no+'">'
-							+'<table id="contentsTab" style="width:550px">'
-								+caption
-								+'<tr>'
-									+'<td><div>'+no+'.</div></td>'
-									+'<td><div>'+quest+'</div></td>'
-								+'</tr>'
-							+'</table>'
-							+'<table id="exTab" style="width:550px">'
-								+'<tr>'
-									+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="1">'+rex[0]+'</div></td>'
-								+'</tr>'
-								+'<tr>'
-									+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="2">'+rex[1]+'</div></td>'
-								+'</tr>'
-								+'<tr>'
-									+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="3">'+rex[2]+'</div></td>'
-								+'</tr>'
-								+'<tr>'
-									+'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="4">'+rex[3]+'</div></td>'
-								+'</tr>'
-							+'</table>'
-						+'</div>';
-					$('#questView').append(str);
-				});
-			},
-			complete : function() {
-				switchFont();
-				radioList();
-				radioEvent();
-				questEvent();
-				focusEvent();
-			}
-		});
-	}
+	      $.ajax('getQuestList/'+level+'/'+allocate, {
+	         type : 'GET',
+	         dataType : 'JSON',
+	         async : false, // 동기전송
+	         success : function(data) {
+	            var oldUnit = "";
+	            var count = 0;
+	            size = data.length;
+	            $.each(data, function(idx) {
+	               questKey.push(data[idx].testsQNo);
+	               var no = 1 + parseInt([idx]);
+	               var quest = data[idx].testsQContents;
+	               var ex1 = data[idx].testsQEx1;
+	               var ex2 = data[idx].testsQEx2;
+	               var ex3 = data[idx].testsQEx3;
+	               var ex4 = data[idx].testsQEx4;
+	               var answer = data[idx].testsQAnswer
+	               var vdata = [ex1,ex2,ex3,ex4]; //보기 담기
+	               var vrand = randomExample(); // 4개의 숫자 랜덤 push
+	               var rex = []; // 랜덤하게 배열된 보기 담을 공간
+	               var answer = data[idx].testsQAnswer;
+	               var newUnit = data[idx].testsQUnit;
+	               var caption = '';
+	               for (var i=0;i<4;i++) { // 4지 선다형, 보기 랜덤 배열 Push
+	                  rex.push(vdata[vrand[i]]); // 배열 값 랜덤 출력
+	               }
+	               if(oldUnit != newUnit) {  // 문제의 과목이 달라지는 시점
+	            	  count++;
+	                  caption = '<caption style="caption-side: top; color: black; font-size: 1.7rem; margin: 5px 0 0 4px;">'
+	                  			+'<h4>◆ '+count+'과목 ['+newUnit+']</h4></caption>';
+	                  // 새로운 과목을 담음
+	               }
+	               oldUnit = newUnit; // 과목단위로 과목명 출력 중복방지
+	               var str = 
+	                  '<div id="questNo'+no+'">'
+	                     +'<table id="contentsTab">'
+	                        +caption
+	                        +'<tr>'
+	                           +'<td colspan="2"><div><strong>'+no+'. ' + quest +'</strong></div></td>'
+	                        +'</tr>'
+	                     +'</table>'
+	                     +'<table id="exTab">'
+	                        +'<tr>'
+	                           +'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="1">'+rex[0]+'</div></td>'
+	                        +'</tr>'
+	                        +'<tr>'
+	                           +'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="2">'+rex[1]+'</div></td>'
+	                        +'</tr>'
+	                        +'<tr>'
+	                           +'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="3">'+rex[2]+'</div></td>'
+	                        +'</tr>'
+	                        +'<tr>'
+	                           +'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="4">'+rex[3]+'</div></td>'
+	                        +'</tr>'
+	                     +'</table>'
+	                  +'</div>';
+	               $('#questView').append(str);
+	            });
+	         },
+	         complete : function() {
+	            switchFont();
+	            scrollEvent();
+	            radioList();
+	            radioEvent();
+	            questEvent();
+	            focusEvent();
+	         }
+	      });
+	   }
 	
 	function switchFont() {
 		var defaultSize = parseFloat($('#content').css('fontSize'),10);
@@ -173,7 +177,7 @@
 						+'<input type="radio" data="'+i+'" name="putNum'+i+'" value="4">'
 					+'</span>'
 				+'</div>';
-			$('#putView').append(str);
+			$('#putContent').append(str);
 		}		
 	}
 	
@@ -199,6 +203,14 @@
 		return idx;
 	}
 	
+	function scrollEvent() {
+		var currentPosition = parseInt($("#putView").css("top"));
+		$(window).scroll(function() {
+			var position = $(window).scrollTop();
+			$("#putView").stop().animate({"top":position+currentPosition+"px"},500);
+		});
+	}
+	
 	function radioEvent() { //radio Matching
 		var value = null;
 		var no = null;
@@ -206,11 +218,11 @@
 		$('#questView input:radio').change(function() {
 			value = $(this).val();
 			no = $(this).attr('data');
-			$('#putView').find('[data="'+no+'"]').val([value]);
+			$('#putContent').find('[data="'+no+'"]').val([value]);
 			questEvent(no);
 		});
 		
-		$('#putView input:radio').change(function() {
+		$('#putContent input:radio').change(function() {
 			value = $(this).val();
 			no = $(this).attr('data');
 			$('#questView').find('[data="'+no+'"]').val([value]);
@@ -328,111 +340,104 @@
 		});
 	}
 </script>
-<style>
-div.cbtViewer #header {
-	top: 3%;
-	left: 5%;
-	width: max;
-	height: 200px;
-	position: static;
-}
-div.cbtViewer #title {
-	top: 2%;
-	left: 5%;
-	position: absolute;
-}
-div.cbtViewer #subTitle {
-	top: 2%;
-	left: 20%;
-	position: absolute;
-}
-div.cbtViewer #users {
-	top: 2%;
-	left: 60%;
-	position: absolute;
-}
-</style>
 </head>
 <body onload="getTest()">
-<div class="cbtViewer">
-	<div id="header">
-		<div id="exam">
-			<span id="title"></span>
-			<span id="subTitle"></span>
-		</div>
-		<div id="users">
-			<span id="userNo"></span>
-			<span id="userName"></span>
-		</div>
-		<div id="putTime">
-			<div id="permisTime"></div>
-			<div id="restTime"></div>
-		</div>
-		<div id="menu">
-			<div id="switchFont">
-				<span><button type="button" id="small">80%</button></span>
-				<span><button type="button" id="medium">100%</button></span>
-				<span><button type="button" id="large">120%</button></span>
-			</div>
-			<div>
-				<span id="allVol"></span>
-				<span id="restVol"></span>
-			</div>
-		</div>
-	</div>
-	<div id="content">
-		<div id="questView" style="width:60%; float:left"></div>
-		<div id="putView" style="width:40%; float:right"></div>
-	</div>
-	<div id="footer">
-		<div id="noExp">
-			<button type="button" class="btn btn-info" id="noExpBtn" data-toggle="modal" data-target="#cbtNoExpModal">안 푼 문제</button>
-			<div class="modal fade bd-example-modal-sm" id="cbtNoExpModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-dialog-centered" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalCenterTitle">안 푼 문제</h5>
-		        <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body"></div> <!-- Modal 내용 -->
-		    </div>
-		   </div>
-		  </div>
-		</div>
-		<button type="button" class="btn btn-primary" id="confirmBtn" data-toggle="modal" data-target="#cbtSubmitModal">제출하기</button>
-		<!-- Modal -->
-		<div class="modal fade" id="cbtSubmitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		  <div class="modal-dialog modal-dialog-centered" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalCenterTitle">답안제출</h5>
-		        <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body"></div> <!-- Modal 내용 -->
-		      <div class="modal-footer">
-		      	<button type="button" id="submitBtn" class="btn btn-primary">YES</button>
-		        <button type="button" id="resetBtn" class="btn btn-secondary" data-dismiss="modal">NO</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-	</div>
+<!-- 상단바 -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark text-white ">
+   <div class = "container">
+      <div class="navbar-brand" id ="exam">
+         <span id="title"></span>
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <span id="subTitle"></span>
+      </div>
+      <div class="navbar-brand" id ="users">
+         <span id="userNo"></span>
+         <span id="userName"></span>
+      </div>
+      <div id="putTime">
+         <div class = "row">
+            <div id="permisTime"></div>
+         </div>
+         <div class = "row">
+            <div id="restTime"></div>   
+         </div>
+      </div>
+   </div>
+</nav>
+
+<br><br><br>
+
+<div>
+   <div class="cbtViewer container">
+      <!-- 글씨 확대/축소 버튼 -->
+      <div class = "btn-group" id = "switchFont">
+      	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <button type = "button" id = "small" class = "btn btn-dark">80%</button>
+         <button type = "button" id = "medium" class = "btn btn-dark">100%</button>
+         <button type = "button" id = "large" class = "btn btn-dark">120%</button>
+      </div>
+      <div id="content" class="ml-5">
+         <div id="questView" style="width:60%; float:left"></div>
+         <div id="putView" style="width:12%; float:right">
+         	<div id="putSubject" style="background-color: darkorange; color: aliceblue; font-size: 16px; height:30px; margin: 2px 0;"><h4>답안 표기란</h4></div>
+         	<div id="putContent" style="background-color: whitesmoke;"></div>
+        	<div id="putFooter" style="background-color: whitesmoke;">	
+	         	<div id="noExp">
+		         	 <button type="button" class="btn btn-info" id="noExpBtn" data-toggle="modal" data-target="#cbtNoExpModal">안 푼 문제</button>
+			         <div class="modal fade bd-example-modal-sm" id="cbtNoExpModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+				        <div class="modal-dialog modal-dialog-centered" role="document">
+				          <div class="modal-content">
+				            <div class="modal-header">
+				              <h5 class="modal-title" id="exampleModalCenterTitle">안 푼 문제</h5>
+				              <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
+				                <span aria-hidden="true">&times;</span>
+				              </button>
+				            </div>
+				            <div class="modal-body"></div> <!-- Modal 내용 -->
+			        	   </div>
+		          	     </div>
+		        	 </div>
+	       		</div>
+	         	<div id="confirm">
+	         		<button type="button" class="btn btn-primary" id="confirmBtn" data-toggle="modal" data-target="#cbtSubmitModal">제출하기</button>
+			      <!-- Modal -->
+				      <div class="modal fade" id="cbtSubmitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				        <div class="modal-dialog modal-dialog-centered" role="document">
+				          <div class="modal-content">
+				            <div class="modal-header">
+				              <h5 class="modal-title" id="exampleModalCenterTitle">답안제출</h5>
+				              <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
+				                <span aria-hidden="true">&times;</span>
+				              </button>
+				            </div>
+				            <div class="modal-body"></div> <!-- Modal 내용 -->
+				            <div class="modal-footer">
+				               <button type="button" id="submitBtn" class="btn btn-primary">YES</button>
+				              <button type="button" id="resetBtn" class="btn btn-secondary" data-dismiss="modal">NO</button>
+				            </div>
+				          </div>
+				        </div>
+				      </div>
+				 </div>
+			 </div>
+         </div>
+      </div>
+   </div>
 </div>
 <div class="cbtProcess">
-	<div id="process">
-		<form action="examination" name="frm" method="POST">
-			<input type="hidden" name="response"/>
-			<div id="toast">
-				<p> <br> 작성하신 답안을 채점중입니다. <br> 잠시만 기다려주세요. </p>
-				<div class="spinner-border text-info" style="width: 4rem; height: 4rem;" role="status">
-					<span class="sr-only"></span>
-				</div>
-			</div>
-		</form>
-	</div>
+   <div id="process">
+      <form action="examination" name="frm" method="POST">
+         <input type="hidden" name="response"/>
+         <div id="toast">
+            <p> <br> 작성하신 답안을 채점중입니다. <br> 잠시만 기다려주세요. </p>
+            <div class="spinner-border text-info" style="width: 4rem; height: 4rem;" role="status">
+               <span class="sr-only"></span>
+            </div>
+         </div>
+      </form>
+   </div>
 </div>
+</body>
 </html>

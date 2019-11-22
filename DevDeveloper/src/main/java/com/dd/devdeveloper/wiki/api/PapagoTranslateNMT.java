@@ -13,7 +13,7 @@ public class PapagoTranslateNMT {
 		String clientId = "oJq6FT1wVv_7Zrsi3wZw";//애플리케이션 클라이언트 아이디값";
         String clientSecret = "XtVDgKI4pZ";//애플리케이션 클라이언트 시크릿값";
         String transText = null;	//번역한 text
-        
+        String entransText = null;
         try {
             String text = URLEncoder.encode(oriContents, "UTF-8");
             String apiURL = "https://openapi.naver.com/v1/papago/n2mt";
@@ -47,13 +47,13 @@ public class PapagoTranslateNMT {
             transText = response.toString();
             
             byte[] enText = transText.getBytes();
-            String entransText = new String(enText, "utf-8");
+            entransText = new String(enText, "utf-8");
             
             System.out.println("인코딩파파고=========================="+entransText + "======================");
             System.out.println("파파고======="+transText+"=======================================");
         } catch (Exception e) {
             System.out.println(e);
         }
-		return transText;
+		return transText+entransText;
 	}
 }

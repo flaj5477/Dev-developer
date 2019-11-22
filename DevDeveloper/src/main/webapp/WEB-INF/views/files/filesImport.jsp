@@ -33,34 +33,78 @@
 <script>
 	pageName = "중요";
 	
- 	function fielsImport() {
-		
-		$.ajax({ type: "POST", enctype: 'multipart/form-data',
-			url: 'filesImport',
-			data:{filesNo: $('[name="chk_files"]:checked').val()},
-			success: function (result) { 
+	function filesImport() {
+		// name이 같은 체크박스의 값들을 배열에 담는다.
+	    var list = [];
+	    $("input[name='chk_files']:checked").each(function(i) {
+			var obj = {};
+	    	obj["filesNo"] = $(this).val();
+	        list.push(obj);
+	    });
+	    var data = JSON.stringify(list);
+		console.log(data);
+	    $.ajax({
+			type : "POST",
+			url : 'filesImport',
+			dataType : "json",
+			data : data,
+			contentType : "application/json",
+			success : function(response) {
 				location.reload();
-				
 			},
-			error: function (e) { } });
+			error : function(xhr, status, msg) {
+				alert("status : " + status + " / err msg : " + msg);
+			}
+		});
 	}
  	
+	// 휴지통
 	function filesTrash() {
-		
-		$.ajax({ type: "POST",
-			url: 'filesTrash',
-			data:{filesNo: $('[name="chk_files"]:checked').val()},
-			success: function (result) { 
+	    var trashList = [];
+	    $("input[name='chk_files']:checked").each(function(i) {
+			var trashObj = {};
+			trashObj["filesNo"] = $(this).val();
+			trashList.push(trashObj);
+	    });
+	    var trashData = JSON.stringify(trashList);
+		console.log(trashData);
+	    $.ajax({
+	    	
+			type : "POST",
+			url : 'filesTrash',
+			dataType : "json",
+			data : trashData,
+			contentType : "application/json",
+			success : function(response) {
 				location.reload();
-				
 			},
-			error: function (e) { } });
+			error : function(xhr, status, msg) {
+				alert("status : " + status + " / err msg : " + msg);
+			}
+		});
 	}
 
 	function filesDownload() {
-		var filesNo =  $('[name="chk_files"]:checked').val(); 
-		location.href="download?filesNo=" + filesNo
-	}
+		var filesArr = [];
+		$("input[name='chk_files']:checked").each(function(i){
+			filesArr.push( $(this).val() ); // 체크한 것의 fileNo를 filsArr 배열에 담음
+		});
+		console.log(filesArr);
+		if(filesArr.length == 0) { // 파일 체크를 하지 않았을 경우
+			alert("파일을 선택해주세요.");
+		} else {
+			var link = document.createElement('a');
+			link.setAttribute('download', null);
+			link.style.display = "none";
+			document.body.appendChild(link);
+			for(var i = 0; i < filesArr.length; i++) {
+				console.log(filesArr[i]);
+				link.setAttribute("href", "download?filesNo=" + filesArr[i]);
+				link.click();
+			}
+			document.body.removeChild(link);
+		}
+	}	
 	
 </script>
 </head>
@@ -99,7 +143,7 @@
 								</div>
 							
 								<div class="col-9 pull-right">
-									<button type="button" class="btn btn-primary btn" onclick="fielsImport()">중요</button>
+									<button type="button" class="btn btn-primary btn" onclick="filesImport()">중요</button>
 
 									<button type="button" class="btn btn-primary btn" onclick="filesTrash()">휴지통</button>
 
@@ -154,12 +198,16 @@
                 						 </c:if> <c:if test="${files.filesType=='D'}"><i class="far fa-folder"></i>
 										  <a href="./getFilesList?upperFolder=${files.filesNo}">${files.filesTitle}</a>
 										</c:if>
-										<span class="filesImportCheck"><c:if test="${files.filesImport=='Y'}">♥</c:if></span> <!-- 기존꺼 긁어옴 -->
-									</td> <!-- <input type="checkbox" name="chk_info" value="HTML">HTML -->
+										<span class="filesImportCheck">
+											<c:if test="${files.filesImport=='Y'}">
+												<i class ="ni ni-favourite-28 text-red"></i>
+											</c:if>
+										</span>
+									</td>
 									<td>${files.filesComment }</td>
 									<td>${files.membersName }</td>
 									<td><fmt:formatDate value="${files.filesUploadDate}" pattern="yyyy-MM-dd"/></td>
-									<td><c:if	test="${files.filesType=='F'}">${files.filesSizeTrans}</c:if></td>
+									<td><c:if test="${files.filesType=='F'}">${files.filesSizeTrans}</c:if></td>
 								</tr>
 							</c:forEach>
 

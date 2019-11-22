@@ -922,13 +922,13 @@ input.insert[type="text"] {
 
 .question-detail-content .question-content-left ul > li i,
 .answer-detail-content .answer-content-left ul > li i {
-    font-size: 25px;
-    color: #cdb8f3;
+    font-size: 30px;
+    color: #c1b28f;
 }
 
 .question-detail-content .question-content-left ul > li .fa-star {
-    font-size: 25px;
-    color: #cdb8f3;
+    font-size: 30px;
+    color: #c1b28f;
 }
 
 .question-detail-content .question-content-left ul > .question-vote-count,

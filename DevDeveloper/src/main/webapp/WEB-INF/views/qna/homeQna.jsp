@@ -13,18 +13,6 @@
 	pageName = "Q & A";
 </script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<%-- <script
-		src="${pageContext.request.contextPath}/resources/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css"> --%>
-<%-- 	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/ccsss.css">  --%>
-<%-- 	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/gg.css"> --%>
-<%-- 	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/ff.css"> --%>
-<%-- 	
-	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/hh.css">  --%>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/qna.css">
 <link href="//fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
@@ -85,7 +73,7 @@
 									</c:otherwise>
 									</c:choose>																				
 										<li>
-											<div>0</div> 좋아요
+											<div>${qna.count}</div> 좋아요
 										</li>						
 										<li>
 											<div>${qna.qViews}</div> 조회수			

@@ -348,8 +348,8 @@
 										<tr>
 											<th scope="row" class="df"><a href="qnaNo?qNo=${qna.qNo}">${fn:substring(qna.qTitle,0,15)}</a></th>
 											<th scope="row" class="df">${qna.aCount}</th>
-											<th scope="row" class="df">${qna.aCount}</th>
-											<th scope="row" class="df">${qna.qDate}</th>
+											<th scope="row" class="df">${qna.qLikeCount}</th>
+											<th scope="row" class="df">${fn:substring(qna.qDate,0,10)}</th>
 											
 										</tr>
 								</c:forEach>		
@@ -384,10 +384,10 @@
 									<tbody>
 										<c:forEach items="${myAnqList}" var="anq" end="4">
 										<tr>
-											<th scope="row" class="df"><a href="qnaNo?qNo=${anq.qNo}">${anq.qTitle}</a></th>
+											<th scope="row" class="df"><a href="qnaNo?qNo=${anq.qNo}">${fn:substring(anq.qTitle,0,5)}</a></th>
 											<th scope="row" class="df">${fn:substring(anq.aContents,0,8)}</th>
-											<th scope="row" class="df"></th>
-											<th scope="row" class="df">${anq.aDate}</th>
+											<th scope="row" class="df">${anq.qLikeCount}</th>
+											<th scope="row" class="df">${fn:substring(anq.aDate,0,10)}</th>
 										</tr>
 										</c:forEach>
 									</tbody>

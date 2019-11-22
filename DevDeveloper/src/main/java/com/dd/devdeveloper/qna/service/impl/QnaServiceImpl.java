@@ -127,6 +127,18 @@ public class QnaServiceImpl implements QnaService {
 		return qnaDAO.anqMyList(membersNo);
 	}
 
+	@Override
+	public int countRec(int no) {
+		 
+		return qnaDAO.countRec(no);
+	}
+	
+	@Override
+	public int acountRec(int no) {
+		 
+		return qnaDAO.acountRec(no);
+	}
+	
 
 
 }

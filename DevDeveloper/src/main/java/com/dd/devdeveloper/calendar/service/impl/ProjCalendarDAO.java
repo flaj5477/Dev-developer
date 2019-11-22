@@ -21,4 +21,13 @@ public class ProjCalendarDAO {
 	public List<ProjCalendarVO> getProjCalendarData(ProjCalendarVO vo) {
 		return mybatis.selectList("CalendarDAO.getProjCalendarData", vo);
 	}
+	
+	//하루 할일 조회
+	public List<ProjCalendarVO> getToDoList(ProjCalendarVO vo){
+		return mybatis.selectList("CalendarDAO.getToDoList",vo);
+	}
+
+	public int updateToDoList(ProjCalendarVO projCalendarVO) {
+		return mybatis.update("CalendarDAO.updateToDoList", projCalendarVO);
+	}
 }

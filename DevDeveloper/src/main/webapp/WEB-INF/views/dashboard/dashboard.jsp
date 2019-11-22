@@ -100,12 +100,12 @@
 												<c:forEach var="activityLog" items="${activityLogList}" varStatus="status">
 													<c:if test="${status.index % 7 == 0 }">
 														<!-- 일요일이면 g태그 열기 -->
-														<g transform="translate(<fmt:formatNumber value="${status.index/7*14}" pattern="#" />, 0)">
+														<g transform="translate(<fmt:formatNumber value="${status.index/7*13}" pattern="#" />, 0)">
 													
 													
 													</c:if>
 													<!-- col-fixed 의 width인 620에 대한 % -->
-													<rect width="10" height="10" class="${activityLog.activityScore }" x="0" y="${status.index%7*14 }"></rect>
+													<rect width="9" height="9" class="${activityLog.activityScore }" x="0" y="${status.index%7*13 }"></rect>
 													<c:if test="${status.index % 7 == 6 }">
 														<!-- 토요일이면 g태그 닫기 -->
 														</g>
@@ -130,9 +130,10 @@
 														<span class="h2 font-weight-bold mb-0">${projApply } </span>
 													</div>
 													<div class="col-auto">
-														<div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+											<!-- 			<div class="icon icon-shape bg-warning text-white rounded-circle shadow">
 															<i class="fas fa-chart-pie"></i>
-														</div>
+														</div> -->
+														<img src="./images/icon/pie-chart_1.png" class="size-50"/>
 													</div>
 												</div>
 											</div>
@@ -151,9 +152,10 @@
 														<span class="h2 font-weight-bold mb-0">${projApprove}</span>
 													</div>
 													<div class="col-auto">
-														<div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+														<!-- <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
 															<i class="fas fa-users"></i>
-														</div>
+														</div> -->
+														<img src="./images/icon/pie-chart_2.png" class="size-50"/>
 													</div>
 												</div>
 											</div>
@@ -172,9 +174,10 @@
 														<span class="h2 font-weight-bold mb-0">${projParticipant}</span>
 													</div>
 													<div class="col-auto">
-														<div class="icon icon-shape bg-info text-white rounded-circle shadow">
+														<!-- <div class="icon icon-shape bg-info text-white rounded-circle shadow">
 															<i class="fas fa-percent"></i>
-														</div>
+														</div> -->
+														<img src="./images/icon/pie-chart_3.png" class="size-50"/>
 													</div>
 												</div>
 											</div>
@@ -193,9 +196,10 @@
 														<span class="h2 font-weight-bold mb-0">0</span>
 													</div>
 													<div class="col-auto">
-														<div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+														<!-- <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
 															<i class="fas fa-chart-pie"></i>
-														</div>
+														</div> -->
+														<img src="./images/icon/pie-chart_4.png" class="size-50"/>
 													</div>
 												</div>
 											</div>
@@ -265,10 +269,10 @@
 																			<td>${projApplicant.status }</td>
 																			<td>
 																				<div class="d-flex align-items-center">
-																					<span class="mr-2">60%</span>
+																					<span class="mr-2">${projApplicant.progress }%</span>
 																					<div>
 																						<div class="progress">
-																							<div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="-10" aria-valuemin="0" aria-valuemax="100" style="width: -10%;"></div>
+																							<div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="${projApplicant.progress }" aria-valuemin="0" aria-valuemax="100" style="width: ${projApplicant.progress }%;"></div>
 																						</div>
 																					</div>
 																				</div>
@@ -321,9 +325,7 @@
 									<div class="col">
 										<h3 class="mb-0">최근 질문</h3>
 									</div>
-									<div class="col text-right">
-										<a href="#!" class="btn btn-sm btn-primary">See all</a>
-									</div>
+									
 								</div>
 							</div>
 							<div class="table-responsive">
@@ -344,8 +346,8 @@
 										<tr>
 											<th scope="row" class="df"><a href="qnaNo?qNo=${qna.qNo}">${fn:substring(qna.qTitle,0,15)}</a></th>
 											<th scope="row" class="df">${qna.aCount}</th>
-											<th scope="row" class="df">${qna.aCount}</th>
-											<th scope="row" class="df">${qna.qDate}</th>
+											<th scope="row" class="df">${qna.qLikeCount}</th>
+											<th scope="row" class="df">${fn:substring(qna.qDate,0,10)}</th>
 											
 										</tr>
 								</c:forEach>		
@@ -361,9 +363,7 @@
 									<div class="col">
 										<h3 class="mb-0">최근 답변</h3>
 									</div>
-									<div class="col text-right">
-										<a href="#!" class="btn btn-sm btn-primary">See all</a>
-									</div>
+								
 								</div>
 							</div>
 							<div class="table-responsive">
@@ -380,10 +380,10 @@
 									<tbody>
 										<c:forEach items="${myAnqList}" var="anq" end="4">
 										<tr>
-											<th scope="row" class="df"><a href="qnaNo?qNo=${anq.qNo}">${anq.qTitle}</a></th>
+											<th scope="row" class="df"><a href="qnaNo?qNo=${anq.qNo}">${fn:substring(anq.qTitle,0,5)}</a></th>
 											<th scope="row" class="df">${fn:substring(anq.aContents,0,8)}</th>
-											<th scope="row" class="df"></th>
-											<th scope="row" class="df">${anq.aDate}</th>
+											<th scope="row" class="df">${anq.qLikeCount}</th>
+											<th scope="row" class="df">${fn:substring(anq.aDate,0,10)}</th>
 										</tr>
 										</c:forEach>
 									</tbody>

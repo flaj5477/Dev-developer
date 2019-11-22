@@ -176,8 +176,9 @@ public class WikiServiceImpl implements WikiService {
 		/////////////////////////////////////////////////////////
 		vo.setManualTotalline(line);	// 총 메뉴얼라인 등록
 		
-		vo.setManualTags(tagsService.checkTag(vo.getManualTags()));	//태그가 하나면 , 을 끝에 붙여준다
-		
+		if(vo.getManualTags() != null) {
+			vo.setManualTags(tagsService.checkTag(vo.getManualTags()));	//태그가 끝에 , 없으면 ,붙여줌
+		}
 		return wikiDAO.insertWiki(vo);
 	}
 
@@ -215,8 +216,9 @@ public class WikiServiceImpl implements WikiService {
 //			e.printStackTrace();
 //		}
 		
-		vo.setManualTags(tagsService.checkTag(vo.getManualTags()));	//태그가 끝에 , 없으면 ,붙여줌
-		
+		if(vo.getManualTags() != null) {
+			vo.setManualTags(tagsService.checkTag(vo.getManualTags()));	//태그가 끝에 , 없으면 ,붙여줌
+		}
 		
 		wikiDAO.updateWiki(vo);		//위키원본 수정
 		wikiDAO.updateWikiTransInfo(vo);	// 위키 번역 수정라인정보 등록

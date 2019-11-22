@@ -14,7 +14,18 @@
 	 			q.q_views		    ,
 	 			q.q_tags			,
 	 			m.members_id     	,
-	 			(select count(a_no) from answer where q_no= q.q_no) a_count   	
+	 			(select count(*) 
+     	    	from (
+                select r.rec_no, r.qa_no q_no, r.qa_type 
+                from rec_list r
+                where qa_type = 1
+                union 
+                select r.rec_no, a.q_no, r.qa_type  from rec_list r join answer a 
+                on r.qa_no = a.a_no
+                where r.qa_type = 2)
+      			where q_no = q.q_no) count,
+	 			(select count(a_no) from answer where q_no= q.q_no) a_count    
+ 
 	 			from members m join question q
 	 			on q.members_no = m.members_no
 	 	<where>
@@ -43,8 +54,9 @@
 	 			a.a_contents 		,
 	 			a.a_date 			,
 	 			m.members_id     	,
-	 			m.members_image
-	 				
+	 			m.members_image		,
+	 			(select count(*) from rec_list
+				where qa_no = a.a_no and qa_type = 2) a_like_count
 	 			from members m join answer a
 	 			on a.members_no = m.members_no
 	 			where q_no = ${qNo}
@@ -61,7 +73,10 @@
 				q_views,
 				q_tags,
 				q_contents,
-				(select count(a_no) from answer where q_no= q.q_no) a_count
+				(select count(a_no) from answer where q_no= q.q_no) a_count,
+				(select count(*) from rec_list
+				where qa_no = q.q_no and qa_type = 1) qLikeCount
+				
 		from question q
 		where members_no = ${membersNo}
 		order by q_no desc
@@ -77,7 +92,9 @@
 				a.a_no,
 				a.members_no, 
 				a.a_date,
-				a.a_contents
+				a.a_contents,
+				(select count(*) from rec_list
+				where qa_no = a.a_no and qa_type = 2) qLikeCount
 		from question q , answer a
 		where a.members_no = ${membersNo} 
 		and a.q_no =q.q_no 
@@ -125,8 +142,17 @@
 	 			q.q_tags			,
 	 			m.members_id		,
 	 			m.members_image     ,
-	 			(select count(a_no) from answer where q_no= q.q_no) a_count
-	      		
+	 			(select count(a_no) from answer where q_no= q.q_no) a_count,
+	      		(select count(*) 
+     	    	from (
+                select r.rec_no, r.qa_no q_no, r.qa_type 
+                from rec_list r
+                where qa_type = 1
+                union 
+                select r.rec_no, a.q_no, r.qa_type  from rec_list r join answer a 
+                on r.qa_no = a.a_no
+                where r.qa_type = 2)
+      			where q_no = q.q_no) count
 	 			from members m join question q
 	 			on q.members_no = m.members_no
 				where q_no = #{qNo}
@@ -185,6 +211,18 @@
 		where qa_no = #{qaNo} and qa_type = #{qaType} and members_No =#{membersNo}
 	</delete>	
 		
-		
+		<!-- 질문 -->
+	<select id ="countRec" parameterType="int" resultType="int">
+		select count(*)
+		from rec_list
+		where qa_no = #{no} and qa_type = 1
+	</select>
+	
+		<!-- 답변 -->
+	<select id ="acountRec" parameterType="int" resultType="int">
+		select count(*)
+		from rec_list
+		where qa_no = #{no} and qa_type = 2
+	</select>
 		
 </mapper>

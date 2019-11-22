@@ -41,7 +41,7 @@
 						${qna.qTitle }
 						<div class="question-meta">
 							<span>조회수 ${qna.qViews}</span> <span>답변수 ${qna.aCount}</span> <span>좋아요
-								0</span>
+								${qna.count}</span>
 							<%-- <span>등록일 ${qna.qDate }</span> --%>
 						</div>
 					</h3>
@@ -51,8 +51,9 @@
 						</div>
 						<div class="question-content-left">
 							<ul>
-								<li class="question-vote-count" style="margin-bottom: 5px;">0</li>
-								<li><a class="rec_update" type="1"> <i class="fa fa-star fa-2x"
+								<li class="question-vote-count licount" style="margin-bottom: 5px;">${questionVO.qLikeCount}</li>
+								<li><a class="rec_update" type="1" no="${qna.qNo}" style="cursor:pointer"> <i class="fa fa-star fa-2x" 
+									
 										aria-hidden="true"></i>
 								</a></li>
 							</ul>
@@ -113,8 +114,8 @@
                     <div class="answer-detail-content answer-selection">
                         <div class="answer-content-left">
                             <ul>
-								<li class="question-vote-count" style="margin-bottom: 5px;">0</li>
-								<li><a class="rec_update" type="2"> <i class="fa fa-star fa-2x"
+								<li class="question-vote-count licount" style="margin-bottom: 5px;">${ans.aLikeCount}</li>
+								<li><a class="rec_update" type="2" no="${ans.aNo}" style="cursor:pointer"> <i class="fa fa-star fa-2x"
 										aria-hidden="true"></i>
 								</a></li>
 							</ul>
@@ -208,30 +209,48 @@
             	$('#modal-login').on('show.bs.modal', function (e) {	 
             	    $(this).find('.modal-content').load("login2");
             	});
-     </script>
-     
-     <script>
- 	$(function(){
+		
+            	
+            	     	
+            	
+            	
+        /* ---------------------- */    	
+            	
+ $(function(){
+		/*--------------------------------
+		          좋아요 증가/삭제
+		--------------------------------*/
 		$(".rec_update").click(function(){
 		var type = $(this).attr('type'); 
-			
+		var no = $(this).attr('no');
+		var li = $(this).parent().prev();
+		var star = $(this).children();
 			$.ajax({
 				url: "recUpdate",
                 type: "POST",
                 data: {
-                	qaNo: '${qna.qNo}',
+                	qaNo: no,
                 	qaType: type
                     
                 },
-                success: function () {
-			        
-                },
-			})
-		})
- 	})
-     </script>
-     <script>
-     	 $(document).ready(function(){ 
+                success: function (data) {
+                	li.html(data.count);
+                	
+                	if(data.result == 0){
+                		star.css('color', '#eca912');
+                	}else
+                		star.css('color', '#c1b28f');
+                	
+                }
+                	
+               
+			})  //end of ajax
+		}) //end of click
+
+     		 
+		/*--------------------------------
+		        답변작성
+		--------------------------------*/    		 
 		$("#ansbutton").click(function(){
 			var content = CKEDITOR.instances['ans_content'].getData();
 			
@@ -241,67 +260,76 @@
 				return false;
 			}			
 			document.insertAnq.submit();			
-		 }) 
-	 	})
-	 	</script>
-	 <script>
+		  
+	 	}) 
 	 
-	 $(document).ready(function(){ 
-	 $(function(){
-			$(".dd").click(function(){
-				$("#anq").attr("action", "updateAnq");
-				$("#ansbutton").attr("id","ansupdatebutton")
-				$("#ansupdatebutton").text("답글수정")
-				var a =$(this).val();
-				$("#zd").attr("name",'aNo')
-				$("#zd").attr("value",a)
-				
-				var offset = $("#ffff").offset();
-
-				$("html").animate({scrollTop:offset.top}, 1000);
+		/*--------------------------------
+		          답변수정
+		--------------------------------*/
+		$(".dd").click(function(){
+			$("#anq").attr("action", "updateAnq");
+			$("#ansbutton").attr("id","ansupdatebutton")
+			$("#ansupdatebutton").text("답글수정")
+			var a =$(this).val();
+			$("#zd").attr("name",'aNo')
+			$("#zd").attr("value",a)
 			
-			    });
-			})
-	 })
-	 </script>
-	      <script>
-     	 $(document).ready(function(){ 
+			var offset = $("#ffff").offset();
+
+			$("html").animate({scrollTop:offset.top}, 1000);
+
+		})
+		
+		/*--------------------------------
+		          수정실행
+		--------------------------------*/
 		$("#ansupdatebutton").click(function(){
 			
 			document.updateAnq.submit();
-		 }) 
+ 
 	 	})
-	 	</script>	 -->
 	 	
-	 	<script>
+ 		/*--------------------------------
+		     답변달기  
+		--------------------------------*/	 	
 		$("#ani").click(function(){
 
 			var offset = $("#ffff").offset();
 
 			$("html").animate({scrollTop:offset.top}, 1000);
 		
-		    });
+	    });
 	 	
 	 
-	 	
-	 		function dddd(aNo,qNo){ 
+		/*--------------------------------
+		        좋아요 증가/삭제
+		--------------------------------*/
+ 		function dddd(aNo,qNo){ 
 	 		if(confirm("정말 삭제하시겠습니까 ?")){ 
 	 			location.href='deleteAnq?aNo='+aNo+'&qNo='+qNo; 
 	 		}else{
 	 			
 	 			return false ; 
 	 		} 
-	 		};
-
-	 		$("#queDel").click(function(){ 
-		 		if(confirm("정말 삭제하시겠습니까 ?")){ 
-		 			location.href='deleteQna?qNo=${qna.qNo}';
-		 		}else{
-		 			return false; 
-		 		} 
-		 		})
+ 		};
+ 		
+ 		/*--------------------------------
+		        좋아요 증가/삭제
+		--------------------------------*/
+ 		$("#queDel").click(function(){ 
+	 		if(confirm("정말 삭제하시겠습니까 ?")){ 
+	 			location.href='deleteQna?qNo=${qna.qNo}';
+	 		}else{
+	 			return false; 
+	 		} 
+ 		})
+ 		
+ 		
+    
+ 		
+})
 	 		
-	 	</script>
+</script>
 	 	
 	 	
 	 	

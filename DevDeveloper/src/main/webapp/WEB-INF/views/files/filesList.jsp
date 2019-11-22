@@ -156,10 +156,10 @@
 									<form name="searchfrm" action="filesSearch">
 										<input type="hidden" name="projNo" value='${projNo}' />
 										<div class="input-group">
-											<select name="select">
+											<!-- <select name="select">
 												<option value="title">제목
 												<option value="userNo">작성자
-											</select>
+											</select> -->
 											<div class="input-group-prepend">
 												<span class="input-group-text"><i
 													class="ni ni-zoom-split-in"></i></span>

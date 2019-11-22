@@ -111,6 +111,18 @@ public class QnaDAO {
 		}
 
 
+		public int countRec(int no) {
+			 
+			return mybatis.selectOne("QnaDAO.countRec",no);
+		}
+
+
+		public int acountRec(int no) {
+			
+			return mybatis.selectOne("QnaDAO.acountRec",no);
+		}
+
+
 		  
 
 

@@ -34,7 +34,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="${pageContext.request.contextPath}/logout">
-              <i class="ni ni-circle-08 text-pink"></i> 임시로그아웃
+              <i class="ni ni-circle-08 text-pink"></i> 로그아웃
             </a>
           </li>
         </ul>

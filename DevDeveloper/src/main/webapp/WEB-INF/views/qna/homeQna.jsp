@@ -13,18 +13,6 @@
 	pageName = "Q & A";
 </script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<%-- <script
-		src="${pageContext.request.contextPath}/resources/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css"> --%>
-<%-- 	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/ccsss.css">  --%>
-<%-- 	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/gg.css"> --%>
-<%-- 	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/ff.css"> --%>
-<%-- 	
-	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/hh.css">  --%>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/qna.css">
 <link href="//fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
@@ -41,7 +29,7 @@
 					질문하기</button>	
 					<form name ="searchform" method ="post">
 			<input class="form-control" name="searchVal" placeholder="Search" value="${questionVO.searchVal}"
-					type="text" style="border: #cdb8f3 1px solid; width:180px;  float :right">
+					type="text" style="border: #574775 1px solid; width:180px;  float :right">
 					<input type="hidden" name="page" value="1"> 
 				 	<input type="hidden" class ="orderby" id="orderby" name="orderby" value=""> 
 					
@@ -55,7 +43,7 @@
     font-size: 13px;">
 						<ul class="main-qqqfilter sub-qqqfilter pull-qqqright qqqtabs">
 							<li class="filter-qqqitem <c:if test='${questionVO.orderby == "q_new" or empty questionVO.orderby}'>active</c:if>"><a href="qna">최신순</a></li>
-							<li class="filter-qqqitem <c:if test='${questionVO.orderby == "q_like"}'>active</c:if>" >좋아요</li>
+							<li class="filter-qqqitem <c:if test='${questionVO.orderby == "count"}'>active</c:if>" id="count">좋아요</li>
 							<li class="filter-qqqitem <c:if test='${questionVO.orderby == "q_views"}'>active</c:if>" id="q_views">조회수</li>
 						</ul>
 						<ul class="main-qqqfilter sub-qqqfilter pull-left qqqtabs">
@@ -73,23 +61,36 @@
 											<div class="t">${qna.aCount}</div> 답변수
 										</li>
 									</c:when>
-<%-- 									<c:when test ="${qna.aCount > 4 }">
-										<li class="fff">
-											<div class="t">${qna.aCount}</div> 답변수
-										</li>
-									</c:when> --%>
 									<c:otherwise>
 										<li class="ddd">
 											<div class="t">${qna.aCount}</div> 답변수
 										</li>
 									</c:otherwise>
-									</c:choose>																				
+									</c:choose>		
+									<c:choose>
+									<c:when test ="${qna.count eq 0 }">																		
 										<li>
-											<div>0</div> 좋아요
-										</li>						
+											<div>${qna.count}</div> 좋아요
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li class="fff">
+											<div>${qna.count}</div> 좋아요
+										</li>		
+									</c:otherwise>	
+									</c:choose>
+									<c:choose>
+									<c:when test ="${qna.qViews < 100 }">					
 										<li>
 											<div>${qna.qViews}</div> 조회수			
 										</li>
+									</c:when>
+									<c:otherwise>
+										<li class = "ddd">
+											<div>${qna.qViews}</div> 조회수			
+										</li>									
+									</c:otherwise>
+									</c:choose>
 									</ul>
 								</td>
 								<td class="question-qqqcontent">
@@ -134,24 +135,10 @@
 		        document.searchform.orderby.value = id 
 				document.searchform.submit()
 				
-		    });
+		    });	
 		});
 		
-		
-/*  		  $(function(){
-			  
-			 var order = $(".orderby").val();  
-		  
-			  if(order=='q_views'){
-				  $("#q_views").attr('class','filter-qqqitem active'); 
 
-				 
-			  }
-		  })
- 
-			  
-		   */
-		 
 		  
 		
 		

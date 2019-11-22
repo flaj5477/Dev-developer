@@ -62,11 +62,12 @@ public class CBTServiceImpl implements CBTService {
 
 	@Override
 	public void solutionProc(Map<String,Object> cd) {
-		int score = 0;	
-		@SuppressWarnings("unchecked")
-		List<Map<String,Integer>> mark = (List<Map<String,Integer>>) cd.get("data");
+		int score = 0;	// 맞은 문제 갯수
+		@SuppressWarnings("unchecked") // warning 막기
+		List<Map<String,Integer>> mark = (List<Map<String,Integer>>) cd.get("data"); // "data" = 시험 문제 key ,value 값
 		//SORTING (Lambda)
 		Collections.sort(mark,(Map<String,Integer> m1, Map<String,Integer> m2)-> { // List안에 담긴 Map 객체 정렬, lambda 형식으로
+			// 2진 트리
 			return m1.get("key")-m2.get("key");  // 오름차순 정렬
 		});
 		/* https://dublin-java.tistory.com/12
@@ -90,10 +91,10 @@ public class CBTServiceImpl implements CBTService {
 			}
 		}
 		// 점수계산
-		float quest = ((float)100/(Integer)cd.get("quest"));
-		int resultScore = Math.round(score*quest);
+		float quest = ((float)100/(Integer)cd.get("quest")); // (float) : 계산값 실수타입으로 출력
+		int resultScore = Math.round(score*quest); // 점수 반올림
 		// 결과 업데이트
-		TestsRecordVO recvo = new TestsRecordVO();
+		TestsRecordVO recvo = new TestsRecordVO(); // 업데이트 할 값을 객체에 담는다.
 		recvo.setTestsApplyNo((Integer)cd.get("rid"));
 		recvo.setMembersNo((Integer)cd.get("user"));
 		recvo.setTestsNo((Integer)cd.get("level"));

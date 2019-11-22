@@ -259,7 +259,7 @@
   	<div id="modal-testNew" class="modal fade" tabindex="-1" role="dialog"
 		aria-labelledby="회원가입" aria-describedby="테스트 모달">
 		<div class="modal-dialog" >
-			<div class="modal-content" style="background: #f0f2ff; width:550px;"></div>
+			<div class="modal-content" style="background: #828bc3; width:550px;"></div>
 		</div>
 	</div>
 	

@@ -29,6 +29,7 @@ public class ProjectsVO {
 	
 	private int first;	//페이징 시작 게시글 번호
 	private int last;	//페이징 종료 게시글 번호
+	private String select;	//검색 분류 선택 (태그,제목)
 	private String searchVal; //검색 값
 	private String orderby; // 정렬
 	

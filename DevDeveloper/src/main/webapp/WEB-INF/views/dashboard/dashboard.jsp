@@ -325,9 +325,7 @@
 									<div class="col">
 										<h3 class="mb-0">최근 질문</h3>
 									</div>
-									<div class="col text-right">
-										<a href="#!" class="btn btn-sm btn-primary">See all</a>
-									</div>
+									
 								</div>
 							</div>
 							<div class="table-responsive">
@@ -365,9 +363,7 @@
 									<div class="col">
 										<h3 class="mb-0">최근 답변</h3>
 									</div>
-									<div class="col text-right">
-										<a href="#!" class="btn btn-sm btn-primary">See all</a>
-									</div>
+								
 								</div>
 							</div>
 							<div class="table-responsive">

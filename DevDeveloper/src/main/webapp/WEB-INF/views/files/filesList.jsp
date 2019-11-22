@@ -35,33 +35,53 @@
 	pageName = "프로젝트 파일";
 
 	function filesImport() {
-		$.ajax({
+		// name이 같은 체크박스의 값들을 배열에 담는다.
+	    var list = [];
+	    $("input[name='chk_files']:checked").each(function(i) {
+			var obj = {};
+	    	obj["filesNo"] = $(this).val();
+	        list.push(obj);
+	    });
+	    var data = JSON.stringify(list);
+		console.log(data);
+	    $.ajax({
 			type : "POST",
 			url : 'filesImport',
-			data : {
-				filesNo : $('[name="chk_files"]:checked').val()
-			},
-			success : function(result) {
+			dataType : "json",
+			data : data,
+			contentType : "application/json",
+			success : function(response) {
 				location.reload();
-
 			},
-			error : function(e) {
+			error : function(xhr, status, msg) {
+				alert("status : " + status + " / err msg : " + msg);
 			}
 		});
 	}
 
+	// 휴지통
 	function filesTrash() {
-		$.ajax({
+		// name이 같은 체크박스의 값들을 배열에 담는다.
+		console.log("후지통");
+	    var trashList = [];
+	    $("input[name='chk_files']:checked").each(function(i) {
+			var trashObj = {};
+			trashObj["filesNo"] = $(this).val();
+			trashList.push(trashObj);
+	    });
+	    var trashData = JSON.stringify(trashList);
+		console.log(trashData);
+	    $.ajax({
 			type : "POST",
 			url : 'filesTrash',
-			data : {
-				filesNo : $('[name="chk_files"]:checked').val()
-			},
-			success : function(result) {
+			dataType : "json",
+			data : trashData,
+			contentType : "application/json",
+			success : function(response) {
 				location.reload();
-
 			},
-			error : function(e) {
+			error : function(xhr, status, msg) {
+				alert("status : " + status + " / err msg : " + msg);
 			}
 		});
 	}
@@ -83,9 +103,26 @@
 	}
 
 	function filesDownload() {
-		var filesNo = $('[name="chk_files"]:checked').val();
-		location.href = "download?filesNo=" + filesNo
-	}
+		var filesArr = [];
+		$("input[name='chk_files']:checked").each(function(i){
+			filesArr.push( $(this).val() ); // 체크한 것의 fileNo를 filsArr 배열에 담음
+		});
+		console.log(filesArr);
+		if(filesArr.length == 0) { // 파일 체크를 하지 않았을 경우
+			alert("파일을 선택해주세요.");
+		} else {
+			var link = document.createElement('a');
+			link.setAttribute('download', null);
+			link.style.display = "none";
+			document.body.appendChild(link);
+			for(var i = 0; i < filesArr.length; i++) {
+				console.log(filesArr[i]);
+				link.setAttribute("href", "download?filesNo=" + filesArr[i]);
+				link.click();
+			}
+			document.body.removeChild(link);
+		}
+	}	
 </script>
 </head>
 
@@ -102,11 +139,14 @@
 					<div class="card-header border-0">
 						<h2 class="mb-0">${project.projTitle }</h2>
 						<div>
+							<b>
+							<font size = "5">
 							<c:forEach items="${filesRoute}" var="route">
 								<a href="getFilesList?upperFolder=${route.filesNo}"> ${route.filesTitle} /</a>
 
 							</c:forEach>
-
+							</font>
+							</b>
 						</div>
 
 						<br />
@@ -137,29 +177,45 @@
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">파일 업로드</h5>
-												<form id="fileForm" name="fileForm" action="filesUpload"
-													method="post" enctype="multipart/form-data"
-													onsubmit='return getCmaFileView()'>
-													<input type="hidden" name="upperFolder"
-														value="${param.upperFolder}" /> 타이틀<input type="text"
-														name="filesTitle"> 코멘트<input type="text"
-														name="filesComment"> <input type="file"
-														onchange='getC()' value="파일 선택" id="uploadFile"
-														name="uploadFile" multiple /> <input type="submit"
-														value="업로드" />
-												</form>
-
+												<h3 class="modal-title" id="exampleModalLabel">파일 업로드</h3>
 												<button type="button" class="close" data-dismiss="modal"
 													aria-label="Close">
 													<span aria-hidden="true">&times;</span>
 												</button>
-
+											</div>
+											<form id="fileForm" name="fileForm" action="filesUpload"
+													method="post" enctype="multipart/form-data"
+													onsubmit='return getCmaFileView()'>
+											<div class ="modal-body">
+												
+													<input type="hidden" name="upperFolder" value="${param.upperFolder}" ></input>
+													<div class = "row">
+														<div class = "col-2">
+															타이틀
+														</div>
+														<div class = "col-10">
+															<input type="text"name="filesTitle" class = "form-control"></input>
+														</div>
+													</div>
+													<br>
+													<div class = "row">
+														<div class = "col-2">
+															코멘트
+														</div>
+														<div class = "col-10">
+															<input type="text" name="filesComment" class = "form-control"></input>
+														</div>
+													</div>
+													<br>
+													<input type="file" class = "form-control-file" onchange='getC()' value="파일 선택" id="uploadFile"	name="uploadFile" multiple>
+												
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
+												<input type = "submit" class = "btn btn-white" value = "업로드">
+												<button type="submit" class="btn btn-secondary"
 													data-dismiss="modal">Close</button>
 											</div>
+											</form>
 										</div>
 									</div>
 								</div>
@@ -238,8 +294,13 @@
                 						 </c:if> <c:if test="${files.filesType=='D'}">
 											<i class="far fa-folder"></i>
 											<a href="./getFilesList?upperFolder=${files.filesNo}">${files.filesTitle}</a>
-										</c:if> <span class="filesImportCheck"><c:if
-												test="${files.filesImport=='Y'}">♥</c:if></span></td>
+										</c:if>
+										<span class="filesImportCheck">
+											<c:if test="${files.filesImport=='Y'}">
+												<i class ="ni ni-favourite-28 text-red"></i>
+											</c:if>
+										</span>
+									</td>
 
 									<!-- <input type="checkbox" name="chk_info" value="HTML">HTML -->
 									<td>${files.filesComment }</td>

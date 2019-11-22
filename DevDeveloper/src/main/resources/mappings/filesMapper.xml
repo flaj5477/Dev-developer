@@ -78,6 +78,7 @@
 		from
 		files f inner join members m on f.members_no = m.members_no
 		where files_Import='Y'
+		and files_trash = 'N'
 	</select>
 	
 	<select id="getTrashList" parameterType="files"

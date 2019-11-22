@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +16,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -134,11 +138,15 @@ public class FilesController {
 
 	// 중요 파일 체크기능
 	@ResponseBody
-	@RequestMapping(value = "/filesImport", method = RequestMethod.POST)
-	public String filesImport(FilesVO vo) {
-		System.out.println(vo);
-		filesService.filesImport(vo);
-		return "redirect:getFilesList"; // 파일 리스트 페이지로 돌아감
+	@RequestMapping(value = "/filesImport", method = RequestMethod.POST, consumes="application/json")
+	public Map<String, Object> filesImport(@RequestBody List<FilesVO> vo) {
+		for(FilesVO fvo : vo) {
+			System.out.println(fvo.getFilesNo());
+			filesService.filesImport(fvo);
+		}
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("result", "seccess");
+		return result; 
 	}
 
 	// 중요파일 리스트
@@ -151,11 +159,15 @@ public class FilesController {
 
 	// 휴지통 체크
 	@ResponseBody
-	@RequestMapping(value = "/filesTrash", method = RequestMethod.POST)
-	public String filesTrash(FilesVO vo) {
-		System.out.println(vo);
-		filesService.filesTrash(vo);
-		return "redirect:getFilesTrash";
+	@RequestMapping(value = "/filesTrash", method = RequestMethod.POST, consumes="application/json")
+	public Map<String, Object> filesTrash(@RequestBody List<FilesVO> vo) {
+		for(FilesVO fvo : vo) {
+			System.out.println(fvo.getFilesNo());
+			filesService.filesTrash(fvo);
+		}
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("result", "seccess");
+		return result; 
 	}
 
 	// 휴지통 리스트
@@ -167,10 +179,14 @@ public class FilesController {
 	}
 
 	// 삭제 //서버에 있는 파일도 지워야함
-	@RequestMapping("/deleteFiles")
-	public String deleteFiles(FilesVO vo) {
-		filesService.deleteFiles(vo);
-		return "redirect:/getFilesTrash";
+	@ResponseBody
+	@RequestMapping(value = "/deleteFiles", method = RequestMethod.POST, consumes="application/json")
+	public Map<String, Object> deleteFiles(@RequestBody List<FilesVO> vo) {
+		for(FilesVO fvo : vo)
+			filesService.deleteFiles(fvo);
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("result", "seccess");
+		return result; 
 	}
 
 	// 검색

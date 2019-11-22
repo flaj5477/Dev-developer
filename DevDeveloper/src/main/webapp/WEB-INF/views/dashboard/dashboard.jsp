@@ -73,7 +73,7 @@
 									<div class="d-flex justify-content-between">
 										<button type="button" class="btn btn-sm btn-info mr-4" data-toggle="modal" data-target=".bd-example-modal-lg">응시기록 열람</button>
 										<!-- <a href="#" class="btn btn-sm btn-info mr-4">Connect</a> -->
-										<a href="#" class="btn btn-sm btn-default float-right">Message</a>
+										<!-- <a href="#" class="btn btn-sm btn-default float-right">Message</a> -->
 									</div>
 								</div>
 								<div class="card-body pt-0 pt-md-4 mt-5">

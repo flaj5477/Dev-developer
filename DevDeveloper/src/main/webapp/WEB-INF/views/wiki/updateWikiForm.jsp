@@ -62,10 +62,14 @@
 					alert("제목을 입력해야합니다")
 					return;
 				} 
-				if (myEditor.getData()=="") {
+				else if ($("#manualTags").val() == null) {
+					alert('태그를 입력 하세요');
+					return false;
+				}
+				else if (myEditor.getData()=="") {
 					alert('내용을 입력 하세요');
 					myEditor.editing.view.focus()
-					return;
+					return false;
 				}
 				
 				$("#frm").submit();

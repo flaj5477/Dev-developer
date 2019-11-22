@@ -124,8 +124,6 @@ public class WikiController {
 	@RequestMapping(value = "/transWikiForm")
 	public String transWikiForm(@ModelAttribute("wiki") WikiVO vo, Model model) {	//
 		
-		
-		System.out.println(vo.getManualNo()+"================================================================");
 		Map<Integer, Object> transList = wikiService.getWikiTrans(vo).get(1);   //번역들고옴	여기서 @Autowired WikiDAO wikiDAO 써도되나? 안쓰고 NEW 하면 에러남
 		
 		model.addAttribute("transWiki", wikiService.getTransWikiForm(vo));
@@ -234,5 +232,17 @@ public class WikiController {
 	public int wikiTransRecDel(WikiRecVO rvo) {
 				
 		return wikiService.wikiTransRecDel(rvo);
+	}
+	
+	/*==============
+  	곽동우
+  	20191122
+  	번역추천수가져오기
+ 	================*/
+	@RequestMapping(value = "/getTransRec", method = RequestMethod.POST)
+	@ResponseBody
+	public int getTransRec(HttpServletRequest request) {
+		int transNo = Integer.parseInt((String) request.getParameter("transNo"));
+		return wikiService.getTransRec(transNo);
 	}
 }

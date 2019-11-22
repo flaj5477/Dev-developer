@@ -57,4 +57,7 @@ public interface WikiService {
 
 	//나의 위키 번역내용
 	public List<WikiTransVO> getMyWikiTransList(int membersNo);
+
+	// 특정위키 추천수를 가져온다
+	public int getTransRec(int transId);
 }

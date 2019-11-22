@@ -13,6 +13,9 @@ public class AnswerVO {
 	private int membersNo;
 	private String membersId;
 	private String membersImage;
+	private int aLikeCount;
+	
+	
 	public int getaNo() {
 		return aNo;
 	}
@@ -68,12 +71,28 @@ public class AnswerVO {
 	public void setMembersImage(String membersImage) {
 		this.membersImage = membersImage;
 	}
+	
+	
+	
+	
+	public int getaLikeCount() {
+		return aLikeCount;
+	}
+	public void setaLikeCount(int aLikeCount) {
+		this.aLikeCount = aLikeCount;
+	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "AnswerVO [aNo=" + aNo + ", qNo=" + qNo + ", aContents=" + aContents + ", aCode=" + aCode + ", aDate="
 				+ aDate + ", aChoice=" + aChoice + ", membersNo=" + membersNo + ", membersId=" + membersId
-				+ ", membersImage=" + membersImage + "]";
+				+ ", membersImage=" + membersImage + ", aLikeCount=" + aLikeCount + "]";
 	}
+	
+	
+	
 	
 	
 	

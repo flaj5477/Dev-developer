@@ -37,6 +37,7 @@ public class PapagoTranslateNMT {
                 br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
             }
             String inputLine;
+            
             StringBuffer response = new StringBuffer();
             while ((inputLine = br.readLine()) != null) {
                 response.append(inputLine);
@@ -44,7 +45,7 @@ public class PapagoTranslateNMT {
             br.close();
             
             transText = response.toString();
-            System.out.println(transText);
+            System.out.println("파파고======="+transText+"=======================================");
         } catch (Exception e) {
             System.out.println(e);
         }

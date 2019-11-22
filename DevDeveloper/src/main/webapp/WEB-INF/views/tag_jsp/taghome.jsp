@@ -30,6 +30,10 @@ div h5 {
 		//e.stopPropagation();
 		location = "wikihome?select=tags&page=1&searchVal="+encodeURIComponent(tag);	// encodeURIComponent(tag) get방식은 파라미터넘길때 인코딩 해줘야함
 	}
+	function clickProjTag(e,tag){
+		//e.stopPropagation();
+		location = "getProjectsList?select=tags&page=1&searchVal="+encodeURIComponent(tag);	// encodeURIComponent(tag) get방식은 파라미터넘길때 인코딩 해줘야함
+	}
 	
 	/*
 		곽동우
@@ -60,11 +64,11 @@ div h5 {
 
 <body>
 	<%-- <c:if test="${sessionScope.members.membersGrade eq 5}"> --%>
-		<div class="row nav nav-pills justify-content-end pt-5 pr-5">
+		<!-- <div class="row nav nav-pills justify-content-end pt-5 pr-5">
 			<div class="text-right">
 				<a href="tagManageForm" class="btn btn-lg btn-danger">태그관리</a>
 			</div>
-		</div>
+		</div> -->
 	<%-- </c:if> --%>
 	<div class="row p-5">
 		<c:forEach items="${tagList}" var="tag">
@@ -73,7 +77,7 @@ div h5 {
                 <div class="card-body"  id="${tag.tagsTitle }">
                 	<p class="mt-3 mb-0 text-muted text-sm">
 	                    <a href="#" class="badge badge-primary">Q&A-${tag.qCount }건</a>
-	                    <a href="#" class="badge badge-primary">프로젝트: ${tag.pCount }</a>
+	                    <a href="javascript:clickProjTag(event,'${tag.tagsTitle}')" class="badge badge-primary">프로젝트: ${tag.pCount }</a>
 	                    <a href = "javascript:clickTag(event,'${tag.tagsTitle}')"  class="badge badge-primary">위키: ${tag.wCount }</a>
                   	</p>
                   <div class="row">

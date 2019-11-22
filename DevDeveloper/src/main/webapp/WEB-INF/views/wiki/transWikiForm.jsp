@@ -162,7 +162,7 @@ div[contenteditable] {
 			var manualNo = ${wiki.manualNo};
 			
 			
-			transClose(id);
+			transClose();
 
 			
 			$(this).attr("class", "translate hide");	//클릭한 기존 문장 숨김
@@ -196,14 +196,16 @@ div[contenteditable] {
 		20191031
 		번역종료(편집창닫는다)
 	*/
-	function transClose(id){
+	function transClose(){
 		//편집창 숨기고 기존문장 보이게
 		$('.translate.hide').attr("class", "translate");	
 		$('.transEdit.open').attr("class", "transEdit hide");	//다른곳에 편집창 열려있으면 숨김
 		
 		//ck에디터가 존재하면 destroy해라
-		var editor = myEditor;	//ck에디터
-		if (editor) { editor.destroy(true); }
+		if(myEditor != null){   
+			var editor = myEditor;	//ck에디터
+			if (editor) { editor.destroy(true); }	// ckeditor destroy 두번불러서 에러났다
+		}
 	}
 	
 	/*
@@ -213,7 +215,8 @@ div[contenteditable] {
 	*/
 	function btnClose(){
 		$('[name="btn-trans-close"]').on("click", function(){
-			transClose();
+			$('.translate.hide').attr("class", "translate");	
+			$('.transEdit.open').attr("class", "transEdit hide");	//다른곳에 편집창 열려있으면 숨김
 		});
 	}
 	
@@ -575,9 +578,6 @@ div[contenteditable] {
 </script>
 </head>
 <body>
-<button type="button" class="btn btn-info" data-container="body" data-toggle="popover" data-color="info" data-placement="top" data-content="This is a very beautiful popover, show some love.">
-  Info popover
-</button>
 	<div class="main p-5">
 		<form name="frm" id="frm" action="updateWikiForm" method="post">
 			<div>
@@ -598,13 +598,13 @@ div[contenteditable] {
 			<div class="nav-wrapper">
 			    <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
 			        <li class="nav-item">
-			            <a class="nav-link mb-sm-3 mb-md-0" id="btnOriWiki" data-toggle="tab" href="#" role="tab" aria-controls="tabs-icons-text-1" aria-selected="false"><i class="ni ni-cloud-upload-96 mr-2"></i>원문보기</a>
+			            <a class="nav-link mb-sm-3 mb-md-0" id="btnOriWiki" data-toggle="tab" href="#" role="tab" aria-controls="tabs-icons-text-1" aria-selected="false"><i class="fas fa-atlas text-purple"></i> 원문보기</a>
 			        </li>
 			        <li class="nav-item">
-			            <a class="nav-link mb-sm-3 mb-md-0 active" id="btnTransWiki" data-toggle="tab" href="#" role="tab" aria-controls="tabs-icons-text-2" aria-selected="true"><i class="ni ni-bell-55 mr-2"></i>번역하기</a>
+			            <a class="nav-link mb-sm-3 mb-md-0 active" id="btnTransWiki" data-toggle="tab" href="#" role="tab" aria-controls="tabs-icons-text-2" aria-selected="true"><i class="fas fa-edit"></i> 번역하기</a>
 			        </li>
 			        <li class="nav-item">
-			            <a class="nav-link mb-sm-3 mb-md-0" id="btnGetTransWiki" data-toggle="tab" href="#" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="ni ni-calendar-grid-58 mr-2"></i>번역본보기</a>
+			            <a class="nav-link mb-sm-3 mb-md-0" id="btnGetTransWiki" data-toggle="tab" href="#" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fas fa-bible"></i> 번역본보기</a>
 			        </li>
 			    </ul>
 			</div>
@@ -675,7 +675,7 @@ div[contenteditable] {
 									</div>
 									<div class="row">
 										<a href='javascript:void(0);' onclick="insertWikiTrans();" class="btn btn-sm btn-primary">번역등록</a>
-										<a href='javascript:void(0);' onclick="papagoTrans();" class="btn btn-sm btn-primary">구글번역</a>
+										<a href='javascript:void(0);' onclick="papagoTrans();" class="btn btn-sm btn-primary">파파고번역</a>
 									</div>
 								</div>
 								

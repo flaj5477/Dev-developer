@@ -333,73 +333,89 @@
 </style>
 </head>
 <body onload="getTest()">
-<div class="cbtViewer">
-	<div id="header">
-		<div id="exam">
-			<span id="title"></span>
-			<span id="subTitle"></span>
-		</div>
-		<div id="users">
-			<span id="userNo"></span>
-			<span id="userName"></span>
-		</div>
-		<div id="putTime">
-			<div id="permisTime"></div>
-			<div id="restTime"></div>
-		</div>
-		<div id="menu">
-			<div id="switchFont">
-				<span><button type="button" id="small">80%</button></span>
-				<span><button type="button" id="medium">100%</button></span>
-				<span><button type="button" id="large">120%</button></span>
-			</div>
-			<div>
-				<span id="allVol"></span>
-				<span id="restVol"></span>
-			</div>
-		</div>
-	</div>
-	<div id="content">
-		<div id="questView" style="width:60%; float:left"></div>
-		<div id="putView" style="width:40%; float:right"></div>
-	</div>
-	<div id="footer">
-		<div id="noExp">
-			<button type="button" class="btn btn-info" id="noExpBtn" data-toggle="modal" data-target="#cbtNoExpModal">안 푼 문제</button>
-			<div class="modal fade" id="cbtNoExpModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-			  <div class="modal-dialog modal-dialog-centered" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalCenterTitle">안 푼 문제</h5>
-			        <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body"></div> <!-- Modal 내용 -->
-			    </div>
-			   </div>
-	 	 	</div>
-		</div>
-		<button type="button" class="btn btn-primary" id="confirmBtn" data-toggle="modal" data-target="#cbtSubmitModal">제출하기</button>
-		<!-- Modal -->
-		<div class="modal fade" id="cbtSubmitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		  <div class="modal-dialog modal-dialog-centered" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalCenterTitle">답안제출</h5>
-		        <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body"></div> <!-- Modal 내용 -->
-		      <div class="modal-footer">
-		      	<button type="button" id="submitBtn" class="btn btn-primary">YES</button>
-		        <button type="button" id="resetBtn" class="btn btn-secondary" data-dismiss="modal">NO</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-	</div>
+<!-- 상단바 -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark text-white ">
+   <div class = "container">
+      <div class="navbar-brand" id ="exam">
+         <span id="title"></span>
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <span id="subTitle"></span>
+      </div>
+      <div class="navbar-brand" id ="users">
+         <span id="userNo"></span>
+         <span id="userName"></span>
+      </div>
+      <div id="putTime">
+         <div class = "row">
+            <div id="permisTime"></div>
+         </div>
+         <div class = "row">
+            <div id="restTime"></div>   
+         </div>
+      </div>
+   </div>
+</nav>
+
+<br><br><br>
+
+<div>
+   <div class="cbtViewer container">
+      <!-- 글씨 확대/축소 버튼 -->
+      <div class = "btn-group" id = "switchFont">
+      	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <button type = "button" id = "small" class = "btn btn-dark">80%</button>
+         <button type = "button" id = "medium" class = "btn btn-dark">100%</button>
+         <button type = "button" id = "large" class = "btn btn-dark">120%</button>
+      </div>
+      <div id="content" class="ml-5">
+         <div id="questView" style="width:60%; float:left"></div>
+         <div id="putView" style="width:12%; float:right">
+         	<div id="putSubject" style="background-color: darkorange; color: aliceblue; font-size: 16px; height:30px; margin: 2px 0;"><h4>답안 표기란</h4></div>
+         	<div id="putContent" style="background-color: whitesmoke;"></div>
+        	<div id="putFooter" style="background-color: whitesmoke;">	
+	         	<div id="noExp">
+		         	 <button type="button" class="btn btn-info" id="noExpBtn" data-toggle="modal" data-target="#cbtNoExpModal">안 푼 문제</button>
+			         <div class="modal fade bd-example-modal-sm" id="cbtNoExpModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+				        <div class="modal-dialog modal-dialog-centered" role="document">
+				          <div class="modal-content">
+				            <div class="modal-header">
+				              <h5 class="modal-title" id="exampleModalCenterTitle">안 푼 문제</h5>
+				              <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
+				                <span aria-hidden="true">&times;</span>
+				              </button>
+				            </div>
+				            <div class="modal-body"></div> <!-- Modal 내용 -->
+			        	   </div>
+		          	     </div>
+		        	 </div>
+	       		</div>
+	         	<div id="confirm">
+	         		<button type="button" class="btn btn-primary" id="confirmBtn" data-toggle="modal" data-target="#cbtSubmitModal">제출하기</button>
+			      <!-- Modal -->
+				      <div class="modal fade" id="cbtSubmitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				        <div class="modal-dialog modal-dialog-centered" role="document">
+				          <div class="modal-content">
+				            <div class="modal-header">
+				              <h5 class="modal-title" id="exampleModalCenterTitle">답안제출</h5>
+				              <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
+				                <span aria-hidden="true">&times;</span>
+				              </button>
+				            </div>
+				            <div class="modal-body"></div> <!-- Modal 내용 -->
+				            <div class="modal-footer">
+				               <button type="button" id="submitBtn" class="btn btn-primary">YES</button>
+				              <button type="button" id="resetBtn" class="btn btn-secondary" data-dismiss="modal">NO</button>
+				            </div>
+				          </div>
+				        </div>
+				      </div>
+				 </div>
+			 </div>
+         </div>
+      </div>
+   </div>
 </div>
 <div class="cbtProcess">
 	<div id="process">

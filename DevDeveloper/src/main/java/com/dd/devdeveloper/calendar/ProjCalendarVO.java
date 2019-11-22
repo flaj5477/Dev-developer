@@ -17,6 +17,7 @@ public class ProjCalendarVO {
 	@JsonIgnore private int developerNo;
 	@JsonIgnore private String developerId; //엑셀에서 입력되는 사용자 id
 	@JsonIgnore private String taskComplete;
+	@JsonIgnore private String date; //선택한 날짜
 	
 	//fullCalendar 타입
 	private String title;

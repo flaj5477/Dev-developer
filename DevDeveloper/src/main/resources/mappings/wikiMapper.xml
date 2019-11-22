@@ -75,7 +75,7 @@
 								AND MANUAL_TITLE LIKE '%' || #{searchVal} || '%'
 							</if>
 							<if test="select == 'tags'">
-								AND NVL(MANUAL_TAGS, '기타') LIKE '%' || #{searchVal} || ',%'
+								AND NVL(MANUAL_TAGS, '기타,') LIKE '%' || #{searchVal} || ',%'
 							</if>
 						</if>
 				</where>

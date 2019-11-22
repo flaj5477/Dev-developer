@@ -38,6 +38,15 @@ public class CalendarController {
 		System.out.println("캘린더 조회 결과:::::::::::::::::::::::::::::::" + list);
 		return list;
 	}
+	
+	//하루 할일 조회
+	@RequestMapping(value="/getToDoList", method=RequestMethod.GET)
+	@ResponseBody
+	public List<ProjCalendarVO> getToDoList(ProjCalendarVO vo){
+		List<ProjCalendarVO> list = calendarService.getToDoList(vo);
+		System.out.println("할일 조회 컨트롤러+++++++++++++" + vo);
+		return list;
+	}
 
 	// 엑셀 업로드 폼
 	/*

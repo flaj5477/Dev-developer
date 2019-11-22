@@ -27,4 +27,14 @@
 		where proj_no=#{projNo}
 	</select>
 	
+	<select id="getToDoList" resultType="projCalendar" parameterType="projCalendar">
+		select	task_title "title",
+				task_complete,
+				developer_no,
+				task_no
+		from proj_calendar 
+		where to_date(#{date},'yyyy-mm-dd') 
+		between start_date and end_date	
+	</select>
+	
 </mapper>

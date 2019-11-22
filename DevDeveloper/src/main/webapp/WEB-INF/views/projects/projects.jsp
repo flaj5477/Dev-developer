@@ -16,6 +16,11 @@
 <link href="./resources/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
 <!-- CSS Files -->
 <link href="./resources/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
+
+<script>
+	pageName = "프로젝트공고";
+</script>
+
 </head>
 <body class="">
 <div>
@@ -116,8 +121,29 @@
 				<a href="./applyProjectsForm?projNo=${project.projNo}" class="btn btn-lg btn-primary">지원하기</a>
 			</div>
 		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
 
-		<input type="hidden" name="projNo" value="${project.projNo }" /> <input type="hidden" name="projTitle" value="${project.projTitle }" /> <input type="hidden" name="projContents" value="${project.projContents }" /> <input type="hidden" name="projDueDate" value="${project.projDueDate }" /> <input type="hidden" name="projRequire" value="${project.projRequire }" /> <input type="hidden" name="projMembersCnt" value="${project.projMembersCnt }" /> <input type="hidden" name="projType" value="${project.projType }" /> <input type="hidden" name="projPrice" value="${project.projPrice }" /> <input type="hidden" name="projTags" value="${project.projTags }" /> <input type="hidden" name="projStartDate" value="${project.projStartDate }" /> <input type="hidden" name="projEndDate" value="${project.projEndDate }" />
+		<input type="hidden" name="projNo" value="${project.projNo }" /> 
+		<input type="hidden" name="projTitle" value="${project.projTitle }" /> 
+		<input type="hidden" name="projContents" value="${project.projContents }" /> 
+		<input type="hidden" name="projDueDate" value="${project.projDueDate }" /> 
+		<input type="hidden" name="projRequire" value="${project.projRequire }" /> 
+		<input type="hidden" name="projMembersCnt" value="${project.projMembersCnt }" /> 
+		<input type="hidden" name="projType" value="${project.projType }" /> 
+		<input type="hidden" name="projPrice" value="${project.projPrice }" /> 
+		<input type="hidden" name="projTags" value="${project.projTags }" /> 
+		<input type="hidden" name="projStartDate" value="${project.projStartDate }" /> 
+		<input type="hidden" name="projEndDate" value="${project.projEndDate }" />
+		
 	</form>
 	
 	</div>

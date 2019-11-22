@@ -84,9 +84,9 @@
             <div class=" dropdown-header noti-title">
               <h6 class="text-overflow m-0">Welcome!</h6>
             </div>
-            <a href="${pageContext.request.contextPath}/examples/profile.html" class="dropdown-item">
-              <i class="ni ni-single-02"></i>
-              <span>My profile</span>
+            <a href="${pageContext.request.contextPath}/getDashboard" class="dropdown-item">
+              <i class="ni ni-tv-2 text-primary"></i>
+              <span>Dashboard</span>
             </a>
             <a href="${pageContext.request.contextPath}/examples/profile.html" class="dropdown-item">
               <i class="ni ni-settings-gear-65"></i>
@@ -176,7 +176,7 @@
     <nav class="navbar navbar-top navbar-expand-md navbar-dark bg-gradient-primary" id="navbar-main">
       <div class="container-fluid">
         <!-- Brand -->
-        <a id="pageName" class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="./index.html">Dashboard</a>
+        <span id="pageName" class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">Dashboard</span>
         <!-- Form -->
         <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
           <div class="form-group mb-0">
@@ -218,9 +218,9 @@
               <div class=" dropdown-header noti-title">
                 <h6 class="text-overflow m-0">Welcome!</h6>
               </div>
-              <a href="#" class="dropdown-item">
-                <i class="ni ni-single-02"></i>
-                <span>My profile</span>
+              <a href="${pageContext.request.contextPath}/getDashboard" class="dropdown-item">
+                <i class="ni ni-tv-2 text-primary"></i>
+                <span>Dashboard</span>
               </a>
               <a href="#" class="dropdown-item">
                 <i class="ni ni-settings-gear-65"></i>

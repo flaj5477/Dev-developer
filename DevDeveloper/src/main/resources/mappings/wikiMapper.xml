@@ -232,7 +232,7 @@
 	<!-- 
 		곽동우
 		20191101
-		위키번역(라인별)최신순 들고오기
+		위키번역(라인별)최신순,추천순 들고오기
 	 -->
 	 <select id="getWikiTransLine" parameterType="wikiTrans" resultType="Map">
 		<!-- SELECT b.* FROM ( SELECT rownum no, a.* FROM ( -->
@@ -312,7 +312,14 @@
         		and a.MEMBERS_NO = d.MEMBERS_NO
 				and a.MANUAL_NO = #{manualNo}
 				and a.MANUAL_LINE = #{manualLine}
-				order by "rec" desc , a.TRANS_DATE desc
+				<choose>	
+					<when test="orderby2 == 'date'" >	<!--  '' 체크해줘야됨 -->
+						ORDER BY a.TRANS_DATE desc
+					</when>
+					<otherwise>
+						order by "rec" desc , a.TRANS_DATE desc
+					</otherwise>
+				</choose>
 		     </if>
 		     
 		     <!-- 
@@ -353,7 +360,7 @@
 						          a.MANUAL_NO									as 		"manualNo",
 						          a.MEMBERS_NO									as 		"membersNo",
 						          nvl(b.rec1,0)               					as   	"rec",
-						          DENSE_RANK() OVER(PARTITION BY a.MANUAL_LINE ORDER BY nvl(b.rec1,0) DESC, a.TRANS_DATE) AS rec_rank
+						          DENSE_RANK() OVER(PARTITION BY a.MANUAL_LINE ORDER BY nvl(b.rec1,0) DESC, a.TRANS_DATE desc) AS rec_rank
 					  FROM WIKI_GUIDE_TRANS a, 
 					                (  select count(trans_no) as rec1, trans_no
 					                    from WIKI_TRANS_REC
@@ -361,7 +368,7 @@
 					                    group by trans_no) b
 					  WHERE a.trans_no = b.trans_no(+)
 					  and a.MANUAL_NO = #{manualNo} ) r
-				where r.rec_rank = 1
+				where r.rec_rank = 1	
 				and "manualLine" is not null
 			</if>
 			

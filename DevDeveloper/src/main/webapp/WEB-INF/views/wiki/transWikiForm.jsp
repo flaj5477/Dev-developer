@@ -135,7 +135,7 @@ div[contenteditable] {
 		$('#btnDelWiki').on('click', function(){
 			/* document.frm.action.value = "deleteWiki";
 			document.frm.submit(); */
-			var result = confirm('정말삭제?'); 
+			var result = confirm('정말 삭제 하시겠습니까?'); 
 			
 			if(result) { //yes 
 				$("#frm").attr("action", "deleteWiki").submit();
@@ -192,7 +192,7 @@ div[contenteditable] {
 	            console.error( error );
 	        } );
 					
-			getWikiTransLine(manualLine, manualNo);	//위키번역 가져오기
+			getWikiTransLine(manualLine, manualNo, 'rec');	//위키번역 가져오기
 			
 		});
 	}
@@ -265,7 +265,7 @@ div[contenteditable] {
 			
 			var $transNo = $(this).parent().parent().attr('id');
 			
-			var check = confirm("정말 삭제?");
+			var check = confirm("정말 삭제 하시겠습니까?");
 			
 			if(check){
 				$.ajax({
@@ -459,7 +459,7 @@ div[contenteditable] {
 						//userList();
 						alert("등록됨");
 						myEditor.setData('');	//텍스트에어리어 초기화
-						getWikiTransLine(manualLine, manualNo);	//메뉴얼번호 메뉴얼라인수 넘겨줌
+						getWikiTransLine(manualLine, manualNo, 'date');	// 해당라인 번역 가져오기(메뉴얼번호 메뉴얼라인수 넘겨줌)
 						$("#transContent"+manualLine).html(manualAfter);	//번역 라인에 등록
 						
 						
@@ -478,7 +478,7 @@ div[contenteditable] {
 		20191101
 		위키번역 목록 조회 요청
 	*/
-	function getWikiTransLine(manualLine, manualNo){
+	function getWikiTransLine(manualLine, manualNo, orderby2){
 		
 		var membersNo = '${sessionScope.members.membersNo}';
 		if(membersNo == null || membersNo == "") { membersNo = 0 };
@@ -490,7 +490,8 @@ div[contenteditable] {
 			data: JSON.stringify({manualLine: manualLine,
 								  manualNo: manualNo,
 								  loginNo : membersNo,
-								  orderby : 'rec'}),
+								  orderby : 'rec',
+								  orderby2 : orderby2}),
 			contentType: 'application/json',
 			error:function(xhr, status, msg){
 				alert("상태값 : "+status + " Http에러메세지 :"+msg);
@@ -527,14 +528,7 @@ div[contenteditable] {
 	function wikiTransLineResult(data, manualLine){	 //data서버에서넘겨받은 json
 		$('#othertrans_'+manualLine).empty();
 		$.each(data,function(idx,item){		//데이터안의 건수만큼 each돌아감
-			/* $('<tr>').append($('<td>').html(item.id))
-					 .append($('<td>').html(item.name))
-					 .append($('<td>').html(item.password))
-					 .append($('<td>').html(item.role))
-					 .append($('<td>').html('<button id=\'btnSelect\'>조회</button>'))
-					 .append($('<td>').html('<button id=\'btnDelete\'>삭제</button>'))
-					 .append($('<input type=\'hidden\' id=\'hidden_userId\'>').val(item.id))
-					 .appendTo('tbody'); */
+
 			   var manualAfterBr = (item.manualAfter).replace(/(\n|\r\n)/g, '<br>');	//br치환
 			   
 			   //이미 번역추천 했나?
@@ -545,7 +539,7 @@ div[contenteditable] {
 			   }
 			   
 			   //자기번역이면 삭제버튼 보이게
-			   if(item.membersId == "${sessionScope.members.membersId}"){
+			   if(item.membersId == "${sessionScope.members.membersId}" || membersGrade == "5"){
 				   var delbtn = '<i name="deltransbtn" class="ni ni-fat-remove">' ;
 			   }else{
 				   var delbtn = null;
@@ -556,7 +550,7 @@ div[contenteditable] {
 				   			'class': 'col otherTrans pr-2 ',
 				   			"id" : item.transNo
 			   		})
-				.append($('<div class="row nav nav-pills justify-content-end">').html(  delbtn  ))			   		
+				.append($('<div class="row nav nav-pills justify-content-end">').html( delbtn  ))			   		
 			   	.append($('<div id="otcontents" class="row" >').html(manualAfterBr))   
 			   	.append($('<div class="row nav nav-pills justify-content-end">')
 			   			.append("<span id =rec"+ item.transNo +">추천수"+item.rec+"</span>").append( recBtn ).append($('<badge class="badge badge-primary ml-3">').html("<br>"+item.translDate+" <br> "+item.membersId+"</a>" )))//"<a href=' getWiki= "+item.membersNo +"'>"+
@@ -590,27 +584,23 @@ div[contenteditable] {
 	}
 	
 	/*
-		20191115
+		20191123
 		곽동우
-		ck에디터 생성
+		추천순, 최신순 정렬버튼
 	*/
-	/* function createCKEditor(manualLine){
-		var Editor;	
+	function orderbtn(orderby){
+		var manualLine = $(".transEdit.open .badge").attr('id');
+		var manualNo = ${wiki.manualNo};
 		
-		InlineEditor	//ck 에디터 사용
-        .create( document.querySelector( '.editor'+manualLine ), {
-     	   toolbar: [ "undo", "redo", "bold", "italic", "blockQuote", "heading",  "link", "numberedList", "bulletedList",  "insertTable" ]    
-        })
-        .then( editor => {
-	            console.log( 'Editor was initialized', editor );
-	            Editor = editor;
-	        } )
-        .catch( error => {
-            console.error( error );
-        } );
-		
-		return Editor;
-	} */
+		if(orderby == 'rec'){
+			getWikiTransLine(manualLine, manualNo, 'rec');
+			console.log("rec")
+		} else if(orderby == 'date'){
+			getWikiTransLine(manualLine, manualNo, 'date');
+			console.log("date")
+		}
+	}
+	
 </script>
 </head>
 <body>
@@ -718,6 +708,8 @@ div[contenteditable] {
 								<%-- 번역편집기 오른쪽--%>
 								<div class="col mr--3" name="rEdit">
 									<span class="row nav nav-pills justify-content-end">
+											<a href='javascript:void(0);' onclick="orderbtn('rec');" class='badge badge-danger'>추천순</a>
+											&nbsp<a href='javascript:void(0);' onclick="orderbtn('date');" class='badge badge-info'>최신순</a>
 											<i name="btn-trans-close" class="ni ni-fat-remove"></i>
 									</span>
 									<div class="scrollspy-example" id="othertrans_${entry.key}">

@@ -39,7 +39,7 @@
 		$('#btnDelWiki').on('click', function(){
 			/* document.frm.action.value = "deleteWiki";
 			document.frm.submit(); */
-			var result = confirm('정말삭제?'); 
+			var result = confirm('정말 삭제 하시겠습니까?'); 
 			
 			if(result) { //yes 
 				$("#frm").attr("action", "deleteWiki").submit();

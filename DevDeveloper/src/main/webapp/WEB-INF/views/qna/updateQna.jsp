@@ -130,7 +130,9 @@
 		 }) 
 	 	})
 	 	
-	 	
+	 		$('#manualTags').select2({ //select2생성
+			placeholder : "태그 선택"
+		});
 	 	
 	</script> 
 

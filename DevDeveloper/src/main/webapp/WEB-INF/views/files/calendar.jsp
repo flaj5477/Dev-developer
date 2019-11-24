@@ -15,7 +15,9 @@
 <script src='./resources/calendar/timegrid/main.js'></script>
 <script src='./resources/calendar/core/locales-all.js'></script> 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
+<script>
+	pageName = "프로젝트 일정";
+</script>
 
 <script>
 	$(function() {
@@ -38,7 +40,6 @@
 
 	function inputData(data) { //data는 list<Map>형식임 
 		console.log(data);
-
 	}
 	//캘린더 화면에 출력
 	function calRender(data) {
@@ -102,21 +103,40 @@
 
 		$.each(data, function(idx, item) {
 			//taskComplete 값에 따라서 체크 태그 만들기
-			var check = "";
+			var check = ""; //체크박스
 			if(item.taskComplete == "y"){
-				check = "<input type='checkbox' name='check' value=" + item.taskComplete + " checked>";
+				check = "<input class='custom-control-input' id=" + item.title + " type='checkbox' name='check' value=" + item.taskComplete + " checked>";
 			} else {
-				check = "<input type='checkbox' name='check' value=" + item.taskComplete + ">";
+				check = "<input class='custom-control-input' id=" + item.title + " type='checkbox' name='check' value=" + item.taskComplete + ">";
 			}
+			
+			//체크박스 라벨
+			var label = '<label class="custom-control-label" for=' + item.title + '>' +'&nbsp' + '</label>';	
+			
+			//체크박스 + 라벨
+			var div = $('<div>').attr('class','custom-control custom-checkbox')
+								.append(check)
+								.append(label);
+			//프로필사진 + id
+			 var profile = "<div class='row' >"
+			 				+ "<a class='avatar avatar-sm' data-toggle='tooltip' data-original-title='아이디' >"
+							+ "<img src='./images/profile/" + item.membersImage + "' class= 'rounded-circle'>"
+							+ "</a>"
+							+ "<span class='mt-auto mb-auto'>" + '&nbsp&nbsp' + item.developerId + "</span>"
+						+ "</div>" 
+			
+
+						
 			$('<tr>').attr('id',item.taskNo)
-					.append($('<td>').html(check))
+					.append($('<td>').html(div))
 					.append($('<td>').html(item.title))
-					.append($('<td>').html(item.developerNo))
-					.append($('<td>').html(item.taskComplete))
+					.append($('<td>').html(profile))
+					/* .append($('<td>').html(item.taskComplete)) */
 					.appendTo('#toDoList');
 		})//each	
 		//모달 그리기
 		$('#myModal').modal();
+		
 	}
 	
 	
@@ -148,7 +168,8 @@
 				$('#myModal').modal("hide"); 
 				
   				if(response.result = true){
-  					alert("총 " + response.success + "/" + response.total + "건이 처리 되었습니다.");
+  					//alert("총 " + response.success + "/" + response.total + "건이 처리 되었습니다.");
+  					alert("to do List가 수정되었습니다.");
   				}
   			},
 			error : function(xhr, status, message) {
@@ -243,7 +264,7 @@ body {
 											<th scope="col">체크</th>
 											<th scope="col">할일</th>
 											<th scope="col">개발자</th>
-											<th scope="col">y/n</th>
+											<!-- <th scope="col">y/n</th> -->
 										</tr>
 									</thead>
 									<tbody id="toDoList">
@@ -251,9 +272,9 @@ body {
 								
 										<tr>
 											<th scope="row" class="df"><input type="checkbox" name="agree" id="chk1"></th>
-											<th scope="row" class="df">공고입력</th>
-											<th scope="row" class="df">10</th>
-											<th scope="row" class="df">y</th>
+											<th scope="row" class="df">할일</th>
+											<th scope="row" class="df">개발자</th>
+											<!-- <th scope="row" class="df">y</th> -->
 										</tr>
 										
 									</tbody>

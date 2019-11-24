@@ -110,13 +110,13 @@
 	               oldUnit = newUnit; // 과목단위로 과목명 출력 중복방지
 	               var str = 
 	                  '<div id="questNo'+no+'">'
-	                     +'<table id="contentsTab">'
+	                     +'<table id="contentsTab" style="width:500px;">'
 	                        +caption
 	                        +'<tr>'
 	                           +'<td colspan="2"><div><strong>'+no+'. ' + quest +'</strong></div></td>'
 	                        +'</tr>'
 	                     +'</table>'
-	                     +'<table id="exTab">'
+	                     +'<table id="exTab" style="width:500px;">'
 	                        +'<tr>'
 	                           +'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="1">'+rex[0]+'</div></td>'
 	                        +'</tr>'
@@ -130,7 +130,15 @@
 	                           +'<td><div><input type="radio" data="'+no+'" name="questNum'+no+'" value="4">'+rex[3]+'</div></td>'
 	                        +'</tr>'
 	                     +'</table>'
-	                  +'</div>';
+	                  +'</div>'
+	                  +'<hr/>';
+	               if(no == size) {
+	            	   str += '<div align="center" class="alert alert-warning">'
+								+'<h4 style="color:black; font-weight:bold;">수고하셨습니다!</h4>'
+			        	   	 +'</div>'
+	            		     +'<br><br><br><br><br><br><br><br><br><br><br><br><br>'
+	            	   		 +'<br><br><br><br><br><br><br><br><br><br><br><br><br>';
+	               }
 	               $('#questView').append(str);
 	            });
 	         },
@@ -185,11 +193,11 @@
 		return idx;
 	}
 	
-	function scrollEvent() {
+	function scrollEvent() { // 답안표기란 스크롤 따라다니기
 		var currentPosition = parseInt($("#putView").css("top"));
 		$(window).scroll(function() {
 			var position = $(window).scrollTop();
-			$("#putView").stop().animate({"top":position+currentPosition+"px"},500);
+			$("#putView").stop().animate({"top":position+currentPosition+"px"},480);
 		});
 	}
 	
@@ -239,7 +247,7 @@
 			var str = 
 					'<span style="margin:0 0 10px 40px;" name="focusQ">'
 						+'<button type="button" id="explain'+i+'" class="btn btn-danger" value="'+i+'"'
-						+'style="width:18px; height:20px; text-align:center; font-size:12px; margin: 0 0 10px 3px;">'
+						+'style="width:18px; height:20px; text-align:center; font-size:12px; margin: 0 0 10px 3px; position:absolute; left:70%;">'
 					+'</span>';
 			$('#radio'+i).append(str);
 			if(nolist[i-1] == true) {
@@ -346,19 +354,17 @@
 <div class="cbtViewer">
 	<!-- 상단바 -->
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark text-white">
-	   <div class = "container">
+	   <div class = "container" style="padding-right:0px">
 	      <div class="navbar-brand" id ="exam">
-	      	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	         <span id="title"></span>
-	         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	         <span id="subTitle"></span>
+	      	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	         <span id="title"  style="padding-right:30px"></span>
+	         <span id="subTitle" style="margin:0 30px;"></span>
 	      </div>
-	      <div class="navbar-brand" id ="users">
+	      <div class="navbar-brand" id ="users" style="padding:0 30px;">
 	         <span id="userNo"></span>
 	         <span id="userName"></span>
 	      </div>
-	      <div id="putTime">
+	      <div id="putTime" style="padding:0 40px;">
 	         <div class = "row">
 	            <div id="permisTime"></div>
 	         </div>
@@ -366,8 +372,8 @@
 	            <div id="restTime"></div>   
 	         </div>
 	      </div>
-	       <div id="confirm" class="navbar-brand" style="margin:0 0 0 40px;">
-	   		  <button type="button" class="btn btn-primary" id="confirmBtn" data-toggle="modal" data-target="#cbtSubmitModal">제출하기</button>
+	       <div id="confirm" class="navbar-brand" style="padding:0 0 0 40px;">
+	   		  <button type="button" class="btn btn-primary" id="confirmBtn" data-toggle="modal" data-target="#cbtSubmitModal" style="width:160px; height:40px;">제출하기</button>
 		  </div>
 	    </div>
 	</nav>
@@ -382,7 +388,7 @@
      </div>
      <div id="content" class="ml-5">
         <div id="questView" style="width:60%; float:left"></div>
-        <div id="putView" style="width:12%; float:right">
+        <div id="putView" style="width:12%; float:right; margin-right: 90px;" >
         	<div id="putSubject" style="background-color: black; color: aliceblue; font-size: 16px; height:40px; margin: 2px 0;">
         		<h3 style="text-align:center"> 답안 표기란 </h3>
         	</div>

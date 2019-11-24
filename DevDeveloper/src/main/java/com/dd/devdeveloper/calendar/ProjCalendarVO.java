@@ -18,6 +18,7 @@ public class ProjCalendarVO {
 	 private String developerId; //엑셀에서 입력되는 사용자 id
 	 private String taskComplete;
 	 private String date; //선택한 날짜
+	 private String membersImage;
 	
 	//fullCalendar 타입
 	private String title;

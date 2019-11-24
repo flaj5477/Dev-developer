@@ -80,7 +80,7 @@
 									<div class="text-center">
 										<div class="row justify-content-center">
 											<div class="col-2 align-self-center">
-												<img src="./images/grade/2.png" width="70px">
+												<img src="./images/grade/${members.membersGrade}.png" width="70px">
 											</div>
 											<div class="col-3 justify-content-center">
 												<h2>${members.membersName}</h2>
@@ -263,7 +263,8 @@
 																	<c:if test="${projApplicant.projNo == myProject.projNo }">
 																		<tr>
 																			<input type="hidden" value="${projApplicant.applyNo }" />
-																			<th scope="row"><span class="size-100 img-rounded " data-toggle="tooltip" data-original-title="${projApplicant.membersId }" style="margin-left: auto;"> <img src="./images/profile/${projApplicant.membersImage }" class="size-100">
+																			<th scope="row"><span class="size-100 img-rounded " data-toggle="tooltip" data-original-title="${projApplicant.membersId }" style="margin-left: auto;"> 
+																			<img src="./images/profile/${projApplicant.membersImage }" class="size-100">
 																			</span></th>
 																			<td>${projApplicant.participantName }</td>
 																			<td>${projApplicant.status }</td>

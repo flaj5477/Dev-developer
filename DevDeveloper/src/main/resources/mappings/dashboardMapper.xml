@@ -24,7 +24,8 @@
 				members_name, 
 				members_image, 
 				members_addr, 
-				members_mail 
+				members_mail,
+				members_grade 
 		from members 
 		where MEMBERS_NO = #{membersNo}
 	</select>

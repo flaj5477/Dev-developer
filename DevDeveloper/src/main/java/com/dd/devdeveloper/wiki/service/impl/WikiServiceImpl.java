@@ -122,7 +122,8 @@ public class WikiServiceImpl implements WikiService {
 				int transPercent = (int) ((double)transCount/(totalLine)*100);
 				wikiList.get(i).put("manualTransPercent", transPercent);
 				
-				System.out.println(transPercent+"-========================================");
+				
+				System.out.println(transPercent+"-==총라인:"+totalLine+"====번역줄수:"+transCount+"==================================");
 			}
 			
 		}
@@ -219,6 +220,36 @@ public class WikiServiceImpl implements WikiService {
 		if(vo.getManualTags() != null) {
 			vo.setManualTags(tagsService.checkTag(vo.getManualTags()));	//태그가 끝에 , 없으면 ,붙여줌
 		}
+		
+		/////////////////////////////////////////
+		//위키 총 라인등록
+		String contents = vo.getManualContents();
+
+		int start;
+		int line = 0;
+
+		Map<Integer, Object> lineMap = new HashMap<Integer, Object>();
+
+		do {
+			start = contents.indexOf("<");
+			int end = contents.indexOf(">");
+
+			if (start != -1) {
+
+				String sTag = contents.substring(start, end + 1);
+				String eTag = "</" + contents.substring(start + 1, end) + ">";
+				int eTagLength = eTag.length();
+
+				int idx = contents.indexOf(eTag);
+
+				lineMap.put(line, contents.substring(0, idx + eTagLength));
+				//data.add(text.substring(0, idx+4));
+				contents = contents.substring(idx + eTagLength);
+				line++;
+			}
+		} while (start != -1);
+		/////////////////////////////////////////////////////////
+		vo.setManualTotalline(line); // 총 메뉴얼라인 등록
 		
 		wikiDAO.updateWiki(vo);		//위키원본 수정
 		wikiDAO.updateWikiTransInfo(vo);	// 위키 번역 수정라인정보 등록
@@ -510,7 +541,17 @@ public class WikiServiceImpl implements WikiService {
 	 ================*/
 	public List<WikiTransVO> getMyWikiTransList(int membersNo) {
 		return wikiDAO.getMyWikiTransList(membersNo);
-	}	
+	}
+	
+	/* ==============
+	 곽동우
+	 20191122
+	 특정 위키번역 추천수 가져오기
+	 ================*/
+	public int getTransRec(int transId) {
+		Integer rec = wikiDAO.getTransRec(transId);
+		return rec;
+	}
 	
 	
 	////////// 파일

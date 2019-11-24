@@ -73,14 +73,14 @@
 									<div class="d-flex justify-content-between">
 										<button type="button" class="btn btn-sm btn-info mr-4" data-toggle="modal" data-target=".bd-example-modal-lg">응시기록 열람</button>
 										<!-- <a href="#" class="btn btn-sm btn-info mr-4">Connect</a> -->
-										<a href="#" class="btn btn-sm btn-default float-right">Message</a>
+										<!-- <a href="#" class="btn btn-sm btn-default float-right">Message</a> -->
 									</div>
 								</div>
 								<div class="card-body pt-0 pt-md-4 mt-5">
 									<div class="text-center">
 										<div class="row justify-content-center">
 											<div class="col-2 align-self-center">
-												<img src="./images/grade/2.png" width="70px">
+												<img src="./images/grade/${members.membersGrade}.png" width="70px">
 											</div>
 											<div class="col-3 justify-content-center">
 												<h2>${members.membersName}</h2>
@@ -263,7 +263,8 @@
 																	<c:if test="${projApplicant.projNo == myProject.projNo }">
 																		<tr>
 																			<input type="hidden" value="${projApplicant.applyNo }" />
-																			<th scope="row"><span class="size-100 img-rounded " data-toggle="tooltip" data-original-title="${projApplicant.membersId }" style="margin-left: auto;"> <img src="./images/profile/${projApplicant.membersImage }" class="size-100">
+																			<th scope="row"><span class="size-100 img-rounded " data-toggle="tooltip" data-original-title="${projApplicant.membersId }" style="margin-left: auto;"> 
+																			<img src="./images/profile/${projApplicant.membersImage }" class="size-100">
 																			</span></th>
 																			<td>${projApplicant.participantName }</td>
 																			<td>${projApplicant.status }</td>
@@ -572,35 +573,19 @@
 					url : "getProjStatusDetail/" + status,
 					type : 'GET',
 					dataType : 'json',
-					async : false, //동기화 방식으로 해야 데이터를 다 받아 온 후에 실행한다.
-					/* data : JSON.stringify({
-						status : encodeURI(status)
-					}), */
+					async : false, //동기화 방식으로 해야 데이터를 다 받아 온 후에 실행한다
 					contentType : 'application/json;charset=utf-8',
 					success : function(data) { //데이터 받아오기 성공하면 
 						//테이블 생성
-						/* 					console.log(data.length);
-						 console.log(data[0].projTitle); */
-
 						for (i = 0; i < data.length; i++) {
 							//이부분 함수로 만들어서 status가 지원일때, 승인일때, 참여일때, 버튼과 클릭이벤트 따로 주기
 							ajaxRow += CreateTableRow(status, data);
-
-							/* 
-							"<tr id=" + data[i].projNo + ">"
-								+ "<td>"
-								+ data[i].projTitle
-								+ "</td>"
-								+ "<td>"
-								+ "<button type=\"button\" class=\"btn btn-default\">지원 취소</button>"
-								+ "</td>" + "</tr>"; */
 						}
 					},
 					error : function(xhr, status, message) {
 						alert(" status: " + status + " er:" + message);
 					}
 				});
-
 				//모달 띄우기
 				var modal = $(this);
 				$(this).find("#projectModalLabel").html(status);

@@ -104,8 +104,8 @@
 	
 	<!--질문등록-->
 	<insert id="insertQna" parameterType="question">
-		insert into question(q_no, q_title, q_contents, members_no) 
-		values((select max(q_no)+1 from question),#{qTitle},#{qContents},#{membersNo})
+		insert into question(q_no, q_title, q_contents, members_no, q_tags) 
+		values((select max(q_no)+1 from question),#{qTitle},#{qContents},#{membersNo},#{qTags})
 	</insert>	
 	
  
@@ -170,7 +170,7 @@
 	
 	<update id="updateQna" parameterType="question"> 
 
-		UPDATE question set q_title = #{qTitle} , q_contents = #{qContents} where q_no = #{qNo}
+		UPDATE question set q_title = #{qTitle} , q_contents = #{qContents}, q_tags = #{qTags} where q_no = #{qNo}
 
 	</update>
 			
@@ -223,6 +223,17 @@
 		select count(*)
 		from rec_list
 		where qa_no = #{no} and qa_type = 2
+	</select>
+	
+		<select id="getTagList" resultType="Map">
+		select tags_no as "tagsNo",
+		       tags_title as "tagsTitle",
+		       tags_contents as "tagsContents",
+		       (select count(*) from question where q_tags like '%' || tags.tags_title || ',%') as "qCount",
+		       (select count(*) from projects where proj_tags like '%' || tags.tags_title || ',%') as "pCount",
+		       (select count(*) from wiki_guide where MANUAL_TAGS like '%' || tags.tags_title || ',%') as "wCount"
+		from tags
+		order by tags_title 
 	</select>
 		
 </mapper>

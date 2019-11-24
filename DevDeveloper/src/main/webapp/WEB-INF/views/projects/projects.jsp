@@ -121,20 +121,10 @@
 				<a href="./applyProjectsForm?projNo=${project.projNo}" class="btn btn-lg btn-primary">지원하기</a>
 			</div>
 		</div>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-
+		
 		<input type="hidden" name="projNo" value="${project.projNo }" /> 
 		<input type="hidden" name="projTitle" value="${project.projTitle }" /> 
-		<input type="hidden" name="projContents" value="${project.projContents }" /> 
+		<input type="hidden" name="projContents" value="<c:out value="${project.projContents }" escapeXml="true" />" />
 		<input type="hidden" name="projDueDate" value="${project.projDueDate }" /> 
 		<input type="hidden" name="projRequire" value="${project.projRequire }" /> 
 		<input type="hidden" name="projMembersCnt" value="${project.projMembersCnt }" /> 

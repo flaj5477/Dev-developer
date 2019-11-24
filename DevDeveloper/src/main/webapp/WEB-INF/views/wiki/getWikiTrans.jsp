@@ -75,6 +75,11 @@
 		otherTransClick(); */
 	});
 
+	//태그클릭
+	function clickTag(e,tag){
+		//e.stopPropagation();
+		location = "wikihome?select=tags&page=1&searchVal="+encodeURIComponent(tag);	// encodeURIComponent(tag) get방식은 파라미터넘길때 인코딩 해줘야함
+	}
 	/*
 		위키 버튼 클릭이벤트
 	*/
@@ -82,7 +87,7 @@
 		$('#btnDelWiki').on('click', function(){
 			/* document.frm.action.value = "deleteWiki";
 			document.frm.submit(); */
-			var result = confirm('정말삭제?'); 
+			var result = confirm('정말 삭제 하시겠습니까?'); 
 			
 			if(result) { //yes 
 				$("#frm").attr("action", "deleteWiki").submit();

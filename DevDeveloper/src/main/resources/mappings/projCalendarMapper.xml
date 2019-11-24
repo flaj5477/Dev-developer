@@ -20,21 +20,25 @@
 	<select id="getProjCalendarData" resultType="projCalendar" parameterType="projCalendar">
 		select task_title "title", 
           to_char(start_date,'yyyy-mm-dd') "start", 
-          to_char(end_date,'yyyy-mm-dd') "end", 
+          to_char(end_date+1,'yyyy-mm-dd') "end",   
           developer_no, 
-          task_complete 
+          task_complete,
+          decode (DENSE_RANK() OVER (ORDER BY developer_no), 1,'blue',2,'cyan',3,'orange', 4,'green', 'pink') color           
 		from PROJ_CALENDAR
 		where proj_no=#{projNo}
 	</select>
 	
 	<select id="getToDoList" resultType="projCalendar" parameterType="projCalendar">
 		select	task_title "title",
-				task_complete,
+				task_complete,       
 				developer_no,
 				task_no,
-				proj_no
-		from proj_calendar 
-		where proj_no = #{projNo} 
+				proj_no,
+				m.members_id "developerId",
+        		m.members_image
+		from proj_calendar c, members m
+		where c.developer_no = m.members_no 
+		and proj_no = #{projNo} 
 		and to_date(#{date},'yyyy-mm-dd') 
 		between start_date and end_date	
 	</select>

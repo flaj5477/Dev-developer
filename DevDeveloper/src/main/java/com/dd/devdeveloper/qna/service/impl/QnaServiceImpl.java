@@ -1,12 +1,14 @@
 package com.dd.devdeveloper.qna.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.dd.devdeveloper.common.paging.Paging;
+import com.dd.devdeveloper.projects.ProjectsVO;
 import com.dd.devdeveloper.qna.AnswerVO;
 import com.dd.devdeveloper.qna.QuestionVO;
 import com.dd.devdeveloper.qna.RecListVO;
@@ -34,6 +36,8 @@ public class QnaServiceImpl implements QnaService {
 				// 시작/마지막 레코드 번호
 				vo.setFirst(paging.getFirst());
 				vo.setLast(paging.getLast());
+				
+			
 				
 				
 		return qnaDAO.qnaList(vo);

@@ -33,9 +33,12 @@
 				task_complete,       
 				developer_no,
 				task_no,
-				proj_no
-		from proj_calendar 
-		where proj_no = #{projNo} 
+				proj_no,
+				m.members_id "developerId",
+        		m.members_image
+		from proj_calendar c, members m
+		where c.developer_no = m.members_no 
+		and proj_no = #{projNo} 
 		and to_date(#{date},'yyyy-mm-dd') 
 		between start_date and end_date	
 	</select>

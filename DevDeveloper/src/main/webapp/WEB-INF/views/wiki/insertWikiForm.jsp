@@ -110,7 +110,10 @@
 	  				<option>${tag.tagsTitle }</option>
 	  			</c:forEach>
 	  		</select>
-	  		<button type="button" id="btnfrm" class="btn btn-primary">등록</button>
+	  		<br>
+	  		<div style="float:right">
+	  			<button type="button" id="btnfrm" class="btn btn-primary">등록</button>
+	  		</div>
 		</form>
 	</div>
 

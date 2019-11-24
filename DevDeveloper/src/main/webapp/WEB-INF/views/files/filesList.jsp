@@ -156,10 +156,10 @@
 									<form name="searchfrm" action="filesSearch">
 										<input type="hidden" name="projNo" value='${projNo}' />
 										<div class="input-group">
-											<!-- <select name="select">
+											<select name="select">
 												<option value="title">제목
 												<option value="userNo">작성자
-											</select> -->
+											</select>
 											<div class="input-group-prepend">
 												<span class="input-group-text"><i
 													class="ni ni-zoom-split-in"></i></span>
@@ -187,7 +187,7 @@
 													method="post" enctype="multipart/form-data"
 													onsubmit='return getCmaFileView()'>
 											<div class ="modal-body">
-												
+													<input type="hidden" name="projNo" value='${projNo}' />
 													<input type="hidden" name="upperFolder" value="${param.upperFolder}" ></input>
 													<div class = "row">
 														<div class = "col-2">
@@ -221,8 +221,8 @@
 								</div>
 
 								<div class="col-9 pull-right">
-									<button type="button" class="btn btn-primary btn"
-										onclick="location.href='filesInsertForm.jsp'">새파일</button>
+									<!-- <button type="button" class="btn btn-primary btn"
+										onclick="location.href='filesInsertForm.jsp'">새파일</button> -->
 
 									<button type="button" class="btn btn-primary btn"
 										onclick="filesImport()">중요</button>
@@ -236,7 +236,7 @@
 									<button type="button" class="btn btn-primary btn"
 										onclick="filesDownload()">다운로드</button>
 
-									<a href="#" class="avatar avatar-sm" data-toggle="tooltip"
+									<!-- <a href="#" class="avatar avatar-sm" data-toggle="tooltip"
 										data-original-title="Ryan Tompson"> <img
 										alt="Image placeholder"
 										src="./resources/assets/img/theme/team-1-800x800.jpg"
@@ -255,7 +255,7 @@
 										data-original-title="Jessica Doe"> <img
 										alt="Image placeholder"
 										src="./resources/assets/img/theme/team-4-800x800.jpg"
-										class="rounded-circle">
+										class="rounded-circle"> -->
 									</a>
 								</div>
 							</div>

@@ -117,7 +117,7 @@
 				</br> </br> </br> </br>
 				<div class="card shadow">
 					<div class="card-header border-0">
-						<h2 class="mb-0">프로젝트명</h2>
+						<h2 class="mb-0">${project.projTitle }</h2>
 						<br />
 						<div class="btn-card-header-group text-right">
 							<div class="row">
@@ -143,13 +143,13 @@
 								</div>
 							
 								<div class="col-9 pull-right">
-									<button type="button" class="btn btn-primary btn" onclick="filesImport()">중요</button>
+									<button type="button" class="btn btn-primary btn" onclick="filesImport()">해제</button>
 
 									<button type="button" class="btn btn-primary btn" onclick="filesTrash()">휴지통</button>
 
 									<button type="button" class="btn btn-primary btn" onclick="filesDownload()">다운로드</button>
 
-									<a href="#" class="avatar avatar-sm" data-toggle="tooltip"
+								<!-- 	<a href="#" class="avatar avatar-sm" data-toggle="tooltip"
 										data-original-title="Ryan Tompson"> <img
 										alt="Image placeholder"
 										src="./resources/assets/img/theme/team-1-800x800.jpg"
@@ -168,7 +168,7 @@
 										data-original-title="Jessica Doe"> <img
 										alt="Image placeholder"
 										src="./resources/assets/img/theme/team-4-800x800.jpg"
-										class="rounded-circle">
+										class="rounded-circle"> -->
 									</a>
 								</div>
 							</div>

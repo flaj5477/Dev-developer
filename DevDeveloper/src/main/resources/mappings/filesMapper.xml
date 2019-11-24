@@ -74,11 +74,12 @@
 		files_type,
 		files_Import,
 		files_Trash,
+		files_size,
 		m.members_name
 		from
 		files f inner join members m on f.members_no = m.members_no
 		where files_Import='Y'
-		and files_trash = 'N'
+		and (files_trash = 'N' or files_trash is null)
 	</select>
 	
 	<select id="getTrashList" parameterType="files"
@@ -93,6 +94,7 @@
 		files_type,
 		files_Import,
 		files_Trash,
+		files_size,
 		m.members_name
 		from
 		files f inner join members m on f.members_no = m.members_no

@@ -137,7 +137,7 @@ public class FilesServiceImpl implements FilesService {
 			paging.setPage(1);
 		}
 		paging.setPageUnit(10); // 게시글 뿌려주는것
-		paging.setPageSize(5); // 하단 페이지 목록 수
+		paging.setPageSize(3); // 하단 페이지 목록 수 //이 부분 설정..
 
 		paging.setTotalRecord(filesDAO.getConuntFiles(vo)); // 전체 개수 가져온 뒤 set
 
@@ -155,22 +155,5 @@ public class FilesServiceImpl implements FilesService {
 		return filesDAO.getFilesRoute(vo);
 		
 	}
-
-//	public List<LinkedHashMap<String, Object>> filesSearch(Paging paging, FilesVO vo) { // 페이징 설정
-//		if(paging.getPage() == null) {
-//			paging.setPage(1);
-//		}
-//		paging.setPageUnit(10); // 게시글 뿌려주는것
-//		paging.setPageSize(5); // 하단 페이지 목록 수
-//		
-//		paging.setTotalRecord(filesDAO.getConuntFiles(vo)); // 전체 개수 가져온 뒤 set
-//		
-//		vo.setFirst(paging.getFirst()); // 시작 레코드 번호
-//		vo.setLast(paging.getLast());	// 마지막 레코드 번호
-//		
-//		List<LinkedHashMap<String, Object>> filesList = filesDAO.filesSearch(vo);
-//		
-//		return  filesList;
-//	}
 
 }

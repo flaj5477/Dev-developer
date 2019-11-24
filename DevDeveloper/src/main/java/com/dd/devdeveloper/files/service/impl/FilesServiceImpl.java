@@ -23,7 +23,7 @@ public class FilesServiceImpl implements FilesService {
 			paging.setPage(1);
 		}
 		paging.setPageUnit(10); // 게시글 뿌려주는것
-		paging.setPageSize(5); // 하단 페이지 목록 수
+		paging.setPageSize(3); // 하단 페이지 목록 수
 
 		paging.setTotalRecord(filesDAO.getConuntFiles(vo)); // 전체 개수 가져온 뒤 set
 
@@ -50,37 +50,46 @@ public class FilesServiceImpl implements FilesService {
 	}
 
 	@Override
-	public List<LinkedHashMap<String, Object>> getImportList(Paging paging, FilesVO vo) { //
+	public List<FilesVO> getImportList(Paging paging, FilesVO vo) { //
 		if (paging.getPage() == null) {
 			paging.setPage(1);
 		}
 		paging.setPageUnit(10); // 게시글 뿌려주는것
-		paging.setPageSize(5); // 하단 페이지 목록 수
+		paging.setPageSize(3); // 하단 페이지 목록 수
 
 		paging.setTotalRecord(filesDAO.getConuntFiles(vo)); // 전체 개수 가져온 뒤 set
 
 		vo.setFirst(paging.getFirst()); // 시작 레코드 번호
 		vo.setLast(paging.getLast()); // 마지막 레코드 번호
 
-		List<LinkedHashMap<String, Object>> filesList = filesDAO.getImportList(vo);
-
+		List<FilesVO> filesList = filesDAO.getImportList(vo);
+		
+		for (FilesVO map : filesList) {
+			map.setFilesSizeTrans(size2String(map.getFilesSize()));
+		}
+		
 		return filesList;
 	}
 
 	@Override
-	public List<LinkedHashMap<String, Object>> getTrashList(Paging paging, FilesVO vo) {
+	public List<FilesVO> getTrashList(Paging paging, FilesVO vo) {
 		if (paging.getPage() == null) {
 			paging.setPage(1);
 		}
 		paging.setPageUnit(10); // 게시글 뿌려주는것
-		paging.setPageSize(5); // 하단 페이지 목록 수
+		paging.setPageSize(3); // 하단 페이지 목록 수
 
 		paging.setTotalRecord(filesDAO.getConuntFiles(vo)); // 전체 개수 가져온 뒤 set
 
 		vo.setFirst(paging.getFirst()); // 시작 레코드 번호
 		vo.setLast(paging.getLast()); // 마지막 레코드 번호
 
-		List<LinkedHashMap<String, Object>> filesList = filesDAO.getTrashList(vo);
+		List<FilesVO> filesList = filesDAO.getTrashList(vo);
+		
+		for (FilesVO map : filesList) {
+			map.setFilesSizeTrans(size2String(map.getFilesSize()));
+		}
+		
 		return filesList;
 	}
 
@@ -132,7 +141,7 @@ public class FilesServiceImpl implements FilesService {
 	}
 
 	@Override
-	public List<LinkedHashMap<String, Object>> getFilesSearch(Paging paging, FilesVO vo) {
+	public List<FilesVO> getFilesSearch(Paging paging, FilesVO vo) {
 		if (paging.getPage() == null) {
 			paging.setPage(1);
 		}
@@ -144,7 +153,11 @@ public class FilesServiceImpl implements FilesService {
 		vo.setFirst(paging.getFirst()); // 시작 레코드 번호
 		vo.setLast(paging.getLast()); // 마지막 레코드 번호
 
-		List<LinkedHashMap<String, Object>> filesList = filesDAO.getfilesSearch(vo);
+		List<FilesVO> filesList = filesDAO.getfilesSearch(vo);
+		
+		for (FilesVO map : filesList) {
+			map.setFilesSizeTrans(size2String(map.getFilesSize()));
+		}
 
 		return filesList;
 	}

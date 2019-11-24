@@ -94,7 +94,7 @@
 		files_type,
 		files_Import,
 		files_Trash,
-		files_size,
+		files_Size,
 		m.members_name
 		from
 		files f inner join members m on f.members_no = m.members_no

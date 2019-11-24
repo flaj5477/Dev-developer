@@ -15,7 +15,9 @@
 <script src='./resources/calendar/timegrid/main.js'></script>
 <script src='./resources/calendar/core/locales-all.js'></script> 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
+<script>
+	pageName = "프로젝트 일정";
+</script>
 
 <script>
 	$(function() {

@@ -134,8 +134,6 @@ public class FilesController {
 		}
 	}
 
-	// 새파일 인설트
-
 	// 중요 파일 체크기능
 	@ResponseBody
 	@RequestMapping(value = "/filesImport", method = RequestMethod.POST, consumes="application/json")
@@ -163,7 +161,7 @@ public class FilesController {
 		voo.setProjNo(projNo);
 		if (vo.getUpperFolder() != null)
 			model.addAttribute("filesRoute", filesService.getFilesRoute(vo));
-		//model.addAttribute("list", filesService.getFilesList(paging, vo)); // 서비스impl 실행해서 모델에 담는다
+		model.addAttribute("list", filesService.getFilesList(paging, vo)); // 서비스impl 실행해서 모델에 담는다
 		model.addAttribute("project", projectsService.getProjects(voo));
 		model.addAttribute("projNo", projNo);
 		//model.addAttribute("paging", paging);
@@ -191,9 +189,18 @@ public class FilesController {
 
 	// 휴지통 리스트
 	@RequestMapping("/getFilesTrash")
-	public String getfilesTrash(Model model, Paging paging, FilesVO vo, HttpServletRequest request) {
+	public String getfilesTrash(Model model, Paging paging, FilesVO vo, HttpServletRequest request, ProjectsVO voo) {
+		HttpSession session = request.getSession();
+		
+		Integer projNo = (Integer) session.getAttribute("projNo");
+		vo.setProjNo(projNo); // projNo 페이지 만들어지면 갈아끼울것
+		voo.setProjNo(projNo);
+		if (vo.getUpperFolder() != null)
+			model.addAttribute("filesRoute", filesService.getFilesRoute(vo));
+		model.addAttribute("project", projectsService.getProjects(voo));
 		model.addAttribute("list", filesService.getTrashList(paging, vo));
-		model.addAttribute("paging", paging);
+		model.addAttribute("projNo", projNo);
+		//model.addAttribute("paging", paging);
 		return "files/filesTrash";
 	}
 

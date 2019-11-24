@@ -457,7 +457,7 @@ div[contenteditable] {
 				success: function(response){
 					if(response.result == true){	// 서버에서 등록후에 true라고 넘어오면
 						//userList();
-						alert("등록됨");
+						alert("등록 되었습니다.");
 						myEditor.setData('');	//텍스트에어리어 초기화
 						getWikiTransLine(manualLine, manualNo, 'date');	// 해당라인 번역 가져오기(메뉴얼번호 메뉴얼라인수 넘겨줌)
 						$("#transContent"+manualLine).html(manualAfter);	//번역 라인에 등록

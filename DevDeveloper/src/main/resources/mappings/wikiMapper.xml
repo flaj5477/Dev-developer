@@ -120,7 +120,8 @@
 						MANUAL_TAGS	= null,
 						</when>
 					</choose>
-					MANUAL_CONTENTS_PATH = #{manualContentsPath}
+					MANUAL_CONTENTS_PATH = #{manualContentsPath},
+					MANUAL_TOTALLINE = #{manualTotalline}
 		where manual_no = #{manualNo}
 	 </update>
 	 

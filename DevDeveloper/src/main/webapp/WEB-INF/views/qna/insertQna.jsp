@@ -104,7 +104,8 @@
 			$("#qqqbutton").click(function() {
 				var title = $("#qna_title").val();
 				var content = CKEDITOR.instances['qna_content'].getData();
-
+				var tags = $("#manualTags").val();
+				
 				if (title == "") {
 					alert("제목을 입력하세요");
 					document.insertQna.qTitle.focus();
@@ -114,8 +115,10 @@
 					alert("내용을 입력하세요");
 					CKEDITOR.instances['qna_content'].focus();
 					return false;
+				} else if(tags == ""){
+					alert('태그를 입력하세요')
+					return false;
 				}
-
 				document.insertQna.submit();
 
 			})

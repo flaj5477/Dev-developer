@@ -16,7 +16,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/qna.css">
 <link href="//fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
-	
+  
 </head>
 <body id = "pp">
 
@@ -43,8 +43,8 @@
     font-size: 13px;">
 						<ul class="main-qqqfilter sub-qqqfilter pull-qqqright qqqtabs">
 							<li class="filter-qqqitem <c:if test='${questionVO.orderby == "q_new" or empty questionVO.orderby}'>active</c:if>"><a href="qna">최신순</a></li>
-							<li class="filter-qqqitem <c:if test='${questionVO.orderby == "count"}'>active</c:if>" id="count">좋아요</li>
-							<li class="filter-qqqitem <c:if test='${questionVO.orderby == "q_views"}'>active</c:if>" id="q_views">조회수</li>
+							<li class="filter-qqqitem <c:if test='${questionVO.orderby == "count"}'>active</c:if>" id="count" style="cursor:pointer"">좋아요</li>
+							<li class="filter-qqqitem <c:if test='${questionVO.orderby == "q_views"}'>active</c:if>" id="q_views" style="cursor:pointer">조회수</li>
 						</ul>
 						<ul class="main-qqqfilter sub-qqqfilter pull-left qqqtabs">
 						</ul>

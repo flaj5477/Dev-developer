@@ -14,6 +14,7 @@
 	 			q.q_views		    ,
 	 			q.q_tags			,
 	 			m.members_id     	,
+	 			m.membersImage		,
 	 			(select count(*) 
      	    	from (
                 select r.rec_no, r.qa_no q_no, r.qa_type 
@@ -32,6 +33,9 @@
 			<if test="searchVal != null and searchVal != '' "> 
 					and q_title LIKE '%' || #{searchVal} || '%'
 					or q_contents LIKE '%' || #{searchVal} || '%'
+					<if test="select == 'tags'">
+					AND NVL(q_tags, '기타') LIKE '%' || #{searchVal} || ',%'
+					</if>
 			</if>
 		</where>	
 		<choose>	

@@ -119,6 +119,7 @@
 					alert('태그를 입력하세요')
 					return false;
 				}
+				
 				document.insertQna.submit();
 
 			})

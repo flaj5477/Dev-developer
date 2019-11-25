@@ -114,7 +114,8 @@
 										</div>
 										<div class="pull-right">
 											<span class="question-qqqauthor"> <a href="#">
-													${qna.membersId}&nbsp; </a> <span class="question-qqqdate">${qna.qDate}</span>
+												<img src="${pageContext.request.contextPath}/images/profile/${qna.membersImage}"
+														width="32px" height="32px">&nbsp;${qna.membersId}&nbsp; </a> <span class="question-qqqdate">${qna.qDate}</span>
 											</span>
 										</div>
 									</div>

@@ -19,7 +19,10 @@
   <!-- CSS Files -->
   <link href="${pageContext.request.contextPath}/resources/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-   <script src="${pageContext.request.contextPath}/resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/assets/js/plugins/jquery/dist/jquery.min.js"></script>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/icon/dd.ico">
+  <link rel="icon" href="${pageContext.request.contextPath}/images/icon/dd.ico">
   
   <script>
   	

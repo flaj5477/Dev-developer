@@ -79,9 +79,7 @@ public class DashboardController {
 		model.addAttribute("myWikiTransList", wikiService.getMyWikiTransList(membersNo) ); ;	// 나의 위키번역내용 가져오기
 		//CBT기록 가져
 		
-		//return "dashboard/svgtest";
-
-			return "dashboard/dashboard";
+		return "dashboard/dashboard";
 	}
 	
 	

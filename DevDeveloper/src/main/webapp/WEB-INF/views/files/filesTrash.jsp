@@ -94,7 +94,7 @@
 				</br> </br> </br> </br>
 				<div class="card shadow">
 					<div class="card-header border-0">
-						<h2 class="mb-0">프로젝트명</h2>
+						<h2 class="mb-0">${project.projTitle }</h2>
 						<br />
 						<div class="btn-card-header-group text-right">
 							<div class="row">
@@ -124,7 +124,7 @@
 
 									<button type="button" class="btn btn-primary btn" onclick="deleteFiles()">영구 삭제</button>
 																		
-									<a href="#" class="avatar avatar-sm" data-toggle="tooltip"
+								<!-- 	<a href="#" class="avatar avatar-sm" data-toggle="tooltip"
 										data-original-title="Ryan Tompson"> <img
 										alt="Image placeholder"
 										src="./resources/assets/img/theme/team-1-800x800.jpg"
@@ -143,7 +143,7 @@
 										data-original-title="Jessica Doe"> <img
 										alt="Image placeholder"
 										src="./resources/assets/img/theme/team-4-800x800.jpg"
-										class="rounded-circle">
+										class="rounded-circle"> -->
 									</a>
 								</div>
 							</div>
@@ -179,7 +179,7 @@
 									<td>${files.filesComment }</td>
 									<td>${files.membersName }</td>
 									<td><fmt:formatDate value="${files.filesUploadDate}" pattern="yyyy-MM-dd"/></td>
-									<td><c:if test="${files.filesType=='F'}">${files.filesSizeTrans}</c:if></td>
+									<td><c:if test="${files.filesType=='F'}">${files.filesSizeTrans}</c:if>
 								</tr>
 							</c:forEach>
 						</tbody>

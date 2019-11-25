@@ -161,15 +161,9 @@ div.cbtReady #cbtReadyModal {
 	left: 4%;
 	position: fixed;
 }
-div.cbtViewer {
-	margin-bottom: 100em;
-}
-div.cbtViewer #questView table {
-	width:550px;
-}
 div.cbtViewer #putView {
 	position: absolute;	
-	top: 85px;
+	top: 110px;
 	height: 800px;
 	right: 265px;
 	padding: 3px 10px;

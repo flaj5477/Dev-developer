@@ -73,10 +73,10 @@
 									<form name="searchfrm" action="filesSearch">
 									<input type="hidden" name="projNo" value='${projNo}'/>
 										<div class="input-group">
-											<!-- <select name="select">
+											<select name="select">
 												<option value="title">제목
 												<option value="userNo">작성자
-											</select> -->
+											</select>
 
 											<div class="input-group-prepend">
 												<span class="input-group-text"><i
@@ -124,22 +124,16 @@
 								</div>
 
 								<div class="col-9 pull-right">
-									<button type="button" class="btn btn-primary btn">새폴더</button>
-
 									<button type="button" class="btn btn-primary btn" onclick="filesImport()">중요</button>
 									
 									<button type="button" class="btn btn-primary btn" onclick="filesTrash()">휴지통</button>
-
-									<button type="button" class="btn btn-primary btn">미리보기</button>
 
 									<button type="button" class="btn btn-primary btn" id="" 
 										data-toggle="modal" data-target="#upmodal">업로드</button>
 
 									<button type="button" class="btn btn-primary btn">다운로드</button>
 
-									<button type="button" class="btn btn-primary btn">압축</button>
-
-									<a href="#" class="avatar avatar-sm" data-toggle="tooltip"
+									<!-- <a href="#" class="avatar avatar-sm" data-toggle="tooltip"
 										data-original-title="Ryan Tompson"> <img
 										alt="Image placeholder"
 										src="./resources/assets/img/theme/team-1-800x800.jpg"
@@ -159,7 +153,7 @@
 										alt="Image placeholder"
 										src="./resources/assets/img/theme/team-4-800x800.jpg"
 										class="rounded-circle">
-									</a>
+									</a> -->
 								</div>
 							</div>
 						</div>
@@ -182,33 +176,24 @@
 								<tr>
 									<td>
 										<input type="checkbox" value="${files.filesNo}"	name="chk_files" id="chk_files">
-											<!-- <script>
-											$('#chk_files').click(function() {
-												var chk = $("#chk_files").prop("checkd");
-												if(chk) {
-													$(".chBox").prop("checkecd", true);
-												}else {
-													$(".chBox").prop("checked", false);
-												}
-											});
-											</script> -->
-											
 										<%-- ${files.filesType} --%>
 										 <c:if	test="${files.filesType=='F'}">
 											<i class="far fa-file"></i>
                 						${files.filesTitle}
-                						 </c:if> <c:if test="${files.filesType=='D'}">
-											<i class="far fa-folder"></i>
+                						 </c:if> <c:if test="${files.filesType=='D'}"><i class="far fa-folder"></i>
 											<a href="./getFilesList?upperFolder=${files.filesNo}">${files.filesTitle}</a>
 										</c:if>
-										<span class="filesImportCheck"><c:if test="${files.filesImport=='Y'}">♥</c:if></span>
-										</td>
+										<span class="filesImportCheck">
+											<c:if test="${files.filesImport=='Y'}">♥</c:if>
+												
+										</span>
+									</td>
 									
 									<!-- <input type="checkbox" name="chk_info" value="HTML">HTML -->
 									<td>${files.filesComment }</td>
-									<td>${files.membersNo }</td>
-									<td>${files.filesUploadDate }</td>
-									<td>${files.filesSize }</td>
+									<td>김지민</td> <!-- ${files.membersNo } -->
+									<td>2019-11-25</td> <!--  <fmt:formatDate value="${files.filesUploadDate}" pattern="yyyy-MM-dd"/> -->
+									<td><c:if test="${files.filesType=='F'}">${files.filesSizeTrans}</c:if>
 								</tr>
 							</c:forEach>
 

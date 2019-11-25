@@ -12,13 +12,13 @@ public interface FilesService {
 	List<FilesVO> getFilesList(Paging paging, FilesVO vo);
 	
 	// 임포트(중요) 조회
-	List<LinkedHashMap<String, Object>> getImportList(Paging paging, FilesVO vo);
+	List<FilesVO> getImportList(Paging paging, FilesVO vo);
 	
 	// 휴지통 조회
-	List<LinkedHashMap<String, Object>> getTrashList(Paging paging, FilesVO vo);
+	List<FilesVO> getTrashList(Paging paging, FilesVO vo);
 	
 	// 검색
-	List<LinkedHashMap<String, Object>> getFilesSearch(Paging paging, FilesVO vo);
+	List<FilesVO> getFilesSearch(Paging paging, FilesVO vo);
 	 
 	//파일 경로
 	public String getFilesPath(FilesVO vo);

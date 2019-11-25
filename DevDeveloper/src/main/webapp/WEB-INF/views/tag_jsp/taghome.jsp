@@ -35,6 +35,11 @@ div h5 {
 		location = "getProjectsList?select=tags&page=1&searchVal="+encodeURIComponent(tag);	// encodeURIComponent(tag) get방식은 파라미터넘길때 인코딩 해줘야함
 	}
 	
+/* 	function clickQnaTag(e,tag){
+		//e.stopPropagation();
+		location = "qna?tags&page=1&searchVal="+encodeURIComponent(tag);	// encodeURIComponent(tag) get방식은 파라미터넘길때 인코딩 해줘야함
+	}	 */
+	
 	/*
 		곽동우
 		20191103
@@ -76,7 +81,7 @@ div h5 {
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body"  id="${tag.tagsTitle }">
                 	<p class="mt-3 mb-0 text-muted text-sm">
-	                    <a href="#" class="badge badge-primary">Q&A-${tag.qCount }건</a>
+	                    <a href="javascript:clickQnaTag(event,'${tag.tagsTitle}')" class="badge badge-primary">Q&A-${tag.qCount }건</a>
 	                    <a href="javascript:clickProjTag(event,'${tag.tagsTitle}')" class="badge badge-primary">프로젝트: ${tag.pCount }</a>
 	                    <a href = "javascript:clickTag(event,'${tag.tagsTitle}')"  class="badge badge-primary">위키: ${tag.wCount }</a>
                   	</p>

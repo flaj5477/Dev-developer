@@ -24,7 +24,7 @@ public class FilesDAO {
 	}
 	
 	// 파일 임포트
-	public List<LinkedHashMap<String, Object>> getImportList(FilesVO vo) {
+	public List<FilesVO> getImportList(FilesVO vo) {
 		return mybatis.selectList("FilesDAO.getImportList", vo);
 	}
 	
@@ -40,7 +40,7 @@ public class FilesDAO {
 	}
 	
 	// 휴지통 리스트
-	public List<LinkedHashMap<String, Object>> getTrashList(FilesVO vo) {
+	public List<FilesVO> getTrashList(FilesVO vo) {
 		return mybatis.selectList("FilesDAO.getTrashList", vo);
 		
 	}
@@ -66,7 +66,7 @@ public class FilesDAO {
 		
 	}
 	// 검색
-	public List<LinkedHashMap<String, Object>> getfilesSearch(FilesVO vo) {
+	public List<FilesVO> getfilesSearch(FilesVO vo) {
 		return mybatis.selectList("FilesDAO.getFilesSearch", vo);
 		 
 	}

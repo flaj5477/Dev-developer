@@ -17,7 +17,7 @@
 	<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 	<link href="//fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
 <link
-	href="${pageContext.request.contextPath}/resources/ckeditor/plugins/codesnippet/lib/highlight/styles/github.css"
+	href="${pageContext.request.contextPath}/resources/ckeditor/plugins/codesnippet/lib/highlight/styles/obsidian.css"
 	rel="stylesheet">
 <script
 	src="${pageContext.request.contextPath}/resources/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
@@ -148,11 +148,12 @@
                     </div> <%-- <input type="hidden" value="${ans.aNo}" id= "aa"> --%>
                    <c:if test = "${sessionScope.members.membersNo == ans.membersNo }">
                    <input type="hidden" id= "sdf" value="${ans.aNo}">
-                <div class ="qUp"> <button class="btn qqqbutton dd" id="ansUpdate" value="${ans.aNo}">
+                <div class ="qUp">
+                 <button class="btn qqqbutton dd" id="ansUpdate" value="${ans.aNo}">
 					답변수정</button>
-				 <button class="btn qqqbutton" id="ansDel"
-				 onclick="dddd(${ans.aNo},${ans.qNo})">
-					답변삭제</button></div>
+				 <button class="btn qqqbutton" id="ansDel" onclick="ansdel(${ans.aNo},${ans.qNo})">
+					답변삭제</button>
+				</div>
 					</c:if>
                 </div>
                 </c:forEach>
@@ -214,7 +215,7 @@
             	     	
             	
             	
-        /* ---------------------- */    	
+         	
             	
  $(function(){
 		/*--------------------------------
@@ -281,7 +282,7 @@
 		})
 		
 		/*--------------------------------
-		          수정실행
+		        수정
 		--------------------------------*/
 		$("#ansupdatebutton").click(function(){
 			
@@ -290,7 +291,7 @@
 	 	})
 	 	
  		/*--------------------------------
-		     답변달기  
+		      답변달기애니메이션
 		--------------------------------*/	 	
 		$("#ani").click(function(){
 
@@ -301,20 +302,10 @@
 	    });
 	 	
 	 
-		/*--------------------------------
-		        좋아요 증가/삭제
-		--------------------------------*/
- 		function dddd(aNo,qNo){ 
-	 		if(confirm("정말 삭제하시겠습니까 ?")){ 
-	 			location.href='deleteAnq?aNo='+aNo+'&qNo='+qNo; 
-	 		}else{
-	 			
-	 			return false ; 
-	 		} 
- 		};
+
  		
  		/*--------------------------------
-		        좋아요 증가/삭제
+		        질문삭제
 		--------------------------------*/
  		$("#queDel").click(function(){ 
 	 		if(confirm("정말 삭제하시겠습니까 ?")){ 
@@ -324,13 +315,22 @@
 	 		} 
  		})
  		
- 		
-    
+   
  		
 })
 	 		
 </script>
-	 	
+	 	<script>
+	 	/* 답변삭제 */
+		function ansdel(aNo,qNo){ 
+			if(confirm("정말 삭제하시겠습니까 ?")){ 
+				location.href='deleteAnq?aNo='+aNo+'&qNo='+qNo; 
+			}else{
+				
+				return false ; 
+			} 
+		}
+	 	</script>
 	 	
 	 	
 </body>

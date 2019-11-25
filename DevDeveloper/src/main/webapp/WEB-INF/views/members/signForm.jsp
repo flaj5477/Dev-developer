@@ -87,7 +87,7 @@
 
 .eheck_font {
 	font-size: 13px;
-	color: crimson;
+	color: #f9f9f9;
 }
 
 form#signForm {
@@ -111,7 +111,7 @@ form#signForm {
 
 	<form action="signup" method="post" id="signForm"
 		enctype="multipart/form-data" style="width: 450px; background-color:#828bc3">
-
+		<input type="hidden" name = membersType value="일반"/>
 
 		<div class="form-group">
 			<div id="idv" class ="input-group input-group-alternative mb-3">

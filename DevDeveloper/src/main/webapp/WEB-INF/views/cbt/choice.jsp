@@ -92,7 +92,7 @@
 <body>
 <div class ="cbtChoice">
 	<div id="subject">
-		<p class="h1" style="color:black"><br>LEVEL CHOICE</p>
+		<p class="h1" style="color:black; line-height:0.8"><br>LEVEL CHOICE</p>
 	</div>	
 	<div id="content">
 		<form action="ready" name="frm" method="post">

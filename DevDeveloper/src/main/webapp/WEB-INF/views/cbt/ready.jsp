@@ -15,11 +15,13 @@
 <script>
 	var user = "${members.membersNo}"; // 세션을 통해 가져왔음!
 	var level = "${param.testsNo}"; //  command의 vo객체를 통해 form 태그의 값을 가져왔음!
+	var rel = null;
 	
 	$(document).ready(function() {
 		$('#tabs').tabs();
 		readyBox();
 		getTest();
+		viewSwitch();
 		examinationPage();
 	});
 	
@@ -56,6 +58,36 @@
 							 .append($('<th>').html(passValue))
 							 .append($('<th>').html(time))
 							 .appendTo('#readyTabBody');
+		});
+	}
+	
+	function viewSwitch() {
+		var viewShow1 = function() {
+			$('#viewer2').attr('hidden',true);
+			$('#viewer3').attr('hidden',true);
+			$('#viewer1').attr('hidden',false);
+		}
+		var viewShow2 = function() {
+			$('#viewer3').attr('hidden',true);
+			$('#viewer1').attr('hidden',true);
+			$('#viewer2').attr('hidden',false);
+		}
+		var viewShow3 = function() {
+			$('#viewer1').attr('hidden',true);
+		 	$('#viewer2').attr('hidden',true);
+			$('#viewer3').attr('hidden',false);
+		}
+		var view = [viewShow1,viewShow2,viewShow3];
+		$('#tab2').on('click',function() {
+			var count = 1;
+			clearInterval(rel); // 초기화 
+			viewShow1(); // 초기화 값
+			rel = setInterval(function() {
+				if(count > 2) count = 0;
+				console.log(count);
+				view[count].call(); // 해당 변수의 함수호출
+				count++;
+			},5000);
 		});
 	}
 	
@@ -99,7 +131,12 @@
 			<div id="comment1"></div>
 		</div>
 		<div id="tabs-2">
-			<div id="comment2"></div>
+			<div id="viewerMenu">
+				<img id="viewer1" src="${pageContext.request.contextPath}/images/cbt/CBT_VIEWER1.PNG" hidden="true"/>
+				<img id="viewer2" src="${pageContext.request.contextPath}/images/cbt/CBT_VIEWER2.PNG" hidden="true"/>
+				<img id="viewer3" src="${pageContext.request.contextPath}/images/cbt/CBT_VIEWER3.PNG" hidden="true"/>	
+				<div id="comment2"></div>			
+			</div>
 		</div>
 		<div id="tabs-3">
 			<div id="comment3"></div>

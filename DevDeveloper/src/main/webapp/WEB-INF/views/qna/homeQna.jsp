@@ -62,7 +62,7 @@
 										</li>
 									</c:when>
 									<c:otherwise>
-										<li class="ddd">
+										<li class="fff">
 											<div class="t">${qna.aCount}</div> 답변수
 										</li>
 									</c:otherwise>
@@ -113,8 +113,9 @@
 											
 										</div>
 										<div class="pull-right">
-											<span class="question-qqqauthor"> <a href="#">
-													${qna.membersId}&nbsp; </a> <span class="question-qqqdate">${qna.qDate}</span>
+											<span class="question-qqqauthor"> <a href="qna?&page=1&searchVal=${qna.membersId}">
+												<img src="${pageContext.request.contextPath}/images/profile/${qna.membersImage}"
+														width="32px" height="32px">&nbsp;${qna.membersId}&nbsp; </a> <span class="question-qqqdate">${qna.qDate}</span>
 											</span>
 										</div>
 									</div>

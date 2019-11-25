@@ -46,7 +46,7 @@
 			]]>
 			</otherwise>
 		</choose>
-		order by files_no
+		order by files_no desc
 		)A)B WHERE RN between #{first} and #{last}
 	</select>
 

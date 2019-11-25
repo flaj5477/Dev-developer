@@ -87,7 +87,7 @@
 
 .eheck_font {
 	font-size: 13px;
-	color: crimson;
+	color: #f9f9f9;
 }
 
 form#signForm {

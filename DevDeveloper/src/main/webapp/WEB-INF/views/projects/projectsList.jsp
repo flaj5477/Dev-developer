@@ -93,7 +93,7 @@
 										<td>${projects.projRegDate }</td>
 										<td>
 											<span>
-												<jsp:useBean id="toDay" class="java.util.Date" />
+												<jsp:useBean id="toDay" class="java.util.Date" /> <!-- 지금날짜 -->
 												<fmt:parseNumber var="toDay_N" value="${toDay.time / (1000*60*60*24)}" integerOnly="true"></fmt:parseNumber>
 												<fmt:parseDate var="projDueDate" value="${projects.projDueDate }" pattern="yyyy-MM-dd"></fmt:parseDate>
 												<fmt:parseNumber var="projDueDate_N" value="${projDueDate.time / (1000*60*60*24)}" integerOnly="true"></fmt:parseNumber>

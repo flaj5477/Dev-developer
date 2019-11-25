@@ -62,7 +62,7 @@
 										</li>
 									</c:when>
 									<c:otherwise>
-										<li class="ddd">
+										<li class="fff">
 											<div class="t">${qna.aCount}</div> 답변수
 										</li>
 									</c:otherwise>

@@ -1143,13 +1143,16 @@ input.insert[type="text"] {
 .ddd {
     
   /*   border: 1px solid #cdb8f3 !important; */
-		background-color :#c0d2e6;
+		background-color :#98ffd3;
 }
 
 .fff {
     
   /*   border: 1px solid #7ea5d6 !important; */
-		background-color :#d2eaea;
+		 background-color :#d2eaea; 
+		/* border-bottom: 3px solid #d2eaea; */
+
+
 }
 
 .qUp{

@@ -38,7 +38,7 @@ div[contenteditable] {
   border-radius: 0.25rem;
   margin-right: -10px;
   margin-left: -10px;
-  margin-top: -5px;
+  margin-top: -0.4px;
 }
 
 .transEdit .col{
@@ -546,7 +546,7 @@ div[contenteditable] {
 			   
 			   //자기번역이면 삭제버튼 보이게
 			   if(item.membersId == "${sessionScope.members.membersId}"){
-				   var delbtn = '<i name="deltransbtn" class="ni ni-fat-remove">' ;
+				   var delbtn = '<i name="deltransbtn" class="fas fa-trash-alt">' ;
 			   }else{
 				   var delbtn = null;
 			   }

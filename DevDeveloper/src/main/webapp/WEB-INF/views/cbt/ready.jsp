@@ -87,7 +87,7 @@
 				console.log(count);
 				view[count].call(); // 해당 변수의 함수호출
 				count++;
-			},4000);
+			},5000);
 		});
 	}
 	

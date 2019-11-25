@@ -35,10 +35,10 @@ div h5 {
 		location = "getProjectsList?select=tags&page=1&searchVal="+encodeURIComponent(tag);	// encodeURIComponent(tag) get방식은 파라미터넘길때 인코딩 해줘야함
 	}
 	
-	function clickQnaTag(e,tag){
+/* 	function clickQnaTag(e,tag){
 		//e.stopPropagation();
-		location = "qna?select=tags&page=1&searchVal="+encodeURIComponent(tag);	// encodeURIComponent(tag) get방식은 파라미터넘길때 인코딩 해줘야함
-	}	
+		location = "qna?tags&page=1&searchVal="+encodeURIComponent(tag);	// encodeURIComponent(tag) get방식은 파라미터넘길때 인코딩 해줘야함
+	}	 */
 	
 	/*
 		곽동우

@@ -356,15 +356,15 @@
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark text-white">
 	   <div class = "container" style="padding-right:0px">
 	      <div class="navbar-brand" id ="exam">
-	      	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	      	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	         <span id="title"  style="padding-right:30px"></span>
-	         <span id="subTitle" style="margin:0 30px;"></span>
+	         <span id="subTitle" style="margin:0 35px;"></span>
 	      </div>
-	      <div class="navbar-brand" id ="users" style="padding:0 30px;">
+	      <div class="navbar-brand" id ="users" style="padding:0 25px 0 0;">
 	         <span id="userNo"></span>
 	         <span id="userName"></span>
 	      </div>
-	      <div id="putTime" style="padding:0 40px;">
+	      <div id="putTime" style="padding:0 35px 0 15px;">
 	         <div class = "row">
 	            <div id="permisTime"></div>
 	         </div>
@@ -372,7 +372,7 @@
 	            <div id="restTime"></div>   
 	         </div>
 	      </div>
-	       <div id="confirm" class="navbar-brand" style="padding:0 0 0 40px;">
+	       <div id="confirm" class="navbar-brand" style="padding:0 0 0 25px;">
 	   		  <button type="button" class="btn btn-primary" id="confirmBtn" data-toggle="modal" data-target="#cbtSubmitModal" style="width:160px; height:40px;">제출하기</button>
 		  </div>
 	    </div>

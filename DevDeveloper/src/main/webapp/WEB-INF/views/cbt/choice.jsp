@@ -75,7 +75,7 @@
 							//location.replace('ready?testsNo='+level); // 페이지 이동, 뒤로가기 하면 현재 페이지 건너 뛴다, GET				
 						}
 						sec--;
-					},300); // n초마다
+					},1000); // n초마다
 				});
 			}
 		});

@@ -66,19 +66,19 @@ public class CBTServiceImpl implements CBTService {
 		@SuppressWarnings("unchecked") // warning 막기
 		List<Map<String,Object>> mark = (List<Map<String,Object>>) cd.get("data"); // "data" = 시험 문제 key ,value 값
 		//SORTING (Lambda)
-		/*
+	
 		Collections.sort(mark,(Map<String,Object> m1, Map<String,Object> m2)-> { // List안에 담긴 Map 객체 정렬, lambda 형식으로
 			// 2진 트리
-			return m1.get("key") - m2.get("key");  // 오름차순 정렬
+			return ((Integer)m1.get("key")) - ((Integer)m2.get("key"));  // 오름차순 정렬
 		});
-		*/
-		
+		/*
 		Collections.sort(mark,new Comparator<Map<String,Object>>() {
 			@Override
 			public int compare(Map<String, Object> m1, Map<String, Object> m2) {
 				return ((Integer)m1.get("key")).compareTo(((Integer)m2.get("key")));
 			}	
 		});
+		*/
 		/* https://dublin-java.tistory.com/12
 		//SORTING (Anonymous Class)
 		Collections.sort(mark,new Comparator<Map<String,Integer>>() {

@@ -1,10 +1,10 @@
 package com.dd.devdeveloper.cbt.service.impl;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -64,11 +64,20 @@ public class CBTServiceImpl implements CBTService {
 	public void solutionProc(Map<String,Object> cd) {
 		int score = 0;	// 맞은 문제 갯수
 		@SuppressWarnings("unchecked") // warning 막기
-		List<Map<String,Integer>> mark = (List<Map<String,Integer>>) cd.get("data"); // "data" = 시험 문제 key ,value 값
+		List<Map<String,Object>> mark = (List<Map<String,Object>>) cd.get("data"); // "data" = 시험 문제 key ,value 값
 		//SORTING (Lambda)
-		Collections.sort(mark,(Map<String,Integer> m1, Map<String,Integer> m2)-> { // List안에 담긴 Map 객체 정렬, lambda 형식으로
+		/*
+		Collections.sort(mark,(Map<String,Object> m1, Map<String,Object> m2)-> { // List안에 담긴 Map 객체 정렬, lambda 형식으로
 			// 2진 트리
-			return m1.get("key")-m2.get("key");  // 오름차순 정렬
+			return m1.get("key") - m2.get("key");  // 오름차순 정렬
+		});
+		*/
+		
+		Collections.sort(mark,new Comparator<Map<String,Object>>() {
+			@Override
+			public int compare(Map<String, Object> m1, Map<String, Object> m2) {
+				return ((Integer)m1.get("key")).compareTo(((Integer)m2.get("key")));
+			}	
 		});
 		/* https://dublin-java.tistory.com/12
 		//SORTING (Anonymous Class)
@@ -82,11 +91,17 @@ public class CBTServiceImpl implements CBTService {
 		// 정답 비교
 		List<Map<String,Object>> solution = dao.getSolutionList(mark);
 		for(Integer i=0;i<mark.size();i++) {
-			Integer markValue = mark.get(i).get("value");
+			//Integer markValue = mark.get(i).get("value");
+			String markValue = mark.get(i).get("value").toString();
 			if(markValue == null) {
-				markValue = 0;
+				markValue = "";
 			}
+			/*
 			if(markValue == ((BigDecimal)solution.get(i).get("value")).intValue()) {
+				score ++;
+			}
+			*/
+			if(markValue.equals((solution.get(i).get("value")).toString())) {
 				score ++;
 			}
 		}

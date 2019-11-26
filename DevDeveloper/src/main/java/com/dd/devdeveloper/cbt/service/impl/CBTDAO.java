@@ -37,7 +37,7 @@ public class CBTDAO {
 		return mybatis.selectList("CBTDAO.getQuestList",tqvo);
 	}
 	//문제답안 조회
-	public List<Map<String,Object>> getSolutionList(List<Map<String,Integer>> mark) {
+	public List<Map<String,Object>> getSolutionList(List<Map<String,Object>> mark) {
 		return mybatis.selectList("CBTDAO.getSolutionList",mark);
 	}
 	//시험결과(응시기록) 업데이트

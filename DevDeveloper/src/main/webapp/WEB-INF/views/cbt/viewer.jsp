@@ -321,7 +321,7 @@
 		for(var i=1;i<=size;i++) {
 			var markobj = {
 					"key" : questKey[i-1],
-					"value" : parseInt($('[name="putNum'+i+'"]:checked').val())
+					"value" : $('[name="questNum'+i+'"]:checked').parent('div').text()
 			};
 			marklist.push(markobj);
 		}
